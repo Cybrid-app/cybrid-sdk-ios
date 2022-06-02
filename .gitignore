@@ -88,3 +88,9 @@ fastlane/test_output
 # https://github.com/johnno1962/injectionforxcode
 
 iOSInjectionProject/
+
+# OS X temporary files that should never be committed
+
+.DS_Store
+.Trashes
+*.swp
