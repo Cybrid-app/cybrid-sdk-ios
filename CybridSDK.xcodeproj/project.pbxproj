@@ -11,6 +11,7 @@
 		0B078F1828497B070020B4F7 /* CybridSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B078F0D28497B070020B4F7 /* CybridSDK.framework */; };
 		0B078F1D28497B070020B4F7 /* CybridSDKTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B078F1C28497B070020B4F7 /* CybridSDKTests.swift */; };
 		0B078F1E28497B070020B4F7 /* CybridSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 0B078F1028497B070020B4F7 /* CybridSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0B99D1E72849CCE500837E05 /* CybridSDK.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 0B99D1E62849CCE500837E05 /* CybridSDK.podspec */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,6 +30,7 @@
 		0B078F1128497B070020B4F7 /* CybridSDK.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = CybridSDK.docc; sourceTree = "<group>"; };
 		0B078F1728497B070020B4F7 /* CybridSDKTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CybridSDKTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0B078F1C28497B070020B4F7 /* CybridSDKTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CybridSDKTests.swift; sourceTree = "<group>"; };
+		0B99D1E62849CCE500837E05 /* CybridSDK.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; fileEncoding = 4; path = CybridSDK.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +55,7 @@
 		0B078F0328497B070020B4F7 = {
 			isa = PBXGroup;
 			children = (
+				0B99D1E62849CCE500837E05 /* CybridSDK.podspec */,
 				0B078F0F28497B070020B4F7 /* CybridSDK */,
 				0B078F1B28497B070020B4F7 /* CybridSDKTests */,
 				0B078F0E28497B070020B4F7 /* Products */,
@@ -177,6 +180,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0B99D1E72849CCE500837E05 /* CybridSDK.podspec in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
