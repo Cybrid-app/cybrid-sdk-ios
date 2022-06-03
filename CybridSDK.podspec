@@ -1,11 +1,6 @@
 Pod::Spec.new do |spec|
 
   # ―――  Spec Metadata  ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
-  #
-  #  These will help people to find your library, and whilst it
-  #  can feel like a chore to fill in it's definitely to your advantage. The
-  #  summary should be tweet-length, and the description more in depth.
-  #
 
   spec.name         = "CybridSDK"
   spec.version      = "0.0.1"
@@ -16,18 +11,15 @@ Pod::Spec.new do |spec|
                    DESC
 
   spec.homepage     = "https://github.com/Cybrid-app/cybrid-sdk-ios"
-
-  # ―――  Spec License  ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
-
   spec.license      = { :type => 'Apache-2.0', :file => 'LICENSE' }
-
-  # ――― Author Metadata  ――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
-
   spec.author             = "Cybrid Technology Inc."
 
-  # ――― Platform Specifics ――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
-
+  # TODO: Define minimum version
   spec.platform     = :ios, "13.0"
+  
+  # TODO: Define if we are going for Dynamic or Static Framework
+  # By default Pods are Dynamic Frameworks. Uncomment to make it static.
+  # spec.static_framework = true
 
   # ――― Source Location ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
 
