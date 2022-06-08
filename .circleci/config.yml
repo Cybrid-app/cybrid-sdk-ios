@@ -8,7 +8,7 @@ jobs:
     macos:
       xcode: "13.3.1"
     environment:
-      FL_OUTPUT_DIR: output
+      FL_OUTPUT_DIR: "./fastlane/output/"
 
     steps:
       - checkout
@@ -17,9 +17,9 @@ jobs:
           command: "pod install --verbose"
       - run:
           name: "Build and run tests"
-          command: "fastlane test output_directory:" + output
+          command: "fastlane test output_directory:'./fastlane/output/'"
       - codecov/upload:
-          file: output + "cobertura.xml"
+          file: "./fastlane/output/cobertura.xml"
 
 workflows:
   ios-workflow:
