@@ -6,6 +6,7 @@ target 'CybridSDK' do
   use_frameworks!
 
   # Pods for CybridSDK
+  pod 'Alamofire' ~> '5.4.0'
 
   target 'CybridSDKTests' do
     # Pods for testing
