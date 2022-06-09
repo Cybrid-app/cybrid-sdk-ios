@@ -10,6 +10,7 @@
   "repositories": [
     "Cybrid-app/cybrid-sdk-ios"
   ],
+  "baseBranches": ["main", "chore/CYB-364-renovate-setup"]
   "packageRules": [
     {
       "description": "lockFileMaintenance",
