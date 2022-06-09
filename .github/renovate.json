@@ -1,0 +1,28 @@
+{
+  "branchPrefix": "renovate-dependency-update/",
+  "dryRun": true,
+  "username": "renovate-release",
+  "gitAuthor": "Renovate Bot <bot@renovateapp.com>",
+  "onboarding": false,
+  "onboardingBranch": "renovate-dependency-update/",
+  "platform": "github",
+  "includeForks": true,
+  "repositories": [
+    "Cybrid-app/cybrid-sdk-ios"
+  ],
+  "packageRules": [
+    {
+      "description": "lockFileMaintenance",
+      "matchUpdateTypes": [
+        "pin",
+        "digest",
+        "patch",
+        "minor",
+        "major",
+        "lockFileMaintenance"
+      ],
+      "dependencyDashboardApproval": false,
+      "stabilityDays": 0
+    }
+  ]
+}
