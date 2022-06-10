@@ -327,7 +327,7 @@ line_length:
   warning: 140
   error: 200
   ignores_comments: true
-  ignores_interpolated_string: true
+  ignores_interpolated_strings: true
   ignores_urls: true
 
 nesting:
