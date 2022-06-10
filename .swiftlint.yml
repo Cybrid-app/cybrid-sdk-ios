@@ -160,7 +160,7 @@ empty_parentheses_with_trailing_closure:
 empty_string:
   severity: error
 empty_xctest_method:
-  severity: error
+  severity: warning
 fatal_error_message:
   severity: error
 first_where:
@@ -222,7 +222,7 @@ operator_usage_whitespace:
 operator_whitespace:
   severity: error
 overridden_super_call:
-  severity: error
+  severity: warning
 override_in_extension:
   severity: error
 pattern_matching_keywords:
