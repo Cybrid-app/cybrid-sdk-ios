@@ -12,5 +12,5 @@ import Foundation
  This code is intented to be tested for CodeCov CI Setup
  **/
 struct TestCode {
-    func addNumbers(a: Int, b: Int) -> Int { a + b }
+    func addNumbers(_ lhs: Int, _ rhs: Int) -> Int { lhs + rhs }
 }

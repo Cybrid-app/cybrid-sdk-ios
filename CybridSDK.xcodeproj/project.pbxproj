@@ -61,6 +61,7 @@
 				0B078F0F28497B070020B4F7 /* CybridSDK */,
 				0B078F1B28497B070020B4F7 /* CybridSDKTests */,
 				0B078F0E28497B070020B4F7 /* Products */,
+				81407DEC5E3C66990E8215E8 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -91,6 +92,13 @@
 			path = CybridSDKTests;
 			sourceTree = "<group>";
 		};
+		81407DEC5E3C66990E8215E8 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -110,6 +118,7 @@
 			buildConfigurationList = 0B078F2128497B070020B4F7 /* Build configuration list for PBXNativeTarget "CybridSDK" */;
 			buildPhases = (
 				0B078F0828497B070020B4F7 /* Headers */,
+				0BDE4ECA2851B4800039C34B /* SwiftLint */,
 				0B078F0928497B070020B4F7 /* Sources */,
 				0B078F0A28497B070020B4F7 /* Frameworks */,
 				0B078F0B28497B070020B4F7 /* Resources */,
@@ -195,6 +204,27 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0BDE4ECA2851B4800039C34B /* SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = SwiftLint;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run only when not running on CI. CI should run SwiftLint with Fastlane.\nif [ -z \"$IS_RUNNING_ON_CI\"]; then\n  ${PODS_ROOT}/SwiftLint/swiftlint\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		0B078F0928497B070020B4F7 /* Sources */ = {

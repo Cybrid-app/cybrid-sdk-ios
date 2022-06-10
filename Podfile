@@ -6,6 +6,7 @@ target 'CybridSDK' do
   use_frameworks!
 
   # Pods for CybridSDK
+  pod 'SwiftLint', '~> 0.47.1'
 
   target 'CybridSDKTests' do
     # Pods for testing

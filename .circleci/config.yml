@@ -2,9 +2,10 @@ version: 2.1
 
 orbs:
   codecov: codecov/codecov@3.2.3
+  swiftlint: ngs/swiftlint@0.0.1
 
 jobs:
-  ios-build-and-test:
+  build-and-test:
     macos:
       xcode: "13.3.1"
     environment:
@@ -21,7 +22,24 @@ jobs:
       - codecov/upload:
           file: "$FASTLANE_OUTPUT_DIR/cobertura.xml"
 
+  swiftlint:
+    description: Runs swiftlint
+    executor: swiftlint
+    steps:
+      - checkout
+      - run: "swiftlint lint --reporter junit | tee result.xml"
+      - store_artifacts:
+          path: "result.xml"
+      - store_test_results:
+          path: "result.xml"
+
+executors:
+  swiftlint:
+    docker:
+      - image: dantoml/swiftlint:latest
+
 workflows:
   ios-workflow:
     jobs:
-      - ios-build-and-test
+      - swiftlint
+      - build-and-test
