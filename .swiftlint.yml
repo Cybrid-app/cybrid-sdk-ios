@@ -313,13 +313,10 @@ file_length:
   error: 1200
 
 identifier_name:
-  severity: error
-  min_length: 2
-  max_length: 50
   excluded:
     - id
     - URL
-    
+
 large_tuple:
   warning: 3
 
