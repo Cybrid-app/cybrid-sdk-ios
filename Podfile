@@ -7,7 +7,7 @@ target 'CybridSDK' do
 
   # Pods for CybridSDK
   pod 'SwiftLint', '~> 0.47.1'
-  pod 'Alamofire', '5.4.0'
+  pod 'Alamofire', '5.6.1'
 
   target 'CybridSDKTests' do
     # Pods for testing
