@@ -1,0 +1,13 @@
+fail_fast: true
+repos:
+-   repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.3.0
+    hooks:
+      - id: check-yaml
+        args: [ --allow-multiple-documents ]
+      - id: check-merge-conflict
+      - id: trailing-whitespace
+-   repo: https://github.com/realm/SwiftLint
+    rev: 0.47.1
+    hooks:
+      - id: swiftlint
