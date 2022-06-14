@@ -1,8 +1,8 @@
 # cybrid-sdk-ios
 
-[![Platforms](https://img.shields.io/badge/Platforms-iOS-yellowgreen?style=flat-square)](https://img.shields.io/badge/Platforms-iOS-Green?style=flat-square)
-
 iOS Component Library and Demo App for Cybrid API.
+
+[![Platforms](https://img.shields.io/badge/Platforms-iOS-yellowgreen?style=flat-square)](https://img.shields.io/badge/Platforms-iOS-Green?style=flat-square)
 
 - [Installation](#installation)
 - [Contribution Guidelines](#contribution)
@@ -11,7 +11,7 @@ iOS Component Library and Demo App for Cybrid API.
 
 ### CocoaPods
 
-- Run the following command:
+Run the following command:
 
 `pod install CybridSDK`
 
