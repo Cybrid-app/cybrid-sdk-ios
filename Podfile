@@ -3,7 +3,6 @@ target 'CybridSDK' do
 
   # Pods for CybridSDK
   pod 'SwiftLint', '~> 0.47.1'
-  pod 'Alamofire', '5.4.0' # Outdated version
 
   unless ENV['CI']
     pod 'CybridApiBankSwift', :path => '../cybrid-api-bank-swift/CybridApiBankSwift.podspec'
