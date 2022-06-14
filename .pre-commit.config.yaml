@@ -1,0 +1,21 @@
+fail_fast: true
+repos:
+-   repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.2.0
+    hooks:
+      - id: check-yaml
+        args: [ --allow-multiple-documents ]
+      - id: check-case-conflict
+      - id: check-executables-have-shebangs
+      - id: check-merge-conflict
+      - id: end-of-file-fixer
+        exclude: .*yml\.enc$
+      - id: trailing-whitespace
+-   repo: https://github.com/nicklockwood/SwiftFormat
+    rev: v0.49.9
+    hooks:
+      - id: swiftformat
+-   repo: https://github.com/realm/SwiftLint
+    rev: v0.47.1
+    hooks:
+      - id: swiftlint
