@@ -57,8 +57,8 @@
 		0B078F0328497B070020B4F7 = {
 			isa = PBXGroup;
 			children = (
-				0BD0A4E628582FB700C10744 /* README.md */,
-				0B99D1E62849CCE500837E05 /* CybridSDK.podspec */,
+				0B965FF728599DF200584692 /* Documentation */,
+				0B965FF628599DD800584692 /* Deployment */,
 				0B078F0F28497B070020B4F7 /* CybridSDK */,
 				0B078F1B28497B070020B4F7 /* CybridSDKTests */,
 				0B078F0E28497B070020B4F7 /* Products */,
@@ -78,8 +78,7 @@
 		0B078F0F28497B070020B4F7 /* CybridSDK */ = {
 			isa = PBXGroup;
 			children = (
-				0B078F1028497B070020B4F7 /* CybridSDK.h */,
-				0B078F1128497B070020B4F7 /* CybridSDK.docc */,
+				0B965FF828599E3A00584692 /* Supporting Files */,
 			);
 			path = CybridSDK;
 			sourceTree = "<group>";
@@ -90,6 +89,31 @@
 				0B078F1C28497B070020B4F7 /* CybridSDKTests.swift */,
 			);
 			path = CybridSDKTests;
+			sourceTree = "<group>";
+		};
+		0B965FF628599DD800584692 /* Deployment */ = {
+			isa = PBXGroup;
+			children = (
+				0B99D1E62849CCE500837E05 /* CybridSDK.podspec */,
+			);
+			name = Deployment;
+			sourceTree = "<group>";
+		};
+		0B965FF728599DF200584692 /* Documentation */ = {
+			isa = PBXGroup;
+			children = (
+				0BD0A4E628582FB700C10744 /* README.md */,
+				0B078F1128497B070020B4F7 /* CybridSDK.docc */,
+			);
+			name = Documentation;
+			sourceTree = "<group>";
+		};
+		0B965FF828599E3A00584692 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				0B078F1028497B070020B4F7 /* CybridSDK.h */,
+			);
+			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		81407DEC5E3C66990E8215E8 /* Pods */ = {
