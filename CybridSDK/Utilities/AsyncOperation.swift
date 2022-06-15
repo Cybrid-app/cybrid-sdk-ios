@@ -19,6 +19,8 @@ import Foundation
  We are keeping it internal because we don't want to expose it outside our SDK's scope.
  */
 class AsyncOperation: Operation {
+  static let unimplementedErrorMessage: String = "main() was not implemented."
+
   var state = State.ready {
     willSet {
       willChangeValue(forKey: newValue.keyPath)
@@ -42,7 +44,7 @@ class AsyncOperation: Operation {
   }
 
   override func main() {
-    assertionFailure("main() was not implemented.")
+    assertionFailure(AsyncOperation.unimplementedErrorMessage)
   }
 }
 
@@ -62,7 +64,7 @@ extension AsyncOperation {
      - isExecuting
      - isFinished
      */
-    fileprivate var keyPath: String {
+    var keyPath: String {
       return "is\(rawValue.capitalized)"
     }
   }
