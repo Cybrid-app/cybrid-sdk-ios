@@ -13,7 +13,6 @@
 		0B078F1E28497B070020B4F7 /* CybridSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 0B078F1028497B070020B4F7 /* CybridSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0B99D1E72849CCE500837E05 /* CybridSDK.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 0B99D1E62849CCE500837E05 /* CybridSDK.podspec */; };
 		0BD0A4E728582FB700C10744 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 0BD0A4E628582FB700C10744 /* README.md */; };
-		0BFC9620284F2A6C0060DA2B /* TestCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BFC961F284F2A6C0060DA2B /* TestCode.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,7 +33,6 @@
 		0B078F1C28497B070020B4F7 /* CybridSDKTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CybridSDKTests.swift; sourceTree = "<group>"; };
 		0B99D1E62849CCE500837E05 /* CybridSDK.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; fileEncoding = 4; path = CybridSDK.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		0BD0A4E628582FB700C10744 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		0BFC961F284F2A6C0060DA2B /* TestCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestCode.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,7 +80,6 @@
 			children = (
 				0B078F1028497B070020B4F7 /* CybridSDK.h */,
 				0B078F1128497B070020B4F7 /* CybridSDK.docc */,
-				0BFC961F284F2A6C0060DA2B /* TestCode.swift */,
 			);
 			path = CybridSDK;
 			sourceTree = "<group>";
@@ -235,7 +232,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0BFC9620284F2A6C0060DA2B /* TestCode.swift in Sources */,
 				0B078F1228497B070020B4F7 /* CybridSDK.docc in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -442,7 +438,6 @@
 		0B078F2528497B070020B4F7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 5789WJ9F6P;
@@ -459,7 +454,6 @@
 		0B078F2628497B070020B4F7 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 5789WJ9F6P;
