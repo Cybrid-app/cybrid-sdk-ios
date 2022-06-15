@@ -15,8 +15,8 @@ extension XCTestCase {
     var assertionMessage: String?
     let operationQueue = OperationQueue()
 
-    AssertionFailureOverride.replaceAssertionClosure { message in
-      assertionMessage = message
+    AssertionFailureOverride.replaceAssertionClosure { message, _, _ in
+      assertionMessage = message()
       expectation.fulfill()
     }
 

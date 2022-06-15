@@ -53,8 +53,8 @@ class AsyncOperationTests: XCTestCase {
   }
 
   func testInvalidUseOfAsyncOperation() {
-    let operation = AsyncOperation()
     expectAssertionFailure(expectedMessage: AsyncOperation.unimplementedErrorMessage) { [weak self] in
+      let operation = AsyncOperation()
       self?.operationQueue.addOperation(operation)
     }
   }
