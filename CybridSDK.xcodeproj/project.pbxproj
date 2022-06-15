@@ -11,6 +11,7 @@
 		0B078F1828497B070020B4F7 /* CybridSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B078F0D28497B070020B4F7 /* CybridSDK.framework */; };
 		0B078F1D28497B070020B4F7 /* CybridSDKTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B078F1C28497B070020B4F7 /* CybridSDKTests.swift */; };
 		0B078F1E28497B070020B4F7 /* CybridSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 0B078F1028497B070020B4F7 /* CybridSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0B965FFE2859A01E00584692 /* AsyncOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B965FFD2859A01E00584692 /* AsyncOperation.swift */; };
 		0B99D1E72849CCE500837E05 /* CybridSDK.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 0B99D1E62849CCE500837E05 /* CybridSDK.podspec */; };
 		0BD0A4E728582FB700C10744 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 0BD0A4E628582FB700C10744 /* README.md */; };
 /* End PBXBuildFile section */
@@ -31,6 +32,7 @@
 		0B078F1128497B070020B4F7 /* CybridSDK.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = CybridSDK.docc; sourceTree = "<group>"; };
 		0B078F1728497B070020B4F7 /* CybridSDKTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CybridSDKTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0B078F1C28497B070020B4F7 /* CybridSDKTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CybridSDKTests.swift; sourceTree = "<group>"; };
+		0B965FFD2859A01E00584692 /* AsyncOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncOperation.swift; sourceTree = "<group>"; };
 		0B99D1E62849CCE500837E05 /* CybridSDK.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; fileEncoding = 4; path = CybridSDK.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		0BD0A4E628582FB700C10744 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -78,6 +80,7 @@
 		0B078F0F28497B070020B4F7 /* CybridSDK */ = {
 			isa = PBXGroup;
 			children = (
+				0B965FFC28599FE700584692 /* Utilities */,
 				0B965FF828599E3A00584692 /* Supporting Files */,
 			);
 			path = CybridSDK;
@@ -114,6 +117,14 @@
 				0B078F1028497B070020B4F7 /* CybridSDK.h */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		0B965FFC28599FE700584692 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				0B965FFD2859A01E00584692 /* AsyncOperation.swift */,
+			);
+			path = Utilities;
 			sourceTree = "<group>";
 		};
 		81407DEC5E3C66990E8215E8 /* Pods */ = {
@@ -256,6 +267,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0B965FFE2859A01E00584692 /* AsyncOperation.swift in Sources */,
 				0B078F1228497B070020B4F7 /* CybridSDK.docc in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -462,6 +474,7 @@
 		0B078F2528497B070020B4F7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 5789WJ9F6P;
@@ -478,6 +491,7 @@
 		0B078F2628497B070020B4F7 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 5789WJ9F6P;
