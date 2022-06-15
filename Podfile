@@ -9,4 +9,8 @@ target 'CybridSDK' do
     pod 'CybridApiBankSwift', :path => '../cybrid-api-bank-swift/CybridApiBankSwift.podspec'
   end
 
+  target 'CybridSDKTests' do
+    # Pods for testing
+  end
+
 end
