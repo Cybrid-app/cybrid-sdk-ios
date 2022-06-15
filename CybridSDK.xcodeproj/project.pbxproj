@@ -13,6 +13,10 @@
 		0B078F1E28497B070020B4F7 /* CybridSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 0B078F1028497B070020B4F7 /* CybridSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0B965FFE2859A01E00584692 /* AsyncOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B965FFD2859A01E00584692 /* AsyncOperation.swift */; };
 		0B966002285A465400584692 /* URLImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B966001285A465400584692 /* URLImageView.swift */; };
+		0B966004285A85C600584692 /* AsyncOperationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B966003285A85C600584692 /* AsyncOperationTests.swift */; };
+		0B966008285A92E700584692 /* XCTestCase+expectFailure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B966007285A92E700584692 /* XCTestCase+expectFailure.swift */; };
+		0B96600A285A96B700584692 /* AssertionFailureOverride.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B966009285A96B700584692 /* AssertionFailureOverride.swift */; };
+		0B96600D285A9A3100584692 /* AsyncMockOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B96600C285A9A3100584692 /* AsyncMockOperation.swift */; };
 		0B99D1E72849CCE500837E05 /* CybridSDK.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 0B99D1E62849CCE500837E05 /* CybridSDK.podspec */; };
 		0BD0A4E728582FB700C10744 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 0BD0A4E628582FB700C10744 /* README.md */; };
 /* End PBXBuildFile section */
@@ -35,6 +39,10 @@
 		0B078F1C28497B070020B4F7 /* CybridSDKTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CybridSDKTests.swift; sourceTree = "<group>"; };
 		0B965FFD2859A01E00584692 /* AsyncOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncOperation.swift; sourceTree = "<group>"; };
 		0B966001285A465400584692 /* URLImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLImageView.swift; sourceTree = "<group>"; };
+		0B966003285A85C600584692 /* AsyncOperationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncOperationTests.swift; sourceTree = "<group>"; };
+		0B966007285A92E700584692 /* XCTestCase+expectFailure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+expectFailure.swift"; sourceTree = "<group>"; };
+		0B966009285A96B700584692 /* AssertionFailureOverride.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssertionFailureOverride.swift; sourceTree = "<group>"; };
+		0B96600C285A9A3100584692 /* AsyncMockOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncMockOperation.swift; sourceTree = "<group>"; };
 		0B99D1E62849CCE500837E05 /* CybridSDK.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; fileEncoding = 4; path = CybridSDK.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		0BD0A4E628582FB700C10744 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -91,6 +99,9 @@
 		0B078F1B28497B070020B4F7 /* CybridSDKTests */ = {
 			isa = PBXGroup;
 			children = (
+				0B96600B285A9A1A00584692 /* Mocks */,
+				0B966006285A92C000584692 /* Extensions */,
+				0B966005285A85FA00584692 /* Utilities Tests */,
 				0B078F1C28497B070020B4F7 /* CybridSDKTests.swift */,
 			);
 			path = CybridSDKTests;
@@ -124,10 +135,35 @@
 		0B965FFC28599FE700584692 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				0B966001285A465400584692 /* URLImageView.swift */,
 				0B965FFD2859A01E00584692 /* AsyncOperation.swift */,
+				0B966001285A465400584692 /* URLImageView.swift */,
+				0B966009285A96B700584692 /* AssertionFailureOverride.swift */,
 			);
 			path = Utilities;
+			sourceTree = "<group>";
+		};
+		0B966005285A85FA00584692 /* Utilities Tests */ = {
+			isa = PBXGroup;
+			children = (
+				0B966003285A85C600584692 /* AsyncOperationTests.swift */,
+			);
+			path = "Utilities Tests";
+			sourceTree = "<group>";
+		};
+		0B966006285A92C000584692 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				0B966007285A92E700584692 /* XCTestCase+expectFailure.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		0B96600B285A9A1A00584692 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				0B96600C285A9A3100584692 /* AsyncMockOperation.swift */,
+			);
+			path = Mocks;
 			sourceTree = "<group>";
 		};
 		81407DEC5E3C66990E8215E8 /* Pods */ = {
@@ -271,6 +307,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0B965FFE2859A01E00584692 /* AsyncOperation.swift in Sources */,
+				0B96600A285A96B700584692 /* AssertionFailureOverride.swift in Sources */,
 				0B078F1228497B070020B4F7 /* CybridSDK.docc in Sources */,
 				0B966002285A465400584692 /* URLImageView.swift in Sources */,
 			);
@@ -280,7 +317,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0B966004285A85C600584692 /* AsyncOperationTests.swift in Sources */,
 				0B078F1D28497B070020B4F7 /* CybridSDKTests.swift in Sources */,
+				0B96600D285A9A3100584692 /* AsyncMockOperation.swift in Sources */,
+				0B966008285A92E700584692 /* XCTestCase+expectFailure.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
