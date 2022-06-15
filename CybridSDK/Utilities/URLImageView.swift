@@ -8,7 +8,42 @@
 import Foundation
 import UIKit
 
-final class ImageDownloadOperation: AsyncOperation {
+// MARK: - URLImageView
+
+final class URLImageView: UIImageView {
+
+  private let operationQueue = OperationQueue()
+  let placeholder: UIImage?
+  let url: URL
+
+  init(url: URL, placeholder: UIImage? = nil) {
+    self.url = url
+    self.placeholder = placeholder
+    super.init(image: placeholder)
+    fetchImage()
+  }
+
+  @available(*, unavailable)
+  required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
+
+  private func fetchImage() {
+    let operation = ImageDownloadOperation(url: url)
+    operation.completionBlock = {
+      DispatchQueue.main.async { [weak self] in
+        guard let self = self, let loadedImage = operation.image else { return }
+        self.image = loadedImage
+      }
+    }
+
+    operationQueue.addOperation(operation)
+  }
+}
+
+// MARK: - ImageDownloadOperation
+
+fileprivate final class ImageDownloadOperation: AsyncOperation {
 
   var image: UIImage?
 
