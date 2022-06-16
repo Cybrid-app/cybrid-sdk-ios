@@ -12,15 +12,23 @@ import UIKit
 
 final class URLImageView: UIImageView {
 
-  private let operationQueue = OperationQueue()
   let placeholder: UIImage?
-  let url: URL
 
-  init(url: URL, placeholder: UIImage? = nil) {
+  private let operationQueue = OperationQueue()
+  private let url: URL
+  private let dataProvider: DataProvider
+
+  init(url: URL, placeholder: UIImage? = nil, dataProvider: DataProvider) {
     self.url = url
     self.placeholder = placeholder
+    self.dataProvider = dataProvider
     super.init(image: placeholder)
     fetchImage()
+  }
+
+  convenience init?(urlString: String, placeholder: UIImage? = nil, dataProvider: DataProvider) {
+    guard let url = URL(string: urlString) else { return nil }
+    self.init(url: url, placeholder: placeholder, dataProvider: dataProvider)
   }
 
   @available(*, unavailable)
@@ -29,7 +37,7 @@ final class URLImageView: UIImageView {
   }
 
   private func fetchImage() {
-    let operation = ImageDownloadOperation(url: url)
+    let operation = ImageDownloadOperation(url: url, dataProvider: dataProvider)
     operation.completionBlock = {
       DispatchQueue.main.async { [weak self] in
         guard let self = self, let loadedImage = operation.image else { return }
@@ -48,13 +56,20 @@ fileprivate final class ImageDownloadOperation: AsyncOperation {
   var image: UIImage?
 
   private let url: URL
+  private let dataProvider: DataProvider
 
-  init(url: URL) {
+  init(url: URL, dataProvider: DataProvider) {
     self.url = url
+    self.dataProvider = dataProvider
+  }
+
+  convenience init?(urlString: String, dataProvider: DataProvider) {
+    guard let url = URL(string: urlString) else { return nil }
+    self.init(url: url, dataProvider: dataProvider)
   }
 
   override func main() {
-    URLSession.shared.dataTask(with: url) { [weak self] data, _, error in
+    dataProvider.dataTaskWithURL(url) { [weak self] data, _, error in
       guard let self = self else { return }
       defer { self.state = .finished }
       guard error == nil, let data = data else { return }

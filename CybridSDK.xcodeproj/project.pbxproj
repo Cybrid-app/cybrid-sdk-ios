@@ -18,6 +18,8 @@
 		0B96600D285A9A3100584692 /* AsyncMockOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B96600C285A9A3100584692 /* AsyncMockOperation.swift */; };
 		0B96600F285AA0FC00584692 /* AssertionFailureOverride.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B966009285A96B700584692 /* AssertionFailureOverride.swift */; };
 		0B966011285AA24300584692 /* AssertionFailureOverrideTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B966010285AA24300584692 /* AssertionFailureOverrideTests.swift */; };
+		0B966013285AA2EB00584692 /* URLImageViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B966012285AA2EB00584692 /* URLImageViewTests.swift */; };
+		0B966017285AE80400584692 /* NetworkingInterfaces.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B966016285AE80400584692 /* NetworkingInterfaces.swift */; };
 		0B99D1E72849CCE500837E05 /* CybridSDK.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 0B99D1E62849CCE500837E05 /* CybridSDK.podspec */; };
 		0BD0A4E728582FB700C10744 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 0BD0A4E628582FB700C10744 /* README.md */; };
 /* End PBXBuildFile section */
@@ -45,6 +47,8 @@
 		0B966009285A96B700584692 /* AssertionFailureOverride.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssertionFailureOverride.swift; sourceTree = "<group>"; };
 		0B96600C285A9A3100584692 /* AsyncMockOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncMockOperation.swift; sourceTree = "<group>"; };
 		0B966010285AA24300584692 /* AssertionFailureOverrideTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssertionFailureOverrideTests.swift; sourceTree = "<group>"; };
+		0B966012285AA2EB00584692 /* URLImageViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLImageViewTests.swift; sourceTree = "<group>"; };
+		0B966016285AE80400584692 /* NetworkingInterfaces.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingInterfaces.swift; sourceTree = "<group>"; };
 		0B99D1E62849CCE500837E05 /* CybridSDK.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; fileEncoding = 4; path = CybridSDK.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		0BD0A4E628582FB700C10744 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -92,6 +96,7 @@
 		0B078F0F28497B070020B4F7 /* CybridSDK */ = {
 			isa = PBXGroup;
 			children = (
+				0B966015285AE7E800584692 /* Networking */,
 				0B965FFC28599FE700584692 /* Utilities */,
 				0B965FF828599E3A00584692 /* Supporting Files */,
 			);
@@ -149,6 +154,7 @@
 			children = (
 				0B966003285A85C600584692 /* AsyncOperationTests.swift */,
 				0B966010285AA24300584692 /* AssertionFailureOverrideTests.swift */,
+				0B966012285AA2EB00584692 /* URLImageViewTests.swift */,
 			);
 			path = "Utilities Tests";
 			sourceTree = "<group>";
@@ -167,6 +173,14 @@
 				0B96600C285A9A3100584692 /* AsyncMockOperation.swift */,
 			);
 			path = Mocks;
+			sourceTree = "<group>";
+		};
+		0B966015285AE7E800584692 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				0B966016285AE80400584692 /* NetworkingInterfaces.swift */,
+			);
+			path = Networking;
 			sourceTree = "<group>";
 		};
 		81407DEC5E3C66990E8215E8 /* Pods */ = {
@@ -310,6 +324,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0B965FFE2859A01E00584692 /* AsyncOperation.swift in Sources */,
+				0B966017285AE80400584692 /* NetworkingInterfaces.swift in Sources */,
 				0B96600F285AA0FC00584692 /* AssertionFailureOverride.swift in Sources */,
 				0B078F1228497B070020B4F7 /* CybridSDK.docc in Sources */,
 				0B966002285A465400584692 /* URLImageView.swift in Sources */,
@@ -324,6 +339,7 @@
 				0B078F1D28497B070020B4F7 /* CybridSDKTests.swift in Sources */,
 				0B966011285AA24300584692 /* AssertionFailureOverrideTests.swift in Sources */,
 				0B96600D285A9A3100584692 /* AsyncMockOperation.swift in Sources */,
+				0B966013285AA2EB00584692 /* URLImageViewTests.swift in Sources */,
 				0B966008285A92E700584692 /* XCTestCase+expectFailure.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
