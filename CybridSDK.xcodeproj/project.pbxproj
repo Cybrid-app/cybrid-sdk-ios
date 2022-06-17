@@ -28,6 +28,7 @@
 		0B966029285C38F500584692 /* URLImageOperationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B966028285C38F500584692 /* URLImageOperationTests.swift */; };
 		0B96602B285C3AC600584692 /* NetworkingInterfaceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B96602A285C3AC600584692 /* NetworkingInterfaceTests.swift */; };
 		0B99D1E72849CCE500837E05 /* CybridSDK.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 0B99D1E62849CCE500837E05 /* CybridSDK.podspec */; };
+		0BBCF63E285C51CE00D39C6D /* MockError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BBCF63D285C51CE00D39C6D /* MockError.swift */; };
 		0BD0A4E728582FB700C10744 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 0BD0A4E628582FB700C10744 /* README.md */; };
 /* End PBXBuildFile section */
 
@@ -64,6 +65,7 @@
 		0B966028285C38F500584692 /* URLImageOperationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLImageOperationTests.swift; sourceTree = "<group>"; };
 		0B96602A285C3AC600584692 /* NetworkingInterfaceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingInterfaceTests.swift; sourceTree = "<group>"; };
 		0B99D1E62849CCE500837E05 /* CybridSDK.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; fileEncoding = 4; path = CybridSDK.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		0BBCF63D285C51CE00D39C6D /* MockError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockError.swift; sourceTree = "<group>"; };
 		0BD0A4E628582FB700C10744 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -187,6 +189,7 @@
 		0B96600B285A9A1A00584692 /* Mocks */ = {
 			isa = PBXGroup;
 			children = (
+				0BBCF63D285C51CE00D39C6D /* MockError.swift */,
 				0B96600C285A9A3100584692 /* MockAsyncOperation.swift */,
 				0B966018285AE8D300584692 /* MockURLSession.swift */,
 				0B966024285C2CEF00584692 /* MockDispatchQueue.swift */,
@@ -375,6 +378,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0BBCF63E285C51CE00D39C6D /* MockError.swift in Sources */,
 				0B966027285C2E8600584692 /* MockImageOperation.swift in Sources */,
 				0B966029285C38F500584692 /* URLImageOperationTests.swift in Sources */,
 				0B966004285A85C600584692 /* AsyncOperationTests.swift in Sources */,
