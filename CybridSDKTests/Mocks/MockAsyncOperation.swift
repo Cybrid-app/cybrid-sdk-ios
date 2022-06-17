@@ -23,10 +23,9 @@ final class MockAsyncOperation: AsyncOperation {
 
   override func main() {
     DispatchQueue.global(qos: .background).async { [weak self] in
-      guard let self = self else { return }
-      defer { self.state = .finished }
+      defer { self?.state = .finished }
       sleep(1)
-      self.mock = "Mock"
+      self?.mock = "Mock"
     }
   }
 }
