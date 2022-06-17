@@ -9,19 +9,26 @@
 import Foundation
 import UIKit
 
-class MockImageOperation: Operation, URLImageOperation {
+class MockImageOperation: AsyncOperation, URLImageOperation {
   var image: UIImage?
+  private var shouldWait = false
 
   init(image: UIImage?) {
     self.image = image
   }
 
-  override func start() {
-    main()
+  override func main() {
+    if !shouldWait {
+      completionBlock?()
+    }
   }
 
-  override func main() {
-    completionBlock?()
+  func wait() {
+    shouldWait = true
+  }
+
+  func resume() {
+    shouldWait = false
   }
 }
 

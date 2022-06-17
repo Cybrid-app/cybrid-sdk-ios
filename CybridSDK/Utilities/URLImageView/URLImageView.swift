@@ -59,12 +59,13 @@ final class URLImageView: UIImageView {
   }
 
   private func loadImage() {
-    if imageOperation.isExecuting { imageOperation.cancel() }
+    if imageOperation.isExecuting {
+      imageOperation.cancel()
+    }
     imageOperation = imageOperationProvider(url, dataProvider)
     imageOperation.completionBlock = { [weak self] in
-      guard let self = self else { return }
-      self.completionDispatchQueue.async {
-        self.image = self.imageOperation.image
+      self?.completionDispatchQueue.async {
+        self?.image = self?.imageOperation.image
       }
     }
 

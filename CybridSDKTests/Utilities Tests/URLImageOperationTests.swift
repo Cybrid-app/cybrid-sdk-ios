@@ -9,7 +9,7 @@
 import XCTest
 
 class URLImageOperationTests: XCTestCase {
-  let mockURLSession = MockURLSession()
+  private let mockURLSession = MockURLSession()
   private var url: URL?
   private var testImage: UIImage?
   private var testImageData: Data?

@@ -10,7 +10,7 @@ import UIKit
 
 // MARK: - ImageDownloadOperation
 
-protocol URLImageOperation: Operation {
+protocol URLImageOperation: AsyncOperation {
   var image: UIImage? { get set }
   var isExecuting: Bool { get }
   var completionBlock: (() -> Void)? { get set }
