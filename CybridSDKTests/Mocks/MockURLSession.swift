@@ -16,8 +16,8 @@ final class MockURLSession: DataProvider {
     return MockURLSessionDataTask()
   }
 
-  func success(with data: Data) {
-    completionHandler?(data, nil, nil)
+  func didFinish(with data: Data?, response: URLResponse?, error: Error?) {
+    completionHandler?(data, response, error)
   }
 }
 

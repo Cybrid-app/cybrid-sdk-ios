@@ -32,10 +32,9 @@ final class ImageDownloadOperation: AsyncOperation, URLImageOperation {
 
   override func main() {
     dataProvider.dataTaskWithURL(url) { [weak self] data, _, error in
-      guard let self = self else { return }
-      defer { self.state = .finished }
+      defer { self?.state = .finished }
       guard error == nil, let data = data else { return }
-      self.image = UIImage(data: data)
+      self?.image = UIImage(data: data)
     }
     .resume()
   }
