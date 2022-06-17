@@ -1,5 +1,5 @@
 //
-//  AsyncMockOperation.swift
+//  MockAsyncOperation.swift
 //  CybridSDKTests
 //
 //  Created by Cybrid on 15/06/22.
@@ -8,7 +8,7 @@
 @testable import CybridSDK
 import Foundation
 
-final class AsyncMockOperation: AsyncOperation {
+final class MockAsyncOperation: AsyncOperation {
   private var mock: String?
   private var onStart: (() -> Void)?
 

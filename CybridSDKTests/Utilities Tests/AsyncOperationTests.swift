@@ -21,13 +21,13 @@ class AsyncOperationTests: XCTestCase {
   }
 
   func testReadyState() throws {
-    let operation = AsyncMockOperation()
+    let operation = MockAsyncOperation()
     XCTAssertEqual(operation.state, .ready)
   }
 
   func testExecutingState() throws {
     let expectation = expectation(description: "Operation did start Execution")
-    let operation = AsyncMockOperation()
+    let operation = MockAsyncOperation()
     operation.onStart {
       expectation.fulfill()
     }
@@ -38,7 +38,7 @@ class AsyncOperationTests: XCTestCase {
 
   func testFinishedState() throws {
     let expectation = expectation(description: "Operation did finish Execution")
-    let operation = AsyncMockOperation()
+    let operation = MockAsyncOperation()
     operation.completionBlock = {
       expectation.fulfill()
     }
@@ -48,7 +48,7 @@ class AsyncOperationTests: XCTestCase {
   }
 
   func testIsAsynchronous() {
-    let operation = AsyncMockOperation()
+    let operation = MockAsyncOperation()
     XCTAssertTrue(operation.isAsynchronous)
   }
 
