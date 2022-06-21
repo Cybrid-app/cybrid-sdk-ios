@@ -34,6 +34,10 @@ extension CryptoPriceViewModel: UITableViewDelegate, UITableViewDataSource {
     cell.customize(dataModel: cryptoPriceList.value[indexPath.row])
     return cell
   }
+  func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    let view = CryptoPriceTableHeaderView()
+    return view
+  }
 }
 
 // FIXME: Remove Mocked data

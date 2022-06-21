@@ -17,6 +17,7 @@ class CryptoPriceTableViewCell: UITableViewCell {
       iconImage,
       nameLabel,
       priceLabel
+
     ])
     stackView.axis = .horizontal
     stackView.spacing = Constants.ContentStackView.itemSpacing
@@ -64,9 +65,7 @@ class CryptoPriceTableViewCell: UITableViewCell {
   // MARK: Private functions
 
   private func setupView() {
-    addSubview(iconImage)
-    addSubview(nameLabel)
-    addSubview(priceLabel)
+    backgroundColor = UIColor.secondaryBackground
     setupIcon()
     setupContentStackView()
   }

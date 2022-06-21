@@ -10,14 +10,19 @@ import UIKit
 extension UIColor {
   // Background Color
   static var primaryBackground: UIColor {
-    return UIColor(light: lightBackground, dark: darkBackground)
+    return UIColor(light: primaryLightBackground, dark: primaryDarkBackground)
   }
   static var secondaryBackground: UIColor {
-    return UIColor(light: lightBackground, dark: secondaryDarkBackground)
+    return UIColor(light: primaryLightBackground, dark: secondaryDarkBackground)
   }
-  private static let lightBackground = UIColor.white
-  private static let darkBackground = UIColor(red: 0.11, green: 0.11, blue: 0.118, alpha: 0.94)
+  static var tertiaryBackground: UIColor {
+    return UIColor(light: tertiaryLightBackground, dark: tertiaryDarkBackground)
+  }
+  private static let primaryLightBackground = UIColor.white
+  private static let primaryDarkBackground = UIColor(red: 0.11, green: 0.11, blue: 0.118, alpha: 0.94)
   private static let secondaryDarkBackground = UIColor(red: 0.11, green: 0.11, blue: 0.118, alpha: 1)
+  private static let tertiaryLightBackground = UIColor(red: 0.463, green: 0.463, blue: 0.502, alpha: 0.12)
+  private static let tertiaryDarkBackground = UIColor(red: 0.463, green: 0.463, blue: 0.502, alpha: 0.24)
 
   // Text Color
   static var primaryText: UIColor {
@@ -25,6 +30,9 @@ extension UIColor {
   }
   static var secondaryText: UIColor {
     return UIColor(light: secondaryDarkText, dark: secondaryLightText)
+  }
+  static var placeholderText: UIColor {
+    return UIColor(light: primaryDarkText, dark: secondaryLightText)
   }
   private static let primaryDarkText = UIColor.black
   private static let primaryLightText = UIColor.white

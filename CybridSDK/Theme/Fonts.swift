@@ -12,6 +12,7 @@ enum FontStyle {
   case bodyLarge
   case body
   case comment
+  case searchBar
 
   var font: UIFont {
     switch self {
@@ -21,6 +22,8 @@ enum FontStyle {
       return .systemFont(ofSize: 17, weight: .regular)
     case .body, .comment:
       return .systemFont(ofSize: 14, weight: .regular)
+    case .searchBar:
+      return .systemFont(ofSize: 16, weight: .regular)
     }
   }
 
@@ -30,6 +33,8 @@ enum FontStyle {
       return .secondaryText
     case .body, .bodyLarge:
       return .primaryText
+    case .searchBar:
+      return .placeholderText
     }
   }
 
