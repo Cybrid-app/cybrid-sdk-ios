@@ -31,9 +31,6 @@ extension UIColor {
   static var secondaryText: UIColor {
     return UIColor(light: secondaryDarkText, dark: secondaryLightText)
   }
-  static var placeholderText: UIColor {
-    return UIColor(light: primaryDarkText, dark: secondaryLightText)
-  }
   private static let primaryDarkText = UIColor.black
   private static let primaryLightText = UIColor.white
   private static let secondaryDarkText = UIColor(red: 0.235, green: 0.235, blue: 0.263, alpha: 0.6)

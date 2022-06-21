@@ -29,12 +29,10 @@ enum FontStyle {
 
   var textColor: UIColor {
     switch self {
-    case .headerSmall, .comment:
+    case .headerSmall, .comment, .searchBar:
       return .secondaryText
     case .body, .bodyLarge:
       return .primaryText
-    case .searchBar:
-      return .placeholderText
     }
   }
 
