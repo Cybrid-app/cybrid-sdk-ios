@@ -12,20 +12,20 @@ class UIColorExtensionsTests: XCTestCase {
 
   func testLightModeColor() {
     // Given
-    let testColor = UIColor(light: Tokens.gray100, dark: Tokens.gray900)
+    let testColor = UIColor(light: UIConstants.gray100, dark: UIConstants.gray900)
     let testVC = UIViewController()
 
     // When
     testVC.view.backgroundColor = testColor
 
     // Then
-    XCTAssertEqual(testVC.view.backgroundColor?.cgColor, Tokens.gray100.cgColor)
+    XCTAssertEqual(testVC.view.backgroundColor?.cgColor, UIConstants.gray100.cgColor)
   }
 
   func testDarkModeColor() {
     // Given
-    let testColor = UIColor(light: Tokens.gray100,
-                            dark: Tokens.gray900,
+    let testColor = UIColor(light: UIConstants.gray100,
+                            dark: UIConstants.gray900,
                             overrideUserInterfaceStyle: .dark)
     let testVC = UIViewController()
 
@@ -33,13 +33,13 @@ class UIColorExtensionsTests: XCTestCase {
     testVC.view.backgroundColor = testColor
 
     // Then
-    XCTAssertEqual(testVC.view.backgroundColor?.cgColor, Tokens.gray900.cgColor)
+    XCTAssertEqual(testVC.view.backgroundColor?.cgColor, UIConstants.gray900.cgColor)
   }
 
   func testUnspecifiedModeColor() {
     // Given
-    let testColor = UIColor(light: Tokens.gray100,
-                            dark: Tokens.gray900,
+    let testColor = UIColor(light: UIConstants.gray100,
+                            dark: UIConstants.gray900,
                             overrideUserInterfaceStyle: .unspecified)
     let testVC = UIViewController()
 
@@ -47,6 +47,6 @@ class UIColorExtensionsTests: XCTestCase {
     testVC.view.backgroundColor = testColor
 
     // Then
-    XCTAssertEqual(testVC.view.backgroundColor?.cgColor, Tokens.gray100.cgColor)
+    XCTAssertEqual(testVC.view.backgroundColor?.cgColor, UIConstants.gray100.cgColor)
   }
 }

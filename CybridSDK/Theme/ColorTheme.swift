@@ -22,24 +22,24 @@ public struct ColorTheme: Equatable {
   static func makeDefaultColorTheme(overrideUserInterfaceStyle: UIUserInterfaceStyle? = nil) -> ColorTheme {
     return ColorTheme(
       primaryBackgroundColor: UIColor(
-        light: Tokens.lightestColor,
-        dark: Tokens.gray800,
+        light: UIConstants.lightestColor,
+        dark: UIConstants.gray800,
         overrideUserInterfaceStyle: overrideUserInterfaceStyle),
       secondaryBackgroundColor: UIColor(
-        light: Tokens.lightestColor,
-        dark: Tokens.gray900,
+        light: UIConstants.lightestColor,
+        dark: UIConstants.gray900,
         overrideUserInterfaceStyle: overrideUserInterfaceStyle),
       tertiaryBackgroundColor: UIColor(
-        light: Tokens.gray200,
-        dark: Tokens.gray300,
+        light: UIConstants.gray200,
+        dark: UIConstants.gray300,
         overrideUserInterfaceStyle: overrideUserInterfaceStyle),
       primaryTextColor: UIColor(
-        light: Tokens.darkestColor,
-        dark: Tokens.lightestColor,
+        light: UIConstants.darkestColor,
+        dark: UIConstants.lightestColor,
         overrideUserInterfaceStyle: overrideUserInterfaceStyle),
       secondaryTextColor: UIColor(
-        light: Tokens.gray400,
-        dark: Tokens.gray100,
+        light: UIConstants.gray400,
+        dark: UIConstants.gray100,
         overrideUserInterfaceStyle: overrideUserInterfaceStyle)
     )
   }

@@ -1,5 +1,5 @@
 //
-//  Tokens.swift
+//  UIConstants.swift
 //  CybridSDK
 //
 //  Created by Cybrid on 22/06/22.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-enum Tokens {
+enum UIConstants {
   // MARK: Sizes
   static let sizeXs: CGFloat = 8.0
   static let sizeSm: CGFloat = 16.0
