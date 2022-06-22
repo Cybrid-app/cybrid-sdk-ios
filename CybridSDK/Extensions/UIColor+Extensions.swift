@@ -7,21 +7,15 @@
 
 import UIKit
 
-protocol InterfaceStyleProvider {
-  var userInterfaceStyle: UIUserInterfaceStyle { get }
-}
-
-extension UITraitCollection: InterfaceStyleProvider {}
-
 extension UIColor {
   convenience init(
     light lightModeColor: @escaping @autoclosure () -> UIColor,
     dark darkModeColor: @escaping @autoclosure () -> UIColor,
-    interfaceStyleProvider: InterfaceStyleProvider? = nil
+    overrideUserInterfaceStyle: UIUserInterfaceStyle? = nil
   ) {
     self.init { traitCollection in
-      let uiStyleProvider = interfaceStyleProvider ?? traitCollection
-      switch uiStyleProvider.userInterfaceStyle {
+      let userInterfaceStyle = overrideUserInterfaceStyle ?? traitCollection.userInterfaceStyle
+      switch userInterfaceStyle {
       case .light:
         return lightModeColor()
       case .dark:

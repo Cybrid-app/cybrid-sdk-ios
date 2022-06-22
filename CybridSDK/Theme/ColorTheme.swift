@@ -8,23 +8,7 @@
 import UIKit
 
 public struct ColorTheme {
-  static let `default` = ColorTheme(
-    primaryBackgroundColor: UIColor(
-      light: Tokens.lightestColor,
-      dark: Tokens.gray800),
-    secondaryBackgroundColor: UIColor(
-      light: Tokens.lightestColor,
-      dark: Tokens.gray900),
-    tertiaryBackgroundColor: UIColor(
-      light: Tokens.gray200,
-      dark: Tokens.gray300),
-    primaryTextColor: UIColor(
-      light: Tokens.darkestColor,
-      dark: Tokens.lightestColor),
-    secondaryTextColor: UIColor(
-      light: Tokens.gray400,
-      dark: Tokens.gray100)
-  )
+  static var `default` = makeDefaultColorTheme()
 
   // Background Colors
   let primaryBackgroundColor: UIColor
@@ -34,4 +18,29 @@ public struct ColorTheme {
   // Text Color
   let primaryTextColor: UIColor
   let secondaryTextColor: UIColor
+
+  static func makeDefaultColorTheme(overrideUserInterfaceStyle: UIUserInterfaceStyle? = nil) -> ColorTheme {
+    return ColorTheme(
+      primaryBackgroundColor: UIColor(
+        light: Tokens.lightestColor,
+        dark: Tokens.gray800,
+        overrideUserInterfaceStyle: overrideUserInterfaceStyle),
+      secondaryBackgroundColor: UIColor(
+        light: Tokens.lightestColor,
+        dark: Tokens.gray900,
+        overrideUserInterfaceStyle: overrideUserInterfaceStyle),
+      tertiaryBackgroundColor: UIColor(
+        light: Tokens.gray200,
+        dark: Tokens.gray300,
+        overrideUserInterfaceStyle: overrideUserInterfaceStyle),
+      primaryTextColor: UIColor(
+        light: Tokens.darkestColor,
+        dark: Tokens.lightestColor,
+        overrideUserInterfaceStyle: overrideUserInterfaceStyle),
+      secondaryTextColor: UIColor(
+        light: Tokens.gray400,
+        dark: Tokens.gray100,
+        overrideUserInterfaceStyle: overrideUserInterfaceStyle)
+    )
+  }
 }

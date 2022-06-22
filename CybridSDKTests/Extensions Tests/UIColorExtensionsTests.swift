@@ -26,7 +26,7 @@ class UIColorExtensionsTests: XCTestCase {
     // Given
     let testColor = UIColor(light: Tokens.gray100,
                             dark: Tokens.gray900,
-                            interfaceStyleProvider: MockUIStyleProvider(userInterfaceStyle: .dark))
+                            overrideUserInterfaceStyle: .dark)
     let testVC = UIViewController()
 
     // When
@@ -40,7 +40,7 @@ class UIColorExtensionsTests: XCTestCase {
     // Given
     let testColor = UIColor(light: Tokens.gray100,
                             dark: Tokens.gray900,
-                            interfaceStyleProvider: MockUIStyleProvider(userInterfaceStyle: .unspecified))
+                            overrideUserInterfaceStyle: .unspecified)
     let testVC = UIViewController()
 
     // When
@@ -49,8 +49,4 @@ class UIColorExtensionsTests: XCTestCase {
     // Then
     XCTAssertEqual(testVC.view.backgroundColor?.cgColor, Tokens.gray100.cgColor)
   }
-}
-
-struct MockUIStyleProvider: InterfaceStyleProvider {
-  let userInterfaceStyle: UIUserInterfaceStyle
 }
