@@ -13,14 +13,14 @@ class CryptoPriceTableHeaderView: UITableViewHeaderFooterView {
     let placeholder = NSAttributedString(
       string: "Search",
       attributes: [
-        NSAttributedString.Key.foregroundColor: FontStyle.searchBar.textColor,
-        NSAttributedString.Key.font: FontStyle.searchBar.font
+        NSAttributedString.Key.foregroundColor: FormatStyle.inputPlaceholder.textColor,
+        NSAttributedString.Key.font: FormatStyle.inputPlaceholder.font
       ]
     )
     searchBar.attributedPlaceholder = placeholder
-    searchBar.textColor = FontStyle.bodyLarge.textColor
-    searchBar.font = FontStyle.searchBar.font
-    searchBar.tintColor = FontStyle.bodyLarge.textColor
+    searchBar.textColor = FormatStyle.bodyLarge.textColor
+    searchBar.font = FormatStyle.inputPlaceholder.font
+    searchBar.tintColor = FormatStyle.bodyLarge.textColor
     return searchBar
   }()
   private lazy var contentStackView: UIStackView = {
@@ -41,8 +41,8 @@ class CryptoPriceTableHeaderView: UITableViewHeaderFooterView {
     label.translatesAutoresizingMaskIntoConstraints = false
     label.baselineAdjustment = .alignCenters
     label.sizeToFit()
-    label.font = FontStyle.headerSmall.font
-    label.textColor = FontStyle.headerSmall.textColor
+    label.font = FormatStyle.headerSmall.font
+    label.textColor = FormatStyle.headerSmall.textColor
     label.text = "Currency".uppercased()
     return label
   }()
@@ -51,8 +51,8 @@ class CryptoPriceTableHeaderView: UITableViewHeaderFooterView {
     label.setContentHuggingPriority(.defaultHigh, for: .horizontal)
     label.translatesAutoresizingMaskIntoConstraints = false
     label.sizeToFit()
-    label.font = FontStyle.headerSmall.font
-    label.textColor = FontStyle.headerSmall.textColor
+    label.font = FormatStyle.headerSmall.font
+    label.textColor = FormatStyle.headerSmall.textColor
     label.text = "Price".uppercased()
     return label
   }()

@@ -25,25 +25,16 @@ class CryptoPriceTableViewCell: UITableViewCell {
     stackView.alignment = .center
     return stackView
   }()
-  private lazy var nameLabel: UILabel = {
-    let label = UILabel()
+  private lazy var nameLabel = UILabel.makeLabel(with: .bodyLarge) { label in
     label.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
     label.setContentHuggingPriority(.defaultHigh, for: .vertical)
-    label.translatesAutoresizingMaskIntoConstraints = false
-    label.baselineAdjustment = .alignCenters
-    label.sizeToFit()
-    label.textColor = UIColor.primaryText
-    return label
-  }()
-  private var priceLabel: UILabel = {
-    let label = UILabel()
-    label.setContentHuggingPriority(.defaultHigh, for: .horizontal)
-    label.translatesAutoresizingMaskIntoConstraints = false
-    label.sizeToFit()
-    label.textColor = UIColor.primaryText
-    return label
-  }()
+  }
+  private var priceLabel = UILabel.makeLabel(with: .body) { label in
+    label.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
+    label.setContentHuggingPriority(.defaultHigh, for: .vertical)
+  }
   private var iconImage = URLImageView(url: nil)
+  private let theme: Theme = CybridSDK.global.theme
 
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -65,7 +56,7 @@ class CryptoPriceTableViewCell: UITableViewCell {
   // MARK: Private functions
 
   private func setupView() {
-    backgroundColor = UIColor.secondaryBackground
+    backgroundColor = theme.colorTheme.primaryBackgroundColor
     setupIcon()
     setupContentStackView()
   }
@@ -117,14 +108,14 @@ class CryptoPriceTableViewCell: UITableViewCell {
       string: currencyTitle,
       attributes: [
         NSAttributedString.Key.paragraphStyle: paragraphStyle,
-        NSAttributedString.Key.foregroundColor: FontStyle.bodyLarge.textColor,
-        NSAttributedString.Key.font: FontStyle.bodyLarge.font
+        NSAttributedString.Key.foregroundColor: FormatStyle.bodyLarge.textColor,
+        NSAttributedString.Key.font: FormatStyle.bodyLarge.font
       ]
     )
     attributedTitle.addAttributes(
       [
-        NSAttributedString.Key.foregroundColor: FontStyle.comment.textColor,
-        NSAttributedString.Key.font: FontStyle.comment.font
+        NSAttributedString.Key.foregroundColor: FormatStyle.comment.textColor,
+        NSAttributedString.Key.font: FormatStyle.comment.font
       ],
       range: NSRange(location: dataModel.name.count + 1, length: dataModel.cryptoId.count)
     )
@@ -141,14 +132,14 @@ class CryptoPriceTableViewCell: UITableViewCell {
       string: priceLabelText,
       attributes: [
         NSAttributedString.Key.paragraphStyle: paragraphStyle,
-        NSAttributedString.Key.foregroundColor: FontStyle.body.textColor,
-        NSAttributedString.Key.font: FontStyle.body.font
+        NSAttributedString.Key.foregroundColor: FormatStyle.body.textColor,
+        NSAttributedString.Key.font: FormatStyle.body.font
       ]
     )
     attributedTitle.addAttributes(
       [
-        NSAttributedString.Key.foregroundColor: FontStyle.comment.textColor,
-        NSAttributedString.Key.font: FontStyle.comment.font
+        NSAttributedString.Key.foregroundColor: FormatStyle.comment.textColor,
+        NSAttributedString.Key.font: FormatStyle.comment.font
       ],
       range: NSRange(location: priceString.count + 1, length: fiatCodeString.count)
     )
