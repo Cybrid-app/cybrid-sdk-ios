@@ -7,7 +7,7 @@
 
 import UIKit
 
-public struct FontTheme {
+public struct FontTheme: Equatable {
   static let `default` = FontTheme(
     bodyLarge: UIFont.systemFont(ofSize: Tokens.fontSizeLg, weight: .regular),
     body: UIFont.systemFont(ofSize: Tokens.fontSizeMd, weight: .regular),

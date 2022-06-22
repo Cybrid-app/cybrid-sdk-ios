@@ -7,7 +7,7 @@
 
 import UIKit
 
-public struct ColorTheme {
+public struct ColorTheme: Equatable {
   static var `default` = makeDefaultColorTheme()
 
   // Background Colors
