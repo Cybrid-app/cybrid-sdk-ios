@@ -41,8 +41,20 @@ class UILabelExtensionsTests: XCTestCase {
   func testLabelUppercased_False() {
     let testLabel = UILabel()
     testLabel.text = "Test"
-    testLabel.formatLabel(with: .body)
 
+    testLabel.formatLabel(with: .bodyLarge)
+    XCTAssertNotEqual(testLabel.text, "TEST")
+    XCTAssertEqual(testLabel.text, "Test")
+
+    testLabel.formatLabel(with: .body)
+    XCTAssertNotEqual(testLabel.text, "TEST")
+    XCTAssertEqual(testLabel.text, "Test")
+
+    testLabel.formatLabel(with: .comment)
+    XCTAssertNotEqual(testLabel.text, "TEST")
+    XCTAssertEqual(testLabel.text, "Test")
+
+    testLabel.formatLabel(with: .inputPlaceholder)
     XCTAssertNotEqual(testLabel.text, "TEST")
     XCTAssertEqual(testLabel.text, "Test")
   }
