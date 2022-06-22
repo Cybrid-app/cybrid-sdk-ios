@@ -25,6 +25,7 @@
 		0B303CE12862E062007BF7FF /* FormatStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B303CE02862E062007BF7FF /* FormatStyle.swift */; };
 		0B303CE42862E5D9007BF7FF /* CybridSDK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B303CE32862E5D9007BF7FF /* CybridSDK.swift */; };
 		0B303CE72862E7E3007BF7FF /* UIColorExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B303CE62862E7E3007BF7FF /* UIColorExtensionsTests.swift */; };
+		0B303CE92862F5BB007BF7FF /* UILabelExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B303CE82862F5BB007BF7FF /* UILabelExtensionsTests.swift */; };
 		0B966004285A85C600584692 /* AsyncOperationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B966003285A85C600584692 /* AsyncOperationTests.swift */; };
 		0B966008285A92E700584692 /* XCTestCase+expectFailure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B966007285A92E700584692 /* XCTestCase+expectFailure.swift */; };
 		0B96600D285A9A3100584692 /* MockAsyncOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B96600C285A9A3100584692 /* MockAsyncOperation.swift */; };
@@ -77,6 +78,7 @@
 		0B303CE02862E062007BF7FF /* FormatStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormatStyle.swift; sourceTree = "<group>"; };
 		0B303CE32862E5D9007BF7FF /* CybridSDK.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CybridSDK.swift; sourceTree = "<group>"; };
 		0B303CE62862E7E3007BF7FF /* UIColorExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtensionsTests.swift; sourceTree = "<group>"; };
+		0B303CE82862F5BB007BF7FF /* UILabelExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabelExtensionsTests.swift; sourceTree = "<group>"; };
 		0B966003285A85C600584692 /* AsyncOperationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncOperationTests.swift; sourceTree = "<group>"; };
 		0B966007285A92E700584692 /* XCTestCase+expectFailure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+expectFailure.swift"; sourceTree = "<group>"; };
 		0B966009285A96B700584692 /* AssertionFailureOverride.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssertionFailureOverride.swift; sourceTree = "<group>"; };
@@ -171,7 +173,6 @@
 				0B966006285A92C000584692 /* Extensions */,
 				0B303CE52862E7BC007BF7FF /* Extensions Tests */,
 				0B966005285A85FA00584692 /* Utilities Tests */,
-				0B2B2A8228628FD5002F0EC1 /* Theme Tests */,
 			);
 			path = CybridSDKTests;
 			sourceTree = "<group>";
@@ -204,13 +205,6 @@
 			path = URLImageView;
 			sourceTree = "<group>";
 		};
-		0B2B2A8228628FD5002F0EC1 /* Theme Tests */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "Theme Tests";
-			sourceTree = "<group>";
-		};
 		0B2B2A832862901A002F0EC1 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -232,6 +226,7 @@
 			isa = PBXGroup;
 			children = (
 				0B303CE62862E7E3007BF7FF /* UIColorExtensionsTests.swift */,
+				0B303CE82862F5BB007BF7FF /* UILabelExtensionsTests.swift */,
 			);
 			path = "Extensions Tests";
 			sourceTree = "<group>";
@@ -540,6 +535,7 @@
 				0BBCF640285C52D700D39C6D /* MockError.swift in Sources */,
 				0B966027285C2E8600584692 /* MockImageOperation.swift in Sources */,
 				0B966029285C38F500584692 /* URLImageOperationTests.swift in Sources */,
+				0B303CE92862F5BB007BF7FF /* UILabelExtensionsTests.swift in Sources */,
 				0B966004285A85C600584692 /* AsyncOperationTests.swift in Sources */,
 				0B966025285C2CEF00584692 /* MockDispatchQueue.swift in Sources */,
 				0B966011285AA24300584692 /* AssertionFailureOverrideTests.swift in Sources */,
