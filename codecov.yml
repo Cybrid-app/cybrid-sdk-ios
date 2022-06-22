@@ -12,9 +12,14 @@ coverage:
         threshold: 0%
 
 ignore:
-  - CybridSDK/CybridSDK.h
-  - CybridSDK/CybridSDK.docc/*
-  - CybridSDKTests/*
+  - "CybridSDK/CybridSDK.h"
+  - "CybridSDK.docc/*"
+  - "CybridSDKTests/*"
+  - "**/*Tests.swift"
+  - "**/*NavigationController.swift"
+  - "**/*ViewController.swift"
+  - "**/*View.swift"
+  - "**/*Cell.swift"
 
 parsers:
   gcov:
