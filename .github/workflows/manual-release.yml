@@ -23,7 +23,7 @@ jobs:
     - name: Bundle Install
       run: bundle install
     - name: Add Pod Spec
-      run: pod repo add cybrid-podspec https://github.com/Cybrid-app/cybrid-podspecs.git
+      run: pod repo add cybrid-podspec https://${{ secrets.GIT_ACTOR }}:${{ secrets.GIT_TOKEN }}github.com/Cybrid-app/cybrid-podspecs.git
     - name: Bump Podspec version
       run: fastlane run version_bump_podspec path:"CybridSDK.podspec" version_number:${{ github.event.inputs.version }}
     - name: Create Pull Request
