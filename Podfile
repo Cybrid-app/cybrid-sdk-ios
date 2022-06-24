@@ -1,3 +1,5 @@
+source 'git@github.com:Cybrid-app/cybrid-podspecs.git'
+
 iphoneOS_deployment_target = '13.0'
 platform :ios, iphoneOS_deployment_target
 
