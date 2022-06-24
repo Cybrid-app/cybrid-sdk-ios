@@ -8,16 +8,16 @@
 @testable import CybridSDK
 import XCTest
 
-class CybridSDKTests: XCTestCase {
+class CybridConfigTests: XCTestCase {
 
   func testGlobal_ConfigSetup() {
-    XCTAssertEqual(CybridSDK.global.theme.fontTheme, CybridTheme.default.fontTheme)
+    XCTAssertEqual(Cybrid.theme.fontTheme, CybridTheme.default.fontTheme)
 
     let testTheme = CybridTheme(
       colorTheme: .default,
       fontTheme: FontTheme(bodyLarge: .systemFont(ofSize: 20), body: .systemFont(ofSize: 16), caption: .systemFont(ofSize: 12)))
-    CybridSDK.setup(testTheme)
+      Cybrid.setup(testTheme)
 
-    XCTAssertEqual(CybridSDK.global.theme.fontTheme, testTheme.fontTheme)
+    XCTAssertEqual(Cybrid.theme.fontTheme, testTheme.fontTheme)
   }
 }
