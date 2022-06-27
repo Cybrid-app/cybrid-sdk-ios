@@ -49,4 +49,4 @@ jobs:
         body: "${{ github.event.inputs.version }}"
         commit-message: "Bump pod version"
     - name: Push Pod Spec
-      run: pod repo push cybrid-podspec CybridSDK.podspec --swift-version=5
+      run: pod repo push cybrid-podspec CybridSDK.podspec
