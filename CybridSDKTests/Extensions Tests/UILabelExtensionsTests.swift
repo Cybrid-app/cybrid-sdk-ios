@@ -15,8 +15,8 @@ class UILabelExtensionsTests: XCTestCase {
 
     XCTAssertEqual(testLabel.numberOfLines, 0)
     XCTAssertEqual(testLabel.translatesAutoresizingMaskIntoConstraints, false)
-    XCTAssertEqual(testLabel.font, CybridSDK.global.theme.fontTheme.body)
-    XCTAssertEqual(testLabel.textColor, CybridSDK.global.theme.colorTheme.primaryTextColor)
+    XCTAssertEqual(testLabel.font, Cybrid.theme.fontTheme.body)
+    XCTAssertEqual(testLabel.textColor, Cybrid.theme.colorTheme.primaryTextColor)
   }
 
   func testLabelFormat() {
@@ -25,8 +25,8 @@ class UILabelExtensionsTests: XCTestCase {
 
     XCTAssertEqual(testLabel.numberOfLines, 0)
     XCTAssertEqual(testLabel.translatesAutoresizingMaskIntoConstraints, false)
-    XCTAssertEqual(testLabel.font, CybridSDK.global.theme.fontTheme.body)
-    XCTAssertEqual(testLabel.textColor, CybridSDK.global.theme.colorTheme.primaryTextColor)
+    XCTAssertEqual(testLabel.font, Cybrid.theme.fontTheme.body)
+    XCTAssertEqual(testLabel.textColor, Cybrid.theme.colorTheme.primaryTextColor)
   }
 
   func testLabelUppercased_True() {

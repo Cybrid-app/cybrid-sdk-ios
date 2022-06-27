@@ -1,3 +1,6 @@
+source 'git@github.com:Cybrid-app/cybrid-podspecs.git'
+source 'https://github.com/CocoaPods/Specs'
+
 iphoneOS_deployment_target = '13.0'
 platform :ios, iphoneOS_deployment_target
 
@@ -11,7 +14,7 @@ def common_pods
 end
 
 def quality_pods
-  pod 'SwiftLint', '~> 0.47.1'
+  pod 'SwiftLint', '~> 0.47'
 end
 
 abstract_target 'Abstract' do

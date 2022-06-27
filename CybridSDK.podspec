@@ -12,10 +12,11 @@ Pod::Spec.new do |spec|
 
   spec.homepage     = "https://github.com/Cybrid-app/cybrid-sdk-ios"
   spec.license      = { :type => 'Apache-2.0', :file => 'LICENSE' }
-  spec.author             = "Cybrid Technology Inc."
+  spec.author       = "Cybrid Technology Inc."
 
   # TODO: Define minimum version
-  spec.platform     = :ios, "13.0"
+  spec.platform       = :ios, "13.0"
+  spec.swift_versions = '5.0'
   
   # TODO: Define if we are going for Dynamic or Static Framework
   # By default Pods are Dynamic Frameworks. Uncomment to make it static.

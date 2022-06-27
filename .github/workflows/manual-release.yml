@@ -11,23 +11,25 @@ on:
        version:
         description: 'Version  (i.e. 1.1.3)'
         required: true
+env:
+  GIT_ACTOR: jc-cybrid
 jobs:
   build:
 
     runs-on: macos-latest
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
       with:
         fetch-depth: 1
     - name: Bundle Install
       run: bundle install
     - name: Add Pod Spec
-      run: pod repo add cybrid-podspec https://${{ secrets.GIT_ACTOR }}:${{ secrets.GIT_TOKEN }}github.com/Cybrid-app/cybrid-podspecs.git
+      run: pod repo add cybrid-podspec https://${{ env.GIT_ACTOR }}:${{ secrets.GIT_TOKEN }}@github.com/Cybrid-app/cybrid-podspecs.git
     - name: Bump Podspec version
       run: fastlane run version_bump_podspec path:"CybridSDK.podspec" version_number:${{ github.event.inputs.version }}
     - name: Create Pull Request
-      uses: peter-evans/create-pull-request@v3
+      uses: peter-evans/create-pull-request@v4
       with:
         title: Release/${{ github.event.inputs.version }}
         base: main
@@ -47,4 +49,4 @@ jobs:
         body: "${{ github.event.inputs.version }}"
         commit-message: "Bump pod version"
     - name: Push Pod Spec
-      run: pod repo push cybrid-podspec CybridSDK.podspec
+      run: pod repo push cybrid-podspec CybridSDK.podspec --swift-version=5

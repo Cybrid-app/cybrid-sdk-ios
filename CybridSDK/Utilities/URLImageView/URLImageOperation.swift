@@ -12,10 +12,6 @@ import UIKit
 
 protocol URLImageOperation: AsyncOperation {
   var image: UIImage? { get set }
-  var isExecuting: Bool { get }
-  var completionBlock: (() -> Void)? { get set }
-
-  func cancel()
 }
 
 final class ImageDownloadOperation: AsyncOperation, URLImageOperation {

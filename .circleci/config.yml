@@ -32,6 +32,15 @@ jobs:
           path: "result.xml"
       - store_test_results:
           path: "result.xml"
+  pod-spec-lint:
+    description: Runs podspec lint
+    macos:
+      xcode: "13.3.1"
+    steps:
+      - checkout
+      - run:
+          name: "Run CocoaPods Podspec linter"
+          command: "pod spec lint --verbose --quick"
 
 executors:
   swiftlint:
@@ -42,4 +51,5 @@ workflows:
   ios-workflow:
     jobs:
       - swiftlint
+      - pod-spec-lint
       - build-and-test
