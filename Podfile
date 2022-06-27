@@ -13,7 +13,7 @@ def common_pods
 end
 
 def quality_pods
-  pod 'SwiftLint', '~> 0.47.1'
+  pod 'SwiftLint', '~> 0.47'
 end
 
 abstract_target 'Abstract' do
