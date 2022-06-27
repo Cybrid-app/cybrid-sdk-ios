@@ -16,7 +16,7 @@ class NetworkingInterfaceTests: XCTestCase {
       var callFinished = false
       let expectation = expectation(description: "")
       // URL
-      let url = URL(string: "https://es.m.wikipedia.org/wiki/Archivo:YouTube_full-color_icon_%282017%29.svg")
+      let url = URL(string: "https://images.cybrid.xyz/sdk/assets/pdf/color/btc.pdf")
       XCTAssertNotNil(url)
 
       let session = URLSession.shared
@@ -29,7 +29,7 @@ class NetworkingInterfaceTests: XCTestCase {
 
       /// Beware, this test could take more time than needed, or even fail.
       /// That's because it's using a real URLSession instance to make a real call.
-      waitForExpectations(timeout: 1.0)
+      waitForExpectations(timeout: 30.0)
       XCTAssertTrue(callFinished)
     }
   }
