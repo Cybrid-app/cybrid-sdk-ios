@@ -16,7 +16,7 @@ class NetworkingInterfaceTests: XCTestCase {
       var callFinished = false
       let expectation = expectation(description: "")
       // URL
-      let url = URL(string: "https://images.cybrid.xyz/sdk/assets/pdf/color/btc.pdf")
+      let url = URL(string: "https://es.m.wikipedia.org/wiki/Archivo:YouTube_full-color_icon_%282017%29.svg")
       XCTAssertNotNil(url)
 
       let session = URLSession.shared
