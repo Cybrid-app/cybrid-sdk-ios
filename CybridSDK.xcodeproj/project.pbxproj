@@ -60,6 +60,7 @@
 		0BD6611B286C197B00F4DA6B /* UIViewConstraintsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD6611A286C197B00F4DA6B /* UIViewConstraintsTests.swift */; };
 		0BD6611D286C1D5B00F4DA6B /* DoubleExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD6611C286C1D5B00F4DA6B /* DoubleExtensionsTests.swift */; };
 		0BD6611F286C1EB800F4DA6B /* ObservableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD6611E286C1EB800F4DA6B /* ObservableTests.swift */; };
+		0BD66123286C20BC00F4DA6B /* CryptoPriceViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD66122286C20BC00F4DA6B /* CryptoPriceViewModelTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -129,6 +130,7 @@
 		0BD6611A286C197B00F4DA6B /* UIViewConstraintsTests.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = UIViewConstraintsTests.swift; sourceTree = "<group>"; tabWidth = 2; };
 		0BD6611C286C1D5B00F4DA6B /* DoubleExtensionsTests.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = DoubleExtensionsTests.swift; sourceTree = "<group>"; tabWidth = 2; };
 		0BD6611E286C1EB800F4DA6B /* ObservableTests.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = ObservableTests.swift; sourceTree = "<group>"; tabWidth = 2; };
+		0BD66122286C20BC00F4DA6B /* CryptoPriceViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoPriceViewModelTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -201,8 +203,9 @@
 				0B966006285A92C000584692 /* Extensions */,
 				0B303CE52862E7BC007BF7FF /* Extensions Tests */,
 				0B303CF1286369F7007BF7FF /* Global Tests */,
-				0B966005285A85FA00584692 /* Utilities Tests */,
 				0B303CEA2862F888007BF7FF /* Theme Tests */,
+				0B966005285A85FA00584692 /* Utilities Tests */,
+				0BD66120286C208600F4DA6B /* ViewModel Tests */,
 			);
 			path = CybridSDKTests;
 			sourceTree = "<group>";
@@ -436,6 +439,14 @@
 			path = URLImageView;
 			sourceTree = "<group>";
 		};
+		0BD66120286C208600F4DA6B /* ViewModel Tests */ = {
+			isa = PBXGroup;
+			children = (
+				0BD66122286C20BC00F4DA6B /* CryptoPriceViewModelTests.swift */,
+			);
+			path = "ViewModel Tests";
+			sourceTree = "<group>";
+		};
 		81407DEC5E3C66990E8215E8 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -656,6 +667,7 @@
 				0B966008285A92E700584692 /* XCTestCase+expectFailure.swift in Sources */,
 				0B96602B285C3AC600584692 /* NetworkingInterfaceTests.swift in Sources */,
 				0B303CE72862E7E3007BF7FF /* UIColorExtensionsTests.swift in Sources */,
+				0BD66123286C20BC00F4DA6B /* CryptoPriceViewModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
