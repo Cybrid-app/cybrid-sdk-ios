@@ -9,11 +9,11 @@ import UIKit
 
 public class CryptoPriceListView: UITableView {
 
-  private var viewModel: CryptoPriceViewModel
+  private var viewModel: CryptoPriceViewModel!
   public init() {
-    viewModel = CryptoPriceViewModel()
     super.init(frame: .zero, style: .plain)
 
+    viewModel = CryptoPriceViewModel(cellProvider: self)
     setupView()
   }
 
@@ -70,5 +70,19 @@ public class CryptoPriceListView: UITableView {
 
   public func startLiveUpdate() {
     viewModel.fetchPriceList()
+  }
+}
+
+extension CryptoPriceListView: CryptoPriceViewProvider {
+  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath, withData dataModel: CryptoPriceModel) -> UITableViewCell {
+    guard
+      let cell = tableView.dequeueReusableCell(
+        withIdentifier: CryptoPriceTableViewCell.reuseIdentifier, for: indexPath
+      ) as? CryptoPriceTableViewCell
+    else {
+      return UITableViewCell()
+    }
+    cell.customize(dataModel: dataModel)
+    return cell
   }
 }

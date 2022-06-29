@@ -9,7 +9,7 @@ import Foundation
 
 // MARK: - CryptoPriceModel
 
-struct CryptoPriceModel {
+struct CryptoPriceModel: Equatable {
   let id: String // 12897019287
   let imageURL: String // https://abc.com/img.png
   let cryptoId: String // BTC

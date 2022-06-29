@@ -118,8 +118,8 @@
 		0BD660FB286B763E00F4DA6B /* AsyncOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncOperation.swift; sourceTree = "<group>"; };
 		0BD66102286B768300F4DA6B /* CryptoPriceTableHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CryptoPriceTableHeaderView.swift; sourceTree = "<group>"; };
 		0BD66103286B768300F4DA6B /* CryptoPriceTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CryptoPriceTableViewCell.swift; sourceTree = "<group>"; };
-		0BD66106286B768C00F4DA6B /* CryptoPriceListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CryptoPriceListView.swift; sourceTree = "<group>"; };
-		0BD66107286B768C00F4DA6B /* CryptoPriceViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CryptoPriceViewModel.swift; sourceTree = "<group>"; };
+		0BD66106286B768C00F4DA6B /* CryptoPriceListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = CryptoPriceListView.swift; sourceTree = "<group>"; tabWidth = 2; };
+		0BD66107286B768C00F4DA6B /* CryptoPriceViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = CryptoPriceViewModel.swift; sourceTree = "<group>"; tabWidth = 2; };
 		0BD66108286B768C00F4DA6B /* CryptoPriceModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CryptoPriceModel.swift; sourceTree = "<group>"; };
 		0BD6610C286B769800F4DA6B /* Observable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		0BD66110286B76DC00F4DA6B /* URLImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLImageView.swift; sourceTree = "<group>"; };
@@ -130,7 +130,7 @@
 		0BD6611A286C197B00F4DA6B /* UIViewConstraintsTests.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = UIViewConstraintsTests.swift; sourceTree = "<group>"; tabWidth = 2; };
 		0BD6611C286C1D5B00F4DA6B /* DoubleExtensionsTests.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = DoubleExtensionsTests.swift; sourceTree = "<group>"; tabWidth = 2; };
 		0BD6611E286C1EB800F4DA6B /* ObservableTests.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = ObservableTests.swift; sourceTree = "<group>"; tabWidth = 2; };
-		0BD66122286C20BC00F4DA6B /* CryptoPriceViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoPriceViewModelTests.swift; sourceTree = "<group>"; };
+		0BD66122286C20BC00F4DA6B /* CryptoPriceViewModelTests.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = CryptoPriceViewModelTests.swift; sourceTree = "<group>"; tabWidth = 2; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */

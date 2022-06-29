@@ -7,8 +7,17 @@
 
 import UIKit
 
+protocol CryptoPriceViewProvider: AnyObject {
+  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath, withData dataModel: CryptoPriceModel) -> UITableViewCell
+}
+
 class CryptoPriceViewModel: NSObject {
   var cryptoPriceList: Observable<[CryptoPriceModel]> = .init([])
+  unowned var cellProvider: CryptoPriceViewProvider
+
+  init(cellProvider: CryptoPriceViewProvider) {
+    self.cellProvider = cellProvider
+  }
 
   func fetchPriceList() {
     // FIXME: replace mocked data with service call
@@ -24,15 +33,7 @@ extension CryptoPriceViewModel: UITableViewDelegate, UITableViewDataSource {
   }
 
   public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    guard
-      let cell = tableView.dequeueReusableCell(
-        withIdentifier: CryptoPriceTableViewCell.reuseIdentifier, for: indexPath
-      ) as? CryptoPriceTableViewCell
-    else {
-      return UITableViewCell()
-    }
-    cell.customize(dataModel: cryptoPriceList.value[indexPath.row])
-    return cell
+    cellProvider.tableView(tableView, cellForRowAt: indexPath, withData: cryptoPriceList.value[indexPath.row])
   }
   func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
     let view = CryptoPriceTableHeaderView()
