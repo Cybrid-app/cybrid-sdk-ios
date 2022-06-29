@@ -26,24 +26,24 @@ enum FormatStyle {
   var textColor: UIColor {
     switch self {
     case .headerSmall, .comment, .inputPlaceholder:
-      return CybridSDK.global.theme.colorTheme.secondaryTextColor
+      return Cybrid.theme.colorTheme.secondaryTextColor
     case .body, .bodyLarge:
-      return CybridSDK.global.theme.colorTheme.primaryTextColor
+      return Cybrid.theme.colorTheme.primaryTextColor
     }
   }
 
   var font: UIFont {
     switch self {
     case .headerSmall:
-      return CybridSDK.global.theme.fontTheme.caption
+      return Cybrid.theme.fontTheme.caption
     case .bodyLarge:
-      return CybridSDK.global.theme.fontTheme.bodyLarge
+      return Cybrid.theme.fontTheme.bodyLarge
     case .body:
-      return CybridSDK.global.theme.fontTheme.body
+      return Cybrid.theme.fontTheme.body
     case .comment:
-      return CybridSDK.global.theme.fontTheme.caption
+      return Cybrid.theme.fontTheme.caption
     case .inputPlaceholder:
-      return CybridSDK.global.theme.fontTheme.bodyLarge
+      return Cybrid.theme.fontTheme.bodyLarge
     }
   }
 }

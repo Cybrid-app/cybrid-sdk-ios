@@ -34,7 +34,7 @@ class CryptoPriceTableViewCell: UITableViewCell {
     label.setContentHuggingPriority(.defaultHigh, for: .vertical)
   }
   private var iconImage = URLImageView(url: nil)
-  private let theme: Theme = CybridSDK.global.theme
+  private let theme: Theme = Cybrid.theme
 
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
