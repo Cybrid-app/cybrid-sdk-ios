@@ -57,6 +57,7 @@
 		0BD66115286B76F300F4DA6B /* CryptoPriceListTestVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD66113286B76F300F4DA6B /* CryptoPriceListTestVC.swift */; };
 		0BD66118286B79C500F4DA6B /* UIView+Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD66116286B79C500F4DA6B /* UIView+Constraints.swift */; };
 		0BD66119286B79C500F4DA6B /* Double+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD66117286B79C500F4DA6B /* Double+Extensions.swift */; };
+		0BD6611B286C197B00F4DA6B /* UIViewConstraintsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD6611A286C197B00F4DA6B /* UIViewConstraintsTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -91,7 +92,7 @@
 		0B966009285A96B700584692 /* AssertionFailureOverride.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssertionFailureOverride.swift; sourceTree = "<group>"; };
 		0B96600C285A9A3100584692 /* MockAsyncOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAsyncOperation.swift; sourceTree = "<group>"; };
 		0B966010285AA24300584692 /* AssertionFailureOverrideTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssertionFailureOverrideTests.swift; sourceTree = "<group>"; };
-		0B966012285AA2EB00584692 /* URLImageViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLImageViewTests.swift; sourceTree = "<group>"; };
+		0B966012285AA2EB00584692 /* URLImageViewTests.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = URLImageViewTests.swift; sourceTree = "<group>"; tabWidth = 2; };
 		0B966018285AE8D300584692 /* MockURLSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockURLSession.swift; sourceTree = "<group>"; };
 		0B96601D285AF03700584692 /* TestAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = TestAssets.xcassets; sourceTree = "<group>"; };
 		0B966024285C2CEF00584692 /* MockDispatchQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockDispatchQueue.swift; sourceTree = "<group>"; };
@@ -123,6 +124,7 @@
 		0BD66113286B76F300F4DA6B /* CryptoPriceListTestVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CryptoPriceListTestVC.swift; sourceTree = "<group>"; };
 		0BD66116286B79C500F4DA6B /* UIView+Constraints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Constraints.swift"; sourceTree = "<group>"; };
 		0BD66117286B79C500F4DA6B /* Double+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Double+Extensions.swift"; sourceTree = "<group>"; };
+		0BD6611A286C197B00F4DA6B /* UIViewConstraintsTests.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = UIViewConstraintsTests.swift; sourceTree = "<group>"; tabWidth = 2; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -236,6 +238,7 @@
 			children = (
 				0B303CE62862E7E3007BF7FF /* UIColorExtensionsTests.swift */,
 				0B303CE82862F5BB007BF7FF /* UILabelExtensionsTests.swift */,
+				0BD6611A286C197B00F4DA6B /* UIViewConstraintsTests.swift */,
 			);
 			path = "Extensions Tests";
 			sourceTree = "<group>";
@@ -640,6 +643,7 @@
 				0B966011285AA24300584692 /* AssertionFailureOverrideTests.swift in Sources */,
 				0B96600D285A9A3100584692 /* MockAsyncOperation.swift in Sources */,
 				0B966019285AE8D300584692 /* MockURLSession.swift in Sources */,
+				0BD6611B286C197B00F4DA6B /* UIViewConstraintsTests.swift in Sources */,
 				0B966013285AA2EB00584692 /* URLImageViewTests.swift in Sources */,
 				0B966008285A92E700584692 /* XCTestCase+expectFailure.swift in Sources */,
 				0B96602B285C3AC600584692 /* NetworkingInterfaceTests.swift in Sources */,
