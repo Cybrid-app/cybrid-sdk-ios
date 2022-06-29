@@ -59,7 +59,10 @@ final class URLImageView: UIImageView {
   }
 
   private func loadImage() {
-    guard let url = url else { return }
+    guard let url = url else {
+        self.image = placeholder
+        return
+    }
     if let imageOp = imageOperation, imageOp.isExecuting {
       imageOperation?.cancel()
     }
