@@ -58,6 +58,7 @@
 		0BD66118286B79C500F4DA6B /* UIView+Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD66116286B79C500F4DA6B /* UIView+Constraints.swift */; };
 		0BD66119286B79C500F4DA6B /* Double+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD66117286B79C500F4DA6B /* Double+Extensions.swift */; };
 		0BD6611B286C197B00F4DA6B /* UIViewConstraintsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD6611A286C197B00F4DA6B /* UIViewConstraintsTests.swift */; };
+		0BD6611D286C1D5B00F4DA6B /* DoubleExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD6611C286C1D5B00F4DA6B /* DoubleExtensionsTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -125,6 +126,7 @@
 		0BD66116286B79C500F4DA6B /* UIView+Constraints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Constraints.swift"; sourceTree = "<group>"; };
 		0BD66117286B79C500F4DA6B /* Double+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Double+Extensions.swift"; sourceTree = "<group>"; };
 		0BD6611A286C197B00F4DA6B /* UIViewConstraintsTests.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = UIViewConstraintsTests.swift; sourceTree = "<group>"; tabWidth = 2; };
+		0BD6611C286C1D5B00F4DA6B /* DoubleExtensionsTests.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = DoubleExtensionsTests.swift; sourceTree = "<group>"; tabWidth = 2; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -239,6 +241,7 @@
 				0B303CE62862E7E3007BF7FF /* UIColorExtensionsTests.swift */,
 				0B303CE82862F5BB007BF7FF /* UILabelExtensionsTests.swift */,
 				0BD6611A286C197B00F4DA6B /* UIViewConstraintsTests.swift */,
+				0BD6611C286C1D5B00F4DA6B /* DoubleExtensionsTests.swift */,
 			);
 			path = "Extensions Tests";
 			sourceTree = "<group>";
@@ -632,6 +635,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0BD6611D286C1D5B00F4DA6B /* DoubleExtensionsTests.swift in Sources */,
 				0B303CF328636A0D007BF7FF /* CybridConfigTests.swift in Sources */,
 				0BBCF640285C52D700D39C6D /* MockError.swift in Sources */,
 				0B966027285C2E8600584692 /* MockImageOperation.swift in Sources */,
