@@ -59,6 +59,7 @@
 		0BD66119286B79C500F4DA6B /* Double+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD66117286B79C500F4DA6B /* Double+Extensions.swift */; };
 		0BD6611B286C197B00F4DA6B /* UIViewConstraintsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD6611A286C197B00F4DA6B /* UIViewConstraintsTests.swift */; };
 		0BD6611D286C1D5B00F4DA6B /* DoubleExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD6611C286C1D5B00F4DA6B /* DoubleExtensionsTests.swift */; };
+		0BD6611F286C1EB800F4DA6B /* ObservableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD6611E286C1EB800F4DA6B /* ObservableTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -127,6 +128,7 @@
 		0BD66117286B79C500F4DA6B /* Double+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Double+Extensions.swift"; sourceTree = "<group>"; };
 		0BD6611A286C197B00F4DA6B /* UIViewConstraintsTests.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = UIViewConstraintsTests.swift; sourceTree = "<group>"; tabWidth = 2; };
 		0BD6611C286C1D5B00F4DA6B /* DoubleExtensionsTests.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = DoubleExtensionsTests.swift; sourceTree = "<group>"; tabWidth = 2; };
+		0BD6611E286C1EB800F4DA6B /* ObservableTests.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = ObservableTests.swift; sourceTree = "<group>"; tabWidth = 2; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -290,10 +292,10 @@
 		0B965FFC28599FE700584692 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				0BD6610C286B769800F4DA6B /* Observable.swift */,
 				0BD660F8286B762C00F4DA6B /* Concurrency */,
 				0BD660F5286B75FF00F4DA6B /* Networking */,
 				0B966009285A96B700584692 /* AssertionFailureOverride.swift */,
+				0BD6610C286B769800F4DA6B /* Observable.swift */,
 				0B303CE02862E062007BF7FF /* FormatStyle.swift */,
 			);
 			path = Utilities;
@@ -307,6 +309,7 @@
 				0B966012285AA2EB00584692 /* URLImageViewTests.swift */,
 				0B966028285C38F500584692 /* URLImageOperationTests.swift */,
 				0B96602A285C3AC600584692 /* NetworkingInterfaceTests.swift */,
+				0BD6611E286C1EB800F4DA6B /* ObservableTests.swift */,
 			);
 			path = "Utilities Tests";
 			sourceTree = "<group>";
@@ -645,6 +648,7 @@
 				0B303CEC2862F898007BF7FF /* ColorThemeTests.swift in Sources */,
 				0B966025285C2CEF00584692 /* MockDispatchQueue.swift in Sources */,
 				0B966011285AA24300584692 /* AssertionFailureOverrideTests.swift in Sources */,
+				0BD6611F286C1EB800F4DA6B /* ObservableTests.swift in Sources */,
 				0B96600D285A9A3100584692 /* MockAsyncOperation.swift in Sources */,
 				0B966019285AE8D300584692 /* MockURLSession.swift in Sources */,
 				0BD6611B286C197B00F4DA6B /* UIViewConstraintsTests.swift in Sources */,
