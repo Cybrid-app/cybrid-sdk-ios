@@ -16,6 +16,9 @@ ignore:
   - "CybridSDK.docc/*"
   - "CybridSDKTests/*"
   - "**/*Tests.swift"
+  - "**/*Cell.swift"
+  - "**/*View.swift"
+  - "**/*ViewController.swift"
 
 parsers:
   gcov:
