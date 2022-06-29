@@ -10,10 +10,14 @@ import UIKit
 public class CryptoPriceListView: UITableView {
 
   private var viewModel: CryptoPriceViewModel!
-  public init() {
+  private let theme: Theme
+
+  public init(theme: Theme? = nil) {
+    self.theme = theme ?? Cybrid.theme
+
     super.init(frame: .zero, style: .plain)
 
-    viewModel = CryptoPriceViewModel(cellProvider: self)
+    self.viewModel = CryptoPriceViewModel(cellProvider: self)
     setupView()
   }
 
@@ -27,8 +31,8 @@ public class CryptoPriceListView: UITableView {
     self.delegate = viewModel
     self.dataSource = viewModel
     self.register(CryptoPriceTableViewCell.self, forCellReuseIdentifier: CryptoPriceTableViewCell.reuseIdentifier)
-    self.rowHeight = 44.0
-    self.estimatedRowHeight = 44.0
+    self.rowHeight = Constants.rowHeight
+    self.estimatedRowHeight = Constants.rowHeight
     self.translatesAutoresizingMaskIntoConstraints = false
   }
 
@@ -73,6 +77,8 @@ public class CryptoPriceListView: UITableView {
   }
 }
 
+// MARK: - CryptoPriceViewProvider
+
 extension CryptoPriceListView: CryptoPriceViewProvider {
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath, withData dataModel: CryptoPriceModel) -> UITableViewCell {
     guard
@@ -84,5 +90,13 @@ extension CryptoPriceListView: CryptoPriceViewProvider {
     }
     cell.customize(dataModel: dataModel)
     return cell
+  }
+}
+
+// MARK: - Constants
+
+fileprivate extension CryptoPriceListView {
+  enum Constants {
+    static let rowHeight: CGFloat = UIConstants.minimumTargetSize
   }
 }
