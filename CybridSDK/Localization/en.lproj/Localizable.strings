@@ -1,0 +1,12 @@
+/*
+  Localizable.strings
+  CybridSDK
+
+  Created by Cybrid on 30/06/22.
+
+*/
+
+// Crypto Price List
+"cybrid.cryptoPriceList.headerSearchPlaceholder" = "Search";
+"cybrid.cryptoPriceList.headerCurrency" = "Currency";
+"cybrid.cryptoPriceList.headerPrice" = "Price";

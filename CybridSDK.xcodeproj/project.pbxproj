@@ -61,6 +61,9 @@
 		0BD6611D286C1D5B00F4DA6B /* DoubleExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD6611C286C1D5B00F4DA6B /* DoubleExtensionsTests.swift */; };
 		0BD6611F286C1EB800F4DA6B /* ObservableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD6611E286C1EB800F4DA6B /* ObservableTests.swift */; };
 		0BD66123286C20BC00F4DA6B /* CryptoPriceViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD66122286C20BC00F4DA6B /* CryptoPriceViewModelTests.swift */; };
+		0BD66125286D7C0400F4DA6B /* Localizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD66124286D7C0400F4DA6B /* Localizer.swift */; };
+		0BD6612A286DE86A00F4DA6B /* CybridLocalizationKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD66129286DE86A00F4DA6B /* CybridLocalizationKey.swift */; };
+		0BD66130286E1F9600F4DA6B /* en.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 0BD6612F286E1F9600F4DA6B /* en.lproj */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -117,7 +120,7 @@
 		0BD660FA286B763E00F4DA6B /* ConcurrencyInterfaces.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConcurrencyInterfaces.swift; sourceTree = "<group>"; };
 		0BD660FB286B763E00F4DA6B /* AsyncOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncOperation.swift; sourceTree = "<group>"; };
 		0BD66102286B768300F4DA6B /* CryptoPriceTableHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CryptoPriceTableHeaderView.swift; sourceTree = "<group>"; };
-		0BD66103286B768300F4DA6B /* CryptoPriceTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CryptoPriceTableViewCell.swift; sourceTree = "<group>"; };
+		0BD66103286B768300F4DA6B /* CryptoPriceTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = CryptoPriceTableViewCell.swift; sourceTree = "<group>"; tabWidth = 2; };
 		0BD66106286B768C00F4DA6B /* CryptoPriceListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = CryptoPriceListView.swift; sourceTree = "<group>"; tabWidth = 2; };
 		0BD66107286B768C00F4DA6B /* CryptoPriceViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = CryptoPriceViewModel.swift; sourceTree = "<group>"; tabWidth = 2; };
 		0BD66108286B768C00F4DA6B /* CryptoPriceModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CryptoPriceModel.swift; sourceTree = "<group>"; };
@@ -131,6 +134,9 @@
 		0BD6611C286C1D5B00F4DA6B /* DoubleExtensionsTests.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = DoubleExtensionsTests.swift; sourceTree = "<group>"; tabWidth = 2; };
 		0BD6611E286C1EB800F4DA6B /* ObservableTests.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = ObservableTests.swift; sourceTree = "<group>"; tabWidth = 2; };
 		0BD66122286C20BC00F4DA6B /* CryptoPriceViewModelTests.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = CryptoPriceViewModelTests.swift; sourceTree = "<group>"; tabWidth = 2; };
+		0BD66124286D7C0400F4DA6B /* Localizer.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = Localizer.swift; sourceTree = "<group>"; tabWidth = 2; };
+		0BD66129286DE86A00F4DA6B /* CybridLocalizationKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CybridLocalizationKey.swift; sourceTree = "<group>"; };
+		0BD6612F286E1F9600F4DA6B /* en.lproj */ = {isa = PBXFileReference; lastKnownFileType = folder; path = en.lproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -185,12 +191,13 @@
 		0B078F0F28497B070020B4F7 /* CybridSDK */ = {
 			isa = PBXGroup;
 			children = (
-				0BD660FF286B765900F4DA6B /* UI Components */,
 				0B303CE22862E5C5007BF7FF /* Global */,
 				0B2B2A832862901A002F0EC1 /* Extensions */,
-				0B2B2A6B28621D35002F0EC1 /* Theme */,
-				0B965FFC28599FE700584692 /* Utilities */,
+				0BD66126286D7CCB00F4DA6B /* Localization */,
 				0B965FF828599E3A00584692 /* Supporting Files */,
+				0B2B2A6B28621D35002F0EC1 /* Theme */,
+				0BD660FF286B765900F4DA6B /* UI Components */,
+				0B965FFC28599FE700584692 /* Utilities */,
 			);
 			path = CybridSDK;
 			sourceTree = "<group>";
@@ -447,6 +454,16 @@
 			path = "ViewModel Tests";
 			sourceTree = "<group>";
 		};
+		0BD66126286D7CCB00F4DA6B /* Localization */ = {
+			isa = PBXGroup;
+			children = (
+				0BD6612F286E1F9600F4DA6B /* en.lproj */,
+				0BD66124286D7C0400F4DA6B /* Localizer.swift */,
+				0BD66129286DE86A00F4DA6B /* CybridLocalizationKey.swift */,
+			);
+			path = Localization;
+			sourceTree = "<group>";
+		};
 		81407DEC5E3C66990E8215E8 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -568,6 +585,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0BD66130286E1F9600F4DA6B /* en.lproj in Resources */,
 				0BD0A4E728582FB700C10744 /* README.md in Resources */,
 				0B99D1E72849CCE500837E05 /* CybridSDK.podspec in Resources */,
 			);
@@ -619,6 +637,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0BD6612A286DE86A00F4DA6B /* CybridLocalizationKey.swift in Sources */,
 				0BD6610D286B769800F4DA6B /* Observable.swift in Sources */,
 				0BD66104286B768300F4DA6B /* CryptoPriceTableHeaderView.swift in Sources */,
 				0B2B2A7128621DA7002F0EC1 /* FontTheme.swift in Sources */,
@@ -634,6 +653,7 @@
 				0BD66109286B768C00F4DA6B /* CryptoPriceListView.swift in Sources */,
 				0BD660FC286B763E00F4DA6B /* URLImageOperation.swift in Sources */,
 				0B078F1228497B070020B4F7 /* CybridSDK.docc in Sources */,
+				0BD66125286D7C0400F4DA6B /* Localizer.swift in Sources */,
 				0BD66111286B76DC00F4DA6B /* URLImageView.swift in Sources */,
 				0BD6610A286B768C00F4DA6B /* CryptoPriceViewModel.swift in Sources */,
 				0B2B2A8928629324002F0EC1 /* Theme.swift in Sources */,

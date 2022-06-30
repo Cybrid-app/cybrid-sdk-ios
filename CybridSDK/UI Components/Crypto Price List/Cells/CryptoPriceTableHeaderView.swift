@@ -8,10 +8,12 @@
 import UIKit
 
 class CryptoPriceTableHeaderView: UITableViewHeaderFooterView {
+  private let localizer = CybridLocalizer()
+
   private lazy var searchTextField: UISearchTextField = {
     let searchBar = UISearchTextField()
     let placeholder = NSAttributedString(
-      string: "Search",
+      string: localizer.localize(with: CybridLocalizationKey.cryptoPriceList(.headerSearchPlaceholder)),
       attributes: [
         NSAttributedString.Key.foregroundColor: FormatStyle.inputPlaceholder.textColor,
         NSAttributedString.Key.font: FormatStyle.inputPlaceholder.font
@@ -23,6 +25,7 @@ class CryptoPriceTableHeaderView: UITableViewHeaderFooterView {
     searchBar.tintColor = FormatStyle.bodyLarge.textColor
     return searchBar
   }()
+
   private lazy var contentStackView: UIStackView = {
     let stackView = UIStackView(arrangedSubviews: [
       nameLabel,
@@ -34,6 +37,7 @@ class CryptoPriceTableHeaderView: UITableViewHeaderFooterView {
     stackView.alignment = .center
     return stackView
   }()
+
   private lazy var nameLabel: UILabel = {
     let label = UILabel()
     label.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
@@ -43,17 +47,20 @@ class CryptoPriceTableHeaderView: UITableViewHeaderFooterView {
     label.sizeToFit()
     label.font = FormatStyle.headerSmall.font
     label.textColor = FormatStyle.headerSmall.textColor
-    label.text = "Currency".uppercased()
+    let text = localizer.localize(with: CybridLocalizationKey.cryptoPriceList(.headerCurrency))
+    label.text = text.uppercased()
     return label
   }()
-  private var priceLabel: UILabel = {
+
+  private lazy var priceLabel: UILabel = {
     let label = UILabel()
     label.setContentHuggingPriority(.defaultHigh, for: .horizontal)
     label.translatesAutoresizingMaskIntoConstraints = false
     label.sizeToFit()
     label.font = FormatStyle.headerSmall.font
     label.textColor = FormatStyle.headerSmall.textColor
-    label.text = "Price".uppercased()
+    let text = localizer.localize(with: CybridLocalizationKey.cryptoPriceList(.headerPrice))
+    label.text = text.uppercased()
     return label
   }()
 
