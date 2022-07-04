@@ -141,9 +141,9 @@
 		0BD66129286DE86A00F4DA6B /* CybridLocalizationKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CybridLocalizationKey.swift; sourceTree = "<group>"; };
 		0BD6612F286E1F9600F4DA6B /* en.lproj */ = {isa = PBXFileReference; lastKnownFileType = folder; path = en.lproj; sourceTree = "<group>"; };
 		0BD661322872A05B00F4DA6B /* LocalizationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizationTests.swift; sourceTree = "<group>"; };
-		0BD661342872B97200F4DA6B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		0BD661362872BB0A00F4DA6B /* AssetPathBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetPathBuilder.swift; sourceTree = "<group>"; };
 		0BD661392872BC0B00F4DA6B /* CybridCurrencyFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CybridCurrencyFormatter.swift; sourceTree = "<group>"; };
+		0BD6613B28734F2900F4DA6B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -198,7 +198,6 @@
 		0B078F0F28497B070020B4F7 /* CybridSDK */ = {
 			isa = PBXGroup;
 			children = (
-				0BD661342872B97200F4DA6B /* Info.plist */,
 				0B303CE22862E5C5007BF7FF /* Global */,
 				0B2B2A832862901A002F0EC1 /* Framework Extensions */,
 				0BD66126286D7CCB00F4DA6B /* Localization */,
@@ -303,6 +302,7 @@
 		0B965FF828599E3A00584692 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				0BD6613B28734F2900F4DA6B /* Info.plist */,
 				0B078F1028497B070020B4F7 /* CybridSDK.h */,
 			);
 			name = "Supporting Files";
