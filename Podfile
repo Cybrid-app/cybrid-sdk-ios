@@ -9,7 +9,7 @@ use_frameworks!
 
 def common_pods
   unless ENV['CI']
-    pod 'CybridApiBankSwift', :path => '../cybrid-api-bank-swift/CybridApiBankSwift.podspec'
+    pod 'CybridApiBankSwift'
   end
 end
 
