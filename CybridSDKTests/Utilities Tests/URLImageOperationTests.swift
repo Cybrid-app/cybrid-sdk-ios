@@ -6,6 +6,7 @@
 //
 
 @testable import CybridSDK
+import PDFKit
 import XCTest
 
 class URLImageOperationTests: XCTestCase {
@@ -15,10 +16,11 @@ class URLImageOperationTests: XCTestCase {
   private var testImageData: Data?
 
   override func setUpWithError() throws {
-    self.url = URL(string: "https://images.cybrid.xyz/color/btc.svg")
+    self.url = URL(string: "https://images.cybrid.xyz/sdk/assets/pdf/color/btc.pdf")
     let bundle = Bundle.init(for: Self.self)
     self.testImage = UIImage(named: "placeholder", in: bundle, compatibleWith: nil)
-    self.testImageData = testImage?.jpegData(compressionQuality: 1)
+    let pdfPage = PDFPage(image: testImage!)
+    self.testImageData = pdfPage?.dataRepresentation
     try super.setUpWithError()
   }
 

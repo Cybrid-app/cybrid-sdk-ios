@@ -56,9 +56,8 @@
 		0BD66114286B76F300F4DA6B /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD66112286B76F300F4DA6B /* RootViewController.swift */; };
 		0BD66115286B76F300F4DA6B /* CryptoPriceListTestVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD66113286B76F300F4DA6B /* CryptoPriceListTestVC.swift */; };
 		0BD66118286B79C500F4DA6B /* UIView+Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD66116286B79C500F4DA6B /* UIView+Constraints.swift */; };
-		0BD66119286B79C500F4DA6B /* Double+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD66117286B79C500F4DA6B /* Double+Extensions.swift */; };
 		0BD6611B286C197B00F4DA6B /* UIViewConstraintsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD6611A286C197B00F4DA6B /* UIViewConstraintsTests.swift */; };
-		0BD6611D286C1D5B00F4DA6B /* DoubleExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD6611C286C1D5B00F4DA6B /* DoubleExtensionsTests.swift */; };
+		0BD6611D286C1D5B00F4DA6B /* CurrencyFormatterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD6611C286C1D5B00F4DA6B /* CurrencyFormatterTests.swift */; };
 		0BD6611F286C1EB800F4DA6B /* ObservableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD6611E286C1EB800F4DA6B /* ObservableTests.swift */; };
 		0BD66123286C20BC00F4DA6B /* CryptoPriceViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD66122286C20BC00F4DA6B /* CryptoPriceViewModelTests.swift */; };
 		0BD66125286D7C0400F4DA6B /* Localizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD66124286D7C0400F4DA6B /* Localizer.swift */; };
@@ -132,9 +131,8 @@
 		0BD66112286B76F300F4DA6B /* RootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; tabWidth = 2; };
 		0BD66113286B76F300F4DA6B /* CryptoPriceListTestVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CryptoPriceListTestVC.swift; sourceTree = "<group>"; };
 		0BD66116286B79C500F4DA6B /* UIView+Constraints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Constraints.swift"; sourceTree = "<group>"; };
-		0BD66117286B79C500F4DA6B /* Double+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Double+Extensions.swift"; sourceTree = "<group>"; };
 		0BD6611A286C197B00F4DA6B /* UIViewConstraintsTests.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = UIViewConstraintsTests.swift; sourceTree = "<group>"; tabWidth = 2; };
-		0BD6611C286C1D5B00F4DA6B /* DoubleExtensionsTests.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = DoubleExtensionsTests.swift; sourceTree = "<group>"; tabWidth = 2; };
+		0BD6611C286C1D5B00F4DA6B /* CurrencyFormatterTests.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = CurrencyFormatterTests.swift; sourceTree = "<group>"; tabWidth = 2; };
 		0BD6611E286C1EB800F4DA6B /* ObservableTests.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = ObservableTests.swift; sourceTree = "<group>"; tabWidth = 2; };
 		0BD66122286C20BC00F4DA6B /* CryptoPriceViewModelTests.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = CryptoPriceViewModelTests.swift; sourceTree = "<group>"; tabWidth = 2; };
 		0BD66124286D7C0400F4DA6B /* Localizer.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = Localizer.swift; sourceTree = "<group>"; tabWidth = 2; };
@@ -239,7 +237,6 @@
 		0B2B2A832862901A002F0EC1 /* Framework Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				0BD66117286B79C500F4DA6B /* Double+Extensions.swift */,
 				0BD66116286B79C500F4DA6B /* UIView+Constraints.swift */,
 				0B2B2A8428629031002F0EC1 /* UIColor+Extensions.swift */,
 				0B2B2A862862906E002F0EC1 /* UILabel+Extensions.swift */,
@@ -261,7 +258,6 @@
 				0B303CE62862E7E3007BF7FF /* UIColorExtensionsTests.swift */,
 				0B303CE82862F5BB007BF7FF /* UILabelExtensionsTests.swift */,
 				0BD6611A286C197B00F4DA6B /* UIViewConstraintsTests.swift */,
-				0BD6611C286C1D5B00F4DA6B /* DoubleExtensionsTests.swift */,
 			);
 			path = "Extensions Tests";
 			sourceTree = "<group>";
@@ -325,6 +321,7 @@
 		0B966005285A85FA00584692 /* Utilities Tests */ = {
 			isa = PBXGroup;
 			children = (
+				0BD6611C286C1D5B00F4DA6B /* CurrencyFormatterTests.swift */,
 				0B966003285A85C600584692 /* AsyncOperationTests.swift */,
 				0B966010285AA24300584692 /* AssertionFailureOverrideTests.swift */,
 				0B966012285AA2EB00584692 /* URLImageViewTests.swift */,
@@ -407,7 +404,6 @@
 			children = (
 				0BD660FB286B763E00F4DA6B /* AsyncOperation.swift */,
 				0BD660FA286B763E00F4DA6B /* ConcurrencyInterfaces.swift */,
-				0BD660F9286B763E00F4DA6B /* URLImageOperation.swift */,
 			);
 			path = Concurrency;
 			sourceTree = "<group>";
@@ -486,6 +482,7 @@
 		0BD661352872BAF100F4DA6B /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				0BD660F9286B763E00F4DA6B /* URLImageOperation.swift */,
 				0BD661362872BB0A00F4DA6B /* AssetPathBuilder.swift */,
 			);
 			path = Resources;
@@ -696,7 +693,6 @@
 				0B2B2A8928629324002F0EC1 /* Theme.swift in Sources */,
 				0B303CE12862E062007BF7FF /* FormatStyle.swift in Sources */,
 				0BD66105286B768300F4DA6B /* CryptoPriceTableViewCell.swift in Sources */,
-				0BD66119286B79C500F4DA6B /* Double+Extensions.swift in Sources */,
 				0BD660FE286B763E00F4DA6B /* AsyncOperation.swift in Sources */,
 				0B303CDF2862DD2C007BF7FF /* UIConstants.swift in Sources */,
 			);
@@ -706,7 +702,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0BD6611D286C1D5B00F4DA6B /* DoubleExtensionsTests.swift in Sources */,
+				0BD6611D286C1D5B00F4DA6B /* CurrencyFormatterTests.swift in Sources */,
 				0B303CF328636A0D007BF7FF /* CybridConfigTests.swift in Sources */,
 				0BBCF640285C52D700D39C6D /* MockError.swift in Sources */,
 				0B966027285C2E8600584692 /* MockImageOperation.swift in Sources */,
