@@ -40,27 +40,3 @@ extension CryptoPriceViewModel: UITableViewDelegate, UITableViewDataSource {
     return view
   }
 }
-
-// FIXME: Remove Mocked data
-extension CryptoPriceModel {
-  static let mockList: [CryptoPriceModel] = [
-    .init(id: UUID().uuidString,
-          imageURL: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/YouTube_social_white_squircle.svg/1200px-YouTube_social_white_squircle.svg.png",
-          cryptoId: "BTC",
-          fiatId: "USD",
-          name: "Bitcoin",
-          price: 20_998.901_43),
-    .init(id: UUID().uuidString,
-          imageURL: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/YouTube_social_white_squircle.svg/1200px-YouTube_social_white_squircle.svg.png",
-          cryptoId: "ETH",
-          fiatId: "USD",
-          name: "Ethereum",
-          price: 2_017.43),
-    .init(id: UUID().uuidString,
-          imageURL: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/YouTube_social_white_squircle.svg/1200px-YouTube_social_white_squircle.svg.png",
-          cryptoId: "DOGE",
-          fiatId: "USD",
-          name: "Dogecoin",
-          price: 0.088_90)
-  ]
-}
