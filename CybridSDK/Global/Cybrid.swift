@@ -15,6 +15,7 @@ public final class CybridConfig {
   static var shared = CybridConfig()
 
   var theme: Theme = CybridTheme.default
+  let assetsURL: String = "https://images.cybrid.xyz/sdk/assets/"
 
   public func setup(_ theme: Theme) {
       self.theme = theme
