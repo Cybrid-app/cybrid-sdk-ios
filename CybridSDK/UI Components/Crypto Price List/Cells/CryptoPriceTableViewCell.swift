@@ -105,7 +105,7 @@ class CryptoPriceTableViewCell: UITableViewCell {
   private func customizeNameLabel(with dataModel: CryptoPriceModel) {
     let paragraphStyle = NSMutableParagraphStyle()
     paragraphStyle.alignment = .left
-    let currencyTitle = dataModel.cryptoName + " " + dataModel.cryptoCode.uppercased()
+    let currencyTitle = dataModel.lhAssetName + " " + dataModel.lhAssetCode.uppercased()
     let attributedTitle = NSMutableAttributedString(
       string: currencyTitle,
       attributes: [
@@ -119,7 +119,7 @@ class CryptoPriceTableViewCell: UITableViewCell {
         NSAttributedString.Key.foregroundColor: FormatStyle.comment.textColor,
         NSAttributedString.Key.font: FormatStyle.comment.font
       ],
-      range: NSRange(location: dataModel.cryptoName.count + 1, length: dataModel.cryptoCode.count)
+      range: NSRange(location: dataModel.lhAssetName.count + 1, length: dataModel.lhAssetCode.count)
     )
     nameLabel.attributedText = attributedTitle
   }
@@ -127,7 +127,7 @@ class CryptoPriceTableViewCell: UITableViewCell {
   private func customizePriceLabel(with dataModel: CryptoPriceModel) {
     let paragraphStyle = NSMutableParagraphStyle()
     paragraphStyle.alignment = .right
-    let fiatCodeString = "(\(dataModel.fiatCode.uppercased()))"
+    let fiatCodeString = "(\(dataModel.thAssetCode.uppercased()))"
     let priceLabelText = dataModel.formattedPrice + " " + fiatCodeString
     let attributedTitle = NSMutableAttributedString(
       string: priceLabelText,

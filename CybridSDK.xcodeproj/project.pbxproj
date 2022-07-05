@@ -66,6 +66,7 @@
 		0BD661332872A05B00F4DA6B /* LocalizationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD661322872A05B00F4DA6B /* LocalizationTests.swift */; };
 		0BD661372872BB0A00F4DA6B /* AssetPathBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD661362872BB0A00F4DA6B /* AssetPathBuilder.swift */; };
 		0BD6613A2872BC0B00F4DA6B /* CybridCurrencyFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD661392872BC0B00F4DA6B /* CybridCurrencyFormatter.swift */; };
+		0BD6613E2874AFAA00F4DA6B /* MockNumberFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD6613D2874AFAA00F4DA6B /* MockNumberFormatter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -142,6 +143,7 @@
 		0BD661362872BB0A00F4DA6B /* AssetPathBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetPathBuilder.swift; sourceTree = "<group>"; };
 		0BD661392872BC0B00F4DA6B /* CybridCurrencyFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CybridCurrencyFormatter.swift; sourceTree = "<group>"; };
 		0BD6613B28734F2900F4DA6B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0BD6613D2874AFAA00F4DA6B /* MockNumberFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNumberFormatter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -348,6 +350,7 @@
 				0BBCF63F285C52D700D39C6D /* MockError.swift */,
 				0B966026285C2E8600584692 /* MockImageOperation.swift */,
 				0B966018285AE8D300584692 /* MockURLSession.swift */,
+				0BD6613D2874AFAA00F4DA6B /* MockNumberFormatter.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -705,6 +708,7 @@
 				0BD6611D286C1D5B00F4DA6B /* CurrencyFormatterTests.swift in Sources */,
 				0B303CF328636A0D007BF7FF /* CybridConfigTests.swift in Sources */,
 				0BBCF640285C52D700D39C6D /* MockError.swift in Sources */,
+				0BD6613E2874AFAA00F4DA6B /* MockNumberFormatter.swift in Sources */,
 				0B966027285C2E8600584692 /* MockImageOperation.swift in Sources */,
 				0B966029285C38F500584692 /* URLImageOperationTests.swift in Sources */,
 				0B303CE92862F5BB007BF7FF /* UILabelExtensionsTests.swift in Sources */,
