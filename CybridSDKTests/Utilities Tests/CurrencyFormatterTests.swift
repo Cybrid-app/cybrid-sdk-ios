@@ -19,10 +19,10 @@ class CurrencyFormatterTests: XCTestCase {
     let price = BigInt(123_456_789_123_456_789)
 
     // When
-    let bitcoinString = CybridCurrencyFormatter.formatPrice(price, from: .usd, to: .bitcoin) // 8 decimal digits
-    let ethereumString = CybridCurrencyFormatter.formatPrice(price, from: .usd, to: .ethereum) // 18 decimal digits
-    let dogecoinString = CybridCurrencyFormatter.formatPrice(price, from: .usd, to: .dogecoin) // 8 decimal digits
-    let usdString = CybridCurrencyFormatter.formatPrice(price, from: .bitcoin, to: .usd) // 2 decimal digits
+    let bitcoinString = CybridCurrencyFormatter.formatPrice(price, to: .bitcoin) // 8 decimal digits
+    let ethereumString = CybridCurrencyFormatter.formatPrice(price, to: .ethereum) // 18 decimal digits
+    let dogecoinString = CybridCurrencyFormatter.formatPrice(price, to: .dogecoin) // 8 decimal digits
+    let usdString = CybridCurrencyFormatter.formatPrice(price, to: .usd) // 2 decimal digits
 
     // Then
     XCTAssertEqual(bitcoinString, "₿1,234,567,891.23456789")
@@ -33,16 +33,10 @@ class CurrencyFormatterTests: XCTestCase {
 
   func testAmountFormatting_withGroupingSeparator() {
     // Given
-    let asset1 = AssetBankModel.bitcoin
-    let asset2 = AssetBankModel.usd
     let price = BigInt(200_032)
 
     // When
-    let currencyString = CybridCurrencyFormatter.formatPrice(
-      price,
-      from: asset1,
-      to: asset2
-    )
+    let currencyString = CybridCurrencyFormatter.formatPrice(price, to: .usd)
 
     // Then
     XCTAssertEqual(currencyString, "$2,000.32")
@@ -50,16 +44,10 @@ class CurrencyFormatterTests: XCTestCase {
 
   func testAmountFormatting_withoutGroupingSeparator() {
     // Given
-    let asset1 = AssetBankModel.bitcoin
-    let asset2 = AssetBankModel.usd
     let price = BigInt(20_032)
 
     // When
-    let currencyString = CybridCurrencyFormatter.formatPrice(
-      price,
-      from: asset1,
-      to: asset2
-    )
+    let currencyString = CybridCurrencyFormatter.formatPrice(price, to: .usd)
 
     // Then
     XCTAssertEqual(currencyString, "$200.32")
@@ -67,16 +55,10 @@ class CurrencyFormatterTests: XCTestCase {
 
   func testNegativeAmountFormatting() {
     // Given
-    let asset1 = AssetBankModel.bitcoin
-    let asset2 = AssetBankModel.usd
     let price = BigInt(-20_032)
 
     // When
-    let currencyString = CybridCurrencyFormatter.formatPrice(
-      price,
-      from: asset1,
-      to: asset2
-    )
+    let currencyString = CybridCurrencyFormatter.formatPrice(price, to: .usd)
 
     // Then
     XCTAssertEqual(currencyString, "-$200.32")
@@ -87,10 +69,10 @@ class CurrencyFormatterTests: XCTestCase {
     let price = BigInt(0)
 
     // When
-    let bitcoinString = CybridCurrencyFormatter.formatPrice(price, from: .usd, to: .bitcoin)
-    let ethereumString = CybridCurrencyFormatter.formatPrice(price, from: .usd, to: .ethereum)
-    let dogecoinString = CybridCurrencyFormatter.formatPrice(price, from: .usd, to: .dogecoin)
-    let usdString = CybridCurrencyFormatter.formatPrice(price, from: .bitcoin, to: .usd)
+    let bitcoinString = CybridCurrencyFormatter.formatPrice(price, to: .bitcoin)
+    let ethereumString = CybridCurrencyFormatter.formatPrice(price, to: .ethereum)
+    let dogecoinString = CybridCurrencyFormatter.formatPrice(price, to: .dogecoin)
+    let usdString = CybridCurrencyFormatter.formatPrice(price, to: .usd)
 
     // Then
     XCTAssertEqual(bitcoinString, "₿0.00000000")
@@ -101,19 +83,14 @@ class CurrencyFormatterTests: XCTestCase {
 
   func testAmountFormatting_withoutFractions() {
     // Given
-    let asset1 = AssetBankModel.ethereum
-    let asset2 = AssetBankModel(type: .fiat, code: "USD", name: "Whole Dollar", symbol: "$", decimals: 0)
+    let jpy = AssetBankModel(type: .fiat, code: "JPY", name: "Japanes Yen", symbol: "¥", decimals: 0)
     let price = BigInt(200_000)
 
     // When
-    let currencyString = CybridCurrencyFormatter.formatPrice(
-      price,
-      from: asset1,
-      to: asset2
-    )
+    let currencyString = CybridCurrencyFormatter.formatPrice(price, to: jpy)
 
     // Then
-    XCTAssertEqual(currencyString, "$200,000")
+    XCTAssertEqual(currencyString, "¥200,000")
   }
 }
 
@@ -180,17 +157,9 @@ extension CurrencyFormatterTests {
     let shaNumber = BigInt( "115792089237316195423570985008687907853269984665640564039457584007913129639935")
 
     // When
-    let formattedPrice1 = CybridCurrencyFormatter.formatPrice(
-      price,
-      from: asset1,
-      to: asset2
-    )
+    let formattedPrice1 = CybridCurrencyFormatter.formatPrice(price, to: asset2)
 
-    let formattedPrice2 = CybridCurrencyFormatter.formatPrice(
-      shaNumber,
-      from: asset1,
-      to: asset2
-    )
+    let formattedPrice2 = CybridCurrencyFormatter.formatPrice(shaNumber, to: asset2)
 
     // Then
     XCTAssertEqual(formattedPrice1, "Ξ 123,456,789,123.456789123456789123")
@@ -247,13 +216,13 @@ extension CurrencyFormatterTests {
     let price = BigInt(200_032)
 
     // When
-    let en_USFormattedString = CybridCurrencyFormatter.formatPrice(price, from: .ethereum, to: .usd, locale: Locale(identifier: "en_US"))
-    let en_CAFormattedString = CybridCurrencyFormatter.formatPrice(price, from: .ethereum, to: .usd, locale: Locale(identifier: "en_CA"))
-    let en_GBFormattedString = CybridCurrencyFormatter.formatPrice(price, from: .ethereum, to: .usd, locale: Locale(identifier: "en_GB"))
-    let fr_CAFormattedString = CybridCurrencyFormatter.formatPrice(price, from: .ethereum, to: .usd, locale: Locale(identifier: "fr_CA"))
-    let es_ESFormattedString = CybridCurrencyFormatter.formatPrice(price, from: .ethereum, to: .usd, locale: Locale(identifier: "es_ES"))
-    let es_MXFormattedString = CybridCurrencyFormatter.formatPrice(price, from: .ethereum, to: .usd, locale: Locale(identifier: "es_MX"))
-    let es_PEFormattedString = CybridCurrencyFormatter.formatPrice(price, from: .ethereum, to: .usd, locale: Locale(identifier: "es_PE"))
+    let en_USFormattedString = CybridCurrencyFormatter.formatPrice(price, to: .usd, locale: Locale(identifier: "en_US"))
+    let en_CAFormattedString = CybridCurrencyFormatter.formatPrice(price, to: .usd, locale: Locale(identifier: "en_CA"))
+    let en_GBFormattedString = CybridCurrencyFormatter.formatPrice(price, to: .usd, locale: Locale(identifier: "en_GB"))
+    let fr_CAFormattedString = CybridCurrencyFormatter.formatPrice(price, to: .usd, locale: Locale(identifier: "fr_CA"))
+    let es_ESFormattedString = CybridCurrencyFormatter.formatPrice(price, to: .usd, locale: Locale(identifier: "es_ES"))
+    let es_MXFormattedString = CybridCurrencyFormatter.formatPrice(price, to: .usd, locale: Locale(identifier: "es_MX"))
+    let es_PEFormattedString = CybridCurrencyFormatter.formatPrice(price, to: .usd, locale: Locale(identifier: "es_PE"))
 
     // Then
     XCTAssertEqual(en_USFormattedString, "$2,000.32")
@@ -271,13 +240,13 @@ extension CurrencyFormatterTests {
     let price = BigInt(200_032)
 
     // When
-    let en_USFormattedString = CybridCurrencyFormatter.formatPrice(price, from: .ethereum, to: pounds, locale: Locale(identifier: "en_US"))
-    let en_CAFormattedString = CybridCurrencyFormatter.formatPrice(price, from: .ethereum, to: pounds, locale: Locale(identifier: "en_CA"))
-    let en_GBFormattedString = CybridCurrencyFormatter.formatPrice(price, from: .ethereum, to: pounds, locale: Locale(identifier: "en_GB"))
-    let fr_CAFormattedString = CybridCurrencyFormatter.formatPrice(price, from: .ethereum, to: pounds, locale: Locale(identifier: "fr_CA"))
-    let es_ESFormattedString = CybridCurrencyFormatter.formatPrice(price, from: .ethereum, to: pounds, locale: Locale(identifier: "es_ES"))
-    let es_MXFormattedString = CybridCurrencyFormatter.formatPrice(price, from: .ethereum, to: pounds, locale: Locale(identifier: "es_MX"))
-    let es_PEFormattedString = CybridCurrencyFormatter.formatPrice(price, from: .ethereum, to: pounds, locale: Locale(identifier: "es_PE"))
+    let en_USFormattedString = CybridCurrencyFormatter.formatPrice(price, to: pounds, locale: Locale(identifier: "en_US"))
+    let en_CAFormattedString = CybridCurrencyFormatter.formatPrice(price, to: pounds, locale: Locale(identifier: "en_CA"))
+    let en_GBFormattedString = CybridCurrencyFormatter.formatPrice(price, to: pounds, locale: Locale(identifier: "en_GB"))
+    let fr_CAFormattedString = CybridCurrencyFormatter.formatPrice(price, to: pounds, locale: Locale(identifier: "fr_CA"))
+    let es_ESFormattedString = CybridCurrencyFormatter.formatPrice(price, to: pounds, locale: Locale(identifier: "es_ES"))
+    let es_MXFormattedString = CybridCurrencyFormatter.formatPrice(price, to: pounds, locale: Locale(identifier: "es_MX"))
+    let es_PEFormattedString = CybridCurrencyFormatter.formatPrice(price, to: pounds, locale: Locale(identifier: "es_PE"))
 
     // Then
     XCTAssertEqual(en_USFormattedString, "£2,000.32")
@@ -294,13 +263,13 @@ extension CurrencyFormatterTests {
     let price = BigInt(200_032)
 
     // When
-    let en_USFormattedString = CybridCurrencyFormatter.formatPrice(price, from: .ethereum, to: .eur, locale: Locale(identifier: "en_US"))
-    let en_CAFormattedString = CybridCurrencyFormatter.formatPrice(price, from: .ethereum, to: .eur, locale: Locale(identifier: "en_CA"))
-    let en_GBFormattedString = CybridCurrencyFormatter.formatPrice(price, from: .ethereum, to: .eur, locale: Locale(identifier: "en_GB"))
-    let fr_CADFormattedString = CybridCurrencyFormatter.formatPrice(price, from: .ethereum, to: .eur, locale: Locale(identifier: "fr_CA"))
-    let es_ESFormattedString = CybridCurrencyFormatter.formatPrice(price, from: .ethereum, to: .eur, locale: Locale(identifier: "es_ES"))
-    let es_MXFormattedString = CybridCurrencyFormatter.formatPrice(price, from: .ethereum, to: .eur, locale: Locale(identifier: "es_MX"))
-    let es_PEFormattedString = CybridCurrencyFormatter.formatPrice(price, from: .ethereum, to: .eur, locale: Locale(identifier: "es_PE"))
+    let en_USFormattedString = CybridCurrencyFormatter.formatPrice(price, to: .eur, locale: Locale(identifier: "en_US"))
+    let en_CAFormattedString = CybridCurrencyFormatter.formatPrice(price, to: .eur, locale: Locale(identifier: "en_CA"))
+    let en_GBFormattedString = CybridCurrencyFormatter.formatPrice(price, to: .eur, locale: Locale(identifier: "en_GB"))
+    let fr_CADFormattedString = CybridCurrencyFormatter.formatPrice(price, to: .eur, locale: Locale(identifier: "fr_CA"))
+    let es_ESFormattedString = CybridCurrencyFormatter.formatPrice(price, to: .eur, locale: Locale(identifier: "es_ES"))
+    let es_MXFormattedString = CybridCurrencyFormatter.formatPrice(price, to: .eur, locale: Locale(identifier: "es_MX"))
+    let es_PEFormattedString = CybridCurrencyFormatter.formatPrice(price, to: .eur, locale: Locale(identifier: "es_PE"))
 
     // Then
     XCTAssertEqual(en_USFormattedString, "€2,000.32")

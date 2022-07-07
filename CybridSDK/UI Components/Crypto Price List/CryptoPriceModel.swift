@@ -25,14 +25,13 @@ struct CryptoPriceModel: Equatable {
     self.pairAssetCode = pairAsset.code
     self.formattedPrice = CybridCurrencyFormatter.formatPrice(
       BigInt(symbolPrice.buyPrice ?? 0), // FIXME: We should get BigInt from API
-      from: asset,
       to: pairAsset
     )
   }
 }
 
-// MARK: - Mocked data
 // FIXME: Remove Mocked data
+// MARK: - Mocked data
 
 extension CryptoPriceModel {
   static let mockList: [CryptoPriceModel] = [

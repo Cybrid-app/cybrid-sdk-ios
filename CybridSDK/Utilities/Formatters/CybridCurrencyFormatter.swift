@@ -43,6 +43,16 @@ struct CybridCurrencyFormatter {
     case trailing(symbol: String)
   }
 
+  static func formatPrice(_ price: BigInt,
+                          to asset2: AssetBankModel,
+                          locale: Locale = Locale.current) -> String {
+    return localizedCurrencyString(from: BigDecimal(price, asset2.decimals),
+                                   locale: locale,
+                                   groupingSeparator: locale.groupingSeparator,
+                                   decimalSeparator: locale.decimalSeparator,
+                                   currencySymbol: asset2.symbol)
+  }
+
   static func makeDefaultFormatter(locale: Locale = Locale.autoupdatingCurrent,
                                    precision: Int = 2,
                                    currencySymbol: String) -> NumberFormatter {
@@ -128,17 +138,6 @@ struct CybridCurrencyFormatter {
     case .trailing(let symbol):
       return sign + magnitude + symbol
     }
-  }
-
-  static func formatPrice(_ price: BigInt,
-                          from asset1: AssetBankModel,
-                          to asset2: AssetBankModel,
-                          locale: Locale = Locale.current) -> String {
-    return localizedCurrencyString(from: BigDecimal(price, asset2.decimals),
-                                   locale: locale,
-                                   groupingSeparator: locale.groupingSeparator,
-                                   decimalSeparator: locale.decimalSeparator,
-                                   currencySymbol: asset2.symbol)
   }
 }
 
