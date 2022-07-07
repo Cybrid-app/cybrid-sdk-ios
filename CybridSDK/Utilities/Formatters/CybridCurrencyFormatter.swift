@@ -44,15 +44,58 @@ struct CybridCurrencyFormatter {
   }
 
   static func formatPrice(_ price: BigInt,
-                          to asset2: AssetBankModel,
+                          to asset: AssetBankModel,
                           locale: Locale = Locale.current) -> String {
-    return localizedCurrencyString(from: BigDecimal(price, asset2.decimals),
+    return localizedCurrencyString(from: BigDecimal(price, asset.decimals),
                                    locale: locale,
                                    groupingSeparator: locale.groupingSeparator,
                                    decimalSeparator: locale.decimalSeparator,
-                                   currencySymbol: asset2.symbol)
+                                   currencySymbol: asset.symbol)
   }
 
+  static func localizedCurrencyString(from number: BigDecimal,
+                                      locale: Locale,
+                                      groupingSeparator: String?,
+                                      decimalSeparator: String?,
+                                      currencySymbol: String,
+                                      baseFormatter: NumberFormatter? = nil) -> String {
+    let currencyFormatter = baseFormatter ?? makeDefaultFormatter(locale: locale,
+                                                                  precision: number.precision,
+                                                                  currencySymbol: currencySymbol)
+    let formattedZeroCurrency = zeroCurrencyAmount(formatter: currencyFormatter)
+
+    if number.value == 0 { return formattedZeroCurrency }
+
+    let localizedCurrencySymbol = localizedCurrencySymbol(locale: locale,
+                                                          currencySymbol: currencySymbol,
+                                                          formatter: currencyFormatter)
+    let groupingSeparator = groupingSeparator ?? ","
+    let decimalSeparator = decimalSeparator ?? "."
+
+    var numberString = String(abs(number.value))
+    let leadingZeroesForSmallNumbers = String(repeating: "0",
+                                              count: max(0, number.precision - numberString.count + 1))
+    numberString = leadingZeroesForSmallNumbers + numberString
+
+    let fractional = String(numberString.suffix(number.precision))
+    let integer = String(numberString.prefix(numberString.count - fractional.count))
+
+    let isNegative = number.value < 0
+    let negativeSign = isNegative ? "-" : ""
+
+    let integerGroupped = groups(string: integer, size: 3).joined(separator: groupingSeparator)
+    let magnitude = fractional.isEmpty ? integerGroupped : integerGroupped + decimalSeparator + fractional
+    let sign = (magnitude != formattedZeroCurrency && isNegative) ? negativeSign : ""
+
+    switch localizedCurrencySymbol {
+    case .leading(let symbol):
+      return sign + symbol + magnitude
+    case .trailing(let symbol):
+      return sign + magnitude + symbol
+    }
+  }
+
+  // MARK: Utilities
   static func makeDefaultFormatter(locale: Locale = Locale.autoupdatingCurrent,
                                    precision: Int = 2,
                                    currencySymbol: String) -> NumberFormatter {
@@ -96,48 +139,6 @@ struct CybridCurrencyFormatter {
         return String(string[lowerIndex..<upperIndex])
     }
     return groups
-  }
-
-  static func localizedCurrencyString(from number: BigDecimal,
-                                      locale: Locale,
-                                      groupingSeparator: String?,
-                                      decimalSeparator: String?,
-                                      currencySymbol: String,
-                                      baseFormatter: NumberFormatter? = nil) -> String {
-    let currencyFormatter = baseFormatter ?? makeDefaultFormatter(locale: locale,
-                                                                  precision: number.precision,
-                                                                  currencySymbol: currencySymbol)
-    let formattedZeroCurrency = zeroCurrencyAmount(formatter: currencyFormatter)
-
-    if number.value == 0 { return formattedZeroCurrency }
-
-    let localizedCurrencySymbol = localizedCurrencySymbol(locale: locale,
-                                                          currencySymbol: currencySymbol,
-                                                          formatter: currencyFormatter)
-    let groupingSeparator = groupingSeparator ?? ","
-    let decimalSeparator = decimalSeparator ?? "."
-
-    var numberString = String(abs(number.value))
-    let leadingZeroesForSmallNumbers = String(repeating: "0",
-                                              count: max(0, number.precision - numberString.count + 1))
-    numberString = leadingZeroesForSmallNumbers + numberString
-
-    let fractional = String(numberString.suffix(number.precision))
-    let integer = String(numberString.prefix(numberString.count - fractional.count))
-
-    let isNegative = number.value < 0
-    let negativeSign = isNegative ? "-" : ""
-
-    let integerGroupped = groups(string: integer, size: 3).joined(separator: groupingSeparator)
-    let magnitude = fractional.isEmpty ? integerGroupped : integerGroupped + decimalSeparator + fractional
-    let sign = (magnitude != formattedZeroCurrency && isNegative) ? negativeSign : ""
-
-    switch localizedCurrencySymbol {
-    case .leading(let symbol):
-      return sign + symbol + magnitude
-    case .trailing(let symbol):
-      return sign + magnitude + symbol
-    }
   }
 }
 
