@@ -12,21 +12,21 @@ import Foundation
 // MARK: - CryptoPriceModel
 
 struct CryptoPriceModel: Equatable {
-  let lhAssetCode: String // BTC
-  let lhAssetName: String // Bitcoin
+  let assetCode: String // BTC
+  let assetName: String // Bitcoin
   let imageURL: String // https://abc.com/img.png
-  let thAssetCode: String // USD
+  let pairAssetCode: String // USD
   let formattedPrice: String // $20,300.129,870
 
-  init(symbolPrice: SymbolPriceBankModel, lhAsset: AssetBankModel, rhAsset: AssetBankModel) {
-    self.lhAssetCode = lhAsset.code
-    self.lhAssetName = lhAsset.name
-    self.imageURL = Cybrid.getCryptoIconURLString(with: lhAsset.code)
-    self.thAssetCode = rhAsset.code
+  init(symbolPrice: SymbolPriceBankModel, asset: AssetBankModel, pairAsset: AssetBankModel) {
+    self.assetCode = asset.code
+    self.assetName = asset.name
+    self.imageURL = Cybrid.getCryptoIconURLString(with: asset.code)
+    self.pairAssetCode = pairAsset.code
     self.formattedPrice = CybridCurrencyFormatter.formatPrice(
       BigInt(symbolPrice.buyPrice ?? 0), // FIXME: We should get BigInt from API
-      from: lhAsset,
-      to: rhAsset
+      from: asset,
+      to: pairAsset
     )
   }
 }
@@ -44,8 +44,8 @@ extension CryptoPriceModel {
         buyPriceLastUpdatedAt: nil,
         sellPriceLastUpdatedAt: nil
       ),
-      lhAsset: .bitcoin,
-      rhAsset: .usd
+      asset: .bitcoin,
+      pairAsset: .usd
     ),
     CryptoPriceModel(
       symbolPrice: SymbolPriceBankModel(
@@ -55,8 +55,8 @@ extension CryptoPriceModel {
         buyPriceLastUpdatedAt: nil,
         sellPriceLastUpdatedAt: nil
       ),
-      lhAsset: .ethereum,
-      rhAsset: .usd
+      asset: .ethereum,
+      pairAsset: .usd
     ),
     CryptoPriceModel(
       symbolPrice: SymbolPriceBankModel(
@@ -66,8 +66,8 @@ extension CryptoPriceModel {
         buyPriceLastUpdatedAt: nil,
         sellPriceLastUpdatedAt: nil
       ),
-      lhAsset: .dogecoin,
-      rhAsset: .usd
+      asset: .dogecoin,
+      pairAsset: .usd
     )
   ]
 }
