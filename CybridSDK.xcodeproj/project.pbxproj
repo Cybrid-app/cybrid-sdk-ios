@@ -315,7 +315,6 @@
 				0BD660F5286B75FF00F4DA6B /* Networking */,
 				0B966009285A96B700584692 /* AssertionFailureOverride.swift */,
 				0BD6610C286B769800F4DA6B /* Observable.swift */,
-				0B303CE02862E062007BF7FF /* FormatStyle.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -494,6 +493,7 @@
 		0BD661382872BBE900F4DA6B /* Formatters */ = {
 			isa = PBXGroup;
 			children = (
+				0B303CE02862E062007BF7FF /* FormatStyle.swift */,
 				0BD661392872BC0B00F4DA6B /* CybridCurrencyFormatter.swift */,
 			);
 			path = Formatters;

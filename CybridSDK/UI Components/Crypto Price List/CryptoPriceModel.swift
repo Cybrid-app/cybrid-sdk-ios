@@ -5,6 +5,7 @@
 //  Created by Cybrid on 20/06/22.
 //
 
+import BigInt
 import CybridApiBankSwift
 import Foundation
 
@@ -23,7 +24,7 @@ struct CryptoPriceModel: Equatable {
     self.imageURL = Cybrid.getCryptoIconURLString(with: lhAsset.code)
     self.thAssetCode = rhAsset.code
     self.formattedPrice = CybridCurrencyFormatter.formatPrice(
-      symbolPrice.buyPriceNum ?? 0,
+      BigInt(symbolPrice.buyPrice ?? 0), // FIXME: We should get BigInt from API
       from: lhAsset,
       to: rhAsset
     )
@@ -38,8 +39,8 @@ extension CryptoPriceModel {
     CryptoPriceModel(
       symbolPrice: SymbolPriceBankModel(
         symbol: "BTC_USD",
-        buyPrice: 2_019_890,
-        sellPrice: 2_019_880,
+        buyPrice: 2_019_891,
+        sellPrice: 2_019_881,
         buyPriceLastUpdatedAt: nil,
         sellPriceLastUpdatedAt: nil
       ),
@@ -49,8 +50,8 @@ extension CryptoPriceModel {
     CryptoPriceModel(
       symbolPrice: SymbolPriceBankModel(
         symbol: "ETH_USD",
-        buyPrice: 209_890,
-        sellPrice: 209_880,
+        buyPrice: 209_891,
+        sellPrice: 209_881,
         buyPriceLastUpdatedAt: nil,
         sellPriceLastUpdatedAt: nil
       ),

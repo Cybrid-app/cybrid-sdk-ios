@@ -10,6 +10,7 @@ use_frameworks!
 def common_pods
   unless ENV['CI']
     pod 'CybridApiBankSwift'
+    pod 'BigInt'
   end
 end
 

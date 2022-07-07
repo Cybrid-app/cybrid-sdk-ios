@@ -5,6 +5,7 @@
 //  Created by Cybrid on 29/06/22.
 //
 
+import BigInt
 import CybridApiBankSwift
 @testable import CybridSDK
 import Foundation
@@ -15,7 +16,7 @@ class CurrencyFormatterTests: XCTestCase {
     // Given
     let asset1 = AssetBankModel.ethereum
     let asset2 = AssetBankModel.usd
-    let price: NSNumber = 200_032
+    let price = BigInt(200_032)
 
     // When
     let currencyString = CybridCurrencyFormatter.formatPrice(
@@ -32,7 +33,7 @@ class CurrencyFormatterTests: XCTestCase {
     // Given
     let asset1 = AssetBankModel.ethereum
     let asset2 = AssetBankModel.usd
-    let price: NSNumber = 200_032
+    let price = BigInt(200_032)
 
     // When
     let currencyString = CybridCurrencyFormatter.formatPrice(
@@ -46,29 +47,70 @@ class CurrencyFormatterTests: XCTestCase {
     XCTAssertEqual(currencyString, "2 000,32 $")
   }
 
-  func testDecimalMaxEthereum() {
+  func testSmallAmountFormatting() {
     // Given
-    let asset1 = AssetBankModel.usd
-    let asset2 = AssetBankModel.ethereum
-    let price = Decimal(string: "123456789123456789123456789123")
-    XCTAssertNotNil(price)
+    let asset1 = AssetBankModel.bitcoin
+    let asset2 = AssetBankModel.usd
+    let price = BigInt(20_032)
 
     // When
     let currencyString = CybridCurrencyFormatter.formatPrice(
-      price! as NSNumber,
+      price,
       from: asset1,
       to: asset2
     )
 
     // Then
-    XCTAssertEqual(currencyString, "Ξ 123,456,789,123.456789123456789123")
+    XCTAssertEqual(currencyString, "$200.32")
+  }
+
+  func testNegativeAmountFormatting() {
+    // Given
+    let asset1 = AssetBankModel.bitcoin
+    let asset2 = AssetBankModel.usd
+    let price = BigInt(-20_032)
+
+    // When
+    let currencyString = CybridCurrencyFormatter.formatPrice(
+      price,
+      from: asset1,
+      to: asset2
+    )
+
+    // Then
+    XCTAssertEqual(currencyString, "-$200.32")
+  }
+
+  func testDecimalMaxEthereum() {
+    // Given
+    let asset1 = AssetBankModel.usd
+    let asset2 = AssetBankModel.ethereum
+    let price = BigInt("123456789123456789123456789123")
+    let shaNumber = BigInt( "115792089237316195423570985008687907853269984665640564039457584007913129639935")
+
+    // When
+    let formattedPrice1 = CybridCurrencyFormatter.formatPrice(
+      price,
+      from: asset1,
+      to: asset2
+    )
+
+    let formattedPrice2 = CybridCurrencyFormatter.formatPrice(
+      shaNumber,
+      from: asset1,
+      to: asset2
+    )
+
+    // Then
+    XCTAssertEqual(formattedPrice1, "Ξ 123,456,789,123.456789123456789123")
+    XCTAssertEqual(formattedPrice2, "Ξ 115,792,089,237,316,195,423,570,985,008,687,907,853,269,984,665,640,564,039,457.584007913129639935")
   }
 
   func testZeroPrice() {
     // Given
     let asset1 = AssetBankModel.usd
     let asset2 = AssetBankModel.ethereum
-    let price: NSNumber = 0
+    let price = BigInt(0)
 
     // When
     let currencyString = CybridCurrencyFormatter.formatPrice(
@@ -94,88 +136,11 @@ class CurrencyFormatterTests: XCTestCase {
     XCTAssertEqual(cryptoPriceModel.formattedPrice, "Ξ 0.000000000000000000")
   }
 
-  func testTrimTrailingSymbol() {
-    // Given
-    let formattedAmount = "2 000,00 $"
-
-    // When
-    let trimmedAmount = CybridCurrencyFormatter.trimTrailingSymbol("$", formattedAmount: formattedAmount)
-
-    // Then
-    XCTAssertEqual(trimmedAmount, "2 000,00")
-  }
-
-  func testTrimTrailingSymbol_withAlreadyFormattedString() {
-    // Given
-    let formattedAmount = "2 000,00"
-
-    // When
-    let trimmedAmount = CybridCurrencyFormatter.trimTrailingSymbol("", formattedAmount: formattedAmount)
-
-    // Then
-    XCTAssertEqual(trimmedAmount, "2 000,00")
-  }
-
-  func testTrimTrailingSymbol_withoutSymbol() {
-    // Given
-    let formattedAmount = "2 000,00 $"
-
-    // When
-    let trimmedAmount = CybridCurrencyFormatter.trimTrailingSymbol("", formattedAmount: formattedAmount)
-
-    // Then
-    XCTAssertEqual(trimmedAmount, "2 000,00")
-  }
-
-  func testFormat_withNilFormattedAmount() {
-    // Given
-    let asset2 = AssetBankModel.usd
-    let price = Decimal(string: "2789123")
-    XCTAssertNotNil(price)
-    let divisor = pow(BigDecimal(10), asset2.decimals)
-    let baseUnit = price! / divisor
-    let formatter = MockNumberFormatter()
-    formatter.setFixedFormattedNumber(nil)
-
-    // When
-    let formattedAmount = CybridCurrencyFormatter.format(
-      baseUnit: baseUnit,
-      targetAsset: asset2,
-      formatter: formatter,
-      locale: Locale.current
-    )
-
-    // Then
-    XCTAssertEqual(formattedAmount, "$0.00")
-  }
-
-  func testFormat_withInvalidLocale() {
-    // Given
-    let asset2 = AssetBankModel.usd
-    let price = Decimal(string: "2789123")
-    XCTAssertNotNil(price)
-    let divisor = pow(BigDecimal(10), asset2.decimals)
-    let baseUnit = price! / divisor
-    let formatter = MockNumberFormatter()
-    formatter.setFixedFormattedNumber(nil)
-
-    // When
-    let formattedAmount = CybridCurrencyFormatter.format(
-      baseUnit: baseUnit,
-      targetAsset: asset2,
-      formatter: formatter,
-      locale: Locale(identifier: "NaN")
-    )
-
-    // Then
-    XCTAssertEqual(formattedAmount, "$0.00")
-  }
-
   func testZeroDecimalsAmount() {
     // Given
     let asset1 = AssetBankModel.ethereum
     let asset2 = AssetBankModel(type: .fiat, code: "USD", name: "Whole Dollar", symbol: "$", decimals: 0)
-    let price: NSNumber = 200_000
+    let price = BigInt(200_000)
 
     // When
     let currencyString = CybridCurrencyFormatter.formatPrice(
@@ -186,5 +151,81 @@ class CurrencyFormatterTests: XCTestCase {
 
     // Then
     XCTAssertEqual(currencyString, "$200,000")
+  }
+
+  func testZeroCurrencyAmountGenerator() {
+    // Given
+    let formatter = MockNumberFormatter()
+    formatter.setFixedFormattedNumber(nil)
+
+    // When
+    let formattedZero = CybridCurrencyFormatter.zeroCurrencyAmount(formatter: formatter)
+
+    // Then
+    XCTAssertEqual(formattedZero, "$0.00")
+  }
+
+  func testLocalizedCurrencySymbol_Leading() {
+    // Given
+    let locale = Locale(identifier: "en_US")
+    let currencySymbol = "$"
+    let formatter = CybridCurrencyFormatter.makeDefaultFormatter(locale: locale, precision: 2, currencySymbol: currencySymbol)
+
+    // When
+    let localizedSymbol = CybridCurrencyFormatter.localizedCurrencySymbol(locale: locale,
+                                                                          currencySymbol: currencySymbol,
+                                                                          formatter: formatter)
+
+    // Then
+    XCTAssertEqual(localizedSymbol, .leading(symbol: "$"))
+  }
+
+  func testLocalizedCurrencySymbol_Trailing() {
+    // Given
+    let locale = Locale(identifier: "fr_CAD")
+    let currencySymbol = "$"
+    let formatter = CybridCurrencyFormatter.makeDefaultFormatter(locale: locale, precision: 2, currencySymbol: currencySymbol)
+
+    // When
+    let localizedSymbol = CybridCurrencyFormatter.localizedCurrencySymbol(locale: locale,
+                                                                          currencySymbol: currencySymbol,
+                                                                          formatter: formatter)
+
+    // Then
+    XCTAssertEqual(localizedSymbol, .trailing(symbol: " $"))
+  }
+
+  func testLocalizedCurrencySymbol_withInvalidFormatter() {
+    // Given
+    let locale = Locale(identifier: "fr_CAD")
+    let currencySymbol = "$"
+    let formatter = MockNumberFormatter()
+    formatter.setFixedFormattedNumber("20.00")
+
+    // When
+    let localizedSymbol = CybridCurrencyFormatter.localizedCurrencySymbol(locale: locale,
+                                                                          currencySymbol: currencySymbol,
+                                                                          formatter: formatter)
+
+    // Then - fallsback to default leading symbol
+    XCTAssertEqual(localizedSymbol, .leading(symbol: "$"))
+  }
+
+  func testDefaultSeparatorsFallback() {
+    // Given
+    let locale = Locale(identifier: "en_US")
+    let currencySymbol = "$"
+    let amount = BigDecimal(1_000_000, 2)
+
+    // When
+    let localizedCurrencyString = CybridCurrencyFormatter.localizedCurrencyString(
+      from: amount,
+      locale: locale,
+      groupingSeparator: nil,
+      decimalSeparator: nil,
+      currencySymbol: currencySymbol)
+
+    // Then - fallsback to default separators `.` and `,`
+    XCTAssertEqual(localizedCurrencyString, "$10,000.00")
   }
 }
