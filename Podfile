@@ -8,10 +8,8 @@ project 'CybridSDK'
 use_frameworks!
 
 def common_pods
-  unless ENV['CI']
-    pod 'CybridApiBankSwift'
-    pod 'BigInt'
-  end
+  pod 'CybridApiBankSwift'
+  pod 'BigInt'
 end
 
 def quality_pods
