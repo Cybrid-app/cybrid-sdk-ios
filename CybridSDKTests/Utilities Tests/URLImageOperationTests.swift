@@ -11,29 +11,18 @@ import XCTest
 
 class URLImageOperationTests: XCTestCase {
   private let mockURLSession = MockURLSession()
-  private var url: URL?
-  private var testImage: UIImage?
-  private var testImageData: Data?
-
-  override func setUpWithError() throws {
-    self.url = URL(string: "https://images.cybrid.xyz/sdk/assets/pdf/color/btc.pdf")
-    let bundle = Bundle.init(for: Self.self)
-    self.testImage = UIImage(named: "placeholder", in: bundle, compatibleWith: nil)
-    let pdfPage = PDFPage(image: testImage!)
-    self.testImageData = pdfPage?.dataRepresentation
-    try super.setUpWithError()
-  }
-
-  override func tearDownWithError() throws {
-    url = nil
-    testImage = nil
-    testImageData = nil
-    try super.tearDownWithError()
-  }
 
   func testImageOperation_success() {
     // Given
+    let url = URL(string: "https://images.cybrid.xyz/sdk/assets/pdf/color/btc.pdf")
     XCTAssertNotNil(url)
+
+    let bundle = Bundle.init(for: Self.self)
+    let testImage = UIImage(named: "placeholder", in: bundle, compatibleWith: nil)
+    XCTAssertNotNil(testImage)
+
+    let pdfPage = PDFPage(image: testImage!)
+    let testImageData = pdfPage?.dataRepresentation
     XCTAssertNotNil(testImageData)
 
     // When
@@ -47,7 +36,15 @@ class URLImageOperationTests: XCTestCase {
 
   func testImageOperation_error() {
     // Given
+    let url = URL(string: "https://images.cybrid.xyz/sdk/assets/pdf/color/btc.pdf")
     XCTAssertNotNil(url)
+
+    let bundle = Bundle.init(for: Self.self)
+    let testImage = UIImage(named: "placeholder", in: bundle, compatibleWith: nil)
+    XCTAssertNotNil(testImage)
+
+    let pdfPage = PDFPage(image: testImage!)
+    let testImageData = pdfPage?.dataRepresentation
     XCTAssertNotNil(testImageData)
 
     // When
@@ -61,12 +58,29 @@ class URLImageOperationTests: XCTestCase {
 
   func testImageOperation_noData() {
     // Given
+    let url = URL(string: "https://images.cybrid.xyz/sdk/assets/pdf/color/btc.pdf")
     XCTAssertNotNil(url)
 
     // When
     let imageOperation = ImageDownloadOperation(url: url!, dataProvider: mockURLSession)
     imageOperation.start()
     mockURLSession.didFinish(with: nil, response: nil, error: nil)
+
+    // Then
+    XCTAssertNil(imageOperation.image)
+  }
+
+  func testImageOperation_invalidDataFormat() {
+    // Given
+    let url = URL(string: "https://images.cybrid.xyz/sdk/assets/pdf/color/btc.pdf")
+    XCTAssertNotNil(url)
+
+    let mockData = "MockString".data(using: .utf8)
+
+    // When
+    let imageOperation = ImageDownloadOperation(url: url!, dataProvider: mockURLSession)
+    imageOperation.start()
+    mockURLSession.didFinish(with: mockData, response: nil, error: nil)
 
     // Then
     XCTAssertNil(imageOperation.image)

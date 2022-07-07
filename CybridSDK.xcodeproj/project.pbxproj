@@ -406,6 +406,7 @@
 			children = (
 				0BD660FB286B763E00F4DA6B /* AsyncOperation.swift */,
 				0BD660FA286B763E00F4DA6B /* ConcurrencyInterfaces.swift */,
+				0BD660F9286B763E00F4DA6B /* URLImageOperation.swift */,
 			);
 			path = Concurrency;
 			sourceTree = "<group>";
@@ -484,7 +485,6 @@
 		0BD661352872BAF100F4DA6B /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				0BD660F9286B763E00F4DA6B /* URLImageOperation.swift */,
 				0BD661362872BB0A00F4DA6B /* AssetPathBuilder.swift */,
 			);
 			path = Resources;
