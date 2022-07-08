@@ -43,14 +43,14 @@ struct CybridCurrencyFormatter {
     case trailing(symbol: String)
   }
 
-  static func formatPrice(_ price: BigInt,
-                          to asset: AssetBankModel,
+  static func formatPrice(_ price: BigDecimal,
+                          with currencySymbol: String,
                           locale: Locale = Locale.current) -> String {
-    return localizedCurrencyString(from: BigDecimal(price, asset.decimals),
+    return localizedCurrencyString(from: price,
                                    locale: locale,
                                    groupingSeparator: locale.groupingSeparator,
                                    decimalSeparator: locale.decimalSeparator,
-                                   currencySymbol: asset.symbol)
+                                   currencySymbol: currencySymbol)
   }
 
   static func localizedCurrencyString(from number: BigDecimal,

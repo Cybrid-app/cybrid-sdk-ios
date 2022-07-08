@@ -24,8 +24,9 @@ struct CryptoPriceModel: Equatable {
     self.imageURL = Cybrid.getCryptoIconURLString(with: asset.code)
     self.counterAssetCode = counterAsset.code
     self.formattedPrice = CybridCurrencyFormatter.formatPrice(
-      BigInt(symbolPrice.buyPrice ?? 0), // FIXME: We should get BigInt from API
-      to: counterAsset
+      // FIXME: We should get other DataType from API (e.g: String or NSData) Int64 is not enough
+      BigDecimal(BigInt(symbolPrice.buyPrice ?? 0), counterAsset.decimals),
+      with: counterAsset.symbol
     )
   }
 }
@@ -72,7 +73,6 @@ extension CryptoPriceModel {
 }
 
 extension AssetBankModel {
-
   static let bitcoin = AssetBankModel(type: .crypto, code: "BTC", name: "Bitcoin", symbol: "₿", decimals: 8)
   static let ethereum = AssetBankModel(type: .crypto, code: "ETH", name: "Ethereum", symbol: "Ξ", decimals: 18)
   static let dogecoin = AssetBankModel(type: .crypto, code: "DOGE", name: "Dogecoin", symbol: "∂", decimals: 8)
