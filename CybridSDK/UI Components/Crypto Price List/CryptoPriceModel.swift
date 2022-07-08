@@ -15,17 +15,17 @@ struct CryptoPriceModel: Equatable {
   let assetCode: String // BTC
   let assetName: String // Bitcoin
   let imageURL: String // https://abc.com/img.png
-  let pairAssetCode: String // USD
+  let counterAssetCode: String // USD
   let formattedPrice: String // $20,300.129,870
 
-  init(symbolPrice: SymbolPriceBankModel, asset: AssetBankModel, pairAsset: AssetBankModel) {
+  init(symbolPrice: SymbolPriceBankModel, asset: AssetBankModel, counterAsset: AssetBankModel) {
     self.assetCode = asset.code
     self.assetName = asset.name
     self.imageURL = Cybrid.getCryptoIconURLString(with: asset.code)
-    self.pairAssetCode = pairAsset.code
+    self.counterAssetCode = counterAsset.code
     self.formattedPrice = CybridCurrencyFormatter.formatPrice(
       BigInt(symbolPrice.buyPrice ?? 0), // FIXME: We should get BigInt from API
-      to: pairAsset
+      to: counterAsset
     )
   }
 }
@@ -44,7 +44,7 @@ extension CryptoPriceModel {
         sellPriceLastUpdatedAt: nil
       ),
       asset: .bitcoin,
-      pairAsset: .usd
+      counterAsset: .usd
     ),
     CryptoPriceModel(
       symbolPrice: SymbolPriceBankModel(
@@ -55,7 +55,7 @@ extension CryptoPriceModel {
         sellPriceLastUpdatedAt: nil
       ),
       asset: .ethereum,
-      pairAsset: .usd
+      counterAsset: .usd
     ),
     CryptoPriceModel(
       symbolPrice: SymbolPriceBankModel(
@@ -66,7 +66,7 @@ extension CryptoPriceModel {
         sellPriceLastUpdatedAt: nil
       ),
       asset: .dogecoin,
-      pairAsset: .usd
+      counterAsset: .usd
     )
   ]
 }

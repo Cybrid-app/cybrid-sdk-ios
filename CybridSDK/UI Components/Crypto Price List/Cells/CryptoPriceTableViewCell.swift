@@ -127,7 +127,7 @@ class CryptoPriceTableViewCell: UITableViewCell {
   private func customizePriceLabel(with dataModel: CryptoPriceModel) {
     let paragraphStyle = NSMutableParagraphStyle()
     paragraphStyle.alignment = .right
-    let fiatCodeString = "(\(dataModel.pairAssetCode.uppercased()))"
+    let fiatCodeString = "(\(dataModel.counterAssetCode.uppercased()))"
     let priceLabelText = dataModel.formattedPrice + " " + fiatCodeString
     let attributedTitle = NSMutableAttributedString(
       string: priceLabelText,

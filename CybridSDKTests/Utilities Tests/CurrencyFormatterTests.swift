@@ -173,7 +173,7 @@ extension CurrencyFormatterTests {
     let price = SymbolPriceBankModel(symbol: "$", buyPrice: nil, sellPrice: nil, buyPriceLastUpdatedAt: nil, sellPriceLastUpdatedAt: nil)
 
     // When
-    let cryptoPriceModel = CryptoPriceModel(symbolPrice: price, asset: asset1, pairAsset: asset2)
+    let cryptoPriceModel = CryptoPriceModel(symbolPrice: price, asset: asset1, counterAsset: asset2)
 
     // Then
     XCTAssertEqual(cryptoPriceModel.formattedPrice, "Ξ 0.000000000000000000")
