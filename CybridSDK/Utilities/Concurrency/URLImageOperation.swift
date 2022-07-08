@@ -30,7 +30,21 @@ final class ImageDownloadOperation: AsyncOperation, URLImageOperation {
     dataProvider.dataTaskWithURL(url) { [weak self] data, _, error in
       defer { self?.state = .finished }
       guard error == nil, let data = data else { return }
-      self?.image = UIImage(data: data)
+      guard
+        let cgDataProvider = CGDataProvider(data: data as CFData),
+        let document = CGPDFDocument(cgDataProvider),
+        let page = document.page(at: 1)
+      else { return }
+      let pageRect = page.getBoxRect(.mediaBox)
+      let renderer = UIGraphicsImageRenderer(size: pageRect.size)
+      let img = renderer.image { context in
+        UIColor.clear.set()
+        context.fill(pageRect)
+        context.cgContext.translateBy(x: 0.0, y: pageRect.size.height)
+        context.cgContext.scaleBy(x: 1.0, y: -1.0)
+        context.cgContext.drawPDFPage(page)
+      }
+      self?.image = img
     }
     .resume()
   }

@@ -20,8 +20,8 @@ final class URLImageView: UIImageView {
 
   // MARK: Private properties
 
-  private let url: URL
-  private lazy var imageOperation: URLImageOperation = imageOperationProvider(url, dataProvider)
+  private var url: URL?
+  private var imageOperation: URLImageOperation?
 
   // MARK: Injectable Dependencies
 
@@ -34,7 +34,7 @@ final class URLImageView: UIImageView {
 
   // MARK: Initializers
 
-  init(url: URL, placeholder: UIImage? = nil) {
+  init(url: URL?, placeholder: UIImage? = nil) {
     self.url = url
     self.placeholder = placeholder
 
@@ -59,17 +59,21 @@ final class URLImageView: UIImageView {
   }
 
   private func loadImage() {
-    if imageOperation.isExecuting {
-      imageOperation.cancel()
+    guard let url = url else {
+        self.image = placeholder
+        return
+    }
+    if let imageOp = imageOperation, imageOp.isExecuting {
+      imageOperation?.cancel()
     }
     imageOperation = imageOperationProvider(url, dataProvider)
-    imageOperation.completionBlock = { [weak self] in
+    imageOperation?.completionBlock = { [weak self] in
       self?.completionDispatchQueue.async {
-        self?.image = self?.imageOperation.image
+        self?.image = self?.imageOperation?.image
       }
     }
 
-    operationQueue.addOperation(imageOperation)
+    operationQueue.addOperation(imageOperation!)
   }
 
   func inject(operationQueue: OperationQueueType? = nil,
@@ -90,7 +94,17 @@ final class URLImageView: UIImageView {
     }
   }
 
+  func setURL(_ url: URL) {
+    self.url = url
+    loadImage()
+  }
+
+  func setURL(_ urlString: String) {
+    guard let url = URL(string: urlString) else { return }
+    setURL(url)
+  }
+
   deinit {
-    imageOperation.cancel()
+    imageOperation?.cancel()
   }
 }

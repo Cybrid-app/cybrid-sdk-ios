@@ -8,9 +8,8 @@ project 'CybridSDK'
 use_frameworks!
 
 def common_pods
-  unless ENV['CI']
-    pod 'CybridApiBankSwift', :path => '../cybrid-api-bank-swift/CybridApiBankSwift.podspec'
-  end
+  pod 'CybridApiBankSwift'
+  pod 'BigInt'
 end
 
 def quality_pods

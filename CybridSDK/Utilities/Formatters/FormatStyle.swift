@@ -23,27 +23,27 @@ enum FormatStyle {
     }
   }
 
-  func textColor(with theme: ColorTheme) -> UIColor {
+  var textColor: UIColor {
     switch self {
     case .headerSmall, .comment, .inputPlaceholder:
-      return theme.secondaryTextColor
+      return Cybrid.theme.colorTheme.secondaryTextColor
     case .body, .bodyLarge:
-      return theme.primaryTextColor
+      return Cybrid.theme.colorTheme.primaryTextColor
     }
   }
 
-  func font(with theme: FontTheme) -> UIFont {
+  var font: UIFont {
     switch self {
     case .headerSmall:
-      return theme.caption
+      return Cybrid.theme.fontTheme.caption
     case .bodyLarge:
-      return theme.bodyLarge
+      return Cybrid.theme.fontTheme.bodyLarge
     case .body:
-      return theme.body
+      return Cybrid.theme.fontTheme.body
     case .comment:
-      return theme.caption
+      return Cybrid.theme.fontTheme.caption
     case .inputPlaceholder:
-      return theme.bodyLarge
+      return Cybrid.theme.fontTheme.bodyLarge
     }
   }
 }

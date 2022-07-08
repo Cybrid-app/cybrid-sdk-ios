@@ -47,9 +47,9 @@ class URLImageViewTests: XCTestCase {
     // Given
     XCTAssertNotNil(url)
     XCTAssertNotNil(testImage)
+    let urlImage = URLImageView(url: url!, placeholder: testImage!)
 
     // When
-    let urlImage = URLImageView(url: url!, placeholder: testImage!)
     urlImage.inject(dataProvider: mockURLSession)
 
     // Then
@@ -60,10 +60,10 @@ class URLImageViewTests: XCTestCase {
     // Given
     XCTAssertNotNil(url)
     XCTAssertNotNil(testImage)
-
-    // When
     let urlImage = URLImageView(url: url!)
     let mockImageOperation = MockImageOperation(image: testImage!)
+
+    // When
     urlImage
       .inject(
         operationQueue: MockOperationQueue(),
@@ -76,7 +76,7 @@ class URLImageViewTests: XCTestCase {
     urlImage.layoutSubviews()
 
     // Then
-    XCTAssertNotNil(urlImage.image)
+    XCTAssertEqual(urlImage.image?.cgImage, testImage?.cgImage)
   }
 
   func testInvalidInit() {
@@ -89,10 +89,10 @@ class URLImageViewTests: XCTestCase {
     // Given
     XCTAssertNotNil(url)
     XCTAssertNotNil(testImage)
-
-    // When
     let urlImage = URLImageView(url: url!)
     let mockImageOperation = MockImageOperation(image: testImage!)
+
+    // When
     urlImage
       .inject(
         operationQueue: MockOperationQueue(),
@@ -110,6 +110,85 @@ class URLImageViewTests: XCTestCase {
     urlImage.layoutSubviews()
 
     // Then
-    XCTAssertNotNil(urlImage.image)
+    XCTAssertEqual(urlImage.image?.cgImage, testImage?.cgImage)
+  }
+
+  func testNilURL() {
+    // Given
+    let placeholder = testImage
+    let urlImage = URLImageView(url: nil, placeholder: testImage)
+
+    // When
+    urlImage.layoutSubviews()
+
+    // Then
+    XCTAssertEqual(urlImage.image?.cgImage, placeholder?.cgImage)
+  }
+
+  func testSetURL() {
+    // Given
+    XCTAssertNotNil(url)
+    XCTAssertNotNil(testImage)
+    let urlImage = URLImageView(url: nil)
+    let mockImageOperation = MockImageOperation(image: testImage!)
+
+    // When
+    urlImage
+      .inject(
+        operationQueue: MockOperationQueue(),
+        dataProvider: mockURLSession,
+        completionDispatchQueue: MockDispatchQueue(),
+        imageOperationProvider: { _, _ in
+          mockImageOperation
+        }
+      )
+    urlImage.setURL(url!)
+
+    // Then
+    XCTAssertEqual(urlImage.image?.cgImage, testImage?.cgImage)
+  }
+
+  func testSetURLString() {
+    // Given
+    XCTAssertNotNil(testImage)
+    let urlImage = URLImageView(url: nil)
+    let mockImageOperation = MockImageOperation(image: testImage!)
+
+    // When
+    urlImage
+      .inject(
+        operationQueue: MockOperationQueue(),
+        dataProvider: mockURLSession,
+        completionDispatchQueue: MockDispatchQueue(),
+        imageOperationProvider: { _, _ in
+          mockImageOperation
+        }
+      )
+    urlImage.setURL("https://images.cybrid.xyz/color/btc.svg")
+
+    // Then
+    XCTAssertEqual(urlImage.image?.cgImage, testImage?.cgImage)
+  }
+
+  func testSetURLString_withInvalidURL() {
+    // Given
+    XCTAssertNotNil(testImage)
+    let urlImage = URLImageView(url: nil)
+    let mockImageOperation = MockImageOperation(image: testImage!)
+
+    // When
+    urlImage
+      .inject(
+        operationQueue: MockOperationQueue(),
+        dataProvider: mockURLSession,
+        completionDispatchQueue: MockDispatchQueue(),
+        imageOperationProvider: { _, _ in
+          mockImageOperation
+        }
+      )
+    urlImage.setURL("")
+
+    // Then
+    XCTAssertNil(urlImage.image)
   }
 }

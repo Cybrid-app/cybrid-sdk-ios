@@ -19,8 +19,8 @@ extension UILabel {
     numberOfLines = 0
     translatesAutoresizingMaskIntoConstraints = false
     sizeToFit()
-    font = style.font(with: Cybrid.theme.fontTheme)
-    textColor = style.textColor(with: Cybrid.theme.colorTheme)
+    font = style.font
+    textColor = style.textColor
     if style.isUppercased {
       text = text?.uppercased()
     }
