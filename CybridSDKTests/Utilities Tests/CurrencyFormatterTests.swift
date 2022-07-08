@@ -20,19 +20,19 @@ class CurrencyFormatterTests: XCTestCase {
 
     // When
     let bitcoinString = CybridCurrencyFormatter.formatPrice(
-      BigDecimal(price, AssetBankModel.bitcoin.decimals), // 8 decimal digits
+      BigDecimal(price, precision: AssetBankModel.bitcoin.decimals), // 8 decimal digits
       with: AssetBankModel.bitcoin.symbol
     )
     let ethereumString = CybridCurrencyFormatter.formatPrice(
-      BigDecimal(price, AssetBankModel.ethereum.decimals), // 18 decimal digits
+      BigDecimal(price, precision: AssetBankModel.ethereum.decimals), // 18 decimal digits
       with: AssetBankModel.ethereum.symbol
     )
     let dogecoinString = CybridCurrencyFormatter.formatPrice(
-      BigDecimal(price, AssetBankModel.dogecoin.decimals), // 8 decimal digits
+      BigDecimal(price, precision: AssetBankModel.dogecoin.decimals), // 8 decimal digits
       with: AssetBankModel.dogecoin.symbol
     )
     let usdString = CybridCurrencyFormatter.formatPrice(
-      BigDecimal(price, AssetBankModel.usd.decimals), // 2 decimal digits
+      BigDecimal(price, precision: AssetBankModel.usd.decimals), // 2 decimal digits
       with: AssetBankModel.usd.symbol
     )
 
@@ -45,7 +45,7 @@ class CurrencyFormatterTests: XCTestCase {
 
   func testAmountFormatting_withGroupingSeparator() {
     // Given
-    let price = BigDecimal(BigInt(200_032), AssetBankModel.usd.decimals)
+    let price = BigDecimal(BigInt(200_032), precision: AssetBankModel.usd.decimals)
 
     // When
     let currencyString = CybridCurrencyFormatter.formatPrice(price, with: AssetBankModel.usd.symbol)
@@ -56,7 +56,7 @@ class CurrencyFormatterTests: XCTestCase {
 
   func testAmountFormatting_withoutGroupingSeparator() {
     // Given
-    let price = BigDecimal(BigInt(20_032), AssetBankModel.usd.decimals)
+    let price = BigDecimal(BigInt(20_032), precision: AssetBankModel.usd.decimals)
 
     // When
     let currencyString = CybridCurrencyFormatter.formatPrice(price, with: AssetBankModel.usd.symbol)
@@ -67,7 +67,7 @@ class CurrencyFormatterTests: XCTestCase {
 
   func testNegativeAmountFormatting() {
     // Given
-    let price = BigDecimal(BigInt(-20_032), AssetBankModel.usd.decimals)
+    let price = BigDecimal(BigInt(-20_032), precision: AssetBankModel.usd.decimals)
 
     // When
     let currencyString = CybridCurrencyFormatter.formatPrice(price, with: AssetBankModel.usd.symbol)
@@ -82,19 +82,19 @@ class CurrencyFormatterTests: XCTestCase {
 
     // When
     let bitcoinString = CybridCurrencyFormatter.formatPrice(
-      BigDecimal(price, AssetBankModel.bitcoin.decimals),
+      BigDecimal(price, precision: AssetBankModel.bitcoin.decimals),
       with: AssetBankModel.bitcoin.symbol
     )
     let ethereumString = CybridCurrencyFormatter.formatPrice(
-      BigDecimal(price, AssetBankModel.ethereum.decimals),
+      BigDecimal(price, precision: AssetBankModel.ethereum.decimals),
       with: AssetBankModel.ethereum.symbol
     )
     let dogecoinString = CybridCurrencyFormatter.formatPrice(
-      BigDecimal(price, AssetBankModel.dogecoin.decimals),
+      BigDecimal(price, precision: AssetBankModel.dogecoin.decimals),
       with: AssetBankModel.dogecoin.symbol
     )
     let usdString = CybridCurrencyFormatter.formatPrice(
-      BigDecimal(price, AssetBankModel.usd.decimals),
+      BigDecimal(price, precision: AssetBankModel.usd.decimals),
       with: AssetBankModel.usd.symbol
     )
 
@@ -108,7 +108,7 @@ class CurrencyFormatterTests: XCTestCase {
   func testAmountFormatting_withoutFractions() {
     // Given
     let jpy = AssetBankModel(type: .fiat, code: "JPY", name: "Japanes Yen", symbol: "¥", decimals: 0)
-    let price = BigDecimal(BigInt(200_000), jpy.decimals)
+    let price = BigDecimal(BigInt(200_000), precision: jpy.decimals)
 
     // When
     let currencyString = CybridCurrencyFormatter.formatPrice(price, with: jpy.symbol)
@@ -125,7 +125,7 @@ extension CurrencyFormatterTests {
     // Given
     let locale = Locale(identifier: "en_US")
     let currencySymbol = "$"
-    let amount = BigDecimal(1_000_000, 2)
+    let amount = BigDecimal(1_000_000, precision: 2)
 
     // When
     let localizedCurrencyString = CybridCurrencyFormatter.localizedCurrencyString(
@@ -175,10 +175,10 @@ extension CurrencyFormatterTests {
 extension CurrencyFormatterTests {
   func testMaxAmountFormatting() {
     // Given
-    let price = BigDecimal(BigInt("123456789123456789123456789123"), AssetBankModel.ethereum.decimals)
+    let price = BigDecimal(BigInt("123456789123456789123456789123"), precision: AssetBankModel.ethereum.decimals)
     let shaNumber = BigDecimal(
       BigInt( "115792089237316195423570985008687907853269984665640564039457584007913129639935"),
-      AssetBankModel.ethereum.decimals
+      precision: AssetBankModel.ethereum.decimals
     )
 
     // When
@@ -200,7 +200,7 @@ extension CurrencyFormatterTests {
     let cryptoPriceModel = CryptoPriceModel(symbolPrice: price, asset: asset1, counterAsset: asset2)
 
     // Then
-    XCTAssertEqual(cryptoPriceModel.formattedPrice, "Ξ 0.000000000000000000")
+    XCTAssertNil(cryptoPriceModel)
   }
 
   func testFormatter_withNilFormattedAmount() {
@@ -239,7 +239,7 @@ extension CurrencyFormatterTests {
 extension CurrencyFormatterTests {
   func testAmountFormatting_toUSD_withMultipleLocales() {
     // Given
-    let price = BigDecimal(BigInt(200_032), AssetBankModel.usd.decimals)
+    let price = BigDecimal(BigInt(200_032), precision: AssetBankModel.usd.decimals)
 
     // When
     let en_USFormattedString = CybridCurrencyFormatter.formatPrice(
@@ -291,7 +291,7 @@ extension CurrencyFormatterTests {
   func testAmountFormatting_toGBP_withMultipleLocales() {
     // Given
     let pounds = AssetBankModel(type: .fiat, code: "GBP", name: "Pounds", symbol: "£", decimals: 2)
-    let price = BigDecimal(BigInt(200_032), pounds.decimals)
+    let price = BigDecimal(BigInt(200_032), precision: pounds.decimals)
 
     // When
     let en_USFormattedString = CybridCurrencyFormatter.formatPrice(
@@ -342,7 +342,7 @@ extension CurrencyFormatterTests {
 
   func testAmountFormatting_toEUR_withMultipleLocales() {
     // Given
-    let price = BigDecimal(BigInt(200_032), AssetBankModel.eur.decimals)
+    let price = BigDecimal(BigInt(200_032), precision: AssetBankModel.eur.decimals)
 
     // When
     let en_USFormattedString = CybridCurrencyFormatter.formatPrice(

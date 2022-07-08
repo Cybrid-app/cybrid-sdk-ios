@@ -18,14 +18,15 @@ struct CryptoPriceModel: Equatable {
   let counterAssetCode: String // USD
   let formattedPrice: String // $20,300.129,870
 
-  init(symbolPrice: SymbolPriceBankModel, asset: AssetBankModel, counterAsset: AssetBankModel) {
+  init?(symbolPrice: SymbolPriceBankModel, asset: AssetBankModel, counterAsset: AssetBankModel) {
+    guard let buyPrice = symbolPrice.buyPrice else { return nil }
     self.assetCode = asset.code
     self.assetName = asset.name
     self.imageURL = Cybrid.getCryptoIconURLString(with: asset.code)
     self.counterAssetCode = counterAsset.code
     self.formattedPrice = CybridCurrencyFormatter.formatPrice(
       // FIXME: We should get other DataType from API (e.g: String or NSData) Int64 is not enough
-      BigDecimal(BigInt(symbolPrice.buyPrice ?? 0), counterAsset.decimals),
+      BigDecimal(buyPrice, precision: counterAsset.decimals),
       with: counterAsset.symbol
     )
   }
@@ -69,7 +70,7 @@ extension CryptoPriceModel {
       asset: .dogecoin,
       counterAsset: .usd
     )
-  ]
+  ].compactMap { $0 }
 }
 
 extension AssetBankModel {

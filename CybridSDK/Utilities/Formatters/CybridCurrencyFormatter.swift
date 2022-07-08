@@ -141,13 +141,3 @@ struct CybridCurrencyFormatter {
     return groups
   }
 }
-
-public struct BigDecimal: Hashable {
-    public var value: BigInt
-    public var precision: Int
-
-    public init(_ value: BigInt, _ precision: Int) {
-        self.value = value
-        self.precision = precision
-    }
-}

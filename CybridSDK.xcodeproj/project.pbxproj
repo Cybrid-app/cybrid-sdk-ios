@@ -14,6 +14,8 @@
 		0B00E0142877E87600707F26 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0B00E0122877E87600707F26 /* Main.storyboard */; };
 		0B00E0152877E93900707F26 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0B00E0172877E93900707F26 /* Localizable.strings */; };
 		0B00E01B2877EED600707F26 /* BundleExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B00E01A2877EED600707F26 /* BundleExtensionsTests.swift */; };
+		0B00E01D28789ADA00707F26 /* BigDecimal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B00E01C28789ADA00707F26 /* BigDecimal.swift */; };
+		0B00E01F2878A16800707F26 /* BigDecimalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B00E01E2878A16800707F26 /* BigDecimalTests.swift */; };
 		0B078F1228497B070020B4F7 /* CybridSDK.docc in Sources */ = {isa = PBXBuildFile; fileRef = 0B078F1128497B070020B4F7 /* CybridSDK.docc */; };
 		0B078F1828497B070020B4F7 /* CybridSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B078F0D28497B070020B4F7 /* CybridSDK.framework */; };
 		0B078F1E28497B070020B4F7 /* CybridSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 0B078F1028497B070020B4F7 /* CybridSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -111,6 +113,8 @@
 		0B00E0162877E93900707F26 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		0B00E0192877ED9E00707F26 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		0B00E01A2877EED600707F26 /* BundleExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BundleExtensionsTests.swift; sourceTree = "<group>"; };
+		0B00E01C28789ADA00707F26 /* BigDecimal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigDecimal.swift; sourceTree = "<group>"; };
+		0B00E01E2878A16800707F26 /* BigDecimalTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigDecimalTests.swift; sourceTree = "<group>"; };
 		0B078F0D28497B070020B4F7 /* CybridSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CybridSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0B078F1028497B070020B4F7 /* CybridSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CybridSDK.h; sourceTree = "<group>"; };
 		0B078F1128497B070020B4F7 /* CybridSDK.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = CybridSDK.docc; sourceTree = "<group>"; };
@@ -360,6 +364,7 @@
 				0B966028285C38F500584692 /* URLImageOperationTests.swift */,
 				0B96602A285C3AC600584692 /* NetworkingInterfaceTests.swift */,
 				0BD6611E286C1EB800F4DA6B /* ObservableTests.swift */,
+				0B00E01E2878A16800707F26 /* BigDecimalTests.swift */,
 			);
 			path = "Utilities Tests";
 			sourceTree = "<group>";
@@ -526,6 +531,7 @@
 			children = (
 				0B303CE02862E062007BF7FF /* FormatStyle.swift */,
 				0BD661392872BC0B00F4DA6B /* CybridCurrencyFormatter.swift */,
+				0B00E01C28789ADA00707F26 /* BigDecimal.swift */,
 			);
 			path = Formatters;
 			sourceTree = "<group>";
@@ -714,6 +720,7 @@
 				0BD6610B286B768C00F4DA6B /* CryptoPriceModel.swift in Sources */,
 				0BD661372872BB0A00F4DA6B /* AssetPathBuilder.swift in Sources */,
 				0BD660F7286B761200F4DA6B /* NetworkingInterfaces.swift in Sources */,
+				0B00E01D28789ADA00707F26 /* BigDecimal.swift in Sources */,
 				0B2B2A8528629031002F0EC1 /* UIColor+Extensions.swift in Sources */,
 				0B2B2A872862906E002F0EC1 /* UILabel+Extensions.swift in Sources */,
 				0B2B2A6D28621D5C002F0EC1 /* ColorTheme.swift in Sources */,
@@ -753,6 +760,7 @@
 				0B303CEC2862F898007BF7FF /* ColorThemeTests.swift in Sources */,
 				0B966025285C2CEF00584692 /* MockDispatchQueue.swift in Sources */,
 				0B966011285AA24300584692 /* AssertionFailureOverrideTests.swift in Sources */,
+				0B00E01F2878A16800707F26 /* BigDecimalTests.swift in Sources */,
 				0BD6611F286C1EB800F4DA6B /* ObservableTests.swift in Sources */,
 				0B96600D285A9A3100584692 /* MockAsyncOperation.swift in Sources */,
 				0B966019285AE8D300584692 /* MockURLSession.swift in Sources */,
