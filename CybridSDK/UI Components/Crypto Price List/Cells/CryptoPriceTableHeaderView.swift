@@ -8,7 +8,7 @@
 import UIKit
 
 class CryptoPriceTableHeaderView: UITableViewHeaderFooterView {
-  private let localizer = CybridLocalizer()
+  private let localizer: Localizer
 
   private lazy var searchTextField: UISearchTextField = {
     let searchBar = UISearchTextField()
@@ -69,6 +69,7 @@ class CryptoPriceTableHeaderView: UITableViewHeaderFooterView {
   }
 
   override init(reuseIdentifier: String?) {
+    self.localizer = CybridLocalizer()
     super.init(reuseIdentifier: reuseIdentifier)
     setupView()
   }

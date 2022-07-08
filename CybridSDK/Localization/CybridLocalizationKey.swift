@@ -7,7 +7,11 @@
 
 import Foundation
 
-enum CybridLocalizationKey {
+protocol LocalizationKey {
+  var stringValue: String { get }
+}
+
+enum CybridLocalizationKey: LocalizationKey {
   case cryptoPriceList(CryptoPriceList)
 
   private var prefix: String { "cybrid" }

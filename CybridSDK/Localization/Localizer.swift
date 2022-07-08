@@ -7,20 +7,26 @@
 
 import Foundation
 
-struct CybridLocalizer {
-  let localizationBundle = Bundle(for: CybridConfig.self)
+protocol Localizer {
+  func localize(with localizationKey: LocalizationKey,
+                parameters: CustomStringConvertible...) -> String
+}
 
-  func localize(with localizationKey: CybridLocalizationKey, arguments: [CustomStringConvertible]) -> String {
-    let localizedStringFormat = localizationBundle.localizedString(forKey: localizationKey.stringValue,
-                                                                   value: nil,
-                                                                   table: nil)
-    return String.localizedStringWithFormat(localizedStringFormat, arguments)
+struct CybridLocalizer: Localizer {
+  let locale: Locale
+
+  init(locale: Locale? = nil) {
+    self.locale = locale ?? Cybrid.getPreferredLocale()
   }
 
-  func localize(with localizationKey: CybridLocalizationKey, parameters: CustomStringConvertible...) -> String {
-    let localizedStringFormat = localizationBundle.localizedString(forKey: localizationKey.stringValue,
-                                                                   value: nil,
-                                                                   table: nil)
+  func localize(with localizationKey: LocalizationKey,
+                parameters: CustomStringConvertible...) -> String {
+    let localizationBundle = Bundle.localizationBundle(forLocale: locale)
+    let localizedStringFormat = localizationBundle.localizedString(
+      forKey: localizationKey.stringValue,
+      value: nil,
+      table: nil
+    )
     return String.localizedStringWithFormat(localizedStringFormat, parameters)
   }
 }

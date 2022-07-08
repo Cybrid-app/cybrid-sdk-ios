@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0B00E0042877DF7F00707F26 /* Bundle+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B00E0032877DF7F00707F26 /* Bundle+Extensions.swift */; };
+		0B00E0052877E56A00707F26 /* CybridSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B078F0D28497B070020B4F7 /* CybridSDK.framework */; platformFilter = ios; };
+		0B00E0062877E56A00707F26 /* CybridSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0B078F0D28497B070020B4F7 /* CybridSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		0B00E0132877E87600707F26 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0B00E0112877E87600707F26 /* LaunchScreen.storyboard */; };
+		0B00E0142877E87600707F26 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0B00E0122877E87600707F26 /* Main.storyboard */; };
+		0B00E0152877E93900707F26 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0B00E0172877E93900707F26 /* Localizable.strings */; };
+		0B00E01B2877EED600707F26 /* BundleExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B00E01A2877EED600707F26 /* BundleExtensionsTests.swift */; };
 		0B078F1228497B070020B4F7 /* CybridSDK.docc in Sources */ = {isa = PBXBuildFile; fileRef = 0B078F1128497B070020B4F7 /* CybridSDK.docc */; };
 		0B078F1828497B070020B4F7 /* CybridSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B078F0D28497B070020B4F7 /* CybridSDK.framework */; };
 		0B078F1E28497B070020B4F7 /* CybridSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 0B078F1028497B070020B4F7 /* CybridSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -37,9 +44,7 @@
 		0B99D1E72849CCE500837E05 /* CybridSDK.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 0B99D1E62849CCE500837E05 /* CybridSDK.podspec */; };
 		0BBCF616285C43E000D39C6D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BBCF615285C43E000D39C6D /* AppDelegate.swift */; };
 		0BBCF618285C43E000D39C6D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BBCF617285C43E000D39C6D /* SceneDelegate.swift */; };
-		0BBCF61D285C43E000D39C6D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0BBCF61B285C43E000D39C6D /* Main.storyboard */; };
 		0BBCF61F285C43E000D39C6D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0BBCF61E285C43E000D39C6D /* Assets.xcassets */; };
-		0BBCF622285C43E000D39C6D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0BBCF620285C43E000D39C6D /* LaunchScreen.storyboard */; };
 		0BBCF640285C52D700D39C6D /* MockError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BBCF63F285C52D700D39C6D /* MockError.swift */; };
 		0BD0A4E728582FB700C10744 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 0BD0A4E628582FB700C10744 /* README.md */; };
 		0BD660F7286B761200F4DA6B /* NetworkingInterfaces.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD660F6286B761200F4DA6B /* NetworkingInterfaces.swift */; };
@@ -62,7 +67,6 @@
 		0BD66123286C20BC00F4DA6B /* CryptoPriceViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD66122286C20BC00F4DA6B /* CryptoPriceViewModelTests.swift */; };
 		0BD66125286D7C0400F4DA6B /* Localizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD66124286D7C0400F4DA6B /* Localizer.swift */; };
 		0BD6612A286DE86A00F4DA6B /* CybridLocalizationKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD66129286DE86A00F4DA6B /* CybridLocalizationKey.swift */; };
-		0BD66130286E1F9600F4DA6B /* en.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 0BD6612F286E1F9600F4DA6B /* en.lproj */; };
 		0BD661332872A05B00F4DA6B /* LocalizationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD661322872A05B00F4DA6B /* LocalizationTests.swift */; };
 		0BD661372872BB0A00F4DA6B /* AssetPathBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD661362872BB0A00F4DA6B /* AssetPathBuilder.swift */; };
 		0BD6613A2872BC0B00F4DA6B /* CybridCurrencyFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD661392872BC0B00F4DA6B /* CybridCurrencyFormatter.swift */; };
@@ -70,6 +74,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		0B00E0072877E56A00707F26 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0B078F0428497B070020B4F7 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0B078F0C28497B070020B4F7;
+			remoteInfo = CybridSDK;
+		};
 		0B078F1928497B070020B4F7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 0B078F0428497B070020B4F7 /* Project object */;
@@ -79,7 +90,27 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		0B00E0092877E56A00707F26 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				0B00E0062877E56A00707F26 /* CybridSDK.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		0B00E0032877DF7F00707F26 /* Bundle+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Extensions.swift"; sourceTree = "<group>"; };
+		0B00E0112877E87600707F26 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		0B00E0122877E87600707F26 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		0B00E0162877E93900707F26 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		0B00E0192877ED9E00707F26 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		0B00E01A2877EED600707F26 /* BundleExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BundleExtensionsTests.swift; sourceTree = "<group>"; };
 		0B078F0D28497B070020B4F7 /* CybridSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CybridSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0B078F1028497B070020B4F7 /* CybridSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CybridSDK.h; sourceTree = "<group>"; };
 		0B078F1128497B070020B4F7 /* CybridSDK.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = CybridSDK.docc; sourceTree = "<group>"; };
@@ -112,9 +143,7 @@
 		0BBCF613285C43E000D39C6D /* CybridSDKTestApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CybridSDKTestApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0BBCF615285C43E000D39C6D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0BBCF617285C43E000D39C6D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		0BBCF61C285C43E000D39C6D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0BBCF61E285C43E000D39C6D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		0BBCF621285C43E000D39C6D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0BBCF623285C43E000D39C6D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0BBCF63F285C52D700D39C6D /* MockError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockError.swift; sourceTree = "<group>"; };
 		0BD0A4E628582FB700C10744 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -138,7 +167,6 @@
 		0BD66122286C20BC00F4DA6B /* CryptoPriceViewModelTests.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = CryptoPriceViewModelTests.swift; sourceTree = "<group>"; tabWidth = 2; };
 		0BD66124286D7C0400F4DA6B /* Localizer.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = Localizer.swift; sourceTree = "<group>"; tabWidth = 2; };
 		0BD66129286DE86A00F4DA6B /* CybridLocalizationKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CybridLocalizationKey.swift; sourceTree = "<group>"; };
-		0BD6612F286E1F9600F4DA6B /* en.lproj */ = {isa = PBXFileReference; lastKnownFileType = folder; path = en.lproj; sourceTree = "<group>"; };
 		0BD661322872A05B00F4DA6B /* LocalizationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizationTests.swift; sourceTree = "<group>"; };
 		0BD661362872BB0A00F4DA6B /* AssetPathBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetPathBuilder.swift; sourceTree = "<group>"; };
 		0BD661392872BC0B00F4DA6B /* CybridCurrencyFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CybridCurrencyFormatter.swift; sourceTree = "<group>"; };
@@ -166,6 +194,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0B00E0052877E56A00707F26 /* CybridSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -242,6 +271,7 @@
 				0BD66116286B79C500F4DA6B /* UIView+Constraints.swift */,
 				0B2B2A8428629031002F0EC1 /* UIColor+Extensions.swift */,
 				0B2B2A862862906E002F0EC1 /* UILabel+Extensions.swift */,
+				0B00E0032877DF7F00707F26 /* Bundle+Extensions.swift */,
 			);
 			path = "Framework Extensions";
 			sourceTree = "<group>";
@@ -257,6 +287,7 @@
 		0B303CE52862E7BC007BF7FF /* Extensions Tests */ = {
 			isa = PBXGroup;
 			children = (
+				0B00E01A2877EED600707F26 /* BundleExtensionsTests.swift */,
 				0B303CE62862E7E3007BF7FF /* UIColorExtensionsTests.swift */,
 				0B303CE82862F5BB007BF7FF /* UILabelExtensionsTests.swift */,
 				0BD6611A286C197B00F4DA6B /* UIViewConstraintsTests.swift */,
@@ -386,9 +417,9 @@
 		0BBCF62A285C443A00D39C6D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				0B00E0112877E87600707F26 /* LaunchScreen.storyboard */,
+				0B00E0122877E87600707F26 /* Main.storyboard */,
 				0BBCF61E285C43E000D39C6D /* Assets.xcassets */,
-				0BBCF61B285C43E000D39C6D /* Main.storyboard */,
-				0BBCF620285C43E000D39C6D /* LaunchScreen.storyboard */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -467,9 +498,9 @@
 		0BD66126286D7CCB00F4DA6B /* Localization */ = {
 			isa = PBXGroup;
 			children = (
-				0BD6612F286E1F9600F4DA6B /* en.lproj */,
 				0BD66124286D7C0400F4DA6B /* Localizer.swift */,
 				0BD66129286DE86A00F4DA6B /* CybridLocalizationKey.swift */,
+				0B00E0172877E93900707F26 /* Localizable.strings */,
 			);
 			path = Localization;
 			sourceTree = "<group>";
@@ -564,10 +595,12 @@
 				0BBCF60F285C43E000D39C6D /* Sources */,
 				0BBCF610285C43E000D39C6D /* Frameworks */,
 				0BBCF611285C43E000D39C6D /* Resources */,
+				0B00E0092877E56A00707F26 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				0B00E0082877E56A00707F26 /* PBXTargetDependency */,
 			);
 			name = CybridSDKTestApp;
 			productName = CybridSDKTestApp;
@@ -602,6 +635,7 @@
 			knownRegions = (
 				en,
 				Base,
+				fr,
 			);
 			mainGroup = 0B078F0328497B070020B4F7;
 			productRefGroup = 0B078F0E28497B070020B4F7 /* Products */;
@@ -620,8 +654,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0BD66130286E1F9600F4DA6B /* en.lproj in Resources */,
 				0BD0A4E728582FB700C10744 /* README.md in Resources */,
+				0B00E0152877E93900707F26 /* Localizable.strings in Resources */,
 				0B99D1E72849CCE500837E05 /* CybridSDK.podspec in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -638,9 +672,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0BBCF622285C43E000D39C6D /* LaunchScreen.storyboard in Resources */,
+				0B00E0142877E87600707F26 /* Main.storyboard in Resources */,
 				0BBCF61F285C43E000D39C6D /* Assets.xcassets in Resources */,
-				0BBCF61D285C43E000D39C6D /* Main.storyboard in Resources */,
+				0B00E0132877E87600707F26 /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -692,6 +726,7 @@
 				0B078F1228497B070020B4F7 /* CybridSDK.docc in Sources */,
 				0BD66125286D7C0400F4DA6B /* Localizer.swift in Sources */,
 				0BD66111286B76DC00F4DA6B /* URLImageView.swift in Sources */,
+				0B00E0042877DF7F00707F26 /* Bundle+Extensions.swift in Sources */,
 				0BD6610A286B768C00F4DA6B /* CryptoPriceViewModel.swift in Sources */,
 				0B2B2A8928629324002F0EC1 /* Theme.swift in Sources */,
 				0B303CE12862E062007BF7FF /* FormatStyle.swift in Sources */,
@@ -714,6 +749,7 @@
 				0B303CE92862F5BB007BF7FF /* UILabelExtensionsTests.swift in Sources */,
 				0BD661332872A05B00F4DA6B /* LocalizationTests.swift in Sources */,
 				0B966004285A85C600584692 /* AsyncOperationTests.swift in Sources */,
+				0B00E01B2877EED600707F26 /* BundleExtensionsTests.swift in Sources */,
 				0B303CEC2862F898007BF7FF /* ColorThemeTests.swift in Sources */,
 				0B966025285C2CEF00584692 /* MockDispatchQueue.swift in Sources */,
 				0B966011285AA24300584692 /* AssertionFailureOverrideTests.swift in Sources */,
@@ -743,6 +779,12 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		0B00E0082877E56A00707F26 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			platformFilter = ios;
+			target = 0B078F0C28497B070020B4F7 /* CybridSDK */;
+			targetProxy = 0B00E0072877E56A00707F26 /* PBXContainerItemProxy */;
+		};
 		0B078F1A28497B070020B4F7 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 0B078F0C28497B070020B4F7 /* CybridSDK */;
@@ -751,20 +793,13 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		0BBCF61B285C43E000D39C6D /* Main.storyboard */ = {
+		0B00E0172877E93900707F26 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				0BBCF61C285C43E000D39C6D /* Base */,
+				0B00E0162877E93900707F26 /* en */,
+				0B00E0192877ED9E00707F26 /* fr */,
 			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		0BBCF620285C43E000D39C6D /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				0BBCF621285C43E000D39C6D /* Base */,
-			);
-			name = LaunchScreen.storyboard;
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -774,6 +809,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
@@ -837,6 +873,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
@@ -956,6 +993,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 5789WJ9F6P;
@@ -973,6 +1011,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 5789WJ9F6P;
