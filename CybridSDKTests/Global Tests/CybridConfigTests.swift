@@ -58,12 +58,14 @@ class CybridConfigTests: XCTestCase {
   func testCybrid_getPreferredLocale_Default() {
     // Given
     Cybrid.setup(Cybrid.theme, locale: nil)
+    /// Default locale in local Simulator is `en-US`, while in CI it's `en`
+    let possiblePreferredLocales = ["en", "en-US"]
 
     // When
     let preferredLocale = Cybrid.getPreferredLocale()
 
     // Then
-    XCTAssertEqual(preferredLocale.identifier, "en-US")
+    XCTAssertTrue(possiblePreferredLocales.contains(preferredLocale.identifier))
   }
 
   func testCybrid_getPreferredLocale_withoutCustomLocale() {
