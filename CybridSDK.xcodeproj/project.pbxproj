@@ -16,6 +16,7 @@
 		0B00E01B2877EED600707F26 /* BundleExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B00E01A2877EED600707F26 /* BundleExtensionsTests.swift */; };
 		0B00E01D28789ADA00707F26 /* BigDecimal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B00E01C28789ADA00707F26 /* BigDecimal.swift */; };
 		0B00E01F2878A16800707F26 /* BigDecimalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B00E01E2878A16800707F26 /* BigDecimalTests.swift */; };
+		0B00E0222878D23100707F26 /* CybridSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B00E0212878D23100707F26 /* CybridSession.swift */; };
 		0B078F1228497B070020B4F7 /* CybridSDK.docc in Sources */ = {isa = PBXBuildFile; fileRef = 0B078F1128497B070020B4F7 /* CybridSDK.docc */; };
 		0B078F1828497B070020B4F7 /* CybridSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B078F0D28497B070020B4F7 /* CybridSDK.framework */; };
 		0B078F1E28497B070020B4F7 /* CybridSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 0B078F1028497B070020B4F7 /* CybridSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -115,6 +116,7 @@
 		0B00E01A2877EED600707F26 /* BundleExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BundleExtensionsTests.swift; sourceTree = "<group>"; };
 		0B00E01C28789ADA00707F26 /* BigDecimal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigDecimal.swift; sourceTree = "<group>"; };
 		0B00E01E2878A16800707F26 /* BigDecimalTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigDecimalTests.swift; sourceTree = "<group>"; };
+		0B00E0212878D23100707F26 /* CybridSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CybridSession.swift; sourceTree = "<group>"; };
 		0B078F0D28497B070020B4F7 /* CybridSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CybridSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0B078F1028497B070020B4F7 /* CybridSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CybridSDK.h; sourceTree = "<group>"; };
 		0B078F1128497B070020B4F7 /* CybridSDK.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = CybridSDK.docc; sourceTree = "<group>"; };
@@ -205,6 +207,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0B00E0202878D20F00707F26 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				0B00E0212878D23100707F26 /* CybridSession.swift */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
 		0B078F0328497B070020B4F7 = {
 			isa = PBXGroup;
 			children = (
@@ -234,6 +244,7 @@
 				0B303CE22862E5C5007BF7FF /* Global */,
 				0B2B2A832862901A002F0EC1 /* Framework Extensions */,
 				0BD66126286D7CCB00F4DA6B /* Localization */,
+				0B00E0202878D20F00707F26 /* Networking */,
 				0B965FF828599E3A00584692 /* Supporting Files */,
 				0B2B2A6B28621D35002F0EC1 /* Theme */,
 				0BD660FF286B765900F4DA6B /* UI Components */,
@@ -725,6 +736,7 @@
 				0B2B2A872862906E002F0EC1 /* UILabel+Extensions.swift in Sources */,
 				0B2B2A6D28621D5C002F0EC1 /* ColorTheme.swift in Sources */,
 				0B96600F285AA0FC00584692 /* AssertionFailureOverride.swift in Sources */,
+				0B00E0222878D23100707F26 /* CybridSession.swift in Sources */,
 				0BD66118286B79C500F4DA6B /* UIView+Constraints.swift in Sources */,
 				0B303CE42862E5D9007BF7FF /* Cybrid.swift in Sources */,
 				0BD660FD286B763E00F4DA6B /* ConcurrencyInterfaces.swift in Sources */,
