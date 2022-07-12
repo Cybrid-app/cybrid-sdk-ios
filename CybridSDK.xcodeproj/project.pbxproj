@@ -17,6 +17,8 @@
 		0B00E01D28789ADA00707F26 /* BigDecimal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B00E01C28789ADA00707F26 /* BigDecimal.swift */; };
 		0B00E01F2878A16800707F26 /* BigDecimalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B00E01E2878A16800707F26 /* BigDecimalTests.swift */; };
 		0B00E0222878D23100707F26 /* CybridSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B00E0212878D23100707F26 /* CybridSession.swift */; };
+		0B00E024287CD72D00707F26 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B00E023287CD72D00707F26 /* Environment.swift */; };
+		0B00E028287DBA8400707F26 /* CryptoAuthenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B00E027287DBA8400707F26 /* CryptoAuthenticator.swift */; };
 		0B078F1228497B070020B4F7 /* CybridSDK.docc in Sources */ = {isa = PBXBuildFile; fileRef = 0B078F1128497B070020B4F7 /* CybridSDK.docc */; };
 		0B078F1828497B070020B4F7 /* CybridSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B078F0D28497B070020B4F7 /* CybridSDK.framework */; };
 		0B078F1E28497B070020B4F7 /* CybridSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 0B078F1028497B070020B4F7 /* CybridSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -117,6 +119,8 @@
 		0B00E01C28789ADA00707F26 /* BigDecimal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigDecimal.swift; sourceTree = "<group>"; };
 		0B00E01E2878A16800707F26 /* BigDecimalTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigDecimalTests.swift; sourceTree = "<group>"; };
 		0B00E0212878D23100707F26 /* CybridSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CybridSession.swift; sourceTree = "<group>"; };
+		0B00E023287CD72D00707F26 /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
+		0B00E027287DBA8400707F26 /* CryptoAuthenticator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoAuthenticator.swift; sourceTree = "<group>"; };
 		0B078F0D28497B070020B4F7 /* CybridSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CybridSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0B078F1028497B070020B4F7 /* CybridSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CybridSDK.h; sourceTree = "<group>"; };
 		0B078F1128497B070020B4F7 /* CybridSDK.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = CybridSDK.docc; sourceTree = "<group>"; };
@@ -215,6 +219,23 @@
 			path = Networking;
 			sourceTree = "<group>";
 		};
+		0B00E025287DBA6300707F26 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				0BD66113286B76F300F4DA6B /* CryptoPriceListTestVC.swift */,
+				0BD66112286B76F300F4DA6B /* RootViewController.swift */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		0B00E026287DBA7300707F26 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				0B00E027287DBA8400707F26 /* CryptoAuthenticator.swift */,
+			);
+			name = Auth;
+			sourceTree = "<group>";
+		};
 		0B078F0328497B070020B4F7 = {
 			isa = PBXGroup;
 			children = (
@@ -295,6 +316,7 @@
 			isa = PBXGroup;
 			children = (
 				0B303CE32862E5D9007BF7FF /* Cybrid.swift */,
+				0B00E023287CD72D00707F26 /* Environment.swift */,
 			);
 			path = Global;
 			sourceTree = "<group>";
@@ -412,8 +434,8 @@
 		0BBCF614285C43E000D39C6D /* CybridSDKTestApp */ = {
 			isa = PBXGroup;
 			children = (
-				0BD66113286B76F300F4DA6B /* CryptoPriceListTestVC.swift */,
-				0BD66112286B76F300F4DA6B /* RootViewController.swift */,
+				0B00E026287DBA7300707F26 /* Auth */,
+				0B00E025287DBA6300707F26 /* ViewControllers */,
 				0BBCF62A285C443A00D39C6D /* Resources */,
 				0BBCF627285C440600D39C6D /* Supporting Files */,
 			);
@@ -742,6 +764,7 @@
 				0BD660FD286B763E00F4DA6B /* ConcurrencyInterfaces.swift in Sources */,
 				0BD66109286B768C00F4DA6B /* CryptoPriceListView.swift in Sources */,
 				0BD660FC286B763E00F4DA6B /* URLImageOperation.swift in Sources */,
+				0B00E024287CD72D00707F26 /* Environment.swift in Sources */,
 				0B078F1228497B070020B4F7 /* CybridSDK.docc in Sources */,
 				0BD66125286D7C0400F4DA6B /* Localizer.swift in Sources */,
 				0BD66111286B76DC00F4DA6B /* URLImageView.swift in Sources */,
@@ -793,6 +816,7 @@
 				0BD66114286B76F300F4DA6B /* RootViewController.swift in Sources */,
 				0BBCF618285C43E000D39C6D /* SceneDelegate.swift in Sources */,
 				0BD66115286B76F300F4DA6B /* CryptoPriceListTestVC.swift in Sources */,
+				0B00E028287DBA8400707F26 /* CryptoAuthenticator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

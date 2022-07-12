@@ -5,15 +5,17 @@
 //  Created by Cybrid on 17/06/22.
 //
 
+import CybridSDK
 import UIKit
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
+  let cryptoAuthenticator = CryptoAuthenticator(session: .shared)
 
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     // Override point for customization after application launch.
+    Cybrid.setup(authenticator: cryptoAuthenticator)
     return true
   }
 
