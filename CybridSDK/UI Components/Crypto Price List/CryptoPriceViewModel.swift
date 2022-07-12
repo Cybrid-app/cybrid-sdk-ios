@@ -13,16 +13,20 @@ protocol CryptoPriceViewProvider: AnyObject {
 }
 
 class CryptoPriceViewModel: NSObject {
+  // MARK: Observed properties
   var cryptoPriceList: Observable<[CryptoPriceModel]> = .init([])
-  unowned var cellProvider: CryptoPriceViewProvider
 
-  init(cellProvider: CryptoPriceViewProvider) {
+  // MARK: Private properties
+  private unowned var cellProvider: CryptoPriceViewProvider
+  private var dataProvider: SymbolsDataProvider
+
+  init(cellProvider: CryptoPriceViewProvider, dataProvider: SymbolsDataProvider) {
     self.cellProvider = cellProvider
+    self.dataProvider = dataProvider
   }
 
   func fetchPriceList() {
-    // FIXME: replace mocked data with service call
-    PricesAPI.listPrices(symbol: "BTC-USD") { result in
+    dataProvider.fetchAvailableSymbols { result in
       switch result {
       case .success(let priceList):
         print(priceList)
@@ -30,6 +34,7 @@ class CryptoPriceViewModel: NSObject {
         print(error)
       }
     }
+    // FIXME: replace mocked data with service call response
     cryptoPriceList.value = CryptoPriceModel.mockList
   }
 }
