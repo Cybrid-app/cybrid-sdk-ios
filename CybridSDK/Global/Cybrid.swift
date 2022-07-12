@@ -5,6 +5,7 @@
 //  Created by Cybrid on 22/06/22.
 //
 
+import CybridApiBankSwift
 import Foundation
 
 // swiftlint:disable identifier_name
@@ -16,6 +17,7 @@ public final class CybridConfig {
   static var shared = CybridConfig()
 
   // MARK: Internal Properties
+  var authenticator: CybridAuthenticator?
   var theme: Theme = CybridTheme.default
   let assetsURL: String = "https://images.cybrid.xyz/sdk/assets/"
 
@@ -23,12 +25,21 @@ public final class CybridConfig {
   private var _preferredLocale: Locale?
 
   // MARK: Public Methods
-  public func setup(_ theme: Theme, locale: Locale? = nil) {
-    self.theme = theme
+  public func setup(environment: CybridEnvironment = .sandbox,
+                    authenticator: CybridAuthenticator,
+                    _ theme: Theme? = nil,
+                    locale: Locale? = nil) {
+    self.authenticator = authenticator
+    self.theme = theme ?? CybridTheme.default
     self._preferredLocale = locale
+    CybridApiBankSwiftAPI.basePath = environment.basePath
   }
+}
+// swiftlint:enable identifier_name
 
-  // MARK: Internal Methods
+// MARK: - CybridConfig + Locale
+
+extension CybridConfig {
   func getPreferredLocale(with preferredLanguages: [String]? = nil) -> Locale {
     /// If developer overrides the Locale,
     /// And the locale is supported by our SDK
@@ -60,4 +71,3 @@ public final class CybridConfig {
     return localeBundlePath != nil
   }
 }
-// swiftlint:enable identifier_name
