@@ -24,10 +24,12 @@ class CryptoAuthenticator: CybridAuthenticator {
     var request = URLRequest(url: url)
     request.httpMethod = "POST"
     request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+    let clientId = Bundle.main.object(forInfoDictionaryKey: "CybridClientId")
+    let clientSecret = Bundle.main.object(forInfoDictionaryKey: "CybridClientSecret")
     let parameters: [String: Any] = [
       "grant_type": "client_credentials",
-      "client_id": "eB_eVroWCb-bUq7vLDjHN79Mt8wc4G09JhZvSFFKZxo",
-      "client_secret": "vz8QSumnRtbPIV1D-wvkbxB0H8VJ4mRnOxPwoSPDgYc",
+      "client_id": clientId ?? "",
+      "client_secret": clientSecret ?? "",
       "scope": "banks:read banks:write accounts:read accounts:execute customers:read customers:write customers:execute prices:read quotes:execute trades:execute trades:read"
     ]
     do {

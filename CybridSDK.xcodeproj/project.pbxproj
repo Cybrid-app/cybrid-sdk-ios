@@ -631,6 +631,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0BBCF624285C43E000D39C6D /* Build configuration list for PBXNativeTarget "CybridSDKTestApp" */;
 			buildPhases = (
+				0B00E02B287DDA3900707F26 /* Set Environment Variables */,
 				0BBCF60F285C43E000D39C6D /* Sources */,
 				0BBCF610285C43E000D39C6D /* Frameworks */,
 				0BBCF611285C43E000D39C6D /* Resources */,
@@ -720,6 +721,26 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		0B00E02B287DDA3900707F26 /* Set Environment Variables */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/CybridSDKTestApp/Info.plist",
+			);
+			name = "Set Environment Variables";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\n$(SRCROOT)scripts/environmentVariables.sh\n";
+		};
 		0BDE4ECA2851B4800039C34B /* SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
