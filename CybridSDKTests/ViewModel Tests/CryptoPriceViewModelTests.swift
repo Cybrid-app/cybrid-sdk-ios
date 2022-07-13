@@ -10,6 +10,8 @@ import XCTest
 
 class CryptoPriceViewModelTests: XCTestCase {
 
+  var dataService = CurrencyListDataProviderMock()
+
   func testFetchData() {
     // Given
     let viewProvider = CryptoPriceMockViewProvider()
@@ -77,7 +79,7 @@ class CryptoPriceViewModelTests: XCTestCase {
 
 extension CryptoPriceViewModelTests {
   func createViewModel(viewProvider: CryptoPriceViewProvider) -> CryptoPriceViewModel {
-    let viewModel = CryptoPriceViewModel(cellProvider: viewProvider)
+    let viewModel = CryptoPriceViewModel(cellProvider: viewProvider, dataProvider: dataService)
     return viewModel
   }
 }
