@@ -18,24 +18,67 @@ class CryptoPriceViewModel: NSObject {
 
   // MARK: Private properties
   private unowned var cellProvider: CryptoPriceViewProvider
-  private var dataProvider: SymbolsDataProvider
+  private var dataProvider: SymbolsDataProvider & PricesDataProvider & AssetsDataProvider
+  private var assetsList: [AssetListBankModel] = []
+  private var pricesList: [SymbolPriceBankModel] = []
 
-  init(cellProvider: CryptoPriceViewProvider, dataProvider: SymbolsDataProvider) {
+  init(cellProvider: CryptoPriceViewProvider, dataProvider: SymbolsDataProvider & PricesDataProvider & AssetsDataProvider) {
     self.cellProvider = cellProvider
     self.dataProvider = dataProvider
   }
 
   func fetchPriceList() {
-    dataProvider.fetchAvailableSymbols { result in
-      switch result {
-      case .success(let priceList):
-        print(priceList)
+    dataProvider.fetchAvailableSymbols { [weak self] symbolsResult in
+      switch symbolsResult {
+      case .success(let symbolList):
+        let symbolListString: String = {
+          var result: String = ""
+          for symbol in symbolList {
+            if symbol == symbolList.first {
+              result += symbol
+            } else {
+              result += ",\(symbol)"
+            }
+          }
+          return result
+        }()
+        self?.dataProvider.fetchPriceList(symbols: symbolListString) { pricesResult in
+          switch pricesResult {
+          case .success(let pricesList):
+            self?.dataProvider.fetchAssetsList({ assetsResult in
+              switch assetsResult {
+              case .success(let assetsList):
+                guard let modelList = self?.buildModelList(symbols: pricesList, assets: assetsList) else {
+                  return
+                }
+                self?.cryptoPriceList.value = modelList
+              case .failure(let error):
+                print(error)
+              }
+            })
+          case .failure(let error):
+            print(error)
+          }
+        }
       case .failure(let error):
         print(error)
       }
     }
-    // FIXME: replace mocked data with service call response
-    cryptoPriceList.value = CryptoPriceModel.mockList
+  }
+
+  private func buildModelList(symbols: [SymbolPriceBankModel], assets: [AssetBankModel]) -> [CryptoPriceModel] {
+    return symbols.compactMap { priceModel in
+      guard
+        let hiphenIndex = priceModel.symbol?.firstIndex(of: "-"),
+        let firstAssetCode = priceModel.symbol?.prefix(upTo: hiphenIndex),
+        let firstAsset = assets.first(where: { $0.code == firstAssetCode }),
+        let secondAssetCode = priceModel.symbol?.suffix(3),
+        let secondAsset = assets.first(where: { $0.code == secondAssetCode })
+      else {
+        return nil
+      }
+      return CryptoPriceModel(symbolPrice: priceModel, asset: firstAsset, counterAsset: secondAsset)
+    }
   }
 }
 

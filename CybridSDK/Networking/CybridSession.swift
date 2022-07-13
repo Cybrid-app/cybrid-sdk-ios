@@ -110,3 +110,51 @@ extension CybridSession: SymbolsDataProvider {
     })
   }
 }
+
+// MARK: - PricesDataProvider
+
+typealias FetchPricesCompletion = (Result<[SymbolPriceBankModel], Error>) -> Void
+
+protocol PricesDataProvider {
+  func fetchPriceList(symbols: String, _ completion: @escaping FetchPricesCompletion)
+}
+
+extension CybridSession: PricesDataProvider {
+  func fetchPriceList(symbols: String, _ completion: @escaping FetchPricesCompletion) {
+    request({ completion in
+      PricesAPI.listPrices(symbol: symbols, completion: completion)
+    },
+    completion: { result in
+      switch result {
+      case .success(let prices):
+        completion(.success(prices))
+      case .failure(let error):
+        completion(.failure(error))
+      }
+    })
+  }
+}
+
+// MARK: - AssetsDataProvider
+
+typealias FetchAssetsCompletion = (Result<[AssetBankModel], Error>) -> Void
+
+protocol AssetsDataProvider {
+  func fetchAssetsList(_ completion: @escaping FetchAssetsCompletion)
+}
+
+extension CybridSession: AssetsDataProvider {
+  func fetchAssetsList(_ completion: @escaping FetchAssetsCompletion) {
+    request({ completion in
+      AssetsAPI.listAssets(completion: completion)
+    },
+    completion: { result in
+      switch result {
+      case .success(let assetsList):
+        completion(.success(assetsList.objects))
+      case .failure(let error):
+        completion(.failure(error))
+      }
+    })
+  }
+}
