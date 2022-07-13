@@ -9,16 +9,17 @@ import CybridApiBankSwift
 
 // MARK: - SymbolsDataProvider
 
-typealias FetchSymbolsCompletion = (Result<[String], Error>) -> Void
+typealias FetchSymbolsCompletion = (Result<[String], ErrorResponse>) -> Void
 
 protocol SymbolsDataProvider {
+  var listSymbolsService: SymbolsAPI.Type { get }
   func fetchAvailableSymbols(_ completion: @escaping FetchSymbolsCompletion)
 }
 
 extension CybridSession: SymbolsDataProvider {
   func fetchAvailableSymbols(_ completion: @escaping FetchSymbolsCompletion) {
-    request({ completion in
-      SymbolsAPI.listSymbols(completion: completion)
+    request({ [weak self] completion in
+      self?.listSymbolsService.listSymbols(completion: completion)
     },
     completion: { result in
       switch result {

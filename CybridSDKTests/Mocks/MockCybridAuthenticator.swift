@@ -14,8 +14,8 @@ class MockAuthenticator: CybridAuthenticator {
     self.authenticationCompletion = completion
   }
 
-  func authenticationSuccess() {
-    authenticationCompletion?(.success("MOCK-BEARER"))
+  func authenticationSuccess(with token: String = "MOCK-BEARER") {
+    authenticationCompletion?(.success(token))
   }
 
   func authenticationFailure() {
