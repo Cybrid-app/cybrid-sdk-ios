@@ -8,12 +8,6 @@
 import CybridApiBankSwift
 import Foundation
 
-public typealias CybridBearer = String
-
-public protocol CybridAuthenticator {
-  func makeCybridAuthToken(completion: @escaping (Result<CybridBearer, Error>) -> Void)
-}
-
 class CybridSession {
 
   static var current = CybridSession()
@@ -74,39 +68,5 @@ class CybridSession {
         completion(.failure(CybridError.authenticationError))
       }
     }
-  }
-}
-
-// MARK: - CybridError
-
-public enum CybridError: Error {
-  case authenticationError
-  case authenticatorNotFound
-  case componentError
-  case dataError
-  case serviceError
-}
-
-// MARK: - SymbolsDataProvider
-
-typealias FetchSymbolsCompletion = (Result<[String], Error>) -> Void
-
-protocol SymbolsDataProvider {
-  func fetchAvailableSymbols(_ completion: @escaping FetchSymbolsCompletion)
-}
-
-extension CybridSession: SymbolsDataProvider {
-  func fetchAvailableSymbols(_ completion: @escaping FetchSymbolsCompletion) {
-    request({ completion in
-      SymbolsAPI.listSymbols(completion: completion)
-    },
-    completion: { result in
-      switch result {
-      case .success(let symbols):
-        completion(.success(symbols))
-      case .failure(let error):
-        completion(.failure(error))
-      }
-    })
   }
 }
