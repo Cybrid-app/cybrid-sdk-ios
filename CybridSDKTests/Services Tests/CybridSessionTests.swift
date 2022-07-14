@@ -71,7 +71,7 @@ class CybridSessionTests: XCTestCase {
 
     // Then
     XCTAssertFalse(didFail)
-    XCTAssertEqual(MockAPIManager.mockHeaders["Authorization"], expectedBearer)
+    XCTAssertEqual(MockAPIManager.customHeaders["Authorization"], expectedBearer)
   }
 
   func testSession_authenticateTwice() {
@@ -97,7 +97,7 @@ class CybridSessionTests: XCTestCase {
 
     // Then
     XCTAssertFalse(didFail)
-    XCTAssertEqual(MockAPIManager.mockHeaders["Authorization"], initialBearer)
+    XCTAssertEqual(MockAPIManager.customHeaders["Authorization"], initialBearer)
   }
 
   func testSession_authenticateWithoutAuthenticator() {

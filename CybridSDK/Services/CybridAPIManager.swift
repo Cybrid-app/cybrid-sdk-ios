@@ -8,12 +8,13 @@
 import CybridApiBankSwift
 
 protocol CybridAPIManager {
+  static var customHeaders: [String: String] { get set }
   static func setHeader(_ key: String, value: String)
   static func hasHeader(_ key: String) -> Bool
   static func clearHeaders()
 }
 
-extension CybridApiBankSwiftAPI: CybridAPIManager {
+extension CybridAPIManager {
   static func setHeader(_ key: String, value: String) {
     customHeaders[key] = value
   }
@@ -26,3 +27,5 @@ extension CybridApiBankSwiftAPI: CybridAPIManager {
     customHeaders.removeAll()
   }
 }
+
+extension CybridApiBankSwiftAPI: CybridAPIManager {}
