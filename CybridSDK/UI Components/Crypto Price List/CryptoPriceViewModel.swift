@@ -5,6 +5,7 @@
 //  Created by Cybrid on 20/06/22.
 //
 
+import CybridApiBankSwift
 import UIKit
 
 protocol CryptoPriceViewProvider: AnyObject {
@@ -12,15 +13,28 @@ protocol CryptoPriceViewProvider: AnyObject {
 }
 
 class CryptoPriceViewModel: NSObject {
+  // MARK: Observed properties
   var cryptoPriceList: Observable<[CryptoPriceModel]> = .init([])
-  unowned var cellProvider: CryptoPriceViewProvider
 
-  init(cellProvider: CryptoPriceViewProvider) {
+  // MARK: Private properties
+  private unowned var cellProvider: CryptoPriceViewProvider
+  private var dataProvider: SymbolsDataProviding
+
+  init(cellProvider: CryptoPriceViewProvider, dataProvider: SymbolsDataProviding) {
     self.cellProvider = cellProvider
+    self.dataProvider = dataProvider
   }
 
   func fetchPriceList() {
-    // FIXME: replace mocked data with service call
+    dataProvider.fetchAvailableSymbols { result in
+      switch result {
+      case .success(let priceList):
+        print(priceList)
+      case .failure(let error):
+        print(error)
+      }
+    }
+    // FIXME: replace mocked data with service call response
     cryptoPriceList.value = CryptoPriceModel.mockList
   }
 }

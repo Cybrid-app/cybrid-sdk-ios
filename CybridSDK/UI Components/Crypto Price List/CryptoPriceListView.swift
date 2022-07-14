@@ -17,7 +17,7 @@ public class CryptoPriceListView: UITableView {
 
     super.init(frame: .zero, style: .plain)
 
-    self.viewModel = CryptoPriceViewModel(cellProvider: self)
+    self.viewModel = CryptoPriceViewModel(cellProvider: self, dataProvider: CybridSession.current)
     setupView()
   }
 
