@@ -10,15 +10,31 @@ import XCTest
 
 class CryptoPriceViewModelTests: XCTestCase {
 
-  var dataService = CurrencyListDataProviderMock()
+  lazy var dataProvider = PriceListDataProviderMock()
 
-  func testFetchData() {
+  func testFetchData_Successfully() {
     // Given
     let viewProvider = CryptoPriceMockViewProvider()
     let viewModel = createViewModel(viewProvider: viewProvider)
 
     // When
     viewModel.fetchPriceList()
+    dataProvider.didFetchPricesSuccessfully()
+    // TODO: Add Price List Service Integration to update actual DataModel
+
+    // Then
+    XCTAssertEqual(viewModel.cryptoPriceList.value, CryptoPriceModel.mockList)
+  }
+
+  func testFetchData_Failure() {
+    // Given
+    let viewProvider = CryptoPriceMockViewProvider()
+    let viewModel = createViewModel(viewProvider: viewProvider)
+
+    // When
+    viewModel.fetchPriceList()
+    dataProvider.didFetchPricesWithError()
+    // TODO: Add Price List Service Integration to update actual DataModel
 
     // Then
     XCTAssertEqual(viewModel.cryptoPriceList.value, CryptoPriceModel.mockList)
@@ -74,12 +90,11 @@ class CryptoPriceViewModelTests: XCTestCase {
     XCTAssertNotNil(headerView)
     XCTAssertTrue(headerView!.isKind(of: CryptoPriceTableHeaderView.self))
   }
-
 }
 
 extension CryptoPriceViewModelTests {
   func createViewModel(viewProvider: CryptoPriceViewProvider) -> CryptoPriceViewModel {
-    let viewModel = CryptoPriceViewModel(cellProvider: viewProvider, dataProvider: dataService)
+    let viewModel = CryptoPriceViewModel(cellProvider: viewProvider, dataProvider: dataProvider)
     return viewModel
   }
 }

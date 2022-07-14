@@ -22,7 +22,7 @@ final class SymbolsAPIMock: SymbolsAPI {
     listSymbolsCompletion?(.success(.mockSymbols))
   }
 
-  class func didFetchSymbolsWithErrors() {
+  class func didFetchSymbolsWithError() {
     listSymbolsCompletion?(.failure(.error(0, nil, nil, CybridError.serviceError)))
   }
 }

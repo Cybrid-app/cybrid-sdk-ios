@@ -18,9 +18,9 @@ class CryptoPriceViewModel: NSObject {
 
   // MARK: Private properties
   private unowned var cellProvider: CryptoPriceViewProvider
-  private var dataProvider: SymbolsDataProvider
+  private var dataProvider: SymbolsDataProviding
 
-  init(cellProvider: CryptoPriceViewProvider, dataProvider: SymbolsDataProvider) {
+  init(cellProvider: CryptoPriceViewProvider, dataProvider: SymbolsDataProviding) {
     self.cellProvider = cellProvider
     self.dataProvider = dataProvider
   }

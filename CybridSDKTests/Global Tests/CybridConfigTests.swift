@@ -21,6 +21,13 @@ class CybridConfigTests: XCTestCase {
     XCTAssertEqual(Cybrid.theme.fontTheme, testTheme.fontTheme)
   }
 
+  func testCybrid_configSetup_withoutPassingTheme() {
+    Cybrid.setup(authenticator: MockAuthenticator())
+
+    XCTAssertEqual(Cybrid.theme.colorTheme, CybridTheme.default.colorTheme)
+    XCTAssertEqual(Cybrid.theme.fontTheme, CybridTheme.default.fontTheme)
+  }
+
   func testCybrid_supportsLanguage() {
     // Given
     let supportsFrench = Cybrid.supportsLanguage("fr")

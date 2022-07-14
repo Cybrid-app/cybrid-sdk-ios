@@ -149,7 +149,7 @@ class CybridSessionTests: XCTestCase {
 
     // When
     session.setupSession(authToken: "Mock_Bearer")
-    session.request { completion in
+    session.authenticatedRequest { completion in
       // Mock response
       completion(.success("Success"))
     } completion: { result in
@@ -174,7 +174,7 @@ class CybridSessionTests: XCTestCase {
 
     // When
     session.setupSession(authToken: "Mock_Bearer")
-    session.request { completion in
+    session.authenticatedRequest { completion in
       // Mock response
       completion(Result<String, ErrorResponse>.failure(.error(1, nil, nil, CybridError.serviceError)))
     } completion: { result in
@@ -199,7 +199,7 @@ class CybridSessionTests: XCTestCase {
     var actualResult: String?
 
     // When
-    session.request { completion in
+    session.authenticatedRequest { completion in
       // Mock response
       completion(.success("Success"))
     } completion: { result in

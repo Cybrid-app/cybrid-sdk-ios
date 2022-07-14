@@ -8,37 +8,27 @@
 import CybridApiBankSwift
 import Foundation
 
-final class CybridSession {
+protocol AuthenticatedServiceProvider: AnyObject {
+  var authenticator: CybridAuthenticator? { get }
+  var apiManager: CybridAPIManager.Type { get }
+}
 
-  static var current = CybridSession(authenticator: Cybrid.authenticator, apiManager: CybridApiBankSwiftAPI.self)
-
-  internal var isAuthenticated: Bool {
+extension AuthenticatedServiceProvider {
+  var isAuthenticated: Bool {
     return apiManager.hasHeader("Authorization")
   }
 
-  // MARK: ServiceProviders APIs
-  internal var listSymbolsService: SymbolsAPI.Type = SymbolsAPI.self
-
-  // MARK: Private properties
-  private var authenticator: CybridAuthenticator?
-  private var apiManager: CybridAPIManager.Type
-
-  init(authenticator: CybridAuthenticator?, apiManager: CybridAPIManager.Type) {
-    self.authenticator = authenticator
-    self.apiManager = apiManager
-  }
-
-  internal func setupSession(authToken: String) {
+  func setupSession(authToken: String) {
     apiManager.setHeader("Authorization", value: "Bearer \(authToken)")
   }
 
   /// Clears session's Authorization headers.
-  internal func clearSession() {
+  func clearSession() {
     apiManager.clearHeaders()
   }
 
   /// Makes sure we have a valid authenticated session.
-  internal func authenticate(_ completion: @escaping (Result<Void, Error>) -> Void) {
+  func authenticate(_ completion: @escaping (Result<Void, Error>) -> Void) {
     /// If it has an Authorization header we return.
     if isAuthenticated {
       completion(.success(()))
@@ -61,8 +51,8 @@ final class CybridSession {
     })
   }
 
-  internal func request<T: Any>(_ request: @escaping (_ completion: @escaping (Result<T, ErrorResponse>) -> Void) -> Void,
-                                completion: @escaping (Result<T, ErrorResponse>) -> Void) {
+  func authenticatedRequest<T: Any>(_ request: @escaping (_ completion: @escaping (Result<T, ErrorResponse>) -> Void) -> Void,
+                                    completion: @escaping (Result<T, ErrorResponse>) -> Void) {
     authenticate { authResult in
       switch authResult {
       case .success:
@@ -79,4 +69,23 @@ final class CybridSession {
       }
     }
   }
+}
+
+final class CybridSession: AuthenticatedServiceProvider {
+
+  static var current = CybridSession(authenticator: Cybrid.authenticator, apiManager: CybridApiBankSwiftAPI.self)
+
+  // MARK: ServiceProviders APIs
+  internal var symbolsDataProvider: SymbolsDataProvider.Type
+
+  // MARK: Private properties
+  private(set) var authenticator: CybridAuthenticator?
+  private(set) var apiManager: CybridAPIManager.Type
+
+  init(authenticator: CybridAuthenticator?, apiManager: CybridAPIManager.Type) {
+    self.authenticator = authenticator
+    self.apiManager = apiManager
+    self.symbolsDataProvider = SymbolsAPI.self
+  }
+
 }
