@@ -27,7 +27,7 @@ public final class CybridConfig {
   // MARK: Public Methods
   public func setup(environment: CybridEnvironment = .sandbox,
                     authenticator: CybridAuthenticator,
-                    _ theme: Theme? = nil,
+                    theme: Theme? = nil,
                     locale: Locale? = nil) {
     self.authenticator = authenticator
     self.theme = theme ?? CybridTheme.default
