@@ -76,7 +76,6 @@ final class CybridSession: AuthenticatedServiceProvider {
   static var current = CybridSession(authenticator: Cybrid.authenticator, apiManager: CybridApiBankSwiftAPI.self)
 
   // MARK: ServiceProviders APIs
-  internal var symbolsRepository: SymbolsRepository.Type
   internal var pricesRepository: PricesRepository.Type
   internal var assetsRepository: AssetsRepository.Type
 
@@ -87,7 +86,6 @@ final class CybridSession: AuthenticatedServiceProvider {
   init(authenticator: CybridAuthenticator?, apiManager: CybridAPIManager.Type) {
     self.authenticator = authenticator
     self.apiManager = apiManager
-    self.symbolsRepository = SymbolsAPI.self
     self.pricesRepository = PricesAPI.self
     self.assetsRepository = AssetsAPI.self
   }

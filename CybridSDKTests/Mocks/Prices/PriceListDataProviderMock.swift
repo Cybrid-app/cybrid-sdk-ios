@@ -8,10 +8,9 @@
 import CybridApiBankSwift
 @testable import CybridSDK
 
-final class PriceListDataProviderMock: SymbolsRepoProvider, AssetsRepoProvider, PricesRepoProvider {
+final class PriceListDataProviderMock: AssetsRepoProvider, PricesRepoProvider {
   var apiManager: CybridAPIManager.Type = MockAPIManager.self
   var authenticator: CybridAuthenticator? = MockAuthenticator()
-  var symbolsRepository: SymbolsRepository.Type = SymbolsAPIMock.self
   var assetsRepository: AssetsRepository.Type = AssetsAPIMock.self
   var pricesRepository: PricesRepository.Type = PricesAPIMock.self
 
