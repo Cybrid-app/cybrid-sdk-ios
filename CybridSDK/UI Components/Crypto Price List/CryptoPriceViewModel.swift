@@ -28,12 +28,12 @@ class CryptoPriceViewModel: NSObject {
   }
 
   func fetchPriceList() {
-    dataProvider.fetchPriceList { [weak self] pricesResult in
-      switch pricesResult {
-      case .success(let pricesList):
-        self?.dataProvider.fetchAssetsList({ assetsResult in
-          switch assetsResult {
-          case .success(let assetsList):
+    dataProvider.fetchAssetsList { [weak self] assetsResult in
+      switch assetsResult {
+      case .success(let assetsList):
+        self?.dataProvider.fetchPriceList { pricesResult in
+          switch pricesResult {
+          case .success(let pricesList):
             guard let modelList = self?.buildModelList(symbols: pricesList, assets: assetsList) else {
               return
             }
@@ -41,7 +41,7 @@ class CryptoPriceViewModel: NSObject {
           case .failure(let error):
             print(error)
           }
-        })
+        }
       case .failure(let error):
         print(error)
       }

@@ -19,11 +19,11 @@ class CryptoPriceViewModelTests: XCTestCase {
 
     // When
     viewModel.fetchPriceList()
+    dataProvider.didFetchAssetsSuccessfully()
     dataProvider.didFetchPricesSuccessfully()
-    // TODO: Add Price List Service Integration to update actual DataModel
 
     // Then
-    XCTAssertEqual(viewModel.cryptoPriceList.value, CryptoPriceModel.mockList)
+    XCTAssertFalse(viewModel.cryptoPriceList.value.isEmpty)
   }
 
   func testFetchData_Failure() {
@@ -33,11 +33,11 @@ class CryptoPriceViewModelTests: XCTestCase {
 
     // When
     viewModel.fetchPriceList()
+    dataProvider.didFetchAssetsSuccessfully()
     dataProvider.didFetchPricesWithError()
-    // TODO: Add Price List Service Integration to update actual DataModel
 
     // Then
-    XCTAssertEqual(viewModel.cryptoPriceList.value, CryptoPriceModel.mockList)
+    XCTAssertTrue(viewModel.cryptoPriceList.value.isEmpty)
   }
 
   func testTableViewRows() {
@@ -47,9 +47,12 @@ class CryptoPriceViewModelTests: XCTestCase {
 
     // When
     viewModel.fetchPriceList()
+    dataProvider.didFetchAssetsSuccessfully()
+    dataProvider.didFetchPricesSuccessfully()
+    tableView.reloadData()
 
     // Then
-    XCTAssertEqual(viewModel.tableView(tableView, numberOfRowsInSection: 0), CryptoPriceModel.mockList.count)
+    XCTAssertEqual(viewModel.tableView(tableView, numberOfRowsInSection: 0), Array.mockPrices.count)
   }
 
   func testTableViewValidCell() {
@@ -59,6 +62,9 @@ class CryptoPriceViewModelTests: XCTestCase {
 
     // When
     viewModel.fetchPriceList()
+    dataProvider.didFetchAssetsSuccessfully()
+    dataProvider.didFetchPricesSuccessfully()
+    tableView.reloadData()
 
     // Then
     XCTAssertTrue(viewModel.tableView(tableView, cellForRowAt: IndexPath(row: 0, section: 0)).isKind(of: CryptoPriceTableViewCell.self))
@@ -72,6 +78,9 @@ class CryptoPriceViewModelTests: XCTestCase {
 
     // When
     viewModel.fetchPriceList()
+    dataProvider.didFetchAssetsSuccessfully()
+    dataProvider.didFetchPricesSuccessfully()
+    tableView.reloadData()
 
     // Then
     XCTAssertFalse(viewModel.tableView(tableView, cellForRowAt: IndexPath(row: 0, section: 0)).isKind(of: CryptoPriceTableViewCell.self))
