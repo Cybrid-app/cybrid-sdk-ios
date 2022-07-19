@@ -79,6 +79,9 @@ final class CybridSession: AuthenticatedServiceProvider {
   internal var pricesRepository: PricesRepository.Type
   internal var assetsRepository: AssetsRepository.Type
 
+  // MARK: Cached Data
+  internal var assetsCache: [AssetBankModel]?
+
   // MARK: Private properties
   private(set) var authenticator: CybridAuthenticator?
   private(set) var apiManager: CybridAPIManager.Type

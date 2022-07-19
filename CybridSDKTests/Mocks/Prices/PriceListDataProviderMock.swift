@@ -11,8 +11,13 @@ import CybridApiBankSwift
 final class PriceListDataProviderMock: AssetsRepoProvider, PricesRepoProvider {
   var apiManager: CybridAPIManager.Type = MockAPIManager.self
   var authenticator: CybridAuthenticator? = MockAuthenticator()
+
+  // MARK: Repositories
   var assetsRepository: AssetsRepository.Type = AssetsAPIMock.self
   var pricesRepository: PricesRepository.Type = PricesAPIMock.self
+
+  // MARK: Cache
+  var assetsCache: [AssetBankModel]?
 
   func didFetchPricesSuccessfully(_ prices: [SymbolPriceBankModel]? = nil) {
     (authenticator as? MockAuthenticator)?.authenticationSuccess()

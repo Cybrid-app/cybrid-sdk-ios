@@ -32,6 +32,7 @@
 		0B00E0522886F01A00707F26 /* AssetsAPIMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B00E0512886F01A00707F26 /* AssetsAPIMock.swift */; };
 		0B00E0542886F21900707F26 /* AssetsListMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B00E0532886F21900707F26 /* AssetsListMock.swift */; };
 		0B00E0572886F25F00707F26 /* PricesAPIMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B00E0562886F25F00707F26 /* PricesAPIMock.swift */; };
+		0B00E0592887022B00707F26 /* PriceListMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B00E0582887022B00707F26 /* PriceListMock.swift */; };
 		0B078F1228497B070020B4F7 /* CybridSDK.docc in Sources */ = {isa = PBXBuildFile; fileRef = 0B078F1128497B070020B4F7 /* CybridSDK.docc */; };
 		0B078F1828497B070020B4F7 /* CybridSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B078F0D28497B070020B4F7 /* CybridSDK.framework */; };
 		0B078F1E28497B070020B4F7 /* CybridSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 0B078F1028497B070020B4F7 /* CybridSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -147,6 +148,7 @@
 		0B00E0512886F01A00707F26 /* AssetsAPIMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetsAPIMock.swift; sourceTree = "<group>"; };
 		0B00E0532886F21900707F26 /* AssetsListMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetsListMock.swift; sourceTree = "<group>"; };
 		0B00E0562886F25F00707F26 /* PricesAPIMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PricesAPIMock.swift; sourceTree = "<group>"; };
+		0B00E0582887022B00707F26 /* PriceListMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceListMock.swift; sourceTree = "<group>"; };
 		0B078F0D28497B070020B4F7 /* CybridSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CybridSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0B078F1028497B070020B4F7 /* CybridSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CybridSDK.h; sourceTree = "<group>"; };
 		0B078F1128497B070020B4F7 /* CybridSDK.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = CybridSDK.docc; sourceTree = "<group>"; };
@@ -295,6 +297,7 @@
 			children = (
 				0B00E045287FBEDC00707F26 /* PriceListDataProviderMock.swift */,
 				0B00E0562886F25F00707F26 /* PricesAPIMock.swift */,
+				0B00E0582887022B00707F26 /* PriceListMock.swift */,
 			);
 			path = Prices;
 			sourceTree = "<group>";
@@ -886,6 +889,7 @@
 				0B966027285C2E8600584692 /* MockImageOperation.swift in Sources */,
 				0B966029285C38F500584692 /* URLImageOperationTests.swift in Sources */,
 				0B303CE92862F5BB007BF7FF /* UILabelExtensionsTests.swift in Sources */,
+				0B00E0592887022B00707F26 /* PriceListMock.swift in Sources */,
 				0BD661332872A05B00F4DA6B /* LocalizationTests.swift in Sources */,
 				0B00E0542886F21900707F26 /* AssetsListMock.swift in Sources */,
 				0B966004285A85C600584692 /* AsyncOperationTests.swift in Sources */,

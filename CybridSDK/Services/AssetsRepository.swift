@@ -16,12 +16,25 @@ protocol AssetsRepository {
 }
 
 protocol AssetsRepoProvider: AuthenticatedServiceProvider {
+  var assetsCache: [AssetBankModel]? { get set }
   var assetsRepository: AssetsRepository.Type { get set }
 }
 
 extension AssetsRepoProvider {
   func fetchAssetsList(_ completion: @escaping FetchAssetsCompletion) {
-    authenticatedRequest(assetsRepository.fetchAssets, completion: completion)
+    if let cachedData = assetsCache {
+      completion(.success(cachedData))
+    } else {
+      authenticatedRequest(assetsRepository.fetchAssets) { [weak self] result in
+        switch result {
+        case .success(let newAssets):
+          self?.assetsCache = newAssets
+          fallthrough
+        default:
+          completion(result)
+        }
+      }
+    }
   }
 }
 

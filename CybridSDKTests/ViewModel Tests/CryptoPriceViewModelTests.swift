@@ -98,6 +98,28 @@ class CryptoPriceViewModelTests: XCTestCase {
     XCTAssertTrue(viewModel.cryptoPriceList.value.isEmpty)
   }
 
+  func testFetchData_withCachedAssets() {
+    // Given
+    let viewProvider = CryptoPriceMockViewProvider()
+    let viewModel = createViewModel(viewProvider: viewProvider)
+
+    // When
+    viewModel.fetchPriceList()
+    dataProvider.didFetchAssetsSuccessfully() // Assets Cached!
+    dataProvider.didFetchPricesSuccessfully()
+
+    let firstList = viewModel.cryptoPriceList.value
+
+    viewModel.fetchPriceList()
+    dataProvider.didFetchAssetsSuccessfully() // Assets retrieved from Cache
+    dataProvider.didFetchPricesSuccessfully()
+
+    let secondList = viewModel.cryptoPriceList.value
+
+    // Then
+    XCTAssertEqual(firstList, secondList)
+  }
+
   func testTableViewRows() {
     // Given
     let tableView = CryptoPriceListView()
