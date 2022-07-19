@@ -5,6 +5,7 @@
 //  Created by Cybrid on 29/06/22.
 //
 
+import CybridApiBankSwift
 @testable import CybridSDK
 import XCTest
 
@@ -12,7 +13,7 @@ class CryptoPriceViewModelTests: XCTestCase {
 
   lazy var dataProvider = PriceListDataProviderMock()
 
-  func testFetchData_Successfully() {
+  func testFetchData_successfully() {
     // Given
     let viewProvider = CryptoPriceMockViewProvider()
     let viewModel = createViewModel(viewProvider: viewProvider)
@@ -26,7 +27,7 @@ class CryptoPriceViewModelTests: XCTestCase {
     XCTAssertFalse(viewModel.cryptoPriceList.value.isEmpty)
   }
 
-  func testFetchData_Failure() {
+  func testFetchData_pricesFailure() {
     // Given
     let viewProvider = CryptoPriceMockViewProvider()
     let viewModel = createViewModel(viewProvider: viewProvider)
@@ -35,6 +36,63 @@ class CryptoPriceViewModelTests: XCTestCase {
     viewModel.fetchPriceList()
     dataProvider.didFetchAssetsSuccessfully()
     dataProvider.didFetchPricesWithError()
+
+    // Then
+    XCTAssertTrue(viewModel.cryptoPriceList.value.isEmpty)
+  }
+
+  func testFetchData_assetsFailure() {
+    // Given
+    let viewProvider = CryptoPriceMockViewProvider()
+    let viewModel = createViewModel(viewProvider: viewProvider)
+
+    // When
+    viewModel.fetchPriceList()
+    dataProvider.didFetchAssetsWithError()
+
+    // Then
+    XCTAssertTrue(viewModel.cryptoPriceList.value.isEmpty)
+  }
+
+  func testViewModel_memoryDeallocation() {
+    // Given
+    let viewProvider = CryptoPriceMockViewProvider()
+    var viewModel: CryptoPriceViewModel? = createViewModel(viewProvider: viewProvider)
+
+    // When
+    viewModel?.fetchPriceList()
+    dataProvider.didFetchAssetsSuccessfully()
+    viewModel = nil
+    dataProvider.didFetchPricesSuccessfully()
+
+    // Then
+    XCTAssertNil(viewModel)
+  }
+
+  func testFetchData_withWrongDataFormat() {
+    // Given
+    let viewProvider = CryptoPriceMockViewProvider()
+    let viewModel = createViewModel(viewProvider: viewProvider)
+
+    // When
+    viewModel.fetchPriceList()
+    dataProvider.didFetchAssetsSuccessfully()
+    dataProvider.didFetchPricesSuccessfully([
+      SymbolPriceBankModel(
+        symbol: "BTC_USD",
+        buyPrice: 2_019_891,
+        sellPrice: 2_019_881,
+        buyPriceLastUpdatedAt: nil,
+        sellPriceLastUpdatedAt: nil
+      ),
+      SymbolPriceBankModel(
+        symbol: "ETH_USD",
+        buyPrice: 209_891,
+        sellPrice: 209_881,
+        buyPriceLastUpdatedAt: nil,
+        sellPriceLastUpdatedAt: nil
+      )
+    ])
 
     // Then
     XCTAssertTrue(viewModel.cryptoPriceList.value.isEmpty)

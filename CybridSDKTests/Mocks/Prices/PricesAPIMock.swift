@@ -20,8 +20,8 @@ final class PricesAPIMock: PricesAPI {
     return listPricesWithRequestBuilder().requestTask
   }
 
-  class func didFetchPricesSuccessfully() {
-    listPricesCompletion?(.success(.mockPrices))
+  class func didFetchPricesSuccessfully(_ prices: [SymbolPriceBankModel]? = nil) {
+    listPricesCompletion?(.success(prices ?? .mockPrices))
   }
 
   class func didFetchPricesWithError() {

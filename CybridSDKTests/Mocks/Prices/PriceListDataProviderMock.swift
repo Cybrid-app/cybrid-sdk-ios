@@ -14,9 +14,9 @@ final class PriceListDataProviderMock: AssetsRepoProvider, PricesRepoProvider {
   var assetsRepository: AssetsRepository.Type = AssetsAPIMock.self
   var pricesRepository: PricesRepository.Type = PricesAPIMock.self
 
-  func didFetchPricesSuccessfully() {
+  func didFetchPricesSuccessfully(_ prices: [SymbolPriceBankModel]? = nil) {
     (authenticator as? MockAuthenticator)?.authenticationSuccess()
-    PricesAPIMock.didFetchPricesSuccessfully()
+    PricesAPIMock.didFetchPricesSuccessfully(prices)
   }
 
   func didFetchPricesWithError() {
