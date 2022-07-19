@@ -18,48 +18,30 @@ class CryptoPriceViewModel: NSObject {
 
   // MARK: Private properties
   private unowned var cellProvider: CryptoPriceViewProvider
-  private var dataProvider: SymbolsDataProvider & PricesDataProvider & AssetsDataProvider
+  private var dataProvider: SymbolsDataProviding & PricesDataProviding & AssetsDataProviding
   private var assetsList: [AssetListBankModel] = []
   private var pricesList: [SymbolPriceBankModel] = []
 
-  init(cellProvider: CryptoPriceViewProvider, dataProvider: SymbolsDataProvider & PricesDataProvider & AssetsDataProvider) {
+  init(cellProvider: CryptoPriceViewProvider, dataProvider: SymbolsDataProviding & PricesDataProviding & AssetsDataProviding) {
     self.cellProvider = cellProvider
     self.dataProvider = dataProvider
   }
 
   func fetchPriceList() {
-    dataProvider.fetchAvailableSymbols { [weak self] symbolsResult in
-      switch symbolsResult {
-      case .success(let symbolList):
-        let symbolListString: String = {
-          var result: String = ""
-          for symbol in symbolList {
-            if symbol == symbolList.first {
-              result += symbol
-            } else {
-              result += ",\(symbol)"
+    dataProvider.fetchPriceList { [weak self] pricesResult in
+      switch pricesResult {
+      case .success(let pricesList):
+        self?.dataProvider.fetchAssetsList({ assetsResult in
+          switch assetsResult {
+          case .success(let assetsList):
+            guard let modelList = self?.buildModelList(symbols: pricesList, assets: assetsList) else {
+              return
             }
-          }
-          return result
-        }()
-        self?.dataProvider.fetchPriceList(symbols: symbolListString) { pricesResult in
-          switch pricesResult {
-          case .success(let pricesList):
-            self?.dataProvider.fetchAssetsList({ assetsResult in
-              switch assetsResult {
-              case .success(let assetsList):
-                guard let modelList = self?.buildModelList(symbols: pricesList, assets: assetsList) else {
-                  return
-                }
-                self?.cryptoPriceList.value = modelList
-              case .failure(let error):
-                print(error)
-              }
-            })
+            self?.cryptoPriceList.value = modelList
           case .failure(let error):
             print(error)
           }
-        }
+        })
       case .failure(let error):
         print(error)
       }
@@ -92,6 +74,7 @@ extension CryptoPriceViewModel: UITableViewDelegate, UITableViewDataSource {
   public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     cellProvider.tableView(tableView, cellForRowAt: indexPath, withData: cryptoPriceList.value[indexPath.row])
   }
+
   func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
     let view = CryptoPriceTableHeaderView()
     return view

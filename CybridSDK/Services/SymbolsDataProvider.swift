@@ -15,7 +15,7 @@ protocol SymbolsDataProvider {
   static func fetchSymbols(_ completion: @escaping FetchSymbolsCompletion)
 }
 
-protocol SymbolsDataProviding: AnyObject, AuthenticatedServiceProvider {
+protocol SymbolsDataProviding: AuthenticatedServiceProvider {
   var symbolsDataProvider: SymbolsDataProvider.Type { get set }
 }
 

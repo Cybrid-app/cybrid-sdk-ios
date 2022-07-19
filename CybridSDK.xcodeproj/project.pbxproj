@@ -30,6 +30,8 @@
 		0B00E043287F907F00707F26 /* SymbolsListMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B00E042287F907F00707F26 /* SymbolsListMock.swift */; };
 		0B00E046287FBEDC00707F26 /* PriceListDataProviderMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B00E045287FBEDC00707F26 /* PriceListDataProviderMock.swift */; };
 		0B00E048287FC4C800707F26 /* EnvironmentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B00E047287FC4C800707F26 /* EnvironmentTests.swift */; };
+		0B00E04C2885AD8D00707F26 /* PricesDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B00E04B2885AD8D00707F26 /* PricesDataProvider.swift */; };
+		0B00E04E2885ADB300707F26 /* AssetsDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B00E04D2885ADB300707F26 /* AssetsDataProvider.swift */; };
 		0B078F1228497B070020B4F7 /* CybridSDK.docc in Sources */ = {isa = PBXBuildFile; fileRef = 0B078F1128497B070020B4F7 /* CybridSDK.docc */; };
 		0B078F1828497B070020B4F7 /* CybridSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B078F0D28497B070020B4F7 /* CybridSDK.framework */; };
 		0B078F1E28497B070020B4F7 /* CybridSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 0B078F1028497B070020B4F7 /* CybridSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -143,6 +145,8 @@
 		0B00E042287F907F00707F26 /* SymbolsListMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymbolsListMock.swift; sourceTree = "<group>"; };
 		0B00E045287FBEDC00707F26 /* PriceListDataProviderMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceListDataProviderMock.swift; sourceTree = "<group>"; };
 		0B00E047287FC4C800707F26 /* EnvironmentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentTests.swift; sourceTree = "<group>"; };
+		0B00E04B2885AD8D00707F26 /* PricesDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PricesDataProvider.swift; sourceTree = "<group>"; };
+		0B00E04D2885ADB300707F26 /* AssetsDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetsDataProvider.swift; sourceTree = "<group>"; };
 		0B078F0D28497B070020B4F7 /* CybridSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CybridSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0B078F1028497B070020B4F7 /* CybridSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CybridSDK.h; sourceTree = "<group>"; };
 		0B078F1128497B070020B4F7 /* CybridSDK.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = CybridSDK.docc; sourceTree = "<group>"; };
@@ -237,8 +241,10 @@
 			isa = PBXGroup;
 			children = (
 				0B00E0212878D23100707F26 /* CybridSession.swift */,
-				0B00E02F287F6B0B00707F26 /* SymbolsDataProvider.swift */,
 				0B00E03F287F81A500707F26 /* CybridAPIManager.swift */,
+				0B00E02F287F6B0B00707F26 /* SymbolsDataProvider.swift */,
+				0B00E04B2885AD8D00707F26 /* PricesDataProvider.swift */,
+				0B00E04D2885ADB300707F26 /* AssetsDataProvider.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -838,6 +844,7 @@
 				0BD66104286B768300F4DA6B /* CryptoPriceTableHeaderView.swift in Sources */,
 				0B2B2A7128621DA7002F0EC1 /* FontTheme.swift in Sources */,
 				0BD6610B286B768C00F4DA6B /* CryptoPriceModel.swift in Sources */,
+				0B00E04E2885ADB300707F26 /* AssetsDataProvider.swift in Sources */,
 				0BD661372872BB0A00F4DA6B /* AssetPathBuilder.swift in Sources */,
 				0B00E034287F6D1000707F26 /* CybridAuthenticator.swift in Sources */,
 				0BD660F7286B761200F4DA6B /* NetworkingInterfaces.swift in Sources */,
@@ -845,6 +852,7 @@
 				0B2B2A8528629031002F0EC1 /* UIColor+Extensions.swift in Sources */,
 				0B2B2A872862906E002F0EC1 /* UILabel+Extensions.swift in Sources */,
 				0B2B2A6D28621D5C002F0EC1 /* ColorTheme.swift in Sources */,
+				0B00E04C2885AD8D00707F26 /* PricesDataProvider.swift in Sources */,
 				0B96600F285AA0FC00584692 /* AssertionFailureOverride.swift in Sources */,
 				0B00E0222878D23100707F26 /* CybridSession.swift in Sources */,
 				0BD66118286B79C500F4DA6B /* UIView+Constraints.swift in Sources */,

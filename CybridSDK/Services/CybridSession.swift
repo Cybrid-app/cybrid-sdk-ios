@@ -77,6 +77,8 @@ final class CybridSession: AuthenticatedServiceProvider {
 
   // MARK: ServiceProviders APIs
   internal var symbolsDataProvider: SymbolsDataProvider.Type
+  internal var pricesDataProvider: PricesDataProvider.Type
+  internal var assetsDataProvider: AssetsDataProvider.Type
 
   // MARK: Private properties
   private(set) var authenticator: CybridAuthenticator?
@@ -86,6 +88,8 @@ final class CybridSession: AuthenticatedServiceProvider {
     self.authenticator = authenticator
     self.apiManager = apiManager
     self.symbolsDataProvider = SymbolsAPI.self
+    self.pricesDataProvider = PricesAPI.self
+    self.assetsDataProvider = AssetsAPI.self
   }
 
 }
