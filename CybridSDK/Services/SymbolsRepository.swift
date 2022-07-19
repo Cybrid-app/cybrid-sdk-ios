@@ -11,23 +11,23 @@ import CybridApiBankSwift
 
 typealias FetchSymbolsCompletion = (Result<[String], ErrorResponse>) -> Void
 
-protocol SymbolsDataProvider {
+protocol SymbolsRepository {
   static func fetchSymbols(_ completion: @escaping FetchSymbolsCompletion)
 }
 
-protocol SymbolsDataProviding: AuthenticatedServiceProvider {
-  var symbolsDataProvider: SymbolsDataProvider.Type { get set }
+protocol SymbolsRepoProvider: AuthenticatedServiceProvider {
+  var symbolsRepository: SymbolsRepository.Type { get set }
 }
 
-extension SymbolsDataProviding {
+extension SymbolsRepoProvider {
   func fetchAvailableSymbols(_ completion: @escaping FetchSymbolsCompletion) {
-    authenticatedRequest(symbolsDataProvider.fetchSymbols, completion: completion)
+    authenticatedRequest(symbolsRepository.fetchSymbols, completion: completion)
   }
 }
 
-extension CybridSession: SymbolsDataProviding {}
+extension CybridSession: SymbolsRepoProvider {}
 
-extension SymbolsAPI: SymbolsDataProvider {
+extension SymbolsAPI: SymbolsRepository {
   static func fetchSymbols(_ completion: @escaping FetchSymbolsCompletion) {
     listSymbols(completion: completion)
   }

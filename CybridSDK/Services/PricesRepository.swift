@@ -11,23 +11,23 @@ import CybridApiBankSwift
 
 typealias FetchPricesCompletion = (Result<[SymbolPriceBankModel], ErrorResponse>) -> Void
 
-protocol PricesDataProvider {
+protocol PricesRepository {
   static func fetchPrices(_ completion: @escaping FetchPricesCompletion)
 }
 
-protocol PricesDataProviding: AuthenticatedServiceProvider {
-  var pricesDataProvider: PricesDataProvider.Type { get set }
+protocol PricesRepoProvider: AuthenticatedServiceProvider {
+  var pricesRepository: PricesRepository.Type { get set }
 }
 
-extension PricesDataProviding {
+extension PricesRepoProvider {
   func fetchPriceList(_ completion: @escaping FetchPricesCompletion) {
-    authenticatedRequest(pricesDataProvider.fetchPrices, completion: completion)
+    authenticatedRequest(pricesRepository.fetchPrices, completion: completion)
   }
 }
 
-extension CybridSession: PricesDataProviding {}
+extension CybridSession: PricesRepoProvider {}
 
-extension PricesAPI: PricesDataProvider {
+extension PricesAPI: PricesRepository {
   static func fetchPrices(_ completion: @escaping FetchPricesCompletion) {
     listPrices(completion: completion)
   }

@@ -11,23 +11,23 @@ import CybridApiBankSwift
 
 typealias FetchAssetsCompletion = (Result<[AssetBankModel], ErrorResponse>) -> Void
 
-protocol AssetsDataProvider {
+protocol AssetsRepository {
   static func fetchAssets(_ completion: @escaping FetchAssetsCompletion)
 }
 
-protocol AssetsDataProviding: AuthenticatedServiceProvider {
-  var assetsDataProvider: AssetsDataProvider.Type { get set }
+protocol AssetsRepoProvider: AuthenticatedServiceProvider {
+  var assetsRepository: AssetsRepository.Type { get set }
 }
 
-extension AssetsDataProviding {
+extension AssetsRepoProvider {
   func fetchAssetsList(_ completion: @escaping FetchAssetsCompletion) {
-    authenticatedRequest(assetsDataProvider.fetchAssets, completion: completion)
+    authenticatedRequest(assetsRepository.fetchAssets, completion: completion)
   }
 }
 
-extension CybridSession: AssetsDataProviding {}
+extension CybridSession: AssetsRepoProvider {}
 
-extension AssetsAPI: AssetsDataProvider {
+extension AssetsAPI: AssetsRepository {
   static func fetchAssets(_ completion: @escaping FetchAssetsCompletion) {
     listAssets { result in
       switch result {
