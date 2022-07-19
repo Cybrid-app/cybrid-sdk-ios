@@ -20,16 +20,19 @@
 		0B00E024287CD72D00707F26 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B00E023287CD72D00707F26 /* Environment.swift */; };
 		0B00E028287DBA8400707F26 /* CryptoAuthenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B00E027287DBA8400707F26 /* CryptoAuthenticator.swift */; };
 		0B00E02E287F6AE500707F26 /* CybridError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B00E02D287F6AE500707F26 /* CybridError.swift */; };
-		0B00E030287F6B0B00707F26 /* SymbolsDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B00E02F287F6B0B00707F26 /* SymbolsDataProvider.swift */; };
 		0B00E032287F6C1600707F26 /* MockCybridAuthenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B00E031287F6C1500707F26 /* MockCybridAuthenticator.swift */; };
 		0B00E034287F6D1000707F26 /* CybridAuthenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B00E033287F6D1000707F26 /* CybridAuthenticator.swift */; };
-		0B00E039287F77DD00707F26 /* SymbolsAPIMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B00E038287F77DD00707F26 /* SymbolsAPIMock.swift */; };
 		0B00E03C287F7BA500707F26 /* CybridSessionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B00E03B287F7BA500707F26 /* CybridSessionTests.swift */; };
 		0B00E03E287F803800707F26 /* MockAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B00E03D287F803800707F26 /* MockAPIManager.swift */; };
 		0B00E040287F81A500707F26 /* CybridAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B00E03F287F81A500707F26 /* CybridAPIManager.swift */; };
-		0B00E043287F907F00707F26 /* SymbolsListMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B00E042287F907F00707F26 /* SymbolsListMock.swift */; };
 		0B00E046287FBEDC00707F26 /* PriceListDataProviderMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B00E045287FBEDC00707F26 /* PriceListDataProviderMock.swift */; };
 		0B00E048287FC4C800707F26 /* EnvironmentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B00E047287FC4C800707F26 /* EnvironmentTests.swift */; };
+		0B00E04C2885AD8D00707F26 /* PricesRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B00E04B2885AD8D00707F26 /* PricesRepository.swift */; };
+		0B00E04E2885ADB300707F26 /* AssetsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B00E04D2885ADB300707F26 /* AssetsRepository.swift */; };
+		0B00E0522886F01A00707F26 /* AssetsAPIMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B00E0512886F01A00707F26 /* AssetsAPIMock.swift */; };
+		0B00E0542886F21900707F26 /* AssetsListMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B00E0532886F21900707F26 /* AssetsListMock.swift */; };
+		0B00E0572886F25F00707F26 /* PricesAPIMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B00E0562886F25F00707F26 /* PricesAPIMock.swift */; };
+		0B00E0592887022B00707F26 /* PriceListMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B00E0582887022B00707F26 /* PriceListMock.swift */; };
 		0B078F1228497B070020B4F7 /* CybridSDK.docc in Sources */ = {isa = PBXBuildFile; fileRef = 0B078F1128497B070020B4F7 /* CybridSDK.docc */; };
 		0B078F1828497B070020B4F7 /* CybridSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B078F0D28497B070020B4F7 /* CybridSDK.framework */; };
 		0B078F1E28497B070020B4F7 /* CybridSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 0B078F1028497B070020B4F7 /* CybridSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -133,16 +136,19 @@
 		0B00E023287CD72D00707F26 /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
 		0B00E027287DBA8400707F26 /* CryptoAuthenticator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoAuthenticator.swift; sourceTree = "<group>"; };
 		0B00E02D287F6AE500707F26 /* CybridError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CybridError.swift; sourceTree = "<group>"; };
-		0B00E02F287F6B0B00707F26 /* SymbolsDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymbolsDataProvider.swift; sourceTree = "<group>"; };
 		0B00E031287F6C1500707F26 /* MockCybridAuthenticator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockCybridAuthenticator.swift; sourceTree = "<group>"; };
 		0B00E033287F6D1000707F26 /* CybridAuthenticator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CybridAuthenticator.swift; sourceTree = "<group>"; };
-		0B00E038287F77DD00707F26 /* SymbolsAPIMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymbolsAPIMock.swift; sourceTree = "<group>"; };
 		0B00E03B287F7BA500707F26 /* CybridSessionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CybridSessionTests.swift; sourceTree = "<group>"; };
 		0B00E03D287F803800707F26 /* MockAPIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAPIManager.swift; sourceTree = "<group>"; };
 		0B00E03F287F81A500707F26 /* CybridAPIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CybridAPIManager.swift; sourceTree = "<group>"; };
-		0B00E042287F907F00707F26 /* SymbolsListMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymbolsListMock.swift; sourceTree = "<group>"; };
 		0B00E045287FBEDC00707F26 /* PriceListDataProviderMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceListDataProviderMock.swift; sourceTree = "<group>"; };
 		0B00E047287FC4C800707F26 /* EnvironmentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentTests.swift; sourceTree = "<group>"; };
+		0B00E04B2885AD8D00707F26 /* PricesRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PricesRepository.swift; sourceTree = "<group>"; };
+		0B00E04D2885ADB300707F26 /* AssetsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetsRepository.swift; sourceTree = "<group>"; };
+		0B00E0512886F01A00707F26 /* AssetsAPIMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetsAPIMock.swift; sourceTree = "<group>"; };
+		0B00E0532886F21900707F26 /* AssetsListMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetsListMock.swift; sourceTree = "<group>"; };
+		0B00E0562886F25F00707F26 /* PricesAPIMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PricesAPIMock.swift; sourceTree = "<group>"; };
+		0B00E0582887022B00707F26 /* PriceListMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceListMock.swift; sourceTree = "<group>"; };
 		0B078F0D28497B070020B4F7 /* CybridSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CybridSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0B078F1028497B070020B4F7 /* CybridSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CybridSDK.h; sourceTree = "<group>"; };
 		0B078F1128497B070020B4F7 /* CybridSDK.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = CybridSDK.docc; sourceTree = "<group>"; };
@@ -237,8 +243,9 @@
 			isa = PBXGroup;
 			children = (
 				0B00E0212878D23100707F26 /* CybridSession.swift */,
-				0B00E02F287F6B0B00707F26 /* SymbolsDataProvider.swift */,
 				0B00E03F287F81A500707F26 /* CybridAPIManager.swift */,
+				0B00E04B2885AD8D00707F26 /* PricesRepository.swift */,
+				0B00E04D2885ADB300707F26 /* AssetsRepository.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -276,21 +283,23 @@
 			path = "Services Tests";
 			sourceTree = "<group>";
 		};
-		0B00E041287F907400707F26 /* Symbols */ = {
+		0B00E0502886F00B00707F26 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
-				0B00E038287F77DD00707F26 /* SymbolsAPIMock.swift */,
-				0B00E042287F907F00707F26 /* SymbolsListMock.swift */,
+				0B00E0512886F01A00707F26 /* AssetsAPIMock.swift */,
+				0B00E0532886F21900707F26 /* AssetsListMock.swift */,
 			);
-			path = Symbols;
+			path = Assets;
 			sourceTree = "<group>";
 		};
-		0B00E044287FBE8C00707F26 /* PriceList */ = {
+		0B00E0552886F23800707F26 /* Prices */ = {
 			isa = PBXGroup;
 			children = (
 				0B00E045287FBEDC00707F26 /* PriceListDataProviderMock.swift */,
+				0B00E0562886F25F00707F26 /* PricesAPIMock.swift */,
+				0B00E0582887022B00707F26 /* PriceListMock.swift */,
 			);
-			path = PriceList;
+			path = Prices;
 			sourceTree = "<group>";
 		};
 		0B078F0328497B070020B4F7 = {
@@ -474,8 +483,8 @@
 		0B96600B285A9A1A00584692 /* Mocks */ = {
 			isa = PBXGroup;
 			children = (
-				0B00E044287FBE8C00707F26 /* PriceList */,
-				0B00E041287F907400707F26 /* Symbols */,
+				0B00E0552886F23800707F26 /* Prices */,
+				0B00E0502886F00B00707F26 /* Assets */,
 				0B00E03D287F803800707F26 /* MockAPIManager.swift */,
 				0B96600C285A9A3100584692 /* MockAsyncOperation.swift */,
 				0B966024285C2CEF00584692 /* MockDispatchQueue.swift */,
@@ -838,6 +847,7 @@
 				0BD66104286B768300F4DA6B /* CryptoPriceTableHeaderView.swift in Sources */,
 				0B2B2A7128621DA7002F0EC1 /* FontTheme.swift in Sources */,
 				0BD6610B286B768C00F4DA6B /* CryptoPriceModel.swift in Sources */,
+				0B00E04E2885ADB300707F26 /* AssetsRepository.swift in Sources */,
 				0BD661372872BB0A00F4DA6B /* AssetPathBuilder.swift in Sources */,
 				0B00E034287F6D1000707F26 /* CybridAuthenticator.swift in Sources */,
 				0BD660F7286B761200F4DA6B /* NetworkingInterfaces.swift in Sources */,
@@ -845,6 +855,7 @@
 				0B2B2A8528629031002F0EC1 /* UIColor+Extensions.swift in Sources */,
 				0B2B2A872862906E002F0EC1 /* UILabel+Extensions.swift in Sources */,
 				0B2B2A6D28621D5C002F0EC1 /* ColorTheme.swift in Sources */,
+				0B00E04C2885AD8D00707F26 /* PricesRepository.swift in Sources */,
 				0B96600F285AA0FC00584692 /* AssertionFailureOverride.swift in Sources */,
 				0B00E0222878D23100707F26 /* CybridSession.swift in Sources */,
 				0BD66118286B79C500F4DA6B /* UIView+Constraints.swift in Sources */,
@@ -860,7 +871,6 @@
 				0BD6610A286B768C00F4DA6B /* CryptoPriceViewModel.swift in Sources */,
 				0B2B2A8928629324002F0EC1 /* Theme.swift in Sources */,
 				0B303CE12862E062007BF7FF /* FormatStyle.swift in Sources */,
-				0B00E030287F6B0B00707F26 /* SymbolsDataProvider.swift in Sources */,
 				0BD66105286B768300F4DA6B /* CryptoPriceTableViewCell.swift in Sources */,
 				0BD660FE286B763E00F4DA6B /* AsyncOperation.swift in Sources */,
 				0B303CDF2862DD2C007BF7FF /* UIConstants.swift in Sources */,
@@ -879,13 +889,14 @@
 				0B966027285C2E8600584692 /* MockImageOperation.swift in Sources */,
 				0B966029285C38F500584692 /* URLImageOperationTests.swift in Sources */,
 				0B303CE92862F5BB007BF7FF /* UILabelExtensionsTests.swift in Sources */,
+				0B00E0592887022B00707F26 /* PriceListMock.swift in Sources */,
 				0BD661332872A05B00F4DA6B /* LocalizationTests.swift in Sources */,
-				0B00E043287F907F00707F26 /* SymbolsListMock.swift in Sources */,
+				0B00E0542886F21900707F26 /* AssetsListMock.swift in Sources */,
 				0B966004285A85C600584692 /* AsyncOperationTests.swift in Sources */,
 				0B00E01B2877EED600707F26 /* BundleExtensionsTests.swift in Sources */,
+				0B00E0522886F01A00707F26 /* AssetsAPIMock.swift in Sources */,
 				0B303CEC2862F898007BF7FF /* ColorThemeTests.swift in Sources */,
 				0B00E03C287F7BA500707F26 /* CybridSessionTests.swift in Sources */,
-				0B00E039287F77DD00707F26 /* SymbolsAPIMock.swift in Sources */,
 				0B00E03E287F803800707F26 /* MockAPIManager.swift in Sources */,
 				0B966025285C2CEF00584692 /* MockDispatchQueue.swift in Sources */,
 				0B966011285AA24300584692 /* AssertionFailureOverrideTests.swift in Sources */,
@@ -897,6 +908,7 @@
 				0B966019285AE8D300584692 /* MockURLSession.swift in Sources */,
 				0BD6611B286C197B00F4DA6B /* UIViewConstraintsTests.swift in Sources */,
 				0B00E032287F6C1600707F26 /* MockCybridAuthenticator.swift in Sources */,
+				0B00E0572886F25F00707F26 /* PricesAPIMock.swift in Sources */,
 				0B966013285AA2EB00584692 /* URLImageViewTests.swift in Sources */,
 				0B966008285A92E700584692 /* XCTestCase+expectFailure.swift in Sources */,
 				0B96602B285C3AC600584692 /* NetworkingInterfaceTests.swift in Sources */,

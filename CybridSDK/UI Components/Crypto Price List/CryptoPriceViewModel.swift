@@ -18,24 +18,49 @@ class CryptoPriceViewModel: NSObject {
 
   // MARK: Private properties
   private unowned var cellProvider: CryptoPriceViewProvider
-  private var dataProvider: SymbolsDataProviding
+  private var dataProvider: PricesRepoProvider & AssetsRepoProvider
+  private var assetsList: [AssetListBankModel] = []
+  private var pricesList: [SymbolPriceBankModel] = []
 
-  init(cellProvider: CryptoPriceViewProvider, dataProvider: SymbolsDataProviding) {
+  init(cellProvider: CryptoPriceViewProvider, dataProvider: PricesRepoProvider & AssetsRepoProvider) {
     self.cellProvider = cellProvider
     self.dataProvider = dataProvider
   }
 
   func fetchPriceList() {
-    dataProvider.fetchAvailableSymbols { result in
-      switch result {
-      case .success(let priceList):
-        print(priceList)
+    dataProvider.fetchAssetsList { [weak self] assetsResult in
+      switch assetsResult {
+      case .success(let assetsList):
+        self?.dataProvider.fetchPriceList { pricesResult in
+          switch pricesResult {
+          case .success(let pricesList):
+            guard let modelList = self?.buildModelList(symbols: pricesList, assets: assetsList) else {
+              return
+            }
+            self?.cryptoPriceList.value = modelList
+          case .failure(let error):
+            print(error)
+          }
+        }
       case .failure(let error):
         print(error)
       }
     }
-    // FIXME: replace mocked data with service call response
-    cryptoPriceList.value = CryptoPriceModel.mockList
+  }
+
+  private func buildModelList(symbols: [SymbolPriceBankModel], assets: [AssetBankModel]) -> [CryptoPriceModel] {
+    return symbols.compactMap { priceModel in
+      guard
+        let hiphenIndex = priceModel.symbol?.firstIndex(of: "-"),
+        let firstAssetCode = priceModel.symbol?.prefix(upTo: hiphenIndex),
+        let firstAsset = assets.first(where: { $0.code == firstAssetCode }),
+        let secondAssetCode = priceModel.symbol?.suffix(3),
+        let secondAsset = assets.first(where: { $0.code == secondAssetCode })
+      else {
+        return nil
+      }
+      return CryptoPriceModel(symbolPrice: priceModel, asset: firstAsset, counterAsset: secondAsset)
+    }
   }
 }
 
@@ -49,6 +74,7 @@ extension CryptoPriceViewModel: UITableViewDelegate, UITableViewDataSource {
   public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     cellProvider.tableView(tableView, cellForRowAt: indexPath, withData: cryptoPriceList.value[indexPath.row])
   }
+
   func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
     let view = CryptoPriceTableHeaderView()
     return view

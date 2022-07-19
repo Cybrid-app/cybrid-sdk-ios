@@ -73,6 +73,9 @@ public class CryptoPriceListView: UITableView {
   }
 
   public func startLiveUpdate() {
+    viewModel.cryptoPriceList.bind { _ in
+      self.reloadData()
+    }
     viewModel.fetchPriceList()
   }
 }
