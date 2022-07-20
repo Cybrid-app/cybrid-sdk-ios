@@ -19,6 +19,7 @@ ignore:
   - "**/*Cell.swift"
   - "**/*View.swift"
   - "**/*ViewController.swift"
+  - "CybridSDK/Framework Extensions/UIView/*"
 
 parsers:
   gcov:
