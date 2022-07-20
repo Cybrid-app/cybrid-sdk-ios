@@ -8,7 +8,7 @@ project 'CybridSDK'
 use_frameworks!
 
 def common_pods
-  pod 'CybridApiBankSwift'
+  pod 'CybridApiBankSwift', '0.32.0'
   pod 'BigInt'
 end
 
