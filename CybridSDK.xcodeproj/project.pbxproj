@@ -302,6 +302,14 @@
 			path = Prices;
 			sourceTree = "<group>";
 		};
+		0B00E05F2887B1D200707F26 /* UIView */ = {
+			isa = PBXGroup;
+			children = (
+				0BD66116286B79C500F4DA6B /* UIView+Constraints.swift */,
+			);
+			path = UIView;
+			sourceTree = "<group>";
+		};
 		0B078F0328497B070020B4F7 = {
 			isa = PBXGroup;
 			children = (
@@ -372,7 +380,7 @@
 		0B2B2A832862901A002F0EC1 /* Framework Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				0BD66116286B79C500F4DA6B /* UIView+Constraints.swift */,
+				0B00E05F2887B1D200707F26 /* UIView */,
 				0B2B2A8428629031002F0EC1 /* UIColor+Extensions.swift */,
 				0B2B2A862862906E002F0EC1 /* UILabel+Extensions.swift */,
 				0B00E0032877DF7F00707F26 /* Bundle+Extensions.swift */,
