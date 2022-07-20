@@ -64,8 +64,9 @@ class CryptoPriceTableHeaderView: UITableViewHeaderFooterView {
     return label
   }()
 
-  convenience init() {
+  convenience init(delegate: UISearchTextFieldDelegate?) {
     self.init(reuseIdentifier: nil)
+    searchTextField.delegate = delegate
   }
 
   override init(reuseIdentifier: String?) {
@@ -105,6 +106,11 @@ class CryptoPriceTableHeaderView: UITableViewHeaderFooterView {
                                toItem: self,
                                attribute: .trailing,
                                constant: -Constants.ContentStackView.horizontalMargin)
+    searchTextField.constraint(attribute: .height,
+                               relatedBy: .equal,
+                               toItem: nil,
+                               attribute: .notAnAttribute,
+                               constant: Constants.SearchBar.height)
   }
 
   private func setupContentStackView() {
@@ -138,16 +144,17 @@ class CryptoPriceTableHeaderView: UITableViewHeaderFooterView {
 extension CryptoPriceTableHeaderView {
   enum Constants {
     enum SearchBar {
-      static let topMargin: CGFloat = 8
-      static let bottomMargin: CGFloat = 30
+      static let topMargin: CGFloat = 0
+      static let bottomMargin: CGFloat = UIConstants.spacingXl4 // 32.0
+      static let height: CGFloat = UIConstants.minimumTargetSize // 44.0
     }
     enum ContentStackView {
-      static let itemSpacing: CGFloat = 10
-      static let horizontalMargin: CGFloat = 16
-      static let verticalMargin: CGFloat = 10
+      static let itemSpacing: CGFloat = UIConstants.spacingLg // 10.0
+      static let horizontalMargin: CGFloat = UIConstants.spacingXl2 // 16.0
+      static let verticalMargin: CGFloat = UIConstants.spacingLg // 10.0
     }
     enum Icon {
-      static let size = CGSize(width: 24, height: 24)
+      static let size = CGSize(width: UIConstants.sizeMd, height: UIConstants.sizeMd)
     }
   }
 }

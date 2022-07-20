@@ -28,12 +28,13 @@ public class CryptoPriceListView: UITableView {
   }
 
   private func setupView() {
-    self.delegate = viewModel
-    self.dataSource = viewModel
-    self.register(CryptoPriceTableViewCell.self, forCellReuseIdentifier: CryptoPriceTableViewCell.reuseIdentifier)
-    self.rowHeight = Constants.rowHeight
-    self.estimatedRowHeight = Constants.rowHeight
-    self.translatesAutoresizingMaskIntoConstraints = false
+    delegate = viewModel
+    dataSource = viewModel
+    register(CryptoPriceTableViewCell.self, forCellReuseIdentifier: CryptoPriceTableViewCell.reuseIdentifier)
+    rowHeight = Constants.rowHeight
+    estimatedRowHeight = Constants.rowHeight
+    translatesAutoresizingMaskIntoConstraints = false
+    makeKeyboardHandler()
   }
 
   public func embed(in viewController: UIViewController) {
@@ -73,7 +74,7 @@ public class CryptoPriceListView: UITableView {
   }
 
   public func startLiveUpdate() {
-    viewModel.cryptoPriceList.bind { _ in
+    viewModel.filteredCryptoPriceList.bind { _ in
       self.reloadData()
     }
     viewModel.fetchPriceList()

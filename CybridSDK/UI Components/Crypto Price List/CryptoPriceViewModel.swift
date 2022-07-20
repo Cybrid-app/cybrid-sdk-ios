@@ -14,13 +14,12 @@ protocol CryptoPriceViewProvider: AnyObject {
 
 class CryptoPriceViewModel: NSObject {
   // MARK: Observed properties
-  var cryptoPriceList: Observable<[CryptoPriceModel]> = .init([])
+  internal var cryptoPriceList: [CryptoPriceModel] = []
+  internal var filteredCryptoPriceList: Observable<[CryptoPriceModel]> = .init([])
 
   // MARK: Private properties
   private unowned var cellProvider: CryptoPriceViewProvider
   private var dataProvider: PricesRepoProvider & AssetsRepoProvider
-  private var assetsList: [AssetListBankModel] = []
-  private var pricesList: [SymbolPriceBankModel] = []
 
   init(cellProvider: CryptoPriceViewProvider, dataProvider: PricesRepoProvider & AssetsRepoProvider) {
     self.cellProvider = cellProvider
@@ -37,7 +36,8 @@ class CryptoPriceViewModel: NSObject {
             guard let modelList = self?.buildModelList(symbols: pricesList, assets: assetsList) else {
               return
             }
-            self?.cryptoPriceList.value = modelList
+            self?.cryptoPriceList = modelList
+            self?.filteredCryptoPriceList.value = modelList
           case .failure(let error):
             print(error)
           }
@@ -68,15 +68,34 @@ class CryptoPriceViewModel: NSObject {
 
 extension CryptoPriceViewModel: UITableViewDelegate, UITableViewDataSource {
   public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    cryptoPriceList.value.count
+    filteredCryptoPriceList.value.count
   }
 
   public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    cellProvider.tableView(tableView, cellForRowAt: indexPath, withData: cryptoPriceList.value[indexPath.row])
+    cellProvider.tableView(tableView, cellForRowAt: indexPath, withData: filteredCryptoPriceList.value[indexPath.row])
   }
 
   func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-    let view = CryptoPriceTableHeaderView()
+    let view = CryptoPriceTableHeaderView(delegate: self)
     return view
+  }
+}
+
+// MARK: - CryptoPriceViewModel + UISearchBarDelegate
+
+extension CryptoPriceViewModel: UISearchTextFieldDelegate {
+  func textFieldDidChangeSelection(_ textField: UITextField) {
+    filterPriceList(with: textField.text)
+  }
+
+  func filterPriceList(with text: String?) {
+    guard let searchText = text, !searchText.isEmpty else {
+      filteredCryptoPriceList.value = cryptoPriceList
+      return
+    }
+    filteredCryptoPriceList.value = cryptoPriceList.filter({ model in
+      model.assetName.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
+      || model.assetCode.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
+    })
   }
 }
