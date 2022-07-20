@@ -33,6 +33,7 @@
 		0B00E0542886F21900707F26 /* AssetsListMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B00E0532886F21900707F26 /* AssetsListMock.swift */; };
 		0B00E0572886F25F00707F26 /* PricesAPIMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B00E0562886F25F00707F26 /* PricesAPIMock.swift */; };
 		0B00E0592887022B00707F26 /* PriceListMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B00E0582887022B00707F26 /* PriceListMock.swift */; };
+		0B00E05C2887256B00707F26 /* UIView+Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B00E05B2887256B00707F26 /* UIView+Keyboard.swift */; };
 		0B078F1228497B070020B4F7 /* CybridSDK.docc in Sources */ = {isa = PBXBuildFile; fileRef = 0B078F1128497B070020B4F7 /* CybridSDK.docc */; };
 		0B078F1828497B070020B4F7 /* CybridSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B078F0D28497B070020B4F7 /* CybridSDK.framework */; };
 		0B078F1E28497B070020B4F7 /* CybridSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 0B078F1028497B070020B4F7 /* CybridSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -149,6 +150,7 @@
 		0B00E0532886F21900707F26 /* AssetsListMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetsListMock.swift; sourceTree = "<group>"; };
 		0B00E0562886F25F00707F26 /* PricesAPIMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PricesAPIMock.swift; sourceTree = "<group>"; };
 		0B00E0582887022B00707F26 /* PriceListMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceListMock.swift; sourceTree = "<group>"; };
+		0B00E05B2887256B00707F26 /* UIView+Keyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Keyboard.swift"; sourceTree = "<group>"; };
 		0B078F0D28497B070020B4F7 /* CybridSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CybridSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0B078F1028497B070020B4F7 /* CybridSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CybridSDK.h; sourceTree = "<group>"; };
 		0B078F1128497B070020B4F7 /* CybridSDK.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = CybridSDK.docc; sourceTree = "<group>"; };
@@ -302,10 +304,11 @@
 			path = Prices;
 			sourceTree = "<group>";
 		};
-		0B00E05F2887B1D200707F26 /* UIView */ = {
+		0B00E05A2887255900707F26 /* UIView */ = {
 			isa = PBXGroup;
 			children = (
 				0BD66116286B79C500F4DA6B /* UIView+Constraints.swift */,
+				0B00E05B2887256B00707F26 /* UIView+Keyboard.swift */,
 			);
 			path = UIView;
 			sourceTree = "<group>";
@@ -380,7 +383,7 @@
 		0B2B2A832862901A002F0EC1 /* Framework Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				0B00E05F2887B1D200707F26 /* UIView */,
+				0B00E05A2887255900707F26 /* UIView */,
 				0B2B2A8428629031002F0EC1 /* UIColor+Extensions.swift */,
 				0B2B2A862862906E002F0EC1 /* UILabel+Extensions.swift */,
 				0B00E0032877DF7F00707F26 /* Bundle+Extensions.swift */,
@@ -877,6 +880,7 @@
 				0BD66111286B76DC00F4DA6B /* URLImageView.swift in Sources */,
 				0B00E0042877DF7F00707F26 /* Bundle+Extensions.swift in Sources */,
 				0BD6610A286B768C00F4DA6B /* CryptoPriceViewModel.swift in Sources */,
+				0B00E05C2887256B00707F26 /* UIView+Keyboard.swift in Sources */,
 				0B2B2A8928629324002F0EC1 /* Theme.swift in Sources */,
 				0B303CE12862E062007BF7FF /* FormatStyle.swift in Sources */,
 				0BD66105286B768300F4DA6B /* CryptoPriceTableViewCell.swift in Sources */,
