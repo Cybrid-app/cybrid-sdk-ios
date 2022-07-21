@@ -24,7 +24,7 @@ class CryptoPriceViewModelTests: XCTestCase {
     dataProvider.didFetchPricesSuccessfully()
 
     // Then
-    XCTAssertFalse(viewModel.cryptoPriceList.value.isEmpty)
+    XCTAssertFalse(viewModel.filteredCryptoPriceList.value.isEmpty)
   }
 
   func testFetchData_pricesFailure() {
@@ -38,7 +38,7 @@ class CryptoPriceViewModelTests: XCTestCase {
     dataProvider.didFetchPricesWithError()
 
     // Then
-    XCTAssertTrue(viewModel.cryptoPriceList.value.isEmpty)
+    XCTAssertTrue(viewModel.filteredCryptoPriceList.value.isEmpty)
   }
 
   func testFetchData_assetsFailure() {
@@ -51,7 +51,7 @@ class CryptoPriceViewModelTests: XCTestCase {
     dataProvider.didFetchAssetsWithError()
 
     // Then
-    XCTAssertTrue(viewModel.cryptoPriceList.value.isEmpty)
+    XCTAssertTrue(viewModel.filteredCryptoPriceList.value.isEmpty)
   }
 
   func testViewModel_memoryDeallocation() {
@@ -95,7 +95,7 @@ class CryptoPriceViewModelTests: XCTestCase {
     ])
 
     // Then
-    XCTAssertTrue(viewModel.cryptoPriceList.value.isEmpty)
+    XCTAssertTrue(viewModel.filteredCryptoPriceList.value.isEmpty)
   }
 
   func testFetchData_withCachedAssets() {
@@ -108,13 +108,13 @@ class CryptoPriceViewModelTests: XCTestCase {
     dataProvider.didFetchAssetsSuccessfully() // Assets Cached!
     dataProvider.didFetchPricesSuccessfully()
 
-    let firstList = viewModel.cryptoPriceList.value
+    let firstList = viewModel.filteredCryptoPriceList.value
 
     viewModel.fetchPriceList()
     dataProvider.didFetchAssetsSuccessfully() // Assets retrieved from Cache
     dataProvider.didFetchPricesSuccessfully()
 
-    let secondList = viewModel.cryptoPriceList.value
+    let secondList = viewModel.filteredCryptoPriceList.value
 
     // Then
     XCTAssertEqual(firstList, secondList)
@@ -178,6 +178,55 @@ class CryptoPriceViewModelTests: XCTestCase {
     // Then
     XCTAssertNotNil(headerView)
     XCTAssertTrue(headerView!.isKind(of: CryptoPriceTableHeaderView.self))
+  }
+
+  func testSearchBar_filterWithValidQuery() {
+    // Given
+    let tableView = CryptoPriceListView()
+    let viewModel = createViewModel(viewProvider: tableView)
+    let searchBar = UISearchTextField()
+
+    // When 1
+    viewModel.fetchPriceList()
+    dataProvider.didFetchAssetsSuccessfully()
+    dataProvider.didFetchPricesSuccessfully()
+
+    // Then 1
+    XCTAssertFalse(viewModel.filteredCryptoPriceList.value.isEmpty)
+
+    // When 2
+    searchBar.text = "BTC"
+    viewModel.textFieldDidChangeSelection(searchBar)
+
+    // Then 2
+    XCTAssertFalse(viewModel.filteredCryptoPriceList.value.isEmpty)
+    XCTAssertEqual(viewModel.filteredCryptoPriceList.value.count, 1)
+  }
+
+  func testSearchBar_filterWithEmptyText() {
+    // Given
+    let tableView = CryptoPriceListView()
+    let viewModel = createViewModel(viewProvider: tableView)
+
+    // When 1
+    viewModel.fetchPriceList()
+    dataProvider.didFetchAssetsSuccessfully()
+    dataProvider.didFetchPricesSuccessfully()
+
+    // Then 1
+    XCTAssertFalse(viewModel.filteredCryptoPriceList.value.isEmpty)
+
+    // When 2
+    viewModel.filterPriceList(with: nil)
+
+    // Then 2
+    XCTAssertEqual(viewModel.filteredCryptoPriceList.value, viewModel.cryptoPriceList)
+
+    // When 3
+    viewModel.filterPriceList(with: "")
+
+    // Then 3
+    XCTAssertEqual(viewModel.filteredCryptoPriceList.value, viewModel.cryptoPriceList)
   }
 }
 
