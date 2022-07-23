@@ -241,7 +241,7 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0B00E0202878D20F00707F26 /* Services */ = {
+		0B00E0202878D20F00707F26 /* Service Layer */ = {
 			isa = PBXGroup;
 			children = (
 				0B00E0212878D23100707F26 /* CybridSession.swift */,
@@ -249,7 +249,7 @@
 				0B00E04B2885AD8D00707F26 /* PricesRepository.swift */,
 				0B00E04D2885ADB300707F26 /* AssetsRepository.swift */,
 			);
-			path = Services;
+			path = "Service Layer";
 			sourceTree = "<group>";
 		};
 		0B00E025287DBA6300707F26 /* ViewControllers */ = {
@@ -342,11 +342,9 @@
 				0B00E02C287F6ABD00707F26 /* Error Management */,
 				0B2B2A832862901A002F0EC1 /* Framework Extensions */,
 				0B303CE22862E5C5007BF7FF /* Global */,
-				0BD66126286D7CCB00F4DA6B /* Localization */,
-				0B00E0202878D20F00707F26 /* Services */,
+				0B00E0202878D20F00707F26 /* Service Layer */,
 				0B965FF828599E3A00584692 /* Supporting Files */,
-				0B2B2A6B28621D35002F0EC1 /* Theme */,
-				0BD660FF286B765900F4DA6B /* UI Components */,
+				0BD660FF286B765900F4DA6B /* View Layer */,
 				0B965FFC28599FE700584692 /* Utilities */,
 			);
 			path = CybridSDK;
@@ -397,6 +395,7 @@
 				0B00E033287F6D1000707F26 /* CybridAuthenticator.swift */,
 				0B303CE32862E5D9007BF7FF /* CybridConfig.swift */,
 				0B00E023287CD72D00707F26 /* Environment.swift */,
+				0B2B2A6B28621D35002F0EC1 /* Theme */,
 			);
 			path = Global;
 			sourceTree = "<group>";
@@ -565,13 +564,14 @@
 			path = Concurrency;
 			sourceTree = "<group>";
 		};
-		0BD660FF286B765900F4DA6B /* UI Components */ = {
+		0BD660FF286B765900F4DA6B /* View Layer */ = {
 			isa = PBXGroup;
 			children = (
-				0BD6610E286B76AA00F4DA6B /* Reusable Views */,
 				0BD66100286B766B00F4DA6B /* Crypto Price List */,
+				0BD66126286D7CCB00F4DA6B /* Localization */,
+				0BD6610E286B76AA00F4DA6B /* Reusable Views */,
 			);
-			path = "UI Components";
+			path = "View Layer";
 			sourceTree = "<group>";
 		};
 		0BD66100286B766B00F4DA6B /* Crypto Price List */ = {
