@@ -41,7 +41,7 @@ public class CryptoPriceListTestVC: UIViewController {
 
   private func setupTableView() {
     tableView.embed(in: self)
-    tableView.startLiveUpdate()
+//    tableView.startLiveUpdate()
   }
 
   private func setupNavBar() {

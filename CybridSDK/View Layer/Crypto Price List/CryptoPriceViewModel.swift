@@ -26,7 +26,7 @@ class CryptoPriceViewModel: NSObject {
     self.dataProvider = dataProvider
   }
 
-  func fetchPriceList() {
+  func startLivePriceUpdates() {
     dataProvider.fetchAssetsList { [weak self] assetsResult in
       switch assetsResult {
       case .success(let assetsList):
@@ -46,6 +46,10 @@ class CryptoPriceViewModel: NSObject {
         print(error)
       }
     }
+  }
+
+  func stopLiveUpdates() {
+    self.dataProvider.pricesFetchScheduler.cancel()
   }
 
   private func buildModelList(symbols: [SymbolPriceBankModel], assets: [AssetBankModel]) -> [CryptoPriceModel] {

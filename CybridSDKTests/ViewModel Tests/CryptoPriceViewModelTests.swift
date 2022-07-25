@@ -19,7 +19,7 @@ class CryptoPriceViewModelTests: XCTestCase {
     let viewModel = createViewModel(viewProvider: viewProvider)
 
     // When
-    viewModel.fetchPriceList()
+    viewModel.startLivePriceUpdates()
     dataProvider.didFetchAssetsSuccessfully()
     dataProvider.didFetchPricesSuccessfully()
 
@@ -33,7 +33,7 @@ class CryptoPriceViewModelTests: XCTestCase {
     let viewModel = createViewModel(viewProvider: viewProvider)
 
     // When
-    viewModel.fetchPriceList()
+    viewModel.startLivePriceUpdates()
     dataProvider.didFetchAssetsSuccessfully()
     dataProvider.didFetchPricesWithError()
 
@@ -47,7 +47,7 @@ class CryptoPriceViewModelTests: XCTestCase {
     let viewModel = createViewModel(viewProvider: viewProvider)
 
     // When
-    viewModel.fetchPriceList()
+    viewModel.startLivePriceUpdates()
     dataProvider.didFetchAssetsWithError()
 
     // Then
@@ -60,7 +60,7 @@ class CryptoPriceViewModelTests: XCTestCase {
     var viewModel: CryptoPriceViewModel? = createViewModel(viewProvider: viewProvider)
 
     // When
-    viewModel?.fetchPriceList()
+    viewModel?.startLivePriceUpdates()
     dataProvider.didFetchAssetsSuccessfully()
     viewModel = nil
     dataProvider.didFetchPricesSuccessfully()
@@ -75,7 +75,7 @@ class CryptoPriceViewModelTests: XCTestCase {
     let viewModel = createViewModel(viewProvider: viewProvider)
 
     // When
-    viewModel.fetchPriceList()
+    viewModel.startLivePriceUpdates()
     dataProvider.didFetchAssetsSuccessfully()
     dataProvider.didFetchPricesSuccessfully([
       SymbolPriceBankModel(
@@ -104,13 +104,13 @@ class CryptoPriceViewModelTests: XCTestCase {
     let viewModel = createViewModel(viewProvider: viewProvider)
 
     // When
-    viewModel.fetchPriceList()
+    viewModel.startLivePriceUpdates()
     dataProvider.didFetchAssetsSuccessfully() // Assets Cached!
     dataProvider.didFetchPricesSuccessfully()
 
     let firstList = viewModel.filteredCryptoPriceList.value
 
-    viewModel.fetchPriceList()
+    viewModel.startLivePriceUpdates()
     dataProvider.didFetchAssetsSuccessfully() // Assets retrieved from Cache
     dataProvider.didFetchPricesSuccessfully()
 
@@ -126,7 +126,7 @@ class CryptoPriceViewModelTests: XCTestCase {
     let viewModel = createViewModel(viewProvider: tableView)
 
     // When
-    viewModel.fetchPriceList()
+    viewModel.startLivePriceUpdates()
     dataProvider.didFetchAssetsSuccessfully()
     dataProvider.didFetchPricesSuccessfully()
     tableView.reloadData()
@@ -141,7 +141,7 @@ class CryptoPriceViewModelTests: XCTestCase {
     let viewModel = createViewModel(viewProvider: tableView)
 
     // When
-    viewModel.fetchPriceList()
+    viewModel.startLivePriceUpdates()
     dataProvider.didFetchAssetsSuccessfully()
     dataProvider.didFetchPricesSuccessfully()
     tableView.reloadData()
@@ -157,7 +157,7 @@ class CryptoPriceViewModelTests: XCTestCase {
     let viewModel = createViewModel(viewProvider: viewProvider)
 
     // When
-    viewModel.fetchPriceList()
+    viewModel.startLivePriceUpdates()
     dataProvider.didFetchAssetsSuccessfully()
     dataProvider.didFetchPricesSuccessfully()
     tableView.reloadData()
@@ -172,7 +172,7 @@ class CryptoPriceViewModelTests: XCTestCase {
     let viewModel = createViewModel(viewProvider: tableView)
 
     // When
-    viewModel.fetchPriceList()
+    viewModel.startLivePriceUpdates()
     let headerView = viewModel.tableView(tableView, viewForHeaderInSection: 0)
 
     // Then
@@ -187,7 +187,7 @@ class CryptoPriceViewModelTests: XCTestCase {
     let searchBar = UISearchTextField()
 
     // When 1
-    viewModel.fetchPriceList()
+    viewModel.startLivePriceUpdates()
     dataProvider.didFetchAssetsSuccessfully()
     dataProvider.didFetchPricesSuccessfully()
 
@@ -209,7 +209,7 @@ class CryptoPriceViewModelTests: XCTestCase {
     let viewModel = createViewModel(viewProvider: tableView)
 
     // When 1
-    viewModel.fetchPriceList()
+    viewModel.startLivePriceUpdates()
     dataProvider.didFetchAssetsSuccessfully()
     dataProvider.didFetchPricesSuccessfully()
 
