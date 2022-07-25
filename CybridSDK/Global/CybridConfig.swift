@@ -14,12 +14,13 @@ public let Cybrid = CybridConfig.shared
 
 public final class CybridConfig {
   // MARK: Internal Static Properties
-  static var shared = CybridConfig()
+  internal static var shared = CybridConfig()
 
   // MARK: Internal Properties
-  var authenticator: CybridAuthenticator?
-  var theme: Theme = CybridTheme.default
-  let assetsURL: String = "https://images.cybrid.xyz/sdk/assets/"
+  internal var authenticator: CybridAuthenticator?
+  internal var theme: Theme = CybridTheme.default
+  internal var refreshRate: TimeInterval = 5
+  internal let assetsURL: String = "https://images.cybrid.xyz/sdk/assets/"
 
   // MARK: Private Properties
   private var _preferredLocale: Locale?
@@ -28,9 +29,11 @@ public final class CybridConfig {
   public func setup(environment: CybridEnvironment = .sandbox,
                     authenticator: CybridAuthenticator,
                     theme: Theme? = nil,
-                    locale: Locale? = nil) {
+                    locale: Locale? = nil,
+                    refreshRate: TimeInterval = 5) {
     self.authenticator = authenticator
     self.theme = theme ?? CybridTheme.default
+    self.refreshRate = refreshRate
     self._preferredLocale = locale
     CybridApiBankSwiftAPI.basePath = environment.basePath
   }
