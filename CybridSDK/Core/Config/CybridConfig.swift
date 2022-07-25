@@ -22,6 +22,7 @@ public final class CybridConfig {
   private var _preferredLocale: Locale?
 
   // MARK: Public Methods
+  /// Setup CybridSDK Configuration
   public func setup(environment: CybridEnvironment = .sandbox,
                     authenticator: CybridAuthenticator,
                     theme: Theme? = nil,
@@ -32,6 +33,17 @@ public final class CybridConfig {
     self.refreshRate = refreshRate
     self._preferredLocale = locale
     CybridApiBankSwiftAPI.basePath = environment.basePath
+  }
+
+  /// Setup NotificationCenter Observers.
+  /// This is meant for manual use only. Observers are initialized by default with Cybrid's Session.
+  public func startListeners() {
+    CybridSession.current.setupEventListeners()
+  }
+
+  /// Removes NotificationCenter Observers.
+  public func stopListeners() {
+    CybridSession.current.stopListeners()
   }
 }
 

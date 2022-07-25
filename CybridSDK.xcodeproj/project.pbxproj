@@ -252,10 +252,10 @@
 		0B00E0202878D20F00707F26 /* Service Layer */ = {
 			isa = PBXGroup;
 			children = (
-				0B6175D2288B7806004E4F5B /* Repositories */,
 				0B2899DF288E4860001B3360 /* AuthenticatedServiceProvider.swift */,
-				0B00E0212878D23100707F26 /* CybridSession.swift */,
 				0B00E03F287F81A500707F26 /* CybridAPIManager.swift */,
+				0B00E0212878D23100707F26 /* CybridSession.swift */,
+				0B6175D2288B7806004E4F5B /* Repositories */,
 			);
 			path = "Service Layer";
 			sourceTree = "<group>";
