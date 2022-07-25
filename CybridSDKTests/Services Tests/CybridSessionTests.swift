@@ -12,6 +12,7 @@ import XCTest
 class CybridSessionTests: XCTestCase {
   var authenticator = MockAuthenticator()
   var apiManager = MockAPIManager.self
+  var notificationManager = NotificationCenterMock()
 
   override func tearDownWithError() throws {
     apiManager.clearHeaders()
@@ -220,6 +221,6 @@ class CybridSessionTests: XCTestCase {
 
 extension CybridSessionTests {
   func createSession(authenticator: CybridAuthenticator?) -> CybridSession {
-    CybridSession(authenticator: authenticator, apiManager: apiManager)
+    CybridSession(authenticator: authenticator, apiManager: apiManager, notificationManager: notificationManager)
   }
 }

@@ -15,6 +15,7 @@ final class PriceListDataProviderMock: AssetsRepoProvider, PricesRepoProvider {
   // MARK: Repositories
   var assetsRepository: AssetsRepository.Type = AssetsAPIMock.self
   var pricesRepository: PricesRepository.Type = PricesAPIMock.self
+  var pricesFetchScheduler: TaskScheduler = TaskSchedulerMock()
 
   // MARK: Cache
   var assetsCache: [AssetBankModel]?

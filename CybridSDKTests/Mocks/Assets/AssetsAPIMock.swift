@@ -16,7 +16,7 @@ final class AssetsAPIMock: AssetsAPI {
   override class func listAssets(page: Int? = nil,
                                  perPage: Int? = nil,
                                  apiResponseQueue: DispatchQueue = CybridApiBankSwiftAPI.apiResponseQueue,
-                                 completion: @escaping (AssetsListCompletion) -> RequestTask {
+                                 completion: @escaping ((_ result: Result<AssetListBankModel, ErrorResponse>) -> Void)) -> RequestTask {
     listAssetsCompletion = completion
     return listAssetsWithRequestBuilder().requestTask
   }

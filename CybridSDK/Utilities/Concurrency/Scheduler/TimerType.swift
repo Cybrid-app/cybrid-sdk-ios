@@ -9,6 +9,7 @@ import Foundation
 
 protocol TimerType {
   var isValid: Bool { get }
+  var timeInterval: TimeInterval { get }
 
   static func makeScheduler(block: @escaping (TimerType) -> Void) -> TimerType
   func invalidate()
