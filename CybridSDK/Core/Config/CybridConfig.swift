@@ -8,10 +8,6 @@
 import CybridApiBankSwift
 import Foundation
 
-// swiftlint:disable identifier_name
-/// Reference to `CybridConfig.shared` for quick bootstrapping.
-public let Cybrid = CybridConfig.shared
-
 public final class CybridConfig {
   // MARK: Internal Static Properties
   internal static var shared = CybridConfig()
@@ -38,11 +34,11 @@ public final class CybridConfig {
     CybridApiBankSwiftAPI.basePath = environment.basePath
   }
 }
-// swiftlint:enable identifier_name
 
 // MARK: - CybridConfig + Locale
 
 extension CybridConfig {
+  /// Returns user preferred locale
   func getPreferredLocale(with preferredLanguages: [String]? = nil) -> Locale {
     /// If developer overrides the Locale,
     /// And the locale is supported by our SDK
