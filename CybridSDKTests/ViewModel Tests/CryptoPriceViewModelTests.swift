@@ -11,7 +11,8 @@ import XCTest
 
 class CryptoPriceViewModelTests: XCTestCase {
 
-  lazy var dataProvider = PriceListDataProviderMock()
+  let pricesFetchScheduler = TaskSchedulerMock()
+  lazy var dataProvider = PriceListDataProviderMock(pricesFetchScheduler: pricesFetchScheduler)
 
   func testFetchData_successfully() {
     // Given
@@ -120,6 +121,87 @@ class CryptoPriceViewModelTests: XCTestCase {
     XCTAssertEqual(firstList, secondList)
   }
 
+}
+
+// MARK: - Data Fetch Scheduled Tests
+
+extension CryptoPriceViewModelTests {
+  func testPriceLiveUpdate() {
+    // Given
+    let viewProvider = CryptoPriceMockViewProvider()
+    let viewModel = createViewModel(viewProvider: viewProvider)
+    let firstList: [CryptoPriceModel] = [
+      CryptoPriceModel(
+        symbolPrice: .btcUSD1,
+        asset: .bitcoin,
+        counterAsset: .usd
+      ),
+      CryptoPriceModel(
+        symbolPrice: .ethUSD1,
+        asset: .ethereum,
+        counterAsset: .usd
+      )
+    ].compactMap { $0 }
+    let secondList: [CryptoPriceModel] = [
+      CryptoPriceModel(
+        symbolPrice: .btcUSD2,
+        asset: .bitcoin,
+        counterAsset: .usd
+      ),
+      CryptoPriceModel(
+        symbolPrice: .ethUSD2,
+        asset: .ethereum,
+        counterAsset: .usd
+      )
+    ].compactMap { $0 }
+
+    // When
+    viewModel.startLivePriceUpdates()
+    dataProvider.didFetchAssetsSuccessfully()
+    dataProvider.didFetchPricesSuccessfully([
+      .btcUSD1,
+      .ethUSD1
+    ])
+
+    // Then
+    XCTAssertEqual(firstList, viewModel.filteredCryptoPriceList.value)
+
+    pricesFetchScheduler.runNextLoop()
+    // When
+    dataProvider.didFetchAssetsSuccessfully()
+    dataProvider.didFetchPricesSuccessfully([
+      .btcUSD2,
+      .ethUSD2
+    ])
+
+    // Then
+    XCTAssertEqual(secondList, viewModel.filteredCryptoPriceList.value)
+  }
+
+  func testPriceLiveUpdate_cancel() {
+    // Given
+    let viewProvider = CryptoPriceMockViewProvider()
+    let viewModel = createViewModel(viewProvider: viewProvider)
+
+    // When
+    viewModel.startLivePriceUpdates()
+    dataProvider.didFetchAssetsSuccessfully()
+    dataProvider.didFetchPricesSuccessfully()
+
+    // Then
+    XCTAssertTrue(pricesFetchScheduler.state == .running)
+
+    // When
+    viewModel.stopLiveUpdates()
+
+    // Then
+    XCTAssertTrue(pricesFetchScheduler.state == .cancelled)
+  }
+}
+
+// MARK: - TableView Delegate Tests
+
+extension CryptoPriceViewModelTests {
   func testTableViewRows() {
     // Given
     let tableView = CryptoPriceListView()
@@ -179,7 +261,11 @@ class CryptoPriceViewModelTests: XCTestCase {
     XCTAssertNotNil(headerView)
     XCTAssertTrue(headerView!.isKind(of: CryptoPriceTableHeaderView.self))
   }
+}
 
+// MARK: - SearchBar Tests
+
+extension CryptoPriceViewModelTests {
   func testSearchBar_filterWithValidQuery() {
     // Given
     let tableView = CryptoPriceListView()

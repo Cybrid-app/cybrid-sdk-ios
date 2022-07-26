@@ -15,10 +15,14 @@ final class PriceListDataProviderMock: AssetsRepoProvider, PricesRepoProvider {
   // MARK: Repositories
   var assetsRepository: AssetsRepository.Type = AssetsAPIMock.self
   var pricesRepository: PricesRepository.Type = PricesAPIMock.self
-  var pricesFetchScheduler: TaskScheduler = TaskSchedulerMock()
+  var pricesFetchScheduler: TaskScheduler
 
   // MARK: Cache
   var assetsCache: [AssetBankModel]?
+
+  init(pricesFetchScheduler: TaskScheduler = TaskSchedulerMock()) {
+    self.pricesFetchScheduler = pricesFetchScheduler
+  }
 
   func didFetchPricesSuccessfully(_ prices: [SymbolPriceBankModel]? = nil) {
     (authenticator as? MockAuthenticator)?.authenticationSuccess()
@@ -38,5 +42,9 @@ final class PriceListDataProviderMock: AssetsRepoProvider, PricesRepoProvider {
   func didFetchAssetsWithError() {
     (authenticator as? MockAuthenticator)?.authenticationSuccess()
     AssetsAPIMock.didFetchAssetsWithError()
+  }
+
+  func cancelUpdates() {
+    pricesFetchScheduler.cancel()
   }
 }

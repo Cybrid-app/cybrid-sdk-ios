@@ -13,6 +13,10 @@ final class TaskSchedulerMock: TaskScheduler {
   var timer: TimerType?
   var state: TimerTypeState = .initial
   var block: (() -> Void)?
+
+  func runNextLoop() {
+    block?()
+  }
 }
 
 final class TimerMock: TimerType {
@@ -43,12 +47,5 @@ final class TimerMock: TimerType {
   func fire() {
     _isValid = true
     block?()
-  }
-
-  func runLoop() {
-    while isValid {
-      block?()
-      sleep(UInt32(timeInterval))
-    }
   }
 }
