@@ -35,6 +35,12 @@ final class TaskSchedulerTests: XCTestCase {
     XCTAssertEqual(loopCount, expectedLoops)
     XCTAssertEqual(scheduler.state, .cancelled)
   }
+
+  func testTimer_makeScheduler() {
+    let timer = Timer.makeScheduler { _ in }
+
+    XCTAssertEqual(timer.timeInterval, Cybrid.refreshRate)
+  }
 }
 
 extension TaskSchedulerTests {
