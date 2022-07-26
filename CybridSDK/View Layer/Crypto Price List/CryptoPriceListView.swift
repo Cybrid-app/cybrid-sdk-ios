@@ -53,7 +53,7 @@ public class CryptoPriceListView: UITableView {
     viewModel.filteredCryptoPriceList.bind { _ in
       self.reloadData()
     }
-    viewModel.startLivePriceUpdates()
+    viewModel.fetchPriceList()
   }
 
   private func stopLiveUpdates() {

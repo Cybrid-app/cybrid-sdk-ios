@@ -14,13 +14,27 @@ class CryptoPriceViewModelTests: XCTestCase {
   let pricesFetchScheduler = TaskSchedulerMock()
   lazy var dataProvider = PriceListDataProviderMock(pricesFetchScheduler: pricesFetchScheduler)
 
-  func testFetchData_successfully() {
+  func testFetchData_withLiveUpdate_successfully() {
     // Given
     let viewProvider = CryptoPriceMockViewProvider()
     let viewModel = createViewModel(viewProvider: viewProvider)
 
     // When
-    viewModel.startLivePriceUpdates()
+    viewModel.fetchPriceList()
+    dataProvider.didFetchAssetsSuccessfully()
+    dataProvider.didFetchPricesSuccessfully()
+
+    // Then
+    XCTAssertFalse(viewModel.filteredCryptoPriceList.value.isEmpty)
+  }
+
+  func testFetchData_withoutLiveUpdate_successfully() {
+    // Given
+    let viewProvider = CryptoPriceMockViewProvider()
+    let viewModel = createViewModel(viewProvider: viewProvider)
+
+    // When
+    viewModel.fetchPriceList(liveUpdateEnabled: false)
     dataProvider.didFetchAssetsSuccessfully()
     dataProvider.didFetchPricesSuccessfully()
 
@@ -34,7 +48,7 @@ class CryptoPriceViewModelTests: XCTestCase {
     let viewModel = createViewModel(viewProvider: viewProvider)
 
     // When
-    viewModel.startLivePriceUpdates()
+    viewModel.fetchPriceList()
     dataProvider.didFetchAssetsSuccessfully()
     dataProvider.didFetchPricesWithError()
 
@@ -48,7 +62,7 @@ class CryptoPriceViewModelTests: XCTestCase {
     let viewModel = createViewModel(viewProvider: viewProvider)
 
     // When
-    viewModel.startLivePriceUpdates()
+    viewModel.fetchPriceList()
     dataProvider.didFetchAssetsWithError()
 
     // Then
@@ -61,7 +75,7 @@ class CryptoPriceViewModelTests: XCTestCase {
     var viewModel: CryptoPriceViewModel? = createViewModel(viewProvider: viewProvider)
 
     // When
-    viewModel?.startLivePriceUpdates()
+    viewModel?.fetchPriceList()
     dataProvider.didFetchAssetsSuccessfully()
     viewModel = nil
     dataProvider.didFetchPricesSuccessfully()
@@ -70,13 +84,33 @@ class CryptoPriceViewModelTests: XCTestCase {
     XCTAssertNil(viewModel)
   }
 
+  func testPriceRepoProvider_MemoryDeallocation() {
+    // Given
+    let viewProvider = CryptoPriceMockViewProvider()
+    var optionalDataProvider: PriceListDataProviderMock? = PriceListDataProviderMock(pricesFetchScheduler: pricesFetchScheduler)
+    var viewModel: CryptoPriceViewModel? = createViewModel(viewProvider: viewProvider, dataProvider: optionalDataProvider)
+
+    // When
+    viewModel?.fetchPriceList()
+    optionalDataProvider?.didFetchAssetsSuccessfully()
+    XCTAssertTrue(pricesFetchScheduler.state == .running)
+
+    // When
+    viewModel = nil
+    optionalDataProvider = nil
+    pricesFetchScheduler.runNextLoop()
+
+    // Then
+    XCTAssertTrue(pricesFetchScheduler.state == .cancelled)
+  }
+
   func testFetchData_withWrongDataFormat() {
     // Given
     let viewProvider = CryptoPriceMockViewProvider()
     let viewModel = createViewModel(viewProvider: viewProvider)
 
     // When
-    viewModel.startLivePriceUpdates()
+    viewModel.fetchPriceList()
     dataProvider.didFetchAssetsSuccessfully()
     dataProvider.didFetchPricesSuccessfully([
       SymbolPriceBankModel(
@@ -105,13 +139,13 @@ class CryptoPriceViewModelTests: XCTestCase {
     let viewModel = createViewModel(viewProvider: viewProvider)
 
     // When
-    viewModel.startLivePriceUpdates()
+    viewModel.fetchPriceList()
     dataProvider.didFetchAssetsSuccessfully() // Assets Cached!
     dataProvider.didFetchPricesSuccessfully()
 
     let firstList = viewModel.filteredCryptoPriceList.value
 
-    viewModel.startLivePriceUpdates()
+    viewModel.fetchPriceList()
     dataProvider.didFetchAssetsSuccessfully() // Assets retrieved from Cache
     dataProvider.didFetchPricesSuccessfully()
 
@@ -156,7 +190,7 @@ extension CryptoPriceViewModelTests {
     ].compactMap { $0 }
 
     // When
-    viewModel.startLivePriceUpdates()
+    viewModel.fetchPriceList()
     dataProvider.didFetchAssetsSuccessfully()
     dataProvider.didFetchPricesSuccessfully([
       .btcUSD1,
@@ -184,7 +218,7 @@ extension CryptoPriceViewModelTests {
     let viewModel = createViewModel(viewProvider: viewProvider)
 
     // When
-    viewModel.startLivePriceUpdates()
+    viewModel.fetchPriceList()
     dataProvider.didFetchAssetsSuccessfully()
     dataProvider.didFetchPricesSuccessfully()
 
@@ -208,7 +242,7 @@ extension CryptoPriceViewModelTests {
     let viewModel = createViewModel(viewProvider: tableView)
 
     // When
-    viewModel.startLivePriceUpdates()
+    viewModel.fetchPriceList()
     dataProvider.didFetchAssetsSuccessfully()
     dataProvider.didFetchPricesSuccessfully()
     tableView.reloadData()
@@ -223,7 +257,7 @@ extension CryptoPriceViewModelTests {
     let viewModel = createViewModel(viewProvider: tableView)
 
     // When
-    viewModel.startLivePriceUpdates()
+    viewModel.fetchPriceList()
     dataProvider.didFetchAssetsSuccessfully()
     dataProvider.didFetchPricesSuccessfully()
     tableView.reloadData()
@@ -239,7 +273,7 @@ extension CryptoPriceViewModelTests {
     let viewModel = createViewModel(viewProvider: viewProvider)
 
     // When
-    viewModel.startLivePriceUpdates()
+    viewModel.fetchPriceList()
     dataProvider.didFetchAssetsSuccessfully()
     dataProvider.didFetchPricesSuccessfully()
     tableView.reloadData()
@@ -254,7 +288,7 @@ extension CryptoPriceViewModelTests {
     let viewModel = createViewModel(viewProvider: tableView)
 
     // When
-    viewModel.startLivePriceUpdates()
+    viewModel.fetchPriceList()
     let headerView = viewModel.tableView(tableView, viewForHeaderInSection: 0)
 
     // Then
@@ -273,7 +307,7 @@ extension CryptoPriceViewModelTests {
     let searchBar = UISearchTextField()
 
     // When 1
-    viewModel.startLivePriceUpdates()
+    viewModel.fetchPriceList()
     dataProvider.didFetchAssetsSuccessfully()
     dataProvider.didFetchPricesSuccessfully()
 
@@ -295,7 +329,7 @@ extension CryptoPriceViewModelTests {
     let viewModel = createViewModel(viewProvider: tableView)
 
     // When 1
-    viewModel.startLivePriceUpdates()
+    viewModel.fetchPriceList()
     dataProvider.didFetchAssetsSuccessfully()
     dataProvider.didFetchPricesSuccessfully()
 
@@ -317,8 +351,9 @@ extension CryptoPriceViewModelTests {
 }
 
 extension CryptoPriceViewModelTests {
-  func createViewModel(viewProvider: CryptoPriceViewProvider) -> CryptoPriceViewModel {
-    let viewModel = CryptoPriceViewModel(cellProvider: viewProvider, dataProvider: dataProvider)
+  func createViewModel(viewProvider: CryptoPriceViewProvider,
+                       dataProvider: (AssetsRepoProvider & PricesRepoProvider)? = nil) -> CryptoPriceViewModel {
+    let viewModel = CryptoPriceViewModel(cellProvider: viewProvider, dataProvider: dataProvider ?? self.dataProvider)
     return viewModel
   }
 }

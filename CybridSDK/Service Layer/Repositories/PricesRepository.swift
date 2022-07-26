@@ -23,10 +23,13 @@ protocol PricesRepoProvider: AuthenticatedServiceProvider {
 }
 
 extension PricesRepoProvider {
-  func fetchPriceList(_ completion: @escaping FetchPricesCompletion, liveUpdateEnabled: Bool = true) {
+  func fetchPriceList(liveUpdateEnabled: Bool = true, _ completion: @escaping FetchPricesCompletion) {
     if liveUpdateEnabled {
-      pricesFetchScheduler.start { [weak self] in
-        guard let self = self else { return }
+      pricesFetchScheduler.start { [weak self, pricesFetchScheduler] in
+        guard let self = self else {
+          pricesFetchScheduler.cancel()
+          return
+        }
         self.authenticatedRequest(self.pricesRepository.fetchPrices, completion: completion)
       }
     } else {

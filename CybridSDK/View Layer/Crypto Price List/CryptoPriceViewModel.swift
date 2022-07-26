@@ -26,11 +26,11 @@ class CryptoPriceViewModel: NSObject {
     self.dataProvider = dataProvider
   }
 
-  func startLivePriceUpdates() {
+  func fetchPriceList(liveUpdateEnabled: Bool = true) {
     dataProvider.fetchAssetsList { [weak self] assetsResult in
       switch assetsResult {
       case .success(let assetsList):
-        self?.dataProvider.fetchPriceList { pricesResult in
+        self?.dataProvider.fetchPriceList(liveUpdateEnabled: liveUpdateEnabled) { pricesResult in
           switch pricesResult {
           case .success(let pricesList):
             guard let modelList = self?.buildModelList(symbols: pricesList, assets: assetsList) else {
