@@ -43,7 +43,7 @@ extension TaskScheduler {
   }
 
   func resume() {
-    if state == .paused || (state == .running && !(timer?.isValid ?? false)) {
+    if state == .paused {
       start()
     }
   }

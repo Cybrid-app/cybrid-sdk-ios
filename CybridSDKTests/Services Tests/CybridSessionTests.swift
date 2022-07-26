@@ -217,6 +217,48 @@ class CybridSessionTests: XCTestCase {
     XCTAssertNotEqual(actualResult, expectedResult)
     XCTAssertNil(actualResult)
   }
+
+  func testSession_startScheduler() {
+    // Given
+    let session = createSession(authenticator: authenticator)
+    let scheduler = TaskSchedulerMock()
+    session.pricesFetchScheduler = scheduler
+
+    // When
+    scheduler.start()
+
+    // Then
+    XCTAssertTrue(scheduler.state == .running)
+  }
+
+  func testSession_moveToBackground() {
+    // Given
+    let session = createSession(authenticator: authenticator)
+    let scheduler = TaskSchedulerMock()
+    session.pricesFetchScheduler = scheduler
+
+    // When
+    scheduler.start()
+    notificationManager.post(name: CybridSession.appMovedToBackgroundEvent, object: nil, userInfo: nil)
+
+    // Then
+    XCTAssertTrue(scheduler.state == .paused)
+  }
+
+  func testSession_moveToForeground() {
+    // Given
+    let session = createSession(authenticator: authenticator)
+    let scheduler = TaskSchedulerMock()
+    session.pricesFetchScheduler = scheduler
+
+    // When
+    scheduler.start()
+    notificationManager.post(name: CybridSession.appMovedToBackgroundEvent, object: nil, userInfo: nil)
+    notificationManager.post(name: CybridSession.appMovedToForegroundEvent, object: nil, userInfo: nil)
+
+    // Then
+    XCTAssertTrue(scheduler.state == .running)
+  }
 }
 
 extension CybridSessionTests {

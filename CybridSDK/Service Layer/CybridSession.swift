@@ -77,6 +77,7 @@ final class CybridSession: AuthenticatedServiceProvider {
 protocol NotificationManager {
   func addObserver(_ observer: Any, selector: Selector, name: NSNotification.Name?, object: Any?)
   func removeObserver(_ observer: Any)
+  func post(name: NSNotification.Name, object: Any?, userInfo: [AnyHashable: Any]?)
 }
 
 extension NotificationCenter: NotificationManager {}
