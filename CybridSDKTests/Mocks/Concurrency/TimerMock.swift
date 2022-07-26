@@ -10,7 +10,7 @@ import Foundation
 
 final class TimerMock: TimerType {
   private var _isValid = false
-  private var _timeInterval: TimeInterval = 5
+  private var _timeInterval: TimeInterval = 1
   fileprivate var block: (() -> Void)?
 
   var isValid: Bool {
@@ -36,5 +36,12 @@ final class TimerMock: TimerType {
   func fire() {
     _isValid = true
     block?()
+  }
+
+  func runLoop() {
+    while isValid {
+      block?()
+      sleep(UInt32(timeInterval))
+    }
   }
 }

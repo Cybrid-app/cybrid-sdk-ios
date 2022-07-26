@@ -23,11 +23,10 @@ extension TaskScheduler {
       self.block = incomingBlock
     }
     /// Create new scheduler
-    timer = timerType.makeScheduler(block: { [weak self] capturedTimer in
+    timer = timerType.makeScheduler(block: { [weak self] _ in
       // TODO: replace this print with Log
       print("\(String(describing: self)) running scheduled task at \(Date().description)")
-      guard let self = self, capturedTimer.isValid else { return }
-      self.block?()
+      self?.block?()
     })
     timer?.fire()
     /// Change state to running

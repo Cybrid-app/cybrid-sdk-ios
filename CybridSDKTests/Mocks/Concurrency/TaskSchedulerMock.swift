@@ -23,4 +23,8 @@ final class TaskSchedulerMock: TaskScheduler {
   func runNextLoop() {
     block?()
   }
+
+  func runLoop() {
+    (timer as? TimerMock)?.runLoop()
+  }
 }

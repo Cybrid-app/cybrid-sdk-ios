@@ -43,6 +43,7 @@
 		0B2899ED288F4BE5001B3360 /* TaskSchedulerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B2899EC288F4BE5001B3360 /* TaskSchedulerMock.swift */; };
 		0B2899F2288F53FE001B3360 /* NotificationCenterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B2899F1288F53FE001B3360 /* NotificationCenterMock.swift */; };
 		0B2899F4289049F3001B3360 /* TimerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B2899F3289049F3001B3360 /* TimerMock.swift */; };
+		0B2899F628904B11001B3360 /* TaskSchedulerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B2899F528904B11001B3360 /* TaskSchedulerTests.swift */; };
 		0B2B2A6D28621D5C002F0EC1 /* ColorTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B2B2A6C28621D5C002F0EC1 /* ColorTheme.swift */; };
 		0B2B2A7128621DA7002F0EC1 /* FontTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B2B2A7028621DA7002F0EC1 /* FontTheme.swift */; };
 		0B2B2A8528629031002F0EC1 /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B2B2A8428629031002F0EC1 /* UIColor+Extensions.swift */; };
@@ -168,6 +169,7 @@
 		0B2899EC288F4BE5001B3360 /* TaskSchedulerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskSchedulerMock.swift; sourceTree = "<group>"; };
 		0B2899F1288F53FE001B3360 /* NotificationCenterMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCenterMock.swift; sourceTree = "<group>"; };
 		0B2899F3289049F3001B3360 /* TimerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerMock.swift; sourceTree = "<group>"; };
+		0B2899F528904B11001B3360 /* TaskSchedulerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskSchedulerTests.swift; sourceTree = "<group>"; };
 		0B2B2A6C28621D5C002F0EC1 /* ColorTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorTheme.swift; sourceTree = "<group>"; };
 		0B2B2A7028621DA7002F0EC1 /* FontTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontTheme.swift; sourceTree = "<group>"; };
 		0B2B2A8428629031002F0EC1 /* UIColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
@@ -555,6 +557,7 @@
 				0B96602A285C3AC600584692 /* NetworkingInterfaceTests.swift */,
 				0BD6611E286C1EB800F4DA6B /* ObservableTests.swift */,
 				0B00E01E2878A16800707F26 /* BigDecimalTests.swift */,
+				0B2899F528904B11001B3360 /* TaskSchedulerTests.swift */,
 			);
 			path = "Utilities Tests";
 			sourceTree = "<group>";
@@ -975,6 +978,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0B2899F628904B11001B3360 /* TaskSchedulerTests.swift in Sources */,
 				0BD6611D286C1D5B00F4DA6B /* CurrencyFormatterTests.swift in Sources */,
 				0B303CF328636A0D007BF7FF /* CybridConfigTests.swift in Sources */,
 				0BBCF640285C52D700D39C6D /* MockError.swift in Sources */,
