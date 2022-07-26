@@ -16,6 +16,7 @@ public final class CybridConfig {
   internal var authenticator: CybridAuthenticator?
   internal var theme: Theme = CybridTheme.default
   internal var refreshRate: TimeInterval = 5
+  internal lazy var session: CybridSession = .current
   internal let assetsURL: String = "https://images.cybrid.xyz/sdk/assets/"
 
   // MARK: Private Properties
@@ -38,12 +39,12 @@ public final class CybridConfig {
   /// Setup NotificationCenter Observers.
   /// This is meant for manual use only. Observers are initialized by default with Cybrid's Session.
   public func startListeners() {
-    CybridSession.current.setupEventListeners()
+    session.setupEventListeners()
   }
 
   /// Removes NotificationCenter Observers.
   public func stopListeners() {
-    CybridSession.current.stopListeners()
+    session.stopListeners()
   }
 }
 

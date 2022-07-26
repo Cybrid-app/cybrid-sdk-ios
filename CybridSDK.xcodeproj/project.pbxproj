@@ -369,7 +369,7 @@
 				0B96600B285A9A1A00584692 /* Mocks */,
 				0B966006285A92C000584692 /* Extensions */,
 				0B303CE52862E7BC007BF7FF /* Extensions Tests */,
-				0B303CF1286369F7007BF7FF /* Global Tests */,
+				0B303CF1286369F7007BF7FF /* Core Tests */,
 				0BD661312872A04800F4DA6B /* Localization Tests */,
 				0B00E03A287F7B5D00707F26 /* Services Tests */,
 				0B303CEA2862F888007BF7FF /* Theme Tests */,
@@ -484,13 +484,13 @@
 			path = "Theme Tests";
 			sourceTree = "<group>";
 		};
-		0B303CF1286369F7007BF7FF /* Global Tests */ = {
+		0B303CF1286369F7007BF7FF /* Core Tests */ = {
 			isa = PBXGroup;
 			children = (
 				0B00E047287FC4C800707F26 /* EnvironmentTests.swift */,
 				0B303CF228636A0D007BF7FF /* CybridConfigTests.swift */,
 			);
-			path = "Global Tests";
+			path = "Core Tests";
 			sourceTree = "<group>";
 		};
 		0B6175D2288B7806004E4F5B /* Repositories */ = {
