@@ -43,8 +43,4 @@ final class PriceListDataProviderMock: AssetsRepoProvider, PricesRepoProvider {
     (authenticator as? MockAuthenticator)?.authenticationSuccess()
     AssetsAPIMock.didFetchAssetsWithError()
   }
-
-  func cancelUpdates() {
-    pricesFetchScheduler.cancel()
-  }
 }
