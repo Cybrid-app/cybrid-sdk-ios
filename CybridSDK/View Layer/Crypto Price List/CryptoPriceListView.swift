@@ -27,6 +27,18 @@ public class CryptoPriceListView: UITableView {
     return nil
   }
 
+  /// This method will detect when the Price List View is added or removed from the View Hierarchy.
+  override public func didMoveToWindow() {
+    super.didMoveToWindow()
+    if window == nil {
+      /// If the ListView is been removed from the View Hierarchy we want to stop receiving live updates
+      stopLiveUpdates()
+    } else {
+      /// If the ListView is been added to the View Hierarchy we want to start receiving live updates
+      startLiveUpdates()
+    }
+  }
+
   private func setupView() {
     delegate = viewModel
     dataSource = viewModel
@@ -35,6 +47,17 @@ public class CryptoPriceListView: UITableView {
     estimatedRowHeight = Constants.rowHeight
     translatesAutoresizingMaskIntoConstraints = false
     makeKeyboardHandler()
+  }
+
+  private func startLiveUpdates() {
+    viewModel.filteredCryptoPriceList.bind { _ in
+      self.reloadData()
+    }
+    viewModel.fetchPriceList()
+  }
+
+  private func stopLiveUpdates() {
+    viewModel.stopLiveUpdates()
   }
 
   public func embed(in viewController: UIViewController) {
@@ -71,13 +94,6 @@ public class CryptoPriceListView: UITableView {
                          constant: 0)
     ])
     layoutSubviews()
-  }
-
-  public func startLiveUpdate() {
-    viewModel.filteredCryptoPriceList.bind { _ in
-      self.reloadData()
-    }
-    viewModel.fetchPriceList()
   }
 }
 

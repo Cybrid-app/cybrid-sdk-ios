@@ -1,8 +1,8 @@
 //
-//  CybridSession.swift
+//  AuthenticatedServiceProvider.swift
 //  CybridSDK
 //
-//  Created by Cybrid on 8/07/22.
+//  Created by Cybrid on 24/07/22.
 //
 
 import CybridApiBankSwift
@@ -69,28 +69,4 @@ extension AuthenticatedServiceProvider {
       }
     }
   }
-}
-
-final class CybridSession: AuthenticatedServiceProvider {
-
-  static var current = CybridSession(authenticator: Cybrid.authenticator, apiManager: CybridApiBankSwiftAPI.self)
-
-  // MARK: ServiceProviders APIs
-  internal var pricesRepository: PricesRepository.Type
-  internal var assetsRepository: AssetsRepository.Type
-
-  // MARK: Cached Data
-  internal var assetsCache: [AssetBankModel]?
-
-  // MARK: Private properties
-  private(set) var authenticator: CybridAuthenticator?
-  private(set) var apiManager: CybridAPIManager.Type
-
-  init(authenticator: CybridAuthenticator?, apiManager: CybridAPIManager.Type) {
-    self.authenticator = authenticator
-    self.apiManager = apiManager
-    self.pricesRepository = PricesAPI.self
-    self.assetsRepository = AssetsAPI.self
-  }
-
 }

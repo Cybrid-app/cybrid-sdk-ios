@@ -37,6 +37,13 @@
 		0B078F1228497B070020B4F7 /* CybridSDK.docc in Sources */ = {isa = PBXBuildFile; fileRef = 0B078F1128497B070020B4F7 /* CybridSDK.docc */; };
 		0B078F1828497B070020B4F7 /* CybridSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B078F0D28497B070020B4F7 /* CybridSDK.framework */; };
 		0B078F1E28497B070020B4F7 /* CybridSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 0B078F1028497B070020B4F7 /* CybridSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0B2899E0288E4860001B3360 /* AuthenticatedServiceProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B2899DF288E4860001B3360 /* AuthenticatedServiceProvider.swift */; };
+		0B2899E5288EE764001B3360 /* TimerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B2899E4288EE764001B3360 /* TimerType.swift */; };
+		0B2899E9288F3E1F001B3360 /* Cybrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B2899E8288F3E1F001B3360 /* Cybrid.swift */; };
+		0B2899ED288F4BE5001B3360 /* TaskSchedulerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B2899EC288F4BE5001B3360 /* TaskSchedulerMock.swift */; };
+		0B2899F2288F53FE001B3360 /* NotificationCenterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B2899F1288F53FE001B3360 /* NotificationCenterMock.swift */; };
+		0B2899F4289049F3001B3360 /* TimerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B2899F3289049F3001B3360 /* TimerMock.swift */; };
+		0B2899F628904B11001B3360 /* TaskSchedulerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B2899F528904B11001B3360 /* TaskSchedulerTests.swift */; };
 		0B2B2A6D28621D5C002F0EC1 /* ColorTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B2B2A6C28621D5C002F0EC1 /* ColorTheme.swift */; };
 		0B2B2A7128621DA7002F0EC1 /* FontTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B2B2A7028621DA7002F0EC1 /* FontTheme.swift */; };
 		0B2B2A8528629031002F0EC1 /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B2B2A8428629031002F0EC1 /* UIColor+Extensions.swift */; };
@@ -49,6 +56,7 @@
 		0B303CE92862F5BB007BF7FF /* UILabelExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B303CE82862F5BB007BF7FF /* UILabelExtensionsTests.swift */; };
 		0B303CEC2862F898007BF7FF /* ColorThemeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B303CEB2862F898007BF7FF /* ColorThemeTests.swift */; };
 		0B303CF328636A0D007BF7FF /* CybridConfigTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B303CF228636A0D007BF7FF /* CybridConfigTests.swift */; };
+		0B6175D4288B7853004E4F5B /* TaskScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6175D3288B7853004E4F5B /* TaskScheduler.swift */; };
 		0B966004285A85C600584692 /* AsyncOperationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B966003285A85C600584692 /* AsyncOperationTests.swift */; };
 		0B966008285A92E700584692 /* XCTestCase+expectFailure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B966007285A92E700584692 /* XCTestCase+expectFailure.swift */; };
 		0B96600D285A9A3100584692 /* MockAsyncOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B96600C285A9A3100584692 /* MockAsyncOperation.swift */; };
@@ -155,6 +163,13 @@
 		0B078F1028497B070020B4F7 /* CybridSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CybridSDK.h; sourceTree = "<group>"; };
 		0B078F1128497B070020B4F7 /* CybridSDK.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = CybridSDK.docc; sourceTree = "<group>"; };
 		0B078F1728497B070020B4F7 /* CybridSDKTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CybridSDKTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		0B2899DF288E4860001B3360 /* AuthenticatedServiceProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticatedServiceProvider.swift; sourceTree = "<group>"; };
+		0B2899E4288EE764001B3360 /* TimerType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerType.swift; sourceTree = "<group>"; };
+		0B2899E8288F3E1F001B3360 /* Cybrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cybrid.swift; sourceTree = "<group>"; };
+		0B2899EC288F4BE5001B3360 /* TaskSchedulerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskSchedulerMock.swift; sourceTree = "<group>"; };
+		0B2899F1288F53FE001B3360 /* NotificationCenterMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCenterMock.swift; sourceTree = "<group>"; };
+		0B2899F3289049F3001B3360 /* TimerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerMock.swift; sourceTree = "<group>"; };
+		0B2899F528904B11001B3360 /* TaskSchedulerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskSchedulerTests.swift; sourceTree = "<group>"; };
 		0B2B2A6C28621D5C002F0EC1 /* ColorTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorTheme.swift; sourceTree = "<group>"; };
 		0B2B2A7028621DA7002F0EC1 /* FontTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontTheme.swift; sourceTree = "<group>"; };
 		0B2B2A8428629031002F0EC1 /* UIColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
@@ -167,6 +182,7 @@
 		0B303CE82862F5BB007BF7FF /* UILabelExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabelExtensionsTests.swift; sourceTree = "<group>"; };
 		0B303CEB2862F898007BF7FF /* ColorThemeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorThemeTests.swift; sourceTree = "<group>"; };
 		0B303CF228636A0D007BF7FF /* CybridConfigTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CybridConfigTests.swift; sourceTree = "<group>"; };
+		0B6175D3288B7853004E4F5B /* TaskScheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskScheduler.swift; sourceTree = "<group>"; };
 		0B966003285A85C600584692 /* AsyncOperationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncOperationTests.swift; sourceTree = "<group>"; };
 		0B966007285A92E700584692 /* XCTestCase+expectFailure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+expectFailure.swift"; sourceTree = "<group>"; };
 		0B966009285A96B700584692 /* AssertionFailureOverride.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssertionFailureOverride.swift; sourceTree = "<group>"; };
@@ -241,15 +257,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0B00E0202878D20F00707F26 /* Services */ = {
+		0B00E0202878D20F00707F26 /* Service Layer */ = {
 			isa = PBXGroup;
 			children = (
-				0B00E0212878D23100707F26 /* CybridSession.swift */,
+				0B2899DF288E4860001B3360 /* AuthenticatedServiceProvider.swift */,
 				0B00E03F287F81A500707F26 /* CybridAPIManager.swift */,
-				0B00E04B2885AD8D00707F26 /* PricesRepository.swift */,
-				0B00E04D2885ADB300707F26 /* AssetsRepository.swift */,
+				0B00E0212878D23100707F26 /* CybridSession.swift */,
+				0B6175D2288B7806004E4F5B /* Repositories */,
 			);
-			path = Services;
+			path = "Service Layer";
 			sourceTree = "<group>";
 		};
 		0B00E025287DBA6300707F26 /* ViewControllers */ = {
@@ -341,13 +357,11 @@
 			children = (
 				0B00E02C287F6ABD00707F26 /* Error Management */,
 				0B2B2A832862901A002F0EC1 /* Framework Extensions */,
-				0B303CE22862E5C5007BF7FF /* Global */,
-				0BD66126286D7CCB00F4DA6B /* Localization */,
-				0B00E0202878D20F00707F26 /* Services */,
+				0B303CE22862E5C5007BF7FF /* Core */,
+				0B00E0202878D20F00707F26 /* Service Layer */,
 				0B965FF828599E3A00584692 /* Supporting Files */,
-				0B2B2A6B28621D35002F0EC1 /* Theme */,
-				0BD660FF286B765900F4DA6B /* UI Components */,
 				0B965FFC28599FE700584692 /* Utilities */,
+				0BD660FF286B765900F4DA6B /* View Layer */,
 			);
 			path = CybridSDK;
 			sourceTree = "<group>";
@@ -359,7 +373,7 @@
 				0B96600B285A9A1A00584692 /* Mocks */,
 				0B966006285A92C000584692 /* Extensions */,
 				0B303CE52862E7BC007BF7FF /* Extensions Tests */,
-				0B303CF1286369F7007BF7FF /* Global Tests */,
+				0B303CF1286369F7007BF7FF /* Core Tests */,
 				0BD661312872A04800F4DA6B /* Localization Tests */,
 				0B00E03A287F7B5D00707F26 /* Services Tests */,
 				0B303CEA2862F888007BF7FF /* Theme Tests */,
@@ -367,6 +381,60 @@
 				0BD66120286C208600F4DA6B /* ViewModel Tests */,
 			);
 			path = CybridSDKTests;
+			sourceTree = "<group>";
+		};
+		0B2899E3288EE747001B3360 /* Scheduler */ = {
+			isa = PBXGroup;
+			children = (
+				0B6175D3288B7853004E4F5B /* TaskScheduler.swift */,
+				0B2899E4288EE764001B3360 /* TimerType.swift */,
+			);
+			path = Scheduler;
+			sourceTree = "<group>";
+		};
+		0B2899E6288F3DF6001B3360 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				0B00E033287F6D1000707F26 /* CybridAuthenticator.swift */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		0B2899E7288F3DFF001B3360 /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				0B303CE32862E5D9007BF7FF /* CybridConfig.swift */,
+				0B00E023287CD72D00707F26 /* Environment.swift */,
+			);
+			path = Config;
+			sourceTree = "<group>";
+		};
+		0B2899EB288F4BC4001B3360 /* Concurrency */ = {
+			isa = PBXGroup;
+			children = (
+				0B966024285C2CEF00584692 /* MockDispatchQueue.swift */,
+				0B96600C285A9A3100584692 /* MockAsyncOperation.swift */,
+				0B966026285C2E8600584692 /* MockImageOperation.swift */,
+				0B2899EC288F4BE5001B3360 /* TaskSchedulerMock.swift */,
+				0B2899F3289049F3001B3360 /* TimerMock.swift */,
+			);
+			path = Concurrency;
+			sourceTree = "<group>";
+		};
+		0B2899EE288F51A8001B3360 /* Events */ = {
+			isa = PBXGroup;
+			children = (
+				0BD6610C286B769800F4DA6B /* Observable.swift */,
+			);
+			path = Events;
+			sourceTree = "<group>";
+		};
+		0B2899EF288F51BD001B3360 /* Overrides */ = {
+			isa = PBXGroup;
+			children = (
+				0B966009285A96B700584692 /* AssertionFailureOverride.swift */,
+			);
+			path = Overrides;
 			sourceTree = "<group>";
 		};
 		0B2B2A6B28621D35002F0EC1 /* Theme */ = {
@@ -391,14 +459,15 @@
 			path = "Framework Extensions";
 			sourceTree = "<group>";
 		};
-		0B303CE22862E5C5007BF7FF /* Global */ = {
+		0B303CE22862E5C5007BF7FF /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				0B00E033287F6D1000707F26 /* CybridAuthenticator.swift */,
-				0B303CE32862E5D9007BF7FF /* CybridConfig.swift */,
-				0B00E023287CD72D00707F26 /* Environment.swift */,
+				0B2899E6288F3DF6001B3360 /* Auth */,
+				0B2899E7288F3DFF001B3360 /* Config */,
+				0B2B2A6B28621D35002F0EC1 /* Theme */,
+				0B2899E8288F3E1F001B3360 /* Cybrid.swift */,
 			);
-			path = Global;
+			path = Core;
 			sourceTree = "<group>";
 		};
 		0B303CE52862E7BC007BF7FF /* Extensions Tests */ = {
@@ -420,13 +489,22 @@
 			path = "Theme Tests";
 			sourceTree = "<group>";
 		};
-		0B303CF1286369F7007BF7FF /* Global Tests */ = {
+		0B303CF1286369F7007BF7FF /* Core Tests */ = {
 			isa = PBXGroup;
 			children = (
 				0B00E047287FC4C800707F26 /* EnvironmentTests.swift */,
 				0B303CF228636A0D007BF7FF /* CybridConfigTests.swift */,
 			);
-			path = "Global Tests";
+			path = "Core Tests";
+			sourceTree = "<group>";
+		};
+		0B6175D2288B7806004E4F5B /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+				0B00E04B2885AD8D00707F26 /* PricesRepository.swift */,
+				0B00E04D2885ADB300707F26 /* AssetsRepository.swift */,
+			);
+			path = Repositories;
 			sourceTree = "<group>";
 		};
 		0B965FF628599DD800584692 /* Deployment */ = {
@@ -458,12 +536,12 @@
 		0B965FFC28599FE700584692 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				0B2899EE288F51A8001B3360 /* Events */,
 				0BD661382872BBE900F4DA6B /* Formatters */,
 				0BD661352872BAF100F4DA6B /* Resources */,
 				0BD660F8286B762C00F4DA6B /* Concurrency */,
 				0BD660F5286B75FF00F4DA6B /* Networking */,
-				0B966009285A96B700584692 /* AssertionFailureOverride.swift */,
-				0BD6610C286B769800F4DA6B /* Observable.swift */,
+				0B2899EF288F51BD001B3360 /* Overrides */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -479,6 +557,7 @@
 				0B96602A285C3AC600584692 /* NetworkingInterfaceTests.swift */,
 				0BD6611E286C1EB800F4DA6B /* ObservableTests.swift */,
 				0B00E01E2878A16800707F26 /* BigDecimalTests.swift */,
+				0B2899F528904B11001B3360 /* TaskSchedulerTests.swift */,
 			);
 			path = "Utilities Tests";
 			sourceTree = "<group>";
@@ -494,16 +573,15 @@
 		0B96600B285A9A1A00584692 /* Mocks */ = {
 			isa = PBXGroup;
 			children = (
+				0B2899EB288F4BC4001B3360 /* Concurrency */,
 				0B00E0552886F23800707F26 /* Prices */,
 				0B00E0502886F00B00707F26 /* Assets */,
 				0B00E03D287F803800707F26 /* MockAPIManager.swift */,
-				0B96600C285A9A3100584692 /* MockAsyncOperation.swift */,
-				0B966024285C2CEF00584692 /* MockDispatchQueue.swift */,
 				0BBCF63F285C52D700D39C6D /* MockError.swift */,
-				0B966026285C2E8600584692 /* MockImageOperation.swift */,
 				0B966018285AE8D300584692 /* MockURLSession.swift */,
 				0BD6613D2874AFAA00F4DA6B /* MockNumberFormatter.swift */,
 				0B00E031287F6C1500707F26 /* MockCybridAuthenticator.swift */,
+				0B2899F1288F53FE001B3360 /* NotificationCenterMock.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -558,6 +636,7 @@
 		0BD660F8286B762C00F4DA6B /* Concurrency */ = {
 			isa = PBXGroup;
 			children = (
+				0B2899E3288EE747001B3360 /* Scheduler */,
 				0BD660FB286B763E00F4DA6B /* AsyncOperation.swift */,
 				0BD660FA286B763E00F4DA6B /* ConcurrencyInterfaces.swift */,
 				0BD660F9286B763E00F4DA6B /* URLImageOperation.swift */,
@@ -565,13 +644,14 @@
 			path = Concurrency;
 			sourceTree = "<group>";
 		};
-		0BD660FF286B765900F4DA6B /* UI Components */ = {
+		0BD660FF286B765900F4DA6B /* View Layer */ = {
 			isa = PBXGroup;
 			children = (
-				0BD6610E286B76AA00F4DA6B /* Reusable Views */,
 				0BD66100286B766B00F4DA6B /* Crypto Price List */,
+				0BD66126286D7CCB00F4DA6B /* Localization */,
+				0BD6610E286B76AA00F4DA6B /* Reusable Views */,
 			);
-			path = "UI Components";
+			path = "View Layer";
 			sourceTree = "<group>";
 		};
 		0BD66100286B766B00F4DA6B /* Crypto Price List */ = {
@@ -851,6 +931,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0B2899E0288E4860001B3360 /* AuthenticatedServiceProvider.swift in Sources */,
 				0BD6612A286DE86A00F4DA6B /* CybridLocalizationKey.swift in Sources */,
 				0B00E02E287F6AE500707F26 /* CybridError.swift in Sources */,
 				0BD6613A2872BC0B00F4DA6B /* CybridCurrencyFormatter.swift in Sources */,
@@ -868,7 +949,9 @@
 				0B2B2A6D28621D5C002F0EC1 /* ColorTheme.swift in Sources */,
 				0B00E04C2885AD8D00707F26 /* PricesRepository.swift in Sources */,
 				0B96600F285AA0FC00584692 /* AssertionFailureOverride.swift in Sources */,
+				0B6175D4288B7853004E4F5B /* TaskScheduler.swift in Sources */,
 				0B00E0222878D23100707F26 /* CybridSession.swift in Sources */,
+				0B2899E9288F3E1F001B3360 /* Cybrid.swift in Sources */,
 				0BD66118286B79C500F4DA6B /* UIView+Constraints.swift in Sources */,
 				0B303CE42862E5D9007BF7FF /* CybridConfig.swift in Sources */,
 				0BD660FD286B763E00F4DA6B /* ConcurrencyInterfaces.swift in Sources */,
@@ -885,6 +968,7 @@
 				0B303CE12862E062007BF7FF /* FormatStyle.swift in Sources */,
 				0BD66105286B768300F4DA6B /* CryptoPriceTableViewCell.swift in Sources */,
 				0BD660FE286B763E00F4DA6B /* AsyncOperation.swift in Sources */,
+				0B2899E5288EE764001B3360 /* TimerType.swift in Sources */,
 				0B303CDF2862DD2C007BF7FF /* UIConstants.swift in Sources */,
 				0B00E040287F81A500707F26 /* CybridAPIManager.swift in Sources */,
 			);
@@ -894,6 +978,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0B2899F628904B11001B3360 /* TaskSchedulerTests.swift in Sources */,
 				0BD6611D286C1D5B00F4DA6B /* CurrencyFormatterTests.swift in Sources */,
 				0B303CF328636A0D007BF7FF /* CybridConfigTests.swift in Sources */,
 				0BBCF640285C52D700D39C6D /* MockError.swift in Sources */,
@@ -911,6 +996,8 @@
 				0B00E03C287F7BA500707F26 /* CybridSessionTests.swift in Sources */,
 				0B00E03E287F803800707F26 /* MockAPIManager.swift in Sources */,
 				0B966025285C2CEF00584692 /* MockDispatchQueue.swift in Sources */,
+				0B2899F2288F53FE001B3360 /* NotificationCenterMock.swift in Sources */,
+				0B2899ED288F4BE5001B3360 /* TaskSchedulerMock.swift in Sources */,
 				0B966011285AA24300584692 /* AssertionFailureOverrideTests.swift in Sources */,
 				0B00E01F2878A16800707F26 /* BigDecimalTests.swift in Sources */,
 				0B00E046287FBEDC00707F26 /* PriceListDataProviderMock.swift in Sources */,
@@ -924,6 +1011,7 @@
 				0B966013285AA2EB00584692 /* URLImageViewTests.swift in Sources */,
 				0B966008285A92E700584692 /* XCTestCase+expectFailure.swift in Sources */,
 				0B96602B285C3AC600584692 /* NetworkingInterfaceTests.swift in Sources */,
+				0B2899F4289049F3001B3360 /* TimerMock.swift in Sources */,
 				0B303CE72862E7E3007BF7FF /* UIColorExtensionsTests.swift in Sources */,
 				0BD66123286C20BC00F4DA6B /* CryptoPriceViewModelTests.swift in Sources */,
 			);

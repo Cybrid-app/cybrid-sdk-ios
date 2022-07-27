@@ -12,6 +12,7 @@ import XCTest
 class CybridSessionTests: XCTestCase {
   var authenticator = MockAuthenticator()
   var apiManager = MockAPIManager.self
+  var notificationManager = NotificationCenterMock()
 
   override func tearDownWithError() throws {
     apiManager.clearHeaders()
@@ -216,10 +217,52 @@ class CybridSessionTests: XCTestCase {
     XCTAssertNotEqual(actualResult, expectedResult)
     XCTAssertNil(actualResult)
   }
+
+  func testSession_startScheduler() {
+    // Given
+    let session = createSession(authenticator: authenticator)
+    let scheduler = TaskSchedulerMock()
+    session.pricesFetchScheduler = scheduler
+
+    // When
+    scheduler.start()
+
+    // Then
+    XCTAssertTrue(scheduler.state == .running)
+  }
+
+  func testSession_moveToBackground() {
+    // Given
+    let session = createSession(authenticator: authenticator)
+    let scheduler = TaskSchedulerMock()
+    session.pricesFetchScheduler = scheduler
+
+    // When
+    scheduler.start()
+    notificationManager.post(name: CybridSession.appMovedToBackgroundEvent, object: nil, userInfo: nil)
+
+    // Then
+    XCTAssertTrue(scheduler.state == .paused)
+  }
+
+  func testSession_moveToForeground() {
+    // Given
+    let session = createSession(authenticator: authenticator)
+    let scheduler = TaskSchedulerMock()
+    session.pricesFetchScheduler = scheduler
+
+    // When
+    scheduler.start()
+    notificationManager.post(name: CybridSession.appMovedToBackgroundEvent, object: nil, userInfo: nil)
+    notificationManager.post(name: CybridSession.appMovedToForegroundEvent, object: nil, userInfo: nil)
+
+    // Then
+    XCTAssertTrue(scheduler.state == .running)
+  }
 }
 
 extension CybridSessionTests {
   func createSession(authenticator: CybridAuthenticator?) -> CybridSession {
-    CybridSession(authenticator: authenticator, apiManager: apiManager)
+    CybridSession(authenticator: authenticator, apiManager: apiManager, notificationManager: notificationManager)
   }
 }

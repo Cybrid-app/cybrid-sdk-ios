@@ -122,4 +122,37 @@ class CybridConfigTests: XCTestCase {
     // Then
     XCTAssertEqual(preferredLocale.languageCode, "en")
   }
+
+  func testCybrid_startListeners() {
+    // Given
+    let authenticator = MockAuthenticator()
+    Cybrid.setup(authenticator: authenticator, theme: Cybrid.theme, locale: nil)
+    let notificationManager = NotificationCenterMock()
+    Cybrid.session = CybridSession(authenticator: authenticator,
+                                   apiManager: MockAPIManager.self,
+                                   notificationManager: notificationManager)
+
+    // When
+    Cybrid.startListeners()
+
+    // Then
+    XCTAssertEqual(notificationManager.observers.count, 2)
+  }
+
+  func testCybrid_stopListeners() {
+    // Given
+    let authenticator = MockAuthenticator()
+    Cybrid.setup(authenticator: authenticator, theme: Cybrid.theme, locale: nil)
+    let notificationManager = NotificationCenterMock()
+    Cybrid.session = CybridSession(authenticator: authenticator,
+                                   apiManager: MockAPIManager.self,
+                                   notificationManager: notificationManager)
+
+    // When
+    Cybrid.startListeners()
+    Cybrid.stopListeners()
+
+    // Then
+    XCTAssertTrue(notificationManager.observers.isEmpty)
+  }
 }

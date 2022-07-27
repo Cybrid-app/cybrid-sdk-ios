@@ -15,7 +15,7 @@ final class PricesAPIMock: PricesAPI {
   @discardableResult
   override class func listPrices(symbol: String? = nil,
                                  apiResponseQueue: DispatchQueue = CybridApiBankSwiftAPI.apiResponseQueue,
-                                 completion: @escaping ((_ result: Swift.Result<[SymbolPriceBankModel], ErrorResponse>) -> Void)) -> RequestTask {
+                                 completion: @escaping ((Result<[SymbolPriceBankModel], ErrorResponse>) -> Void)) -> RequestTask {
     listPricesCompletion = completion
     return listPricesWithRequestBuilder().requestTask
   }

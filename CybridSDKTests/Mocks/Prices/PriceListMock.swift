@@ -26,3 +26,37 @@ extension Array where Element == SymbolPriceBankModel {
     )
   ]
 }
+
+extension SymbolPriceBankModel {
+  static let btcUSD1 = SymbolPriceBankModel(
+    symbol: "BTC-USD",
+    buyPrice: 2_019_891,
+    sellPrice: 2_019_881,
+    buyPriceLastUpdatedAt: nil,
+    sellPriceLastUpdatedAt: nil
+  )
+
+  static let btcUSD2 = SymbolPriceBankModel(
+    symbol: "BTC-USD",
+    buyPrice: 2_019_815,
+    sellPrice: 2_019_811,
+    buyPriceLastUpdatedAt: nil,
+    sellPriceLastUpdatedAt: nil
+  )
+
+  static let ethUSD1 = SymbolPriceBankModel(
+    symbol: "ETH-USD",
+    buyPrice: 209_891,
+    sellPrice: 209_881,
+    buyPriceLastUpdatedAt: nil,
+    sellPriceLastUpdatedAt: nil
+  )
+
+  static let ethUSD2 = SymbolPriceBankModel(
+    symbol: "ETH-USD",
+    buyPrice: 209_805,
+    sellPrice: 209_811,
+    buyPriceLastUpdatedAt: nil,
+    sellPriceLastUpdatedAt: nil
+  )
+}

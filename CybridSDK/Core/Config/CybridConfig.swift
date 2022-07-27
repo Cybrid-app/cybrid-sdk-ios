@@ -8,38 +8,50 @@
 import CybridApiBankSwift
 import Foundation
 
-// swiftlint:disable identifier_name
-/// Reference to `CybridConfig.shared` for quick bootstrapping.
-public let Cybrid = CybridConfig.shared
-
 public final class CybridConfig {
   // MARK: Internal Static Properties
-  static var shared = CybridConfig()
+  internal static var shared = CybridConfig()
 
   // MARK: Internal Properties
-  var authenticator: CybridAuthenticator?
-  var theme: Theme = CybridTheme.default
-  let assetsURL: String = "https://images.cybrid.xyz/sdk/assets/"
+  internal var authenticator: CybridAuthenticator?
+  internal var theme: Theme = CybridTheme.default
+  internal var refreshRate: TimeInterval = 5
+  internal lazy var session: CybridSession = .current
+  internal let assetsURL: String = "https://images.cybrid.xyz/sdk/assets/"
 
   // MARK: Private Properties
   private var _preferredLocale: Locale?
 
   // MARK: Public Methods
+  /// Setup CybridSDK Configuration
   public func setup(environment: CybridEnvironment = .sandbox,
                     authenticator: CybridAuthenticator,
                     theme: Theme? = nil,
-                    locale: Locale? = nil) {
+                    locale: Locale? = nil,
+                    refreshRate: TimeInterval = 5) {
     self.authenticator = authenticator
     self.theme = theme ?? CybridTheme.default
+    self.refreshRate = refreshRate
     self._preferredLocale = locale
     CybridApiBankSwiftAPI.basePath = environment.basePath
   }
+
+  /// Setup NotificationCenter Observers.
+  /// This is meant for manual use only. Observers are initialized by default with Cybrid's Session.
+  public func startListeners() {
+    session.setupEventListeners()
+  }
+
+  /// Removes NotificationCenter Observers.
+  public func stopListeners() {
+    session.stopListeners()
+  }
 }
-// swiftlint:enable identifier_name
 
 // MARK: - CybridConfig + Locale
 
 extension CybridConfig {
+  /// Returns user preferred locale
   func getPreferredLocale(with preferredLanguages: [String]? = nil) -> Locale {
     /// If developer overrides the Locale,
     /// And the locale is supported by our SDK
