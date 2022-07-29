@@ -1,0 +1,16 @@
+[
+  {
+    "symbol": "BTC-USD",
+    "buy_price": 2387700,
+    "sell_price": 2387600,
+    "buy_price_last_updated_at": "2022-07-29T19:11:22.209Z",
+    "sell_price_last_updated_at": "2022-07-29T19:11:22.209Z"
+  },
+  {
+    "symbol": "ETH-USD",
+    "buy_price": 187730,
+    "sell_price": 187620,
+    "buy_price_last_updated_at": "2022-07-29T19:11:22.209Z",
+    "sell_price_last_updated_at": "2022-07-29T19:11:22.209Z"
+  }
+]

@@ -21,16 +21,21 @@ final class CybridJSONDecoder: JSONDecoder {
     // Decode SymbolPriceBankModel
     switch type {
     case is Array<SymbolPriceBankModel>.Type:
-      let jsonObject = try JSONSerialization.jsonObject(with: data) as? [[String: Any]]
-      guard let decodedValue = jsonObject?.compactMap({ dictionary in
-        try? SymbolPriceBankModel(json: dictionary)
-      }) as? T else {
-        throw DecodingError.customDecodingError
-      }
-      return decodedValue
+      guard let list = try decodeSymbolPriceList(data: data) as? T else { throw DecodingError.customDecodingError }
+      return list
     default:
       return try super.decode(type, from: data)
     }
+  }
+
+  func decodeSymbolPriceList(data: Data) throws -> [SymbolPriceBankModel] {
+    let jsonObject = try JSONSerialization.jsonObject(with: data) as? [[String: Any]]
+    guard let curatedList = try jsonObject?.compactMap({ dictionary in
+      try SymbolPriceBankModel(json: dictionary)
+    }) else {
+      throw DecodingError.customDecodingError
+    }
+    return curatedList
   }
 }
 
