@@ -24,10 +24,7 @@ struct CryptoPriceModel: Equatable {
     self.assetName = asset.name
     self.imageURL = Cybrid.getCryptoIconURLString(with: asset.code)
     self.counterAssetCode = counterAsset.code
-    self.formattedPrice = CybridCurrencyFormatter.formatPrice(
-      // FIXME: We should get other DataType from API (e.g: String or NSData) Int64 is not enough
-      BigDecimal(buyPrice, precision: counterAsset.decimals),
-      with: counterAsset.symbol
-    )
+    let bigDecimal = BigDecimal(buyPrice, precision: counterAsset.decimals)
+    self.formattedPrice = CybridCurrencyFormatter.formatPrice(bigDecimal, with: counterAsset.symbol)
   }
 }
