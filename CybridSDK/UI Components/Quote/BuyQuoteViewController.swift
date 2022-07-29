@@ -34,6 +34,7 @@ final class BuyQuoteViewController: UIViewController {
       amountLabel,
       amountStackView,
       cryptoExchangePriceLabel,
+      separatorLine,
       buttonContainer,
       spacerView
     ])
@@ -133,6 +134,12 @@ final class BuyQuoteViewController: UIViewController {
     label.text = "$500 CAD"
     label.font = label.font.withSize(13)
     return label
+  }()
+
+  private lazy var separatorLine: UIImageView = {
+    let separator = UIImageView.init(frame: CGRect(x: 8, y: 64, width: cell.frame.width - 16, height: 2))
+    separator.backgroundColor = .blue
+    return separator
   }()
 
   private lazy var buyButton: CYBButton = {
