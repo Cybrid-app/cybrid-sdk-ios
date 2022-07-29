@@ -34,6 +34,7 @@ public final class CybridConfig {
     self.refreshRate = refreshRate
     self._preferredLocale = locale
     CybridApiBankSwiftAPI.basePath = environment.basePath
+    CodableHelper.jsonDecoder = CybridJSONDecoder()
   }
 
   /// Setup NotificationCenter Observers.
