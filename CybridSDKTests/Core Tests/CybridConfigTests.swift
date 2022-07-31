@@ -66,7 +66,7 @@ class CybridConfigTests: XCTestCase {
     // Given
     Cybrid.setup(authenticator: MockAuthenticator(), theme: Cybrid.theme, locale: nil)
     /// Default locale in local Simulator is `en-US`, while in CI it's `en`
-    let possiblePreferredLocales = ["en", "en-US"]
+    let possiblePreferredLocales = ["en", "en-US", "en-CA"]
 
     // When
     let preferredLocale = Cybrid.getPreferredLocale()
