@@ -85,14 +85,11 @@ extension CybridEvent {
   public enum ApplicationEvent {
     case initSuccess
     case initError
-    case serviceError(ServiceError)
 
     var level: LogLevel {
       switch self {
       case .initSuccess:
         return .info
-      case .serviceError:
-        return .error
       case .initError:
         return .fatal
       }
@@ -104,8 +101,6 @@ extension CybridEvent {
         return "INIT"
       case .initError:
         return "ERROR"
-      case .serviceError:
-        return "SERVICE_ERROR"
       }
     }
 
@@ -115,8 +110,6 @@ extension CybridEvent {
         return "Initializing appplication"
       case .initError:
         return "Fatal error initializing application"
-      case .serviceError(let error):
-        return error.message
       }
     }
   }
@@ -174,7 +167,7 @@ extension CybridEvent {
       var code: String {
         switch self {
         case .initSuccess:
-          return "COMPONENT_INIT"
+          return "INIT"
         case .dataFetching:
           return "DATA_FETCHING"
         case .dataError:
@@ -223,7 +216,7 @@ extension CybridEvent {
       var code: String {
         switch self {
         case .initSuccess:
-          return "COMPONENT_INIT"
+          return "INIT"
         case .priceDataFetching:
           return "PRICE_DATA_FETCHING"
         case .priceDataError:
