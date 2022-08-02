@@ -14,8 +14,7 @@ coverage:
 ignore:
   - "CybridSDK/CybridSDK.h"
   - "CybridSDK.docc/*"
-  - "CybridSDKTests/*"
-  - "**/*Tests.swift"
+  - "CybridSDKTests/**/*"
   - "**/*Cell.swift"
   - "**/*View.swift"
   - "**/*ViewController.swift"

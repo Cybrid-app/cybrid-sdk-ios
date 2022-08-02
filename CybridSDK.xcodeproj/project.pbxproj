@@ -44,6 +44,11 @@
 		0B2899F2288F53FE001B3360 /* NotificationCenterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B2899F1288F53FE001B3360 /* NotificationCenterMock.swift */; };
 		0B2899F4289049F3001B3360 /* TimerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B2899F3289049F3001B3360 /* TimerMock.swift */; };
 		0B2899F628904B11001B3360 /* TaskSchedulerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B2899F528904B11001B3360 /* TaskSchedulerTests.swift */; };
+		0B2899F828942C54001B3360 /* CybridJSONDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B2899F728942C54001B3360 /* CybridJSONDecoder.swift */; };
+		0B2899FA2894653F001B3360 /* CybridJSONDecoderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B2899F92894653F001B3360 /* CybridJSONDecoderTests.swift */; };
+		0B2899FE289467EE001B3360 /* listPricesResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 0B2899FD289467EE001B3360 /* listPricesResponse.json */; };
+		0B289A0028946B52001B3360 /* JSONMockHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B2899FF28946B52001B3360 /* JSONMockHelper.swift */; };
+		0B289A0228946F74001B3360 /* listLargestPricesResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 0B289A0128946F53001B3360 /* listLargestPricesResponse.json */; };
 		0B2B2A6D28621D5C002F0EC1 /* ColorTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B2B2A6C28621D5C002F0EC1 /* ColorTheme.swift */; };
 		0B2B2A7128621DA7002F0EC1 /* FontTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B2B2A7028621DA7002F0EC1 /* FontTheme.swift */; };
 		0B2B2A8528629031002F0EC1 /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B2B2A8428629031002F0EC1 /* UIColor+Extensions.swift */; };
@@ -99,6 +104,7 @@
 		0BD661372872BB0A00F4DA6B /* AssetPathBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD661362872BB0A00F4DA6B /* AssetPathBuilder.swift */; };
 		0BD6613A2872BC0B00F4DA6B /* CybridCurrencyFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD661392872BC0B00F4DA6B /* CybridCurrencyFormatter.swift */; };
 		0BD6613E2874AFAA00F4DA6B /* MockNumberFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD6613D2874AFAA00F4DA6B /* MockNumberFormatter.swift */; };
+		0BFF8755289628EB00E44C74 /* listAssetsResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 0BFF87542896267C00E44C74 /* listAssetsResponse.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -170,6 +176,11 @@
 		0B2899F1288F53FE001B3360 /* NotificationCenterMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCenterMock.swift; sourceTree = "<group>"; };
 		0B2899F3289049F3001B3360 /* TimerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerMock.swift; sourceTree = "<group>"; };
 		0B2899F528904B11001B3360 /* TaskSchedulerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskSchedulerTests.swift; sourceTree = "<group>"; };
+		0B2899F728942C54001B3360 /* CybridJSONDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CybridJSONDecoder.swift; sourceTree = "<group>"; };
+		0B2899F92894653F001B3360 /* CybridJSONDecoderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CybridJSONDecoderTests.swift; sourceTree = "<group>"; };
+		0B2899FD289467EE001B3360 /* listPricesResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = listPricesResponse.json; sourceTree = "<group>"; };
+		0B2899FF28946B52001B3360 /* JSONMockHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONMockHelper.swift; sourceTree = "<group>"; };
+		0B289A0128946F53001B3360 /* listLargestPricesResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = listLargestPricesResponse.json; sourceTree = "<group>"; };
 		0B2B2A6C28621D5C002F0EC1 /* ColorTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorTheme.swift; sourceTree = "<group>"; };
 		0B2B2A7028621DA7002F0EC1 /* FontTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontTheme.swift; sourceTree = "<group>"; };
 		0B2B2A8428629031002F0EC1 /* UIColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
@@ -228,6 +239,7 @@
 		0BD661392872BC0B00F4DA6B /* CybridCurrencyFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CybridCurrencyFormatter.swift; sourceTree = "<group>"; };
 		0BD6613B28734F2900F4DA6B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0BD6613D2874AFAA00F4DA6B /* MockNumberFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNumberFormatter.swift; sourceTree = "<group>"; };
+		0BFF87542896267C00E44C74 /* listAssetsResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = listAssetsResponse.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -437,6 +449,17 @@
 			path = Overrides;
 			sourceTree = "<group>";
 		};
+		0B2899FC289467C1001B3360 /* JSON */ = {
+			isa = PBXGroup;
+			children = (
+				0B2899FD289467EE001B3360 /* listPricesResponse.json */,
+				0BFF87542896267C00E44C74 /* listAssetsResponse.json */,
+				0B289A0128946F53001B3360 /* listLargestPricesResponse.json */,
+				0B2899FF28946B52001B3360 /* JSONMockHelper.swift */,
+			);
+			path = JSON;
+			sourceTree = "<group>";
+		};
 		0B2B2A6B28621D35002F0EC1 /* Theme */ = {
 			isa = PBXGroup;
 			children = (
@@ -558,6 +581,7 @@
 				0BD6611E286C1EB800F4DA6B /* ObservableTests.swift */,
 				0B00E01E2878A16800707F26 /* BigDecimalTests.swift */,
 				0B2899F528904B11001B3360 /* TaskSchedulerTests.swift */,
+				0B2899F92894653F001B3360 /* CybridJSONDecoderTests.swift */,
 			);
 			path = "Utilities Tests";
 			sourceTree = "<group>";
@@ -573,6 +597,7 @@
 		0B96600B285A9A1A00584692 /* Mocks */ = {
 			isa = PBXGroup;
 			children = (
+				0B2899FC289467C1001B3360 /* JSON */,
 				0B2899EB288F4BC4001B3360 /* Concurrency */,
 				0B00E0552886F23800707F26 /* Prices */,
 				0B00E0502886F00B00707F26 /* Assets */,
@@ -628,6 +653,7 @@
 		0BD660F5286B75FF00F4DA6B /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				0B2899F728942C54001B3360 /* CybridJSONDecoder.swift */,
 				0BD660F6286B761200F4DA6B /* NetworkingInterfaces.swift */,
 			);
 			path = Networking;
@@ -869,7 +895,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0B2899FE289467EE001B3360 /* listPricesResponse.json in Resources */,
+				0BFF8755289628EB00E44C74 /* listAssetsResponse.json in Resources */,
 				0B96601E285AF03700584692 /* TestAssets.xcassets in Resources */,
+				0B289A0228946F74001B3360 /* listLargestPricesResponse.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -966,6 +995,7 @@
 				0B00E05C2887256B00707F26 /* UIView+Keyboard.swift in Sources */,
 				0B2B2A8928629324002F0EC1 /* Theme.swift in Sources */,
 				0B303CE12862E062007BF7FF /* FormatStyle.swift in Sources */,
+				0B2899F828942C54001B3360 /* CybridJSONDecoder.swift in Sources */,
 				0BD66105286B768300F4DA6B /* CryptoPriceTableViewCell.swift in Sources */,
 				0BD660FE286B763E00F4DA6B /* AsyncOperation.swift in Sources */,
 				0B2899E5288EE764001B3360 /* TimerType.swift in Sources */,
@@ -991,7 +1021,9 @@
 				0B00E0542886F21900707F26 /* AssetsListMock.swift in Sources */,
 				0B966004285A85C600584692 /* AsyncOperationTests.swift in Sources */,
 				0B00E01B2877EED600707F26 /* BundleExtensionsTests.swift in Sources */,
+				0B2899FA2894653F001B3360 /* CybridJSONDecoderTests.swift in Sources */,
 				0B00E0522886F01A00707F26 /* AssetsAPIMock.swift in Sources */,
+				0B289A0028946B52001B3360 /* JSONMockHelper.swift in Sources */,
 				0B303CEC2862F898007BF7FF /* ColorThemeTests.swift in Sources */,
 				0B00E03C287F7BA500707F26 /* CybridSessionTests.swift in Sources */,
 				0B00E03E287F803800707F26 /* MockAPIManager.swift in Sources */,
