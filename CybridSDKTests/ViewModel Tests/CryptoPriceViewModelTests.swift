@@ -353,7 +353,7 @@ extension CryptoPriceViewModelTests {
 extension CryptoPriceViewModelTests {
   func createViewModel(viewProvider: CryptoPriceViewProvider,
                        dataProvider: (AssetsRepoProvider & PricesRepoProvider)? = nil) -> CryptoPriceViewModel {
-    let viewModel = CryptoPriceViewModel(cellProvider: viewProvider, dataProvider: dataProvider ?? self.dataProvider)
+    let viewModel = CryptoPriceViewModel(cellProvider: viewProvider, dataProvider: dataProvider ?? self.dataProvider, logger: nil)
     return viewModel
   }
 }
