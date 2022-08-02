@@ -12,10 +12,11 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
   let cryptoAuthenticator = CryptoAuthenticator(session: .shared)
+  let logger = ClientLogger()
 
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     // Override point for customization after application launch.
-    Cybrid.setup(authenticator: cryptoAuthenticator)
+    Cybrid.setup(authenticator: cryptoAuthenticator, logger: logger)
     return true
   }
 
