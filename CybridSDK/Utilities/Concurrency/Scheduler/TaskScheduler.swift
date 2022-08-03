@@ -24,8 +24,6 @@ extension TaskScheduler {
     }
     /// Create new scheduler
     timer = timerType.makeScheduler(block: { [weak self] _ in
-      // TODO: replace this print with Log
-      print("\(String(describing: self)) running scheduled task at \(Date().description)")
       self?.block?()
     })
     timer?.fire()

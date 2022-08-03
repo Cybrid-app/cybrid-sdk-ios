@@ -20,30 +20,36 @@ class CryptoPriceViewModel: NSObject {
   // MARK: Private properties
   private unowned var cellProvider: CryptoPriceViewProvider
   private var dataProvider: PricesRepoProvider & AssetsRepoProvider
+  private var logger: CybridLogger?
 
-  init(cellProvider: CryptoPriceViewProvider, dataProvider: PricesRepoProvider & AssetsRepoProvider) {
+  init(cellProvider: CryptoPriceViewProvider,
+       dataProvider: PricesRepoProvider & AssetsRepoProvider,
+       logger: CybridLogger?) {
     self.cellProvider = cellProvider
     self.dataProvider = dataProvider
+    self.logger = logger
   }
 
   func fetchPriceList(liveUpdateEnabled: Bool = true) {
     dataProvider.fetchAssetsList { [weak self] assetsResult in
       switch assetsResult {
       case .success(let assetsList):
+        self?.logger?.log(.component(.priceList(.dataFetching)))
         self?.dataProvider.fetchPriceList(liveUpdateEnabled: liveUpdateEnabled) { pricesResult in
           switch pricesResult {
           case .success(let pricesList):
+            self?.logger?.log(.component(.priceList(.dataRefreshed)))
             guard let modelList = self?.buildModelList(symbols: pricesList, assets: assetsList) else {
               return
             }
             self?.cryptoPriceList = modelList
             self?.filteredCryptoPriceList.value = modelList
-          case .failure(let error):
-            print(error)
+          case .failure:
+            self?.logger?.log(.component(.priceList(.dataError)))
           }
         }
-      case .failure(let error):
-        print(error)
+      case .failure:
+        self?.logger?.log(.component(.priceList(.dataError)))
       }
     }
   }

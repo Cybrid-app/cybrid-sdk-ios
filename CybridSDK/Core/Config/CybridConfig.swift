@@ -14,9 +14,10 @@ public final class CybridConfig {
 
   // MARK: Internal Properties
   internal var authenticator: CybridAuthenticator?
-  internal var theme: Theme = CybridTheme.default
+  internal var logger: CybridLogger?
   internal var refreshRate: TimeInterval = 5
   internal lazy var session: CybridSession = .current
+  internal var theme: Theme = CybridTheme.default
   internal let assetsURL: String = "https://images.cybrid.xyz/sdk/assets/"
 
   // MARK: Private Properties
@@ -28,11 +29,13 @@ public final class CybridConfig {
                     authenticator: CybridAuthenticator,
                     theme: Theme? = nil,
                     locale: Locale? = nil,
-                    refreshRate: TimeInterval = 5) {
+                    refreshRate: TimeInterval = 5,
+                    logger: CybridLogger? = nil) {
     self.authenticator = authenticator
     self.theme = theme ?? CybridTheme.default
     self.refreshRate = refreshRate
     self._preferredLocale = locale
+    self.logger = logger
     CybridApiBankSwiftAPI.basePath = environment.basePath
     CodableHelper.jsonDecoder = CybridJSONDecoder()
   }

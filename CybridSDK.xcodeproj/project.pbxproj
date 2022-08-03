@@ -61,6 +61,8 @@
 		0B303CE92862F5BB007BF7FF /* UILabelExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B303CE82862F5BB007BF7FF /* UILabelExtensionsTests.swift */; };
 		0B303CEC2862F898007BF7FF /* ColorThemeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B303CEB2862F898007BF7FF /* ColorThemeTests.swift */; };
 		0B303CF328636A0D007BF7FF /* CybridConfigTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B303CF228636A0D007BF7FF /* CybridConfigTests.swift */; };
+		0B557B8D28999C6E00632A6D /* ClientLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B557B8C28999C6E00632A6D /* ClientLogger.swift */; };
+		0B557B8F2899A39D00632A6D /* CybridEventTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B557B8E2899A39D00632A6D /* CybridEventTests.swift */; };
 		0B6175D4288B7853004E4F5B /* TaskScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6175D3288B7853004E4F5B /* TaskScheduler.swift */; };
 		0B966004285A85C600584692 /* AsyncOperationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B966003285A85C600584692 /* AsyncOperationTests.swift */; };
 		0B966008285A92E700584692 /* XCTestCase+expectFailure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B966007285A92E700584692 /* XCTestCase+expectFailure.swift */; };
@@ -105,6 +107,8 @@
 		0BD6613A2872BC0B00F4DA6B /* CybridCurrencyFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD661392872BC0B00F4DA6B /* CybridCurrencyFormatter.swift */; };
 		0BD6613E2874AFAA00F4DA6B /* MockNumberFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD6613D2874AFAA00F4DA6B /* MockNumberFormatter.swift */; };
 		0BFF8755289628EB00E44C74 /* listAssetsResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 0BFF87542896267C00E44C74 /* listAssetsResponse.json */; };
+		0BFF875A28996CBA00E44C74 /* CybridLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BFF875928996CBA00E44C74 /* CybridLogger.swift */; };
+		0BFF875C28998CAF00E44C74 /* CybridEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BFF875B28998CAF00E44C74 /* CybridEvent.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -193,6 +197,8 @@
 		0B303CE82862F5BB007BF7FF /* UILabelExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabelExtensionsTests.swift; sourceTree = "<group>"; };
 		0B303CEB2862F898007BF7FF /* ColorThemeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorThemeTests.swift; sourceTree = "<group>"; };
 		0B303CF228636A0D007BF7FF /* CybridConfigTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CybridConfigTests.swift; sourceTree = "<group>"; };
+		0B557B8C28999C6E00632A6D /* ClientLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientLogger.swift; sourceTree = "<group>"; };
+		0B557B8E2899A39D00632A6D /* CybridEventTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CybridEventTests.swift; sourceTree = "<group>"; };
 		0B6175D3288B7853004E4F5B /* TaskScheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskScheduler.swift; sourceTree = "<group>"; };
 		0B966003285A85C600584692 /* AsyncOperationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncOperationTests.swift; sourceTree = "<group>"; };
 		0B966007285A92E700584692 /* XCTestCase+expectFailure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+expectFailure.swift"; sourceTree = "<group>"; };
@@ -240,6 +246,8 @@
 		0BD6613B28734F2900F4DA6B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0BD6613D2874AFAA00F4DA6B /* MockNumberFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNumberFormatter.swift; sourceTree = "<group>"; };
 		0BFF87542896267C00E44C74 /* listAssetsResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = listAssetsResponse.json; sourceTree = "<group>"; };
+		0BFF875928996CBA00E44C74 /* CybridLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CybridLogger.swift; sourceTree = "<group>"; };
+		0BFF875B28998CAF00E44C74 /* CybridEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CybridEvent.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -487,6 +495,7 @@
 			children = (
 				0B2899E6288F3DF6001B3360 /* Auth */,
 				0B2899E7288F3DFF001B3360 /* Config */,
+				0BFF87582898D8F300E44C74 /* Logger */,
 				0B2B2A6B28621D35002F0EC1 /* Theme */,
 				0B2899E8288F3E1F001B3360 /* Cybrid.swift */,
 			);
@@ -517,8 +526,17 @@
 			children = (
 				0B00E047287FC4C800707F26 /* EnvironmentTests.swift */,
 				0B303CF228636A0D007BF7FF /* CybridConfigTests.swift */,
+				0B557B8E2899A39D00632A6D /* CybridEventTests.swift */,
 			);
 			path = "Core Tests";
+			sourceTree = "<group>";
+		};
+		0B557B8B28999C5F00632A6D /* Logger */ = {
+			isa = PBXGroup;
+			children = (
+				0B557B8C28999C6E00632A6D /* ClientLogger.swift */,
+			);
+			path = Logger;
 			sourceTree = "<group>";
 		};
 		0B6175D2288B7806004E4F5B /* Repositories */ = {
@@ -622,6 +640,7 @@
 		0BBCF614285C43E000D39C6D /* CybridSDKTestApp */ = {
 			isa = PBXGroup;
 			children = (
+				0B557B8B28999C5F00632A6D /* Logger */,
 				0B00E026287DBA7300707F26 /* Auth */,
 				0B00E025287DBA6300707F26 /* ViewControllers */,
 				0BBCF62A285C443A00D39C6D /* Resources */,
@@ -758,6 +777,15 @@
 				0B00E01C28789ADA00707F26 /* BigDecimal.swift */,
 			);
 			path = Formatters;
+			sourceTree = "<group>";
+		};
+		0BFF87582898D8F300E44C74 /* Logger */ = {
+			isa = PBXGroup;
+			children = (
+				0BFF875928996CBA00E44C74 /* CybridLogger.swift */,
+				0BFF875B28998CAF00E44C74 /* CybridEvent.swift */,
+			);
+			path = Logger;
 			sourceTree = "<group>";
 		};
 		81407DEC5E3C66990E8215E8 /* Pods */ = {
@@ -985,6 +1013,7 @@
 				0B303CE42862E5D9007BF7FF /* CybridConfig.swift in Sources */,
 				0BD660FD286B763E00F4DA6B /* ConcurrencyInterfaces.swift in Sources */,
 				0BD66109286B768C00F4DA6B /* CryptoPriceListView.swift in Sources */,
+				0BFF875C28998CAF00E44C74 /* CybridEvent.swift in Sources */,
 				0BD660FC286B763E00F4DA6B /* URLImageOperation.swift in Sources */,
 				0B00E024287CD72D00707F26 /* Environment.swift in Sources */,
 				0B078F1228497B070020B4F7 /* CybridSDK.docc in Sources */,
@@ -998,6 +1027,7 @@
 				0B2899F828942C54001B3360 /* CybridJSONDecoder.swift in Sources */,
 				0BD66105286B768300F4DA6B /* CryptoPriceTableViewCell.swift in Sources */,
 				0BD660FE286B763E00F4DA6B /* AsyncOperation.swift in Sources */,
+				0BFF875A28996CBA00E44C74 /* CybridLogger.swift in Sources */,
 				0B2899E5288EE764001B3360 /* TimerType.swift in Sources */,
 				0B303CDF2862DD2C007BF7FF /* UIConstants.swift in Sources */,
 				0B00E040287F81A500707F26 /* CybridAPIManager.swift in Sources */,
@@ -1024,6 +1054,7 @@
 				0B2899FA2894653F001B3360 /* CybridJSONDecoderTests.swift in Sources */,
 				0B00E0522886F01A00707F26 /* AssetsAPIMock.swift in Sources */,
 				0B289A0028946B52001B3360 /* JSONMockHelper.swift in Sources */,
+				0B557B8F2899A39D00632A6D /* CybridEventTests.swift in Sources */,
 				0B303CEC2862F898007BF7FF /* ColorThemeTests.swift in Sources */,
 				0B00E03C287F7BA500707F26 /* CybridSessionTests.swift in Sources */,
 				0B00E03E287F803800707F26 /* MockAPIManager.swift in Sources */,
@@ -1055,6 +1086,7 @@
 			files = (
 				0BBCF616285C43E000D39C6D /* AppDelegate.swift in Sources */,
 				0BD66114286B76F300F4DA6B /* RootViewController.swift in Sources */,
+				0B557B8D28999C6E00632A6D /* ClientLogger.swift in Sources */,
 				0BBCF618285C43E000D39C6D /* SceneDelegate.swift in Sources */,
 				0BD66115286B76F300F4DA6B /* CryptoPriceListTestVC.swift in Sources */,
 				0B00E028287DBA8400707F26 /* CryptoAuthenticator.swift in Sources */,
