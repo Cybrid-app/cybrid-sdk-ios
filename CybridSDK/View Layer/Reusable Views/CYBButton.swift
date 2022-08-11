@@ -14,6 +14,11 @@ final class CYBButton: UIButton {
     return CGSize(width: baseSize.width + Constants.horizontalPadding * 2,
                   height: baseSize.height)
   }
+  override var isEnabled: Bool {
+    didSet {
+      setBackgroundColor()
+    }
+  }
 
   let theme: Theme
 

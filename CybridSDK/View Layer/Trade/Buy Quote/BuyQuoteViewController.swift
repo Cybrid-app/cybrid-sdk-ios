@@ -100,6 +100,7 @@ final class BuyQuoteViewController: UIViewController {
   private lazy var buyButton: CYBButton = {
     let button = CYBButton(theme: theme)
     button.setTitle(localizer.localize(with: CybridLocalizationKey.trade(.buy(.cta))), for: .normal)
+    button.isEnabled = false
 
     return button
   }()
@@ -221,6 +222,9 @@ final class BuyQuoteViewController: UIViewController {
     }
     viewModel.shouldInputCrypto.bind { [weak self] shouldInputCrypto in
       self?.updateIcons(shouldInputCrypto: shouldInputCrypto)
+    }
+    viewModel.ctaButtonEnabled.bind { [weak self] isButtonEnabled in
+      self?.buyButton.isEnabled = isButtonEnabled
     }
     viewModel.fetchPriceList()
   }

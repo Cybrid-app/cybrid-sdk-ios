@@ -14,6 +14,7 @@ final class BuyQuoteViewModel: NSObject {
   internal var amountText: Observable<String?> = Observable(nil)
   internal var displayAmount: Observable<String?> = Observable(nil)
   internal var shouldInputCrypto: Observable<Bool> = Observable(true)
+  internal var ctaButtonEnabled: Observable<Bool> = Observable(false)
   internal var assetList: Observable<[CurrencyModel]>
   internal var cryptoCurrency: Observable<CurrencyModel?>
   internal let fiatCurrency: CurrencyModel
@@ -91,15 +92,12 @@ extension BuyQuoteViewModel: UIPickerViewDelegate, UIPickerViewDataSource {
 }
 
 extension BuyQuoteViewModel: UITextFieldDelegate {
-  func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-    return true
-  }
-
   func textFieldDidChangeSelection(_ textField: UITextField) {
     guard self.amountText.value != textField.text else { return }
     let formattedInput = formatInputText(textField.text)
     amountText.value = formattedInput
     updateConversion()
+    updateButtonState()
   }
 
   func updateConversion() {
@@ -110,6 +108,18 @@ extension BuyQuoteViewModel: UITextFieldDelegate {
       isInputGreaterThanZero(inputText)
     else { return }
     displayAmount.value = formatDisplayAmount(amountText.value)
+  }
+
+  func updateButtonState() {
+    var numberText: String?
+    if shouldInputCrypto.value {
+      numberText = displayAmount.value?
+        .trimmingCharacters(in: CharacterSet(charactersIn: " " + fiatCurrency.asset.symbol + fiatCurrency.asset.code))
+        .filter { $0 != "." && $0 != "," }
+    } else {
+      numberText = amountText.value?.filter { $0 != "." && $0 != "," }
+    }
+    ctaButtonEnabled.value = isInputGreaterThanZero(numberText ?? "")
   }
 
   func isInputGreaterThanZero(_ numberString: String) -> Bool {
@@ -144,7 +154,6 @@ extension BuyQuoteViewModel: UITextFieldDelegate {
       return CybridCurrencyFormatter.formatPrice(BigDecimal(0), with: fiatSymbol) + " " + fiatCode
     }
 
-    let cryptoSymbol = crypto.asset.symbol
     let cryptoCode = crypto.asset.code
     let cryptoPrecision = crypto.asset.decimals
 
