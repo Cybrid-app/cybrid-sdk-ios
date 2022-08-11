@@ -6,10 +6,9 @@
 //
 
 import UIKit
+import CybridSDK
 
 class RootViewController: UIViewController {
-
-  
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -17,6 +16,11 @@ class RootViewController: UIViewController {
 
   @IBAction func didTapCryptoListButton(_ sender: Any) {
     let viewController = CryptoPriceListTestVC()
+    navigationController?.pushViewController(viewController, animated: true)
+  }
+
+  @IBAction func didTapTradeButton(_ sender: Any) {
+    let viewController = TradeViewController()
     navigationController?.pushViewController(viewController, animated: true)
   }
 }

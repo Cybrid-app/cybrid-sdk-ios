@@ -8,11 +8,11 @@
 import UIKit
 import CybridSDK
 
-public class CryptoPriceListTestVC: UIViewController {
+final class CryptoPriceListTestVC: UIViewController {
 
   lazy var tableView = CryptoPriceListView()
 
-  public init() {
+  init() {
     super.init(nibName: nil, bundle: nil)
   }
 
