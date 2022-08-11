@@ -58,21 +58,30 @@ final class CYBTextField: UITextField {
     case .rounded:
       backgroundColor = theme.colorTheme.textFieldBackgroundColor
       layer.cornerRadius = Constants.cornerRadius
-      textColor = theme.colorTheme.primaryTextColor
     case .plain:
       backgroundColor = .clear
       borderStyle = UITextField.BorderStyle.none
       layer.cornerRadius = 0
-      textColor = theme.colorTheme.secondaryTextColor
     }
     leftViewMode = .always
     leftView = iconContainer
+    textColor = theme.colorTheme.primaryTextColor
+    setupConstraints()
+    setupIcon()
+    setupUnderline()
+  }
+
+  private func setupConstraints() {
     iconContainer.constraint(attribute: .width,
                              relatedBy: .equal,
                              toItem: nil,
                              attribute: .notAnAttribute,
                              constant: Constants.IconContainer.minWidth)
-    setupIcon()
+    constraint(attribute: .height,
+               relatedBy: .greaterThanOrEqual,
+               toItem: nil,
+               attribute: .notAnAttribute,
+               constant: Constants.minHeight)
   }
 
   private func setupIcon() {
@@ -87,7 +96,35 @@ final class CYBTextField: UITextField {
     case .none:
       return
     }
-    layoutSubviews()
+  }
+
+  private func setupUnderline() {
+    switch style {
+    case .plain:
+      let underline = UIView()
+      underline.backgroundColor = theme.colorTheme.separatorColor
+      underline.translatesAutoresizingMaskIntoConstraints = false
+      self.addSubview(underline)
+      underline.constraint(attribute: .leading,
+                           relatedBy: .equal,
+                           toItem: self,
+                           attribute: .leading)
+      underline.constraint(attribute: .trailing,
+                           relatedBy: .equal,
+                           toItem: self,
+                           attribute: .trailing)
+      underline.constraint(attribute: .top,
+                           relatedBy: .equal,
+                           toItem: self,
+                           attribute: .bottom)
+      underline.constraint(attribute: .height,
+                           relatedBy: .equal,
+                           toItem: nil,
+                           attribute: .notAnAttribute,
+                           constant: Constants.borderWidth)
+    default:
+      return
+    }
   }
 
   private func setupTextIcon(content: String) {
@@ -102,10 +139,25 @@ final class CYBTextField: UITextField {
     iconContainer.addSubview(border)
 
     label.constraintEdges(to: iconContainer)
-    border.constraint(attribute: .leading, relatedBy: .equal, toItem: label, attribute: .trailing, constant: -7)
-    border.constraint(attribute: .centerY, relatedBy: .equal, toItem: label, attribute: .centerY)
-    border.constraint(attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, constant: 22)
-    border.constraint(attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, constant: 1)
+    border.constraint(attribute: .leading,
+                      relatedBy: .equal,
+                      toItem: label,
+                      attribute: .trailing,
+                      constant: Constants.Divider.trailing)
+    border.constraint(attribute: .centerY,
+                      relatedBy: .equal,
+                      toItem: label,
+                      attribute: .centerY)
+    border.constraint(attribute: .height,
+                      relatedBy: .equal,
+                      toItem: nil,
+                      attribute: .notAnAttribute,
+                      constant: Constants.Divider.height)
+    border.constraint(attribute: .width,
+                      relatedBy: .equal,
+                      toItem: nil,
+                      attribute: .notAnAttribute,
+                      constant: Constants.borderWidth)
   }
 
   private func setupImageIcon(urlString: String) {
@@ -133,9 +185,18 @@ extension CYBTextField {
                                      left: UIConstants.spacingMd,
                                      bottom: 0,
                                      right: UIConstants.spacingMd)
+    static let minHeight: CGFloat = UIConstants.minimumTargetSize
+    static let borderWidth: CGFloat = 1
+
+    enum Divider {
+      static let trailing: CGFloat = -7
+      static let height: CGFloat = 22
+    }
+
     enum IconContainer {
       static let minWidth: CGFloat = UIConstants.sizeLg
     }
+
     enum Icon {
       static let insets = UIEdgeInsets(top: 0,
                                        left: UIConstants.spacingXl2,
