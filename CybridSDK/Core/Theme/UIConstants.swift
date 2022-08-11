@@ -34,9 +34,15 @@ enum UIConstants {
   static let spacingXl3: CGFloat = 24.0
   static let spacingXl4: CGFloat = 32.0
 
+  // MARK: Radius
+  static let radiusMd: CGFloat = 8.0
+  static let radiusLg: CGFloat = 10.0
+
   // MARK: Colors
   static let lightestColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
   static let gray100 = UIColor(red: 0.922, green: 0.922, blue: 0.961, alpha: 0.6)
+  static let gray150 = UIColor(red: 0.929, green: 0.929, blue: 0.929, alpha: 0.8)
+  static let gray180 = UIColor(red: 0.776, green: 0.776, blue: 0.784, alpha: 1)
   static let gray200 = UIColor(red: 0.463, green: 0.463, blue: 0.502, alpha: 0.12)
   static let gray300 = UIColor(red: 0.463, green: 0.463, blue: 0.502, alpha: 0.24)
   static let gray400 = UIColor(red: 0.235, green: 0.235, blue: 0.263, alpha: 0.6)

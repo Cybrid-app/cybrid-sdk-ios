@@ -14,6 +14,8 @@ public struct ColorTheme: Equatable {
   let primaryBackgroundColor: UIColor
   let secondaryBackgroundColor: UIColor
   let tertiaryBackgroundColor: UIColor
+  let textFieldBackgroundColor: UIColor
+  let separatorColor: UIColor
 
   // Text Color
   let primaryTextColor: UIColor
@@ -32,6 +34,14 @@ public struct ColorTheme: Equatable {
       tertiaryBackgroundColor: UIColor(
         light: UIConstants.gray200,
         dark: UIConstants.gray300,
+        overrideUserInterfaceStyle: overrideUserInterfaceStyle),
+      textFieldBackgroundColor: UIColor(
+        light: UIConstants.gray150,
+        dark: UIConstants.gray300, // TODO: Define dark mode color
+        overrideUserInterfaceStyle: overrideUserInterfaceStyle),
+      separatorColor: UIColor(
+        light: UIConstants.gray180,
+        dark: UIConstants.gray300, // TODO: Define dark mode color
         overrideUserInterfaceStyle: overrideUserInterfaceStyle),
       primaryTextColor: UIColor(
         light: UIConstants.darkestColor,
