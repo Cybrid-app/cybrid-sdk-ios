@@ -39,6 +39,7 @@ final class URLImageView: UIImageView {
     self.placeholder = placeholder
 
     super.init(image: placeholder)
+    loadImage()
   }
 
   convenience init?(urlString: String,
@@ -53,12 +54,8 @@ final class URLImageView: UIImageView {
     return nil
   }
 
-  override func layoutSubviews() {
-    super.layoutSubviews()
-    loadImage()
-  }
-
-  private func loadImage() {
+  internal func loadImage() {
+    contentMode = .scaleAspectFit
     guard let url = url else {
         self.image = placeholder
         return
