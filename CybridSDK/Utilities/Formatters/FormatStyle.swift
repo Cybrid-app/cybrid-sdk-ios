@@ -11,7 +11,7 @@ enum FormatStyle {
   case headerSmall
   case bodyLarge
   case body
-  case comment
+  case caption
   case inputPlaceholder
 
   var isUppercased: Bool {
@@ -25,7 +25,7 @@ enum FormatStyle {
 
   var textColor: UIColor {
     switch self {
-    case .headerSmall, .comment, .inputPlaceholder:
+    case .headerSmall, .caption, .inputPlaceholder:
       return Cybrid.theme.colorTheme.secondaryTextColor
     case .body, .bodyLarge:
       return Cybrid.theme.colorTheme.primaryTextColor
@@ -40,7 +40,7 @@ enum FormatStyle {
       return Cybrid.theme.fontTheme.bodyLarge
     case .body:
       return Cybrid.theme.fontTheme.body
-    case .comment:
+    case .caption:
       return Cybrid.theme.fontTheme.caption
     case .inputPlaceholder:
       return Cybrid.theme.fontTheme.bodyLarge
