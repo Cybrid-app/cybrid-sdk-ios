@@ -30,7 +30,7 @@ final class BuyQuoteViewController: UIViewController {
       currencyLabel,
       cryptoPickerTextField,
       amountLabel,
-      amountStackView,
+      amountTextField,
       cryptoExchangeStackView,
       buttonContainer,
       spacerView
@@ -39,24 +39,9 @@ final class BuyQuoteViewController: UIViewController {
     stackView.axis = .vertical
     stackView.spacing = Constants.ContentStackView.itemSpacing
     stackView.distribution = .fill
-    stackView.setCustomSpacing(13.0, after: currencyLabel)
-    stackView.setCustomSpacing(34.0, after: cryptoPickerTextField)
-    stackView.setCustomSpacing(16.0, after: amountLabel)
-    stackView.setCustomSpacing(14.0, after: amountStackView)
-    stackView.setCustomSpacing(19.0, after: cryptoExchangePriceLabel)
+    stackView.setCustomSpacing(Constants.PickerView.bottomSpacing, after: cryptoPickerTextField)
+    stackView.setCustomSpacing(Constants.Button.topSpacing, after: cryptoExchangeStackView)
 
-    return stackView
-  }()
-
-  private lazy var amountStackView: UIStackView = {
-    let stackView = UIStackView(arrangedSubviews: [
-      amountTextField,
-      switchButton
-    ])
-    stackView.spacing = Constants.ContentStackView.itemSpacing
-    stackView.alignment = .center
-    stackView.axis = .horizontal
-    stackView.distribution = .fill
     return stackView
   }()
 
@@ -65,6 +50,8 @@ final class BuyQuoteViewController: UIViewController {
     textField.placeholder = "0.0"
     textField.keyboardType = .decimalPad
     textField.delegate = viewModel
+    textField.rightView = switchButton
+    textField.rightViewMode = .always
 
     return textField
 
@@ -111,10 +98,8 @@ final class BuyQuoteViewController: UIViewController {
   }()
 
   private lazy var buyButton: CYBButton = {
-    let button = CYBButton()
-    button.setTitle("Buy", for: .normal)
-    button.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.18)
-    button.layer.cornerRadius = 10
+    let button = CYBButton(theme: theme)
+    button.setTitle(localizer.localize(with: CybridLocalizationKey.trade(.buy(.cta))), for: .normal)
 
     return button
   }()
@@ -154,18 +139,13 @@ final class BuyQuoteViewController: UIViewController {
   private func setupContentStackView() {
     view.addSubview(contentStackView)
     contentStackView.translatesAutoresizingMaskIntoConstraints = false
-    contentStackView.constraintEdges(to: view, insets: UIEdgeInsets(top: 44, left: 16, bottom: 0, right: 16))
+    contentStackView.constraintEdges(to: view, insets: Constants.ContentStackView.insets)
   }
 
   private func setupPickerView() {
     cryptoPickerView.delegate = viewModel
     cryptoPickerView.dataSource = viewModel
     cryptoPickerTextField.inputView = cryptoPickerView
-    cryptoPickerTextField.constraint(attribute: .height,
-                                     relatedBy: .equal,
-                                     toItem: nil,
-                                     attribute: .notAnAttribute,
-                                     constant: 46)
   }
 
   private func setupFlagIcon() {
@@ -173,17 +153,17 @@ final class BuyQuoteViewController: UIViewController {
                         relatedBy: .equal,
                         toItem: nil,
                         attribute: .notAnAttribute,
-                        constant: 28)
+                        constant: Constants.FlagIcon.size.width)
     flagIcon.constraint(attribute: .height,
                         relatedBy: .equal,
                         toItem: nil,
                         attribute: .notAnAttribute,
-                        constant: 24)
+                        constant: Constants.FlagIcon.size.height)
     cryptoExchangeStackView.constraint(attribute: .height,
                                        relatedBy: .equal,
                                        toItem: nil,
                                        attribute: .notAnAttribute,
-                                       constant: 24)
+                                       constant: Constants.FlagIcon.size.height)
   }
 
   private func setupSwitchButton() {
@@ -191,12 +171,12 @@ final class BuyQuoteViewController: UIViewController {
                             relatedBy: .equal,
                             toItem: nil,
                             attribute: .notAnAttribute,
-                            constant: 24)
+                            constant: Constants.SwitchButton.size.height)
     switchButton.constraint(attribute: .width,
                             relatedBy: .equal,
                             toItem: nil,
                             attribute: .notAnAttribute,
-                            constant: 24)
+                            constant: Constants.SwitchButton.size.width)
   }
 
   private func setupButton() {
@@ -211,7 +191,7 @@ final class BuyQuoteViewController: UIViewController {
                          relatedBy: .equal,
                          toItem: nil,
                          attribute: .notAnAttribute,
-                         constant: 48)
+                         constant: Constants.Button.height)
   }
 
   @objc
@@ -261,9 +241,28 @@ final class BuyQuoteViewController: UIViewController {
 extension BuyQuoteViewController {
   enum Constants {
     enum ContentStackView {
-      static let itemSpacing: CGFloat = 10
-      static let horizontalMargin: CGFloat = 16
-      static let verticalMargin: CGFloat = 10
+      static let insets = UIEdgeInsets(top: UIConstants.minimumTargetSize,
+                                       left: UIConstants.spacingXl2,
+                                       bottom: UIConstants.spacingXl2,
+                                       right: UIConstants.spacingXl2)
+      static let itemSpacing: CGFloat = UIConstants.spacingXl // 12.0
+    }
+
+    enum FlagIcon {
+      static let size: CGSize = CGSize(width: 28, height: UIConstants.sizeMd)
+    }
+
+    enum Button {
+      static let topSpacing: CGFloat = 20
+      static let height: CGFloat = UIConstants.sizeLg // 48
+    }
+
+    enum PickerView {
+      static let bottomSpacing: CGFloat = 34
+    }
+
+    enum SwitchButton {
+      static let size: CGSize = CGSize(width: UIConstants.sizeMd, height: UIConstants.sizeMd)
     }
   }
 }
