@@ -53,6 +53,25 @@ struct CybridCurrencyFormatter {
                                    currencySymbol: currencySymbol)
   }
 
+  static func formatInputNumber(_ number: BigDecimal, locale: Locale = Locale.current) -> String {
+    let decimalSeparator = locale.decimalSeparator ?? "."
+
+    var numberString = String(abs(number.value))
+    let leadingZeroesForSmallNumbers = String(repeating: "0",
+                                              count: max(0, number.precision - numberString.count + 1))
+    numberString = leadingZeroesForSmallNumbers + numberString
+
+    let fractional = String(numberString.suffix(number.precision))
+    let integer = String(numberString.prefix(numberString.count - fractional.count))
+
+    let isNegative = number.value < 0
+
+    let magnitude = fractional.isEmpty ? integer : integer + decimalSeparator + fractional
+    let sign = isNegative ? "-" : ""
+
+    return sign + magnitude
+  }
+
   static func localizedCurrencyString(from number: BigDecimal,
                                       locale: Locale,
                                       groupingSeparator: String?,
