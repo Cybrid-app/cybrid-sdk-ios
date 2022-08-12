@@ -19,18 +19,18 @@ final class BuyQuoteViewModel: NSObject {
   internal var cryptoCurrency: Observable<CurrencyModel?>
   internal let fiatCurrency: CurrencyModel
 
+  internal var selectedPriceRate: BigInt? {
+    guard let cryptoCode = cryptoCurrency.value?.asset.code else { return nil }
+    let priceRate = priceList.first { $0.symbol?.contains(cryptoCode) ?? false }
+    return priceRate?.buyPrice
+  }
+
   // MARK: Private Properties
   private let dataProvider: AssetsRepoProvider & PricesRepoProvider
   private var priceList: [SymbolPriceBankModel] {
     didSet {
       updateConversion()
     }
-  }
-
-  private var selectedPriceRate: BigInt? {
-    guard let cryptoCode = cryptoCurrency.value?.asset.code else { return nil }
-    let priceRate = priceList.first { $0.symbol?.contains(cryptoCode) ?? false }
-    return priceRate?.buyPrice
   }
 
   init(dataProvider: AssetsRepoProvider & PricesRepoProvider,
@@ -107,7 +107,7 @@ extension BuyQuoteViewModel: UITextFieldDelegate {
       let inputText = (amountText.value?.filter { $0 != "." && $0 != "," }),
       isInputGreaterThanZero(inputText)
     else { return }
-    displayAmount.value = formatDisplayAmount(amountText.value)
+    displayAmount.value = formatAndConvert(amountText.value)
   }
 
   func updateButtonState() {
@@ -123,65 +123,50 @@ extension BuyQuoteViewModel: UITextFieldDelegate {
   }
 
   func isInputGreaterThanZero(_ numberString: String) -> Bool {
-    if let bigDecimal = BigDecimal(numberString, precision: self.cryptoCurrency.value?.asset.decimals ?? 2) {
+    let inputPrecision = shouldInputCrypto.value ? (cryptoCurrency.value?.asset.decimals ?? 2) : fiatCurrency.asset.decimals
+    if let bigDecimal = BigDecimal(numberString, precision: inputPrecision) {
       return bigDecimal.value > 0
-    } else {
-      return false
     }
+    return false
   }
 
   func formatInputText(_ inputText: String?) -> String? {
     guard
       let text = (inputText?.filter { $0 != "." && $0 != "," }),
+      let bigInt = BigInt(text),
       isInputGreaterThanZero(text)
     else { return nil }
     var precision: Int = 2
     if shouldInputCrypto.value {
-      precision = cryptoCurrency.value?.asset.decimals ?? 2
+      guard let cryptoAsset = cryptoCurrency.value?.asset else { return nil }
+      precision = cryptoAsset.decimals
     } else {
       precision = fiatCurrency.asset.decimals
     }
-    guard let resultDecimal = BigDecimal(text, precision: precision) else { return nil }
-    return CybridCurrencyFormatter.formatInputNumber(resultDecimal)
+    return CybridCurrencyFormatter.formatInputNumber(BigDecimal(bigInt, precision: precision))
   }
 
-  func formatDisplayAmount(_ amount: String?) -> String {
-    let fiatSymbol = fiatCurrency.asset.symbol
-    let fiatCode = fiatCurrency.asset.code
-    let fiatPrecision = fiatCurrency.asset.decimals
+  func formatAndConvert(_ amount: String?) -> String {
+    let symbol = shouldInputCrypto.value ? fiatCurrency.asset.symbol : ""
+    let code = shouldInputCrypto.value ? fiatCurrency.asset.code : (cryptoCurrency.value?.asset.code ?? "")
 
-    guard let crypto = cryptoCurrency.value else {
-      return CybridCurrencyFormatter.formatPrice(BigDecimal(0), with: fiatSymbol) + " " + fiatCode
+    guard
+      let text = amount,
+      let priceBigInt = selectedPriceRate,
+      let cryptoAsset = cryptoCurrency.value?.asset,
+      let amountBigInt = BigInt(text.filter { $0 != "." && $0 != "," })
+    else {
+      return (CybridCurrencyFormatter.formatPrice(BigDecimal(0), with: symbol) + " " + code)
+        .trimmingCharacters(in: .whitespacesAndNewlines)
     }
-
-    let cryptoCode = crypto.asset.code
-    let cryptoPrecision = crypto.asset.decimals
-
-    if shouldInputCrypto.value {
-      guard
-        let text = amount,
-        let priceBigInt = selectedPriceRate,
-        let amountBigDecimal = BigDecimal((text.filter { $0 != "." && $0 != "," }), precision: cryptoPrecision)
-      else {
-        return CybridCurrencyFormatter.formatPrice(BigDecimal(0), with: fiatSymbol) + " " + fiatCode
-      }
-      let priceRateBigDecimal = BigDecimal(priceBigInt, precision: fiatPrecision)
-      let conversionAmount = amountBigDecimal.multiply(with: priceRateBigDecimal, targetPrecision: fiatPrecision)
-
-      return CybridCurrencyFormatter.formatPrice(conversionAmount, with: fiatSymbol) + " " + fiatCode
-    } else {
-      guard
-        let text = amount,
-        let priceBigInt = selectedPriceRate,
-        let amountBigDecimal = BigDecimal((text.filter { $0 != "." && $0 != "," }), precision: fiatPrecision)
-      else {
-        return CybridCurrencyFormatter.formatPrice(BigDecimal(0), with: "") + " \(cryptoCode)"
-      }
-      let priceRateBigDecimal = BigDecimal(priceBigInt, precision: fiatCurrency.asset.decimals)
-      let conversionAmount = amountBigDecimal.divide(by: priceRateBigDecimal, targetPrecision: cryptoPrecision)
-
-      return CybridCurrencyFormatter.formatPrice(conversionAmount, with: "") + " \(cryptoCode)"
-    }
+    let originPrecision = shouldInputCrypto.value ? cryptoAsset.decimals : fiatCurrency.asset.decimals
+    let targetPrecision = shouldInputCrypto.value ? fiatCurrency.asset.decimals : cryptoAsset.decimals
+    let amountBigDecimal = BigDecimal(amountBigInt, precision: originPrecision)
+    let priceRateBigDecimal = BigDecimal(priceBigInt, precision: fiatCurrency.asset.decimals)
+    let conversionAmount = shouldInputCrypto.value
+      ? amountBigDecimal.multiply(with: priceRateBigDecimal, targetPrecision: targetPrecision)
+      : amountBigDecimal.divide(by: priceRateBigDecimal, targetPrecision: targetPrecision)
+    return CybridCurrencyFormatter.formatPrice(conversionAmount, with: symbol) + " " + code
   }
 }
 
