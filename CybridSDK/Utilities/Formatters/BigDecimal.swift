@@ -58,31 +58,21 @@ struct BigDecimal: Hashable {
   }
 
   func divide(by decimal: BigDecimal, targetPrecision: Int) -> BigDecimal {
-    var (quotient, reminder) = value.quotientAndRemainder(dividingBy: decimal.value)
+    let divisor = decimal.addPrecision(max(0, String(abs(value)).count - String(abs(decimal.value)).count))
+    var (quotient, reminder) = value.quotientAndRemainder(dividingBy: divisor.value)
 
     let intString = String(abs(quotient))
     var decimalDigits: [Int] = []
 
-    while decimalDigits.count <= targetPrecision {
-      (quotient, reminder) = (reminder * 10).quotientAndRemainder(dividingBy: decimal.value)
+    var extraPrecision = 0
+    // If quotient equals 4 we need to look for more precision.
+    // We should not look for precision beyond 18, which is Ethereum's precision
+    while (decimalDigits.count <= targetPrecision || quotient == 4) && extraPrecision < 18 {
+      (quotient, reminder) = (reminder * 10).quotientAndRemainder(dividingBy: divisor.value)
       if let digit = Int(String(abs(quotient))) {
         decimalDigits.append(digit)
       }
-    }
-
-    var extraPrecision = 1
-    // If last quotient is less than 4 it will be rounded down to 0, so we remove last decimal digit
-    if quotient < 4 {
-      decimalDigits.removeLast()
-      extraPrecision = 0
-    } else if quotient > 4 { // If last quotient is greater than 4, it will be rounded up by 1.
-      extraPrecision = 1
-    } else { // If last quotient is 4, we need to keep adding precision until we get a round up or down digit.
-      while quotient == 4 {
-        (quotient, reminder) = (reminder * 10).quotientAndRemainder(dividingBy: decimal.value)
-        if let digit = Int(String(abs(quotient))) {
-          decimalDigits.append(digit)
-        }
+      if decimalDigits.count > targetPrecision {
         extraPrecision += 1
       }
     }
@@ -91,10 +81,13 @@ struct BigDecimal: Hashable {
     let resultString = intString + decimalString
 
     // We create a decimal with all the extra precision needed
-    guard let decimal = BigDecimal(resultString, precision: targetPrecision + extraPrecision) else { return self }
+    return BigDecimal(BigInt(stringLiteral: resultString), precision: targetPrecision + extraPrecision)
+      .roundUp(to: targetPrecision)
+  }
 
-    // Finally we reduce the precision digits to the target precision
-    return decimal.roundUp(to: targetPrecision)
+  func addPrecision(_ precision: Int) -> BigDecimal {
+    let stringValue = String(abs(value)) + String(repeating: "0", count: precision)
+    return BigDecimal(BigInt(stringLiteral: stringValue), precision: self.precision + precision)
   }
 
   func roundUp(to targetPrecision: Int) -> BigDecimal {
@@ -106,7 +99,6 @@ struct BigDecimal: Hashable {
     // Array of digits
     let invertedDigits: [Int] = resultStringWithLeadingZeros.reversed().compactMap { Int(String($0)) }
     let precisionDiff = precision - targetPrecision
-    guard precisionDiff < invertedDigits.count else { return self }
 
     // Round up with zeros
     var result: [Int] = []
@@ -130,8 +122,6 @@ struct BigDecimal: Hashable {
 
     let finalNumberString = Array(result.reversed()).map { String($0) }.joined()
 
-    guard let decimal = BigDecimal(finalNumberString, precision: targetPrecision) else { return self }
-
-    return decimal
+    return BigDecimal(BigInt(stringLiteral: finalNumberString), precision: targetPrecision)
   }
 }
