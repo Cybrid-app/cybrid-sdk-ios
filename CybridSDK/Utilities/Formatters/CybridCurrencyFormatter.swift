@@ -53,8 +53,9 @@ struct CybridCurrencyFormatter {
                                    currencySymbol: currencySymbol)
   }
 
-  static func formatInputNumber(_ number: BigDecimal, locale: Locale = Locale.current) -> String {
-    let decimalSeparator = locale.decimalSeparator ?? "."
+  static func formatInputNumber(_ number: BigDecimal,
+                                decimalSeparator: String? = Locale.current.decimalSeparator) -> String {
+    let decimalSeparator = decimalSeparator ?? "."
 
     var numberString = String(abs(number.value))
     let leadingZeroesForSmallNumbers = String(repeating: "0",

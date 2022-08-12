@@ -390,4 +390,25 @@ extension CurrencyFormatterTests {
     XCTAssertEqual(es_MXFormattedString, "€2,000.32")
     XCTAssertEqual(es_PEFormattedString, "€ 2,000.32")
   }
+
+  func testAmountFormatting_decimalInput() {
+    // Given
+    let inputNumber = BigDecimal(BigInt(stringLiteral: "123100200"), precision: 8)
+    let numberWithoutFractions = BigDecimal(BigInt(stringLiteral: "123100200"), precision: 0)
+    let negativeNumber = BigDecimal(BigInt(stringLiteral: "-123100200"), precision: 8)
+
+    // When
+    let formattedInput = CybridCurrencyFormatter.formatInputNumber(inputNumber)
+    let formattedNegativeNumber = CybridCurrencyFormatter.formatInputNumber(negativeNumber)
+    let formattedInputWithoutFractions = CybridCurrencyFormatter.formatInputNumber(numberWithoutFractions)
+    let formattedInputWithCommaSeparator = CybridCurrencyFormatter.formatInputNumber(inputNumber, decimalSeparator: ",")
+    let formattedInputWithoutSeparator = CybridCurrencyFormatter.formatInputNumber(inputNumber, decimalSeparator: nil)
+
+    // Then
+    XCTAssertEqual(formattedInput, "1.23100200")
+    XCTAssertEqual(formattedInputWithoutFractions, "123100200")
+    XCTAssertEqual(formattedNegativeNumber, "-1.23100200")
+    XCTAssertEqual(formattedInputWithCommaSeparator, "1,23100200")
+    XCTAssertEqual(formattedInputWithoutSeparator, "1.23100200")
+  }
 }
