@@ -58,4 +58,10 @@ class LocalizationTests: XCTestCase {
     // Then
     XCTAssertEqual(localizedString.stringValue, "Devise")
   }
+
+  func testCybridLocalizer_keys() {
+    XCTAssertEqual(CybridLocalizationKey.cryptoPriceList(.headerCurrency).stringValue, "cybrid.cryptoPriceList.headerCurrency")
+    XCTAssertEqual(CybridLocalizationKey.trade(.buy(.amount)).stringValue, "cybrid.trade.buy.amount")
+    XCTAssertEqual(CybridLocalizationKey.trade(.sell(.title)).stringValue, "cybrid.trade.sell.title")
+  }
 }
