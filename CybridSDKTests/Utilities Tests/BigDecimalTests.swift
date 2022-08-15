@@ -53,7 +53,7 @@ class BigDecimalTests: XCTestCase {
     XCTAssertNotNil(firstDecimal)
 
     // When
-    let multiplication = firstDecimal!.multiply(with: secondDecimal!, targetPrecision: 2)
+    let multiplication = try? firstDecimal!.multiply(with: secondDecimal!, targetPrecision: 2)
 
     // Then
     XCTAssertEqual(multiplication, BigDecimal("2597783", precision: 2))
@@ -67,7 +67,7 @@ class BigDecimalTests: XCTestCase {
     XCTAssertNotNil(firstDecimal)
 
     // When
-    let multiplication = firstDecimal!.multiply(with: secondDecimal!, targetPrecision: 2)
+    let multiplication = try? firstDecimal!.multiply(with: secondDecimal!, targetPrecision: 2)
 
     // Then
     XCTAssertEqual(multiplication, BigDecimal("3928185", precision: 2))
@@ -81,7 +81,7 @@ class BigDecimalTests: XCTestCase {
     XCTAssertNotNil(firstDecimal)
 
     // When
-    let multiplication = firstDecimal!.multiply(with: secondDecimal!, targetPrecision: 2)
+    let multiplication = try? firstDecimal!.multiply(with: secondDecimal!, targetPrecision: 2)
 
     // Then
     XCTAssertEqual(multiplication, BigDecimal("199", precision: 2))
@@ -95,7 +95,7 @@ class BigDecimalTests: XCTestCase {
     XCTAssertNotNil(priceAmount)
 
     // When
-    let result = fiatAmount!.divide(by: priceAmount!, targetPrecision: 8)
+    let result = try? fiatAmount!.divide(by: priceAmount!, targetPrecision: 8)
 
     // Then
     XCTAssertEqual(result, BigDecimal("112345696", precision: 8))
@@ -109,7 +109,7 @@ class BigDecimalTests: XCTestCase {
     XCTAssertNotNil(priceAmount)
 
     // When
-    let result = fiatAmount!.divide(by: priceAmount!, targetPrecision: 8)
+    let result = try? fiatAmount!.divide(by: priceAmount!, targetPrecision: 8)
 
     // Then
     XCTAssertEqual(result, BigDecimal("8649", precision: 8))
@@ -123,7 +123,7 @@ class BigDecimalTests: XCTestCase {
     XCTAssertNotNil(priceAmount)
 
     // When
-    let result = fiatAmount!.divide(by: priceAmount!, targetPrecision: 3)
+    let result = try? fiatAmount!.divide(by: priceAmount!, targetPrecision: 3)
 
     // Then
     XCTAssertEqual(result, BigDecimal("145", precision: 3))

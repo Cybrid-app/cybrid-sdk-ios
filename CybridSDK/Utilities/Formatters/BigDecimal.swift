@@ -45,19 +45,26 @@ struct BigDecimal: Hashable {
     self.init(BigInt(value), precision: precision)
   }
 
-  static func zero(withPrecision precision: Int) -> BigDecimal {
+  static func zero(withPrecision precision: Int = 2) -> BigDecimal {
     return BigDecimal(0, precision: precision)
   }
+}
 
-  func multiply(with decimal: BigDecimal, targetPrecision: Int) -> BigDecimal {
+// MARK: - BigDecimal Operations
+
+extension BigDecimal {
+  typealias BigDecimalOperation = (BigDecimal, Int) throws -> BigDecimal
+
+  func multiply(with decimal: BigDecimal, targetPrecision: Int) throws -> BigDecimal {
     let resultInt = value * decimal.value
     let resultPrecision = precision + decimal.precision
     let resultDecimal = BigDecimal(resultInt, precision: resultPrecision)
+    try resultDecimal.performIntegrityCheck(with: resultInt)
 
     return resultDecimal.roundUp(to: targetPrecision)
   }
 
-  func divide(by decimal: BigDecimal, targetPrecision: Int) -> BigDecimal {
+  func divide(by decimal: BigDecimal, targetPrecision: Int) throws -> BigDecimal {
     let divisor = decimal.addPrecision(max(0, String(abs(value)).count - String(abs(decimal.value)).count))
     var (quotient, reminder) = value.quotientAndRemainder(dividingBy: divisor.value)
 
@@ -79,10 +86,12 @@ struct BigDecimal: Hashable {
 
     let decimalString = decimalDigits.map { String($0) }.joined()
     let resultString = intString + decimalString
+    let bigInt = BigInt(stringLiteral: resultString)
+    let resultDecimal = BigDecimal(bigInt, precision: targetPrecision + extraPrecision)
+    try resultDecimal.performIntegrityCheck(with: bigInt)
 
     // We create a decimal with all the extra precision needed
-    return BigDecimal(BigInt(stringLiteral: resultString), precision: targetPrecision + extraPrecision)
-      .roundUp(to: targetPrecision)
+    return resultDecimal.roundUp(to: targetPrecision)
   }
 
   func addPrecision(_ precision: Int) -> BigDecimal {

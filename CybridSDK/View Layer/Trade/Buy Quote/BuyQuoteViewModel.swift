@@ -57,13 +57,17 @@ final class BuyQuoteViewModel: NSObject {
           case .success(let pricesList):
             self?.priceList = pricesList
           case .failure(let error):
-            print(error)
+            self?.handleError(error)
           }
         }
       case .failure(let error):
-        print(error)
+        self?.handleError(error)
       }
     }
+  }
+
+  func handleError(_ error: Error) {
+    print(error)
   }
 
   func switchConversion() {
@@ -164,8 +168,12 @@ extension BuyQuoteViewModel: UITextFieldDelegate {
     let amountBigDecimal = BigDecimal(amountBigInt, precision: originPrecision)
     let priceRateBigDecimal = BigDecimal(priceBigInt, precision: fiatCurrency.asset.decimals)
     let conversionAmount = shouldInputCrypto.value
-      ? amountBigDecimal.multiply(with: priceRateBigDecimal, targetPrecision: targetPrecision)
-      : amountBigDecimal.divide(by: priceRateBigDecimal, targetPrecision: targetPrecision)
+      ? BigDecimal.runOperation({
+        try amountBigDecimal.multiply(with: priceRateBigDecimal, targetPrecision: targetPrecision)
+      }, with: handleError(_:))
+      : BigDecimal.runOperation({
+        try amountBigDecimal.divide(by: priceRateBigDecimal, targetPrecision: targetPrecision)
+      }, with: handleError(_:))
     return CybridCurrencyFormatter.formatPrice(conversionAmount, with: symbol) + " " + code
   }
 }
