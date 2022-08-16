@@ -88,6 +88,10 @@
 		0BBCF640285C52D700D39C6D /* MockError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BBCF63F285C52D700D39C6D /* MockError.swift */; };
 		0BBD0CCA28AAC025001DBC5F /* BigDecimalValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BBD0CC928AAC025001DBC5F /* BigDecimalValidator.swift */; };
 		0BBD0CCE28AB71B7001DBC5F /* TradeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BBD0CCD28AB71B7001DBC5F /* TradeViewModel.swift */; };
+		0BBD0CD128ABF905001DBC5F /* TradeConfirmationModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BBD0CD028ABF905001DBC5F /* TradeConfirmationModalView.swift */; };
+		0BBD0CD428AC0B60001DBC5F /* CybridModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BBD0CD328AC0B60001DBC5F /* CybridModalViewController.swift */; };
+		0BBD0CD628AC1DDC001DBC5F /* LoadingModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BBD0CD528AC1DDC001DBC5F /* LoadingModalView.swift */; };
+		0BBD0CD828AC21F1001DBC5F /* TradeSuccessModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BBD0CD728AC21F1001DBC5F /* TradeSuccessModalView.swift */; };
 		0BD0A4E728582FB700C10744 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 0BD0A4E628582FB700C10744 /* README.md */; };
 		0BD26F2428A55D4800ED2A1B /* CybridEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD26F2228A55D4800ED2A1B /* CybridEvent.swift */; };
 		0BD26F2528A55D4800ED2A1B /* CybridLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD26F2328A55D4800ED2A1B /* CybridLogger.swift */; };
@@ -234,6 +238,10 @@
 		0BBCF63F285C52D700D39C6D /* MockError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockError.swift; sourceTree = "<group>"; };
 		0BBD0CC928AAC025001DBC5F /* BigDecimalValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigDecimalValidator.swift; sourceTree = "<group>"; };
 		0BBD0CCD28AB71B7001DBC5F /* TradeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeViewModel.swift; sourceTree = "<group>"; };
+		0BBD0CD028ABF905001DBC5F /* TradeConfirmationModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeConfirmationModalView.swift; sourceTree = "<group>"; };
+		0BBD0CD328AC0B60001DBC5F /* CybridModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CybridModalViewController.swift; sourceTree = "<group>"; };
+		0BBD0CD528AC1DDC001DBC5F /* LoadingModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingModalView.swift; sourceTree = "<group>"; };
+		0BBD0CD728AC21F1001DBC5F /* TradeSuccessModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeSuccessModalView.swift; sourceTree = "<group>"; };
 		0BD0A4E628582FB700C10744 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		0BD26F2228A55D4800ED2A1B /* CybridEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CybridEvent.swift; sourceTree = "<group>"; };
 		0BD26F2328A55D4800ED2A1B /* CybridLogger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CybridLogger.swift; sourceTree = "<group>"; };
@@ -577,6 +585,7 @@
 		0B557B902899F4CB00632A6D /* Trade */ = {
 			isa = PBXGroup;
 			children = (
+				0BBD0CCF28ABF8F8001DBC5F /* Modal Views */,
 				0B557B932899F4DE00632A6D /* TradeViewController.swift */,
 				0BBD0CCD28AB71B7001DBC5F /* TradeViewModel.swift */,
 			);
@@ -713,6 +722,24 @@
 			name = Resources;
 			sourceTree = "<group>";
 		};
+		0BBD0CCF28ABF8F8001DBC5F /* Modal Views */ = {
+			isa = PBXGroup;
+			children = (
+				0BBD0CD028ABF905001DBC5F /* TradeConfirmationModalView.swift */,
+				0BBD0CD728AC21F1001DBC5F /* TradeSuccessModalView.swift */,
+				0BBD0CD528AC1DDC001DBC5F /* LoadingModalView.swift */,
+			);
+			path = "Modal Views";
+			sourceTree = "<group>";
+		};
+		0BBD0CD228AC0B54001DBC5F /* Modal */ = {
+			isa = PBXGroup;
+			children = (
+				0BBD0CD328AC0B60001DBC5F /* CybridModalViewController.swift */,
+			);
+			path = Modal;
+			sourceTree = "<group>";
+		};
 		0BD26F2728A55D6000ED2A1B /* Logger */ = {
 			isa = PBXGroup;
 			children = (
@@ -775,6 +802,7 @@
 		0BD6610E286B76AA00F4DA6B /* Reusable Views */ = {
 			isa = PBXGroup;
 			children = (
+				0BBD0CD228AC0B54001DBC5F /* Modal */,
 				0B289A08289E3325001B3360 /* TextFields */,
 				0B557B972899F56900632A6D /* CYBButton.swift */,
 				0BD6610F286B76CF00F4DA6B /* URLImageView */,
@@ -1047,10 +1075,13 @@
 				0BD6610B286B768C00F4DA6B /* CryptoPriceModel.swift in Sources */,
 				0B557B962899F4DE00632A6D /* TradeViewController.swift in Sources */,
 				0B00E04E2885ADB300707F26 /* AssetsRepository.swift in Sources */,
+				0BBD0CD828AC21F1001DBC5F /* TradeSuccessModalView.swift in Sources */,
 				0BD661372872BB0A00F4DA6B /* AssetPathBuilder.swift in Sources */,
 				0B00E034287F6D1000707F26 /* CybridAuthenticator.swift in Sources */,
+				0BBD0CD128ABF905001DBC5F /* TradeConfirmationModalView.swift in Sources */,
 				0BD660F7286B761200F4DA6B /* NetworkingInterfaces.swift in Sources */,
 				0B00E01D28789ADA00707F26 /* BigDecimal.swift in Sources */,
+				0BBD0CD428AC0B60001DBC5F /* CybridModalViewController.swift in Sources */,
 				0B2B2A8528629031002F0EC1 /* UIColor+Extensions.swift in Sources */,
 				0B2B2A872862906E002F0EC1 /* UILabel+Extensions.swift in Sources */,
 				0B2B2A6D28621D5C002F0EC1 /* ColorTheme.swift in Sources */,
@@ -1082,6 +1113,7 @@
 				0B303CE12862E062007BF7FF /* FormatStyle.swift in Sources */,
 				0B2899F828942C54001B3360 /* CybridJSONDecoder.swift in Sources */,
 				0BD66105286B768300F4DA6B /* CryptoPriceTableViewCell.swift in Sources */,
+				0BBD0CD628AC1DDC001DBC5F /* LoadingModalView.swift in Sources */,
 				0BD660FE286B763E00F4DA6B /* AsyncOperation.swift in Sources */,
 				0B2899E5288EE764001B3360 /* TimerType.swift in Sources */,
 				0B303CDF2862DD2C007BF7FF /* UIConstants.swift in Sources */,

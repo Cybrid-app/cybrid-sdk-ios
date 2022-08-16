@@ -8,9 +8,11 @@
 import UIKit
 
 enum FormatStyle {
+  case header
   case headerSmall
   case bodyLarge
   case body
+  case bodyStrong
   case caption
   case inputPlaceholder
 
@@ -27,18 +29,22 @@ enum FormatStyle {
     switch self {
     case .headerSmall, .caption, .inputPlaceholder:
       return Cybrid.theme.colorTheme.secondaryTextColor
-    case .body, .bodyLarge:
+    case .body, .bodyStrong, .bodyLarge, .header:
       return Cybrid.theme.colorTheme.primaryTextColor
     }
   }
 
   var font: UIFont {
     switch self {
+    case .header:
+      return Cybrid.theme.fontTheme.bodyLarge
     case .headerSmall:
       return Cybrid.theme.fontTheme.caption
     case .bodyLarge:
       return Cybrid.theme.fontTheme.bodyLarge
     case .body:
+      return Cybrid.theme.fontTheme.body
+    case .bodyStrong:
       return Cybrid.theme.fontTheme.body
     case .caption:
       return Cybrid.theme.fontTheme.caption

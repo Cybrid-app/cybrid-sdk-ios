@@ -201,6 +201,10 @@ extension TradeViewModel: UITextFieldDelegate {
       }, errorEvent: .component(.trade(.priceDataError)))
     return CybridCurrencyFormatter.formatPrice(conversionAmount, with: symbol) + " " + code
   }
+
+  func confirmOperation() {
+    // TODO: Implement service
+  }
 }
 
 extension TradeViewModel {

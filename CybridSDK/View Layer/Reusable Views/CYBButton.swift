@@ -16,13 +16,15 @@ final class CYBButton: UIButton {
   }
   override var isEnabled: Bool {
     didSet {
-      setBackgroundColor()
+      setColor()
     }
   }
 
+  let style: ButtonStyle
   let theme: Theme
 
-  init(theme: Theme = CybridTheme.default) {
+  init(style: ButtonStyle = .primary, theme: Theme = CybridTheme.default) {
+    self.style = style
     self.theme = theme
     super.init(frame: .zero)
     setupView()
@@ -36,15 +38,41 @@ final class CYBButton: UIButton {
 
   private func setupView() {
     layer.cornerRadius = Constants.cornerRadius
-    setBackgroundColor()
+    setContentHuggingPriority(.required, for: .horizontal)
+    translatesAutoresizingMaskIntoConstraints = false
+
+    constraint(attribute: .height,
+               relatedBy: .greaterThanOrEqual,
+               toItem: nil,
+               attribute: .notAnAttribute,
+               constant: Constants.minimumHeight)
+
+    setColor()
   }
 
-  private func setBackgroundColor() {
-    if isEnabled {
-      backgroundColor = theme.colorTheme.accentColor
-    } else {
-      backgroundColor = theme.colorTheme.disabledBackgroundColor
+  private func setColor() {
+    switch style {
+    case .primary:
+      if isEnabled {
+        backgroundColor = theme.colorTheme.accentColor
+      } else {
+        backgroundColor = theme.colorTheme.disabledBackgroundColor
+      }
+    case .secondary:
+      if isEnabled {
+        setTitleColor(theme.colorTheme.accentColor, for: .normal)
+      } else {
+        setTitleColor(theme.colorTheme.disabledBackgroundColor, for: .normal)
+      }
     }
+  }
+}
+
+// MARK: - Styles
+extension CYBButton {
+  enum ButtonStyle {
+    case primary // highlighted
+    case secondary // plain
   }
 }
 
@@ -54,5 +82,6 @@ extension CYBButton {
   enum Constants {
     static let horizontalPadding: CGFloat = 20
     static let cornerRadius: CGFloat = UIConstants.radiusLg
+    static let minimumHeight: CGFloat = UIConstants.minimumTargetSize
   }
 }

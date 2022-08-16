@@ -25,12 +25,12 @@ class CryptoPriceTableViewCell: UITableViewCell {
     stackView.alignment = .center
     return stackView
   }()
-  private lazy var nameLabel = UILabel.makeLabel(with: .bodyLarge) { label in
+  private lazy var nameLabel = UILabel.makeLabel(.bodyLarge) { label in
     label.setContentCompressionResistancePriority(.defaultHigh - 1, for: .horizontal)
     label.setContentHuggingPriority(.required, for: .horizontal)
     label.setContentHuggingPriority(.defaultHigh, for: .vertical)
   }
-  private var priceLabel = UILabel.makeLabel(with: .body) { label in
+  private var priceLabel = UILabel.makeLabel(.body) { label in
     label.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
     label.setContentHuggingPriority(.defaultHigh, for: .vertical)
   }
