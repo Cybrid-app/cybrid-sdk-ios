@@ -22,7 +22,7 @@ enum TradeSegment: Int {
   }
 }
 
-public final class TradeViewModel: NSObject {
+final class TradeViewModel: NSObject {
   // MARK: Observed Properties
   internal var amountText: Observable<String?> = Observable(nil)
   internal var assetList: Observable<[CurrencyModel]>
@@ -51,7 +51,7 @@ public final class TradeViewModel: NSObject {
     }
   }
 
-  public init(selectedCrypto: AssetBankModel?) {
+  init(selectedCrypto: AssetBankModel?) {
     self.dataProvider = CybridSession.current
     self.fiatCurrency = CurrencyModel(asset: Cybrid.fiat.defaultAsset)
     self.assetList = Observable(dataProvider.assetsCache?.map { CurrencyModel(asset: $0) } ?? [])

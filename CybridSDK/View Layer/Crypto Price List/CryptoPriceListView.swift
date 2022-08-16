@@ -10,13 +10,13 @@ import UIKit
 
 public class CryptoPriceListView: UITableView {
 
-  private var onCryptoSelect: ((AssetBankModel) -> Void)?
   private var viewModel: CryptoPriceViewModel!
+  private weak var navigationController: UINavigationController?
   private let theme: Theme
 
-  public init(theme: Theme? = nil, onCryptoSelect: ((AssetBankModel) -> Void)? = nil) {
+  public init(navigationController: UINavigationController?, theme: Theme? = nil) {
     self.theme = theme ?? Cybrid.theme
-    self.onCryptoSelect = onCryptoSelect
+    self.navigationController = navigationController
 
     super.init(frame: .zero, style: .plain)
 
@@ -59,9 +59,10 @@ public class CryptoPriceListView: UITableView {
     viewModel.filteredCryptoPriceList.bind { _ in
       self.reloadData()
     }
-    viewModel.selectedCrypto.bind { [onCryptoSelect, viewModel] selectedAsset in
+    viewModel.selectedCrypto.bind { [navigationController, viewModel] selectedAsset in
       if let asset = selectedAsset {
-        onCryptoSelect?(asset)
+        let viewController = TradeViewController(viewModel: TradeViewModel(selectedCrypto: asset))
+        navigationController?.pushViewController(viewController, animated: true)
         viewModel?.selectedCrypto.value = nil
       }
     }

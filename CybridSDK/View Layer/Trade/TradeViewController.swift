@@ -128,7 +128,16 @@ public final class TradeViewController: UIViewController {
 
   private lazy var buttonContainer = UIView()
 
-  public init(viewModel: TradeViewModel) {
+  public init() {
+    self.theme = Cybrid.theme
+    self.localizer = CybridLocalizer()
+    self.logger = Cybrid.logger
+    self.viewModel = TradeViewModel(selectedCrypto: nil)
+
+    super.init(nibName: nil, bundle: nil)
+  }
+
+  init(viewModel: TradeViewModel) {
     self.theme = Cybrid.theme
     self.localizer = CybridLocalizer()
     self.logger = Cybrid.logger
