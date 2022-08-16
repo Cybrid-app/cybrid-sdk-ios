@@ -27,6 +27,7 @@ final class BuyQuoteViewModel: NSObject {
 
   // MARK: Private Properties
   private let dataProvider: AssetsRepoProvider & PricesRepoProvider
+  private let logger: CybridLogger?
   private var priceList: [SymbolPriceBankModel] {
     didSet {
       updateConversion()
@@ -35,10 +36,12 @@ final class BuyQuoteViewModel: NSObject {
 
   init(dataProvider: AssetsRepoProvider & PricesRepoProvider,
        fiatAsset: AssetBankModel,
+       logger: CybridLogger?,
        priceList: [SymbolPriceBankModel]? = nil) {
     self.dataProvider = dataProvider
     self.fiatCurrency = CurrencyModel(asset: fiatAsset)
     self.assetList = Observable([])
+    self.logger = logger
     self.priceList = priceList ?? []
     self.cryptoCurrency = Observable(nil)
     cryptoCurrency.value = assetList.value.first
@@ -56,18 +59,14 @@ final class BuyQuoteViewModel: NSObject {
           switch pricesResult {
           case .success(let pricesList):
             self?.priceList = pricesList
-          case .failure(let error):
-            self?.handleError(error)
+          case .failure:
+            self?.logger?.log(.component(.trade(.priceDataError)))
           }
         }
-      case .failure(let error):
-        self?.handleError(error)
+      case .failure:
+        self?.logger?.log(.component(.trade(.priceDataError)))
       }
     }
-  }
-
-  func handleError(_ error: Error) {
-    print(error)
   }
 
   func switchConversion() {
@@ -170,10 +169,10 @@ extension BuyQuoteViewModel: UITextFieldDelegate {
     let conversionAmount = shouldInputCrypto.value
       ? BigDecimal.runOperation({
         try amountBigDecimal.multiply(with: priceRateBigDecimal, targetPrecision: targetPrecision)
-      }, with: handleError(_:))
+      }, errorEvent: .component(.trade(.priceDataError)))
       : BigDecimal.runOperation({
         try amountBigDecimal.divide(by: priceRateBigDecimal, targetPrecision: targetPrecision)
-      }, with: handleError(_:))
+      }, errorEvent: .component(.trade(.priceDataError)))
     return CybridCurrencyFormatter.formatPrice(conversionAmount, with: symbol) + " " + code
   }
 }

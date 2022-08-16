@@ -12,6 +12,7 @@ public final class TradeViewController: UIViewController {
 
   private let theme: Theme
   private let localizer: Localizer
+  private let logger: CybridLogger?
 
   private lazy var segments = [
     localizer.localize(with: CybridLocalizationKey.trade(.buy(.title))),
@@ -36,7 +37,8 @@ public final class TradeViewController: UIViewController {
   lazy var buyViewController = BuyQuoteViewController(
     viewModel: BuyQuoteViewModel(
       dataProvider: CybridSession.current,
-      fiatAsset: .usd
+      fiatAsset: .usd,
+      logger: logger
     ),
     theme: theme,
     localizer: localizer
@@ -47,6 +49,7 @@ public final class TradeViewController: UIViewController {
   public init() {
     self.theme = Cybrid.theme
     self.localizer = CybridLocalizer()
+    self.logger = Cybrid.logger
 
     super.init(nibName: nil, bundle: nil)
   }

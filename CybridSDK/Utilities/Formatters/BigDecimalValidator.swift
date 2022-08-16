@@ -9,11 +9,11 @@ import BigInt
 import Foundation
 
 extension BigDecimal {
-  static func runOperation(_ operation: () throws -> BigDecimal, with errorHandler: @escaping (Error) -> Void) -> BigDecimal {
+  static func runOperation(_ operation: () throws -> BigDecimal, errorEvent: CybridEvent) -> BigDecimal {
     do {
       return try operation()
     } catch {
-      errorHandler(error)
+      Cybrid.logger?.log(errorEvent)
       return BigDecimal.zero()
     }
   }

@@ -271,6 +271,7 @@ extension BuyQuoteViewModelTests {
                        priceList: [SymbolPriceBankModel]? = nil) -> BuyQuoteViewModel {
     return BuyQuoteViewModel(dataProvider: dataProvider ?? self.dataProvider,
                              fiatAsset: .usd,
+                             logger: nil,
                              priceList: priceList)
   }
 }
