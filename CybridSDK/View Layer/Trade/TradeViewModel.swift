@@ -22,7 +22,7 @@ enum TradeSegment: Int {
   }
 }
 
-final class TradeViewModel: NSObject {
+public final class TradeViewModel: NSObject {
   // MARK: Observed Properties
   internal var amountText: Observable<String?> = Observable(nil)
   internal var assetList: Observable<[CurrencyModel]>
@@ -51,17 +51,20 @@ final class TradeViewModel: NSObject {
     }
   }
 
-  init(dataProvider: AssetsRepoProvider & PricesRepoProvider,
-       fiatAsset: AssetBankModel,
-       logger: CybridLogger?,
-       priceList: [SymbolPriceBankModel]? = nil) {
-    self.dataProvider = dataProvider
-    self.fiatCurrency = CurrencyModel(asset: fiatAsset)
-    self.assetList = Observable([])
-    self.logger = logger
-    self.priceList = priceList ?? []
+  public init(selectedCrypto: AssetBankModel?) {
+    self.dataProvider = CybridSession.current
+    self.fiatCurrency = CurrencyModel(asset: Cybrid.fiat.defaultAsset)
+    self.assetList = Observable(dataProvider.assetsCache?.map { CurrencyModel(asset: $0) } ?? [])
+    self.logger = Cybrid.logger
+    self.priceList = []
     self.cryptoCurrency = Observable(nil)
-    cryptoCurrency.value = assetList.value.first
+    if let selectedCrypto = selectedCrypto {
+      cryptoCurrency.value = assetList.value.first(where: {
+        $0.asset.code == selectedCrypto.code
+      })
+    } else {
+      cryptoCurrency.value = assetList.value.first
+    }
   }
 
   func fetchPriceList() {
@@ -71,7 +74,6 @@ final class TradeViewModel: NSObject {
         self?.assetList.value = assetList
           .filter { $0.type == .crypto }
           .map { CurrencyModel(asset: $0) }
-        self?.cryptoCurrency.value = self?.assetList.value.first
         self?.dataProvider.fetchPriceList { pricesResult in
           switch pricesResult {
           case .success(let pricesList):
@@ -100,26 +102,26 @@ final class TradeViewModel: NSObject {
 }
 
 extension TradeViewModel: UIPickerViewDelegate, UIPickerViewDataSource {
-  func numberOfComponents(in pickerView: UIPickerView) -> Int {
+  public func numberOfComponents(in pickerView: UIPickerView) -> Int {
     return 1
   }
 
-  func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+  public func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
     return assetList.value.count
   }
 
-  func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+  public func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
     return assetList.value[row].asset.name
   }
 
-  func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+  public func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
     cryptoCurrency.value = assetList.value[row]
     updateConversion()
   }
 }
 
 extension TradeViewModel: UITextFieldDelegate {
-  func textFieldDidChangeSelection(_ textField: UITextField) {
+  public func textFieldDidChangeSelection(_ textField: UITextField) {
     guard self.amountText.value != textField.text else { return }
     let formattedInput = formatInputText(textField.text)
     amountText.value = formattedInput

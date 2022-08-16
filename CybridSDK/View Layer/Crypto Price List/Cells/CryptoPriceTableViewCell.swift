@@ -49,12 +49,6 @@ class CryptoPriceTableViewCell: UITableViewCell {
     return nil
   }
 
-  override func setSelected(_ selected: Bool, animated: Bool) {
-      super.setSelected(selected, animated: animated)
-
-      // Configure the view for the selected state
-  }
-
   // MARK: Private functions
 
   private func setupView() {

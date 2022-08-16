@@ -128,15 +128,11 @@ public final class TradeViewController: UIViewController {
 
   private lazy var buttonContainer = UIView()
 
-  public init() {
+  public init(viewModel: TradeViewModel) {
     self.theme = Cybrid.theme
     self.localizer = CybridLocalizer()
     self.logger = Cybrid.logger
-    self.viewModel = TradeViewModel(
-      dataProvider: CybridSession.current,
-      fiatAsset: .usd,
-      logger: logger
-    )
+    self.viewModel = viewModel
 
     super.init(nibName: nil, bundle: nil)
   }
@@ -250,6 +246,7 @@ public final class TradeViewController: UIViewController {
     viewModel.segmentSelection.bind { [weak self]  selectedSegment in
       self?.updateButton(selectedSegment: selectedSegment)
     }
+//    viewModel.setSelectedCurrency()
     viewModel.fetchPriceList()
   }
 

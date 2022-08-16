@@ -15,7 +15,8 @@ protocol CryptoPriceViewProvider: AnyObject {
 class CryptoPriceViewModel: NSObject {
   // MARK: Observed properties
   internal var cryptoPriceList: [CryptoPriceModel] = []
-  internal var filteredCryptoPriceList: Observable<[CryptoPriceModel]> = .init([])
+  internal var filteredCryptoPriceList: Observable<[CryptoPriceModel]> = Observable([])
+  internal var selectedCrypto: Observable<AssetBankModel?> = Observable(nil)
 
   // MARK: Private properties
   private unowned var cellProvider: CryptoPriceViewProvider
@@ -88,6 +89,15 @@ extension CryptoPriceViewModel: UITableViewDelegate, UITableViewDataSource {
   func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
     let view = CryptoPriceTableHeaderView(delegate: self)
     return view
+  }
+
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    let selectedModel = filteredCryptoPriceList.value[indexPath.row]
+    guard
+      let assetList = dataProvider.assetsCache,
+        let selectedAsset = assetList.first(where: { $0.code == selectedModel.assetCode })
+    else { return }
+    selectedCrypto.value = selectedAsset
   }
 }
 

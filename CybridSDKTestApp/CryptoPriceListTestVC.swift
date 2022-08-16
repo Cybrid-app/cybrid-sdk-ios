@@ -10,7 +10,10 @@ import CybridSDK
 
 final class CryptoPriceListTestVC: UIViewController {
 
-  lazy var tableView = CryptoPriceListView()
+  lazy var tableView = CryptoPriceListView { [navigationController] selectedCrypto in
+    let viewController = TradeViewController(viewModel: TradeViewModel(selectedCrypto: selectedCrypto))
+    navigationController?.pushViewController(viewController, animated: true)
+  }
 
   init() {
     super.init(nibName: nil, bundle: nil)

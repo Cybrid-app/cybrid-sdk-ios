@@ -19,18 +19,20 @@ public final class CybridConfig {
   internal lazy var session: CybridSession = .current
   internal var theme: Theme = CybridTheme.default
   internal let assetsURL: String = "https://images.cybrid.xyz/sdk/assets/"
+  internal var fiat: FiatConfig = .usd
 
   // MARK: Private Properties
   private var _preferredLocale: Locale?
 
   // MARK: Public Methods
   /// Setup CybridSDK Configuration
-  public func setup(environment: CybridEnvironment = .sandbox,
-                    authenticator: CybridAuthenticator,
-                    theme: Theme? = nil,
+  public func setup(authenticator: CybridAuthenticator,
+                    environment: CybridEnvironment = .sandbox,
+                    fiat: FiatConfig,
                     locale: Locale? = nil,
+                    logger: CybridLogger? = nil,
                     refreshRate: TimeInterval = 5,
-                    logger: CybridLogger? = nil) {
+                    theme: Theme? = nil) {
     self.authenticator = authenticator
     self.theme = theme ?? CybridTheme.default
     self.refreshRate = refreshRate
