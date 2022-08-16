@@ -119,6 +119,12 @@
 		0BD6613A2872BC0B00F4DA6B /* CybridCurrencyFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD661392872BC0B00F4DA6B /* CybridCurrencyFormatter.swift */; };
 		0BD6613E2874AFAA00F4DA6B /* MockNumberFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD6613D2874AFAA00F4DA6B /* MockNumberFormatter.swift */; };
 		0BFF8755289628EB00E44C74 /* listAssetsResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 0BFF87542896267C00E44C74 /* listAssetsResponse.json */; };
+		489B1712ABFAEAD71D675698 /* Pods_Abstract_CybridSDKTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE14953A2B619F3B0B0FE90F /* Pods_Abstract_CybridSDKTests.framework */; };
+		693F21288229192750E94BA0 /* Pods_Abstract_CybridSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 440FDAF7ABD29FAC3A04ECBF /* Pods_Abstract_CybridSDK.framework */; };
+		6F22C872E276FE6FFDAA91A3 /* Pods_Abstract_CybridSDKTestApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDE6BF51F839523A68806209 /* Pods_Abstract_CybridSDKTestApp.framework */; };
+		9286A74928AC0B6B00B63128 /* AccountsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9286A74828AC0B6A00B63128 /* AccountsRepository.swift */; };
+		9286A74C28AC150600B63128 /* AccountsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9286A74B28AC150600B63128 /* AccountsViewModel.swift */; };
+		9286A74E28AC185E00B63128 /* AccountAssetPriceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9286A74D28AC185E00B63128 /* AccountAssetPriceModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -268,6 +274,18 @@
 		0BD6613B28734F2900F4DA6B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0BD6613D2874AFAA00F4DA6B /* MockNumberFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNumberFormatter.swift; sourceTree = "<group>"; };
 		0BFF87542896267C00E44C74 /* listAssetsResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = listAssetsResponse.json; sourceTree = "<group>"; };
+		2DFBF9E56A11AB55DCC2FA4F /* Pods-Abstract-CybridSDK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Abstract-CybridSDK.release.xcconfig"; path = "Target Support Files/Pods-Abstract-CybridSDK/Pods-Abstract-CybridSDK.release.xcconfig"; sourceTree = "<group>"; };
+		440FDAF7ABD29FAC3A04ECBF /* Pods_Abstract_CybridSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Abstract_CybridSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8E29A5A64B00BBB9F0AEF5FD /* Pods-Abstract-CybridSDKTestApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Abstract-CybridSDKTestApp.debug.xcconfig"; path = "Target Support Files/Pods-Abstract-CybridSDKTestApp/Pods-Abstract-CybridSDKTestApp.debug.xcconfig"; sourceTree = "<group>"; };
+		9286A74828AC0B6A00B63128 /* AccountsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsRepository.swift; sourceTree = "<group>"; };
+		9286A74B28AC150600B63128 /* AccountsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsViewModel.swift; sourceTree = "<group>"; };
+		9286A74D28AC185E00B63128 /* AccountAssetPriceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountAssetPriceModel.swift; sourceTree = "<group>"; };
+		98CDEAB8796D71FD6DD38878 /* Pods-Abstract-CybridSDKTestApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Abstract-CybridSDKTestApp.release.xcconfig"; path = "Target Support Files/Pods-Abstract-CybridSDKTestApp/Pods-Abstract-CybridSDKTestApp.release.xcconfig"; sourceTree = "<group>"; };
+		BE14953A2B619F3B0B0FE90F /* Pods_Abstract_CybridSDKTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Abstract_CybridSDKTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C28A3274B41F95BBE2AE47CC /* Pods-Abstract-CybridSDKTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Abstract-CybridSDKTests.release.xcconfig"; path = "Target Support Files/Pods-Abstract-CybridSDKTests/Pods-Abstract-CybridSDKTests.release.xcconfig"; sourceTree = "<group>"; };
+		D493EDA8B3625B83DB94CC27 /* Pods-Abstract-CybridSDKTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Abstract-CybridSDKTests.debug.xcconfig"; path = "Target Support Files/Pods-Abstract-CybridSDKTests/Pods-Abstract-CybridSDKTests.debug.xcconfig"; sourceTree = "<group>"; };
+		EDE6BF51F839523A68806209 /* Pods_Abstract_CybridSDKTestApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Abstract_CybridSDKTestApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F8840D6F2AF3377ED63CFBBE /* Pods-Abstract-CybridSDK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Abstract-CybridSDK.debug.xcconfig"; path = "Target Support Files/Pods-Abstract-CybridSDK/Pods-Abstract-CybridSDK.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -275,6 +293,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				693F21288229192750E94BA0 /* Pods_Abstract_CybridSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -283,6 +302,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0B078F1828497B070020B4F7 /* CybridSDK.framework in Frameworks */,
+				489B1712ABFAEAD71D675698 /* Pods_Abstract_CybridSDKTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -291,6 +311,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0B00E0052877E56A00707F26 /* CybridSDK.framework in Frameworks */,
+				6F22C872E276FE6FFDAA91A3 /* Pods_Abstract_CybridSDKTestApp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -388,6 +409,7 @@
 				0BBCF614285C43E000D39C6D /* CybridSDKTestApp */,
 				0B078F0E28497B070020B4F7 /* Products */,
 				81407DEC5E3C66990E8215E8 /* Pods */,
+				B151516902E8FBD74A2C6EE7 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -602,6 +624,7 @@
 			children = (
 				0B00E04B2885AD8D00707F26 /* PricesRepository.swift */,
 				0B00E04D2885ADB300707F26 /* AssetsRepository.swift */,
+				9286A74828AC0B6A00B63128 /* AccountsRepository.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -758,6 +781,7 @@
 		0BD660FF286B765900F4DA6B /* View Layer */ = {
 			isa = PBXGroup;
 			children = (
+				9286A74A28AC14D200B63128 /* AccountsComponent */,
 				0BD66100286B766B00F4DA6B /* Crypto Price List */,
 				0BD66126286D7CCB00F4DA6B /* Localization */,
 				0BD6610E286B76AA00F4DA6B /* Reusable Views */,
@@ -853,8 +877,33 @@
 		81407DEC5E3C66990E8215E8 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
+				F8840D6F2AF3377ED63CFBBE /* Pods-Abstract-CybridSDK.debug.xcconfig */,
+				2DFBF9E56A11AB55DCC2FA4F /* Pods-Abstract-CybridSDK.release.xcconfig */,
+				8E29A5A64B00BBB9F0AEF5FD /* Pods-Abstract-CybridSDKTestApp.debug.xcconfig */,
+				98CDEAB8796D71FD6DD38878 /* Pods-Abstract-CybridSDKTestApp.release.xcconfig */,
+				D493EDA8B3625B83DB94CC27 /* Pods-Abstract-CybridSDKTests.debug.xcconfig */,
+				C28A3274B41F95BBE2AE47CC /* Pods-Abstract-CybridSDKTests.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		9286A74A28AC14D200B63128 /* AccountsComponent */ = {
+			isa = PBXGroup;
+			children = (
+				9286A74B28AC150600B63128 /* AccountsViewModel.swift */,
+				9286A74D28AC185E00B63128 /* AccountAssetPriceModel.swift */,
+			);
+			path = AccountsComponent;
+			sourceTree = "<group>";
+		};
+		B151516902E8FBD74A2C6EE7 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				440FDAF7ABD29FAC3A04ECBF /* Pods_Abstract_CybridSDK.framework */,
+				EDE6BF51F839523A68806209 /* Pods_Abstract_CybridSDKTestApp.framework */,
+				BE14953A2B619F3B0B0FE90F /* Pods_Abstract_CybridSDKTests.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -875,6 +924,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0B078F2128497B070020B4F7 /* Build configuration list for PBXNativeTarget "CybridSDK" */;
 			buildPhases = (
+				FBE7D82A6905D5BDD6F055B1 /* [CP] Check Pods Manifest.lock */,
 				0B078F0828497B070020B4F7 /* Headers */,
 				0BDE4ECA2851B4800039C34B /* SwiftLint */,
 				0B078F0928497B070020B4F7 /* Sources */,
@@ -894,9 +944,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0B078F2428497B070020B4F7 /* Build configuration list for PBXNativeTarget "CybridSDKTests" */;
 			buildPhases = (
+				09F569CB203AD9E9C2FF529C /* [CP] Check Pods Manifest.lock */,
 				0B078F1328497B070020B4F7 /* Sources */,
 				0B078F1428497B070020B4F7 /* Frameworks */,
 				0B078F1528497B070020B4F7 /* Resources */,
+				C3C70BC5113044167E5410F9 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -912,11 +964,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0BBCF624285C43E000D39C6D /* Build configuration list for PBXNativeTarget "CybridSDKTestApp" */;
 			buildPhases = (
+				5E4B4C9C0C66627B45708FBD /* [CP] Check Pods Manifest.lock */,
 				0B00E02B287DDA3900707F26 /* Set Environment Variables */,
 				0BBCF60F285C43E000D39C6D /* Sources */,
 				0BBCF610285C43E000D39C6D /* Frameworks */,
 				0BBCF611285C43E000D39C6D /* Resources */,
 				0B00E0092877E56A00707F26 /* Embed Frameworks */,
+				DBAFA38585CC843C257455E7 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1006,6 +1060,28 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		09F569CB203AD9E9C2FF529C /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Abstract-CybridSDKTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 		0B00E02B287DDA3900707F26 /* Set Environment Variables */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
@@ -1044,6 +1120,84 @@
 			shellPath = /bin/sh;
 			shellScript = "# Run only when not running on CI. CI should run SwiftLint with Fastlane.\nif [ -z \"$CI\"]; then\n  ${PODS_ROOT}/SwiftLint/swiftlint\nfi\n";
 		};
+		5E4B4C9C0C66627B45708FBD /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Abstract-CybridSDKTestApp-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C3C70BC5113044167E5410F9 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Abstract-CybridSDKTests/Pods-Abstract-CybridSDKTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Abstract-CybridSDKTests/Pods-Abstract-CybridSDKTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Abstract-CybridSDKTests/Pods-Abstract-CybridSDKTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DBAFA38585CC843C257455E7 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Abstract-CybridSDKTestApp/Pods-Abstract-CybridSDKTestApp-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Abstract-CybridSDKTestApp/Pods-Abstract-CybridSDKTestApp-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Abstract-CybridSDKTestApp/Pods-Abstract-CybridSDKTestApp-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FBE7D82A6905D5BDD6F055B1 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Abstract-CybridSDK-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -1073,11 +1227,13 @@
 				0B96600F285AA0FC00584692 /* AssertionFailureOverride.swift in Sources */,
 				0B6175D4288B7853004E4F5B /* TaskScheduler.swift in Sources */,
 				0B00E0222878D23100707F26 /* CybridSession.swift in Sources */,
+				9286A74E28AC185E00B63128 /* AccountAssetPriceModel.swift in Sources */,
 				0B2899E9288F3E1F001B3360 /* Cybrid.swift in Sources */,
 				0BD66118286B79C500F4DA6B /* UIView+Constraints.swift in Sources */,
 				0B303CE42862E5D9007BF7FF /* CybridConfig.swift in Sources */,
 				0BD660FD286B763E00F4DA6B /* ConcurrencyInterfaces.swift in Sources */,
 				0BD66109286B768C00F4DA6B /* CryptoPriceListView.swift in Sources */,
+				9286A74928AC0B6B00B63128 /* AccountsRepository.swift in Sources */,
 				0B557B942899F4DE00632A6D /* SellQuoteViewController.swift in Sources */,
 				0BD660FC286B763E00F4DA6B /* URLImageOperation.swift in Sources */,
 				0B00E024287CD72D00707F26 /* Environment.swift in Sources */,
@@ -1097,6 +1253,7 @@
 				0B289A0A289E333C001B3360 /* CYBTextField.swift in Sources */,
 				0B303CE12862E062007BF7FF /* FormatStyle.swift in Sources */,
 				0B2899F828942C54001B3360 /* CybridJSONDecoder.swift in Sources */,
+				9286A74C28AC150600B63128 /* AccountsViewModel.swift in Sources */,
 				0BD66105286B768300F4DA6B /* CryptoPriceTableViewCell.swift in Sources */,
 				0BD660FE286B763E00F4DA6B /* AsyncOperation.swift in Sources */,
 				0B2899E5288EE764001B3360 /* TimerType.swift in Sources */,
@@ -1318,6 +1475,7 @@
 		};
 		0B078F2228497B070020B4F7 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F8840D6F2AF3377ED63CFBBE /* Pods-Abstract-CybridSDK.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -1349,6 +1507,7 @@
 		};
 		0B078F2328497B070020B4F7 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2DFBF9E56A11AB55DCC2FA4F /* Pods-Abstract-CybridSDK.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -1380,6 +1539,7 @@
 		};
 		0B078F2528497B070020B4F7 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D493EDA8B3625B83DB94CC27 /* Pods-Abstract-CybridSDKTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
@@ -1398,6 +1558,7 @@
 		};
 		0B078F2628497B070020B4F7 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C28A3274B41F95BBE2AE47CC /* Pods-Abstract-CybridSDKTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
@@ -1416,6 +1577,7 @@
 		};
 		0BBCF625285C43E000D39C6D /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8E29A5A64B00BBB9F0AEF5FD /* Pods-Abstract-CybridSDKTestApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1445,6 +1607,7 @@
 		};
 		0BBCF626285C43E000D39C6D /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 98CDEAB8796D71FD6DD38878 /* Pods-Abstract-CybridSDKTestApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
