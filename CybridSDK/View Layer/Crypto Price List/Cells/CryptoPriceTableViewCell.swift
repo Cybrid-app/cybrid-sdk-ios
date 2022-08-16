@@ -116,8 +116,8 @@ class CryptoPriceTableViewCell: UITableViewCell {
     )
     attributedTitle.addAttributes(
       [
-        NSAttributedString.Key.foregroundColor: FormatStyle.comment.textColor,
-        NSAttributedString.Key.font: FormatStyle.comment.font
+        NSAttributedString.Key.foregroundColor: FormatStyle.caption.textColor,
+        NSAttributedString.Key.font: FormatStyle.caption.font
       ],
       range: NSRange(location: dataModel.assetName.count + 1, length: dataModel.assetCode.count)
     )
@@ -139,8 +139,8 @@ class CryptoPriceTableViewCell: UITableViewCell {
     )
     attributedTitle.addAttributes(
       [
-        NSAttributedString.Key.foregroundColor: FormatStyle.comment.textColor,
-        NSAttributedString.Key.font: FormatStyle.comment.font
+        NSAttributedString.Key.foregroundColor: FormatStyle.caption.textColor,
+        NSAttributedString.Key.font: FormatStyle.caption.font
       ],
       range: NSRange(location: dataModel.formattedPrice.count + 1, length: fiatCodeString.count)
     )

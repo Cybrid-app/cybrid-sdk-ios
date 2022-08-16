@@ -17,15 +17,26 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="cIp-MT-lRL">
-                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="cIp-MT-lRL">
+                                <rect key="frame" x="0.0" y="415" width="414" height="120"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5je-8O-oTJ">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="774"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="60"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="60" id="NnX-MQ-bQb"/>
+                                        </constraints>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" title="Crypto List"/>
                                         <connections>
                                             <action selector="didTapCryptoListButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="8Mn-iu-9Bk"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sIm-iv-R9Y">
+                                        <rect key="frame" x="0.0" y="60" width="414" height="60"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Trade Bitcoin"/>
+                                        <connections>
+                                            <action selector="didTapTradeButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="bIe-OK-GqH"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -34,10 +45,11 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="cIp-MT-lRL" secondAttribute="bottom" id="8dl-aT-nd0"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="cIp-MT-lRL" secondAttribute="bottom" id="8dl-aT-nd0"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="cIp-MT-lRL" secondAttribute="trailing" id="Cvi-p4-joH"/>
-                            <constraint firstItem="cIp-MT-lRL" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="cqL-Or-KMN"/>
+                            <constraint firstItem="cIp-MT-lRL" firstAttribute="top" relation="greaterThanOrEqual" secondItem="6Tk-OE-BBY" secondAttribute="top" id="cqL-Or-KMN"/>
                             <constraint firstItem="cIp-MT-lRL" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="ewh-Px-Dkd"/>
+                            <constraint firstItem="cIp-MT-lRL" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="wPG-DP-S0t"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Yhi-5t-5Tt"/>

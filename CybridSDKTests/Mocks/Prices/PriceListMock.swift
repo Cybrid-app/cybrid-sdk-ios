@@ -59,4 +59,12 @@ extension SymbolPriceBankModel {
     buyPriceLastUpdatedAt: nil,
     sellPriceLastUpdatedAt: nil
   )
+
+  static let priceWithoutSymbol = SymbolPriceBankModel(
+    symbol: nil,
+    buyPrice: 209_891,
+    sellPrice: 209_881,
+    buyPriceLastUpdatedAt: nil,
+    sellPriceLastUpdatedAt: nil
+  )
 }

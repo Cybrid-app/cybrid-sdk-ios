@@ -73,7 +73,7 @@ class URLImageViewTests: XCTestCase {
           mockImageOperation
         }
       )
-    urlImage.layoutSubviews()
+    urlImage.loadImage()
 
     // Then
     XCTAssertEqual(urlImage.image?.cgImage, testImage?.cgImage)
@@ -106,8 +106,8 @@ class URLImageViewTests: XCTestCase {
     mockImageOperation.wait()
     urlImage.layoutSubviews()
     mockImageOperation.resume()
+    urlImage.loadImage()
     XCTAssertTrue(mockImageOperation.isExecuting)
-    urlImage.layoutSubviews()
 
     // Then
     XCTAssertEqual(urlImage.image?.cgImage, testImage?.cgImage)

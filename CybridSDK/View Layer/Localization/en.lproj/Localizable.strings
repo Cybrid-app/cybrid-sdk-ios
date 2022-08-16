@@ -10,3 +10,13 @@
 "cybrid.cryptoPriceList.headerSearchPlaceholder" = "Search";
 "cybrid.cryptoPriceList.headerCurrency" = "Currency";
 "cybrid.cryptoPriceList.headerPrice" = "Price";
+
+// Trade Buy
+"cybrid.trade.buy.title" = "BUY";
+"cybrid.trade.buy.currency" = "Currency";
+"cybrid.trade.buy.selectCurrency" = "Select Currency";
+"cybrid.trade.buy.amount" = "Amount";
+"cybrid.trade.buy.cta" = "Buy";
+
+// Trade Sell
+"cybrid.trade.sell.title" = "SELL";
