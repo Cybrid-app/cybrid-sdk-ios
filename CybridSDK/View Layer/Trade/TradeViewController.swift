@@ -118,7 +118,7 @@ public final class TradeViewController: UIViewController {
     return label
   }()
 
-  private lazy var buyButton: CYBButton = {
+  private lazy var primaryButton: CYBButton = {
     let button = CYBButton(theme: theme)
     button.setTitle(localizer.localize(with: CybridLocalizationKey.trade(.buy(.cta))), for: .normal)
     button.isEnabled = false
@@ -207,18 +207,18 @@ public final class TradeViewController: UIViewController {
   }
 
   private func setupButton() {
-    buttonContainer.addSubview(buyButton)
+    buttonContainer.addSubview(primaryButton)
 
-    buyButton.setContentHuggingPriority(.defaultHigh, for: .horizontal)
-    buyButton.constraint(attribute: .top, relatedBy: .equal, toItem: buttonContainer, attribute: .top)
-    buyButton.constraint(attribute: .bottom, relatedBy: .equal, toItem: buttonContainer, attribute: .bottom)
-    buyButton.constraint(attribute: .trailing, relatedBy: .equal, toItem: buttonContainer, attribute: .trailing)
-    buyButton.constraint(attribute: .leading, relatedBy: .greaterThanOrEqual, toItem: buttonContainer, attribute: .leading)
-    buyButton.constraint(attribute: .height,
-                         relatedBy: .equal,
-                         toItem: nil,
-                         attribute: .notAnAttribute,
-                         constant: Constants.Button.height)
+    primaryButton.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+    primaryButton.constraint(attribute: .top, relatedBy: .equal, toItem: buttonContainer, attribute: .top)
+    primaryButton.constraint(attribute: .bottom, relatedBy: .equal, toItem: buttonContainer, attribute: .bottom)
+    primaryButton.constraint(attribute: .trailing, relatedBy: .equal, toItem: buttonContainer, attribute: .trailing)
+    primaryButton.constraint(attribute: .leading, relatedBy: .greaterThanOrEqual, toItem: buttonContainer, attribute: .leading)
+    primaryButton.constraint(attribute: .height,
+                             relatedBy: .equal,
+                             toItem: nil,
+                             attribute: .notAnAttribute,
+                             constant: Constants.Button.height)
   }
 
   private func bindViewModel() {
@@ -245,7 +245,7 @@ public final class TradeViewController: UIViewController {
       self?.updateIcons(shouldInputCrypto: shouldInputCrypto)
     }
     viewModel.ctaButtonEnabled.bind { [weak self] isButtonEnabled in
-      self?.buyButton.isEnabled = isButtonEnabled
+      self?.primaryButton.isEnabled = isButtonEnabled
     }
     viewModel.segmentSelection.bind { [weak self]  selectedSegment in
       self?.updateButton(selectedSegment: selectedSegment)
@@ -268,9 +268,9 @@ public final class TradeViewController: UIViewController {
   private func updateButton(selectedSegment: TradeSegment) {
     switch selectedSegment {
     case .buy:
-      buyButton.setTitle(localizer.localize(with: CybridLocalizationKey.trade(.buy(.cta))), for: .normal)
+      primaryButton.setTitle(localizer.localize(with: CybridLocalizationKey.trade(.buy(.cta))), for: .normal)
     case .sell:
-      buyButton.setTitle(localizer.localize(with: CybridLocalizationKey.trade(.sell(.cta))), for: .normal)
+      primaryButton.setTitle(localizer.localize(with: CybridLocalizationKey.trade(.sell(.cta))), for: .normal)
     }
   }
 }
