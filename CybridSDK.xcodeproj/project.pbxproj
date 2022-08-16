@@ -49,7 +49,6 @@
 		0B2899FE289467EE001B3360 /* listPricesResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 0B2899FD289467EE001B3360 /* listPricesResponse.json */; };
 		0B289A0028946B52001B3360 /* JSONMockHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B2899FF28946B52001B3360 /* JSONMockHelper.swift */; };
 		0B289A0228946F74001B3360 /* listLargestPricesResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 0B289A0128946F53001B3360 /* listLargestPricesResponse.json */; };
-		0B289A05289CE525001B3360 /* BuyQuoteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B289A04289CE525001B3360 /* BuyQuoteViewModel.swift */; };
 		0B289A07289E29D4001B3360 /* AssetBankModel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B289A06289E29D4001B3360 /* AssetBankModel+Extensions.swift */; };
 		0B289A0A289E333C001B3360 /* CYBTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B289A09289E333C001B3360 /* CYBTextField.swift */; };
 		0B289A0D28A2C7B5001B3360 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0B289A0C28A2C7B5001B3360 /* Assets.xcassets */; };
@@ -66,9 +65,7 @@
 		0B303CEC2862F898007BF7FF /* ColorThemeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B303CEB2862F898007BF7FF /* ColorThemeTests.swift */; };
 		0B303CF328636A0D007BF7FF /* CybridConfigTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B303CF228636A0D007BF7FF /* CybridConfigTests.swift */; };
 		0B50F35928A5885400DDB01E /* CybridEventTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B50F35828A5885400DDB01E /* CybridEventTests.swift */; };
-		0B50F35B28A5890C00DDB01E /* BuyQuoteViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B50F35A28A5890C00DDB01E /* BuyQuoteViewModelTests.swift */; };
-		0B557B942899F4DE00632A6D /* SellQuoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B557B912899F4DE00632A6D /* SellQuoteViewController.swift */; };
-		0B557B952899F4DE00632A6D /* BuyQuoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B557B922899F4DE00632A6D /* BuyQuoteViewController.swift */; };
+		0B50F35B28A5890C00DDB01E /* TradeViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B50F35A28A5890C00DDB01E /* TradeViewModelTests.swift */; };
 		0B557B962899F4DE00632A6D /* TradeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B557B932899F4DE00632A6D /* TradeViewController.swift */; };
 		0B557B982899F56900632A6D /* CYBButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B557B972899F56900632A6D /* CYBButton.swift */; };
 		0B6175D4288B7853004E4F5B /* TaskScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6175D3288B7853004E4F5B /* TaskScheduler.swift */; };
@@ -90,6 +87,7 @@
 		0BBCF61F285C43E000D39C6D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0BBCF61E285C43E000D39C6D /* Assets.xcassets */; };
 		0BBCF640285C52D700D39C6D /* MockError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BBCF63F285C52D700D39C6D /* MockError.swift */; };
 		0BBD0CCA28AAC025001DBC5F /* BigDecimalValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BBD0CC928AAC025001DBC5F /* BigDecimalValidator.swift */; };
+		0BBD0CCE28AB71B7001DBC5F /* TradeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BBD0CCD28AB71B7001DBC5F /* TradeViewModel.swift */; };
 		0BD0A4E728582FB700C10744 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 0BD0A4E628582FB700C10744 /* README.md */; };
 		0BD26F2428A55D4800ED2A1B /* CybridEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD26F2228A55D4800ED2A1B /* CybridEvent.swift */; };
 		0BD26F2528A55D4800ED2A1B /* CybridLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD26F2328A55D4800ED2A1B /* CybridLogger.swift */; };
@@ -195,7 +193,6 @@
 		0B2899FD289467EE001B3360 /* listPricesResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = listPricesResponse.json; sourceTree = "<group>"; };
 		0B2899FF28946B52001B3360 /* JSONMockHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONMockHelper.swift; sourceTree = "<group>"; };
 		0B289A0128946F53001B3360 /* listLargestPricesResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = listLargestPricesResponse.json; sourceTree = "<group>"; };
-		0B289A04289CE525001B3360 /* BuyQuoteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuyQuoteViewModel.swift; sourceTree = "<group>"; };
 		0B289A06289E29D4001B3360 /* AssetBankModel+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AssetBankModel+Extensions.swift"; sourceTree = "<group>"; };
 		0B289A09289E333C001B3360 /* CYBTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CYBTextField.swift; sourceTree = "<group>"; };
 		0B289A0C28A2C7B5001B3360 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -212,9 +209,7 @@
 		0B303CEB2862F898007BF7FF /* ColorThemeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorThemeTests.swift; sourceTree = "<group>"; };
 		0B303CF228636A0D007BF7FF /* CybridConfigTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CybridConfigTests.swift; sourceTree = "<group>"; };
 		0B50F35828A5885400DDB01E /* CybridEventTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CybridEventTests.swift; sourceTree = "<group>"; };
-		0B50F35A28A5890C00DDB01E /* BuyQuoteViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuyQuoteViewModelTests.swift; sourceTree = "<group>"; };
-		0B557B912899F4DE00632A6D /* SellQuoteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SellQuoteViewController.swift; sourceTree = "<group>"; };
-		0B557B922899F4DE00632A6D /* BuyQuoteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BuyQuoteViewController.swift; sourceTree = "<group>"; };
+		0B50F35A28A5890C00DDB01E /* TradeViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeViewModelTests.swift; sourceTree = "<group>"; };
 		0B557B932899F4DE00632A6D /* TradeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TradeViewController.swift; sourceTree = "<group>"; };
 		0B557B972899F56900632A6D /* CYBButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CYBButton.swift; sourceTree = "<group>"; };
 		0B6175D3288B7853004E4F5B /* TaskScheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskScheduler.swift; sourceTree = "<group>"; };
@@ -238,6 +233,7 @@
 		0BBCF623285C43E000D39C6D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0BBCF63F285C52D700D39C6D /* MockError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockError.swift; sourceTree = "<group>"; };
 		0BBD0CC928AAC025001DBC5F /* BigDecimalValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigDecimalValidator.swift; sourceTree = "<group>"; };
+		0BBD0CCD28AB71B7001DBC5F /* TradeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeViewModel.swift; sourceTree = "<group>"; };
 		0BD0A4E628582FB700C10744 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		0BD26F2228A55D4800ED2A1B /* CybridEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CybridEvent.swift; sourceTree = "<group>"; };
 		0BD26F2328A55D4800ED2A1B /* CybridLogger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CybridLogger.swift; sourceTree = "<group>"; };
@@ -498,15 +494,6 @@
 			path = JSON;
 			sourceTree = "<group>";
 		};
-		0B289A03289CE514001B3360 /* Buy Quote */ = {
-			isa = PBXGroup;
-			children = (
-				0B557B922899F4DE00632A6D /* BuyQuoteViewController.swift */,
-				0B289A04289CE525001B3360 /* BuyQuoteViewModel.swift */,
-			);
-			path = "Buy Quote";
-			sourceTree = "<group>";
-		};
 		0B289A08289E3325001B3360 /* TextFields */ = {
 			isa = PBXGroup;
 			children = (
@@ -590,9 +577,8 @@
 		0B557B902899F4CB00632A6D /* Trade */ = {
 			isa = PBXGroup;
 			children = (
-				0B289A03289CE514001B3360 /* Buy Quote */,
 				0B557B932899F4DE00632A6D /* TradeViewController.swift */,
-				0B557B912899F4DE00632A6D /* SellQuoteViewController.swift */,
+				0BBD0CCD28AB71B7001DBC5F /* TradeViewModel.swift */,
 			);
 			path = Trade;
 			sourceTree = "<group>";
@@ -808,7 +794,7 @@
 			isa = PBXGroup;
 			children = (
 				0BD66122286C20BC00F4DA6B /* CryptoPriceViewModelTests.swift */,
-				0B50F35A28A5890C00DDB01E /* BuyQuoteViewModelTests.swift */,
+				0B50F35A28A5890C00DDB01E /* TradeViewModelTests.swift */,
 			);
 			path = "ViewModel Tests";
 			sourceTree = "<group>";
@@ -1056,7 +1042,6 @@
 				0B00E02E287F6AE500707F26 /* CybridError.swift in Sources */,
 				0BD6613A2872BC0B00F4DA6B /* CybridCurrencyFormatter.swift in Sources */,
 				0BD6610D286B769800F4DA6B /* Observable.swift in Sources */,
-				0B557B952899F4DE00632A6D /* BuyQuoteViewController.swift in Sources */,
 				0BD66104286B768300F4DA6B /* CryptoPriceTableHeaderView.swift in Sources */,
 				0B2B2A7128621DA7002F0EC1 /* FontTheme.swift in Sources */,
 				0BD6610B286B768C00F4DA6B /* CryptoPriceModel.swift in Sources */,
@@ -1078,7 +1063,6 @@
 				0B303CE42862E5D9007BF7FF /* CybridConfig.swift in Sources */,
 				0BD660FD286B763E00F4DA6B /* ConcurrencyInterfaces.swift in Sources */,
 				0BD66109286B768C00F4DA6B /* CryptoPriceListView.swift in Sources */,
-				0B557B942899F4DE00632A6D /* SellQuoteViewController.swift in Sources */,
 				0BD660FC286B763E00F4DA6B /* URLImageOperation.swift in Sources */,
 				0B00E024287CD72D00707F26 /* Environment.swift in Sources */,
 				0B078F1228497B070020B4F7 /* CybridSDK.docc in Sources */,
@@ -1093,7 +1077,7 @@
 				0BBD0CCA28AAC025001DBC5F /* BigDecimalValidator.swift in Sources */,
 				0B2B2A8928629324002F0EC1 /* Theme.swift in Sources */,
 				0B289A07289E29D4001B3360 /* AssetBankModel+Extensions.swift in Sources */,
-				0B289A05289CE525001B3360 /* BuyQuoteViewModel.swift in Sources */,
+				0BBD0CCE28AB71B7001DBC5F /* TradeViewModel.swift in Sources */,
 				0B289A0A289E333C001B3360 /* CYBTextField.swift in Sources */,
 				0B303CE12862E062007BF7FF /* FormatStyle.swift in Sources */,
 				0B2899F828942C54001B3360 /* CybridJSONDecoder.swift in Sources */,
@@ -1137,7 +1121,7 @@
 				0BD6611F286C1EB800F4DA6B /* ObservableTests.swift in Sources */,
 				0B96600D285A9A3100584692 /* MockAsyncOperation.swift in Sources */,
 				0B00E048287FC4C800707F26 /* EnvironmentTests.swift in Sources */,
-				0B50F35B28A5890C00DDB01E /* BuyQuoteViewModelTests.swift in Sources */,
+				0B50F35B28A5890C00DDB01E /* TradeViewModelTests.swift in Sources */,
 				0B966019285AE8D300584692 /* MockURLSession.swift in Sources */,
 				0BD6611B286C197B00F4DA6B /* UIViewConstraintsTests.swift in Sources */,
 				0B00E032287F6C1600707F26 /* MockCybridAuthenticator.swift in Sources */,

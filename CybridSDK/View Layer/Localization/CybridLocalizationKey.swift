@@ -76,6 +76,7 @@ extension CybridLocalizationKey {
 
     enum Sell: String {
       case title
+      case cta
 
       var prefix: String { "sell" }
       var stringValue: String { "\(prefix).\(rawValue)" }

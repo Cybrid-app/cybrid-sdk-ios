@@ -1,5 +1,5 @@
 //
-//  BuyQuoteViewModelTests.swift
+//  TradeViewModelTests.swift
 //  CybridSDKTests
 //
 //  Created by Cybrid on 11/08/22.
@@ -10,7 +10,7 @@ import CybridApiBankSwift
 @testable import CybridSDK
 import XCTest
 
-class BuyQuoteViewModelTests: XCTestCase {
+class TradeViewModelTests: XCTestCase {
   let pricesFetchScheduler = TaskSchedulerMock()
   lazy var dataProvider = PriceListDataProviderMock(pricesFetchScheduler: pricesFetchScheduler)
 
@@ -72,6 +72,47 @@ class BuyQuoteViewModelTests: XCTestCase {
 
     // Then
     XCTAssertTrue(viewModel.assetList.value.isEmpty)
+  }
+
+  func testViewModel_segmentControl_Selection() {
+    // Given
+    let viewModel = createViewModel()
+    let segmentedControl = UISegmentedControl(items: ["Buy", "Sell"])
+
+    XCTAssertEqual(viewModel.segmentSelection.value, .buy)
+
+    // When
+    viewModel.fetchPriceList()
+    dataProvider.didFetchAssetsSuccessfully()
+    dataProvider.didFetchPricesSuccessfully()
+    segmentedControl.selectedSegmentIndex = 1
+    viewModel.segmentedControlValueChanged(segmentedControl)
+
+    // Then
+    XCTAssertEqual(viewModel.segmentSelection.value, .sell)
+  }
+
+  func testViewModel_segmentControl_invalidSelection() {
+    // Given
+    let viewModel = createViewModel()
+    let segmentedControl = UISegmentedControl(items: ["Buy", "Sell"])
+
+    XCTAssertEqual(viewModel.segmentSelection.value, .buy)
+
+    // When
+    viewModel.fetchPriceList()
+    dataProvider.didFetchAssetsSuccessfully()
+    dataProvider.didFetchPricesSuccessfully()
+    segmentedControl.selectedSegmentIndex = 100
+    viewModel.segmentedControlValueChanged(segmentedControl)
+
+    // Then
+    XCTAssertEqual(viewModel.segmentSelection.value, .buy)
+  }
+
+  func testViewModel_segmentControl_localizationKeys() {
+    XCTAssertEqual(TradeSegment.buy.localizationKey, .trade(.buy(.title)))
+    XCTAssertEqual(TradeSegment.sell.localizationKey, .trade(.sell(.title)))
   }
 
   func testViewModel_pickerSetup() {
@@ -149,7 +190,7 @@ class BuyQuoteViewModelTests: XCTestCase {
     dataProvider.didFetchPricesSuccessfully()
     textField.text = "1.10020030"
     viewModel.textFieldDidChangeSelection(textField)
-    viewModel.switchConversion()
+    viewModel.didTapConversionSwitchButton()
 
     // Then
     XCTAssertEqual(viewModel.amountText.value, "1100200.30")
@@ -257,7 +298,7 @@ class BuyQuoteViewModelTests: XCTestCase {
     XCTAssertEqual(viewModel.formatAndConvert("100000000"), "$20,198.91 USD")
 
     // Then: convert to Crypto
-    viewModel.switchConversion()
+    viewModel.didTapConversionSwitchButton()
     XCTAssertEqual(viewModel.formatAndConvert("2019891"), "1.00000000 BTC")
 
     // Then: convert to Crypto without crypto Currency
@@ -266,12 +307,12 @@ class BuyQuoteViewModelTests: XCTestCase {
   }
 }
 
-extension BuyQuoteViewModelTests {
+extension TradeViewModelTests {
   func createViewModel(dataProvider: (AssetsRepoProvider & PricesRepoProvider)? = nil,
-                       priceList: [SymbolPriceBankModel]? = nil) -> BuyQuoteViewModel {
-    return BuyQuoteViewModel(dataProvider: dataProvider ?? self.dataProvider,
-                             fiatAsset: .usd,
-                             logger: nil,
-                             priceList: priceList)
+                       priceList: [SymbolPriceBankModel]? = nil) -> TradeViewModel {
+    return TradeViewModel(dataProvider: dataProvider ?? self.dataProvider,
+                          fiatAsset: .usd,
+                          logger: nil,
+                          priceList: priceList)
   }
 }

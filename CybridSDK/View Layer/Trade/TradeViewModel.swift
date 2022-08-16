@@ -1,24 +1,41 @@
 //
-//  BuyQuoteViewModel.swift
+//  TradeViewModel.swift
 //  CybridSDK
 //
-//  Created by Cybrid on 5/08/22.
+//  Created by Cybrid on 16/08/22.
 //
 
 import BigInt
 import CybridApiBankSwift
-import Foundation
 
-final class BuyQuoteViewModel: NSObject {
-  // MARK: Internal Properties
+enum TradeSegment: Int {
+  case buy = 0
+  case sell = 1
+
+  var localizationKey: CybridLocalizationKey {
+    switch self {
+    case .buy:
+      return CybridLocalizationKey.trade(.buy(.title))
+    case .sell:
+      return CybridLocalizationKey.trade(.sell(.title))
+    }
+  }
+}
+
+final class TradeViewModel: NSObject {
+  // MARK: Observed Properties
   internal var amountText: Observable<String?> = Observable(nil)
-  internal var displayAmount: Observable<String?> = Observable(nil)
-  internal var shouldInputCrypto: Observable<Bool> = Observable(true)
-  internal var ctaButtonEnabled: Observable<Bool> = Observable(false)
   internal var assetList: Observable<[CurrencyModel]>
   internal var cryptoCurrency: Observable<CurrencyModel?>
+  internal var ctaButtonEnabled: Observable<Bool> = Observable(false)
+  internal var displayAmount: Observable<String?> = Observable(nil)
+  internal var segmentSelection: Observable<TradeSegment> = Observable(.buy)
+  internal var shouldInputCrypto: Observable<Bool> = Observable(true)
+
+  // MARK: Internal Properties
   internal let fiatCurrency: CurrencyModel
 
+  // MARK: Computed properties
   internal var selectedPriceRate: BigInt? {
     guard let cryptoCode = cryptoCurrency.value?.asset.code else { return nil }
     let priceRate = priceList.first { $0.symbol?.contains(cryptoCode) ?? false }
@@ -69,13 +86,20 @@ final class BuyQuoteViewModel: NSObject {
     }
   }
 
-  func switchConversion() {
+  @objc
+  func segmentedControlValueChanged(_ sender: UISegmentedControl) {
+    guard let selectedIndex = TradeSegment(rawValue: sender.selectedSegmentIndex) else { return }
+    self.segmentSelection.value = selectedIndex
+  }
+
+  @objc
+  func didTapConversionSwitchButton() {
     shouldInputCrypto.value.toggle()
     updateConversion()
   }
 }
 
-extension BuyQuoteViewModel: UIPickerViewDelegate, UIPickerViewDataSource {
+extension TradeViewModel: UIPickerViewDelegate, UIPickerViewDataSource {
   func numberOfComponents(in pickerView: UIPickerView) -> Int {
     return 1
   }
@@ -94,7 +118,7 @@ extension BuyQuoteViewModel: UIPickerViewDelegate, UIPickerViewDataSource {
   }
 }
 
-extension BuyQuoteViewModel: UITextFieldDelegate {
+extension TradeViewModel: UITextFieldDelegate {
   func textFieldDidChangeSelection(_ textField: UITextField) {
     guard self.amountText.value != textField.text else { return }
     let formattedInput = formatInputText(textField.text)
@@ -177,7 +201,7 @@ extension BuyQuoteViewModel: UITextFieldDelegate {
   }
 }
 
-extension BuyQuoteViewModel {
+extension TradeViewModel {
   struct CurrencyModel {
     let asset: AssetBankModel
     let imageURL: String
