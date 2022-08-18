@@ -25,7 +25,7 @@ class TradeViewModelTests: XCTestCase {
 
   func testViewModel_initialization_withMissingCrypto() {
     // Given
-    let viewModel = createViewModel(priceList: [.btcUSD1, .priceWithoutSymbol])
+    let viewModel = createViewModel()
 
     // When
     viewModel.cryptoCurrency.value = .init(asset: .dogecoin)
@@ -308,11 +308,9 @@ class TradeViewModelTests: XCTestCase {
 }
 
 extension TradeViewModelTests {
-  func createViewModel(dataProvider: (AssetsRepoProvider & PricesRepoProvider)? = nil,
-                       priceList: [SymbolPriceBankModel]? = nil) -> TradeViewModel {
-    return TradeViewModel(dataProvider: dataProvider ?? self.dataProvider,
-                          fiatAsset: .usd,
-                          logger: nil,
-                          priceList: priceList)
+  func createViewModel(selectedCrypto: AssetBankModel = .bitcoin, dataProvider: (AssetsRepoProvider & PricesRepoProvider)? = nil) -> TradeViewModel {
+    return TradeViewModel(selectedCrypto: selectedCrypto,
+                          dataProvider: dataProvider ?? self.dataProvider,
+                          logger: nil)
   }
 }

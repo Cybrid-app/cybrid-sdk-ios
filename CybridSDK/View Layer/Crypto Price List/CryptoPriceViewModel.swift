@@ -16,7 +16,7 @@ class CryptoPriceViewModel: NSObject {
   // MARK: Observed properties
   internal var cryptoPriceList: [CryptoPriceModel] = []
   internal var filteredCryptoPriceList: Observable<[CryptoPriceModel]> = Observable([])
-  internal var selectedCrypto: Observable<AssetBankModel?> = Observable(nil)
+  internal var selectedCrypto: Observable<TradeViewModel?> = Observable(nil)
 
   // MARK: Private properties
   private unowned var cellProvider: CryptoPriceViewProvider
@@ -97,7 +97,10 @@ extension CryptoPriceViewModel: UITableViewDelegate, UITableViewDataSource {
       let assetList = dataProvider.assetsCache,
         let selectedAsset = assetList.first(where: { $0.code == selectedModel.assetCode })
     else { return }
-    selectedCrypto.value = selectedAsset
+    let viewModel = TradeViewModel(selectedCrypto: selectedAsset,
+                                   dataProvider: dataProvider,
+                                   logger: logger)
+    selectedCrypto.value = viewModel
   }
 }
 

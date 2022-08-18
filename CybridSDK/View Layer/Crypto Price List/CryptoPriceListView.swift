@@ -60,8 +60,8 @@ public class CryptoPriceListView: UITableView {
       self.reloadData()
     }
     viewModel.selectedCrypto.bind { [navigationController, viewModel] selectedAsset in
-      if let asset = selectedAsset {
-        let viewController = TradeViewController(viewModel: TradeViewModel(selectedCrypto: asset))
+      if let assetVM = selectedAsset {
+        let viewController = TradeViewController(viewModel: assetVM)
         navigationController?.pushViewController(viewController, animated: true)
         viewModel?.selectedCrypto.value = nil
       }

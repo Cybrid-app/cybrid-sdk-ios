@@ -238,7 +238,7 @@ extension CryptoPriceViewModelTests {
 extension CryptoPriceViewModelTests {
   func testTableViewRows() {
     // Given
-    let tableView = CryptoPriceListView()
+    let tableView = CryptoPriceListView(navigationController: nil)
     let viewModel = createViewModel(viewProvider: tableView)
 
     // When
@@ -253,7 +253,7 @@ extension CryptoPriceViewModelTests {
 
   func testTableViewValidCell() {
     // Given
-    let tableView = CryptoPriceListView()
+    let tableView = CryptoPriceListView(navigationController: nil)
     let viewModel = createViewModel(viewProvider: tableView)
 
     // When
@@ -284,7 +284,7 @@ extension CryptoPriceViewModelTests {
 
   func testTableViewHeader() {
     // Given
-    let tableView = CryptoPriceListView()
+    let tableView = CryptoPriceListView(navigationController: nil)
     let viewModel = createViewModel(viewProvider: tableView)
 
     // When
@@ -302,7 +302,7 @@ extension CryptoPriceViewModelTests {
 extension CryptoPriceViewModelTests {
   func testSearchBar_filterWithValidQuery() {
     // Given
-    let tableView = CryptoPriceListView()
+    let tableView = CryptoPriceListView(navigationController: nil)
     let viewModel = createViewModel(viewProvider: tableView)
     let searchBar = UISearchTextField()
 
@@ -325,7 +325,7 @@ extension CryptoPriceViewModelTests {
 
   func testSearchBar_filterWithEmptyText() {
     // Given
-    let tableView = CryptoPriceListView()
+    let tableView = CryptoPriceListView(navigationController: nil)
     let viewModel = createViewModel(viewProvider: tableView)
 
     // When 1

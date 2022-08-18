@@ -51,17 +51,17 @@ final class TradeViewModel: NSObject {
     }
   }
 
-  init(selectedCrypto: AssetBankModel?) {
-    self.dataProvider = CybridSession.current
+  init(selectedCrypto: AssetBankModel?,
+       dataProvider: AssetsRepoProvider & PricesRepoProvider,
+       logger: CybridLogger?) {
+    self.dataProvider = dataProvider
     self.fiatCurrency = CurrencyModel(asset: Cybrid.fiat.defaultAsset)
     self.assetList = Observable(dataProvider.assetsCache?.map { CurrencyModel(asset: $0) } ?? [])
     self.logger = Cybrid.logger
     self.priceList = []
     self.cryptoCurrency = Observable(nil)
     if let selectedCrypto = selectedCrypto {
-      cryptoCurrency.value = assetList.value.first(where: {
-        $0.asset.code == selectedCrypto.code
-      })
+      cryptoCurrency.value = .init(asset: selectedCrypto)
     } else {
       cryptoCurrency.value = assetList.value.first
     }

@@ -11,7 +11,7 @@ import XCTest
 class UILabelExtensionsTests: XCTestCase {
 
   func testLabelCreation() {
-    let testLabel = UILabel.makeLabel(with: .body) { _ in }
+    let testLabel = UILabel.makeLabel(.body) { _ in }
 
     XCTAssertEqual(testLabel.numberOfLines, 0)
     XCTAssertEqual(testLabel.translatesAutoresizingMaskIntoConstraints, false)

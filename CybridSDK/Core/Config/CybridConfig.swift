@@ -28,7 +28,7 @@ public final class CybridConfig {
   /// Setup CybridSDK Configuration
   public func setup(authenticator: CybridAuthenticator,
                     environment: CybridEnvironment = .sandbox,
-                    fiat: FiatConfig,
+                    fiat: FiatConfig = .cad,
                     locale: Locale? = nil,
                     logger: CybridLogger? = nil,
                     refreshRate: TimeInterval = 5,

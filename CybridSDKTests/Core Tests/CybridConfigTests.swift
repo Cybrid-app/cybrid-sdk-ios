@@ -15,7 +15,12 @@ class CybridConfigTests: XCTestCase {
 
     let testTheme = CybridTheme(
       colorTheme: .default,
-      fontTheme: FontTheme(bodyLarge: .systemFont(ofSize: 20), body: .systemFont(ofSize: 16), caption: .systemFont(ofSize: 12)))
+      fontTheme: FontTheme(header: .systemFont(ofSize: 32),
+                           bodyLarge: .systemFont(ofSize: 20),
+                           body: .systemFont(ofSize: 16),
+                           bodyStrong: .systemFont(ofSize: 16),
+                           caption: .systemFont(ofSize: 12))
+    )
     Cybrid.setup(authenticator: MockAuthenticator(), theme: testTheme)
 
     XCTAssertEqual(Cybrid.theme.fontTheme, testTheme.fontTheme)
@@ -64,7 +69,7 @@ class CybridConfigTests: XCTestCase {
 
   func testCybrid_getPreferredLocale_Default() {
     // Given
-    Cybrid.setup(authenticator: MockAuthenticator(), theme: Cybrid.theme, locale: nil)
+    Cybrid.setup(authenticator: MockAuthenticator(), locale: nil, theme: Cybrid.theme)
     /// Default locale in local Simulator is `en-US`, while in CI it's `en`
     let possiblePreferredLocales = ["en", "en-US", "en-CA"]
 
@@ -77,7 +82,7 @@ class CybridConfigTests: XCTestCase {
 
   func testCybrid_getPreferredLocale_withoutCustomLocale() {
     // Given
-    Cybrid.setup(authenticator: MockAuthenticator(), theme: Cybrid.theme, locale: nil)
+    Cybrid.setup(authenticator: MockAuthenticator(), locale: nil, theme: Cybrid.theme)
     let preferredLanguages = ["en-US", "fr-CA"]
 
     // When
@@ -89,7 +94,7 @@ class CybridConfigTests: XCTestCase {
 
   func testCybrid_getPreferredLocale_withCustomLocale_Supported() {
     // Given
-    Cybrid.setup(authenticator: MockAuthenticator(), theme: Cybrid.theme, locale: Locale(identifier: "fr-CA"))
+    Cybrid.setup(authenticator: MockAuthenticator(), locale: Locale(identifier: "fr-CA"), theme: Cybrid.theme)
     let preferredLanguages = ["en-US", "fr-CA"]
 
     // When
@@ -101,7 +106,7 @@ class CybridConfigTests: XCTestCase {
 
   func testCybrid_getPreferredLocale_withCustomLocale_Unsupported() {
     // Given
-    Cybrid.setup(authenticator: MockAuthenticator(), theme: Cybrid.theme, locale: Locale(identifier: "es-PE"))
+    Cybrid.setup(authenticator: MockAuthenticator(), locale: Locale(identifier: "es-PE"), theme: Cybrid.theme)
     let preferredLanguages = ["en-US", "fr-CA"]
 
     // When
@@ -113,7 +118,7 @@ class CybridConfigTests: XCTestCase {
 
   func testCybrid_getPreferredLocale_withNoPreferredLanguages() {
     // Given
-    Cybrid.setup(authenticator: MockAuthenticator(), theme: Cybrid.theme, locale: nil)
+    Cybrid.setup(authenticator: MockAuthenticator(), locale: nil, theme: Cybrid.theme)
     let preferredLanguages: [String] = []
 
     // When
@@ -126,7 +131,7 @@ class CybridConfigTests: XCTestCase {
   func testCybrid_startListeners() {
     // Given
     let authenticator = MockAuthenticator()
-    Cybrid.setup(authenticator: authenticator, theme: Cybrid.theme, locale: nil)
+    Cybrid.setup(authenticator: authenticator, locale: nil, theme: Cybrid.theme)
     let notificationManager = NotificationCenterMock()
     Cybrid.session = CybridSession(authenticator: authenticator,
                                    apiManager: MockAPIManager.self,
@@ -142,7 +147,7 @@ class CybridConfigTests: XCTestCase {
   func testCybrid_stopListeners() {
     // Given
     let authenticator = MockAuthenticator()
-    Cybrid.setup(authenticator: authenticator, theme: Cybrid.theme, locale: nil)
+    Cybrid.setup(authenticator: authenticator, locale: nil, theme: Cybrid.theme)
     let notificationManager = NotificationCenterMock()
     Cybrid.session = CybridSession(authenticator: authenticator,
                                    apiManager: MockAPIManager.self,

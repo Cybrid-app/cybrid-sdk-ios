@@ -152,7 +152,9 @@ public final class TradeViewController: UIViewController {
     self.theme = Cybrid.theme
     self.localizer = CybridLocalizer()
     self.logger = Cybrid.logger
-    self.viewModel = TradeViewModel(selectedCrypto: nil)
+    self.viewModel = TradeViewModel(selectedCrypto: nil,
+                                    dataProvider: CybridSession.current,
+                                    logger: logger)
 
     super.init(nibName: nil, bundle: nil)
   }
