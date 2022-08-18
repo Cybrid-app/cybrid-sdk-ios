@@ -10,6 +10,7 @@ import UIKit
 
 final class TradeConfirmationModalView: UIView {
   private var dataModel: QuoteDataModel
+  private let localizer: Localizer
   private let theme: Theme
   private var onCancel: (() -> Void)?
   private var onConfirm: (() -> Void)?
@@ -38,29 +39,29 @@ final class TradeConfirmationModalView: UIView {
     return stackView
   }()
 
-  private lazy var titleLabel: UILabel = .makeLabel(.header) { label in
-    label.text = "Order Quote"
+  private lazy var titleLabel: UILabel = .makeLabel(.header) { [localizer] label in
+    label.text = localizer.localize(with: CybridLocalizationKey.trade(.confirmationModal(.title)))
   }
 
-  private lazy var disclosureLabel: UILabel = .makeLabel(.body) { label in
-    label.text = "Prices are in realtime. Rates automatically refresh."
+  private lazy var disclosureLabel: UILabel = .makeLabel(.body) { [localizer] label in
+    label.text = localizer.localize(with: CybridLocalizationKey.trade(.confirmationModal(.subtitle)))
     label.sizeToFit()
   }
 
-  private lazy var fiatAmountTitleLabel: UILabel = .makeLabel(.bodyStrong) { label in
-    label.text = "Purchase amount"
+  private lazy var fiatAmountTitleLabel: UILabel = .makeLabel(.bodyStrong) { [localizer] label in
+    label.text = localizer.localize(with: CybridLocalizationKey.trade(.confirmationModal(.purchaseAmount)))
   }
 
   private lazy var fiatAmountLabel: UILabel = .makeLabel(.body)
 
-  private lazy var cryptoAmountTitleLabel: UILabel = .makeLabel(.bodyStrong) { label in
-    label.text = "Purchase quantity"
+  private lazy var cryptoAmountTitleLabel: UILabel = .makeLabel(.bodyStrong) { [localizer] label in
+    label.text = localizer.localize(with: CybridLocalizationKey.trade(.confirmationModal(.purchaseQuantity)))
   }
 
   private lazy var cryptoAmountLabel: UILabel = .makeLabel(.body)
 
-  private lazy var feeAmountTitleLabel: UILabel = .makeLabel(.bodyStrong) { label in
-    label.text = "Transaction Fee"
+  private lazy var feeAmountTitleLabel: UILabel = .makeLabel(.bodyStrong) { [localizer] label in
+    label.text = localizer.localize(with: CybridLocalizationKey.trade(.confirmationModal(.transactionFee)))
   }
 
   private lazy var feeAmountLabel: UILabel = .makeLabel(.body)
@@ -77,20 +78,21 @@ final class TradeConfirmationModalView: UIView {
 
   private lazy var confirmButton: CYBButton = {
     let button = CYBButton(theme: theme)
-    button.setTitle("Confirm", for: .normal)
+    button.setTitle(localizer.localize(with: CybridLocalizationKey.trade(.confirmationModal(.confirm))), for: .normal)
     button.addTarget(self, action: #selector(didTapConfirmButton), for: .touchUpInside)
     return button
   }()
 
   private lazy var cancelButton: CYBButton = {
     let button = CYBButton(style: .secondary, theme: theme)
-    button.setTitle("Cancel", for: .normal)
+    button.setTitle(localizer.localize(with: CybridLocalizationKey.trade(.confirmationModal(.cancel))), for: .normal)
     button.addTarget(self, action: #selector(didTapCancelButton), for: .touchUpInside)
     return button
   }()
 
-  init(theme: Theme = Cybrid.theme, dataModel: QuoteDataModel, onCancel: (() -> Void)?, onConfirm: (() -> Void)?) {
+  init(theme: Theme, localizer: Localizer, dataModel: QuoteDataModel, onCancel: (() -> Void)?, onConfirm: (() -> Void)?) {
     self.dataModel = dataModel
+    self.localizer = localizer
     self.theme = theme
     self.onCancel = onCancel
     self.onConfirm = onConfirm
@@ -119,8 +121,12 @@ final class TradeConfirmationModalView: UIView {
     fiatAmountLabel.text = dataModel.fiatAmount + " " + dataModel.fiatCode
     feeAmountLabel.text = dataModel.transactionFee + " " + dataModel.fiatCode
 
-    fiatAmountTitleLabel.text = dataModel.quoteType == .buy ? "Purchase amount" : "Sell amount"
-    cryptoAmountTitleLabel.text = dataModel.quoteType == .buy ? "Purchase quantity" : "Sell quantity"
+    fiatAmountTitleLabel.text = dataModel.quoteType == .buy
+      ? localizer.localize(with: CybridLocalizationKey.trade(.confirmationModal(.purchaseAmount)))
+      : localizer.localize(with: CybridLocalizationKey.trade(.confirmationModal(.sellAmount)))
+    cryptoAmountTitleLabel.text = dataModel.quoteType == .buy
+      ? localizer.localize(with: CybridLocalizationKey.trade(.confirmationModal(.purchaseQuantity)))
+      : localizer.localize(with: CybridLocalizationKey.trade(.confirmationModal(.sellQuantity)))
   }
 
   @objc
@@ -133,11 +139,10 @@ final class TradeConfirmationModalView: UIView {
     onConfirm?()
   }
 
-  func updatePrices(cryptoAmount: String, fiatAmount: String, lockType: QuoteDataModel.LockType, quoteType: QuoteDataModel.QuoteType) {
+  func updatePrices(cryptoAmount: String, fiatAmount: String, quoteType: QuoteDataModel.QuoteType) {
     var newDataModel = dataModel
     newDataModel.cryptoAmount = cryptoAmount
     newDataModel.fiatAmount = fiatAmount
-    newDataModel.lockType = lockType
     newDataModel.quoteType = quoteType
     self.dataModel = newDataModel
     setupAmountLabels()
@@ -145,11 +150,6 @@ final class TradeConfirmationModalView: UIView {
 }
 
 struct QuoteDataModel {
-  enum LockType {
-    case fiatLock // purchase amount is locked, crypto amount updates
-    case cryptoLock // crypto amount is locked, fiat amount updates
-  }
-
   enum QuoteType {
     case buy
     case sell
@@ -160,6 +160,5 @@ struct QuoteDataModel {
   var cryptoAmount: String
   let cryptoCode: String
   let transactionFee: String
-  var lockType: LockType
   var quoteType: QuoteType
 }

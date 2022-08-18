@@ -130,13 +130,14 @@ public final class TradeViewController: UIViewController {
   private lazy var buttonContainer = UIView()
 
   private lazy var tradeConfirmationModalView = TradeConfirmationModalView(
+    theme: theme,
+    localizer: localizer,
     dataModel: QuoteDataModel(
       fiatAmount: viewModel.amountText.value ?? "",
       fiatCode: viewModel.fiatCurrency.asset.code,
       cryptoAmount: viewModel.displayAmount.value ?? "",
       cryptoCode: viewModel.cryptoCurrency.value?.asset.code ?? "",
       transactionFee: "$2.59",
-      lockType: viewModel.shouldInputCrypto.value ? .cryptoLock : .fiatLock,
       quoteType: viewModel.segmentSelection.value == .buy ? .buy : .sell),
     onCancel: { [weak self] in
       self?.dismissModal()
@@ -192,17 +193,22 @@ public final class TradeViewController: UIViewController {
   private func confirmOperation() {
     viewModel.confirmOperation()
     // TODO: replace this with data bindings
-    modalViewController.replaceContent(LoadingModalView(message: "Submitting Crypto Order"))
+    modalViewController.replaceContent(
+      LoadingModalView(
+        message: localizer.localize(with: CybridLocalizationKey.trade(.loadingModal(.processingMessage)))
+      )
+    )
     DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [weak self] in
       guard let self = self else { return }
       let successModal = TradeSuccessModalView(
+        theme: self.theme,
+        localizer: self.localizer,
         dataModel: QuoteDataModel(
           fiatAmount: self.viewModel.amountText.value ?? "",
           fiatCode: self.viewModel.fiatCurrency.asset.code,
           cryptoAmount: self.viewModel.displayAmount.value ?? "",
           cryptoCode: self.viewModel.cryptoCurrency.value?.asset.code ?? "",
           transactionFee: "$2.59",
-          lockType: self.viewModel.shouldInputCrypto.value ? .cryptoLock : .fiatLock,
           quoteType: self.viewModel.segmentSelection.value == .buy ? .buy : .sell),
         onBuyMoreTap: { [weak self] in
           self?.dismissModal()
@@ -325,7 +331,6 @@ extension TradeViewController {
   func updateConfirmationModalData() {
     tradeConfirmationModalView.updatePrices(cryptoAmount: viewModel.displayAmount.value ?? "",
                                             fiatAmount: viewModel.amountText.value ?? "",
-                                            lockType: viewModel.shouldInputCrypto.value ? .cryptoLock : .fiatLock,
                                             quoteType: viewModel.segmentSelection.value == .buy ? .buy : .sell)
   }
 

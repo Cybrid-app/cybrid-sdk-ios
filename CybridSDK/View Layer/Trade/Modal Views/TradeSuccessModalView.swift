@@ -10,6 +10,7 @@ import UIKit
 
 final class TradeSuccessModalView: UIView {
   private var dataModel: QuoteDataModel
+  private let localizer: Localizer
   private let theme: Theme
   private var onBuyMoreTap: (() -> Void)?
 
@@ -45,45 +46,45 @@ final class TradeSuccessModalView: UIView {
     return stackView
   }()
 
-  private lazy var titleLabel: UILabel = .makeLabel(.header) { label in
-    label.text = "Order Submitted"
+  private lazy var titleLabel: UILabel = .makeLabel(.header) { [localizer] label in
+    label.text = localizer.localize(with: CybridLocalizationKey.trade(.successModal(.title)))
   }
 
-  private lazy var disclosureLabel: UILabel = .makeLabel(.body) { label in
-    label.text = "Your order has been placed"
+  private lazy var disclosureLabel: UILabel = .makeLabel(.body) { [localizer] label in
+    label.text = localizer.localize(with: CybridLocalizationKey.trade(.successModal(.subtitle)))
     label.sizeToFit()
   }
 
-  private lazy var transactionTitleLabel: UILabel = .makeLabel(.bodyStrong) { label in
-    label.text = "Transaction ID:"
+  private lazy var transactionTitleLabel: UILabel = .makeLabel(.bodyStrong) { [localizer] label in
+    label.text = localizer.localize(with: CybridLocalizationKey.trade(.successModal(.transactionId)))
   }
 
   private lazy var transactionIDLabel: UILabel = .makeLabel(.bodyStrong) { label in
     label.text = "#980019" // FIXME: Replace this mocked data
   }
 
-  private lazy var dateTitleLabel: UILabel = .makeLabel(.bodyStrong) { label in
-    label.text = "Date:"
+  private lazy var dateTitleLabel: UILabel = .makeLabel(.bodyStrong) { [localizer] label in
+    label.text = localizer.localize(with: CybridLocalizationKey.trade(.successModal(.date)))
   }
 
   private lazy var dateLabel: UILabel = .makeLabel(.bodyStrong) { label in
     label.text = "August 16, 2022" // FIXME: Replace this mocked data
   }
 
-  private lazy var fiatAmountTitleLabel: UILabel = .makeLabel(.bodyStrong) { label in
-    label.text = "Purchase amount"
+  private lazy var fiatAmountTitleLabel: UILabel = .makeLabel(.bodyStrong) { [localizer] label in
+    label.text = localizer.localize(with: CybridLocalizationKey.trade(.successModal(.purchaseAmount)))
   }
 
   private lazy var fiatAmountLabel: UILabel = .makeLabel(.body)
 
-  private lazy var cryptoAmountTitleLabel: UILabel = .makeLabel(.bodyStrong) { label in
-    label.text = "Purchase quantity"
+  private lazy var cryptoAmountTitleLabel: UILabel = .makeLabel(.bodyStrong) { [localizer] label in
+    label.text = localizer.localize(with: CybridLocalizationKey.trade(.successModal(.purchaseQuantity)))
   }
 
   private lazy var cryptoAmountLabel: UILabel = .makeLabel(.body)
 
-  private lazy var feeAmountTitleLabel: UILabel = .makeLabel(.bodyStrong) { label in
-    label.text = "Transaction Fee"
+  private lazy var feeAmountTitleLabel: UILabel = .makeLabel(.bodyStrong) { [localizer] label in
+    label.text = localizer.localize(with: CybridLocalizationKey.trade(.successModal(.transactionFee)))
   }
 
   private lazy var feeAmountLabel: UILabel = .makeLabel(.body)
@@ -91,22 +92,23 @@ final class TradeSuccessModalView: UIView {
   private lazy var buttonStackView: UIStackView = {
     let spacerView = UIView()
     spacerView.setContentHuggingPriority(.fittingSizeLevel, for: .horizontal)
-    let stackView = UIStackView(arrangedSubviews: [spacerView, buyMoreButton])
+    let stackView = UIStackView(arrangedSubviews: [spacerView, moreButton])
     stackView.axis = .horizontal
     stackView.alignment = .trailing
     stackView.distribution = .fill
     return stackView
   }()
 
-  private lazy var buyMoreButton: CYBButton = {
+  private lazy var moreButton: CYBButton = {
     let button = CYBButton(style: .secondary, theme: theme)
-    button.setTitle("Buy more crypto", for: .normal)
+    button.setTitle(localizer.localize(with: CybridLocalizationKey.trade(.successModal(.buyMore))), for: .normal)
     button.addTarget(self, action: #selector(didTapBuyMoreButton), for: .touchUpInside)
     return button
   }()
 
-  init(theme: Theme = Cybrid.theme, dataModel: QuoteDataModel, onBuyMoreTap: (() -> Void)?) {
+  init(theme: Theme = Cybrid.theme, localizer: Localizer, dataModel: QuoteDataModel, onBuyMoreTap: (() -> Void)?) {
     self.dataModel = dataModel
+    self.localizer = localizer
     self.theme = theme
     self.onBuyMoreTap = onBuyMoreTap
 
@@ -134,9 +136,18 @@ final class TradeSuccessModalView: UIView {
     fiatAmountLabel.text = dataModel.fiatAmount + " " + dataModel.fiatCode
     feeAmountLabel.text = dataModel.transactionFee + " " + dataModel.fiatCode
 
-    fiatAmountTitleLabel.text = dataModel.quoteType == .buy ? "Purchase amount" : "Sell amount"
-    cryptoAmountTitleLabel.text = dataModel.quoteType == .buy ? "Purchase quantity" : "Sell quantity"
-    buyMoreButton.setTitle(dataModel.quoteType == .buy ? "Buy more crypto" : "Sell more crypto", for: .normal)
+    fiatAmountTitleLabel.text = dataModel.quoteType == .buy
+      ? localizer.localize(with: CybridLocalizationKey.trade(.successModal(.purchaseAmount)))
+      : localizer.localize(with: CybridLocalizationKey.trade(.successModal(.sellAmount)))
+    cryptoAmountTitleLabel.text = dataModel.quoteType == .buy
+      ? localizer.localize(with: CybridLocalizationKey.trade(.successModal(.purchaseQuantity)))
+      : localizer.localize(with: CybridLocalizationKey.trade(.successModal(.sellQuantity)))
+    moreButton.setTitle(
+      dataModel.quoteType == .buy
+        ? localizer.localize(with: CybridLocalizationKey.trade(.successModal(.buyMore)))
+        : localizer.localize(with: CybridLocalizationKey.trade(.successModal(.sellMore))),
+      for: .normal
+    )
   }
 
   @objc
