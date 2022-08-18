@@ -24,6 +24,9 @@ final class CybridSession: AuthenticatedServiceProvider {
   // Prices Repository
   internal var pricesRepository: PricesRepository.Type
   internal var pricesFetchScheduler: TaskScheduler
+    
+  // Accounts Repository
+  internal var accountsRepository: AccountsRepository.Type
 
   // MARK: Private(set) Internal Properties
   private(set) var authenticator: CybridAuthenticator?
@@ -40,6 +43,7 @@ final class CybridSession: AuthenticatedServiceProvider {
     self.notificationManager = notificationManager
     self.pricesRepository = PricesAPI.self
     self.assetsRepository = AssetsAPI.self
+    self.accountsRepository = AccountsAPI.self
     self.pricesFetchScheduler = CybridTaskScheduler()
 
     setupEventListeners()

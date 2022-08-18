@@ -119,6 +119,9 @@
 		0BD6613A2872BC0B00F4DA6B /* CybridCurrencyFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD661392872BC0B00F4DA6B /* CybridCurrencyFormatter.swift */; };
 		0BD6613E2874AFAA00F4DA6B /* MockNumberFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD6613D2874AFAA00F4DA6B /* MockNumberFormatter.swift */; };
 		0BFF8755289628EB00E44C74 /* listAssetsResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 0BFF87542896267C00E44C74 /* listAssetsResponse.json */; };
+		9224373028AEA01C008E73F2 /* AccountsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224372F28AEA01C008E73F2 /* AccountsRepository.swift */; };
+		9224373328AEA141008E73F2 /* AccountAssetPriceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224373228AEA141008E73F2 /* AccountAssetPriceModel.swift */; };
+		9224373528AEA18F008E73F2 /* AccountsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224373428AEA18F008E73F2 /* AccountsViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -268,6 +271,9 @@
 		0BD6613B28734F2900F4DA6B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0BD6613D2874AFAA00F4DA6B /* MockNumberFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNumberFormatter.swift; sourceTree = "<group>"; };
 		0BFF87542896267C00E44C74 /* listAssetsResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = listAssetsResponse.json; sourceTree = "<group>"; };
+		9224372F28AEA01C008E73F2 /* AccountsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsRepository.swift; sourceTree = "<group>"; };
+		9224373228AEA141008E73F2 /* AccountAssetPriceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountAssetPriceModel.swift; sourceTree = "<group>"; };
+		9224373428AEA18F008E73F2 /* AccountsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -602,6 +608,7 @@
 			children = (
 				0B00E04B2885AD8D00707F26 /* PricesRepository.swift */,
 				0B00E04D2885ADB300707F26 /* AssetsRepository.swift */,
+				9224372F28AEA01C008E73F2 /* AccountsRepository.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -758,6 +765,7 @@
 		0BD660FF286B765900F4DA6B /* View Layer */ = {
 			isa = PBXGroup;
 			children = (
+				9224373128AEA102008E73F2 /* Accounts */,
 				0BD66100286B766B00F4DA6B /* Crypto Price List */,
 				0BD66126286D7CCB00F4DA6B /* Localization */,
 				0BD6610E286B76AA00F4DA6B /* Reusable Views */,
@@ -855,6 +863,15 @@
 			children = (
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		9224373128AEA102008E73F2 /* Accounts */ = {
+			isa = PBXGroup;
+			children = (
+				9224373228AEA141008E73F2 /* AccountAssetPriceModel.swift */,
+				9224373428AEA18F008E73F2 /* AccountsViewModel.swift */,
+			);
+			path = Accounts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1067,8 +1084,10 @@
 				0BD660F7286B761200F4DA6B /* NetworkingInterfaces.swift in Sources */,
 				0B00E01D28789ADA00707F26 /* BigDecimal.swift in Sources */,
 				0B2B2A8528629031002F0EC1 /* UIColor+Extensions.swift in Sources */,
+				9224373528AEA18F008E73F2 /* AccountsViewModel.swift in Sources */,
 				0B2B2A872862906E002F0EC1 /* UILabel+Extensions.swift in Sources */,
 				0B2B2A6D28621D5C002F0EC1 /* ColorTheme.swift in Sources */,
+				9224373328AEA141008E73F2 /* AccountAssetPriceModel.swift in Sources */,
 				0B00E04C2885AD8D00707F26 /* PricesRepository.swift in Sources */,
 				0B96600F285AA0FC00584692 /* AssertionFailureOverride.swift in Sources */,
 				0B6175D4288B7853004E4F5B /* TaskScheduler.swift in Sources */,
@@ -1078,6 +1097,7 @@
 				0B303CE42862E5D9007BF7FF /* CybridConfig.swift in Sources */,
 				0BD660FD286B763E00F4DA6B /* ConcurrencyInterfaces.swift in Sources */,
 				0BD66109286B768C00F4DA6B /* CryptoPriceListView.swift in Sources */,
+				9224373028AEA01C008E73F2 /* AccountsRepository.swift in Sources */,
 				0B557B942899F4DE00632A6D /* SellQuoteViewController.swift in Sources */,
 				0BD660FC286B763E00F4DA6B /* URLImageOperation.swift in Sources */,
 				0B00E024287CD72D00707F26 /* Environment.swift in Sources */,
