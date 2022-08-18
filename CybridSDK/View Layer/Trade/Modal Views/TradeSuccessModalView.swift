@@ -31,18 +31,18 @@ final class TradeSuccessModalView: UIView {
       buttonStackView
     ])
     stackView.axis = .vertical
-    stackView.setCustomSpacing(16, after: titleLabel)
-    stackView.setCustomSpacing(24, after: disclosureLabel)
-    stackView.setCustomSpacing(4, after: transactionTitleLabel)
-    stackView.setCustomSpacing(32, after: transactionIDLabel)
-    stackView.setCustomSpacing(4, after: dateTitleLabel)
-    stackView.setCustomSpacing(32, after: dateLabel)
-    stackView.setCustomSpacing(4, after: fiatAmountTitleLabel)
-    stackView.setCustomSpacing(32, after: fiatAmountLabel)
-    stackView.setCustomSpacing(4, after: cryptoAmountTitleLabel)
-    stackView.setCustomSpacing(32, after: cryptoAmountLabel)
-    stackView.setCustomSpacing(4, after: feeAmountTitleLabel)
-    stackView.setCustomSpacing(32, after: feeAmountLabel)
+    stackView.setCustomSpacing(Constants.titleSpacing, after: titleLabel)
+    stackView.setCustomSpacing(Constants.subtitleSpacing, after: disclosureLabel)
+    stackView.setCustomSpacing(Constants.transactionTitleSpacing, after: transactionTitleLabel)
+    stackView.setCustomSpacing(Constants.transactionIDSpacing, after: transactionIDLabel)
+    stackView.setCustomSpacing(Constants.dateTitleSpacing, after: dateTitleLabel)
+    stackView.setCustomSpacing(Constants.dateSpacing, after: dateLabel)
+    stackView.setCustomSpacing(Constants.fiatAmountTitleSpacing, after: fiatAmountTitleLabel)
+    stackView.setCustomSpacing(Constants.fiatAmountSpacing, after: fiatAmountLabel)
+    stackView.setCustomSpacing(Constants.cryptoAmountTitleSpacing, after: cryptoAmountTitleLabel)
+    stackView.setCustomSpacing(Constants.cryptoAmountSpacing, after: cryptoAmountLabel)
+    stackView.setCustomSpacing(Constants.feeAmountTitleSpacing, after: feeAmountTitleLabel)
+    stackView.setCustomSpacing(Constants.feeAmountSpacing, after: feeAmountLabel)
     return stackView
   }()
 
@@ -161,5 +161,24 @@ final class TradeSuccessModalView: UIView {
     newDataModel.fiatAmount = fiatAmount
     self.dataModel = newDataModel
     setupAmountLabels()
+  }
+}
+
+// MARK: - Constants
+
+extension TradeSuccessModalView {
+  enum Constants {
+    static let titleSpacing: CGFloat = UIConstants.spacingXl2
+    static let subtitleSpacing: CGFloat = UIConstants.spacingXl3
+    static let transactionTitleSpacing: CGFloat = UIConstants.spacingXs
+    static let transactionIDSpacing: CGFloat = UIConstants.spacingXl4
+    static let dateTitleSpacing: CGFloat = UIConstants.spacingXs
+    static let dateSpacing: CGFloat = UIConstants.spacingXl4
+    static let fiatAmountTitleSpacing: CGFloat = UIConstants.spacingXs
+    static let fiatAmountSpacing: CGFloat = UIConstants.spacingXl4
+    static let cryptoAmountTitleSpacing: CGFloat = UIConstants.spacingXs
+    static let cryptoAmountSpacing: CGFloat = UIConstants.spacingXl4
+    static let feeAmountTitleSpacing: CGFloat = UIConstants.spacingXs
+    static let feeAmountSpacing: CGFloat = UIConstants.spacingXl4
   }
 }

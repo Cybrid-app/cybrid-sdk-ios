@@ -16,7 +16,7 @@ final class CybridModalViewController: UIViewController {
   private lazy var containerView: UIView = {
     let view = UIView()
     view.backgroundColor = theme.colorTheme.secondaryBackgroundColor
-    view.layer.cornerRadius = 28
+    view.layer.cornerRadius = Constants.cornerRadius
     view.alpha = 0
     return view
   }()
@@ -45,13 +45,32 @@ final class CybridModalViewController: UIViewController {
     view.addSubview(containerView)
     containerView.addSubview(contentView)
 
-    containerView.constraint(attribute: .top, relatedBy: .greaterThanOrEqual, toItem: view, attribute: .top, constant: 16)
-    containerView.constraint(attribute: .bottom, relatedBy: .lessThanOrEqual, toItem: view, attribute: .bottom, constant: -16)
-    containerView.constraint(attribute: .leading, relatedBy: .equal, toItem: view, attribute: .leading, constant: 20)
-    containerView.constraint(attribute: .trailing, relatedBy: .equal, toItem: view, attribute: .trailing, constant: -20)
-    containerView.constraint(attribute: .centerY, relatedBy: .equal, toItem: view, attribute: .centerY)
+    containerView.constraint(attribute: .top,
+                             relatedBy: .greaterThanOrEqual,
+                             toItem: view,
+                             attribute: .top,
+                             constant: Constants.minimumVerticalSpacing)
+    containerView.constraint(attribute: .bottom,
+                             relatedBy: .lessThanOrEqual,
+                             toItem: view,
+                             attribute: .bottom,
+                             constant: -Constants.minimumVerticalSpacing)
+    containerView.constraint(attribute: .leading,
+                             relatedBy: .equal,
+                             toItem: view,
+                             attribute: .leading,
+                             constant: Constants.horizontalSpacing)
+    containerView.constraint(attribute: .trailing,
+                             relatedBy: .equal,
+                             toItem: view,
+                             attribute: .trailing,
+                             constant: -Constants.horizontalSpacing)
+    containerView.constraint(attribute: .centerY,
+                             relatedBy: .equal,
+                             toItem: view,
+                             attribute: .centerY)
 
-    contentView.constraintEdges(to: containerView, insets: .init(top: 24, left: 24, bottom: 24, right: 24))
+    contentView.constraintEdges(to: containerView, insets: Constants.contentInsets)
 
     containerView.layoutIfNeeded()
   }
@@ -111,8 +130,22 @@ final class CybridModalViewController: UIViewController {
     contentView = newContent
     contentView.translatesAutoresizingMaskIntoConstraints = false
     containerView.addSubview(contentView)
-    contentView.constraintEdges(to: containerView, insets: .init(top: 24, left: 24, bottom: 24, right: 24))
+    contentView.constraintEdges(to: containerView, insets: Constants.contentInsets)
 
     containerView.layoutSubviews()
+  }
+}
+
+// MARK: - Constants
+
+extension CybridModalViewController {
+  enum Constants {
+    static let cornerRadius: CGFloat = UIConstants.radiusXl
+    static let horizontalSpacing: CGFloat = UIConstants.spacingXl2
+    static let minimumVerticalSpacing: CGFloat = UIConstants.spacingXl2
+    static let contentInsets = UIEdgeInsets(top: UIConstants.spacingXl3,
+                                            left: UIConstants.spacingXl3,
+                                            bottom: UIConstants.spacingXl3,
+                                            right: UIConstants.spacingXl3)
   }
 }

@@ -17,7 +17,7 @@ final class LoadingModalView: UIView {
       spinner
     ])
     stackView.axis = .vertical
-    stackView.spacing = 16
+    stackView.spacing = Constants.spacing
     stackView.alignment = .center
     return stackView
   }()
@@ -54,5 +54,13 @@ final class LoadingModalView: UIView {
 
     contentStackView.constraintEdges(to: self, insets: .init(top: 94, left: 0, bottom: 94, right: 0))
     spinner.startAnimating()
+  }
+}
+
+// MARK: - Constants
+
+extension LoadingModalView {
+  enum Constants {
+    static let spacing: CGFloat = UIConstants.spacingXl2
   }
 }

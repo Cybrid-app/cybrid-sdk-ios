@@ -38,6 +38,7 @@ enum UIConstants {
   // MARK: Radius
   static let radiusMd: CGFloat = 8.0
   static let radiusLg: CGFloat = 10.0
+  static let radiusXl: CGFloat = 28.0
 
   // MARK: Colors
   static let lightestColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
