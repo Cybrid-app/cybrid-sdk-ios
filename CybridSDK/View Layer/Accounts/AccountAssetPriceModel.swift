@@ -5,8 +5,8 @@
 //  Created by Erick Sanchez Perez on 18/08/22.
 //
 
-import Foundation
 import CybridApiBankSwift
+import Foundation
 
 struct AccountAssetPriceModel {
 
@@ -23,8 +23,8 @@ struct AccountAssetPriceModel {
     let assetSymbol: String
     let assetType: AssetBankModel.TypeBankModel
     let assetDecimals: BigDecimal
-    let pairAsset:AssetBankModel?
-    let buyPrice:BigDecimal
+    let pairAsset: AssetBankModel?
+    let buyPrice: BigDecimal
     let buyPriceFormatted: String
     let sellPrice: BigDecimal
 

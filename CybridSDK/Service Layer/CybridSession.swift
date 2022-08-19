@@ -5,8 +5,8 @@
 //  Created by Cybrid on 8/07/22.
 //
 
-import CybridApiBankSwift
 import Foundation
+import CybridApiBankSwift
 
 final class CybridSession: AuthenticatedServiceProvider {
   // MARK: Static Properties
@@ -24,7 +24,7 @@ final class CybridSession: AuthenticatedServiceProvider {
   // Prices Repository
   internal var pricesRepository: PricesRepository.Type
   internal var pricesFetchScheduler: TaskScheduler
-    
+
   // Accounts Repository
   internal var accountsRepository: AccountsRepository.Type
 

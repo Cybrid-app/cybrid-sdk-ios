@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CybridApiBankSwift
 
 typealias FetchAccountsCompletion = (Result<AccountListBankModel, ErrorResponse>) -> Void
 
@@ -27,7 +28,7 @@ extension AccountsRepoProvider {
 // MARK: - Protocol Conformance
 extension CybridSession: AccountsRepoProvider {}
 
-extension AccountsAPI : AccountsRepository {
+extension AccountsAPI: AccountsRepository {
     static func fetchAccounts(_ completion: @escaping FetchAccountsCompletion) {
         listAccounts(customerGuid: "", completion: completion)
     }

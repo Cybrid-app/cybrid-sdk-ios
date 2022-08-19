@@ -121,6 +121,7 @@ extension CybridEvent {
   public enum ComponentEvent {
     case priceList(PriceListEvent)
     case trade(TradeEvent)
+    case accounts(AccountsEvent)
 
     var level: LogLevel {
       switch self {
@@ -128,6 +129,8 @@ extension CybridEvent {
         return event.level
       case .trade(let event):
         return event.level
+      case .accounts(let event):
+          return event.level
       }
     }
 
@@ -136,7 +139,9 @@ extension CybridEvent {
       case .priceList(let event):
         return "PRICE_LIST_" + event.code
       case .trade(let event):
-        return "TRADE_" + event.code
+          return "TRADE_" + event.code
+      case .accounts(let event):
+          return "ACCOUNTS_" + event.code
       }
     }
 
@@ -146,8 +151,11 @@ extension CybridEvent {
         return event.message
       case .trade(let event):
         return event.message
+      case .accounts(let event):
+        return event.message
       }
     }
+  }
 
     public enum PriceListEvent {
       case initSuccess
@@ -263,5 +271,63 @@ extension CybridEvent {
         }
       }
     }
-  }
+    
+    public enum AccountsEvent {
+        case initSuccess
+        case assetsDataFetching
+        case accountsDataFetching
+        case pricesDataFetching
+        case assetsDataError
+        case accountsDataError
+        case pricesDataError
+        
+        var level: LogLevel {
+          switch self {
+          case .initSuccess, .assetsDataFetching, .accountsDataFetching, .pricesDataFetching:
+            return .info
+          case .assetsDataError, .accountsDataError, .pricesDataError:
+            return .error
+          }
+        }
+        
+        var code: String {
+          switch self {
+          case .initSuccess:
+            return "INIT"
+          case .assetsDataFetching:
+            return "ASSETS_DATA_FETCHING"
+          case .assetsDataError:
+            return "ASSETS_DATA_ERROR"
+          case .accountsDataFetching:
+            return "ACCOUNTS_DATA_FETCHING"
+          case .accountsDataError:
+            return "ACCOUNTS_DATA_ERROR"
+          case .pricesDataFetching:
+            return "PRICES_DATA_FETCHING"
+          case .pricesDataError:
+            return "PRICES_DATA_ERROR"
+              
+          }
+        }
+        
+        var message: String {
+          switch self {
+          case .initSuccess:
+            return "Initializing accounts component"
+          case .assetsDataFetching:
+            return "Fetching assets"
+          case .assetsDataError:
+            return "There was an error fetching prices"
+          case .accountsDataFetching:
+            return "Fetching accounts"
+          case .accountsDataError:
+            return "There was an error fetching accounts"
+          case .pricesDataFetching:
+            return "Fetching prices"
+          case .pricesDataError:
+            return "There was an error fetching accounts"
+              
+          }
+        }
+    }
 }
