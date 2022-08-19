@@ -39,40 +39,38 @@ final class TradeConfirmationModalView: UIView {
     return stackView
   }()
 
-  private lazy var titleLabel: UILabel = .makeLabel(.header) { [localizer] label in
+  private lazy var titleLabel: UILabel = .makeLabel(.header1) { [localizer] label in
     label.text = localizer.localize(with: CybridLocalizationKey.trade(.confirmationModal(.title)))
   }
 
-  private lazy var disclosureLabel: UILabel = .makeLabel(.body) { [localizer] label in
+  private lazy var disclosureLabel: UILabel = .makeLabel(.disclaimer) { [localizer] label in
     label.text = localizer.localize(with: CybridLocalizationKey.trade(.confirmationModal(.subtitle)))
     label.sizeToFit()
   }
 
-  private lazy var fiatAmountTitleLabel: UILabel = .makeLabel(.bodyStrong) { [localizer] label in
+  private lazy var fiatAmountTitleLabel: UILabel = .makeLabel(.caption) { [localizer] label in
     label.text = localizer.localize(with: CybridLocalizationKey.trade(.confirmationModal(.purchaseAmount)))
   }
 
   private lazy var fiatAmountLabel: UILabel = .makeLabel(.body)
 
-  private lazy var cryptoAmountTitleLabel: UILabel = .makeLabel(.bodyStrong) { [localizer] label in
+  private lazy var cryptoAmountTitleLabel: UILabel = .makeLabel(.caption) { [localizer] label in
     label.text = localizer.localize(with: CybridLocalizationKey.trade(.confirmationModal(.purchaseQuantity)))
   }
 
   private lazy var cryptoAmountLabel: UILabel = .makeLabel(.body)
 
-  private lazy var feeAmountTitleLabel: UILabel = .makeLabel(.bodyStrong) { [localizer] label in
+  private lazy var feeAmountTitleLabel: UILabel = .makeLabel(.caption) { [localizer] label in
     label.text = localizer.localize(with: CybridLocalizationKey.trade(.confirmationModal(.transactionFee)))
   }
 
   private lazy var feeAmountLabel: UILabel = .makeLabel(.body)
 
   private lazy var buttonStackView: UIStackView = {
-    let spacerView = UIView()
-    spacerView.setContentHuggingPriority(.fittingSizeLevel, for: .horizontal)
-    let stackView = UIStackView(arrangedSubviews: [spacerView, cancelButton, confirmButton])
+    let stackView = UIStackView(arrangedSubviews: [cancelButton, confirmButton])
     stackView.axis = .horizontal
     stackView.alignment = .trailing
-    stackView.distribution = .fill
+    stackView.distribution = .fillEqually
     return stackView
   }()
 

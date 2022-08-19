@@ -22,7 +22,7 @@ final class LoadingModalView: UIView {
     return stackView
   }()
 
-  private lazy var titleLabel: UILabel = .makeLabel(.header) { [weak self] label in
+  private lazy var titleLabel: UILabel = .makeLabel(.header1) { [weak self] label in
     label.text = self?.message ?? ""
     label.textAlignment = .center
   }

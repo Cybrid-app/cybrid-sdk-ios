@@ -25,7 +25,7 @@ class CryptoPriceTableViewCell: UITableViewCell {
     stackView.alignment = .center
     return stackView
   }()
-  private lazy var nameLabel = UILabel.makeLabel(.bodyLarge) { label in
+  private lazy var nameLabel = UILabel.makeLabel(.header2) { label in
     label.setContentCompressionResistancePriority(.defaultHigh - 1, for: .horizontal)
     label.setContentHuggingPriority(.required, for: .horizontal)
     label.setContentHuggingPriority(.defaultHigh, for: .vertical)
@@ -104,8 +104,8 @@ class CryptoPriceTableViewCell: UITableViewCell {
       string: currencyTitle,
       attributes: [
         NSAttributedString.Key.paragraphStyle: paragraphStyle,
-        NSAttributedString.Key.foregroundColor: FormatStyle.bodyLarge.textColor,
-        NSAttributedString.Key.font: FormatStyle.bodyLarge.font
+        NSAttributedString.Key.foregroundColor: FormatStyle.header2.textColor,
+        NSAttributedString.Key.font: FormatStyle.header2.font
       ]
     )
     attributedTitle.addAttributes(

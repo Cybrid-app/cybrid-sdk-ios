@@ -16,10 +16,10 @@ class CybridConfigTests: XCTestCase {
 
     let testTheme = CybridTheme(
       colorTheme: .default,
-      fontTheme: FontTheme(header: .systemFont(ofSize: 32),
-                           bodyLarge: .systemFont(ofSize: 20),
+      fontTheme: FontTheme(header1: .systemFont(ofSize: 32),
+                           header2: .systemFont(ofSize: 20),
                            body: .systemFont(ofSize: 16),
-                           bodyStrong: .systemFont(ofSize: 16),
+                           body2: .systemFont(ofSize: 16),
                            caption: .systemFont(ofSize: 12))
     )
     cybridConfig.setup(authenticator: MockAuthenticator(), theme: testTheme)

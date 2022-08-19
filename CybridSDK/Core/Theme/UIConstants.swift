@@ -19,10 +19,11 @@ enum UIConstants {
   static let minimumTargetSize: CGFloat = 44.0
 
   // MARK: Font Sizes
-  static let fontSizeSm: CGFloat = 12.0
-  static let fontSizeMd: CGFloat = 14.0
-  static let fontSizeLg: CGFloat = 17.0
-  static let fontSizeXl: CGFloat = 24.0
+  static let fontSizeCaption: CGFloat = 12.0
+  static let fontSizeBody2: CGFloat = 13.0
+  static let fontSizeBody1: CGFloat = 14.0
+  static let fontSizeH2: CGFloat = 17.0
+  static let fontSizeH1: CGFloat = 22.0
 
   // MARK: Spacing
   static let spacingXxs: CGFloat = 2.0

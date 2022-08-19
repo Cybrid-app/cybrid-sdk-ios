@@ -46,44 +46,44 @@ final class TradeSuccessModalView: UIView {
     return stackView
   }()
 
-  private lazy var titleLabel: UILabel = .makeLabel(.header) { [localizer] label in
+  private lazy var titleLabel: UILabel = .makeLabel(.header1) { [localizer] label in
     label.text = localizer.localize(with: CybridLocalizationKey.trade(.successModal(.title)))
   }
 
-  private lazy var disclosureLabel: UILabel = .makeLabel(.body) { [localizer] label in
+  private lazy var disclosureLabel: UILabel = .makeLabel(.disclaimer) { [localizer] label in
     label.text = localizer.localize(with: CybridLocalizationKey.trade(.successModal(.subtitle)))
     label.sizeToFit()
   }
 
-  private lazy var transactionTitleLabel: UILabel = .makeLabel(.bodyStrong) { [localizer] label in
+  private lazy var transactionTitleLabel: UILabel = .makeLabel(.caption) { [localizer] label in
     label.text = localizer.localize(with: CybridLocalizationKey.trade(.successModal(.transactionId)))
   }
 
-  private lazy var transactionIDLabel: UILabel = .makeLabel(.bodyStrong) { [dataModel] label in
+  private lazy var transactionIDLabel: UILabel = .makeLabel(.body) { [dataModel] label in
     label.text = dataModel.transactionFee
   }
 
-  private lazy var dateTitleLabel: UILabel = .makeLabel(.bodyStrong) { [localizer] label in
+  private lazy var dateTitleLabel: UILabel = .makeLabel(.caption) { [localizer] label in
     label.text = localizer.localize(with: CybridLocalizationKey.trade(.successModal(.date)))
   }
 
-  private lazy var dateLabel: UILabel = .makeLabel(.bodyStrong) { [dataModel] label in
+  private lazy var dateLabel: UILabel = .makeLabel(.body) { [dataModel] label in
     label.text = dataModel.date
   }
 
-  private lazy var fiatAmountTitleLabel: UILabel = .makeLabel(.bodyStrong) { [localizer] label in
+  private lazy var fiatAmountTitleLabel: UILabel = .makeLabel(.caption) { [localizer] label in
     label.text = localizer.localize(with: CybridLocalizationKey.trade(.successModal(.purchaseAmount)))
   }
 
   private lazy var fiatAmountLabel: UILabel = .makeLabel(.body)
 
-  private lazy var cryptoAmountTitleLabel: UILabel = .makeLabel(.bodyStrong) { [localizer] label in
+  private lazy var cryptoAmountTitleLabel: UILabel = .makeLabel(.caption) { [localizer] label in
     label.text = localizer.localize(with: CybridLocalizationKey.trade(.successModal(.purchaseQuantity)))
   }
 
   private lazy var cryptoAmountLabel: UILabel = .makeLabel(.body)
 
-  private lazy var feeAmountTitleLabel: UILabel = .makeLabel(.bodyStrong) { [localizer] label in
+  private lazy var feeAmountTitleLabel: UILabel = .makeLabel(.caption) { [localizer] label in
     label.text = localizer.localize(with: CybridLocalizationKey.trade(.successModal(.transactionFee)))
   }
 

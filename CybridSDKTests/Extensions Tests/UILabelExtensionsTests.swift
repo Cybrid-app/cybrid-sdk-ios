@@ -32,7 +32,7 @@ class UILabelExtensionsTests: XCTestCase {
   func testLabelUppercased_True() {
     let testLabel = UILabel()
     testLabel.text = "Test"
-    testLabel.formatLabel(with: .headerSmall)
+    testLabel.formatLabel(with: .header4)
 
     XCTAssertNotEqual(testLabel.text, "Test")
     XCTAssertEqual(testLabel.text, "TEST")
@@ -42,11 +42,11 @@ class UILabelExtensionsTests: XCTestCase {
     let testLabel = UILabel()
     testLabel.text = "Test"
 
-    testLabel.formatLabel(with: .header)
+    testLabel.formatLabel(with: .header1)
     XCTAssertNotEqual(testLabel.text, "TEST")
     XCTAssertEqual(testLabel.text, "Test")
 
-    testLabel.formatLabel(with: .bodyLarge)
+    testLabel.formatLabel(with: .header2)
     XCTAssertNotEqual(testLabel.text, "TEST")
     XCTAssertEqual(testLabel.text, "Test")
 
@@ -54,7 +54,7 @@ class UILabelExtensionsTests: XCTestCase {
     XCTAssertNotEqual(testLabel.text, "TEST")
     XCTAssertEqual(testLabel.text, "Test")
 
-    testLabel.formatLabel(with: .bodyStrong)
+    testLabel.formatLabel(with: .disclaimer)
     XCTAssertNotEqual(testLabel.text, "TEST")
     XCTAssertEqual(testLabel.text, "Test")
 
