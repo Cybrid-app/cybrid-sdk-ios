@@ -42,11 +42,19 @@ class UILabelExtensionsTests: XCTestCase {
     let testLabel = UILabel()
     testLabel.text = "Test"
 
+    testLabel.formatLabel(with: .header)
+    XCTAssertNotEqual(testLabel.text, "TEST")
+    XCTAssertEqual(testLabel.text, "Test")
+
     testLabel.formatLabel(with: .bodyLarge)
     XCTAssertNotEqual(testLabel.text, "TEST")
     XCTAssertEqual(testLabel.text, "Test")
 
     testLabel.formatLabel(with: .body)
+    XCTAssertNotEqual(testLabel.text, "TEST")
+    XCTAssertEqual(testLabel.text, "Test")
+
+    testLabel.formatLabel(with: .bodyStrong)
     XCTAssertNotEqual(testLabel.text, "TEST")
     XCTAssertEqual(testLabel.text, "Test")
 
@@ -57,5 +65,6 @@ class UILabelExtensionsTests: XCTestCase {
     testLabel.formatLabel(with: .inputPlaceholder)
     XCTAssertNotEqual(testLabel.text, "TEST")
     XCTAssertEqual(testLabel.text, "Test")
+
   }
 }

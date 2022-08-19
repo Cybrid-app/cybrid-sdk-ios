@@ -32,6 +32,9 @@ final class TradeViewModel: NSObject {
   internal var segmentSelection: Observable<TradeSegment> = Observable(.buy)
   internal var shouldInputCrypto: Observable<Bool> = Observable(true)
 
+  internal var generatedQuoteModel: Observable<TradeConfirmationModalView.DataModel?> = Observable(nil)
+  internal var tradeSuccessModel: Observable<TradeSuccessModalView.DataModel?> = Observable(nil)
+
   // MARK: Internal Properties
   internal let fiatCurrency: CurrencyModel
 
@@ -51,20 +54,19 @@ final class TradeViewModel: NSObject {
     }
   }
 
-  init(selectedCrypto: AssetBankModel?,
+  init(selectedCrypto: AssetBankModel,
        dataProvider: AssetsRepoProvider & PricesRepoProvider,
        logger: CybridLogger?) {
     self.dataProvider = dataProvider
     self.fiatCurrency = CurrencyModel(asset: Cybrid.fiat.defaultAsset)
-    self.assetList = Observable(dataProvider.assetsCache?.map { CurrencyModel(asset: $0) } ?? [])
+    self.assetList = Observable([])
     self.logger = Cybrid.logger
     self.priceList = []
-    self.cryptoCurrency = Observable(nil)
-    if let selectedCrypto = selectedCrypto {
-      cryptoCurrency.value = .init(asset: selectedCrypto)
-    } else {
-      cryptoCurrency.value = assetList.value.first
+    self.cryptoCurrency = Observable(.init(asset: selectedCrypto))
+    if let assetsCache = dataProvider.assetsCache {
+      self.assetList.value = assetsCache.map { .init(asset: $0) }
     }
+    cryptoCurrency.value = .init(asset: selectedCrypto)
   }
 
   func fetchPriceList() {
@@ -202,13 +204,35 @@ extension TradeViewModel: UITextFieldDelegate {
     return CybridCurrencyFormatter.formatPrice(conversionAmount, with: symbol) + " " + code
   }
 
+  func createQuote() {
+    // TODO: Replace with service call
+    generatedQuoteModel.value = .init(
+      fiatAmount: amountText.value ?? "",
+      fiatCode: fiatCurrency.asset.code,
+      cryptoAmount: displayAmount.value ?? "",
+      cryptoCode: cryptoCurrency.value?.asset.code ?? "",
+      transactionFee: "$2.59",
+      quoteType: segmentSelection.value == .buy ? .buy : .sell
+    )
+  }
+
   func confirmOperation() {
-    // TODO: Implement service
+    // TODO: Replace with service call
+    tradeSuccessModel.value = .init(
+      transactionId: "#980019", // FIXME: Remove mocked data
+      date: "August 16, 2022", // FIXME: Remove mocked data
+      fiatAmount: amountText.value ?? "",
+      fiatCode: fiatCurrency.asset.code,
+      cryptoAmount: displayAmount.value ?? "",
+      cryptoCode: cryptoCurrency.value?.asset.code ?? "",
+      transactionFee: "$2.59", // FIXME: Remove mocked data
+      quoteType: segmentSelection.value == .buy ? .buy : .sell
+    )
   }
 }
 
 extension TradeViewModel {
-  struct CurrencyModel {
+  struct CurrencyModel: Equatable {
     let asset: AssetBankModel
     let imageURL: String
 

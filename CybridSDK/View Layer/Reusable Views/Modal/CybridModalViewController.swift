@@ -10,7 +10,7 @@ import UIKit
 final class CybridModalViewController: UIViewController {
   typealias ModalContentView = UIView
 
-  private var contentView: ModalContentView
+  internal var contentView: ModalContentView
   private let theme: Theme
 
   private lazy var containerView: UIView = {

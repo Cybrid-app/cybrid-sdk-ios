@@ -34,6 +34,7 @@ public final class CybridConfig {
                     refreshRate: TimeInterval = 5,
                     theme: Theme? = nil) {
     self.authenticator = authenticator
+    self.fiat = fiat
     self.theme = theme ?? CybridTheme.default
     self.refreshRate = refreshRate
     self._preferredLocale = locale

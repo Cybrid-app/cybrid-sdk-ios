@@ -295,6 +295,43 @@ extension CryptoPriceViewModelTests {
     XCTAssertNotNil(headerView)
     XCTAssertTrue(headerView!.isKind(of: CryptoPriceTableHeaderView.self))
   }
+
+  func testTableView_didSelectRowAtIndex() {
+    // Given
+    let tableView = CryptoPriceListView(navigationController: nil)
+    let viewModel = createViewModel(viewProvider: tableView)
+
+    // When
+    viewModel.fetchPriceList()
+    dataProvider.didFetchAssetsSuccessfully()
+    dataProvider.didFetchPricesSuccessfully()
+    tableView.reloadData()
+    viewModel.tableView(tableView, didSelectRowAt: IndexPath(item: 0, section: 0))
+    let expectedCryptoViewModel = TradeViewModel(selectedCrypto: .bitcoin,
+                                                 dataProvider: dataProvider,
+                                                 logger: nil)
+
+    // Then
+    XCTAssertEqual(viewModel.selectedCrypto.value?.cryptoCurrency.value,
+                   expectedCryptoViewModel.cryptoCurrency.value)
+  }
+
+  func testTableView_didSelectRowAtIndex_withoutAssetsData() {
+    // Given
+    let tableView = CryptoPriceListView(navigationController: nil)
+    let viewModel = createViewModel(viewProvider: tableView)
+
+    // When
+    viewModel.fetchPriceList()
+    dataProvider.didFetchAssetsSuccessfully()
+    dataProvider.didFetchPricesSuccessfully()
+    tableView.reloadData()
+    dataProvider.assetsCache = nil // Clears cache
+    viewModel.tableView(tableView, didSelectRowAt: IndexPath(item: 0, section: 0))
+
+    // Then
+    XCTAssertNil(viewModel.selectedCrypto.value)
+  }
 }
 
 // MARK: - SearchBar Tests

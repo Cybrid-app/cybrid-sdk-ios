@@ -36,7 +36,7 @@ final class PriceListDataProviderMock: AssetsRepoProvider, PricesRepoProvider {
 
   func didFetchAssetsSuccessfully() {
     (authenticator as? MockAuthenticator)?.authenticationSuccess()
-    AssetsAPIMock.didFetchAssetsSuccessfully()
+    assetsCache = AssetsAPIMock.didFetchAssetsSuccessfully().objects
   }
 
   func didFetchAssetsWithError() {

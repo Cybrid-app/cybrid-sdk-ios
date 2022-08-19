@@ -11,7 +11,8 @@ import XCTest
 class CybridConfigTests: XCTestCase {
 
   func testCybrid_configSetup() {
-    XCTAssertEqual(Cybrid.theme.fontTheme, CybridTheme.default.fontTheme)
+    let cybridConfig = CybridConfig()
+    XCTAssertEqual(cybridConfig.theme.fontTheme, CybridTheme.default.fontTheme)
 
     let testTheme = CybridTheme(
       colorTheme: .default,
@@ -21,25 +22,27 @@ class CybridConfigTests: XCTestCase {
                            bodyStrong: .systemFont(ofSize: 16),
                            caption: .systemFont(ofSize: 12))
     )
-    Cybrid.setup(authenticator: MockAuthenticator(), theme: testTheme)
+    cybridConfig.setup(authenticator: MockAuthenticator(), theme: testTheme)
 
-    XCTAssertEqual(Cybrid.theme.fontTheme, testTheme.fontTheme)
+    XCTAssertEqual(cybridConfig.theme.fontTheme, testTheme.fontTheme)
   }
 
   func testCybrid_configSetup_withoutPassingTheme() {
-    Cybrid.setup(authenticator: MockAuthenticator())
+    let cybridConfig = CybridConfig()
+    cybridConfig.setup(authenticator: MockAuthenticator())
 
-    XCTAssertEqual(Cybrid.theme.colorTheme, CybridTheme.default.colorTheme)
-    XCTAssertEqual(Cybrid.theme.fontTheme, CybridTheme.default.fontTheme)
+    XCTAssertEqual(cybridConfig.theme.colorTheme, CybridTheme.default.colorTheme)
+    XCTAssertEqual(cybridConfig.theme.fontTheme, CybridTheme.default.fontTheme)
   }
 
   func testCybrid_supportsLanguage() {
     // Given
-    let supportsFrench = Cybrid.supportsLanguage("fr")
-    let supportsEnglish = Cybrid.supportsLanguage("en")
-    let supportsSpanish = Cybrid.supportsLanguage("es")
-    let supportsJapanese = Cybrid.supportsLanguage("jp")
-    let supportsNilLanguage = Cybrid.supportsLanguage(nil)
+    let cybridConfig = CybridConfig()
+    let supportsFrench = cybridConfig.supportsLanguage("fr")
+    let supportsEnglish = cybridConfig.supportsLanguage("en")
+    let supportsSpanish = cybridConfig.supportsLanguage("es")
+    let supportsJapanese = cybridConfig.supportsLanguage("jp")
+    let supportsNilLanguage = cybridConfig.supportsLanguage(nil)
 
     // Then
     XCTAssertTrue(supportsEnglish)
@@ -51,6 +54,7 @@ class CybridConfigTests: XCTestCase {
 
   func testCybrid_supportsLocale() {
     // Given
+    let cybridConfig = CybridConfig()
     let frenchCanadian = Locale(identifier: "fr_CA")
     let frenchFrench = Locale(identifier: "fr_FR")
     let englishUS = Locale(identifier: "en_US")
@@ -59,22 +63,23 @@ class CybridConfigTests: XCTestCase {
     let spanishPeru = Locale(identifier: "es_PE")
 
     // Then
-    XCTAssertTrue(Cybrid.supportsLocale(frenchCanadian))
-    XCTAssertTrue(Cybrid.supportsLocale(frenchFrench))
-    XCTAssertTrue(Cybrid.supportsLocale(englishUS))
-    XCTAssertTrue(Cybrid.supportsLocale(englishUK))
-    XCTAssertFalse(Cybrid.supportsLocale(spanishSpain))
-    XCTAssertFalse(Cybrid.supportsLocale(spanishPeru))
+    XCTAssertTrue(cybridConfig.supportsLocale(frenchCanadian))
+    XCTAssertTrue(cybridConfig.supportsLocale(frenchFrench))
+    XCTAssertTrue(cybridConfig.supportsLocale(englishUS))
+    XCTAssertTrue(cybridConfig.supportsLocale(englishUK))
+    XCTAssertFalse(cybridConfig.supportsLocale(spanishSpain))
+    XCTAssertFalse(cybridConfig.supportsLocale(spanishPeru))
   }
 
   func testCybrid_getPreferredLocale_Default() {
     // Given
-    Cybrid.setup(authenticator: MockAuthenticator(), locale: nil, theme: Cybrid.theme)
+    let cybridConfig = CybridConfig()
+    cybridConfig.setup(authenticator: MockAuthenticator(), locale: nil, theme: cybridConfig.theme)
     /// Default locale in local Simulator is `en-US`, while in CI it's `en`
     let possiblePreferredLocales = ["en", "en-US", "en-CA"]
 
     // When
-    let preferredLocale = Cybrid.getPreferredLocale()
+    let preferredLocale = cybridConfig.getPreferredLocale()
 
     // Then
     XCTAssertTrue(possiblePreferredLocales.contains(preferredLocale.identifier))
@@ -82,11 +87,12 @@ class CybridConfigTests: XCTestCase {
 
   func testCybrid_getPreferredLocale_withoutCustomLocale() {
     // Given
-    Cybrid.setup(authenticator: MockAuthenticator(), locale: nil, theme: Cybrid.theme)
+    let cybridConfig = CybridConfig()
+    cybridConfig.setup(authenticator: MockAuthenticator(), locale: nil)
     let preferredLanguages = ["en-US", "fr-CA"]
 
     // When
-    let preferredLocale = Cybrid.getPreferredLocale(with: preferredLanguages)
+    let preferredLocale = cybridConfig.getPreferredLocale(with: preferredLanguages)
 
     // Then
     XCTAssertEqual(preferredLocale.identifier, "en-US")
@@ -94,11 +100,12 @@ class CybridConfigTests: XCTestCase {
 
   func testCybrid_getPreferredLocale_withCustomLocale_Supported() {
     // Given
-    Cybrid.setup(authenticator: MockAuthenticator(), locale: Locale(identifier: "fr-CA"), theme: Cybrid.theme)
+    let cybridConfig = CybridConfig()
+    cybridConfig.setup(authenticator: MockAuthenticator(), locale: Locale(identifier: "fr-CA"))
     let preferredLanguages = ["en-US", "fr-CA"]
 
     // When
-    let preferredLocale = Cybrid.getPreferredLocale(with: preferredLanguages)
+    let preferredLocale = cybridConfig.getPreferredLocale(with: preferredLanguages)
 
     // Then
     XCTAssertEqual(preferredLocale.identifier, "fr-CA")
@@ -106,11 +113,12 @@ class CybridConfigTests: XCTestCase {
 
   func testCybrid_getPreferredLocale_withCustomLocale_Unsupported() {
     // Given
-    Cybrid.setup(authenticator: MockAuthenticator(), locale: Locale(identifier: "es-PE"), theme: Cybrid.theme)
+    let cybridConfig = CybridConfig()
+    cybridConfig.setup(authenticator: MockAuthenticator(), locale: Locale(identifier: "es-PE"))
     let preferredLanguages = ["en-US", "fr-CA"]
 
     // When
-    let preferredLocale = Cybrid.getPreferredLocale(with: preferredLanguages)
+    let preferredLocale = cybridConfig.getPreferredLocale(with: preferredLanguages)
 
     // Then
     XCTAssertEqual(preferredLocale.identifier, "en-US")
@@ -118,27 +126,44 @@ class CybridConfigTests: XCTestCase {
 
   func testCybrid_getPreferredLocale_withNoPreferredLanguages() {
     // Given
-    Cybrid.setup(authenticator: MockAuthenticator(), locale: nil, theme: Cybrid.theme)
+    let cybridConfig = CybridConfig()
+    cybridConfig.setup(authenticator: MockAuthenticator(), locale: nil)
     let preferredLanguages: [String] = []
 
     // When
-    let preferredLocale = Cybrid.getPreferredLocale(with: preferredLanguages)
+    let preferredLocale = cybridConfig.getPreferredLocale(with: preferredLanguages)
 
     // Then
     XCTAssertEqual(preferredLocale.languageCode, "en")
   }
 
-  func testCybrid_startListeners() {
+  func testCybrid_getFiat() {
     // Given
-    let authenticator = MockAuthenticator()
-    Cybrid.setup(authenticator: authenticator, locale: nil, theme: Cybrid.theme)
-    let notificationManager = NotificationCenterMock()
-    Cybrid.session = CybridSession(authenticator: authenticator,
-                                   apiManager: MockAPIManager.self,
-                                   notificationManager: notificationManager)
+    let cybridConfig = CybridConfig()
+    cybridConfig.setup(authenticator: MockAuthenticator(), fiat: .cad, locale: nil)
+
+    // Then
+    XCTAssertEqual(cybridConfig.fiat.defaultAsset.code, "CAD")
 
     // When
-    Cybrid.startListeners()
+    cybridConfig.setup(authenticator: MockAuthenticator(), fiat: .usd, locale: nil)
+
+    // Then
+    XCTAssertEqual(cybridConfig.fiat.defaultAsset.code, "USD")
+  }
+
+  func testCybrid_startListeners() {
+    // Given
+    let cybridConfig = CybridConfig()
+    let authenticator = MockAuthenticator()
+    cybridConfig.setup(authenticator: authenticator, locale: nil)
+    let notificationManager = NotificationCenterMock()
+    cybridConfig.session = CybridSession(authenticator: authenticator,
+                                         apiManager: MockAPIManager.self,
+                                         notificationManager: notificationManager)
+
+    // When
+    cybridConfig.startListeners()
 
     // Then
     XCTAssertEqual(notificationManager.observers.count, 2)
@@ -146,16 +171,17 @@ class CybridConfigTests: XCTestCase {
 
   func testCybrid_stopListeners() {
     // Given
+    let cybridConfig = CybridConfig()
     let authenticator = MockAuthenticator()
-    Cybrid.setup(authenticator: authenticator, locale: nil, theme: Cybrid.theme)
+    cybridConfig.setup(authenticator: authenticator, locale: nil)
     let notificationManager = NotificationCenterMock()
-    Cybrid.session = CybridSession(authenticator: authenticator,
-                                   apiManager: MockAPIManager.self,
-                                   notificationManager: notificationManager)
+    cybridConfig.session = CybridSession(authenticator: authenticator,
+                                         apiManager: MockAPIManager.self,
+                                         notificationManager: notificationManager)
 
     // When
-    Cybrid.startListeners()
-    Cybrid.stopListeners()
+    cybridConfig.startListeners()
+    cybridConfig.stopListeners()
 
     // Then
     XCTAssertTrue(notificationManager.observers.isEmpty)

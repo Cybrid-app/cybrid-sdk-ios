@@ -95,7 +95,7 @@ extension CryptoPriceViewModel: UITableViewDelegate, UITableViewDataSource {
     let selectedModel = filteredCryptoPriceList.value[indexPath.row]
     guard
       let assetList = dataProvider.assetsCache,
-        let selectedAsset = assetList.first(where: { $0.code == selectedModel.assetCode })
+      let selectedAsset = assetList.first(where: { $0.code == selectedModel.assetCode })
     else { return }
     let viewModel = TradeViewModel(selectedCrypto: selectedAsset,
                                    dataProvider: dataProvider,

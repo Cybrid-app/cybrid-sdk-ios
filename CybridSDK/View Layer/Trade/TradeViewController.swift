@@ -132,7 +132,7 @@ public final class TradeViewController: UIViewController {
   private lazy var tradeConfirmationModalView = TradeConfirmationModalView(
     theme: theme,
     localizer: localizer,
-    dataModel: QuoteDataModel(
+    dataModel: .init(
       fiatAmount: viewModel.amountText.value ?? "",
       fiatCode: viewModel.fiatCurrency.asset.code,
       cryptoAmount: viewModel.displayAmount.value ?? "",
@@ -148,11 +148,11 @@ public final class TradeViewController: UIViewController {
 
   private lazy var modalViewController = CybridModalViewController(theme: theme, tradeConfirmationModalView)
 
-  public init() {
+  public init(selectedCrypto: AssetBankModel) {
     self.theme = Cybrid.theme
     self.localizer = CybridLocalizer()
     self.logger = Cybrid.logger
-    self.viewModel = TradeViewModel(selectedCrypto: nil,
+    self.viewModel = TradeViewModel(selectedCrypto: selectedCrypto,
                                     dataProvider: CybridSession.current,
                                     logger: logger)
 
@@ -183,9 +183,7 @@ public final class TradeViewController: UIViewController {
 
   @objc
   private func didTapActionButton() {
-    modalViewController.replaceContent(tradeConfirmationModalView)
-    updateConfirmationModalData()
-    modalViewController.present()
+    viewModel.createQuote()
   }
 
   private func dismissModal() {
@@ -193,32 +191,35 @@ public final class TradeViewController: UIViewController {
   }
 
   private func confirmOperation() {
-    viewModel.confirmOperation()
-    // TODO: replace this with data bindings
     modalViewController.replaceContent(
       LoadingModalView(
         message: localizer.localize(with: CybridLocalizationKey.trade(.loadingModal(.processingMessage)))
       )
     )
-    DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [weak self] in
-      guard let self = self else { return }
-      let successModal = TradeSuccessModalView(
-        theme: self.theme,
-        localizer: self.localizer,
-        dataModel: QuoteDataModel(
-          fiatAmount: self.viewModel.amountText.value ?? "",
-          fiatCode: self.viewModel.fiatCurrency.asset.code,
-          cryptoAmount: self.viewModel.displayAmount.value ?? "",
-          cryptoCode: self.viewModel.cryptoCurrency.value?.asset.code ?? "",
-          transactionFee: "$2.59",
-          quoteType: self.viewModel.segmentSelection.value == .buy ? .buy : .sell),
-        onBuyMoreTap: { [weak self] in
-          self?.dismissModal()
-        }
-      )
+    viewModel.confirmOperation()
+  }
 
-      self.modalViewController.replaceContent(successModal)
+  private func showConfirmationModal(data: TradeConfirmationModalView.DataModel) {
+    tradeConfirmationModalView.updateData(data)
+    if !(modalViewController.contentView === tradeConfirmationModalView) {
+      modalViewController.replaceContent(tradeConfirmationModalView)
     }
+    if !modalViewController.isBeingPresented {
+      modalViewController.present()
+    }
+  }
+
+  private func showSuccessModal(data: TradeSuccessModalView.DataModel) {
+    let successModal = TradeSuccessModalView(
+      theme: theme,
+      localizer: localizer,
+      dataModel: data,
+      onBuyMoreTap: { [weak self] in
+        self?.dismissModal()
+      }
+    )
+
+    modalViewController.replaceContent(successModal)
   }
 }
 
@@ -299,7 +300,6 @@ extension TradeViewController {
   func bindViewModel() {
     viewModel.amountText.bind { [weak self] newAmountText in
       self?.amountTextField.text = newAmountText
-      self?.updateConfirmationModalData()
     }
     viewModel.cryptoCurrency.bind { [weak self] newCurrencySelection in
       self?.cryptoPickerTextField.resignFirstResponder()
@@ -316,7 +316,6 @@ extension TradeViewController {
     }
     viewModel.displayAmount.bind { [weak self] newAmount in
       self?.cryptoExchangePriceLabel.text = newAmount ?? ""
-      self?.updateConfirmationModalData()
     }
     viewModel.shouldInputCrypto.bind { [weak self] shouldInputCrypto in
       self?.updateIcons(shouldInputCrypto: shouldInputCrypto)
@@ -327,13 +326,23 @@ extension TradeViewController {
     viewModel.segmentSelection.bind { [weak self]  selectedSegment in
       self?.updateButton(selectedSegment: selectedSegment)
     }
+    viewModel.generatedQuoteModel.bind { [weak self] newData in
+      if let data = newData {
+        self?.showConfirmationModal(data: data)
+        self?.viewModel.generatedQuoteModel.value = nil
+      }
+    }
+    viewModel.tradeSuccessModel.bind { [weak self] newData in
+      if let data = newData {
+        self?.showSuccessModal(data: data)
+        self?.viewModel.tradeSuccessModel.value = nil
+      }
+    }
     viewModel.fetchPriceList()
   }
 
   func updateConfirmationModalData() {
-    tradeConfirmationModalView.updatePrices(cryptoAmount: viewModel.displayAmount.value ?? "",
-                                            fiatAmount: viewModel.amountText.value ?? "",
-                                            quoteType: viewModel.segmentSelection.value == .buy ? .buy : .sell)
+    viewModel.createQuote()
   }
 
   private func updateIcons(shouldInputCrypto: Bool) {

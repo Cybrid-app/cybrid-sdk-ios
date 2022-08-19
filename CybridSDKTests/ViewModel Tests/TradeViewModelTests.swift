@@ -25,18 +25,47 @@ class TradeViewModelTests: XCTestCase {
 
   func testViewModel_initialization_withMissingCrypto() {
     // Given
-    let viewModel = createViewModel()
+    let viewModel = createViewModel(selectedCrypto: .dogecoin)
 
     // When
-    viewModel.cryptoCurrency.value = .init(asset: .dogecoin)
+    viewModel.fetchPriceList()
+    dataProvider.didFetchAssetsSuccessfully()
+    dataProvider.didFetchPricesSuccessfully()
 
     // Then
-    XCTAssertTrue(viewModel.assetList.value.isEmpty)
+    XCTAssertNil(viewModel.selectedPriceRate)
+  }
+
+  func testViewModel_initialization_withMalformedCryptoData() {
+    // Given
+    let viewModel = createViewModel(selectedCrypto: .dogecoin)
+
+    // When
+    viewModel.fetchPriceList()
+    dataProvider.didFetchAssetsSuccessfully()
+    dataProvider.didFetchPricesSuccessfully([.priceWithoutSymbol])
+
+    // Then
     XCTAssertNil(viewModel.selectedPriceRate)
   }
 
   func testFetchData_successfully() {
     // Given
+    let viewModel = createViewModel()
+
+    // When
+    viewModel.fetchPriceList()
+    dataProvider.didFetchAssetsSuccessfully()
+    dataProvider.didFetchPricesSuccessfully()
+
+    // Then
+    XCTAssertFalse(viewModel.assetList.value.isEmpty)
+    XCTAssertNotNil(viewModel.selectedPriceRate)
+  }
+
+  func testFetchData_successfully_withCachedAssets() {
+    // Given
+    dataProvider.didFetchAssetsSuccessfully()
     let viewModel = createViewModel()
 
     // When
@@ -305,10 +334,76 @@ class TradeViewModelTests: XCTestCase {
     viewModel.cryptoCurrency.value = nil
     XCTAssertEqual(viewModel.formatAndConvert("2019891"), "0.00")
   }
+
+  func testViewModel_createQuote() {
+    // Given
+    let viewModel = createViewModel()
+    viewModel.fetchPriceList()
+    dataProvider.didFetchAssetsSuccessfully()
+    dataProvider.didFetchPricesSuccessfully()
+
+    // When
+    viewModel.createQuote()
+
+    // Then
+    XCTAssertNotNil(viewModel.generatedQuoteModel.value)
+    XCTAssertEqual(viewModel.generatedQuoteModel.value?.quoteType, .buy)
+  }
+
+  func testViewModel_createQuote_alternative() {
+    // Given
+    let viewModel = createViewModel()
+    viewModel.fetchPriceList()
+    dataProvider.didFetchAssetsSuccessfully()
+    dataProvider.didFetchPricesSuccessfully()
+    viewModel.cryptoCurrency.value = nil
+    viewModel.segmentSelection.value = .sell
+
+    // When
+    viewModel.createQuote()
+
+    // Then
+    XCTAssertNotNil(viewModel.generatedQuoteModel.value)
+    XCTAssertEqual(viewModel.generatedQuoteModel.value?.cryptoCode, "")
+    XCTAssertEqual(viewModel.generatedQuoteModel.value?.quoteType, .sell)
+  }
+
+  func testViewModel_confirmOperation() {
+    // Given
+    let viewModel = createViewModel()
+    viewModel.fetchPriceList()
+    dataProvider.didFetchAssetsSuccessfully()
+    dataProvider.didFetchPricesSuccessfully()
+    viewModel.cryptoCurrency.value = nil
+    viewModel.segmentSelection.value = .sell
+
+    // When
+    viewModel.confirmOperation()
+
+    // Then
+    XCTAssertNotNil(viewModel.tradeSuccessModel.value)
+    XCTAssertEqual(viewModel.tradeSuccessModel.value?.cryptoCode, "")
+    XCTAssertEqual(viewModel.tradeSuccessModel.value?.quoteType, .sell)
+  }
+
+  func testViewModel_confirmOperation_alternative() {
+    // Given
+    let viewModel = createViewModel()
+    viewModel.fetchPriceList()
+    dataProvider.didFetchAssetsSuccessfully()
+    dataProvider.didFetchPricesSuccessfully()
+
+    // When
+    viewModel.confirmOperation()
+
+    // Then
+    XCTAssertNotNil(viewModel.tradeSuccessModel.value)
+  }
 }
 
 extension TradeViewModelTests {
-  func createViewModel(selectedCrypto: AssetBankModel = .bitcoin, dataProvider: (AssetsRepoProvider & PricesRepoProvider)? = nil) -> TradeViewModel {
+  func createViewModel(selectedCrypto: AssetBankModel = .bitcoin,
+                       dataProvider: (AssetsRepoProvider & PricesRepoProvider)? = nil) -> TradeViewModel {
     return TradeViewModel(selectedCrypto: selectedCrypto,
                           dataProvider: dataProvider ?? self.dataProvider,
                           logger: nil)

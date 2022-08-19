@@ -9,7 +9,7 @@ import CybridApiBankSwift
 import UIKit
 
 final class TradeConfirmationModalView: UIView {
-  private var dataModel: QuoteDataModel
+  private var dataModel: DataModel
   private let localizer: Localizer
   private let theme: Theme
   private var onCancel: (() -> Void)?
@@ -90,7 +90,7 @@ final class TradeConfirmationModalView: UIView {
     return button
   }()
 
-  init(theme: Theme, localizer: Localizer, dataModel: QuoteDataModel, onCancel: (() -> Void)?, onConfirm: (() -> Void)?) {
+  init(theme: Theme, localizer: Localizer, dataModel: DataModel, onCancel: (() -> Void)?, onConfirm: (() -> Void)?) {
     self.dataModel = dataModel
     self.localizer = localizer
     self.theme = theme
@@ -139,28 +139,21 @@ final class TradeConfirmationModalView: UIView {
     onConfirm?()
   }
 
-  func updatePrices(cryptoAmount: String, fiatAmount: String, quoteType: QuoteDataModel.QuoteType) {
-    var newDataModel = dataModel
-    newDataModel.cryptoAmount = cryptoAmount
-    newDataModel.fiatAmount = fiatAmount
-    newDataModel.quoteType = quoteType
-    self.dataModel = newDataModel
+  func updateData(_ dataModel: DataModel) {
+    self.dataModel = dataModel
     setupAmountLabels()
   }
 }
 
-struct QuoteDataModel {
-  enum QuoteType {
-    case buy
-    case sell
+extension TradeConfirmationModalView {
+  struct DataModel {
+    let fiatAmount: String
+    let fiatCode: String
+    let cryptoAmount: String
+    let cryptoCode: String
+    let transactionFee: String
+    let quoteType: TradeSegment
   }
-
-  var fiatAmount: String
-  let fiatCode: String
-  var cryptoAmount: String
-  let cryptoCode: String
-  let transactionFee: String
-  var quoteType: QuoteType
 }
 
 // MARK: - Constants

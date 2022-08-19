@@ -9,7 +9,7 @@ import CybridApiBankSwift
 import UIKit
 
 final class TradeSuccessModalView: UIView {
-  private var dataModel: QuoteDataModel
+  private var dataModel: DataModel
   private let localizer: Localizer
   private let theme: Theme
   private var onBuyMoreTap: (() -> Void)?
@@ -59,16 +59,16 @@ final class TradeSuccessModalView: UIView {
     label.text = localizer.localize(with: CybridLocalizationKey.trade(.successModal(.transactionId)))
   }
 
-  private lazy var transactionIDLabel: UILabel = .makeLabel(.bodyStrong) { label in
-    label.text = "#980019" // FIXME: Replace this mocked data
+  private lazy var transactionIDLabel: UILabel = .makeLabel(.bodyStrong) { [dataModel] label in
+    label.text = dataModel.transactionFee
   }
 
   private lazy var dateTitleLabel: UILabel = .makeLabel(.bodyStrong) { [localizer] label in
     label.text = localizer.localize(with: CybridLocalizationKey.trade(.successModal(.date)))
   }
 
-  private lazy var dateLabel: UILabel = .makeLabel(.bodyStrong) { label in
-    label.text = "August 16, 2022" // FIXME: Replace this mocked data
+  private lazy var dateLabel: UILabel = .makeLabel(.bodyStrong) { [dataModel] label in
+    label.text = dataModel.date
   }
 
   private lazy var fiatAmountTitleLabel: UILabel = .makeLabel(.bodyStrong) { [localizer] label in
@@ -106,7 +106,7 @@ final class TradeSuccessModalView: UIView {
     return button
   }()
 
-  init(theme: Theme = Cybrid.theme, localizer: Localizer, dataModel: QuoteDataModel, onBuyMoreTap: (() -> Void)?) {
+  init(theme: Theme = Cybrid.theme, localizer: Localizer, dataModel: DataModel, onBuyMoreTap: (() -> Void)?) {
     self.dataModel = dataModel
     self.localizer = localizer
     self.theme = theme
@@ -154,14 +154,6 @@ final class TradeSuccessModalView: UIView {
   func didTapBuyMoreButton() {
     onBuyMoreTap?()
   }
-
-  func updatePrices(cryptoAmount: String, fiatAmount: String) {
-    var newDataModel = dataModel
-    newDataModel.cryptoAmount = cryptoAmount
-    newDataModel.fiatAmount = fiatAmount
-    self.dataModel = newDataModel
-    setupAmountLabels()
-  }
 }
 
 // MARK: - Constants
@@ -180,5 +172,18 @@ extension TradeSuccessModalView {
     static let cryptoAmountSpacing: CGFloat = UIConstants.spacingXl4
     static let feeAmountTitleSpacing: CGFloat = UIConstants.spacingXs
     static let feeAmountSpacing: CGFloat = UIConstants.spacingXl4
+  }
+}
+
+extension TradeSuccessModalView {
+  struct DataModel {
+    let transactionId: String
+    let date: String
+    let fiatAmount: String
+    let fiatCode: String
+    let cryptoAmount: String
+    let cryptoCode: String
+    let transactionFee: String
+    let quoteType: TradeSegment
   }
 }
