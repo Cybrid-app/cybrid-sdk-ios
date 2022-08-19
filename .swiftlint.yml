@@ -84,7 +84,6 @@ opt_in_rules: # These rules are disabled by default, unless explicitly added bel
   - shorthand_operator
   - single_test_class
   - sorted_first_last
-  - sorted_imports
   - statement_position
   - static_operator
   - superfluous_disable_command
@@ -255,8 +254,6 @@ shorthand_operator:
 single_test_class:
   severity: error
 sorted_first_last:
-  severity: error
-sorted_imports:
   severity: error
 statement_position:
   severity: error
