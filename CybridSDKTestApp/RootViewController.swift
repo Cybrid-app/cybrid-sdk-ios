@@ -23,4 +23,9 @@ class RootViewController: UIViewController {
     let viewController = TradeViewController()
     navigationController?.pushViewController(viewController, animated: true)
   }
+  
+  @IBAction func didTapAccountsButton(_ sender: Any) {
+    let viewController = AccountsViewController()
+    navigationController?.pushViewController(viewController, animated: true)
+  }
 }
