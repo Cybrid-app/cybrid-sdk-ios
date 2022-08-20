@@ -25,6 +25,7 @@ final class TradeConfirmationModalView: UIView {
       cryptoAmountLabel,
       feeAmountTitleLabel,
       feeAmountLabel,
+      divider,
       buttonStackView
     ])
     stackView.axis = .vertical
@@ -36,6 +37,7 @@ final class TradeConfirmationModalView: UIView {
     stackView.setCustomSpacing(Constants.cryptoAmountSpacing, after: cryptoAmountLabel)
     stackView.setCustomSpacing(Constants.feeAmountTitleSpacing, after: feeAmountTitleLabel)
     stackView.setCustomSpacing(Constants.feeAmountSpacing, after: feeAmountLabel)
+    stackView.setCustomSpacing(Constants.dividerSpacing, after: divider)
     return stackView
   }()
 
@@ -66,6 +68,13 @@ final class TradeConfirmationModalView: UIView {
 
   private lazy var feeAmountLabel: UILabel = .makeLabel(.body)
 
+  private lazy var divider: UIView = {
+    let underline = UIView()
+    underline.backgroundColor = theme.colorTheme.separatorColor
+    underline.translatesAutoresizingMaskIntoConstraints = false
+    return underline
+  }()
+
   private lazy var buttonStackView: UIStackView = {
     let stackView = UIStackView(arrangedSubviews: [cancelButton, confirmButton])
     stackView.axis = .horizontal
@@ -75,16 +84,23 @@ final class TradeConfirmationModalView: UIView {
   }()
 
   private lazy var confirmButton: CYBButton = {
-    let button = CYBButton(theme: theme)
-    button.setTitle(localizer.localize(with: CybridLocalizationKey.trade(.confirmationModal(.confirm))), for: .normal)
-    button.addTarget(self, action: #selector(didTapConfirmButton), for: .touchUpInside)
+    let button = CYBButton(
+      title: localizer.localize(with: CybridLocalizationKey.trade(.confirmationModal(.confirm))),
+      theme: theme
+    ) { [weak self] in
+      self?.didTapConfirmButton()
+    }
     return button
   }()
 
   private lazy var cancelButton: CYBButton = {
-    let button = CYBButton(style: .secondary, theme: theme)
-    button.setTitle(localizer.localize(with: CybridLocalizationKey.trade(.confirmationModal(.cancel))), for: .normal)
-    button.addTarget(self, action: #selector(didTapCancelButton), for: .touchUpInside)
+    let button = CYBButton(
+      title: localizer.localize(with: CybridLocalizationKey.trade(.confirmationModal(.cancel))),
+      style: .secondary,
+      theme: theme
+    ) { [weak self] in
+      self?.didTapCancelButton()
+    }
     return button
   }()
 
@@ -112,6 +128,15 @@ final class TradeConfirmationModalView: UIView {
 
     contentStackView.constraintEdges(to: self)
     setupAmountLabels()
+    divider.constraint(attribute: .width,
+                       relatedBy: .equal,
+                       toItem: contentStackView,
+                       attribute: .width)
+    divider.constraint(attribute: .height,
+                       relatedBy: .equal,
+                       toItem: nil,
+                       attribute: .notAnAttribute,
+                       constant: Constants.borderWidth)
   }
 
   func setupAmountLabels() {
@@ -127,12 +152,10 @@ final class TradeConfirmationModalView: UIView {
       : localizer.localize(with: CybridLocalizationKey.trade(.confirmationModal(.sellQuantity)))
   }
 
-  @objc
   func didTapCancelButton() {
     onCancel?()
   }
 
-  @objc
   func didTapConfirmButton() {
     onConfirm?()
   }
@@ -161,10 +184,12 @@ extension TradeConfirmationModalView {
     static let titleSpacing: CGFloat = UIConstants.spacingXl2
     static let subtitleSpacing: CGFloat = UIConstants.spacingXl3
     static let fiatAmountTitleSpacing: CGFloat = UIConstants.spacingXs
-    static let fiatAmountSpacing: CGFloat = UIConstants.spacingXl4
+    static let fiatAmountSpacing: CGFloat = UIConstants.spacingXl3
     static let cryptoAmountTitleSpacing: CGFloat = UIConstants.spacingXs
-    static let cryptoAmountSpacing: CGFloat = UIConstants.spacingXl4
+    static let cryptoAmountSpacing: CGFloat = UIConstants.spacingXl3
     static let feeAmountTitleSpacing: CGFloat = UIConstants.spacingXs
-    static let feeAmountSpacing: CGFloat = UIConstants.spacingXl4
+    static let feeAmountSpacing: CGFloat = UIConstants.spacingXl3
+    static let dividerSpacing: CGFloat = UIConstants.spacingXl3
+    static let borderWidth: CGFloat = 1.0
   }
 }

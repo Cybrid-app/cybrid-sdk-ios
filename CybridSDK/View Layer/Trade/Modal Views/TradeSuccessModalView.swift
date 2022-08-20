@@ -28,7 +28,8 @@ final class TradeSuccessModalView: UIView {
       cryptoAmountLabel,
       feeAmountTitleLabel,
       feeAmountLabel,
-      buttonStackView
+      divider,
+      moreButton
     ])
     stackView.axis = .vertical
     stackView.setCustomSpacing(Constants.titleSpacing, after: titleLabel)
@@ -43,6 +44,7 @@ final class TradeSuccessModalView: UIView {
     stackView.setCustomSpacing(Constants.cryptoAmountSpacing, after: cryptoAmountLabel)
     stackView.setCustomSpacing(Constants.feeAmountTitleSpacing, after: feeAmountTitleLabel)
     stackView.setCustomSpacing(Constants.feeAmountSpacing, after: feeAmountLabel)
+    stackView.setCustomSpacing(Constants.dividerSpacing, after: divider)
     return stackView
   }()
 
@@ -89,20 +91,21 @@ final class TradeSuccessModalView: UIView {
 
   private lazy var feeAmountLabel: UILabel = .makeLabel(.body)
 
-  private lazy var buttonStackView: UIStackView = {
-    let spacerView = UIView()
-    spacerView.setContentHuggingPriority(.fittingSizeLevel, for: .horizontal)
-    let stackView = UIStackView(arrangedSubviews: [spacerView, moreButton])
-    stackView.axis = .horizontal
-    stackView.alignment = .trailing
-    stackView.distribution = .fill
-    return stackView
+  private lazy var divider: UIView = {
+    let underline = UIView()
+    underline.backgroundColor = theme.colorTheme.separatorColor
+    underline.translatesAutoresizingMaskIntoConstraints = false
+    return underline
   }()
 
   private lazy var moreButton: CYBButton = {
-    let button = CYBButton(style: .secondary, theme: theme)
-    button.setTitle(localizer.localize(with: CybridLocalizationKey.trade(.successModal(.buyMore))), for: .normal)
-    button.addTarget(self, action: #selector(didTapBuyMoreButton), for: .touchUpInside)
+    let button = CYBButton(
+      title: localizer.localize(with: CybridLocalizationKey.trade(.successModal(.buyMore))),
+      style: .secondary,
+      theme: theme
+    ) { [weak self] in
+      self?.didTapBuyMoreButton()
+    }
     return button
   }()
 
@@ -129,6 +132,15 @@ final class TradeSuccessModalView: UIView {
 
     contentStackView.constraintEdges(to: self)
     setupAmountLabels()
+    divider.constraint(attribute: .width,
+                       relatedBy: .equal,
+                       toItem: contentStackView,
+                       attribute: .width)
+    divider.constraint(attribute: .height,
+                       relatedBy: .equal,
+                       toItem: nil,
+                       attribute: .notAnAttribute,
+                       constant: Constants.borderWidth)
   }
 
   func setupAmountLabels() {
@@ -150,7 +162,6 @@ final class TradeSuccessModalView: UIView {
     )
   }
 
-  @objc
   func didTapBuyMoreButton() {
     onBuyMoreTap?()
   }
@@ -163,15 +174,17 @@ extension TradeSuccessModalView {
     static let titleSpacing: CGFloat = UIConstants.spacingXl2
     static let subtitleSpacing: CGFloat = UIConstants.spacingXl3
     static let transactionTitleSpacing: CGFloat = UIConstants.spacingXs
-    static let transactionIDSpacing: CGFloat = UIConstants.spacingXl4
+    static let transactionIDSpacing: CGFloat = UIConstants.spacingXl3
     static let dateTitleSpacing: CGFloat = UIConstants.spacingXs
-    static let dateSpacing: CGFloat = UIConstants.spacingXl4
+    static let dateSpacing: CGFloat = UIConstants.spacingXl3
     static let fiatAmountTitleSpacing: CGFloat = UIConstants.spacingXs
-    static let fiatAmountSpacing: CGFloat = UIConstants.spacingXl4
+    static let fiatAmountSpacing: CGFloat = UIConstants.spacingXl3
     static let cryptoAmountTitleSpacing: CGFloat = UIConstants.spacingXs
-    static let cryptoAmountSpacing: CGFloat = UIConstants.spacingXl4
+    static let cryptoAmountSpacing: CGFloat = UIConstants.spacingXl3
     static let feeAmountTitleSpacing: CGFloat = UIConstants.spacingXs
-    static let feeAmountSpacing: CGFloat = UIConstants.spacingXl4
+    static let feeAmountSpacing: CGFloat = UIConstants.spacingXl3
+    static let dividerSpacing: CGFloat = UIConstants.spacingXl3
+    static let borderWidth: CGFloat = 1.0
   }
 }
 

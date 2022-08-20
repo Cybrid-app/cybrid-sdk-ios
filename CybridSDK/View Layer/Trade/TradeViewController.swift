@@ -119,10 +119,14 @@ public final class TradeViewController: UIViewController {
   }()
 
   private lazy var primaryButton: CYBButton = {
-    let button = CYBButton(theme: theme)
-    button.setTitle(localizer.localize(with: CybridLocalizationKey.trade(.buy(.cta))), for: .normal)
-    button.isEnabled = false
-    button.addTarget(self, action: #selector(didTapActionButton), for: .touchUpInside)
+    let button = CYBButton(
+      title: localizer.localize(with: CybridLocalizationKey.trade(.buy(.cta))),
+      style: .primary,
+      theme: theme
+    ) { [weak self] in
+      self?.didTapActionButton()
+    }
+    button.customState = .disabled
 
     return button
   }()
@@ -181,8 +185,8 @@ public final class TradeViewController: UIViewController {
     bindViewModel()
   }
 
-  @objc
   private func didTapActionButton() {
+    primaryButton.customState = .processing
     viewModel.createQuote()
   }
 
@@ -321,21 +325,27 @@ extension TradeViewController {
       self?.updateIcons(shouldInputCrypto: shouldInputCrypto)
     }
     viewModel.ctaButtonEnabled.bind { [weak self] isButtonEnabled in
-      self?.primaryButton.isEnabled = isButtonEnabled
+      self?.primaryButton.customState = isButtonEnabled ? .normal : .disabled
     }
     viewModel.segmentSelection.bind { [weak self]  selectedSegment in
       self?.updateButton(selectedSegment: selectedSegment)
     }
-    viewModel.generatedQuoteModel.bind { [weak self] newData in
-      if let data = newData {
-        self?.showConfirmationModal(data: data)
-        self?.viewModel.generatedQuoteModel.value = nil
+    viewModel.generatedQuoteModel.bind { newData in
+      DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [weak self] in
+        guard let self = self else { return }
+        if let data = newData {
+          self.showConfirmationModal(data: data)
+          self.viewModel.generatedQuoteModel.value = nil
+        }
+        self.primaryButton.customState = .normal
       }
     }
     viewModel.tradeSuccessModel.bind { [weak self] newData in
-      if let data = newData {
-        self?.showSuccessModal(data: data)
-        self?.viewModel.tradeSuccessModel.value = nil
+      DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [weak self] in
+        if let data = newData {
+          self?.showSuccessModal(data: data)
+          self?.viewModel.tradeSuccessModel.value = nil
+        }
       }
     }
     viewModel.fetchPriceList()
