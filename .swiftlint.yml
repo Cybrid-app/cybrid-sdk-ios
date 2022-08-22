@@ -36,7 +36,6 @@ opt_in_rules: # These rules are disabled by default, unless explicitly added bel
   - fatal_error_message
   - first_where
   - for_where
-  - force_cast
   - force_try
   - generic_type_name
   - identical_operands
@@ -86,7 +85,6 @@ opt_in_rules: # These rules are disabled by default, unless explicitly added bel
   - sorted_first_last
   - statement_position
   - static_operator
-  - superfluous_disable_command
   - switch_case_alignment
   - switch_case_on_newline
   - syntactic_sugar
@@ -166,8 +164,6 @@ fatal_error_message:
 first_where:
   severity: error
 for_where:
-  severity: error
-force_cast:
   severity: error
 force_try:
   severity: error
@@ -258,8 +254,6 @@ sorted_first_last:
 statement_position:
   severity: error
 static_operator:
-  severity: error
-superfluous_disable_command:
   severity: error
 switch_case_alignment:
   severity: error

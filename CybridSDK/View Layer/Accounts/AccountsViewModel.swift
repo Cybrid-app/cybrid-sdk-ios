@@ -67,7 +67,7 @@ class AccountsViewModel: NSObject {
     internal func getPricesList() {
 
         dataProvider.fetchPriceList(liveUpdateEnabled: true) { [weak self] pricesResult in
-
+            print(pricesResult)
             switch pricesResult {
             case .success(let pricesList):
                 self?.logger?.log(.component(.accounts(.pricesDataFetching)))
