@@ -43,6 +43,7 @@ extension CybridSession: AssetsRepoProvider {}
 extension AssetsAPI: AssetsRepository {
   static func fetchAssets(_ completion: @escaping FetchAssetsCompletion) {
     listAssets { result in
+        print(result)
       switch result {
       case .failure(let error):
         completion(.failure(error))

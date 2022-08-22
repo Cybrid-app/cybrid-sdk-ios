@@ -36,6 +36,7 @@ class CryptoPriceViewModel: NSObject {
       case .success(let assetsList):
         self?.logger?.log(.component(.priceList(.dataFetching)))
         self?.dataProvider.fetchPriceList(liveUpdateEnabled: liveUpdateEnabled) { pricesResult in
+          print(pricesResult)
           switch pricesResult {
           case .success(let pricesList):
             self?.logger?.log(.component(.priceList(.dataRefreshed)))

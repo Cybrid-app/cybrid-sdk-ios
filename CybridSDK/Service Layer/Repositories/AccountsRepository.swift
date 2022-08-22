@@ -30,6 +30,6 @@ extension CybridSession: AccountsRepoProvider {}
 
 extension AccountsAPI: AccountsRepository {
     static func fetchAccounts(_ completion: @escaping FetchAccountsCompletion) {
-        listAccounts(customerGuid: "", completion: completion)
+        listAccounts(customerGuid: "bf10305829337d106b82c521bb6c8fd2", completion: completion)
     }
 }

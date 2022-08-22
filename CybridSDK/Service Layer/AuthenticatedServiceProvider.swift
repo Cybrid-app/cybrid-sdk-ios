@@ -54,6 +54,7 @@ extension AuthenticatedServiceProvider {
   func authenticatedRequest<T: Any>(_ request: @escaping (_ completion: @escaping (Result<T, ErrorResponse>) -> Void) -> Void,
                                     completion: @escaping (Result<T, ErrorResponse>) -> Void) {
     authenticate { authResult in
+        print(authResult)
       switch authResult {
       case .success:
         request { requestResult in

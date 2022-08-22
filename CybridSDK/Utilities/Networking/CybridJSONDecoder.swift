@@ -12,12 +12,13 @@ import Foundation
 
 final class CybridJSONDecoder: JSONDecoder {
   override func decode<T>(_ type: T.Type, from data: Data) throws -> T where T: Decodable {
-    // Decode SymbolPriceBankModel
     switch type {
     case is Array<SymbolPriceBankModel>.Type:
-      // Force cast is valid here, since we are already falling into the case where T equals Array<SymbolPriceBankModel>
       // swiftlint:disable:next force_cast
       return try decodeSymbolPriceList(data: data) as! T
+    case is AccountListBankModel.Type:
+      // swiftlint:disable:next force_cast
+      return try decodeAccountList(data: data) as! T
     default:
       return try super.decode(type, from: data)
     }
@@ -59,6 +60,24 @@ final class CybridJSONDecoder: JSONDecoder {
     }
     return curatedList
   }
+
+  func decodeAccountList(data: Data) throws -> AccountListBankModel? {
+    guard let jsonObject = try JSONSerialization.jsonObject(with: data) as? [String: Any] else {
+      throw DecodingError.customDecodingError
+    }
+    let jsonStringObject: [String: Any] = jsonObject
+    let objectsValue = jsonStringObject[AccountListBankModel.CodingKeys.objects.rawValue] as? [[String: Any]]
+    var objects = [AccountBankModel]()
+    if let objectsValue = objectsValue {
+        objects = AccountBankModel.fromArray(objects: objectsValue)
+    }
+    // -- Create AccountListBankModel
+    return AccountListBankModel(
+        total: jsonStringObject[AccountListBankModel.CodingKeys.total.rawValue] as? Int ?? 0,
+        page: jsonStringObject[AccountListBankModel.CodingKeys.page.rawValue] as? Int ?? 0,
+        perPage: jsonStringObject[AccountListBankModel.CodingKeys.perPage.rawValue] as? Int ?? 0,
+        objects: objects)
+  }
 }
 
 extension DecodingError {
@@ -83,4 +102,42 @@ extension SymbolPriceBankModel {
               buyPriceLastUpdatedAt: json[SymbolPriceBankModel.CodingKeys.buyPriceLastUpdatedAt.rawValue] as? Date,
               sellPriceLastUpdatedAt: json[SymbolPriceBankModel.CodingKeys.sellPriceLastUpdatedAt.rawValue] as? Date)
   }
+}
+
+extension AccountBankModel {
+    
+    static func fromArray(objects: [[String: Any]]) -> [AccountBankModel] {
+        var models = [AccountBankModel]()
+        for object in objects {
+            let model = AccountBankModel(json: object)
+            //for index in object.indices {}
+            if let model = model {
+                models.append(model)
+            }
+        }
+        return models
+    }
+    
+    init?(json: [String: Any]) {
+        guard
+            let platformAvailableValue = json[AccountBankModel.CodingKeys.platformAvailable.rawValue] as? String,
+            let platfomrBalanceValue = json[AccountBankModel.CodingKeys.platformBalance.rawValue] as? String,
+            let platformAvailable = BigInt(platformAvailableValue),
+            let platformBalance = BigInt(platfomrBalanceValue)
+        else {
+            return nil
+        }
+        self.init(
+            type: json[AccountBankModel.CodingKeys.type.rawValue] as? AccountBankModel.TypeBankModel,
+            provider: json[AccountBankModel.CodingKeys.provider.rawValue] as? ProviderBankModel,
+            guid: json[AccountBankModel.CodingKeys.guid.rawValue] as? String,
+            createdAt: json[AccountBankModel.CodingKeys.createdAt.rawValue] as? Date,
+            asset: json[AccountBankModel.CodingKeys.asset.rawValue] as? String,
+            name: json[AccountBankModel.CodingKeys.asset.rawValue] as? String,
+            bankGuid: json[AccountBankModel.CodingKeys.bankGuid.rawValue] as? String,
+            customerGuid: json[AccountBankModel.CodingKeys.customerGuid.rawValue] as? String,
+            platformBalance: platformBalance,
+            platformAvailable: platformAvailable,
+            state: json[AccountBankModel.CodingKeys.state.rawValue] as? StateBankModel)
+    }
 }

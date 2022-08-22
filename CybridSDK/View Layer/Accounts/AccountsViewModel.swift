@@ -52,6 +52,7 @@ class AccountsViewModel: NSObject {
 
     internal func getAccountsList() {
         dataProvider.fetchAccounts { [weak self] accountsResult in
+            print(accountsResult)
             switch accountsResult {
             case .success(let accountsList):
                 self?.logger?.log(.component(.accounts(.accountsDataFetching)))
@@ -75,7 +76,8 @@ class AccountsViewModel: NSObject {
                 }
                 self?.prices.value = modelList
 
-            case .failure:
+            case .failure(let error):
+                print(error)
                 self?.logger?.log(.component(.accounts(.pricesDataError)))
             }
         }
