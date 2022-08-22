@@ -14,23 +14,25 @@ extension AccountBankModel {
         guard
             let platformAvailableValue = json[AccountBankModel.CodingKeys.platformAvailable.rawValue] as? String,
             let platfomrBalanceValue = json[AccountBankModel.CodingKeys.platformBalance.rawValue] as? String,
+            let type = json[AccountBankModel.CodingKeys.type.rawValue] as? String,
+            let state = json[AccountBankModel.CodingKeys.state.rawValue] as? String,
             let platformAvailable = BigInt(platformAvailableValue),
             let platformBalance = BigInt(platfomrBalanceValue)
         else {
             return nil
         }
         self.init(
-            type: json[AccountBankModel.CodingKeys.type.rawValue] as? AccountBankModel.TypeBankModel,
+            type: (AccountBankModel.TypeBankModel(rawValue: type) ?? .trading) as TypeBankModel,
             provider: json[AccountBankModel.CodingKeys.provider.rawValue] as? ProviderBankModel,
             guid: json[AccountBankModel.CodingKeys.guid.rawValue] as? String,
             createdAt: json[AccountBankModel.CodingKeys.createdAt.rawValue] as? Date,
             asset: json[AccountBankModel.CodingKeys.asset.rawValue] as? String,
-            name: json[AccountBankModel.CodingKeys.asset.rawValue] as? String,
+            name: json[AccountBankModel.CodingKeys.name.rawValue] as? String,
             bankGuid: json[AccountBankModel.CodingKeys.bankGuid.rawValue] as? String,
             customerGuid: json[AccountBankModel.CodingKeys.customerGuid.rawValue] as? String,
             platformBalance: platformBalance,
             platformAvailable: platformAvailable,
-            state: json[AccountBankModel.CodingKeys.state.rawValue] as? StateBankModel)
+            state: StateBankModel(rawValue: state))
     }
 
     static func fromArray(objects: [[String: Any]]) -> [AccountBankModel] {

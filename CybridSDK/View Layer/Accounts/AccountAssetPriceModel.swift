@@ -7,11 +7,12 @@
 
 import CybridApiBankSwift
 import Foundation
+import BigInt
 
 struct AccountAssetPriceModel {
 
-    let accountAssetCode: String
-    let accountBalance: BigDecimal
+    let accountAssetCode: String // BTC
+    let accountBalance: BigDecimal // 12
     let accountBalanceFormatted: BigDecimal
     let accountBalanceFormattedString: String
     let accountBalanceInFiat: BigDecimal
@@ -29,13 +30,20 @@ struct AccountAssetPriceModel {
     let sellPrice: BigDecimal
 
     init?(
-        account: AccountBankModel
+        account: AccountBankModel,
+        asset: AssetBankModel,
+        counterAsset: AssetBankModel,
+        price: SymbolPriceBankModel
     ) {
 
-        self.accountAssetCode = ""
-        self.accountBalance = BigDecimal("0")
-        self.accountBalanceFormatted = BigDecimal("0")
-        self.accountBalanceFormattedString = ""
+        let balanceValue = account.platformBalance ?? BigInt(0)
+        let balanceValueFormatted = AssetPipe.transform(
+            value: balanceValue, asset: counterAsset, unit: .trade)
+
+        self.accountAssetCode = account.asset ?? ""
+        self.accountBalance = BigDecimal(balanceValue)
+        self.accountBalanceFormatted = BigDecimal(balanceValueFormatted)
+        self.accountBalanceFormattedString = String(balanceValueFormatted)
         self.accountBalanceInFiat = BigDecimal("0")
         self.accountBalanceInFiatFormatted = ""
         self.accountGuid = account.guid ?? ""

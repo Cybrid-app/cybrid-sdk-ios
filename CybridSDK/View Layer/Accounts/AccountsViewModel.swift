@@ -12,16 +12,17 @@ class AccountsViewModel: NSObject {
 
     // MARK: Observed properties
     internal var assets: [AssetBankModel] = []
-    internal var prices: Observable<[CryptoPriceModel]> = .init([])
-    internal var accountsObj: [AccountBankModel] = []
-    internal var accounts: [AccountAssetPriceModel] = []
+    internal var accounts: [AccountBankModel] = []
+    internal var balances: Observable<[AccountAssetPriceModel]> = .init([])
 
     // MARK: Private properties
     private var dataProvider: PricesRepoProvider & AssetsRepoProvider & AccountsRepoProvider
     private var logger: CybridLogger?
+    private var currentCurrency: String = "USD"
 
     init(dataProvider: PricesRepoProvider & AssetsRepoProvider & AccountsRepoProvider,
-         logger: CybridLogger?) {
+         logger: CybridLogger?,
+         currency: String = "USD") {
       self.dataProvider = dataProvider
       self.logger = logger
     }
@@ -56,7 +57,7 @@ class AccountsViewModel: NSObject {
             switch accountsResult {
             case .success(let accountsList):
                 self?.logger?.log(.component(.accounts(.accountsDataFetching)))
-                self?.accountsObj = accountsList.objects
+                self?.accounts = accountsList.objects
                 self?.getPricesList()
             case .failure:
                 self?.logger?.log(.component(.accounts(.accountsDataError)))
@@ -71,10 +72,13 @@ class AccountsViewModel: NSObject {
             switch pricesResult {
             case .success(let pricesList):
                 self?.logger?.log(.component(.accounts(.pricesDataFetching)))
-                guard let modelList = self?.buildModelList(symbols: pricesList, assets: self!.assets) else {
+                guard let modelList = self?.buildModelList(
+                    assets: self?.assets ?? [],
+                    accounts: self?.accounts ?? [],
+                    prices: pricesList) else {
                   return
                 }
-                self?.prices.value = modelList
+                self?.balances.value = modelList
 
             case .failure(let error):
                 print(error)
@@ -83,18 +87,25 @@ class AccountsViewModel: NSObject {
         }
     }
 
-    private func buildModelList(symbols: [SymbolPriceBankModel], assets: [AssetBankModel]) -> [CryptoPriceModel] {
-      return symbols.compactMap { priceModel in
+    private func buildModelList(
+        assets: [AssetBankModel],
+        accounts: [AccountBankModel],
+        prices: [SymbolPriceBankModel]) -> [AccountAssetPriceModel]? {
+      return accounts.compactMap { account in
         guard
-          let hiphenIndex = priceModel.symbol?.firstIndex(of: "-"),
-          let firstAssetCode = priceModel.symbol?.prefix(upTo: hiphenIndex),
-          let firstAsset = assets.first(where: { $0.code == firstAssetCode }),
-          let secondAssetCode = priceModel.symbol?.suffix(3),
-          let secondAsset = assets.first(where: { $0.code == secondAssetCode })
+          let asset = assets.first(where: { $0.code == account.asset }),
+          let assetCode = account.asset,
+          let counterAsset = assets.first(where: { $0.code == currentCurrency }),
+          let price = prices.first(where: { $0.symbol == "\(assetCode)-\(currentCurrency)" })
+
         else {
           return nil
         }
-        return CryptoPriceModel(symbolPrice: priceModel, asset: firstAsset, counterAsset: secondAsset)
+        return AccountAssetPriceModel(
+            account: account,
+            asset: asset,
+            counterAsset: counterAsset,
+            price: price)
       }
     }
 }
