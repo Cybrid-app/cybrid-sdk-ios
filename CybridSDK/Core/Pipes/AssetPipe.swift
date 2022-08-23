@@ -8,6 +8,7 @@
 import Foundation
 import BigInt
 import CybridApiBankSwift
+import CybridCore
 
 public enum AssetPipeType: String {
     case trade = "TRADE"
@@ -15,20 +16,16 @@ public enum AssetPipeType: String {
 }
 
 class AssetPipe {
-    
-    static func transform(value: BigDecimal, asset: AssetBankModel, unit: AssetPipeType) -> BigInt {
-        return transformAny(value: value.value, asset: asset, unit: unit)
+
+    static func transform(value: String, asset: AssetBankModel, unit: AssetPipeType) -> BigDecimal {
+        return transformAny(value: BigDecimal(value___: value), asset: asset, unit: unit)
     }
 
-    static func transform(value: BigInt, asset: AssetBankModel, unit: AssetPipeType) -> BigInt {
+    static func transform(value: BigDecimal, asset: AssetBankModel, unit: AssetPipeType) -> BigDecimal {
         return transformAny(value: value, asset: asset, unit: unit)
     }
 
-    static func transform(value: String, asset: AssetBankModel, unit: AssetPipeType) -> BigInt {
-        return transformAny(value: BigInt(stringLiteral: value), asset: asset, unit: unit)
-    }
-
-    static func transform(value: BigDecimal, decimals: Int, unit: AssetPipeType) -> BigInt {
+    static func transform(value: SBigDecimal, decimals: Int, unit: AssetPipeType) -> BigInt {
         return transformAny(value: value.value, decimals: decimals, unit: unit)
     }
 
@@ -40,17 +37,18 @@ class AssetPipe {
         return transformAny(value: BigInt(stringLiteral: value), decimals: decimals, unit: unit)
     }
 
-    private static func transformAny(value: BigInt, asset: AssetBankModel, unit: AssetPipeType) -> BigInt {
-
-        let divisor = BigInt(10).power(2)
-        let tradeUnit = value.magnitude / 100
-        let baseUnit = value * divisor
-        var returnValue = BigInt(0)
+    private static func transformAny(value: BigDecimal, asset: AssetBankModel, unit: AssetPipeType) -> BigDecimal {
+   
+        let divisor = BigDecimal(value: 10).pow(n_: UInt64(asset.decimals))
+        let tradeUnit = value.div(divisor: divisor)
+        let baseUnit = value.times(multiplicand: divisor)
+        var returnValue = BigDecimal(value: 0)
         switch unit {
         case .trade:
             print(tradeUnit)
-            //returnValue = tradeUnit
+            returnValue = tradeUnit
         case.base:
+            print(tradeUnit)
             returnValue = baseUnit
         }
         return returnValue

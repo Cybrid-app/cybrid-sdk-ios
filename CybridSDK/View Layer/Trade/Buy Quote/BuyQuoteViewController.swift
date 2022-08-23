@@ -213,7 +213,7 @@ final class BuyQuoteViewController: UIViewController {
       }
       self?.cryptoPickerTextField.text = selection.asset.name + " " + selection.asset.code
       self?.cryptoPickerTextField.updateIcon(.urlImage(selection.imageURL))
-      self?.amountTextField.placeholder = CybridCurrencyFormatter.formatInputNumber(BigDecimal(0, precision: selection.asset.decimals))
+      self?.amountTextField.placeholder = CybridCurrencyFormatter.formatInputNumber(SBigDecimal(0, precision: selection.asset.decimals))
       self?.amountTextField.updateIcon(.text(selection.asset.code))
       self?.updateIcons(shouldInputCrypto: self?.viewModel.shouldInputCrypto.value ?? true)
     }

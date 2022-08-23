@@ -1,0 +1,8 @@
+framework module CybridCore {
+    umbrella header "CybridCore.h"
+
+    export *
+    module * { export * }
+
+    use Foundation
+}

@@ -8,6 +8,7 @@
 import CybridApiBankSwift
 import Foundation
 import BigInt
+import CybridCore
 
 struct AccountAssetPriceModel {
 
@@ -35,27 +36,49 @@ struct AccountAssetPriceModel {
         counterAsset: AssetBankModel,
         price: SymbolPriceBankModel
     ) {
+        
+        print("__________________****_________________")
+        let balanceBigDecimal = SBigDecimal(account.platformBalance ?? "0", precision: asset.decimals)
+        let balanceBigDecimalFormatted = CybridCurrencyFormatter.formatPrice(balanceBigDecimal!, with: "")
+        let nose = CybridCurrencyFormatter.formatInputNumber(balanceBigDecimal!)
+        let perro = AssetPipe.transform(value: BigInt(account.platformBalance ?? "0")!, decimals: asset.decimals, unit: .trade)
+        let loco = BigDecimal(value___: "350000000000000000000000000")
+        let locoPerro = AssetPipe.transform(value: loco, asset: asset, unit: .trade)
+        print(balanceBigDecimal)
+        print(balanceBigDecimalFormatted)
+        print(nose)
+        print(perro)
+        print(locoPerro)
+        print("__________________****_________________")
 
-        let balanceValue = account.platformBalance ?? BigInt(0)
-        let balanceValueFormatted = AssetPipe.transform(
-            value: balanceValue, asset: counterAsset, unit: .trade)
+        let balanceValue = BigDecimal(value___: account.platformBalance ?? "0")
+        let balanceValueFormatted: BigDecimal = AssetPipe.transform(
+            value: balanceValue, asset: asset, unit: .trade)
+        let balanceValueFormattedString = balanceValueFormatted.toPlainString()
+
+        let buyPriceString = String(price.buyPrice ?? BigInt(0))
+        let buyPrice = BigDecimal(value___: buyPriceString)
+        let buyPriceFormatted = BigDecimalPipe.transform(value: buyPrice, asset: counterAsset)
+
+        let accountBalanceInFiat = balanceValueFormatted.times(multiplicand: buyPrice).setScale(scale: 2)
+        let accountBalanceInFiatFormatted = BigDecimalPipe.transform(value: accountBalanceInFiat, asset: counterAsset)
 
         self.accountAssetCode = account.asset ?? ""
-        self.accountBalance = BigDecimal(balanceValue)
-        self.accountBalanceFormatted = BigDecimal(balanceValueFormatted)
-        self.accountBalanceFormattedString = String(balanceValueFormatted)
-        self.accountBalanceInFiat = BigDecimal("0")
-        self.accountBalanceInFiatFormatted = ""
+        self.accountBalance = balanceValue
+        self.accountBalanceFormatted = balanceValueFormatted
+        self.accountBalanceFormattedString = balanceValueFormattedString
+        self.accountBalanceInFiat = accountBalanceInFiat
+        self.accountBalanceInFiatFormatted = accountBalanceInFiatFormatted ?? "$0.0"
         self.accountGuid = account.guid ?? ""
         self.accountType = account.type
         self.accountCreated = account.createdAt ?? Date()
-        self.assetName = ""
-        self.assetSymbol = ""
-        self.assetType = AssetBankModel.TypeBankModel.crypto
-        self.assetDecimals = BigDecimal("0")
-        self.pairAsset = nil
-        self.buyPrice = BigDecimal("0")
-        self.buyPriceFormatted = ""
-        self.sellPrice = BigDecimal("0")
+        self.assetName = asset.name
+        self.assetSymbol = asset.symbol
+        self.assetType = asset.type
+        self.assetDecimals = BigDecimal(value: Int32(asset.decimals))
+        self.pairAsset = counterAsset
+        self.buyPrice = buyPrice
+        self.buyPriceFormatted = buyPriceFormatted ?? ""
+        self.sellPrice = BigDecimal(value___: "0")
     }
 }

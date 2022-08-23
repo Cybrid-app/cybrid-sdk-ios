@@ -15,9 +15,9 @@ extension AccountBankModel {
             let platformAvailableValue = json[AccountBankModel.CodingKeys.platformAvailable.rawValue] as? String,
             let platfomrBalanceValue = json[AccountBankModel.CodingKeys.platformBalance.rawValue] as? String,
             let type = json[AccountBankModel.CodingKeys.type.rawValue] as? String,
-            let state = json[AccountBankModel.CodingKeys.state.rawValue] as? String,
-            let platformAvailable = BigInt(platformAvailableValue),
-            let platformBalance = BigInt(platfomrBalanceValue)
+            let state = json[AccountBankModel.CodingKeys.state.rawValue] as? String
+            //let platformAvailable = BigInt(platformAvailableValue),
+            //let platformBalance = BigInt(platfomrBalanceValue)
         else {
             return nil
         }
@@ -30,8 +30,8 @@ extension AccountBankModel {
             name: json[AccountBankModel.CodingKeys.name.rawValue] as? String,
             bankGuid: json[AccountBankModel.CodingKeys.bankGuid.rawValue] as? String,
             customerGuid: json[AccountBankModel.CodingKeys.customerGuid.rawValue] as? String,
-            platformBalance: platformBalance,
-            platformAvailable: platformAvailable,
+            platformBalance: platfomrBalanceValue,
+            platformAvailable: platformAvailableValue,
             state: StateBankModel(rawValue: state))
     }
 

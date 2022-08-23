@@ -16,15 +16,19 @@ class AccountsViewModel: NSObject {
     internal var balances: Observable<[AccountAssetPriceModel]> = .init([])
 
     // MARK: Private properties
+    private unowned var cellProvider: AccountsViewProvider
     private var dataProvider: PricesRepoProvider & AssetsRepoProvider & AccountsRepoProvider
     private var logger: CybridLogger?
     private var currentCurrency: String = "USD"
 
-    init(dataProvider: PricesRepoProvider & AssetsRepoProvider & AccountsRepoProvider,
+    init(cellProvider: AccountsViewProvider,
+         dataProvider: PricesRepoProvider & AssetsRepoProvider & AccountsRepoProvider,
          logger: CybridLogger?,
          currency: String = "USD") {
-      self.dataProvider = dataProvider
-      self.logger = logger
+
+        self.cellProvider = cellProvider
+        self.dataProvider = dataProvider
+        self.logger = logger
     }
 
     func getAccounts() {
@@ -108,4 +112,27 @@ class AccountsViewModel: NSObject {
             price: price)
       }
     }
+}
+
+// MARK: - AccountsViewProvider
+
+protocol AccountsViewProvider: AnyObject {
+  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath, withData dataModel: AccountAssetPriceModel) -> UITableViewCell
+}
+
+// MARK: - AccountsViewModel + UITableViewDelegate + UITableViewDataSource
+
+extension AccountsViewModel: UITableViewDelegate, UITableViewDataSource {
+  public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    balances.value.count
+  }
+
+  public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    cellProvider.tableView(tableView, cellForRowAt: indexPath, withData: balances.value[indexPath.row])
+  }
+
+  func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    //let view = CryptoPriceTableHeaderView(delegate: self)
+    return nil
+  }
 }

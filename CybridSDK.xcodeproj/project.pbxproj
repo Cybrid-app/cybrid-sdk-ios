@@ -14,7 +14,7 @@
 		0B00E0142877E87600707F26 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0B00E0122877E87600707F26 /* Main.storyboard */; };
 		0B00E0152877E93900707F26 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0B00E0172877E93900707F26 /* Localizable.strings */; };
 		0B00E01B2877EED600707F26 /* BundleExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B00E01A2877EED600707F26 /* BundleExtensionsTests.swift */; };
-		0B00E01D28789ADA00707F26 /* BigDecimal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B00E01C28789ADA00707F26 /* BigDecimal.swift */; };
+		0B00E01D28789ADA00707F26 /* SBigDecimal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B00E01C28789ADA00707F26 /* SBigDecimal.swift */; };
 		0B00E01F2878A16800707F26 /* BigDecimalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B00E01E2878A16800707F26 /* BigDecimalTests.swift */; };
 		0B00E0222878D23100707F26 /* CybridSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B00E0212878D23100707F26 /* CybridSession.swift */; };
 		0B00E024287CD72D00707F26 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B00E023287CD72D00707F26 /* Environment.swift */; };
@@ -130,6 +130,9 @@
 		92B97C3828B3D2020061D6BA /* AccountBankModel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B97C3728B3D2020061D6BA /* AccountBankModel+Extensions.swift */; };
 		92B97C3A28B3D6530061D6BA /* UtilTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B97C3928B3D6530061D6BA /* UtilTest.swift */; };
 		92B97C3D28B3F1E70061D6BA /* AssetPipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B97C3C28B3F1E70061D6BA /* AssetPipe.swift */; };
+		92B97C4728B43CE40061D6BA /* CybridCore.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92B97C4628B43CE40061D6BA /* CybridCore.xcframework */; };
+		92B97C4928B43CFF0061D6BA /* BigDecimalPipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B97C4828B43CFF0061D6BA /* BigDecimalPipe.swift */; };
+		92B97C4B28B4564D0061D6BA /* BigDecimalPipeNew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B97C4A28B4564D0061D6BA /* BigDecimalPipeNew.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -171,7 +174,7 @@
 		0B00E0162877E93900707F26 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		0B00E0192877ED9E00707F26 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		0B00E01A2877EED600707F26 /* BundleExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BundleExtensionsTests.swift; sourceTree = "<group>"; };
-		0B00E01C28789ADA00707F26 /* BigDecimal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigDecimal.swift; sourceTree = "<group>"; };
+		0B00E01C28789ADA00707F26 /* SBigDecimal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SBigDecimal.swift; sourceTree = "<group>"; };
 		0B00E01E2878A16800707F26 /* BigDecimalTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigDecimalTests.swift; sourceTree = "<group>"; };
 		0B00E0212878D23100707F26 /* CybridSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CybridSession.swift; sourceTree = "<group>"; };
 		0B00E023287CD72D00707F26 /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
@@ -295,6 +298,9 @@
 		92B97C3728B3D2020061D6BA /* AccountBankModel+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AccountBankModel+Extensions.swift"; sourceTree = "<group>"; };
 		92B97C3928B3D6530061D6BA /* UtilTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilTest.swift; sourceTree = "<group>"; };
 		92B97C3C28B3F1E70061D6BA /* AssetPipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetPipe.swift; sourceTree = "<group>"; };
+		92B97C4628B43CE40061D6BA /* CybridCore.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = CybridCore.xcframework; sourceTree = "<group>"; };
+		92B97C4828B43CFF0061D6BA /* BigDecimalPipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigDecimalPipe.swift; sourceTree = "<group>"; };
+		92B97C4A28B4564D0061D6BA /* BigDecimalPipeNew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigDecimalPipeNew.swift; sourceTree = "<group>"; };
 		B405213090797F42FC2D6B61 /* Pods-Abstract-CybridSDK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Abstract-CybridSDK.debug.xcconfig"; path = "Target Support Files/Pods-Abstract-CybridSDK/Pods-Abstract-CybridSDK.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -304,6 +310,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				51763411D3F45A952AC6465B /* Pods_Abstract_CybridSDK.framework in Frameworks */,
+				92B97C4728B43CE40061D6BA /* CybridCore.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -882,7 +889,7 @@
 			children = (
 				0B303CE02862E062007BF7FF /* FormatStyle.swift */,
 				0BD661392872BC0B00F4DA6B /* CybridCurrencyFormatter.swift */,
-				0B00E01C28789ADA00707F26 /* BigDecimal.swift */,
+				0B00E01C28789ADA00707F26 /* SBigDecimal.swift */,
 				0BBD0CC928AAC025001DBC5F /* BigDecimalValidator.swift */,
 			);
 			path = Formatters;
@@ -891,6 +898,7 @@
 		7DB7ECF3A36A5A65228D0CBD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				92B97C4628B43CE40061D6BA /* CybridCore.xcframework */,
 				2B30C2517BE0C7A158CBA03C /* Pods_Abstract_CybridSDK.framework */,
 				40A14D53715BC480FC592C31 /* Pods_Abstract_CybridSDKTestApp.framework */,
 				66ADA3F7FD334DF60D00900F /* Pods_Abstract_CybridSDKTests.framework */,
@@ -925,6 +933,8 @@
 			isa = PBXGroup;
 			children = (
 				92B97C3C28B3F1E70061D6BA /* AssetPipe.swift */,
+				92B97C4828B43CFF0061D6BA /* BigDecimalPipe.swift */,
+				92B97C4A28B4564D0061D6BA /* BigDecimalPipeNew.swift */,
 			);
 			path = Pipes;
 			sourceTree = "<group>";
@@ -1242,10 +1252,11 @@
 				0B557B962899F4DE00632A6D /* TradeViewController.swift in Sources */,
 				0B00E04E2885ADB300707F26 /* AssetsRepository.swift in Sources */,
 				92B97C3528B3D1AA0061D6BA /* Util.swift in Sources */,
+				92B97C4928B43CFF0061D6BA /* BigDecimalPipe.swift in Sources */,
 				0BD661372872BB0A00F4DA6B /* AssetPathBuilder.swift in Sources */,
 				0B00E034287F6D1000707F26 /* CybridAuthenticator.swift in Sources */,
 				0BD660F7286B761200F4DA6B /* NetworkingInterfaces.swift in Sources */,
-				0B00E01D28789ADA00707F26 /* BigDecimal.swift in Sources */,
+				0B00E01D28789ADA00707F26 /* SBigDecimal.swift in Sources */,
 				0B2B2A8528629031002F0EC1 /* UIColor+Extensions.swift in Sources */,
 				9224373528AEA18F008E73F2 /* AccountsViewModel.swift in Sources */,
 				0B2B2A872862906E002F0EC1 /* UILabel+Extensions.swift in Sources */,
@@ -1258,6 +1269,7 @@
 				0B2899E9288F3E1F001B3360 /* Cybrid.swift in Sources */,
 				0BD66118286B79C500F4DA6B /* UIView+Constraints.swift in Sources */,
 				0B303CE42862E5D9007BF7FF /* CybridConfig.swift in Sources */,
+				92B97C4B28B4564D0061D6BA /* BigDecimalPipeNew.swift in Sources */,
 				0BD660FD286B763E00F4DA6B /* ConcurrencyInterfaces.swift in Sources */,
 				0BD66109286B768C00F4DA6B /* CryptoPriceListView.swift in Sources */,
 				9224373028AEA01C008E73F2 /* AccountsRepository.swift in Sources */,

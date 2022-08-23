@@ -9,26 +9,125 @@ import Foundation
 import UIKit
 
 public final class AccountsViewController: UIViewController {
-    
-    private var accountsViewModel: AccountsViewModel
-    private let theme: Theme
-    private let localizer: Localizer
-    
+
+    private var accountsViewModel: AccountsViewModel!
+    private var theme: Theme!
+    private var localizer: Localizer!
+
+    // -- UI Vars
+    let accountTile = UILabel()
+
     public init() {
-        
+
+        super.init(nibName: nil, bundle: nil)
         self.accountsViewModel = AccountsViewModel(
+            cellProvider: self,
             dataProvider: CybridSession.current,
             logger: Cybrid.logger
         )
         self.theme = Cybrid.theme
         self.localizer = CybridLocalizer()
         self.accountsViewModel.getAccounts()
-        super.init(nibName: nil, bundle: nil)
+        self.setupView()
     }
-    
+
     @available(iOS, deprecated: 10, message: "You should never use this init method.")
     required init?(coder: NSCoder) {
       assertionFailure("init(coder:) should never be used")
       return nil
+    }
+
+    func setupView() {
+
+        view.backgroundColor = .white
+        self.setupBalaceView()
+    }
+
+    func setupBalaceView() {
+
+        self.createAccountTitle()
+        self.createAccountValueTitle()
+    }
+    
+    func setupTableView() {
+        
+    }
+}
+
+extension AccountsViewController {
+
+    private func createAccountTitle() {
+
+        accountTile.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+        accountTile.translatesAutoresizingMaskIntoConstraints = false
+        accountTile.sizeToFit()
+        accountTile.font = FormatStyle.headerSmall.font
+        accountTile.textColor = FormatStyle.headerSmall.textColor
+        accountTile.textAlignment = .center
+        accountTile.text = "Account Value"
+        self.view.addSubview(accountTile)
+        accountTile.translatesAutoresizingMaskIntoConstraints = false
+        accountTile.constraint(attribute: .top,
+                               relatedBy: .equal,
+                               toItem: self.view,
+                               attribute: .topMargin,
+                               constant: 40)
+        accountTile.constraint(attribute: .leading,
+                               relatedBy: .equal,
+                               toItem: self.view,
+                               attribute: .leading,
+                               constant: 10)
+        accountTile.constraint(attribute: .trailing,
+                               relatedBy: .equal,
+                               toItem: self.view,
+                               attribute: .trailing,
+                               constant: -10)
+        accountTile.constraint(attribute: .height,
+                               relatedBy: .equal,
+                               toItem: nil,
+                               attribute: .notAnAttribute,
+                               constant: 20)
+    }
+
+    private func createAccountValueTitle(value: String = "$116,256.56 USD") {
+
+        let accountValueTile = UILabel()
+        accountValueTile.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+        accountValueTile.translatesAutoresizingMaskIntoConstraints = false
+        accountValueTile.sizeToFit()
+        accountValueTile.font = UIFont.systemFont(ofSize: 23, weight: .regular)
+        accountValueTile.textColor = UIColor.black
+        accountValueTile.textAlignment = .center
+        accountValueTile.text = value
+        self.view.addSubview(accountValueTile)
+        accountValueTile.translatesAutoresizingMaskIntoConstraints = false
+        accountValueTile.constraint(attribute: .top,
+                                    relatedBy: .equal,
+                                    toItem: self.accountTile,
+                                    attribute: .bottom,
+                                    constant: 3)
+        accountValueTile.constraint(attribute: .leading,
+                                    relatedBy: .equal,
+                                    toItem: self.view,
+                                    attribute: .leading,
+                                    constant: 10)
+        accountValueTile.constraint(attribute: .trailing,
+                                    relatedBy: .equal,
+                                    toItem: self.view,
+                                    attribute: .trailing,
+                                    constant: -10)
+        accountValueTile.constraint(attribute: .height,
+                                    relatedBy: .equal,
+                                    toItem: nil,
+                                    attribute: .notAnAttribute,
+                                    constant: 40)
+    }
+    
+    private func createAccountsTable() {}
+}
+
+extension AccountsViewController: AccountsViewProvider {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath, withData dataModel: AccountAssetPriceModel) -> UITableViewCell {
+        return UITableViewCell()
     }
 }
