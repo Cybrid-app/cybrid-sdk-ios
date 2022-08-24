@@ -13,7 +13,7 @@ protocol CryptoPriceViewProvider: AnyObject {
 }
 
 class CryptoPriceViewModel: NSObject {
-  typealias DataProvider = PricesRepoProvider & AssetsRepoProvider & QuotesRepoProvider
+  typealias DataProvider = PricesRepoProvider & AssetsRepoProvider & QuotesRepoProvider & TradesRepoProvider
 
   // MARK: Observed properties
   internal var cryptoPriceList: [CryptoPriceModel] = []

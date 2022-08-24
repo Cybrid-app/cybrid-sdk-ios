@@ -169,6 +169,7 @@ final class TradeConfirmationModalView: UIView {
 
 extension TradeConfirmationModalView {
   struct DataModel {
+    let quoteGUID: String
     let fiatAmount: String
     let fiatCode: String
     let cryptoAmount: String

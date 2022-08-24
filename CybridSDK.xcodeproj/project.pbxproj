@@ -93,6 +93,8 @@
 		0BBD0CD628AC1DDC001DBC5F /* LoadingModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BBD0CD528AC1DDC001DBC5F /* LoadingModalView.swift */; };
 		0BBD0CD828AC21F1001DBC5F /* TradeSuccessModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BBD0CD728AC21F1001DBC5F /* TradeSuccessModalView.swift */; };
 		0BBD0CDA28B3E5D9001DBC5F /* QuotesRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BBD0CD928B3E5D9001DBC5F /* QuotesRepository.swift */; };
+		0BBD0CDC28B5D6F7001DBC5F /* TradesRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BBD0CDB28B5D6F7001DBC5F /* TradesRepository.swift */; };
+		0BBD0CDE28B68C49001DBC5F /* CybridDateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BBD0CDD28B68C49001DBC5F /* CybridDateFormatter.swift */; };
 		0BD0A4E728582FB700C10744 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 0BD0A4E628582FB700C10744 /* README.md */; };
 		0BD26F2428A55D4800ED2A1B /* CybridEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD26F2228A55D4800ED2A1B /* CybridEvent.swift */; };
 		0BD26F2528A55D4800ED2A1B /* CybridLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD26F2328A55D4800ED2A1B /* CybridLogger.swift */; };
@@ -244,6 +246,8 @@
 		0BBD0CD528AC1DDC001DBC5F /* LoadingModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingModalView.swift; sourceTree = "<group>"; };
 		0BBD0CD728AC21F1001DBC5F /* TradeSuccessModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeSuccessModalView.swift; sourceTree = "<group>"; };
 		0BBD0CD928B3E5D9001DBC5F /* QuotesRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuotesRepository.swift; sourceTree = "<group>"; };
+		0BBD0CDB28B5D6F7001DBC5F /* TradesRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradesRepository.swift; sourceTree = "<group>"; };
+		0BBD0CDD28B68C49001DBC5F /* CybridDateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CybridDateFormatter.swift; sourceTree = "<group>"; };
 		0BD0A4E628582FB700C10744 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		0BD26F2228A55D4800ED2A1B /* CybridEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CybridEvent.swift; sourceTree = "<group>"; };
 		0BD26F2328A55D4800ED2A1B /* CybridLogger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CybridLogger.swift; sourceTree = "<group>"; };
@@ -600,6 +604,7 @@
 				0B00E04B2885AD8D00707F26 /* PricesRepository.swift */,
 				0B00E04D2885ADB300707F26 /* AssetsRepository.swift */,
 				0BBD0CD928B3E5D9001DBC5F /* QuotesRepository.swift */,
+				0BBD0CDB28B5D6F7001DBC5F /* TradesRepository.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -863,6 +868,7 @@
 				0BD661392872BC0B00F4DA6B /* CybridCurrencyFormatter.swift */,
 				0B00E01C28789ADA00707F26 /* BigDecimal.swift */,
 				0BBD0CC928AAC025001DBC5F /* BigDecimalValidator.swift */,
+				0BBD0CDD28B68C49001DBC5F /* CybridDateFormatter.swift */,
 			);
 			path = Formatters;
 			sourceTree = "<group>";
@@ -1071,6 +1077,7 @@
 				0B2899E0288E4860001B3360 /* AuthenticatedServiceProvider.swift in Sources */,
 				0BD6612A286DE86A00F4DA6B /* CybridLocalizationKey.swift in Sources */,
 				0B00E02E287F6AE500707F26 /* CybridError.swift in Sources */,
+				0BBD0CDE28B68C49001DBC5F /* CybridDateFormatter.swift in Sources */,
 				0BD6613A2872BC0B00F4DA6B /* CybridCurrencyFormatter.swift in Sources */,
 				0BD6610D286B769800F4DA6B /* Observable.swift in Sources */,
 				0BD66104286B768300F4DA6B /* CryptoPriceTableHeaderView.swift in Sources */,
@@ -1090,6 +1097,7 @@
 				0B2B2A872862906E002F0EC1 /* UILabel+Extensions.swift in Sources */,
 				0B2B2A6D28621D5C002F0EC1 /* ColorTheme.swift in Sources */,
 				0B00E04C2885AD8D00707F26 /* PricesRepository.swift in Sources */,
+				0BBD0CDC28B5D6F7001DBC5F /* TradesRepository.swift in Sources */,
 				0B96600F285AA0FC00584692 /* AssertionFailureOverride.swift in Sources */,
 				0B6175D4288B7853004E4F5B /* TaskScheduler.swift in Sources */,
 				0B00E0222878D23100707F26 /* CybridSession.swift in Sources */,

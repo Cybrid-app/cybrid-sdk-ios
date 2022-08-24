@@ -32,7 +32,7 @@ enum TradeType: Int {
 }
 
 final class TradeViewModel: NSObject {
-  typealias DataProvider = AssetsRepoProvider & PricesRepoProvider & QuotesRepoProvider
+  typealias DataProvider = AssetsRepoProvider & PricesRepoProvider & QuotesRepoProvider & TradesRepoProvider
 
   // MARK: Observed Properties
   internal var amountText: Observable<String?> = Observable(nil)
@@ -65,6 +65,7 @@ final class TradeViewModel: NSObject {
       updateConversion()
     }
   }
+  private var quoteGUID: String?
 
   init(selectedCrypto: AssetBankModel,
        dataProvider: DataProvider,
@@ -143,6 +144,7 @@ final class TradeViewModel: NSObject {
           return
         }
         self.generatedQuoteModel.value = newDataModel
+        self.quoteGUID = newDataModel.quoteGUID
         self.error.value = nil
       case .failure(let error):
         self.logger?.log(.component(.trade(.quoteDataError)))
@@ -153,6 +155,7 @@ final class TradeViewModel: NSObject {
 
   func createQuoteDataModel(with quoteBankModel: QuoteBankModel) -> TradeConfirmationModalView.DataModel? {
     guard
+      let guid = quoteBankModel.guid,
       let receiveAmount = quoteBankModel.receiveAmount,
       let deliverAmount = quoteBankModel.deliverAmount,
       let cryptoAsset = cryptoCurrency.value?.asset
@@ -176,7 +179,8 @@ final class TradeViewModel: NSObject {
     let formattedFeeAmount = CybridCurrencyFormatter.formatPrice(feeDecimal, with: fiatCurrency.asset.symbol)
     let cryptoDecimal = BigDecimal(cryptoAmount, precision: cryptoAsset.decimals)
     let formattedCryptoAmount = CybridCurrencyFormatter.formatPrice(cryptoDecimal, with: "")
-    return .init(fiatAmount: formattedFiatAmount,
+    return .init(quoteGUID: guid,
+                 fiatAmount: formattedFiatAmount,
                  fiatCode: fiatCode,
                  cryptoAmount: formattedCryptoAmount,
                  cryptoCode: cryptoAsset.code,
@@ -185,15 +189,61 @@ final class TradeViewModel: NSObject {
   }
 
   func confirmOperation() {
-    // TODO: Replace with service call
-    tradeSuccessModel.value = .init(
-      transactionId: "#980019", // FIXME: Remove mocked data
-      date: "August 16, 2022", // FIXME: Remove mocked data
-      fiatAmount: amountText.value ?? "",
-      fiatCode: fiatCurrency.asset.code,
-      cryptoAmount: displayAmount.value ?? "",
-      cryptoCode: cryptoCurrency.value?.asset.code ?? "",
-      transactionFee: "$2.59", // FIXME: Remove mocked data
+    guard let guid = quoteGUID else { return }
+
+    self.logger?.log(.component(.trade(.tradeDataFetching)))
+    dataProvider.createTrade(quoteGuid: guid) { [weak self] result in
+      guard let self = self else { return }
+      switch result {
+      case .success(let tradeModel):
+        guard let newDataModel = self.createTradeDataModel(with: tradeModel) else {
+          self.logger?.log(.component(.trade(.tradeDataError)))
+          return
+        }
+        self.logger?.log(.component(.trade(.tradeConfirmed)))
+        self.tradeSuccessModel.value = newDataModel
+        self.error.value = nil
+      case .failure(let error):
+        self.logger?.log(.component(.trade(.quoteDataError)))
+        self.error.value = error
+      }
+    }
+  }
+
+  func createTradeDataModel(with tradeModel: TradeBankModel) -> TradeSuccessModalView.DataModel? {
+    guard
+      let guid = tradeModel.guid,
+      let receiveAmount = tradeModel.receiveAmount,
+      let deliverAmount = tradeModel.deliverAmount,
+      let cryptoAsset = cryptoCurrency.value?.asset
+    else {
+      return nil
+    }
+    var cryptoAmount: BigInt
+    var fiatAmount: BigInt
+    switch segmentSelection.value {
+    case .buy:
+      cryptoAmount = receiveAmount
+      fiatAmount = deliverAmount
+    case .sell:
+      cryptoAmount = deliverAmount
+      fiatAmount = receiveAmount
+    }
+    let fiatCode = fiatCurrency.asset.code
+    let fiatDecimal = BigDecimal(fiatAmount, precision: fiatCurrency.asset.decimals)
+    let formattedFiatAmount = CybridCurrencyFormatter.formatPrice(fiatDecimal, with: fiatCurrency.asset.symbol)
+    let feeDecimal = BigDecimal(tradeModel.fee ?? 0, precision: fiatCurrency.asset.decimals)
+    let formattedFeeAmount = CybridCurrencyFormatter.formatPrice(feeDecimal, with: fiatCurrency.asset.symbol)
+    let cryptoDecimal = BigDecimal(cryptoAmount, precision: cryptoAsset.decimals)
+    let formattedCryptoAmount = CybridCurrencyFormatter.formatPrice(cryptoDecimal, with: "")
+    return .init(
+      transactionId: guid,
+      date: String(describing: tradeModel.createdAt),
+      fiatAmount: formattedFiatAmount,
+      fiatCode: fiatCode,
+      cryptoAmount: formattedCryptoAmount,
+      cryptoCode: cryptoAsset.code,
+      transactionFee: formattedFeeAmount,
       quoteType: segmentSelection.value
     )
   }

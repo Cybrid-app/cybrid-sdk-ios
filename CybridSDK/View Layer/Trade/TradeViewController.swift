@@ -132,25 +132,8 @@ public final class TradeViewController: UIViewController {
   }()
 
   private lazy var buttonContainer = UIView()
-
-  private lazy var tradeConfirmationModalView = TradeConfirmationModalView(
-    theme: theme,
-    localizer: localizer,
-    dataModel: .init(
-      fiatAmount: viewModel.amountText.value ?? "",
-      fiatCode: viewModel.fiatCurrency.asset.code,
-      cryptoAmount: viewModel.displayAmount.value ?? "",
-      cryptoCode: viewModel.cryptoCurrency.value?.asset.code ?? "",
-      transactionFee: "$2.59",
-      quoteType: viewModel.segmentSelection.value == .buy ? .buy : .sell),
-    onCancel: { [weak self] in
-      self?.dismissModal()
-    }, onConfirm: { [weak self] in
-      self?.confirmOperation()
-    }
-  )
-
-  private lazy var modalViewController = CybridModalViewController(theme: theme, tradeConfirmationModalView)
+  private var tradeConfirmationModalView: TradeConfirmationModalView?
+  private var modalViewController: CybridModalViewController?
 
   public init(selectedCrypto: AssetBankModel) {
     self.theme = Cybrid.theme
@@ -191,11 +174,11 @@ public final class TradeViewController: UIViewController {
   }
 
   private func dismissModal() {
-    modalViewController.dismiss(animated: true)
+    modalViewController?.dismiss(animated: true)
   }
 
   private func confirmOperation() {
-    modalViewController.replaceContent(
+    modalViewController?.replaceContent(
       LoadingModalView(
         message: localizer.localize(with: CybridLocalizationKey.trade(.loadingModal(.processingMessage)))
       )
@@ -204,12 +187,28 @@ public final class TradeViewController: UIViewController {
   }
 
   private func showConfirmationModal(data: TradeConfirmationModalView.DataModel) {
-    tradeConfirmationModalView.updateData(data)
-    if !(modalViewController.contentView === tradeConfirmationModalView) {
-      modalViewController.replaceContent(tradeConfirmationModalView)
+    if tradeConfirmationModalView == nil {
+      tradeConfirmationModalView = TradeConfirmationModalView(
+        theme: theme,
+        localizer: localizer,
+        dataModel: data,
+        onCancel: { [weak self] in
+          self?.dismissModal()
+        }, onConfirm: { [weak self] in
+          self?.confirmOperation()
+        }
+      )
+    } else {
+      tradeConfirmationModalView?.updateData(data)
     }
-    if !modalViewController.isBeingPresented {
-      modalViewController.present()
+    if modalViewController == nil, let view = tradeConfirmationModalView {
+      modalViewController = CybridModalViewController(theme: theme, view)
+    }
+    if !(modalViewController?.contentView === tradeConfirmationModalView), let view = tradeConfirmationModalView {
+      modalViewController?.replaceContent(view)
+    }
+    if !(modalViewController?.isBeingPresented ?? false) {
+      modalViewController?.present()
     }
   }
 
@@ -223,7 +222,7 @@ public final class TradeViewController: UIViewController {
       }
     )
 
-    modalViewController.replaceContent(successModal)
+    modalViewController?.replaceContent(successModal)
   }
 }
 

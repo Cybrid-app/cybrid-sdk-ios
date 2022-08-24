@@ -8,7 +8,7 @@
 import BigInt
 import CybridApiBankSwift
 
-// MARK: - QuotesDataProvider
+// MARK: - QuotesRepository
 
 typealias CreateQuoteCompletion = (Result<QuoteBankModel, ErrorResponse>) -> Void
 

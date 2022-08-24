@@ -62,7 +62,7 @@ final class TradeSuccessModalView: UIView {
   }
 
   private lazy var transactionIDLabel: UILabel = .makeLabel(.body) { [dataModel] label in
-    label.text = dataModel.transactionFee
+    label.text = dataModel.transactionId
   }
 
   private lazy var dateTitleLabel: UILabel = .makeLabel(.caption) { [localizer] label in

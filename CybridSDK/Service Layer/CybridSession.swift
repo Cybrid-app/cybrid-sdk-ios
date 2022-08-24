@@ -28,6 +28,9 @@ final class CybridSession: AuthenticatedServiceProvider {
   // Quotes Repository
   internal var quotesRepository: QuotesRepository.Type
 
+  // Trades Repository
+  internal var tradesRepository: TradesRepository.Type
+
   // MARK: Private(set) Internal Properties
   private(set) var authenticator: CybridAuthenticator?
   private(set) var apiManager: CybridAPIManager.Type
@@ -45,6 +48,7 @@ final class CybridSession: AuthenticatedServiceProvider {
     self.assetsRepository = AssetsAPI.self
     self.pricesFetchScheduler = CybridTaskScheduler()
     self.quotesRepository = QuotesAPI.self
+    self.tradesRepository = TradesAPI.self
 
     setupEventListeners()
   }
