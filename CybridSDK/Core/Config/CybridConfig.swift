@@ -14,6 +14,7 @@ public final class CybridConfig {
 
   // MARK: Internal Properties
   internal var authenticator: CybridAuthenticator?
+  internal var customerGUID: String = ""
   internal var logger: CybridLogger?
   internal var refreshRate: TimeInterval = 5
   internal lazy var session: CybridSession = .current
@@ -27,6 +28,7 @@ public final class CybridConfig {
   // MARK: Public Methods
   /// Setup CybridSDK Configuration
   public func setup(authenticator: CybridAuthenticator,
+                    customerGUID: String,
                     environment: CybridEnvironment = .sandbox,
                     fiat: FiatConfig = .cad,
                     locale: Locale? = nil,
@@ -34,6 +36,7 @@ public final class CybridConfig {
                     refreshRate: TimeInterval = 5,
                     theme: Theme? = nil) {
     self.authenticator = authenticator
+    self.customerGUID = customerGUID
     self.fiat = fiat
     self.theme = theme ?? CybridTheme.default
     self.refreshRate = refreshRate

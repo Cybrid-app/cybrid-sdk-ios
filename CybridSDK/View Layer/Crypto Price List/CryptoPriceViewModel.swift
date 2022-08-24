@@ -13,6 +13,8 @@ protocol CryptoPriceViewProvider: AnyObject {
 }
 
 class CryptoPriceViewModel: NSObject {
+  typealias DataProvider = PricesRepoProvider & AssetsRepoProvider & QuotesRepoProvider
+
   // MARK: Observed properties
   internal var cryptoPriceList: [CryptoPriceModel] = []
   internal var filteredCryptoPriceList: Observable<[CryptoPriceModel]> = Observable([])
@@ -20,11 +22,11 @@ class CryptoPriceViewModel: NSObject {
 
   // MARK: Private properties
   private unowned var cellProvider: CryptoPriceViewProvider
-  private var dataProvider: PricesRepoProvider & AssetsRepoProvider
+  private var dataProvider: DataProvider
   private var logger: CybridLogger?
 
   init(cellProvider: CryptoPriceViewProvider,
-       dataProvider: PricesRepoProvider & AssetsRepoProvider,
+       dataProvider: DataProvider,
        logger: CybridLogger?) {
     self.cellProvider = cellProvider
     self.dataProvider = dataProvider

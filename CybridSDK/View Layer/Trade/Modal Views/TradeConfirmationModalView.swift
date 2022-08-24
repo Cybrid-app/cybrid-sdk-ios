@@ -5,6 +5,7 @@
 //  Created by Cybrid on 16/08/22.
 //
 
+import BigInt
 import CybridApiBankSwift
 import UIKit
 
@@ -173,7 +174,7 @@ extension TradeConfirmationModalView {
     let cryptoAmount: String
     let cryptoCode: String
     let transactionFee: String
-    let quoteType: TradeSegment
+    let quoteType: TradeType
   }
 }
 

@@ -18,6 +18,9 @@ final class CybridJSONDecoder: JSONDecoder {
       // Force cast is valid here, since we are already falling into the case where T equals Array<SymbolPriceBankModel>
       // swiftlint:disable:next force_cast
       return try decodeSymbolPriceList(data: data) as! T
+    case is QuoteBankModel.Type:
+      // swiftlint:disable:next force_cast
+      return try decodeQuoteBankModel(data: data) as! T
     default:
       return try super.decode(type, from: data)
     }
@@ -59,6 +62,26 @@ final class CybridJSONDecoder: JSONDecoder {
     }
     return curatedList
   }
+
+  func decodeQuoteBankModel(data: Data) throws -> QuoteBankModel {
+    guard let jsonObject = try JSONSerialization.jsonObject(with: data) as? [String: Any] else {
+      throw DecodingError.customDecodingError
+    }
+    var jsonStringObject: [String: Any] = jsonObject
+    let deliverAmountKey = QuoteBankModel.CodingKeys.deliverAmount.rawValue
+    let receiveAmountKey = QuoteBankModel.CodingKeys.receiveAmount.rawValue
+    let feeAmountKey = QuoteBankModel.CodingKeys.fee.rawValue
+    jsonStringObject[deliverAmountKey] = stringValue(forKey: deliverAmountKey, in: data, atIndex: 0)
+    jsonStringObject[receiveAmountKey] = stringValue(forKey: receiveAmountKey, in: data, atIndex: 0)
+    jsonStringObject[feeAmountKey] = stringValue(forKey: feeAmountKey, in: data, atIndex: 0)
+
+    guard
+      let model = QuoteBankModel(json: jsonStringObject)
+    else {
+      throw DecodingError.customDecodingError
+    }
+    return model
+  }
 }
 
 extension DecodingError {
@@ -82,5 +105,29 @@ extension SymbolPriceBankModel {
               sellPrice: sellPrice,
               buyPriceLastUpdatedAt: json[SymbolPriceBankModel.CodingKeys.buyPriceLastUpdatedAt.rawValue] as? Date,
               sellPriceLastUpdatedAt: json[SymbolPriceBankModel.CodingKeys.sellPriceLastUpdatedAt.rawValue] as? Date)
+  }
+}
+
+extension QuoteBankModel {
+  init?(json: [String: Any]) {
+    guard
+      let deliverAmountString = json[QuoteBankModel.CodingKeys.deliverAmount.rawValue] as? String,
+      let receiveAmountString = json[QuoteBankModel.CodingKeys.receiveAmount.rawValue] as? String,
+      let feeAmountString = json[QuoteBankModel.CodingKeys.fee.rawValue] as? String,
+      let deliverAmount = BigInt(deliverAmountString),
+      let receiveAmount = BigInt(receiveAmountString),
+      let feeAmount = BigInt(feeAmountString)
+    else {
+      return nil
+    }
+    self.init(guid: json[QuoteBankModel.CodingKeys.guid.rawValue] as? String,
+              customerGuid: json[QuoteBankModel.CodingKeys.customerGuid.rawValue] as? String,
+              symbol: json[QuoteBankModel.CodingKeys.symbol.rawValue] as? String,
+              side: json[QuoteBankModel.CodingKeys.side.rawValue] as? SideBankModel,
+              receiveAmount: receiveAmount,
+              deliverAmount: deliverAmount,
+              fee: feeAmount,
+              issuedAt: json[QuoteBankModel.CodingKeys.issuedAt.rawValue] as? Date,
+              expiresAt: json[QuoteBankModel.CodingKeys.expiresAt.rawValue] as? Date)
   }
 }

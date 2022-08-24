@@ -140,8 +140,8 @@ class TradeViewModelTests: XCTestCase {
   }
 
   func testViewModel_segmentControl_localizationKeys() {
-    XCTAssertEqual(TradeSegment.buy.localizationKey, .trade(.buy(.title)))
-    XCTAssertEqual(TradeSegment.sell.localizationKey, .trade(.sell(.title)))
+    XCTAssertEqual(TradeType.buy.localizationKey, .trade(.buy(.title)))
+    XCTAssertEqual(TradeType.sell.localizationKey, .trade(.sell(.title)))
   }
 
   func testViewModel_pickerSetup() {

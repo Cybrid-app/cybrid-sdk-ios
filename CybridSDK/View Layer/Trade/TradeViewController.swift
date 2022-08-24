@@ -15,7 +15,7 @@ public final class TradeViewController: UIViewController {
   private let localizer: Localizer
   private let logger: CybridLogger?
   private var viewModel: TradeViewModel
-  private let segments = [TradeSegment.buy, TradeSegment.sell]
+  private let segments = [TradeType.buy, TradeType.sell]
 
   // MARK: UI Properties
   private lazy var segmentControl: UISegmentedControl = {
@@ -331,14 +331,11 @@ extension TradeViewController {
       self?.updateButton(selectedSegment: selectedSegment)
     }
     viewModel.generatedQuoteModel.bind { newData in
-      DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [weak self] in
-        guard let self = self else { return }
-        if let data = newData {
-          self.showConfirmationModal(data: data)
-          self.viewModel.generatedQuoteModel.value = nil
-        }
-        self.primaryButton.customState = .normal
+      if let data = newData {
+        self.showConfirmationModal(data: data)
+        self.viewModel.generatedQuoteModel.value = nil
       }
+      self.primaryButton.customState = .normal
     }
     viewModel.tradeSuccessModel.bind { [weak self] newData in
       DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [weak self] in
@@ -347,6 +344,10 @@ extension TradeViewController {
           self?.viewModel.tradeSuccessModel.value = nil
         }
       }
+    }
+    viewModel.error.bind { [weak self] _ in
+      guard let self = self else { return }
+      self.primaryButton.customState = .normal
     }
     viewModel.fetchPriceList()
   }
@@ -367,7 +368,7 @@ extension TradeViewController {
     }
   }
 
-  private func updateButton(selectedSegment: TradeSegment) {
+  private func updateButton(selectedSegment: TradeType) {
     switch selectedSegment {
     case .buy:
       primaryButton.setTitle(localizer.localize(with: CybridLocalizationKey.trade(.buy(.cta))), for: .normal)

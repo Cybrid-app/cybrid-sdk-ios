@@ -8,7 +8,7 @@
 import BigInt
 import CybridApiBankSwift
 
-enum TradeSegment: Int {
+enum TradeType: Int {
   case buy = 0
   case sell = 1
 
@@ -20,23 +20,35 @@ enum TradeSegment: Int {
       return CybridLocalizationKey.trade(.sell(.title))
     }
   }
+
+  var sideBankModel: PostQuoteBankModel.SideBankModel {
+    switch self {
+    case .buy:
+      return .buy
+    case .sell:
+      return.sell
+    }
+  }
 }
 
 final class TradeViewModel: NSObject {
+  typealias DataProvider = AssetsRepoProvider & PricesRepoProvider & QuotesRepoProvider
+
   // MARK: Observed Properties
   internal var amountText: Observable<String?> = Observable(nil)
   internal var assetList: Observable<[CurrencyModel]>
-  internal var cryptoCurrency: Observable<CurrencyModel?>
+  internal var cryptoCurrency: Observable<CurrencyModel?> // Asset
   internal var ctaButtonEnabled: Observable<Bool> = Observable(false)
   internal var displayAmount: Observable<String?> = Observable(nil)
-  internal var segmentSelection: Observable<TradeSegment> = Observable(.buy)
+  internal var segmentSelection: Observable<TradeType> = Observable(.buy)
   internal var shouldInputCrypto: Observable<Bool> = Observable(true)
 
   internal var generatedQuoteModel: Observable<TradeConfirmationModalView.DataModel?> = Observable(nil)
   internal var tradeSuccessModel: Observable<TradeSuccessModalView.DataModel?> = Observable(nil)
+  internal var error: Observable<Error?> = Observable(nil)
 
   // MARK: Internal Properties
-  internal let fiatCurrency: CurrencyModel
+  internal let fiatCurrency: CurrencyModel // CounterAsset
 
   // MARK: Computed properties
   internal var selectedPriceRate: BigInt? {
@@ -46,7 +58,7 @@ final class TradeViewModel: NSObject {
   }
 
   // MARK: Private Properties
-  private let dataProvider: AssetsRepoProvider & PricesRepoProvider
+  private let dataProvider: DataProvider
   private let logger: CybridLogger?
   private var priceList: [SymbolPriceBankModel] {
     didSet {
@@ -55,7 +67,7 @@ final class TradeViewModel: NSObject {
   }
 
   init(selectedCrypto: AssetBankModel,
-       dataProvider: AssetsRepoProvider & PricesRepoProvider,
+       dataProvider: DataProvider,
        logger: CybridLogger?) {
     self.dataProvider = dataProvider
     self.fiatCurrency = CurrencyModel(asset: Cybrid.fiat.defaultAsset)
@@ -90,9 +102,105 @@ final class TradeViewModel: NSObject {
     }
   }
 
+  func createQuote() {
+    logger?.log(.component(.trade(.quoteDataFetching)))
+    guard
+      let cryptoCode = cryptoCurrency.value?.asset.code,
+      let inputText = (amountText.value?.filter { $0 != "." && $0 != "," && $0 != " " })
+    else { return }
+    let fiatCode = fiatCurrency.asset.code
+    var symbol = ""
+    var receiveAmount: String?
+    var deliverAmount: String?
+
+    switch segmentSelection.value {
+    case .buy:
+      symbol = cryptoCode + "-" + fiatCode
+      if shouldInputCrypto.value {
+        receiveAmount = inputText
+      } else {
+        deliverAmount = inputText
+      }
+    case .sell:
+      symbol = fiatCode + "-" + cryptoCode
+      if shouldInputCrypto.value {
+        deliverAmount = inputText
+      } else {
+        receiveAmount = inputText
+      }
+    }
+
+    dataProvider.createQuote(symbol: symbol,
+                             type: segmentSelection.value,
+                             receiveAmount: receiveAmount,
+                             deliverAmount: deliverAmount
+    ) { [weak self] result in
+      guard let self = self else { return }
+      switch result {
+      case .success(let quoteModel):
+        guard let newDataModel = self.createQuoteDataModel(with: quoteModel) else {
+          self.logger?.log(.component(.trade(.quoteDataError)))
+          return
+        }
+        self.generatedQuoteModel.value = newDataModel
+        self.error.value = nil
+      case .failure(let error):
+        self.logger?.log(.component(.trade(.quoteDataError)))
+        self.error.value = error
+      }
+    }
+  }
+
+  func createQuoteDataModel(with quoteBankModel: QuoteBankModel) -> TradeConfirmationModalView.DataModel? {
+    guard
+      let receiveAmount = quoteBankModel.receiveAmount,
+      let deliverAmount = quoteBankModel.deliverAmount,
+      let cryptoAsset = cryptoCurrency.value?.asset
+    else {
+      return nil
+    }
+    var cryptoAmount: BigInt
+    var fiatAmount: BigInt
+    switch segmentSelection.value {
+    case .buy:
+      cryptoAmount = receiveAmount
+      fiatAmount = deliverAmount
+    case .sell:
+      cryptoAmount = deliverAmount
+      fiatAmount = receiveAmount
+    }
+    let fiatCode = fiatCurrency.asset.code
+    let fiatDecimal = BigDecimal(fiatAmount, precision: fiatCurrency.asset.decimals)
+    let formattedFiatAmount = CybridCurrencyFormatter.formatPrice(fiatDecimal, with: fiatCurrency.asset.symbol)
+    let feeDecimal = BigDecimal(quoteBankModel.fee ?? 0, precision: fiatCurrency.asset.decimals)
+    let formattedFeeAmount = CybridCurrencyFormatter.formatPrice(feeDecimal, with: fiatCurrency.asset.symbol)
+    let cryptoDecimal = BigDecimal(cryptoAmount, precision: cryptoAsset.decimals)
+    let formattedCryptoAmount = CybridCurrencyFormatter.formatPrice(cryptoDecimal, with: "")
+    return .init(fiatAmount: formattedFiatAmount,
+                 fiatCode: fiatCode,
+                 cryptoAmount: formattedCryptoAmount,
+                 cryptoCode: cryptoAsset.code,
+                 transactionFee: formattedFeeAmount,
+                 quoteType: segmentSelection.value)
+  }
+
+  func confirmOperation() {
+    // TODO: Replace with service call
+    tradeSuccessModel.value = .init(
+      transactionId: "#980019", // FIXME: Remove mocked data
+      date: "August 16, 2022", // FIXME: Remove mocked data
+      fiatAmount: amountText.value ?? "",
+      fiatCode: fiatCurrency.asset.code,
+      cryptoAmount: displayAmount.value ?? "",
+      cryptoCode: cryptoCurrency.value?.asset.code ?? "",
+      transactionFee: "$2.59", // FIXME: Remove mocked data
+      quoteType: segmentSelection.value
+    )
+  }
+
   @objc
   func segmentedControlValueChanged(_ sender: UISegmentedControl) {
-    guard let selectedIndex = TradeSegment(rawValue: sender.selectedSegmentIndex) else { return }
+    guard let selectedIndex = TradeType(rawValue: sender.selectedSegmentIndex) else { return }
     self.segmentSelection.value = selectedIndex
   }
 
@@ -202,32 +310,6 @@ extension TradeViewModel: UITextFieldDelegate {
         try amountBigDecimal.divide(by: priceRateBigDecimal, targetPrecision: targetPrecision)
       }, errorEvent: .component(.trade(.priceDataError)))
     return CybridCurrencyFormatter.formatPrice(conversionAmount, with: symbol) + " " + code
-  }
-
-  func createQuote() {
-    // TODO: Replace with service call
-    generatedQuoteModel.value = .init(
-      fiatAmount: amountText.value ?? "",
-      fiatCode: fiatCurrency.asset.code,
-      cryptoAmount: displayAmount.value ?? "",
-      cryptoCode: cryptoCurrency.value?.asset.code ?? "",
-      transactionFee: "$2.59",
-      quoteType: segmentSelection.value == .buy ? .buy : .sell
-    )
-  }
-
-  func confirmOperation() {
-    // TODO: Replace with service call
-    tradeSuccessModel.value = .init(
-      transactionId: "#980019", // FIXME: Remove mocked data
-      date: "August 16, 2022", // FIXME: Remove mocked data
-      fiatAmount: amountText.value ?? "",
-      fiatCode: fiatCurrency.asset.code,
-      cryptoAmount: displayAmount.value ?? "",
-      cryptoCode: cryptoCurrency.value?.asset.code ?? "",
-      transactionFee: "$2.59", // FIXME: Remove mocked data
-      quoteType: segmentSelection.value == .buy ? .buy : .sell
-    )
   }
 }
 
