@@ -130,9 +130,8 @@ extension AccountsViewModel: UITableViewDelegate, UITableViewDataSource {
   public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     cellProvider.tableView(tableView, cellForRowAt: indexPath, withData: balances.value[indexPath.row])
   }
-
+    
   func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-    //let view = CryptoPriceTableHeaderView(delegate: self)
-    return nil
+      return AccountsTableHeaderCell()
   }
 }

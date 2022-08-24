@@ -133,6 +133,7 @@
 		92B97C4728B43CE40061D6BA /* CybridCore.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92B97C4628B43CE40061D6BA /* CybridCore.xcframework */; };
 		92B97C4928B43CFF0061D6BA /* BigDecimalPipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B97C4828B43CFF0061D6BA /* BigDecimalPipe.swift */; };
 		92B97C4B28B4564D0061D6BA /* BigDecimalPipeNew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B97C4A28B4564D0061D6BA /* BigDecimalPipeNew.swift */; };
+		92B97C4E28B67D560061D6BA /* AccountsTableHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B97C4D28B67D560061D6BA /* AccountsTableHeaderCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -301,6 +302,7 @@
 		92B97C4628B43CE40061D6BA /* CybridCore.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = CybridCore.xcframework; sourceTree = "<group>"; };
 		92B97C4828B43CFF0061D6BA /* BigDecimalPipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigDecimalPipe.swift; sourceTree = "<group>"; };
 		92B97C4A28B4564D0061D6BA /* BigDecimalPipeNew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigDecimalPipeNew.swift; sourceTree = "<group>"; };
+		92B97C4D28B67D560061D6BA /* AccountsTableHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsTableHeaderCell.swift; sourceTree = "<group>"; };
 		B405213090797F42FC2D6B61 /* Pods-Abstract-CybridSDK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Abstract-CybridSDK.debug.xcconfig"; path = "Target Support Files/Pods-Abstract-CybridSDK/Pods-Abstract-CybridSDK.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -922,6 +924,7 @@
 		9224373128AEA102008E73F2 /* Accounts */ = {
 			isa = PBXGroup;
 			children = (
+				92B97C4C28B67BA30061D6BA /* Cell */,
 				9224373228AEA141008E73F2 /* AccountAssetPriceModel.swift */,
 				9224373428AEA18F008E73F2 /* AccountsViewModel.swift */,
 				924992F128AFEC8000386012 /* AccountsViewController.swift */,
@@ -937,6 +940,14 @@
 				92B97C4A28B4564D0061D6BA /* BigDecimalPipeNew.swift */,
 			);
 			path = Pipes;
+			sourceTree = "<group>";
+		};
+		92B97C4C28B67BA30061D6BA /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				92B97C4D28B67D560061D6BA /* AccountsTableHeaderCell.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1254,6 +1265,7 @@
 				92B97C3528B3D1AA0061D6BA /* Util.swift in Sources */,
 				92B97C4928B43CFF0061D6BA /* BigDecimalPipe.swift in Sources */,
 				0BD661372872BB0A00F4DA6B /* AssetPathBuilder.swift in Sources */,
+				92B97C4E28B67D560061D6BA /* AccountsTableHeaderCell.swift in Sources */,
 				0B00E034287F6D1000707F26 /* CybridAuthenticator.swift in Sources */,
 				0BD660F7286B761200F4DA6B /* NetworkingInterfaces.swift in Sources */,
 				0B00E01D28789ADA00707F26 /* SBigDecimal.swift in Sources */,

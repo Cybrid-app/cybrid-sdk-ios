@@ -16,6 +16,8 @@ public final class AccountsViewController: UIViewController {
 
     // -- UI Vars
     let accountTile = UILabel()
+    let accountValueTile = UILabel()
+    let accountsTable = UITableView()
 
     public init() {
 
@@ -40,17 +42,19 @@ public final class AccountsViewController: UIViewController {
     func setupView() {
 
         view.backgroundColor = .white
-        self.setupBalaceView()
+        self.setupBalanceView()
+        self.setupTableView()
     }
 
-    func setupBalaceView() {
+    func setupBalanceView() {
 
         self.createAccountTitle()
         self.createAccountValueTitle()
     }
-    
+
     func setupTableView() {
-        
+
+        self.createAccountsTable()
     }
 }
 
@@ -91,7 +95,6 @@ extension AccountsViewController {
 
     private func createAccountValueTitle(value: String = "$116,256.56 USD") {
 
-        let accountValueTile = UILabel()
         accountValueTile.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         accountValueTile.translatesAutoresizingMaskIntoConstraints = false
         accountValueTile.sizeToFit()
@@ -122,11 +125,51 @@ extension AccountsViewController {
                                     attribute: .notAnAttribute,
                                     constant: 40)
     }
-    
-    private func createAccountsTable() {}
+
+    private func createAccountsTable() {
+
+        self.accountsTable.delegate = self.accountsViewModel
+        self.accountsTable.dataSource = self.accountsViewModel
+        self.accountsTable.register(CryptoPriceTableViewCell.self, forCellReuseIdentifier: CryptoPriceTableViewCell.reuseIdentifier)
+        self.accountsTable.rowHeight = 100
+        self.accountsTable.estimatedRowHeight = 100
+        self.accountsTable.translatesAutoresizingMaskIntoConstraints = false
+        self.accountsTable.makeKeyboardHandler()
+
+        // -- Constraints
+        self.view.addSubview(self.accountsTable)
+        self.accountsTable.translatesAutoresizingMaskIntoConstraints = false
+        accountsTable.backgroundColor = UIColor.green
+        accountsTable.constraint(attribute: .top,
+                                 relatedBy: .equal,
+                                 toItem: self.accountValueTile,
+                                 attribute: .bottom,
+                                 constant: 40)
+        accountsTable.constraint(attribute: .bottom,
+                                 relatedBy: .equal,
+                                 toItem: self.view,
+                                 attribute: .bottomMargin,
+                                 constant: 4)
+        accountsTable.constraint(attribute: .leading,
+                                 relatedBy: .equal,
+                                 toItem: self.view,
+                                 attribute: .leading,
+                                 constant: 10)
+        accountsTable.constraint(attribute: .trailing,
+                                 relatedBy: .equal,
+                                 toItem: self.view,
+                                 attribute: .trailing,
+                                 constant: -10)
+
+        // -- Live Data
+        accountsViewModel.balances.bind { _ in
+            self.accountsTable.reloadData()
+        }
+    }
 }
 
 extension AccountsViewController: AccountsViewProvider {
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath, withData dataModel: AccountAssetPriceModel) -> UITableViewCell {
         return UITableViewCell()
     }
