@@ -130,7 +130,7 @@ extension AccountsViewController {
 
         self.accountsTable.delegate = self.accountsViewModel
         self.accountsTable.dataSource = self.accountsViewModel
-        self.accountsTable.register(CryptoPriceTableViewCell.self, forCellReuseIdentifier: CryptoPriceTableViewCell.reuseIdentifier)
+        self.accountsTable.register(AccountsCell.self, forCellReuseIdentifier: AccountsCell.reuseIdentifier)
         self.accountsTable.rowHeight = 100
         self.accountsTable.estimatedRowHeight = 100
         self.accountsTable.translatesAutoresizingMaskIntoConstraints = false
@@ -139,7 +139,6 @@ extension AccountsViewController {
         // -- Constraints
         self.view.addSubview(self.accountsTable)
         self.accountsTable.translatesAutoresizingMaskIntoConstraints = false
-        accountsTable.backgroundColor = UIColor.green
         accountsTable.constraint(attribute: .top,
                                  relatedBy: .equal,
                                  toItem: self.accountValueTile,
@@ -169,8 +168,16 @@ extension AccountsViewController {
 }
 
 extension AccountsViewController: AccountsViewProvider {
-
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath, withData dataModel: AccountAssetPriceModel) -> UITableViewCell {
-        return UITableViewCell()
+        
+        guard
+            let cell = tableView.dequeueReusableCell(
+                withIdentifier: AccountsCell.reuseIdentifier,
+                for: indexPath) as? AccountsCell
+        else {
+            return UITableViewCell()
+        }
+        cell.setData(balance: dataModel)
+        return cell
     }
 }

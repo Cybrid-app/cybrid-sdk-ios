@@ -13,6 +13,7 @@ import CybridCore
 struct AccountAssetPriceModel {
 
     let accountAssetCode: String // BTC
+    let accountAssetURL: String // http://
     let accountBalance: BigDecimal // 12
     let accountBalanceFormatted: BigDecimal
     let accountBalanceFormattedString: String
@@ -64,6 +65,7 @@ struct AccountAssetPriceModel {
         let accountBalanceInFiatFormatted = BigDecimalPipe.transform(value: accountBalanceInFiat, asset: counterAsset)
 
         self.accountAssetCode = account.asset ?? ""
+        self.accountAssetURL = Cybrid.getCryptoIconURLString(with: self.accountAssetCode)
         self.accountBalance = balanceValue
         self.accountBalanceFormatted = balanceValueFormatted
         self.accountBalanceFormattedString = balanceValueFormattedString

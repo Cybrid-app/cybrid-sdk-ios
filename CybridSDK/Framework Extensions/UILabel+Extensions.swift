@@ -8,6 +8,12 @@
 import UIKit
 
 extension UILabel {
+  
+  public enum Side {
+    case left
+    case right
+  }
+  
   static func makeLabel(with style: FormatStyle, _ onDidMake: @escaping (UILabel) -> Void) -> UILabel {
     let label = UILabel()
     label.formatLabel(with: style)
