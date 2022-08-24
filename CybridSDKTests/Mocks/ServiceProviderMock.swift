@@ -8,7 +8,10 @@
 import CybridApiBankSwift
 @testable import CybridSDK
 
-final class PriceListDataProviderMock: AssetsRepoProvider, PricesRepoProvider {
+final class ServiceProviderMock: AssetsRepoProvider,
+                                 PricesRepoProvider,
+                                 QuotesRepoProvider,
+                                 TradesRepoProvider {
   var apiManager: CybridAPIManager.Type = MockAPIManager.self
   var authenticator: CybridAuthenticator? = MockAuthenticator()
 
@@ -16,6 +19,8 @@ final class PriceListDataProviderMock: AssetsRepoProvider, PricesRepoProvider {
   var assetsRepository: AssetsRepository.Type = AssetsAPIMock.self
   var pricesRepository: PricesRepository.Type = PricesAPIMock.self
   var pricesFetchScheduler: TaskScheduler
+  var quotesRepository: QuotesRepository.Type = QuotesAPIMock.self
+  var tradesRepository: TradesRepository.Type = TradesAPIMock.self
 
   // MARK: Cache
   var assetsCache: [AssetBankModel]?
@@ -42,5 +47,21 @@ final class PriceListDataProviderMock: AssetsRepoProvider, PricesRepoProvider {
   func didFetchAssetsWithError() {
     (authenticator as? MockAuthenticator)?.authenticationSuccess()
     AssetsAPIMock.didFetchAssetsWithError()
+  }
+
+  func didCreateQuoteSuccessfully(_ dataModel: QuoteBankModel) {
+    QuotesAPIMock.didCreateQuoteSuccessfully(mockQuote: dataModel)
+  }
+
+  func didCreateQuoteFailed() {
+    QuotesAPIMock.didCreateQuoteFailed()
+  }
+
+  func didCreateTradeSuccessfully(_ dataModel: TradeBankModel) {
+    TradesAPIMock.didCreateTradeSuccessfully(mockTrade: dataModel)
+  }
+
+  func didCreateTradeFailed() {
+    TradesAPIMock.didCreateTradeFailed()
   }
 }

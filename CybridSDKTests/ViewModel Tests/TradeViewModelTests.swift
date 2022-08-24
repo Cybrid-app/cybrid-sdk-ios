@@ -12,7 +12,7 @@ import XCTest
 
 class TradeViewModelTests: XCTestCase {
   let pricesFetchScheduler = TaskSchedulerMock()
-  lazy var dataProvider = PriceListDataProviderMock(pricesFetchScheduler: pricesFetchScheduler)
+  lazy var dataProvider = ServiceProviderMock(pricesFetchScheduler: pricesFetchScheduler)
 
   func testViewModel_initialization() {
     // Given
@@ -335,77 +335,93 @@ class TradeViewModelTests: XCTestCase {
     XCTAssertEqual(viewModel.formatAndConvert("2019891"), "0.00")
   }
 
-  func testViewModel_createQuote() {
+  func testViewModel_createBuyQuote() {
     // Given
     let viewModel = createViewModel()
     viewModel.fetchPriceList()
     dataProvider.didFetchAssetsSuccessfully()
     dataProvider.didFetchPricesSuccessfully()
+    viewModel.amountText.value = "0.00012343"
 
     // When
     viewModel.createQuote()
+    dataProvider.didCreateQuoteSuccessfully(.buyBitcoin)
 
     // Then
     XCTAssertNotNil(viewModel.generatedQuoteModel.value)
     XCTAssertEqual(viewModel.generatedQuoteModel.value?.quoteType, .buy)
+    XCTAssertEqual(viewModel.generatedQuoteModel.value?.fiatAmount, "$2.68")
+    XCTAssertEqual(viewModel.generatedQuoteModel.value?.cryptoAmount, "0.00012343")
   }
 
-  func testViewModel_createQuote_alternative() {
+  func testViewModel_createSellQuote() {
     // Given
     let viewModel = createViewModel()
     viewModel.fetchPriceList()
     dataProvider.didFetchAssetsSuccessfully()
     dataProvider.didFetchPricesSuccessfully()
-    viewModel.cryptoCurrency.value = nil
     viewModel.segmentSelection.value = .sell
+    viewModel.amountText.value = "2.68"
 
     // When
     viewModel.createQuote()
+    dataProvider.didCreateQuoteSuccessfully(.sellBitcoin)
 
     // Then
     XCTAssertNotNil(viewModel.generatedQuoteModel.value)
-    XCTAssertEqual(viewModel.generatedQuoteModel.value?.cryptoCode, "")
     XCTAssertEqual(viewModel.generatedQuoteModel.value?.quoteType, .sell)
+    XCTAssertEqual(viewModel.generatedQuoteModel.value?.fiatAmount, "$2.68")
+    XCTAssertEqual(viewModel.generatedQuoteModel.value?.cryptoAmount, "0.00012343")
   }
 
-  func testViewModel_confirmOperation() {
+  func testViewModel_confirmBuyOperation() {
     // Given
     let viewModel = createViewModel()
     viewModel.fetchPriceList()
     dataProvider.didFetchAssetsSuccessfully()
     dataProvider.didFetchPricesSuccessfully()
-    viewModel.cryptoCurrency.value = nil
+    viewModel.amountText.value = "0.00012343"
+
+    // When
+    viewModel.createQuote()
+    dataProvider.didCreateQuoteSuccessfully(.buyBitcoin)
+    viewModel.confirmOperation()
+    dataProvider.didCreateTradeSuccessfully(.buyBitcoin)
+
+    // Then
+    XCTAssertNotNil(viewModel.tradeSuccessModel.value)
+    XCTAssertEqual(viewModel.tradeSuccessModel.value?.quoteType, .buy)
+    XCTAssertEqual(viewModel.tradeSuccessModel.value?.fiatAmount, "$2.68")
+    XCTAssertEqual(viewModel.tradeSuccessModel.value?.cryptoAmount, "0.00012343")
+  }
+
+  func testViewModel_confirmSellOperation() {
+    // Given
+    let viewModel = createViewModel()
+    viewModel.fetchPriceList()
+    dataProvider.didFetchAssetsSuccessfully()
+    dataProvider.didFetchPricesSuccessfully()
     viewModel.segmentSelection.value = .sell
+    viewModel.amountText.value = "2.68"
 
     // When
+    viewModel.createQuote()
+    dataProvider.didCreateQuoteSuccessfully(.sellBitcoin)
     viewModel.confirmOperation()
+    dataProvider.didCreateTradeSuccessfully(.sellBitcoin)
 
     // Then
     XCTAssertNotNil(viewModel.tradeSuccessModel.value)
-    XCTAssertEqual(viewModel.tradeSuccessModel.value?.cryptoCode, "")
     XCTAssertEqual(viewModel.tradeSuccessModel.value?.quoteType, .sell)
-  }
-
-  func testViewModel_confirmOperation_alternative() {
-    // Given
-    let viewModel = createViewModel()
-    viewModel.fetchPriceList()
-    dataProvider.didFetchAssetsSuccessfully()
-    dataProvider.didFetchPricesSuccessfully()
-
-    // When
-    viewModel.confirmOperation()
-
-    // Then
-    XCTAssertNotNil(viewModel.tradeSuccessModel.value)
+    XCTAssertEqual(viewModel.tradeSuccessModel.value?.fiatAmount, "$2.68")
+    XCTAssertEqual(viewModel.tradeSuccessModel.value?.cryptoAmount, "0.00012343")
   }
 }
 
 extension TradeViewModelTests {
-  func createViewModel(selectedCrypto: AssetBankModel = .bitcoin,
-                       dataProvider: (AssetsRepoProvider & PricesRepoProvider)? = nil) -> TradeViewModel {
+  func createViewModel(selectedCrypto: AssetBankModel = .bitcoin) -> TradeViewModel {
     return TradeViewModel(selectedCrypto: selectedCrypto,
-                          dataProvider: dataProvider ?? self.dataProvider,
+                          dataProvider: self.dataProvider,
                           logger: nil)
   }
 }

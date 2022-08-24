@@ -12,7 +12,7 @@ import XCTest
 class CryptoPriceViewModelTests: XCTestCase {
 
   let pricesFetchScheduler = TaskSchedulerMock()
-  lazy var dataProvider = PriceListDataProviderMock(pricesFetchScheduler: pricesFetchScheduler)
+  lazy var dataProvider = ServiceProviderMock(pricesFetchScheduler: pricesFetchScheduler)
 
   func testFetchData_withLiveUpdate_successfully() {
     // Given
@@ -87,7 +87,7 @@ class CryptoPriceViewModelTests: XCTestCase {
   func testPriceRepoProvider_MemoryDeallocation() {
     // Given
     let viewProvider = CryptoPriceMockViewProvider()
-    var optionalDataProvider: PriceListDataProviderMock? = PriceListDataProviderMock(pricesFetchScheduler: pricesFetchScheduler)
+    var optionalDataProvider: ServiceProviderMock? = ServiceProviderMock(pricesFetchScheduler: pricesFetchScheduler)
     var viewModel: CryptoPriceViewModel? = createViewModel(viewProvider: viewProvider, dataProvider: optionalDataProvider)
 
     // When
@@ -389,8 +389,15 @@ extension CryptoPriceViewModelTests {
 
 extension CryptoPriceViewModelTests {
   func createViewModel(viewProvider: CryptoPriceViewProvider,
-                       dataProvider: (AssetsRepoProvider & PricesRepoProvider)? = nil) -> CryptoPriceViewModel {
-    let viewModel = CryptoPriceViewModel(cellProvider: viewProvider, dataProvider: dataProvider ?? self.dataProvider, logger: nil)
+                       dataProvider: (AssetsRepoProvider
+                                      & PricesRepoProvider
+                                      & QuotesRepoProvider
+                                      & TradesRepoProvider)? = nil) -> CryptoPriceViewModel {
+    let viewModel = CryptoPriceViewModel(
+      cellProvider: viewProvider,
+      dataProvider: dataProvider ?? self.dataProvider,
+      logger: nil
+    )
     return viewModel
   }
 }
