@@ -99,6 +99,8 @@
 		0BBD0CE328B6BDFA001DBC5F /* QuoteMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BBD0CE228B6BDFA001DBC5F /* QuoteMock.swift */; };
 		0BBD0CE628B6C671001DBC5F /* TradesAPIMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BBD0CE528B6C671001DBC5F /* TradesAPIMock.swift */; };
 		0BBD0CE828B6C730001DBC5F /* TradeMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BBD0CE728B6C730001DBC5F /* TradeMock.swift */; };
+		0BBD0CEA28B7E7EE001DBC5F /* createQuoteResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 0BBD0CE928B7E6E6001DBC5F /* createQuoteResponse.json */; };
+		0BBD0CEC28B7EC17001DBC5F /* createTradeResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 0BBD0CEB28B7EC09001DBC5F /* createTradeResponse.json */; };
 		0BD0A4E728582FB700C10744 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 0BD0A4E628582FB700C10744 /* README.md */; };
 		0BD26F2428A55D4800ED2A1B /* CybridEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD26F2228A55D4800ED2A1B /* CybridEvent.swift */; };
 		0BD26F2528A55D4800ED2A1B /* CybridLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD26F2328A55D4800ED2A1B /* CybridLogger.swift */; };
@@ -256,6 +258,8 @@
 		0BBD0CE228B6BDFA001DBC5F /* QuoteMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteMock.swift; sourceTree = "<group>"; };
 		0BBD0CE528B6C671001DBC5F /* TradesAPIMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradesAPIMock.swift; sourceTree = "<group>"; };
 		0BBD0CE728B6C730001DBC5F /* TradeMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeMock.swift; sourceTree = "<group>"; };
+		0BBD0CE928B7E6E6001DBC5F /* createQuoteResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = createQuoteResponse.json; sourceTree = "<group>"; };
+		0BBD0CEB28B7EC09001DBC5F /* createTradeResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = createTradeResponse.json; sourceTree = "<group>"; };
 		0BD0A4E628582FB700C10744 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		0BD26F2228A55D4800ED2A1B /* CybridEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CybridEvent.swift; sourceTree = "<group>"; };
 		0BD26F2328A55D4800ED2A1B /* CybridLogger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CybridLogger.swift; sourceTree = "<group>"; };
@@ -508,6 +512,8 @@
 			isa = PBXGroup;
 			children = (
 				0B2899FD289467EE001B3360 /* listPricesResponse.json */,
+				0BBD0CE928B7E6E6001DBC5F /* createQuoteResponse.json */,
+				0BBD0CEB28B7EC09001DBC5F /* createTradeResponse.json */,
 				0BFF87542896267C00E44C74 /* listAssetsResponse.json */,
 				0B289A0128946F53001B3360 /* listLargestPricesResponse.json */,
 				0B2899FF28946B52001B3360 /* JSONMockHelper.swift */,
@@ -1037,10 +1043,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0BBD0CEA28B7E7EE001DBC5F /* createQuoteResponse.json in Resources */,
 				0B2899FE289467EE001B3360 /* listPricesResponse.json in Resources */,
 				0BFF8755289628EB00E44C74 /* listAssetsResponse.json in Resources */,
 				0B96601E285AF03700584692 /* TestAssets.xcassets in Resources */,
 				0B289A0228946F74001B3360 /* listLargestPricesResponse.json in Resources */,
+				0BBD0CEC28B7EC17001DBC5F /* createTradeResponse.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
