@@ -131,8 +131,8 @@ extension AccountsViewController {
         self.accountsTable.delegate = self.accountsViewModel
         self.accountsTable.dataSource = self.accountsViewModel
         self.accountsTable.register(AccountsCell.self, forCellReuseIdentifier: AccountsCell.reuseIdentifier)
-        self.accountsTable.rowHeight = 100
-        self.accountsTable.estimatedRowHeight = 100
+        self.accountsTable.rowHeight = 64
+        self.accountsTable.estimatedRowHeight = 64
         self.accountsTable.translatesAutoresizingMaskIntoConstraints = false
         self.accountsTable.makeKeyboardHandler()
 
@@ -168,8 +168,11 @@ extension AccountsViewController {
 }
 
 extension AccountsViewController: AccountsViewProvider {
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath, withData dataModel: AccountAssetPriceModel) -> UITableViewCell {
-        
+
+    func tableView(_ tableView: UITableView,
+                   cellForRowAt indexPath: IndexPath,
+                   withData dataModel: AccountAssetPriceModel) -> UITableViewCell {
+
         guard
             let cell = tableView.dequeueReusableCell(
                 withIdentifier: AccountsCell.reuseIdentifier,

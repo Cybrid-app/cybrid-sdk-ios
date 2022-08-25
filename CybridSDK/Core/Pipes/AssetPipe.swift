@@ -45,10 +45,8 @@ class AssetPipe {
         var returnValue = BigDecimal(value: 0)
         switch unit {
         case .trade:
-            print(tradeUnit)
             returnValue = tradeUnit
         case.base:
-            print(tradeUnit)
             returnValue = baseUnit
         }
         return returnValue

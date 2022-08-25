@@ -31,4 +31,26 @@ extension UILabel {
       text = text?.uppercased()
     }
   }
+  
+  func setAttributedText(mainText: String, mainTextFont: UIFont, mainTextColor: UIColor?, attributedText: String, attributedTextFont: UIFont, attributedTextColor: UIColor?, side: UILabel.Side) {
+    
+    let paragraphStyle = NSMutableParagraphStyle()
+    paragraphStyle.alignment = side == .left ? .left : .right
+    let attributedTitle = NSMutableAttributedString(
+      string: "\(mainText) \(attributedText)",
+      attributes: [
+        NSAttributedString.Key.paragraphStyle: paragraphStyle,
+        NSAttributedString.Key.foregroundColor: mainTextColor,
+        NSAttributedString.Key.font: mainTextFont
+      ]
+    )
+    attributedTitle.addAttributes(
+      [
+        NSAttributedString.Key.foregroundColor: attributedTextColor,
+        NSAttributedString.Key.font: attributedTextFont
+      ],
+      range: NSRange(location: mainText.count + 1, length: attributedText.count)
+    )
+    self.attributedText = attributedTitle
+  }
 }
