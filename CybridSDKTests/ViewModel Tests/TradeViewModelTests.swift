@@ -335,6 +335,10 @@ class TradeViewModelTests: XCTestCase {
     XCTAssertEqual(viewModel.formatAndConvert("2019891"), "0.00")
   }
 
+}
+
+// MARK: - Buy and Sell tests
+extension TradeViewModelTests {
   func testViewModel_createBuyQuote() {
     // Given
     let viewModel = createViewModel()
@@ -352,6 +356,107 @@ class TradeViewModelTests: XCTestCase {
     XCTAssertEqual(viewModel.generatedQuoteModel.value?.quoteType, .buy)
     XCTAssertEqual(viewModel.generatedQuoteModel.value?.fiatAmount, "$2.68")
     XCTAssertEqual(viewModel.generatedQuoteModel.value?.cryptoAmount, "0.00012343")
+  }
+
+  func testViewModel_createBuyQuote_withCurrencyInput() {
+    // Given
+    let viewModel = createViewModel()
+    viewModel.fetchPriceList()
+    dataProvider.didFetchAssetsSuccessfully()
+    dataProvider.didFetchPricesSuccessfully()
+    viewModel.amountText.value = "0.00012343"
+    viewModel.didTapConversionSwitchButton()
+    let expectedInputAmount = "12343"
+    let expectedCrypto = "573107"
+    let expectedQuote = QuoteBankModel(
+      guid: QuoteBankModel.buyBitcoin.guid,
+      productType: QuoteBankModel.buyBitcoin.productType,
+      customerGuid: QuoteBankModel.buyBitcoin.customerGuid,
+      symbol: QuoteBankModel.buyBitcoin.symbol,
+      asset: QuoteBankModel.buyBitcoin.asset,
+      side: QuoteBankModel.buyBitcoin.side,
+      receiveAmount: BigInt(stringLiteral: expectedCrypto),
+      deliverAmount: BigInt(stringLiteral: expectedInputAmount),
+      fee: QuoteBankModel.buyBitcoin.fee,
+      issuedAt: QuoteBankModel.buyBitcoin.issuedAt,
+      expiresAt: QuoteBankModel.buyBitcoin.expiresAt,
+      productProvider: QuoteBankModel.buyBitcoin.productProvider
+    )
+
+    // When
+    viewModel.createQuote()
+    dataProvider.didCreateQuoteSuccessfully(expectedQuote)
+
+    // Then
+    XCTAssertNotNil(viewModel.generatedQuoteModel.value)
+    XCTAssertEqual(viewModel.generatedQuoteModel.value?.quoteType, .buy)
+    XCTAssertEqual(viewModel.generatedQuoteModel.value?.fiatAmount, "$123.43")
+    XCTAssertEqual(viewModel.generatedQuoteModel.value?.cryptoAmount, "0.00573107")
+  }
+
+  func testViewModel_createBuyQuote_withInvalidData() {
+    // Given
+    let viewModel = createViewModel()
+    viewModel.fetchPriceList()
+    dataProvider.didFetchAssetsSuccessfully()
+    dataProvider.didFetchPricesSuccessfully()
+    viewModel.amountText.value = "0.00012343"
+
+    // When
+    viewModel.createQuote()
+    dataProvider.didCreateQuoteSuccessfully(.invalidQuote)
+
+    // Then
+    XCTAssertNil(viewModel.generatedQuoteModel.value)
+  }
+
+  func testViewModel_createBuyQuote_withoutAmount() {
+    // Given
+    let viewModel = createViewModel()
+    viewModel.fetchPriceList()
+    dataProvider.didFetchAssetsSuccessfully()
+    dataProvider.didFetchPricesSuccessfully()
+
+    // When
+    viewModel.createQuote()
+    dataProvider.didCreateQuoteSuccessfully(.buyBitcoin)
+
+    // Then
+    XCTAssertNil(viewModel.generatedQuoteModel.value)
+  }
+
+  func testViewModel_createBuyQuote_withNoFee() {
+    // Given
+    let viewModel = createViewModel()
+    viewModel.fetchPriceList()
+    dataProvider.didFetchAssetsSuccessfully()
+    dataProvider.didFetchPricesSuccessfully()
+    viewModel.amountText.value = "0.00012343"
+
+    // When
+    viewModel.createQuote()
+    dataProvider.didCreateQuoteSuccessfully(.buyBitcoinZeroFee)
+
+    // Then
+    XCTAssertNotNil(viewModel.generatedQuoteModel.value)
+    XCTAssertEqual(viewModel.generatedQuoteModel.value?.quoteType, .buy)
+    XCTAssertEqual(viewModel.generatedQuoteModel.value?.transactionFee, "$0.00")
+  }
+
+  func testViewModel_createBuyQuote_failure() {
+    // Given
+    let viewModel = createViewModel()
+    viewModel.fetchPriceList()
+    dataProvider.didFetchAssetsSuccessfully()
+    dataProvider.didFetchPricesSuccessfully()
+    viewModel.amountText.value = "0.00012343"
+
+    // When
+    viewModel.createQuote()
+    dataProvider.didCreateQuoteFailed()
+
+    // Then
+    XCTAssertNil(viewModel.generatedQuoteModel.value)
   }
 
   func testViewModel_createSellQuote() {
@@ -374,6 +479,43 @@ class TradeViewModelTests: XCTestCase {
     XCTAssertEqual(viewModel.generatedQuoteModel.value?.cryptoAmount, "0.00012343")
   }
 
+  func testViewModel_createSellQuote_withCurrencyInput() {
+    // Given
+    let viewModel = createViewModel()
+    viewModel.fetchPriceList()
+    dataProvider.didFetchAssetsSuccessfully()
+    dataProvider.didFetchPricesSuccessfully()
+    viewModel.amountText.value = "0.00012343"
+    viewModel.didTapConversionSwitchButton()
+    viewModel.segmentSelection.value = .sell
+    let expectedInputAmount = "12343"
+    let expectedCrypto = "573107"
+    let expectedQuote = QuoteBankModel(
+      guid: QuoteBankModel.sellBitcoin.guid,
+      productType: QuoteBankModel.sellBitcoin.productType,
+      customerGuid: QuoteBankModel.sellBitcoin.customerGuid,
+      symbol: QuoteBankModel.sellBitcoin.symbol,
+      asset: QuoteBankModel.sellBitcoin.asset,
+      side: QuoteBankModel.sellBitcoin.side,
+      receiveAmount: BigInt(stringLiteral: expectedInputAmount),
+      deliverAmount: BigInt(stringLiteral: expectedCrypto),
+      fee: QuoteBankModel.sellBitcoin.fee,
+      issuedAt: QuoteBankModel.sellBitcoin.issuedAt,
+      expiresAt: QuoteBankModel.sellBitcoin.expiresAt,
+      productProvider: QuoteBankModel.sellBitcoin.productProvider
+    )
+
+    // When
+    viewModel.createQuote()
+    dataProvider.didCreateQuoteSuccessfully(expectedQuote)
+
+    // Then
+    XCTAssertNotNil(viewModel.generatedQuoteModel.value)
+    XCTAssertEqual(viewModel.generatedQuoteModel.value?.quoteType, .sell)
+    XCTAssertEqual(viewModel.generatedQuoteModel.value?.fiatAmount, "$123.43")
+    XCTAssertEqual(viewModel.generatedQuoteModel.value?.cryptoAmount, "0.00573107")
+  }
+
   func testViewModel_confirmBuyOperation() {
     // Given
     let viewModel = createViewModel()
@@ -393,6 +535,78 @@ class TradeViewModelTests: XCTestCase {
     XCTAssertEqual(viewModel.tradeSuccessModel.value?.quoteType, .buy)
     XCTAssertEqual(viewModel.tradeSuccessModel.value?.fiatAmount, "$2.68")
     XCTAssertEqual(viewModel.tradeSuccessModel.value?.cryptoAmount, "0.00012343")
+  }
+
+  func testViewModel_confirmBuyOperation_withoutQuoteGUID() {
+    // Given
+    let viewModel = createViewModel()
+    viewModel.fetchPriceList()
+    dataProvider.didFetchAssetsSuccessfully()
+    dataProvider.didFetchPricesSuccessfully()
+    viewModel.amountText.value = "0.00012343"
+
+    // When
+    viewModel.confirmOperation()
+    dataProvider.didCreateTradeSuccessfully(.buyBitcoin)
+
+    // Then
+    XCTAssertNil(viewModel.tradeSuccessModel.value)
+  }
+
+  func testViewModel_confirmBuyOperation_withInvalidData() {
+    // Given
+    let viewModel = createViewModel()
+    viewModel.fetchPriceList()
+    dataProvider.didFetchAssetsSuccessfully()
+    dataProvider.didFetchPricesSuccessfully()
+    viewModel.amountText.value = "0.00012343"
+
+    // When
+    viewModel.createQuote()
+    dataProvider.didCreateQuoteSuccessfully(.buyBitcoin)
+    viewModel.confirmOperation()
+    dataProvider.didCreateTradeSuccessfully(.invalidData)
+
+    // Then
+    XCTAssertNil(viewModel.tradeSuccessModel.value)
+  }
+
+  func testViewModel_confirmBuyOperation_withNoFee() {
+    // Given
+    let viewModel = createViewModel()
+    viewModel.fetchPriceList()
+    dataProvider.didFetchAssetsSuccessfully()
+    dataProvider.didFetchPricesSuccessfully()
+    viewModel.amountText.value = "0.00012343"
+
+    // When
+    viewModel.createQuote()
+    dataProvider.didCreateQuoteSuccessfully(.buyBitcoinZeroFee)
+    viewModel.confirmOperation()
+    dataProvider.didCreateTradeSuccessfully(.buyBitcoinZeroFee)
+
+    // Then
+    XCTAssertNotNil(viewModel.tradeSuccessModel.value)
+    XCTAssertEqual(viewModel.tradeSuccessModel.value?.quoteType, .buy)
+    XCTAssertEqual(viewModel.tradeSuccessModel.value?.transactionFee, "$0.00")
+  }
+
+  func testViewModel_confirmBuyOperation_failure() {
+    // Given
+    let viewModel = createViewModel()
+    viewModel.fetchPriceList()
+    dataProvider.didFetchAssetsSuccessfully()
+    dataProvider.didFetchPricesSuccessfully()
+    viewModel.amountText.value = "0.00012343"
+
+    // When
+    viewModel.createQuote()
+    dataProvider.didCreateQuoteSuccessfully(.buyBitcoin)
+    viewModel.confirmOperation()
+    dataProvider.didCreateTradeFailed()
+
+    // Then
+    XCTAssertNil(viewModel.tradeSuccessModel.value)
   }
 
   func testViewModel_confirmSellOperation() {
