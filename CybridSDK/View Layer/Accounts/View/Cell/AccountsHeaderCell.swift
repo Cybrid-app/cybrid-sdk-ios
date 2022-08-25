@@ -7,7 +7,7 @@
 
 import UIKit
 
-class AccountsTableHeaderCell: UITableViewHeaderFooterView {
+class AccountsHeaderCell: UITableViewHeaderFooterView {
 
     private let localizer: Localizer
     private var currentCurrency: String = "USD"
@@ -65,7 +65,7 @@ class AccountsTableHeaderCell: UITableViewHeaderFooterView {
     }
 }
 
-extension AccountsTableHeaderCell {
+extension AccountsHeaderCell {
 
     private func createTitleLabel() -> UILabel {
 
@@ -161,7 +161,7 @@ extension AccountsTableHeaderCell {
     }
 }
 
-extension AccountsTableHeaderCell {
+extension AccountsHeaderCell {
 
     enum UIValues {
 

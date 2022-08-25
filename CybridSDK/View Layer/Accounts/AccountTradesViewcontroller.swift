@@ -76,6 +76,7 @@ extension AccountTradesViewController {
 
     private func createBalanceTitles() {
 
+        // -- Balancr Value
         let balanceValueView = UILabel()
         balanceValueView.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         balanceValueView.translatesAutoresizingMaskIntoConstraints = false
@@ -93,6 +94,25 @@ extension AccountTradesViewController {
             toItem: assetTitleContainer,
             height: UIValues.balanceValueViewSize,
             margins: UIValues.balanceValueViewMargin)
+
+        // -- Balance Fiat Value
+        let balanceFiatValueView = UILabel()
+        balanceFiatValueView.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+        balanceFiatValueView.translatesAutoresizingMaskIntoConstraints = false
+        balanceFiatValueView.sizeToFit()
+        balanceFiatValueView.font = UIValues.balanceFiatValueFont
+        balanceFiatValueView.textColor = UIValues.balanceFiatValueColor
+        balanceFiatValueView.textAlignment = .center
+        balanceFiatValueView.setAttributedText(mainText: balance.accountBalanceInFiatFormatted,
+                                               mainTextFont: UIValues.balanceFiatValueFont,
+                                               mainTextColor: UIValues.balanceFiatValueColor,
+                                               attributedText: balance.pairAsset?.code ?? "",
+                                               attributedTextFont: UIValues.balanceFiatValueCodeFont,
+                                               attributedTextColor: UIValues.balanceFiatValueCodeColor)
+        balanceFiatValueView.addBelow(
+            toItem: balanceValueView,
+            height: UIValues.balanceFiatValueViewSize,
+            margins: UIValues.balanceFiatValueViewMargins)
     }
 
     private func centerHorizontalView(container: UIStackView) {
@@ -131,15 +151,21 @@ extension AccountTradesViewController {
         static let balanceAssetNameMargin = UIEdgeInsets(top: 4, left: 10, bottom: 0, right: 0)
         static let balanceValueViewMargin = UIEdgeInsets(top: 19, left: 10, bottom: 0, right: 10)
         static let balanceValueViewSize: CGFloat = 35
+        static let balanceFiatValueViewMargins = UIEdgeInsets(top: 2, left: 10, bottom: 0, right: 10)
+        static let balanceFiatValueViewSize: CGFloat = 23
 
         // -- Fonts
         static let balanceAssetNameFont = UIFont.make(ofSize: 16.5, weight: .medium)
         static let balanceValueViewFont = UIFont.make(ofSize: 28)
         static let balanceValueCodeViewFont = UIFont.make(ofSize: 18)
+        static let balanceFiatValueFont = UIFont.make(ofSize: 17)
+        static let balanceFiatValueCodeFont = UIFont.make(ofSize: 17)
 
         // -- Colors
         static let balanceAssetNameColor = UIColor(hex: "#3A3A3C")
         static let balanceValueViewColor = UIColor.black
         static let balanceValueCodeViewColor = UIColor(hex: "#8E8E93")
+        static let balanceFiatValueColor = UIColor(hex: "#636366")
+        static let balanceFiatValueCodeColor = UIColor(hex: "#757575")
     }
 }

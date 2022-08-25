@@ -133,7 +133,7 @@
 		92B97C3D28B3F1E70061D6BA /* AssetPipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B97C3C28B3F1E70061D6BA /* AssetPipe.swift */; };
 		92B97C4728B43CE40061D6BA /* CybridCore.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92B97C4628B43CE40061D6BA /* CybridCore.xcframework */; };
 		92B97C4928B43CFF0061D6BA /* BigDecimalPipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B97C4828B43CFF0061D6BA /* BigDecimalPipe.swift */; };
-		92B97C4E28B67D560061D6BA /* AccountsTableHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B97C4D28B67D560061D6BA /* AccountsTableHeaderCell.swift */; };
+		92B97C4E28B67D560061D6BA /* AccountsHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B97C4D28B67D560061D6BA /* AccountsHeaderCell.swift */; };
 		92B97C5028B6B4F10061D6BA /* AccountsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B97C4F28B6B4F00061D6BA /* AccountsCell.swift */; };
 		92B97C5228B6C9C90061D6BA /* UIFont+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B97C5128B6C9C90061D6BA /* UIFont+Extensions.swift */; };
 /* End PBXBuildFile section */
@@ -304,7 +304,7 @@
 		92B97C3C28B3F1E70061D6BA /* AssetPipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetPipe.swift; sourceTree = "<group>"; };
 		92B97C4628B43CE40061D6BA /* CybridCore.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = CybridCore.xcframework; sourceTree = "<group>"; };
 		92B97C4828B43CFF0061D6BA /* BigDecimalPipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigDecimalPipe.swift; sourceTree = "<group>"; };
-		92B97C4D28B67D560061D6BA /* AccountsTableHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsTableHeaderCell.swift; sourceTree = "<group>"; };
+		92B97C4D28B67D560061D6BA /* AccountsHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsHeaderCell.swift; sourceTree = "<group>"; };
 		92B97C4F28B6B4F00061D6BA /* AccountsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsCell.swift; sourceTree = "<group>"; };
 		92B97C5128B6C9C90061D6BA /* UIFont+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extensions.swift"; sourceTree = "<group>"; };
 		B405213090797F42FC2D6B61 /* Pods-Abstract-CybridSDK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Abstract-CybridSDK.debug.xcconfig"; path = "Target Support Files/Pods-Abstract-CybridSDK/Pods-Abstract-CybridSDK.debug.xcconfig"; sourceTree = "<group>"; };
@@ -966,7 +966,7 @@
 		92B97C4C28B67BA30061D6BA /* Cell */ = {
 			isa = PBXGroup;
 			children = (
-				92B97C4D28B67D560061D6BA /* AccountsTableHeaderCell.swift */,
+				92B97C4D28B67D560061D6BA /* AccountsHeaderCell.swift */,
 				92B97C4F28B6B4F00061D6BA /* AccountsCell.swift */,
 			);
 			path = Cell;
@@ -1288,7 +1288,7 @@
 				92B97C4928B43CFF0061D6BA /* BigDecimalPipe.swift in Sources */,
 				0BD661372872BB0A00F4DA6B /* AssetPathBuilder.swift in Sources */,
 				92B8097528B7C1A200EA5F2F /* AccountTradesViewcontroller.swift in Sources */,
-				92B97C4E28B67D560061D6BA /* AccountsTableHeaderCell.swift in Sources */,
+				92B97C4E28B67D560061D6BA /* AccountsHeaderCell.swift in Sources */,
 				92B97C5028B6B4F10061D6BA /* AccountsCell.swift in Sources */,
 				0B00E034287F6D1000707F26 /* CybridAuthenticator.swift in Sources */,
 				0BD660F7286B761200F4DA6B /* NetworkingInterfaces.swift in Sources */,

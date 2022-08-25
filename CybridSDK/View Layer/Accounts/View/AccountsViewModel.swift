@@ -152,7 +152,7 @@ extension AccountsViewModel: UITableViewDelegate, UITableViewDataSource {
   }
 
   func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-      return AccountsTableHeaderCell(currency: self.currentCurrency)
+      return AccountsHeaderCell(currency: self.currentCurrency)
   }
 
   public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
