@@ -186,7 +186,7 @@ extension AccountsViewController: AccountsViewProvider {
 
         let accountTradesViewController = AccountTradesViewController(
             balance: balance,
-            viewModel: accountsViewModel)
+            accountsViewModel: accountsViewModel)
 
         if self.navigationController != nil {
             self.navigationController?.pushViewController(accountTradesViewController, animated: true)

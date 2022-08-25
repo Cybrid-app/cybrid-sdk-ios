@@ -11,7 +11,8 @@ import UIKit
 public final class AccountTradesViewController: UIViewController {
 
     private var balance: AccountAssetPriceModel!
-    private var viewModel: AccountsViewModel!
+    private var accountsViewModel: AccountsViewModel!
+    private var tradesViewModel: AccountTradeViewModel!
 
     private var theme: Theme!
     private var localizer: Localizer!
@@ -21,13 +22,18 @@ public final class AccountTradesViewController: UIViewController {
     var balanceAssetName: UILabel!
     var assetTitleContainer: UIStackView!
 
-    internal init(balance: AccountAssetPriceModel, viewModel: AccountsViewModel) {
+    internal init(balance: AccountAssetPriceModel, accountsViewModel: AccountsViewModel) {
 
         super.init(nibName: nil, bundle: nil)
         self.balance = balance
-        self.viewModel = viewModel
+        self.accountsViewModel = accountsViewModel
+        self.tradesViewModel = AccountTradeViewModel(
+            dataProvider: CybridSession.current,
+            logger: Cybrid.logger)
         self.theme = Cybrid.theme
         self.localizer = CybridLocalizer()
+        
+        self.tradesViewModel.getTrades(accountGuid: balance.accountGuid)
         self.setupView()
     }
 

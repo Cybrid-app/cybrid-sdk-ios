@@ -26,3 +26,12 @@ func stringValue(forKey key: String, in jsonData: Data, atIndex index: Int = 0) 
   guard keyValueSplit.count == 2, let value = keyValueSplit.last else { return nil }
   return String(describing: value).trimmingCharacters(in: recurrentCharacters)
 }
+
+func getDate(stringDate: String) -> Date? {
+    
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+    dateFormatter.timeZone = TimeZone.current
+    dateFormatter.locale = Locale.current
+    return dateFormatter.date(from: stringDate)
+}
