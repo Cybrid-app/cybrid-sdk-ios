@@ -927,12 +927,28 @@
 		9224373128AEA102008E73F2 /* Accounts */ = {
 			isa = PBXGroup;
 			children = (
-				92B97C4C28B67BA30061D6BA /* Cell */,
-				9224373228AEA141008E73F2 /* AccountAssetPriceModel.swift */,
-				9224373428AEA18F008E73F2 /* AccountsViewModel.swift */,
+				92B8097328B7B8B800EA5F2F /* Entity */,
+				92B8097228B7B8A200EA5F2F /* View */,
 				924992F128AFEC8000386012 /* AccountsViewController.swift */,
 			);
 			path = Accounts;
+			sourceTree = "<group>";
+		};
+		92B8097228B7B8A200EA5F2F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				9224373428AEA18F008E73F2 /* AccountsViewModel.swift */,
+				92B97C4C28B67BA30061D6BA /* Cell */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		92B8097328B7B8B800EA5F2F /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+				9224373228AEA141008E73F2 /* AccountAssetPriceModel.swift */,
+			);
+			path = Entity;
 			sourceTree = "<group>";
 		};
 		92B97C3B28B3F1D70061D6BA /* Pipes */ = {

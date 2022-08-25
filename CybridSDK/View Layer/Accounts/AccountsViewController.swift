@@ -141,7 +141,6 @@ extension AccountsViewController {
         self.accountsTable.rowHeight = UIValues.accountsTableRowHeight
         self.accountsTable.estimatedRowHeight = UIValues.accountsTableRowHeight
         self.accountsTable.translatesAutoresizingMaskIntoConstraints = false
-        self.accountsTable.makeKeyboardHandler()
 
         // -- Constraints
         self.view.addSubview(self.accountsTable)
@@ -189,6 +188,12 @@ extension AccountsViewController: AccountsViewProvider {
         }
         cell.setData(balance: dataModel)
         return cell
+    }
+
+    func tableView(_ tableView: UITableView,
+                   didSelectRowAt indexPath: IndexPath,
+                   withBalance balance: AccountAssetPriceModel) {
+        print(balance.assetName)
     }
 }
 

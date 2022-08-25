@@ -136,6 +136,8 @@ class AccountsViewModel: NSObject {
 
 protocol AccountsViewProvider: AnyObject {
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath, withData dataModel: AccountAssetPriceModel) -> UITableViewCell
+
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath, withBalance balance: AccountAssetPriceModel)
 }
 
 // MARK: - AccountsViewModel + UITableViewDelegate + UITableViewDataSource
@@ -151,5 +153,9 @@ extension AccountsViewModel: UITableViewDelegate, UITableViewDataSource {
 
   func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
       return AccountsTableHeaderCell(currency: self.currentCurrency)
+  }
+
+  public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+      cellProvider.tableView(tableView, didSelectRowAt: indexPath, withBalance: balances.value[indexPath.row])
   }
 }
