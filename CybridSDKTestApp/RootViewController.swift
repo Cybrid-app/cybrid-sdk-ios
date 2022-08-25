@@ -18,4 +18,9 @@ class RootViewController: UIViewController {
     let viewController = CryptoPriceListTestVC()
     navigationController?.pushViewController(viewController, animated: true)
   }
+
+  @IBAction func didTapTradeButton(_ sender: Any) {
+    let viewController = TradeViewController()
+    navigationController?.pushViewController(viewController, animated: true)
+  }
 }

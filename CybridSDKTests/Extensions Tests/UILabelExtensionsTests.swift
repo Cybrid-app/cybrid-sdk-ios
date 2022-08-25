@@ -54,10 +54,6 @@ class UILabelExtensionsTests: XCTestCase {
     XCTAssertNotEqual(testLabel.text, "TEST")
     XCTAssertEqual(testLabel.text, "Test")
 
-    testLabel.formatLabel(with: .disclaimer)
-    XCTAssertNotEqual(testLabel.text, "TEST")
-    XCTAssertEqual(testLabel.text, "Test")
-
     testLabel.formatLabel(with: .caption)
     XCTAssertNotEqual(testLabel.text, "TEST")
     XCTAssertEqual(testLabel.text, "Test")
