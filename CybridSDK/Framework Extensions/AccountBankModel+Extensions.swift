@@ -16,8 +16,6 @@ extension AccountBankModel {
             let platfomrBalanceValue = json[AccountBankModel.CodingKeys.platformBalance.rawValue] as? String,
             let type = json[AccountBankModel.CodingKeys.type.rawValue] as? String,
             let state = json[AccountBankModel.CodingKeys.state.rawValue] as? String
-            //let platformAvailable = BigInt(platformAvailableValue),
-            //let platformBalance = BigInt(platfomrBalanceValue)
         else {
             return nil
         }

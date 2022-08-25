@@ -38,7 +38,7 @@ class AssetPipe {
     }
 
     private static func transformAny(value: BigDecimal, asset: AssetBankModel, unit: AssetPipeType) -> BigDecimal {
-   
+
         let divisor = BigDecimal(value: 10).pow(n_: UInt64(asset.decimals))
         let tradeUnit = value.div(divisor: divisor)
         let baseUnit = value.times(multiplicand: divisor)

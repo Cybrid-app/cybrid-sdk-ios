@@ -20,3 +20,9 @@
 
 // Trade Sell
 "cybrid.trade.sell.title" = "VENDRE";
+
+// Accounts
+"cybrid.accounts.accountComponentTitle" = "Valeur du compte";
+"cybrid.accounts.assetTitle" = "ACTIF";
+"cybrid.accounts.marketPriceTitle" = "Market Price";
+"cybrid.accounts.balanceTitle" = "PRIX DU MARCHÉ";

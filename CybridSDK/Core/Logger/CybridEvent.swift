@@ -271,7 +271,7 @@ extension CybridEvent {
         }
       }
     }
-    
+
     public enum AccountsEvent {
         case initSuccess
         case assetsDataFetching
@@ -280,7 +280,7 @@ extension CybridEvent {
         case assetsDataError
         case accountsDataError
         case pricesDataError
-        
+
         var level: LogLevel {
           switch self {
           case .initSuccess, .assetsDataFetching, .accountsDataFetching, .pricesDataFetching:
@@ -289,7 +289,7 @@ extension CybridEvent {
             return .error
           }
         }
-        
+
         var code: String {
           switch self {
           case .initSuccess:
@@ -306,10 +306,10 @@ extension CybridEvent {
             return "PRICES_DATA_FETCHING"
           case .pricesDataError:
             return "PRICES_DATA_ERROR"
-              
+
           }
         }
-        
+
         var message: String {
           switch self {
           case .initSuccess:
@@ -326,7 +326,7 @@ extension CybridEvent {
             return "Fetching prices"
           case .pricesDataError:
             return "There was an error fetching accounts"
-              
+
           }
         }
     }

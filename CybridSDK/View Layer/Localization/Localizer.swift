@@ -10,6 +10,9 @@ import Foundation
 protocol Localizer {
   func localize(with localizationKey: LocalizationKey,
                 parameters: CustomStringConvertible...) -> String
+
+  func localize(with localizationKey: String,
+                parameters: CustomStringConvertible...) -> String
 }
 
 struct CybridLocalizer: Localizer {
@@ -21,9 +24,14 @@ struct CybridLocalizer: Localizer {
 
   func localize(with localizationKey: LocalizationKey,
                 parameters: CustomStringConvertible...) -> String {
+    return self.localize(with: localizationKey.stringValue, parameters: parameters)
+  }
+
+  func localize(with localizationKey: String,
+                parameters: CustomStringConvertible...) -> String {
     let localizationBundle = Bundle.localizationBundle(forLocale: locale)
     let localizedStringFormat = localizationBundle.localizedString(
-      forKey: localizationKey.stringValue,
+      forKey: localizationKey,
       value: nil,
       table: nil
     )

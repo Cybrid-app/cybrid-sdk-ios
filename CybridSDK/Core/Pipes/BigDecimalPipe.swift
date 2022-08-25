@@ -26,7 +26,7 @@ class BigDecimalPipe {
     }
 
     static func transformAny(baseUnit: BigDecimal, asset: AssetBankModel, prefix: String) -> String? {
-                
+
         let baseUnitString = baseUnit.toPlainString()
         if baseUnitString.contains(".") {
             let baseParts = baseUnitString.split(separator: ".")
@@ -43,7 +43,6 @@ class BigDecimalPipe {
             formater.minimumFractionDigits = 0
             formater.decimalSeparator = "."
             formater.groupingSeparator = ","
-            //formater.currencyCode = "M"
             let valueFormatted = integer.format(numberFormat: formater)
             return valueFormatted ?? "" + "." + decimal
         } else {
@@ -54,7 +53,6 @@ class BigDecimalPipe {
             formater.numberStyle = .decimal
             formater.decimalSeparator = "."
             formater.groupingSeparator = ","
-            //formater.currencyCode = "M"
             return baseUnit.format(numberFormat: formater)
         }
     }

@@ -14,12 +14,13 @@ class AccountsViewModel: NSObject {
     internal var assets: [AssetBankModel] = []
     internal var accounts: [AccountBankModel] = []
     internal var balances: Observable<[AccountAssetPriceModel]> = .init([])
+    internal var accountTotalBalance: Observable<String> = .init("")
 
     // MARK: Private properties
     private unowned var cellProvider: AccountsViewProvider
     private var dataProvider: PricesRepoProvider & AssetsRepoProvider & AccountsRepoProvider
     private var logger: CybridLogger?
-    private var currentCurrency: String = "USD"
+    var currentCurrency: String = "USD"
 
     init(cellProvider: AccountsViewProvider,
          dataProvider: PricesRepoProvider & AssetsRepoProvider & AccountsRepoProvider,
@@ -83,6 +84,7 @@ class AccountsViewModel: NSObject {
                   return
                 }
                 self?.balances.value = modelList
+                self?.calculateTotalBalance()
 
             case .failure(let error):
                 print(error)
@@ -112,6 +114,22 @@ class AccountsViewModel: NSObject {
             price: price)
       }
     }
+
+    private func calculateTotalBalance() {
+
+        if !self.assets.isEmpty && !self.balances.value.isEmpty {
+            if let asset = assets.first(where: { $0.code == currentCurrency.uppercased() }) {
+
+                var total = SBigDecimal(0).value
+                for balance in self.balances.value {
+                    total += balance.accountBalanceInFiat.value
+                }
+                let totalBigDecimal = SBigDecimal(total, precision: asset.decimals)
+                let totalFormatted = CybridCurrencyFormatter.formatPrice(totalBigDecimal, with: asset.symbol)
+                self.accountTotalBalance.value = "\(totalFormatted) \(asset.code)"
+            }
+        }
+    }
 }
 
 // MARK: - AccountsViewProvider
@@ -130,8 +148,8 @@ extension AccountsViewModel: UITableViewDelegate, UITableViewDataSource {
   public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     cellProvider.tableView(tableView, cellForRowAt: indexPath, withData: balances.value[indexPath.row])
   }
-    
+
   func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-      return AccountsTableHeaderCell()
+      return AccountsTableHeaderCell(currency: self.currentCurrency)
   }
 }

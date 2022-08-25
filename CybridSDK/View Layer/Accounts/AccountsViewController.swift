@@ -65,65 +65,72 @@ extension AccountsViewController {
         accountTile.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         accountTile.translatesAutoresizingMaskIntoConstraints = false
         accountTile.sizeToFit()
-        accountTile.font = FormatStyle.headerSmall.font
-        accountTile.textColor = FormatStyle.headerSmall.textColor
+        accountTile.font = UIFont.make(ofSize: UIValues.accountComponentTitleSize)
+        accountTile.textColor = UIValues.accountComponentTitleColor
         accountTile.textAlignment = .center
-        accountTile.text = "Account Value"
+        accountTile.setLocalizedText(key: UIStrings.accountComponentTitle, localizer: localizer)
+
         self.view.addSubview(accountTile)
         accountTile.translatesAutoresizingMaskIntoConstraints = false
         accountTile.constraint(attribute: .top,
                                relatedBy: .equal,
                                toItem: self.view,
                                attribute: .topMargin,
-                               constant: 40)
+                               constant: UIValues.accountComponentTitleMargin.top)
         accountTile.constraint(attribute: .leading,
                                relatedBy: .equal,
                                toItem: self.view,
                                attribute: .leading,
-                               constant: 10)
+                               constant: UIValues.accountComponentTitleMargin.left)
         accountTile.constraint(attribute: .trailing,
                                relatedBy: .equal,
                                toItem: self.view,
                                attribute: .trailing,
-                               constant: -10)
+                               constant: -UIValues.accountComponentTitleMargin.right)
         accountTile.constraint(attribute: .height,
                                relatedBy: .equal,
                                toItem: nil,
                                attribute: .notAnAttribute,
-                               constant: 20)
+                               constant: UIValues.accountComponentTitleHeight)
     }
 
-    private func createAccountValueTitle(value: String = "$116,256.56 USD") {
+    private func createAccountValueTitle() {
 
         accountValueTile.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         accountValueTile.translatesAutoresizingMaskIntoConstraints = false
         accountValueTile.sizeToFit()
-        accountValueTile.font = UIFont.systemFont(ofSize: 23, weight: .regular)
-        accountValueTile.textColor = UIColor.black
+        accountValueTile.font = UIFont.make(ofSize: UIValues.accountValueTitleSize)
+        accountValueTile.textColor = UIValues.accountValueTitleColor
         accountValueTile.textAlignment = .center
-        accountValueTile.text = value
-        self.view.addSubview(accountValueTile)
+        accountValueTile.text = "... \(accountsViewModel.currentCurrency)"
+
+        view.addSubview(accountValueTile)
         accountValueTile.translatesAutoresizingMaskIntoConstraints = false
         accountValueTile.constraint(attribute: .top,
                                     relatedBy: .equal,
                                     toItem: self.accountTile,
                                     attribute: .bottom,
-                                    constant: 3)
+                                    constant: UIValues.accountValueTitleMargin.top)
         accountValueTile.constraint(attribute: .leading,
                                     relatedBy: .equal,
                                     toItem: self.view,
                                     attribute: .leading,
-                                    constant: 10)
+                                    constant: UIValues.accountValueTitleMargin.left)
         accountValueTile.constraint(attribute: .trailing,
                                     relatedBy: .equal,
                                     toItem: self.view,
                                     attribute: .trailing,
-                                    constant: -10)
+                                    constant: -UIValues.accountValueTitleMargin.right)
         accountValueTile.constraint(attribute: .height,
                                     relatedBy: .equal,
                                     toItem: nil,
                                     attribute: .notAnAttribute,
-                                    constant: 40)
+                                    constant: UIValues.accountValueTitleHeight)
+
+        // -- Live update
+        accountsViewModel.accountTotalBalance.bind { value in
+            self.accountValueTile.text = value
+        }
     }
 
     private func createAccountsTable() {
@@ -131,8 +138,8 @@ extension AccountsViewController {
         self.accountsTable.delegate = self.accountsViewModel
         self.accountsTable.dataSource = self.accountsViewModel
         self.accountsTable.register(AccountsCell.self, forCellReuseIdentifier: AccountsCell.reuseIdentifier)
-        self.accountsTable.rowHeight = 64
-        self.accountsTable.estimatedRowHeight = 64
+        self.accountsTable.rowHeight = UIValues.accountsTableRowHeight
+        self.accountsTable.estimatedRowHeight = UIValues.accountsTableRowHeight
         self.accountsTable.translatesAutoresizingMaskIntoConstraints = false
         self.accountsTable.makeKeyboardHandler()
 
@@ -143,22 +150,22 @@ extension AccountsViewController {
                                  relatedBy: .equal,
                                  toItem: self.accountValueTile,
                                  attribute: .bottom,
-                                 constant: 40)
+                                 constant: UIValues.accountsTableMargin.top)
         accountsTable.constraint(attribute: .bottom,
                                  relatedBy: .equal,
                                  toItem: self.view,
                                  attribute: .bottomMargin,
-                                 constant: 4)
+                                 constant: UIValues.accountsTableMargin.bottom)
         accountsTable.constraint(attribute: .leading,
                                  relatedBy: .equal,
                                  toItem: self.view,
                                  attribute: .leading,
-                                 constant: 10)
+                                 constant: UIValues.accountsTableMargin.left)
         accountsTable.constraint(attribute: .trailing,
                                  relatedBy: .equal,
                                  toItem: self.view,
                                  attribute: .trailing,
-                                 constant: -10)
+                                 constant: -UIValues.accountsTableMargin.right)
 
         // -- Live Data
         accountsViewModel.balances.bind { _ in
@@ -182,5 +189,30 @@ extension AccountsViewController: AccountsViewProvider {
         }
         cell.setData(balance: dataModel)
         return cell
+    }
+}
+
+extension AccountsViewController {
+
+    enum UIValues {
+
+        // -- Sizes
+        static let accountComponentTitleSize: CGFloat = 12
+        static let accountComponentTitleHeight: CGFloat = 20
+        static let accountComponentTitleMargin = UIEdgeInsets(top: 40, left: 10, bottom: 0, right: 10)
+        static let accountValueTitleSize: CGFloat = 23
+        static let accountValueTitleHeight: CGFloat = 40
+        static let accountValueTitleMargin = UIEdgeInsets(top: 3, left: 10, bottom: 0, right: 10)
+        static let accountsTableRowHeight: CGFloat = 64
+        static let accountsTableMargin = UIEdgeInsets(top: 20, left: 10, bottom: 4, right: 10)
+
+        // -- Colors
+        static let accountComponentTitleColor = UIColor(hex: "#636366")
+        static let accountValueTitleColor = UIColor.black
+    }
+
+    enum UIStrings {
+
+        static let accountComponentTitle = "cybrid.accounts.accountComponentTitle"
     }
 }

@@ -8,12 +8,12 @@
 import UIKit
 
 extension UILabel {
-  
+
   public enum Side {
     case left
     case right
   }
-  
+
   static func makeLabel(with style: FormatStyle, _ onDidMake: @escaping (UILabel) -> Void) -> UILabel {
     let label = UILabel()
     label.formatLabel(with: style)
@@ -31,9 +31,16 @@ extension UILabel {
       text = text?.uppercased()
     }
   }
-  
-  func setAttributedText(mainText: String, mainTextFont: UIFont, mainTextColor: UIColor?, attributedText: String, attributedTextFont: UIFont, attributedTextColor: UIColor?, side: UILabel.Side) {
-    
+
+  func setAttributedText(
+    mainText: String,
+    mainTextFont: UIFont,
+    mainTextColor: UIColor?,
+    attributedText: String,
+    attributedTextFont: UIFont,
+    attributedTextColor: UIColor?,
+    side: UILabel.Side) {
+
     let paragraphStyle = NSMutableParagraphStyle()
     paragraphStyle.alignment = side == .left ? .left : .right
     let attributedTitle = NSMutableAttributedString(
@@ -52,5 +59,11 @@ extension UILabel {
       range: NSRange(location: mainText.count + 1, length: attributedText.count)
     )
     self.attributedText = attributedTitle
+  }
+
+  func setLocalizedText(key: String, localizer: Localizer) {
+
+    let text = localizer.localize(with: key)
+    self.text = text
   }
 }

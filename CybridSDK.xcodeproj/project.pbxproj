@@ -132,7 +132,6 @@
 		92B97C3D28B3F1E70061D6BA /* AssetPipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B97C3C28B3F1E70061D6BA /* AssetPipe.swift */; };
 		92B97C4728B43CE40061D6BA /* CybridCore.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92B97C4628B43CE40061D6BA /* CybridCore.xcframework */; };
 		92B97C4928B43CFF0061D6BA /* BigDecimalPipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B97C4828B43CFF0061D6BA /* BigDecimalPipe.swift */; };
-		92B97C4B28B4564D0061D6BA /* BigDecimalPipeNew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B97C4A28B4564D0061D6BA /* BigDecimalPipeNew.swift */; };
 		92B97C4E28B67D560061D6BA /* AccountsTableHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B97C4D28B67D560061D6BA /* AccountsTableHeaderCell.swift */; };
 		92B97C5028B6B4F10061D6BA /* AccountsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B97C4F28B6B4F00061D6BA /* AccountsCell.swift */; };
 		92B97C5228B6C9C90061D6BA /* UIFont+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B97C5128B6C9C90061D6BA /* UIFont+Extensions.swift */; };
@@ -303,7 +302,6 @@
 		92B97C3C28B3F1E70061D6BA /* AssetPipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetPipe.swift; sourceTree = "<group>"; };
 		92B97C4628B43CE40061D6BA /* CybridCore.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = CybridCore.xcframework; sourceTree = "<group>"; };
 		92B97C4828B43CFF0061D6BA /* BigDecimalPipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigDecimalPipe.swift; sourceTree = "<group>"; };
-		92B97C4A28B4564D0061D6BA /* BigDecimalPipeNew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigDecimalPipeNew.swift; sourceTree = "<group>"; };
 		92B97C4D28B67D560061D6BA /* AccountsTableHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsTableHeaderCell.swift; sourceTree = "<group>"; };
 		92B97C4F28B6B4F00061D6BA /* AccountsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsCell.swift; sourceTree = "<group>"; };
 		92B97C5128B6C9C90061D6BA /* UIFont+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extensions.swift"; sourceTree = "<group>"; };
@@ -942,7 +940,6 @@
 			children = (
 				92B97C3C28B3F1E70061D6BA /* AssetPipe.swift */,
 				92B97C4828B43CFF0061D6BA /* BigDecimalPipe.swift */,
-				92B97C4A28B4564D0061D6BA /* BigDecimalPipeNew.swift */,
 			);
 			path = Pipes;
 			sourceTree = "<group>";
@@ -1288,7 +1285,6 @@
 				0B2899E9288F3E1F001B3360 /* Cybrid.swift in Sources */,
 				0BD66118286B79C500F4DA6B /* UIView+Constraints.swift in Sources */,
 				0B303CE42862E5D9007BF7FF /* CybridConfig.swift in Sources */,
-				92B97C4B28B4564D0061D6BA /* BigDecimalPipeNew.swift in Sources */,
 				0BD660FD286B763E00F4DA6B /* ConcurrencyInterfaces.swift in Sources */,
 				0BD66109286B768C00F4DA6B /* CryptoPriceListView.swift in Sources */,
 				9224373028AEA01C008E73F2 /* AccountsRepository.swift in Sources */,

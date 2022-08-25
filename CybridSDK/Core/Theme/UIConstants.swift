@@ -8,6 +8,10 @@
 import UIKit
 
 enum UIConstants {
+
+  // MARK: Global
+  static let zero: CGFloat = 0
+
   // MARK: Sizes
   static let sizeXs: CGFloat = 8.0
   static let sizeSm: CGFloat = 16.0

@@ -72,12 +72,12 @@ extension AccountsCell {
                         relatedBy: .equal,
                         toItem: nil,
                         attribute: .notAnAttribute,
-                        constant: UIConstants.iconWidht)
+                        constant: UIValues.iconWidht)
         icon.constraint(attribute: .width,
                         relatedBy: .equal,
                         toItem: nil,
                         attribute: .notAnAttribute,
-                        constant: UIConstants.iconHeight)
+                        constant: UIValues.iconHeight)
     }
 
     private func setupLabels() {
@@ -85,26 +85,26 @@ extension AccountsCell {
         // -- Asset name
         self.setupBasicLabel(assetName,
                              side: .left,
-                             font: UIFont.make(ofSize: UIConstants.assetNameSize),
-                             color: UIConstants.assetNameColor)
+                             font: UIFont.make(ofSize: UIValues.assetNameSize),
+                             color: UIValues.assetNameColor)
 
         // -- Account balance
         self.setupBasicLabel(accountBalance,
                              side: .right,
-                             font: UIFont.make(ofSize: UIConstants.accountBalanceSize),
-                             color: UIConstants.accountBalanceColor)
+                             font: UIFont.make(ofSize: UIValues.accountBalanceSize),
+                             color: UIValues.accountBalanceColor)
 
         // -- Asset price
         self.setupBasicLabel(assetPrice,
                              side: .left,
-                             font: UIFont.make(ofSize: UIConstants.assetPriceSize),
-                             color: UIConstants.assetPriceColor)
+                             font: UIFont.make(ofSize: UIValues.assetPriceSize),
+                             color: UIValues.assetPriceColor)
 
         // -- Account balance fiat
         self.setupBasicLabel(accountBalanceFiat,
                              side: .right,
-                             font: UIFont.make(ofSize: UIConstants.accountBalanceFiatSize),
-                             color: UIConstants.accountBalanceFiatColor)
+                             font: UIFont.make(ofSize: UIValues.accountBalanceFiatSize),
+                             color: UIValues.accountBalanceFiatColor)
     }
 
     private func createVerticalStackView(top: UIView, bottom: UIView, withConstraints: Bool = false) -> UIStackView {
@@ -115,7 +115,7 @@ extension AccountsCell {
             self.setConstraintsInVerticalStacks(view: bottom, parent: stack)
         }
         stack.axis = .vertical
-        stack.spacing = 10
+        stack.spacing = UIValues.verticalStakSeparation
         stack.distribution = .equalSpacing
         stack.alignment = .leading
         return stack
@@ -132,7 +132,7 @@ extension AccountsCell {
 
       let contentStackView = UIStackView(arrangedSubviews: [left, center, right])
       contentStackView.axis = .horizontal
-      contentStackView.spacing = 10
+        contentStackView.spacing = UIValues.margin
       contentStackView.distribution = .fill
       contentStackView.alignment = .center
       addSubview(contentStackView)
@@ -141,22 +141,22 @@ extension AccountsCell {
                                   relatedBy: .equal,
                                   toItem: self,
                                   attribute: .top,
-                                  constant: 10)
+                                  constant: UIValues.margin)
       contentStackView.constraint(attribute: .bottom,
                                   relatedBy: .equal,
                                   toItem: self,
                                   attribute: .bottom,
-                                  constant: -10)
+                                  constant: -UIValues.margin)
       contentStackView.constraint(attribute: .leading,
                                   relatedBy: .equal,
                                   toItem: self,
                                   attribute: .leading,
-                                  constant: 10)
+                                  constant: UIValues.margin)
       contentStackView.constraint(attribute: .trailing,
                                   relatedBy: .equal,
                                   toItem: self,
                                   attribute: .trailing,
-                                  constant: -10)
+                                  constant: -UIValues.margin)
     }
 
     private func setupBasicLabel(_ label: UILabel, side: UILabel.Side, font: UIFont, color: UIColor?) {
@@ -185,12 +185,12 @@ extension AccountsCell {
                         relatedBy: .equal,
                         toItem: parent,
                         attribute: .leading,
-                        constant: 0)
+                        constant: UIConstants.zero)
         view.constraint(attribute: .trailing,
                         relatedBy: .equal,
                         toItem: parent,
                         attribute: .trailing,
-                        constant: 0)
+                        constant: UIConstants.zero)
     }
 
     private func setLabelsData(balance: AccountAssetPriceModel) {
@@ -198,11 +198,11 @@ extension AccountsCell {
         // -- Asset name
         assetName.setAttributedText(
             mainText: balance.assetName,
-            mainTextFont: UIFont.systemFont(ofSize: UIConstants.assetNameSize),
-            mainTextColor: UIConstants.assetNameColor,
+            mainTextFont: UIFont.systemFont(ofSize: UIValues.assetNameSize),
+            mainTextColor: UIValues.assetNameColor,
             attributedText: balance.accountAssetCode,
-            attributedTextFont: UIFont.systemFont(ofSize: UIConstants.assetNameCodeSize),
-            attributedTextColor: UIConstants.assetNameCodeColor,
+            attributedTextFont: UIFont.systemFont(ofSize: UIValues.assetNameCodeSize),
+            attributedTextColor: UIValues.assetNameCodeColor,
             side: .left)
 
         // -- Account balance
@@ -218,9 +218,11 @@ extension AccountsCell {
 
 extension AccountsCell {
 
-    enum UIConstants {
+    enum UIValues {
 
         // -- Sizes
+        static let verticalStakSeparation: CGFloat = 3
+        static let margin: CGFloat = 10
         static let iconWidht: CGFloat = 24
         static let iconHeight: CGFloat = 24
         static let assetNameSize: CGFloat = 14
