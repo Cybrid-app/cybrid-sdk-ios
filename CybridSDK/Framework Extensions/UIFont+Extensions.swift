@@ -10,7 +10,7 @@ import UIKit
 
 extension UIFont {
 
-    static func make(ofSize: CGFloat) -> UIFont {
-        return UIFont.systemFont(ofSize: ofSize, weight: .regular)
+    static func make(ofSize: CGFloat, weight: UIFont.Weight = .regular) -> UIFont {
+        return UIFont.systemFont(ofSize: ofSize, weight: weight)
     }
 }

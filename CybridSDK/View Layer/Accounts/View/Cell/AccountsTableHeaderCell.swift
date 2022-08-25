@@ -75,7 +75,7 @@ extension AccountsTableHeaderCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.baselineAdjustment = .alignCenters
         label.sizeToFit()
-        label.font = UIFont.make(ofSize: UIValues.assetTileSize)
+        label.font = UIValues.assetTileFont
         label.textColor = UIValues.assetTitleColor
         return label
     }
@@ -169,10 +169,10 @@ extension AccountsTableHeaderCell {
         static let headerHeight: CGFloat = 60
         static let verticalStakSeparation: CGFloat = 5
 
-        static let assetTileSize: CGFloat = 12
+        static let assetTileFont = UIFont.make(ofSize: 12, weight: .medium)
         static let assetSubTitleSize: CGFloat = 12
 
-        static let assetTitleColor = UIColor(hex: "#48484A")
+        static let assetTitleColor = UIColor.black
         static let assetSubTitleColor = UIColor(hex: "#636366")
     }
 

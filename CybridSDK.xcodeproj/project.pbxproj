@@ -126,6 +126,7 @@
 		9224373328AEA141008E73F2 /* AccountAssetPriceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224373228AEA141008E73F2 /* AccountAssetPriceModel.swift */; };
 		9224373528AEA18F008E73F2 /* AccountsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224373428AEA18F008E73F2 /* AccountsViewModel.swift */; };
 		924992F228AFEC8000386012 /* AccountsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924992F128AFEC8000386012 /* AccountsViewController.swift */; };
+		92B8097528B7C1A200EA5F2F /* AccountTradesViewcontroller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B8097428B7C1A200EA5F2F /* AccountTradesViewcontroller.swift */; };
 		92B97C3528B3D1AA0061D6BA /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B97C3428B3D1AA0061D6BA /* Util.swift */; };
 		92B97C3828B3D2020061D6BA /* AccountBankModel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B97C3728B3D2020061D6BA /* AccountBankModel+Extensions.swift */; };
 		92B97C3A28B3D6530061D6BA /* UtilTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B97C3928B3D6530061D6BA /* UtilTest.swift */; };
@@ -296,6 +297,7 @@
 		9224373228AEA141008E73F2 /* AccountAssetPriceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountAssetPriceModel.swift; sourceTree = "<group>"; };
 		9224373428AEA18F008E73F2 /* AccountsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsViewModel.swift; sourceTree = "<group>"; };
 		924992F128AFEC8000386012 /* AccountsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsViewController.swift; sourceTree = "<group>"; };
+		92B8097428B7C1A200EA5F2F /* AccountTradesViewcontroller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTradesViewcontroller.swift; sourceTree = "<group>"; };
 		92B97C3428B3D1AA0061D6BA /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 		92B97C3728B3D2020061D6BA /* AccountBankModel+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AccountBankModel+Extensions.swift"; sourceTree = "<group>"; };
 		92B97C3928B3D6530061D6BA /* UtilTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilTest.swift; sourceTree = "<group>"; };
@@ -930,6 +932,7 @@
 				92B8097328B7B8B800EA5F2F /* Entity */,
 				92B8097228B7B8A200EA5F2F /* View */,
 				924992F128AFEC8000386012 /* AccountsViewController.swift */,
+				92B8097428B7C1A200EA5F2F /* AccountTradesViewcontroller.swift */,
 			);
 			path = Accounts;
 			sourceTree = "<group>";
@@ -1284,6 +1287,7 @@
 				92B97C3528B3D1AA0061D6BA /* Util.swift in Sources */,
 				92B97C4928B43CFF0061D6BA /* BigDecimalPipe.swift in Sources */,
 				0BD661372872BB0A00F4DA6B /* AssetPathBuilder.swift in Sources */,
+				92B8097528B7C1A200EA5F2F /* AccountTradesViewcontroller.swift in Sources */,
 				92B97C4E28B67D560061D6BA /* AccountsTableHeaderCell.swift in Sources */,
 				92B97C5028B6B4F10061D6BA /* AccountsCell.swift in Sources */,
 				0B00E034287F6D1000707F26 /* CybridAuthenticator.swift in Sources */,

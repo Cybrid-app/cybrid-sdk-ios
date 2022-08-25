@@ -42,18 +42,8 @@ public final class AccountsViewController: UIViewController {
     func setupView() {
 
         view.backgroundColor = .white
-        self.setupBalanceView()
-        self.setupTableView()
-    }
-
-    func setupBalanceView() {
-
         self.createAccountTitle()
         self.createAccountValueTitle()
-    }
-
-    func setupTableView() {
-
         self.createAccountsTable()
     }
 }
@@ -193,7 +183,17 @@ extension AccountsViewController: AccountsViewProvider {
     func tableView(_ tableView: UITableView,
                    didSelectRowAt indexPath: IndexPath,
                    withBalance balance: AccountAssetPriceModel) {
-        print(balance.assetName)
+
+        let accountTradesViewController = AccountTradesViewController(
+            balance: balance,
+            viewModel: accountsViewModel)
+
+        if self.navigationController != nil {
+            self.navigationController?.pushViewController(accountTradesViewController, animated: true)
+        } else {
+            self.modalPresentationStyle = .fullScreen
+            self.present(accountTradesViewController, animated: true)
+        }
     }
 }
 

@@ -12,6 +12,7 @@ extension UILabel {
   public enum Side {
     case left
     case right
+    case center
   }
 
   static func makeLabel(with style: FormatStyle, _ onDidMake: @escaping (UILabel) -> Void) -> UILabel {
@@ -39,10 +40,17 @@ extension UILabel {
     attributedText: String,
     attributedTextFont: UIFont,
     attributedTextColor: UIColor?,
-    side: UILabel.Side) {
+    side: UILabel.Side = .center) {
 
     let paragraphStyle = NSMutableParagraphStyle()
-    paragraphStyle.alignment = side == .left ? .left : .right
+    switch side {
+    case .left:
+      paragraphStyle.alignment = .left
+    case .right:
+      paragraphStyle.alignment = .right
+    case .center:
+      paragraphStyle.alignment = .center
+    }
     let attributedTitle = NSMutableAttributedString(
       string: "\(mainText) \(attributedText)",
       attributes: [

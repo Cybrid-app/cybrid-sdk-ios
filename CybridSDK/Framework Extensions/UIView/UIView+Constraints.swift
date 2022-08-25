@@ -75,4 +75,47 @@ extension UIView {
       removeConstraint(constraint)
     }
   }
+
+    func setConstraintsSize(size: CGSize) {
+
+        self.constraint(attribute: .height,
+                        relatedBy: .equal,
+                        toItem: nil,
+                        attribute: .notAnAttribute,
+                        constant: size.width)
+        self.constraint(attribute: .width,
+                        relatedBy: .equal,
+                        toItem: nil,
+                        attribute: .notAnAttribute,
+                        constant: size.height)
+    }
+
+    func addBelow(toItem: UIView, height: CGFloat, margins: UIEdgeInsets) {
+
+        if toItem.superview != nil {
+
+            toItem.superview?.addSubview(self)
+            self.translatesAutoresizingMaskIntoConstraints = false
+            self.constraint(attribute: .top,
+                            relatedBy: .equal,
+                            toItem: toItem,
+                            attribute: .bottom,
+                            constant: margins.top)
+            self.constraint(attribute: .leading,
+                            relatedBy: .equal,
+                            toItem: toItem.superview,
+                            attribute: .leading,
+                            constant: margins.left)
+            self.constraint(attribute: .trailing,
+                            relatedBy: .equal,
+                            toItem: toItem.superview,
+                            attribute: .trailing,
+                            constant: -margins.right)
+            self.constraint(attribute: .height,
+                            relatedBy: .equal,
+                            toItem: nil,
+                            attribute: .notAnAttribute,
+                            constant: height)
+        }
+    }
 }

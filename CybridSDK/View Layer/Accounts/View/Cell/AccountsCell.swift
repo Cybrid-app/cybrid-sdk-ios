@@ -175,6 +175,9 @@ extension AccountsCell {
             label.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
             label.setContentHuggingPriority(.defaultHigh, for: .vertical)
             label.textAlignment = .right
+
+        case .center:
+            label.textAlignment = .center
         }
         label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false
