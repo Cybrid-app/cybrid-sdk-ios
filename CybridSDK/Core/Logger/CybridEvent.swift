@@ -118,10 +118,12 @@ extension CybridEvent {
 // MARK: - Component Event
 
 extension CybridEvent {
+
   public enum ComponentEvent {
     case priceList(PriceListEvent)
     case trade(TradeEvent)
     case accounts(AccountsEvent)
+    case trades(TradesEvent)
 
     var level: LogLevel {
       switch self {
@@ -131,6 +133,8 @@ extension CybridEvent {
         return event.level
       case .accounts(let event):
           return event.level
+      case .trades(let event):
+        return event.level
       }
     }
 
@@ -142,6 +146,8 @@ extension CybridEvent {
           return "TRADE_" + event.code
       case .accounts(let event):
           return "ACCOUNTS_" + event.code
+      case .trades(let event):
+          return "TRADES_" + event.code
       }
     }
 
@@ -152,6 +158,8 @@ extension CybridEvent {
       case .trade(let event):
         return event.message
       case .accounts(let event):
+        return event.message
+      case .trades(let event):
         return event.message
       }
     }
@@ -327,6 +335,44 @@ extension CybridEvent {
           case .pricesDataError:
             return "There was an error fetching accounts"
 
+          }
+        }
+    }
+
+    public enum TradesEvent {
+        case initSuccess
+        case tradesDataFetching
+        case tradesDataError
+
+        var level: LogLevel {
+          switch self {
+          case .initSuccess, .tradesDataFetching:
+            return .info
+          case .tradesDataError:
+            return .error
+          }
+        }
+
+        var code: String {
+          switch self {
+          case .initSuccess:
+            return "INIT"
+          case .tradesDataFetching:
+            return "TRADES_DATA_FETCHING"
+          case .tradesDataError:
+            return "TRADES_DATA_ERROR"
+
+          }
+        }
+
+        var message: String {
+          switch self {
+          case .initSuccess:
+            return "Initializing accounts component"
+          case .tradesDataFetching:
+            return "Fetching trades"
+          case .tradesDataError:
+            return "There was an error fetching trades"
           }
         }
     }

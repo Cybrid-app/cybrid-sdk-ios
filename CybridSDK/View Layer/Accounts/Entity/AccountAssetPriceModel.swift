@@ -14,7 +14,7 @@ struct AccountAssetPriceModel {
 
     let accountAssetCode: String // BTC
     let accountAssetURL: String // http://
-    let accountBalance: SBigDecimal // 12
+    let accountBalance: SBigDecimal
     let accountBalanceFormatted: String
     let accountBalanceInFiat: SBigDecimal
     let accountBalanceInFiatFormatted: String

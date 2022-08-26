@@ -46,7 +46,7 @@ extension TradeBankModel {
             if let objectData = objectData {
 
                 let stringChangeValues = [
-                    TradeBankModel.CodingKeys.createdAt.rawValue,
+                    //TradeBankModel.CodingKeys.createdAt.rawValue,
                     TradeBankModel.CodingKeys.deliverAmount.rawValue,
                     TradeBankModel.CodingKeys.fee.rawValue,
                     TradeBankModel.CodingKeys.receiveAmount.rawValue

@@ -131,6 +131,7 @@
 		92B8097928B81AC800EA5F2F /* AccountTradeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B8097828B81AC800EA5F2F /* AccountTradeViewModel.swift */; };
 		92B8097C28B81FCB00EA5F2F /* TradeBankModel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B8097B28B81FCB00EA5F2F /* TradeBankModel+Extensions.swift */; };
 		92B8097E28B82E3B00EA5F2F /* SymbolPriceBankModel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B8097D28B82E3B00EA5F2F /* SymbolPriceBankModel+Extensions.swift */; };
+		92B8098028B834DC00EA5F2F /* TradeUIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B8097F28B834DC00EA5F2F /* TradeUIModel.swift */; };
 		92B97C3528B3D1AA0061D6BA /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B97C3428B3D1AA0061D6BA /* Util.swift */; };
 		92B97C3828B3D2020061D6BA /* AccountBankModel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B97C3728B3D2020061D6BA /* AccountBankModel+Extensions.swift */; };
 		92B97C3A28B3D6530061D6BA /* UtilTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B97C3928B3D6530061D6BA /* UtilTest.swift */; };
@@ -306,6 +307,7 @@
 		92B8097828B81AC800EA5F2F /* AccountTradeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTradeViewModel.swift; sourceTree = "<group>"; };
 		92B8097B28B81FCB00EA5F2F /* TradeBankModel+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TradeBankModel+Extensions.swift"; sourceTree = "<group>"; };
 		92B8097D28B82E3B00EA5F2F /* SymbolPriceBankModel+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SymbolPriceBankModel+Extensions.swift"; sourceTree = "<group>"; };
+		92B8097F28B834DC00EA5F2F /* TradeUIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeUIModel.swift; sourceTree = "<group>"; };
 		92B97C3428B3D1AA0061D6BA /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 		92B97C3728B3D2020061D6BA /* AccountBankModel+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AccountBankModel+Extensions.swift"; sourceTree = "<group>"; };
 		92B97C3928B3D6530061D6BA /* UtilTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilTest.swift; sourceTree = "<group>"; };
@@ -959,6 +961,7 @@
 			isa = PBXGroup;
 			children = (
 				9224373228AEA141008E73F2 /* AccountAssetPriceModel.swift */,
+				92B8097F28B834DC00EA5F2F /* TradeUIModel.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -1307,6 +1310,7 @@
 				92B97C3528B3D1AA0061D6BA /* Util.swift in Sources */,
 				92B97C4928B43CFF0061D6BA /* BigDecimalPipe.swift in Sources */,
 				0BD661372872BB0A00F4DA6B /* AssetPathBuilder.swift in Sources */,
+				92B8098028B834DC00EA5F2F /* TradeUIModel.swift in Sources */,
 				92B8097528B7C1A200EA5F2F /* AccountTradesViewcontroller.swift in Sources */,
 				92B97C4E28B67D560061D6BA /* AccountsHeaderCell.swift in Sources */,
 				92B97C5028B6B4F10061D6BA /* AccountsCell.swift in Sources */,

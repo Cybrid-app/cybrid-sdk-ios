@@ -87,7 +87,6 @@ class AccountsViewModel: NSObject {
                 self?.calculateTotalBalance()
 
             case .failure(let error):
-                print(error)
                 self?.logger?.log(.component(.accounts(.pricesDataError)))
             }
         }

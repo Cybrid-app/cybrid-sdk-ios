@@ -27,12 +27,15 @@ public final class AccountTradesViewController: UIViewController {
         super.init(nibName: nil, bundle: nil)
         self.balance = balance
         self.accountsViewModel = accountsViewModel
+        
         self.tradesViewModel = AccountTradeViewModel(
             dataProvider: CybridSession.current,
+            assets: accountsViewModel.assets,
             logger: Cybrid.logger)
+        
         self.theme = Cybrid.theme
         self.localizer = CybridLocalizer()
-        
+
         self.tradesViewModel.getTrades(accountGuid: balance.accountGuid)
         self.setupView()
     }
