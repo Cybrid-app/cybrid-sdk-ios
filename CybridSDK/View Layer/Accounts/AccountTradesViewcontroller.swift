@@ -191,7 +191,13 @@ extension AccountTradesViewController: AccountTradesViewProvider {
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath, with trade: TradeUIModel) {
-        print(trade.tradeBankModel.guid)
+        
+        let modal = AccountTradeDetailModal(
+                trade: trade,
+                theme: theme,
+                localizer: localizer,
+                onConfirm: nil)
+        modal.present()
     }
 }
 

@@ -59,13 +59,6 @@ class AccountTradesCell: UITableViewCell {
 
     func setData(trade: TradeUIModel) {
 
-        // -- Setup icon
-        icon.image = UIImage(
-            named: trade.tradeBankModel.side == .sell ? "sellIcon" : "buyIcon",
-            in: Bundle(for: Self.self),
-            with: nil)
-
-        // -- Setup labels
         self.setLabelsData(trade: trade)
     }
 }
@@ -204,6 +197,12 @@ extension AccountTradesCell {
     }
 
     private func setLabelsData(trade: TradeUIModel) {
+        
+        // -- Setup icon
+        icon.image = UIImage(
+            named: trade.tradeBankModel.side == .sell ? "sellIcon" : "buyIcon",
+            in: Bundle(for: Self.self),
+            with: nil)
 
         // -- Trade Type
         let tradeTypeKey = (trade.tradeBankModel.side == .sell) ? UIString.tradeTYpeSell : UIString.tradeTypeBuy

@@ -134,6 +134,8 @@
 		92B8098028B834DC00EA5F2F /* TradeUIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B8097F28B834DC00EA5F2F /* TradeUIModel.swift */; };
 		92B8098228B8A12200EA5F2F /* AccountTradesHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B8098128B8A12200EA5F2F /* AccountTradesHeaderCell.swift */; };
 		92B8098428B8A52300EA5F2F /* AccountTradesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B8098328B8A52300EA5F2F /* AccountTradesCell.swift */; };
+		92B8098628B9455C00EA5F2F /* UIModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B8098528B9455C00EA5F2F /* UIModal.swift */; };
+		92B8098928B9499E00EA5F2F /* AccountTradeDetailModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B8098828B9499E00EA5F2F /* AccountTradeDetailModal.swift */; };
 		92B97C3528B3D1AA0061D6BA /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B97C3428B3D1AA0061D6BA /* Util.swift */; };
 		92B97C3828B3D2020061D6BA /* AccountBankModel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B97C3728B3D2020061D6BA /* AccountBankModel+Extensions.swift */; };
 		92B97C3A28B3D6530061D6BA /* UtilTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B97C3928B3D6530061D6BA /* UtilTest.swift */; };
@@ -312,6 +314,8 @@
 		92B8097F28B834DC00EA5F2F /* TradeUIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeUIModel.swift; sourceTree = "<group>"; };
 		92B8098128B8A12200EA5F2F /* AccountTradesHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTradesHeaderCell.swift; sourceTree = "<group>"; };
 		92B8098328B8A52300EA5F2F /* AccountTradesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTradesCell.swift; sourceTree = "<group>"; };
+		92B8098528B9455C00EA5F2F /* UIModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIModal.swift; sourceTree = "<group>"; };
+		92B8098828B9499E00EA5F2F /* AccountTradeDetailModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTradeDetailModal.swift; sourceTree = "<group>"; };
 		92B97C3428B3D1AA0061D6BA /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 		92B97C3728B3D2020061D6BA /* AccountBankModel+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AccountBankModel+Extensions.swift"; sourceTree = "<group>"; };
 		92B97C3928B3D6530061D6BA /* UtilTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilTest.swift; sourceTree = "<group>"; };
@@ -858,6 +862,7 @@
 				0B289A08289E3325001B3360 /* TextFields */,
 				0B557B972899F56900632A6D /* CYBButton.swift */,
 				0BD6610F286B76CF00F4DA6B /* URLImageView */,
+				92B8098528B9455C00EA5F2F /* UIModal.swift */,
 			);
 			path = "Reusable Views";
 			sourceTree = "<group>";
@@ -943,6 +948,7 @@
 		9224373128AEA102008E73F2 /* Accounts */ = {
 			isa = PBXGroup;
 			children = (
+				92B8098728B9497800EA5F2F /* Modal */,
 				92B8097328B7B8B800EA5F2F /* Entity */,
 				92B8097228B7B8A200EA5F2F /* View */,
 				924992F128AFEC8000386012 /* AccountsViewController.swift */,
@@ -979,6 +985,14 @@
 				92B8097D28B82E3B00EA5F2F /* SymbolPriceBankModel+Extensions.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		92B8098728B9497800EA5F2F /* Modal */ = {
+			isa = PBXGroup;
+			children = (
+				92B8098828B9499E00EA5F2F /* AccountTradeDetailModal.swift */,
+			);
+			path = Modal;
 			sourceTree = "<group>";
 		};
 		92B97C3B28B3F1D70061D6BA /* Pipes */ = {
@@ -1301,9 +1315,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				0B2899E0288E4860001B3360 /* AuthenticatedServiceProvider.swift in Sources */,
+				92B8098628B9455C00EA5F2F /* UIModal.swift in Sources */,
 				0BD6612A286DE86A00F4DA6B /* CybridLocalizationKey.swift in Sources */,
 				0B00E02E287F6AE500707F26 /* CybridError.swift in Sources */,
 				0BD6613A2872BC0B00F4DA6B /* CybridCurrencyFormatter.swift in Sources */,
+				92B8098928B9499E00EA5F2F /* AccountTradeDetailModal.swift in Sources */,
 				92B97C3D28B3F1E70061D6BA /* AssetPipe.swift in Sources */,
 				0BD6610D286B769800F4DA6B /* Observable.swift in Sources */,
 				0B557B952899F4DE00632A6D /* BuyQuoteViewController.swift in Sources */,

@@ -55,4 +55,7 @@ enum UIConstants {
   static let gray900 = UIColor(red: 0.11, green: 0.11, blue: 0.118, alpha: 1)
   static let darkestColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1)
   static let brightBlue = UIColor(red: 0, green: 0.478, blue: 1, alpha: 1)
+
+    // MARK: Global Modal
+    static let cornerRadius: CGFloat = 12
 }

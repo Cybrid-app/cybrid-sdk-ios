@@ -74,4 +74,16 @@ extension UILabel {
     let text = localizer.localize(with: key)
     self.text = text
   }
+  
+  static func makeBasic(font: UIFont, color: UIColor, aligment: NSTextAlignment) -> UILabel {
+    
+    let label = UILabel()
+    label.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+    label.translatesAutoresizingMaskIntoConstraints = false
+    label.sizeToFit()
+    label.font = font
+    label.textColor = color
+    label.textAlignment = aligment
+    return label
+  }
 }

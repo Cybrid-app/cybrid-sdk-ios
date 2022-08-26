@@ -118,7 +118,7 @@ extension UIView {
                             constant: height)
         }
     }
-    
+
     func addBelowToBottom(topItem: UIView, bottomItem: UIView, margins: UIEdgeInsets) {
 
         if topItem.superview != nil {
@@ -146,5 +146,31 @@ extension UIView {
                             attribute: .bottom,
                             constant: -margins.bottom)
         }
+    }
+    
+    func addAsFirstElement(parent: UIView, height: CGFloat, margins: UIEdgeInsets) {
+
+        parent.addSubview(self)
+        self.translatesAutoresizingMaskIntoConstraints = false
+        self.constraint(attribute: .top,
+                        relatedBy: .equal,
+                        toItem: parent,
+                        attribute: .topMargin,
+                        constant: margins.top)
+        self.constraint(attribute: .leading,
+                        relatedBy: .equal,
+                        toItem: parent,
+                        attribute: .leading,
+                        constant: margins.left)
+        self.constraint(attribute: .trailing,
+                        relatedBy: .equal,
+                        toItem: parent,
+                        attribute: .trailing,
+                        constant: -margins.right)
+        self.constraint(attribute: .height,
+                        relatedBy: .equal,
+                        toItem: nil,
+                        attribute: .notAnAttribute,
+                        constant: height)
     }
 }
