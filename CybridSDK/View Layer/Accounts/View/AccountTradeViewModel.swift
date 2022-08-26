@@ -14,19 +14,23 @@ class AccountTradeViewModel: NSObject {
     internal var trades: Observable<[TradeUIModel]> = .init([])
 
     // MARK: Private properties
-    // private unowned var cellProvider: AccountsViewProvider
+    private unowned var cellProvider: AccountTradesViewProvider
     private var dataProvider: TradesRepoProvider
     private var logger: CybridLogger?
     private var assets: [AssetBankModel]?
+    private var currentCurrency: String = "USD"
 
-    init(dataProvider: TradesRepoProvider,
+    init(cellProvider: AccountTradesViewProvider,
+         dataProvider: TradesRepoProvider,
          assets: [AssetBankModel],
-         logger: CybridLogger?) {
+         logger: CybridLogger?,
+         currency: String = "USD") {
 
-        // self.cellProvider = cellProvider
+        self.cellProvider = cellProvider
         self.dataProvider = dataProvider
         self.assets = assets
         self.logger = logger
+        self.currentCurrency = currency
     }
 
     func getTrades(accountGuid: String) {
@@ -66,5 +70,35 @@ class AccountTradeViewModel: NSObject {
                 asset: asset,
                 counterAsset: counterAsset)
         }
+    }
+}
+
+// MARK: - TradesViewProvider
+
+protocol AccountTradesViewProvider: AnyObject {
+
+  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath, withData model: TradeUIModel) -> UITableViewCell
+
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath, with trade: TradeUIModel)
+}
+
+// MARK: - TradesViewModel + UITableViewDelegate + UITableViewDataSource
+
+extension AccountTradeViewModel: UITableViewDelegate, UITableViewDataSource {
+
+    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        trades.value.count
+    }
+
+    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        cellProvider.tableView(tableView, cellForRowAt: indexPath, withData: trades.value[indexPath.row])
+    }
+
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        return AccountTradesHeaderCell(currency: self.currentCurrency)
+    }
+
+    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        cellProvider.tableView(tableView, didSelectRowAt: indexPath, with: trades.value[indexPath.row])
     }
 }

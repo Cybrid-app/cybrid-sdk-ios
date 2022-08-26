@@ -132,6 +132,8 @@
 		92B8097C28B81FCB00EA5F2F /* TradeBankModel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B8097B28B81FCB00EA5F2F /* TradeBankModel+Extensions.swift */; };
 		92B8097E28B82E3B00EA5F2F /* SymbolPriceBankModel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B8097D28B82E3B00EA5F2F /* SymbolPriceBankModel+Extensions.swift */; };
 		92B8098028B834DC00EA5F2F /* TradeUIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B8097F28B834DC00EA5F2F /* TradeUIModel.swift */; };
+		92B8098228B8A12200EA5F2F /* AccountTradesHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B8098128B8A12200EA5F2F /* AccountTradesHeaderCell.swift */; };
+		92B8098428B8A52300EA5F2F /* AccountTradesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B8098328B8A52300EA5F2F /* AccountTradesCell.swift */; };
 		92B97C3528B3D1AA0061D6BA /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B97C3428B3D1AA0061D6BA /* Util.swift */; };
 		92B97C3828B3D2020061D6BA /* AccountBankModel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B97C3728B3D2020061D6BA /* AccountBankModel+Extensions.swift */; };
 		92B97C3A28B3D6530061D6BA /* UtilTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B97C3928B3D6530061D6BA /* UtilTest.swift */; };
@@ -308,6 +310,8 @@
 		92B8097B28B81FCB00EA5F2F /* TradeBankModel+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TradeBankModel+Extensions.swift"; sourceTree = "<group>"; };
 		92B8097D28B82E3B00EA5F2F /* SymbolPriceBankModel+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SymbolPriceBankModel+Extensions.swift"; sourceTree = "<group>"; };
 		92B8097F28B834DC00EA5F2F /* TradeUIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeUIModel.swift; sourceTree = "<group>"; };
+		92B8098128B8A12200EA5F2F /* AccountTradesHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTradesHeaderCell.swift; sourceTree = "<group>"; };
+		92B8098328B8A52300EA5F2F /* AccountTradesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTradesCell.swift; sourceTree = "<group>"; };
 		92B97C3428B3D1AA0061D6BA /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 		92B97C3728B3D2020061D6BA /* AccountBankModel+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AccountBankModel+Extensions.swift"; sourceTree = "<group>"; };
 		92B97C3928B3D6530061D6BA /* UtilTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilTest.swift; sourceTree = "<group>"; };
@@ -991,6 +995,8 @@
 			children = (
 				92B97C4D28B67D560061D6BA /* AccountsHeaderCell.swift */,
 				92B97C4F28B6B4F00061D6BA /* AccountsCell.swift */,
+				92B8098128B8A12200EA5F2F /* AccountTradesHeaderCell.swift */,
+				92B8098328B8A52300EA5F2F /* AccountTradesCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -1324,6 +1330,7 @@
 				0B2B2A6D28621D5C002F0EC1 /* ColorTheme.swift in Sources */,
 				9224373328AEA141008E73F2 /* AccountAssetPriceModel.swift in Sources */,
 				0B00E04C2885AD8D00707F26 /* PricesRepository.swift in Sources */,
+				92B8098228B8A12200EA5F2F /* AccountTradesHeaderCell.swift in Sources */,
 				92B8097E28B82E3B00EA5F2F /* SymbolPriceBankModel+Extensions.swift in Sources */,
 				0B96600F285AA0FC00584692 /* AssertionFailureOverride.swift in Sources */,
 				0B6175D4288B7853004E4F5B /* TaskScheduler.swift in Sources */,
@@ -1358,6 +1365,7 @@
 				0B303CE12862E062007BF7FF /* FormatStyle.swift in Sources */,
 				0B2899F828942C54001B3360 /* CybridJSONDecoder.swift in Sources */,
 				0BD66105286B768300F4DA6B /* CryptoPriceTableViewCell.swift in Sources */,
+				92B8098428B8A52300EA5F2F /* AccountTradesCell.swift in Sources */,
 				0BD660FE286B763E00F4DA6B /* AsyncOperation.swift in Sources */,
 				0B2899E5288EE764001B3360 /* TimerType.swift in Sources */,
 				0B303CDF2862DD2C007BF7FF /* UIConstants.swift in Sources */,

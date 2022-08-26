@@ -21,18 +21,23 @@ public final class AccountTradesViewController: UIViewController {
     var balanceAssetIcon: URLImageView!
     var balanceAssetName: UILabel!
     var assetTitleContainer: UIStackView!
+    var balanceValueView: UILabel!
+    var balanceFiatValueView: UILabel!
+    let tradesTable = UITableView()
 
     internal init(balance: AccountAssetPriceModel, accountsViewModel: AccountsViewModel) {
 
         super.init(nibName: nil, bundle: nil)
         self.balance = balance
         self.accountsViewModel = accountsViewModel
-        
+
         self.tradesViewModel = AccountTradeViewModel(
+            cellProvider: self,
             dataProvider: CybridSession.current,
             assets: accountsViewModel.assets,
-            logger: Cybrid.logger)
-        
+            logger: Cybrid.logger,
+            currency: accountsViewModel.currentCurrency)
+
         self.theme = Cybrid.theme
         self.localizer = CybridLocalizer()
 
@@ -51,6 +56,7 @@ public final class AccountTradesViewController: UIViewController {
         view.backgroundColor = .white
         self.createAssetTitle()
         self.createBalanceTitles()
+        self.createTradesTable()
     }
 }
 
@@ -86,7 +92,7 @@ extension AccountTradesViewController {
     private func createBalanceTitles() {
 
         // -- Balancr Value
-        let balanceValueView = UILabel()
+        balanceValueView = UILabel()
         balanceValueView.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         balanceValueView.translatesAutoresizingMaskIntoConstraints = false
         balanceValueView.sizeToFit()
@@ -105,7 +111,7 @@ extension AccountTradesViewController {
             margins: UIValues.balanceValueViewMargin)
 
         // -- Balance Fiat Value
-        let balanceFiatValueView = UILabel()
+        balanceFiatValueView = UILabel()
         balanceFiatValueView.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         balanceFiatValueView.translatesAutoresizingMaskIntoConstraints = false
         balanceFiatValueView.sizeToFit()
@@ -122,6 +128,26 @@ extension AccountTradesViewController {
             toItem: balanceValueView,
             height: UIValues.balanceFiatValueViewSize,
             margins: UIValues.balanceFiatValueViewMargins)
+    }
+
+    private func createTradesTable() {
+
+        self.tradesTable.delegate = self.tradesViewModel
+        self.tradesTable.dataSource = self.tradesViewModel
+        self.tradesTable.register(AccountTradesCell.self, forCellReuseIdentifier: AccountTradesCell.reuseIdentifier)
+        self.tradesTable.rowHeight = UIValues.tradesTableCellHeight
+        self.tradesTable.estimatedRowHeight = UIValues.tradesTableCellHeight
+        self.tradesTable.translatesAutoresizingMaskIntoConstraints = false
+
+        self.tradesTable.addBelowToBottom(
+            topItem: self.balanceFiatValueView,
+            bottomItem: self.view,
+            margins: UIValues.tradesTableMargins)
+
+        // -- Live Data
+        tradesViewModel.trades.bind { _ in
+            self.tradesTable.reloadData()
+        }
     }
 
     private func centerHorizontalView(container: UIStackView) {
@@ -149,6 +175,26 @@ extension AccountTradesViewController {
     }
 }
 
+extension AccountTradesViewController: AccountTradesViewProvider {
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath, withData model: TradeUIModel) -> UITableViewCell {
+
+        guard
+            let cell = tableView.dequeueReusableCell(
+                withIdentifier: AccountTradesCell.reuseIdentifier,
+                for: indexPath) as? AccountTradesCell
+        else {
+            return UITableViewCell()
+        }
+        cell.setData(trade: model)
+        return cell
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath, with trade: TradeUIModel) {
+        print(trade.tradeBankModel.guid)
+    }
+}
+
 extension AccountTradesViewController {
 
     enum UIValues {
@@ -162,6 +208,8 @@ extension AccountTradesViewController {
         static let balanceValueViewSize: CGFloat = 35
         static let balanceFiatValueViewMargins = UIEdgeInsets(top: 2, left: 10, bottom: 0, right: 10)
         static let balanceFiatValueViewSize: CGFloat = 23
+        static let tradesTableCellHeight: CGFloat = 62
+        static let tradesTableMargins = UIEdgeInsets(top: 5, left: 15, bottom: 0, right: 15)
 
         // -- Fonts
         static let balanceAssetNameFont = UIFont.make(ofSize: 16.5, weight: .medium)

@@ -26,3 +26,7 @@
 "cybrid.accounts.assetTitle" = "ACTIF";
 "cybrid.accounts.marketPriceTitle" = "Market Price";
 "cybrid.accounts.balanceTitle" = "PRIX DU MARCHÉ";
+
+// Account Trades
+"cybrid.account.trades.recentTransactionsTitle" = "TRANSACTION RÉCENTE";
+"cybrid.account.trades.amountTitle" = "MONTANT";
