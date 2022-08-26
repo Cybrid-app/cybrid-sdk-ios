@@ -30,3 +30,5 @@
 // Account Trades
 "cybrid.account.trades.recentTransactionsTitle" = "RECENT TRANSACTIONS";
 "cybrid.account.trades.amountTitle" = "AMOUNT";
+"cybrid.account.trades.sellType" = "Sell";
+"cybrid.account.trades.buyType" = "Buy";

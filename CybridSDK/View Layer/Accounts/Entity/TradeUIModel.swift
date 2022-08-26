@@ -12,10 +12,6 @@ import CybridCore
 struct TradeUIModel {
 
     let tradeBankModel: TradeBankModel
-    let receiveAmountValue: SBigDecimal
-    let receiveAmountBDValue: BigDecimal
-    let deliverAmountValue: SBigDecimal
-    let deliverAmountBDValue: BigDecimal
     let feeValue: SBigDecimal
     let feeFormatted: String
     let asset: AssetBankModel
@@ -24,20 +20,12 @@ struct TradeUIModel {
     init?(tradeBankModel: TradeBankModel, asset: AssetBankModel, counterAsset: AssetBankModel) {
 
         let emptyValue = SBigDecimal(0)
-        let receiveAmount = SBigDecimal(tradeBankModel.receiveAmount ?? "0", precision: asset.decimals)
-        let receiveAmountBD = BigDecimal(value___: tradeBankModel.receiveAmount ?? "0")
-        let deliverAmount = SBigDecimal(tradeBankModel.deliverAmount ?? "0", precision: asset.decimals)
-        let deliverAmountBD = BigDecimal(value___: tradeBankModel.deliverAmount ?? "0")
         let fee = SBigDecimal(tradeBankModel.fee ?? "0", precision: counterAsset.decimals)
         let feeString = CybridCurrencyFormatter.formatPrice(fee ?? emptyValue, with: counterAsset.symbol)
 
         self.tradeBankModel = tradeBankModel
         self.asset = asset
         self.counterAsset = counterAsset
-        self.receiveAmountValue = receiveAmount ?? emptyValue
-        self.receiveAmountBDValue = receiveAmountBD
-        self.deliverAmountValue = deliverAmount ?? emptyValue
-        self.deliverAmountBDValue = deliverAmountBD
         self.feeValue = fee ?? emptyValue
         self.feeFormatted = feeString
     }
@@ -46,9 +34,11 @@ struct TradeUIModel {
 
         var returnValue = ""
         if self.tradeBankModel.side == .sell {
-            returnValue = AssetPipe.transform(value: self.deliverAmountBDValue, asset: self.asset, unit: .trade).toPlainString()
+            let deliverAmount = BigDecimal(value___: self.tradeBankModel.deliverAmount ?? "0")
+            returnValue = AssetPipe.transform(value: deliverAmount, asset: self.asset, unit: .trade).toPlainString()
         } else {
-            returnValue = AssetPipe.transform(value: self.receiveAmountBDValue, asset: self.asset, unit: .trade).toPlainString()
+            let receiveAmount = BigDecimal(value___: self.tradeBankModel.receiveAmount ?? "0")
+            returnValue = AssetPipe.transform(value: receiveAmount, asset: self.asset, unit: .trade).toPlainString()
         }
         return returnValue
     }
@@ -57,9 +47,11 @@ struct TradeUIModel {
 
         var returnValue = ""
         if self.tradeBankModel.side == .sell {
-            returnValue = CybridCurrencyFormatter.formatPrice(self.receiveAmountValue, with: counterAsset.symbol)
+            let receiveAmount = SBigDecimal(self.tradeBankModel.receiveAmount ?? "0", precision: counterAsset.decimals) ?? SBigDecimal(0)
+            returnValue = CybridCurrencyFormatter.formatPrice(receiveAmount, with: self.counterAsset.symbol)
         } else {
-            returnValue = CybridCurrencyFormatter.formatPrice(self.deliverAmountValue, with: counterAsset.symbol)
+            let deliverAmount = SBigDecimal(self.tradeBankModel.deliverAmount ?? "0", precision: counterAsset.decimals) ?? SBigDecimal(0)
+            returnValue = CybridCurrencyFormatter.formatPrice(deliverAmount, with: self.counterAsset.symbol)
         }
         return returnValue
     }

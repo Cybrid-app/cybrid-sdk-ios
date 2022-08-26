@@ -13,7 +13,7 @@ class AccountTradesCell: UITableViewCell {
     static let reuseIdentifier = "accountTradesCell"
     override var reuseIdentifier: String? { Self.reuseIdentifier }
     private let theme: Theme
-    private var icon = URLImageView(url: nil)
+    private var icon = UIImageView()
     private var tradeType = UILabel()
     private var tradeAmount = UILabel()
     private var tradeDate = UILabel()
@@ -60,7 +60,10 @@ class AccountTradesCell: UITableViewCell {
     func setData(trade: TradeUIModel) {
 
         // -- Setup icon
-        // icon.setURL(balance.accountAssetURL)
+        icon.image = UIImage(
+            named: trade.tradeBankModel.side == .sell ? "sellIcon" : "buyIcon",
+            in: Bundle(for: Self.self),
+            with: nil)
 
         // -- Setup labels
         self.setLabelsData(trade: trade)
@@ -203,9 +206,8 @@ extension AccountTradesCell {
     private func setLabelsData(trade: TradeUIModel) {
 
         // -- Trade Type
-        // TODO: change
-        let tradeTypeText = (trade.tradeBankModel.side == .sell) ? "Sell" : "Buy"
-        tradeType.text = tradeTypeText
+        let tradeTypeKey = (trade.tradeBankModel.side == .sell) ? UIString.tradeTYpeSell : UIString.tradeTypeBuy
+        tradeType.setLocalizedText(key: tradeTypeKey, localizer: CybridLocalizer())
 
         // -- Trade Amount
         tradeAmount.setAttributedText(
@@ -215,7 +217,7 @@ extension AccountTradesCell {
             attributedText: trade.asset.code,
             attributedTextFont: UIFont.systemFont(ofSize: UIValues.tradeAmountCodeSize),
             attributedTextColor: UIValues.tradeAmountCodeColor,
-            side: .left)
+            side: .right)
 
         // -- Trade Date
         tradeDate.text = "Jul 26, 2022"
@@ -226,6 +228,12 @@ extension AccountTradesCell {
 }
 
 extension AccountTradesCell {
+
+    enum UIString {
+
+        static let tradeTYpeSell = "cybrid.account.trades.sellType"
+        static let tradeTypeBuy = "cybrid.account.trades.buyType"
+    }
 
     enum UIValues {
 
