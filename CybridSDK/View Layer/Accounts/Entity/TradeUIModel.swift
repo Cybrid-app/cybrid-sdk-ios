@@ -16,8 +16,9 @@ struct TradeUIModel {
     let feeFormatted: String
     let asset: AssetBankModel
     let counterAsset: AssetBankModel
+    let accoountGuid: String
 
-    init?(tradeBankModel: TradeBankModel, asset: AssetBankModel, counterAsset: AssetBankModel) {
+    init?(tradeBankModel: TradeBankModel, asset: AssetBankModel, counterAsset: AssetBankModel, accountGuid: String) {
 
         let emptyValue = SBigDecimal(0)
         let fee = SBigDecimal(tradeBankModel.fee ?? "0", precision: counterAsset.decimals)
@@ -28,6 +29,7 @@ struct TradeUIModel {
         self.counterAsset = counterAsset
         self.feeValue = fee ?? emptyValue
         self.feeFormatted = feeString
+        self.accoountGuid = accountGuid
     }
 
     func getTradeAmount() -> String {
@@ -43,7 +45,7 @@ struct TradeUIModel {
         return returnValue
     }
 
-    func getTradeFiarAmount() -> String {
+    func getTradeFiatAmount() -> String {
 
         var returnValue = ""
         if self.tradeBankModel.side == .sell {

@@ -14,14 +14,16 @@ internal class UIModal: UIViewController {
     private let dispatchGroup = DispatchGroup()
 
     internal var containerView = UIView()
+    var height: CGFloat = 100
 
-    init(theme: Theme) {
+    init(theme: Theme, height: CGFloat = 100) {
 
         self.theme = theme
         super.init(nibName: nil, bundle: nil)
 
         self.containerView.backgroundColor = theme.colorTheme.secondaryBackgroundColor
         self.containerView.layer.cornerRadius = UIConstants.cornerRadius
+        self.height = height
         self.setupViews()
     }
 
@@ -64,7 +66,7 @@ internal class UIModal: UIViewController {
                                  relatedBy: .equal,
                                  toItem: nil,
                                  attribute: .notAnAttribute,
-                                 constant: 100)
+                                 constant: self.height)
 
         containerView.layoutIfNeeded()
     }

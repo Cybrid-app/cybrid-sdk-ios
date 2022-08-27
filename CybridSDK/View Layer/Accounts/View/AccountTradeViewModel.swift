@@ -41,7 +41,8 @@ class AccountTradeViewModel: NSObject {
                 self?.logger?.log(.component(.trades(.tradesDataFetching)))
                 guard let modelUIList = self?.createUIModelList(
                     trades: tradesList.objects,
-                    assets: self?.assets) else {
+                    assets: self?.assets,
+                    accountGuid: accountGuid) else {
                     return
                 }
                 self?.trades.value = modelUIList
@@ -54,7 +55,8 @@ class AccountTradeViewModel: NSObject {
 
     private func createUIModelList(
         trades: [TradeBankModel],
-        assets: [AssetBankModel]?) -> [TradeUIModel]? {
+        assets: [AssetBankModel]?,
+        accountGuid: String) -> [TradeUIModel]? {
 
         return trades.compactMap { trade in
             guard
@@ -68,7 +70,8 @@ class AccountTradeViewModel: NSObject {
             return TradeUIModel(
                 tradeBankModel: trade,
                 asset: asset,
-                counterAsset: counterAsset)
+                counterAsset: counterAsset,
+                accountGuid: accountGuid)
         }
     }
 }

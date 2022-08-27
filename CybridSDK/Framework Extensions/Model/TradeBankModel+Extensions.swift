@@ -23,6 +23,7 @@ extension TradeBankModel {
         }
 
         let codingKeys = TradeBankModel.CodingKeys.self
+        let createdAtDate = getDate(stringDate: createdAt)
         self.init(
             guid: json[codingKeys.guid.rawValue] as? String ?? "",
             customerGuid: json[codingKeys.customerGuid.rawValue] as? String ?? "",
@@ -33,7 +34,7 @@ extension TradeBankModel {
             receiveAmount: receiveAmount,
             deliverAmount: deliverAmount,
             fee: fee,
-            createdAt: getDate(stringDate: createdAt))
+            createdAt: createdAtDate)
     }
 
     static func fromArray(objects: [[String: Any]]) -> [TradeBankModel] {
@@ -46,7 +47,6 @@ extension TradeBankModel {
             if let objectData = objectData {
 
                 let stringChangeValues = [
-                    //TradeBankModel.CodingKeys.createdAt.rawValue,
                     TradeBankModel.CodingKeys.deliverAmount.rawValue,
                     TradeBankModel.CodingKeys.fee.rawValue,
                     TradeBankModel.CodingKeys.receiveAmount.rawValue

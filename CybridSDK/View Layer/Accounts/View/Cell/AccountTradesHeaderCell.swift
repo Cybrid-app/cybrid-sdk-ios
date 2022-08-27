@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 class AccountTradesHeaderCell: UITableViewHeaderFooterView {
-    
+
     private let localizer: Localizer
     private var currentCurrency: String = "USD"
 

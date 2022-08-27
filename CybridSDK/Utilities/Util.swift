@@ -8,6 +8,7 @@
 import Foundation
 
 func stringValue(forKey key: String, in jsonData: Data, atIndex index: Int = 0) -> String? {
+
   guard let jsonString = String(data: jsonData, encoding: .utf8) else { return nil }
   let recurrentCharacters = CharacterSet(charactersIn: "\n ")
   let arrayContent = jsonString.trimmingCharacters(in: CharacterSet(charactersIn: "\n []{"))
@@ -28,10 +29,25 @@ func stringValue(forKey key: String, in jsonData: Data, atIndex index: Int = 0) 
 }
 
 func getDate(stringDate: String) -> Date? {
-    
+
     let dateFormatter = DateFormatter()
-    dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
-    dateFormatter.timeZone = TimeZone.current
-    dateFormatter.locale = Locale.current
+    dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+    dateFormatter.calendar = Calendar(identifier: .iso8601)
+    dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+    dateFormatter.timeZone = TimeZone(secondsFromGMT: 0)
     return dateFormatter.date(from: stringDate)
+}
+
+func getFormattedDate(_ date: Date?, format: String) -> String {
+
+    if let date = date {
+        let dateFormatter = DateFormatter()
+        dateFormatter.calendar = Calendar(identifier: .iso8601)
+        dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+        dateFormatter.timeZone = TimeZone(secondsFromGMT: 0)
+        dateFormatter.dateFormat = format
+        return dateFormatter.string(from: date)
+    } else {
+        return ""
+    }
 }

@@ -32,10 +32,6 @@ class AccountTradesCell: UITableViewCell {
       return nil
     }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-    }
-
     private func setupViews() {
 
         backgroundColor = theme.colorTheme.primaryBackgroundColor
@@ -197,7 +193,7 @@ extension AccountTradesCell {
     }
 
     private func setLabelsData(trade: TradeUIModel) {
-        
+
         // -- Setup icon
         icon.image = UIImage(
             named: trade.tradeBankModel.side == .sell ? "sellIcon" : "buyIcon",
@@ -219,10 +215,10 @@ extension AccountTradesCell {
             side: .right)
 
         // -- Trade Date
-        tradeDate.text = "Jul 26, 2022"
+        tradeDate.text = getFormattedDate(trade.tradeBankModel.createdAt, format: "MMM dd, YYYY")
 
         // -- Trade Amount in Fiat
-        tradeAmountInFiat.text = trade.getTradeFiarAmount()
+        tradeAmountInFiat.text = trade.getTradeFiatAmount()
     }
 }
 

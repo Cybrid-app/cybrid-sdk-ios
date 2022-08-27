@@ -32,3 +32,14 @@
 "cybrid.account.trades.amountTitle" = "AMOUNT";
 "cybrid.account.trades.sellType" = "Sell";
 "cybrid.account.trades.buyType" = "Buy";
+
+// Account Trade Detail - Modal
+"cybrid.account.trade.detail.bought" = "Bought";
+"cybrid.account.trade.detail.sold" = "Sold";
+"cybrid.account.trade.detail.status" = "Status";
+"cybrid.account.trade.detail.orderPlaced" = "Order Placed";
+"cybrid.account.trade.detail.orderFinalized" = "Order Finalized";
+"cybrid.account.trade.detail.transactionDate" = "Transaction Date & Time";
+"cybrid.account.trade.detail.accountID" = "Account ID";
+"cybrid.account.trade.detail.orderID" = "Order ID";
+"cybrid.account.trade.detail.close" = "Close";
