@@ -84,7 +84,7 @@ extension AccountTradesCell {
                              font: UIFont.make(ofSize: UIValues.tradeTypeSize),
                              color: UIValues.tradeTypeColor)
 
-        // -- TRade Amount
+        // -- Trade Amount
         self.setupBasicLabel(tradeAmount,
                              side: .right,
                              font: UIFont.make(ofSize: UIValues.tradeAmountSize),
@@ -207,7 +207,7 @@ extension AccountTradesCell {
         // -- Trade Amount
         tradeAmount.setAttributedText(
             mainText: trade.getTradeAmount(),
-            mainTextFont: UIFont.systemFont(ofSize: UIValues.tradeAmountSize),
+            mainTextFont: UIFont.systemFont(ofSize: UIValues.tradeAmountSize, weight: .medium),
             mainTextColor: UIValues.tradeAmountColor,
             attributedText: trade.asset.code,
             attributedTextFont: UIFont.systemFont(ofSize: UIValues.tradeAmountCodeSize),

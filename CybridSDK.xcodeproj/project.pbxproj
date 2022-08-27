@@ -136,11 +136,12 @@
 		92B8098428B8A52300EA5F2F /* AccountTradesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B8098328B8A52300EA5F2F /* AccountTradesCell.swift */; };
 		92B8098628B9455C00EA5F2F /* UIModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B8098528B9455C00EA5F2F /* UIModal.swift */; };
 		92B8098928B9499E00EA5F2F /* AccountTradeDetailModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B8098828B9499E00EA5F2F /* AccountTradeDetailModal.swift */; };
+		92B8098A28B9F95900EA5F2F /* CybridCore.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92B97C4628B43CE40061D6BA /* CybridCore.xcframework */; };
+		92B8098B28B9F95900EA5F2F /* CybridCore.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 92B97C4628B43CE40061D6BA /* CybridCore.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		92B97C3528B3D1AA0061D6BA /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B97C3428B3D1AA0061D6BA /* Util.swift */; };
 		92B97C3828B3D2020061D6BA /* AccountBankModel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B97C3728B3D2020061D6BA /* AccountBankModel+Extensions.swift */; };
 		92B97C3A28B3D6530061D6BA /* UtilTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B97C3928B3D6530061D6BA /* UtilTest.swift */; };
 		92B97C3D28B3F1E70061D6BA /* AssetPipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B97C3C28B3F1E70061D6BA /* AssetPipe.swift */; };
-		92B97C4728B43CE40061D6BA /* CybridCore.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92B97C4628B43CE40061D6BA /* CybridCore.xcframework */; };
 		92B97C4928B43CFF0061D6BA /* BigDecimalPipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B97C4828B43CFF0061D6BA /* BigDecimalPipe.swift */; };
 		92B97C4E28B67D560061D6BA /* AccountsHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B97C4D28B67D560061D6BA /* AccountsHeaderCell.swift */; };
 		92B97C5028B6B4F10061D6BA /* AccountsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B97C4F28B6B4F00061D6BA /* AccountsCell.swift */; };
@@ -172,6 +173,17 @@
 			dstSubfolderSpec = 10;
 			files = (
 				0B00E0062877E56A00707F26 /* CybridSDK.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		92B8098C28B9F95900EA5F2F /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				92B8098B28B9F95900EA5F2F /* CybridCore.xcframework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -334,7 +346,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				51763411D3F45A952AC6465B /* Pods_Abstract_CybridSDK.framework in Frameworks */,
-				92B97C4728B43CE40061D6BA /* CybridCore.xcframework in Frameworks */,
+				92B8098A28B9F95900EA5F2F /* CybridCore.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1039,6 +1051,7 @@
 				0B078F0928497B070020B4F7 /* Sources */,
 				0B078F0A28497B070020B4F7 /* Frameworks */,
 				0B078F0B28497B070020B4F7 /* Resources */,
+				92B8098C28B9F95900EA5F2F /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
