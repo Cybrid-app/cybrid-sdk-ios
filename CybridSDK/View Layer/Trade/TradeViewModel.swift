@@ -89,7 +89,7 @@ final class TradeViewModel: NSObject {
         self?.assetList.value = assetList
           .filter { $0.type == .crypto }
           .map { CurrencyModel(asset: $0) }
-        self?.dataProvider.fetchPriceList { pricesResult in
+        self?.dataProvider.fetchPriceList(liveUpdateEnabled: false) { pricesResult in
           switch pricesResult {
           case .success(let pricesList):
             self?.priceList = pricesList
@@ -110,20 +110,18 @@ final class TradeViewModel: NSObject {
       let inputText = (amountText.value?.filter { $0 != "." && $0 != "," && $0 != " " })
     else { return }
     let fiatCode = fiatCurrency.asset.code
-    var symbol = ""
+    let symbol = cryptoCode + "-" + fiatCode
     var receiveAmount: String?
     var deliverAmount: String?
 
     switch segmentSelection.value {
     case .buy:
-      symbol = cryptoCode + "-" + fiatCode
       if shouldInputCrypto.value {
         receiveAmount = inputText
       } else {
         deliverAmount = inputText
       }
     case .sell:
-      symbol = fiatCode + "-" + cryptoCode
       if shouldInputCrypto.value {
         deliverAmount = inputText
       } else {

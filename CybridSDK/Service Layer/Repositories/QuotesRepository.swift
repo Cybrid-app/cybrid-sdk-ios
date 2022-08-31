@@ -22,6 +22,7 @@ protocol QuotesRepository {
 
 protocol QuotesRepoProvider: AuthenticatedServiceProvider {
   var quotesRepository: QuotesRepository.Type { get set }
+//  var quotesScheduler: TaskScheduler { get }
 }
 
 extension QuotesRepoProvider {
