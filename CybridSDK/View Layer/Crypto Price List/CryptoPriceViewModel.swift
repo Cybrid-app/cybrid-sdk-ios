@@ -24,6 +24,7 @@ class CryptoPriceViewModel: NSObject {
   private unowned var cellProvider: CryptoPriceViewProvider
   private var dataProvider: DataProvider
   private var logger: CybridLogger?
+  private var taskScheduler: CybridTaskScheduler?
 
   init(cellProvider: CryptoPriceViewProvider,
        dataProvider: DataProvider,
@@ -33,12 +34,19 @@ class CryptoPriceViewModel: NSObject {
     self.logger = logger
   }
 
-  func fetchPriceList(liveUpdateEnabled: Bool = true) {
+  private func setupScheduler() {
+    let scheduler = CybridTaskScheduler()
+    taskScheduler = scheduler
+    Cybrid.session.taskSchedulers.insert(scheduler)
+  }
+
+  func fetchPriceList() {
+    setupScheduler()
     dataProvider.fetchAssetsList { [weak self] assetsResult in
       switch assetsResult {
       case .success(let assetsList):
         self?.logger?.log(.component(.priceList(.dataFetching)))
-        self?.dataProvider.fetchPriceList(liveUpdateEnabled: liveUpdateEnabled) { pricesResult in
+        self?.dataProvider.fetchPriceList(with: self?.taskScheduler) { pricesResult in
           switch pricesResult {
           case .success(let pricesList):
             self?.logger?.log(.component(.priceList(.dataRefreshed)))
@@ -58,7 +66,8 @@ class CryptoPriceViewModel: NSObject {
   }
 
   func stopLiveUpdates() {
-    self.dataProvider.pricesFetchScheduler.cancel()
+    logger?.log(.component(.priceList(.liveUpdateStop)))
+    taskScheduler?.cancel()
   }
 
   private func buildModelList(symbols: [SymbolPriceBankModel], assets: [AssetBankModel]) -> [CryptoPriceModel] {

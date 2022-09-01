@@ -23,13 +23,15 @@ final class CybridSession: AuthenticatedServiceProvider {
 
   // Prices Repository
   internal var pricesRepository: PricesRepository.Type
-  internal var pricesFetchScheduler: TaskScheduler
 
   // Quotes Repository
   internal var quotesRepository: QuotesRepository.Type
 
   // Trades Repository
   internal var tradesRepository: TradesRepository.Type
+
+  // Schedulers
+  internal var taskSchedulers: Set<CybridTaskScheduler> = []
 
   // MARK: Private(set) Internal Properties
   private(set) var authenticator: CybridAuthenticator?
@@ -46,7 +48,6 @@ final class CybridSession: AuthenticatedServiceProvider {
     self.notificationManager = notificationManager
     self.pricesRepository = PricesAPI.self
     self.assetsRepository = AssetsAPI.self
-    self.pricesFetchScheduler = CybridTaskScheduler()
     self.quotesRepository = QuotesAPI.self
     self.tradesRepository = TradesAPI.self
 
@@ -73,12 +74,16 @@ final class CybridSession: AuthenticatedServiceProvider {
 
   @objc
   func appMovedToBackground() {
-    pricesFetchScheduler.pause()
+    taskSchedulers.forEach { scheduler in
+      scheduler.pause()
+    }
   }
 
   @objc
   func appMovedToForeground() {
-    pricesFetchScheduler.resume()
+    taskSchedulers.forEach { scheduler in
+      scheduler.resume()
+    }
   }
 }
 

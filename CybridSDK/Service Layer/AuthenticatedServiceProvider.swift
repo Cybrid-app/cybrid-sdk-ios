@@ -94,5 +94,3 @@ extension AuthenticatedServiceProvider {
     }
   }
 }
-
-struct EmptyParameters { }

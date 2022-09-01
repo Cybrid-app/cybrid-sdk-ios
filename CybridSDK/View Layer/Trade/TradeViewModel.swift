@@ -66,6 +66,8 @@ final class TradeViewModel: NSObject {
     }
   }
   private var quoteGUID: String?
+  private var priceFetchScheduler: CybridTaskScheduler?
+  private var quoteFetchScheduler: CybridTaskScheduler?
 
   init(selectedCrypto: AssetBankModel,
        dataProvider: DataProvider,
@@ -82,16 +84,41 @@ final class TradeViewModel: NSObject {
     cryptoCurrency.value = .init(asset: selectedCrypto)
   }
 
+  private func setupPriceScheduler() {
+    let priceScheduler = CybridTaskScheduler()
+    priceFetchScheduler = priceScheduler
+
+    Cybrid.session.taskSchedulers.insert(priceScheduler)
+  }
+
+  private func setupQuoteScheduler() {
+    let quoteScheduler = CybridTaskScheduler()
+    quoteFetchScheduler = quoteScheduler
+
+    Cybrid.session.taskSchedulers.insert(quoteScheduler)
+  }
+
   func fetchPriceList() {
+    setupPriceScheduler()
     dataProvider.fetchAssetsList { [weak self] assetsResult in
       switch assetsResult {
       case .success(let assetList):
+        self?.logger?.log(.component(.trade(.priceDataFetching)))
         self?.assetList.value = assetList
           .filter { $0.type == .crypto }
           .map { CurrencyModel(asset: $0) }
-        self?.dataProvider.fetchPriceList(liveUpdateEnabled: false) { pricesResult in
+        guard
+          let cryptoCode = self?.cryptoCurrency.value?.asset.code,
+          let fiatCode = self?.fiatCurrency.asset.code
+        else {
+          self?.logger?.log(.component(.trade(.priceDataError)))
+          return
+        }
+        let symbol = cryptoCode + "-" + fiatCode
+        self?.dataProvider.fetchPriceList(symbol: symbol, with: self?.priceFetchScheduler) { pricesResult in
           switch pricesResult {
           case .success(let pricesList):
+            self?.logger?.log(.component(.trade(.priceDataRefreshed)))
             self?.priceList = pricesList
           case .failure:
             self?.logger?.log(.component(.trade(.priceDataError)))
@@ -104,6 +131,7 @@ final class TradeViewModel: NSObject {
   }
 
   func createQuote() {
+    setupQuoteScheduler()
     logger?.log(.component(.trade(.quoteDataFetching)))
     guard
       let cryptoCode = cryptoCurrency.value?.asset.code,
@@ -129,11 +157,14 @@ final class TradeViewModel: NSObject {
       }
     }
 
-    dataProvider.createQuote(symbol: symbol,
-                             type: segmentSelection.value,
-                             receiveAmount: receiveAmount,
-                             deliverAmount: deliverAmount
-    ) { [weak self] result in
+    let params = PostQuoteBankModel(
+      customerGuid: Cybrid.customerGUID,
+      symbol: symbol,
+      side: segmentSelection.value.sideBankModel,
+      receiveAmount: receiveAmount,
+      deliverAmount: deliverAmount
+    )
+    dataProvider.createQuote(params: params, with: quoteFetchScheduler) { [weak self] result in
       guard let self = self else { return }
       switch result {
       case .success(let quoteModel):
@@ -141,6 +172,7 @@ final class TradeViewModel: NSObject {
           self.logger?.log(.component(.trade(.quoteDataError)))
           return
         }
+        self.logger?.log(.component(.trade(.quoteDataRefreshed)))
         self.generatedQuoteModel.value = newDataModel
         self.quoteGUID = newDataModel.quoteGUID
         self.error.value = nil
@@ -244,6 +276,16 @@ final class TradeViewModel: NSObject {
       transactionFee: formattedFeeAmount,
       quoteType: segmentSelection.value
     )
+  }
+
+  func stopPriceUpdate() {
+    logger?.log(.component(.trade(.priceLiveUpdateStop)))
+    priceFetchScheduler?.cancel()
+  }
+
+  func stopQuoteUpdateIfNeeded() {
+    logger?.log(.component(.trade(.quoteLiveUpdateStop)))
+    quoteFetchScheduler?.cancel()
   }
 
   @objc

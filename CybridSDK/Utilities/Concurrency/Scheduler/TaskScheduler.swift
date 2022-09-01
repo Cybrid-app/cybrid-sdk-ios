@@ -46,6 +46,7 @@ extension TaskScheduler {
   }
 
   func cancel() {
+    guard state != .cancelled else { return }
     timer?.invalidate()
     timer = nil
     state = .cancelled
@@ -59,7 +60,8 @@ enum TimerTypeState {
   case cancelled
 }
 
-final class CybridTaskScheduler: TaskScheduler {
+final class CybridTaskScheduler: TaskScheduler, Hashable {
+  let uuid = UUID()
   var timerType: TimerType.Type
   var timer: TimerType?
   var state: TimerTypeState
@@ -68,5 +70,13 @@ final class CybridTaskScheduler: TaskScheduler {
   init() {
     self.timerType = Timer.self
     self.state = .initial
+  }
+
+  static func == (lhs: CybridTaskScheduler, rhs: CybridTaskScheduler) -> Bool {
+    lhs.uuid == rhs.uuid
+  }
+
+  func hash(into hasher: inout Hasher) {
+    hasher.combine(uuid)
   }
 }

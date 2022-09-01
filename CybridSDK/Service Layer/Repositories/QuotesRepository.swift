@@ -19,23 +19,20 @@ protocol QuotesRepository {
 
 protocol QuotesRepoProvider: AuthenticatedServiceProvider {
   var quotesRepository: QuotesRepository.Type { get set }
-//  var quotesScheduler: TaskScheduler { get }
 }
 
 extension QuotesRepoProvider {
-  func createQuote(symbol: String,
-                   type: TradeType,
-                   receiveAmount: String?,
-                   deliverAmount: String?,
+  func createQuote(params: PostQuoteBankModel,
+                   with scheduler: CybridTaskScheduler?,
                    _ completion: @escaping CreateQuoteCompletion) {
-    let params = PostQuoteBankModel(
-      customerGuid: Cybrid.customerGUID,
-      symbol: symbol,
-      side: type.sideBankModel,
-      receiveAmount: receiveAmount,
-      deliverAmount: deliverAmount
-    )
-    authenticatedRequest(quotesRepository.createQuote, parameters: params, completion: completion)
+    if let scheduler = scheduler {
+      scheduler.start { [weak self] in
+        guard let self = self else { return }
+        self.authenticatedRequest(self.quotesRepository.createQuote, parameters: params, completion: completion)
+      }
+    } else {
+      authenticatedRequest(quotesRepository.createQuote, parameters: params, completion: completion)
+    }
   }
 }
 
