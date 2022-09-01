@@ -24,8 +24,7 @@ protocol TradesRepoProvider: AuthenticatedServiceProvider {
 extension TradesRepoProvider {
   func createTrade(quoteGuid: String,
                    _ completion: @escaping CreateTradeCompletion) {
-    tradesRepository.createTrade(quoteGuid: quoteGuid,
-                                 completion)
+    authenticatedRequest(tradesRepository.createTrade, parameters: quoteGuid, completion: completion)
   }
 }
 

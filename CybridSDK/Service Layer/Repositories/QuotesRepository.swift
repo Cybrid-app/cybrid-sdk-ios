@@ -13,10 +13,7 @@ import CybridApiBankSwift
 typealias CreateQuoteCompletion = (Result<QuoteBankModel, ErrorResponse>) -> Void
 
 protocol QuotesRepository {
-  static func createQuote(symbol: String,
-                          type: TradeType,
-                          receiveAmount: String?,
-                          deliverAmount: String?,
+  static func createQuote(_ params: PostQuoteBankModel,
                           _ completion: @escaping CreateQuoteCompletion)
 }
 
@@ -31,30 +28,24 @@ extension QuotesRepoProvider {
                    receiveAmount: String?,
                    deliverAmount: String?,
                    _ completion: @escaping CreateQuoteCompletion) {
-    quotesRepository.createQuote(symbol: symbol,
-                                 type: type,
-                                 receiveAmount: receiveAmount,
-                                 deliverAmount: deliverAmount,
-                                 completion)
+    let params = PostQuoteBankModel(
+      customerGuid: Cybrid.customerGUID,
+      symbol: symbol,
+      side: type.sideBankModel,
+      receiveAmount: receiveAmount,
+      deliverAmount: deliverAmount
+    )
+    authenticatedRequest(quotesRepository.createQuote, parameters: params, completion: completion)
   }
 }
 
 extension CybridSession: QuotesRepoProvider {}
 
 extension QuotesAPI: QuotesRepository {
-  static func createQuote(symbol: String,
-                          type: TradeType,
-                          receiveAmount: String?,
-                          deliverAmount: String?,
+  static func createQuote(_ params: PostQuoteBankModel,
                           _ completion: @escaping CreateQuoteCompletion) {
     createQuote(
-      postQuoteBankModel: PostQuoteBankModel(
-        customerGuid: Cybrid.customerGUID,
-        symbol: symbol,
-        side: type.sideBankModel,
-        receiveAmount: receiveAmount,
-        deliverAmount: deliverAmount
-      ),
+      postQuoteBankModel: params,
       completion: completion
     )
   }

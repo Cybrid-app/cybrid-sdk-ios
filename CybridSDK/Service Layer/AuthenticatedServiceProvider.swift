@@ -51,8 +51,10 @@ extension AuthenticatedServiceProvider {
     })
   }
 
-  func authenticatedRequest<T: Any>(_ request: @escaping (_ completion: @escaping (Result<T, ErrorResponse>) -> Void) -> Void,
-                                    completion: @escaping (Result<T, ErrorResponse>) -> Void) {
+  func authenticatedRequest<ResponseType: Any>(
+    _ request: @escaping (_ completion: @escaping (Result<ResponseType, ErrorResponse>) -> Void) -> Void,
+    completion: @escaping (Result<ResponseType, ErrorResponse>) -> Void
+  ) {
     authenticate { authResult in
       switch authResult {
       case .success:
@@ -69,4 +71,28 @@ extension AuthenticatedServiceProvider {
       }
     }
   }
+
+  func authenticatedRequest<Parameters: Any, ResponseType: Any>(
+    _ request: @escaping (_ params: Parameters, _ completion: @escaping (Result<ResponseType, ErrorResponse>) -> Void) -> Void,
+    parameters: Parameters,
+    completion: @escaping (Result<ResponseType, ErrorResponse>) -> Void
+  ) {
+    authenticate { authResult in
+      switch authResult {
+      case .success:
+        request(parameters) { requestResult in
+          switch requestResult {
+          case .success(let data):
+            completion(.success(data))
+          case .failure(let error):
+            completion(.failure(error))
+          }
+        }
+      case .failure:
+        completion(.failure(.error(1, nil, nil, CybridError.authenticationError)))
+      }
+    }
+  }
 }
+
+struct EmptyParameters { }
