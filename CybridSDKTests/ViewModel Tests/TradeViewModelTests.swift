@@ -12,7 +12,7 @@ import XCTest
 
 class TradeViewModelTests: XCTestCase {
   let pricesFetchScheduler = TaskSchedulerMock()
-  lazy var dataProvider = ServiceProviderMock(pricesFetchScheduler: pricesFetchScheduler)
+  lazy var dataProvider = ServiceProviderMock()
 
   func testViewModel_initialization() {
     // Given

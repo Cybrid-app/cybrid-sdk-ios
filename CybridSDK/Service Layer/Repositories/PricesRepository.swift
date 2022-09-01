@@ -25,7 +25,10 @@ extension PricesRepoProvider {
   func fetchPriceList(symbol: String? = nil, with scheduler: TaskScheduler? = nil, _ completion: @escaping FetchPricesCompletion) {
     if let scheduler = scheduler {
       scheduler.start { [weak self] in
-        guard let self = self else { return }
+        guard let self = self else {
+          scheduler.cancel()
+          return
+        }
         self.authenticatedRequest(self.pricesRepository.fetchPrices, parameters: symbol, completion: completion)
       }
     } else {

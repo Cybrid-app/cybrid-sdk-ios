@@ -18,16 +18,13 @@ final class ServiceProviderMock: AssetsRepoProvider,
   // MARK: Repositories
   var assetsRepository: AssetsRepository.Type = AssetsAPIMock.self
   var pricesRepository: PricesRepository.Type = PricesAPIMock.self
-  var pricesFetchScheduler: TaskScheduler
   var quotesRepository: QuotesRepository.Type = QuotesAPIMock.self
   var tradesRepository: TradesRepository.Type = TradesAPIMock.self
 
   // MARK: Cache
   var assetsCache: [AssetBankModel]?
 
-  init(pricesFetchScheduler: TaskScheduler = TaskSchedulerMock()) {
-    self.pricesFetchScheduler = pricesFetchScheduler
-  }
+  init() { }
 
   func didFetchPricesSuccessfully(_ prices: [SymbolPriceBankModel]? = nil) {
     (authenticator as? MockAuthenticator)?.authenticationSuccess()

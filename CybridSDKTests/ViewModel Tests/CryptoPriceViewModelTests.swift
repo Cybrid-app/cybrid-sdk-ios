@@ -12,12 +12,13 @@ import XCTest
 class CryptoPriceViewModelTests: XCTestCase {
 
   let pricesFetchScheduler = TaskSchedulerMock()
-  lazy var dataProvider = ServiceProviderMock(pricesFetchScheduler: pricesFetchScheduler)
+  lazy var dataProvider = ServiceProviderMock()
 
   func testFetchData_withLiveUpdate_successfully() {
     // Given
     let viewProvider = CryptoPriceMockViewProvider()
-    let viewModel = createViewModel(viewProvider: viewProvider)
+    let viewModel = createViewModel(viewProvider: viewProvider,
+                                    pricesFetchScheduler: pricesFetchScheduler)
 
     // When
     viewModel.fetchPriceList()
@@ -87,8 +88,10 @@ class CryptoPriceViewModelTests: XCTestCase {
   func testPriceRepoProvider_MemoryDeallocation() {
     // Given
     let viewProvider = CryptoPriceMockViewProvider()
-    var optionalDataProvider: ServiceProviderMock? = ServiceProviderMock(pricesFetchScheduler: pricesFetchScheduler)
-    var viewModel: CryptoPriceViewModel? = createViewModel(viewProvider: viewProvider, dataProvider: optionalDataProvider)
+    var optionalDataProvider: ServiceProviderMock? = ServiceProviderMock()
+    var viewModel: CryptoPriceViewModel? = createViewModel(viewProvider: viewProvider,
+                                                           dataProvider: optionalDataProvider,
+                                                           pricesFetchScheduler: pricesFetchScheduler)
 
     // When
     viewModel?.fetchPriceList()
@@ -163,7 +166,8 @@ extension CryptoPriceViewModelTests {
   func testPriceLiveUpdate() {
     // Given
     let viewProvider = CryptoPriceMockViewProvider()
-    let viewModel = createViewModel(viewProvider: viewProvider)
+    let viewModel = createViewModel(viewProvider: viewProvider,
+                                    pricesFetchScheduler: pricesFetchScheduler)
     let firstList: [CryptoPriceModel] = [
       CryptoPriceModel(
         symbolPrice: .btcUSD1,
@@ -215,7 +219,8 @@ extension CryptoPriceViewModelTests {
   func testPriceLiveUpdate_cancel() {
     // Given
     let viewProvider = CryptoPriceMockViewProvider()
-    let viewModel = createViewModel(viewProvider: viewProvider)
+    let viewModel = createViewModel(viewProvider: viewProvider,
+                                    pricesFetchScheduler: pricesFetchScheduler)
 
     // When
     viewModel.fetchPriceList()
@@ -392,11 +397,13 @@ extension CryptoPriceViewModelTests {
                        dataProvider: (AssetsRepoProvider
                                       & PricesRepoProvider
                                       & QuotesRepoProvider
-                                      & TradesRepoProvider)? = nil) -> CryptoPriceViewModel {
+                                      & TradesRepoProvider)? = nil,
+                       pricesFetchScheduler: TaskScheduler? = nil) -> CryptoPriceViewModel {
     let viewModel = CryptoPriceViewModel(
       cellProvider: viewProvider,
       dataProvider: dataProvider ?? self.dataProvider,
-      logger: nil
+      logger: nil,
+      taskScheduler: pricesFetchScheduler
     )
     return viewModel
   }
