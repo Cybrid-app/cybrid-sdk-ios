@@ -66,8 +66,8 @@ final class TradeViewModel: NSObject {
     }
   }
   private var quoteGUID: String?
-  private var priceFetchScheduler: CybridTaskScheduler?
-  private var quoteFetchScheduler: CybridTaskScheduler?
+  private var priceFetchScheduler: TaskScheduler?
+  private var quoteFetchScheduler: TaskScheduler?
 
   init(selectedCrypto: AssetBankModel,
        dataProvider: DataProvider,
@@ -85,14 +85,14 @@ final class TradeViewModel: NSObject {
   }
 
   private func setupPriceScheduler() {
-    let priceScheduler = CybridTaskScheduler()
+    let priceScheduler = TaskScheduler()
     priceFetchScheduler = priceScheduler
 
     Cybrid.session.taskSchedulers.insert(priceScheduler)
   }
 
   private func setupQuoteScheduler() {
-    let quoteScheduler = CybridTaskScheduler()
+    let quoteScheduler = TaskScheduler()
     quoteFetchScheduler = quoteScheduler
 
     Cybrid.session.taskSchedulers.insert(quoteScheduler)

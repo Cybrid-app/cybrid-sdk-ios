@@ -24,7 +24,7 @@ class CryptoPriceViewModel: NSObject {
   private unowned var cellProvider: CryptoPriceViewProvider
   private var dataProvider: DataProvider
   private var logger: CybridLogger?
-  private var taskScheduler: CybridTaskScheduler?
+  private var taskScheduler: TaskScheduler?
 
   init(cellProvider: CryptoPriceViewProvider,
        dataProvider: DataProvider,
@@ -35,7 +35,7 @@ class CryptoPriceViewModel: NSObject {
   }
 
   private func setupScheduler() {
-    let scheduler = CybridTaskScheduler()
+    let scheduler = TaskScheduler()
     taskScheduler = scheduler
     Cybrid.session.taskSchedulers.insert(scheduler)
   }

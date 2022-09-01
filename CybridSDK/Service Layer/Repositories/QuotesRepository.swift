@@ -23,7 +23,7 @@ protocol QuotesRepoProvider: AuthenticatedServiceProvider {
 
 extension QuotesRepoProvider {
   func createQuote(params: PostQuoteBankModel,
-                   with scheduler: CybridTaskScheduler?,
+                   with scheduler: TaskScheduler?,
                    _ completion: @escaping CreateQuoteCompletion) {
     if let scheduler = scheduler {
       scheduler.start { [weak self] in

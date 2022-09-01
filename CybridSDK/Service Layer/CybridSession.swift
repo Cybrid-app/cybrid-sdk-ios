@@ -31,7 +31,7 @@ final class CybridSession: AuthenticatedServiceProvider {
   internal var tradesRepository: TradesRepository.Type
 
   // Schedulers
-  internal var taskSchedulers: Set<CybridTaskScheduler> = []
+  internal var taskSchedulers: Set<TaskScheduler> = []
 
   // MARK: Private(set) Internal Properties
   private(set) var authenticator: CybridAuthenticator?

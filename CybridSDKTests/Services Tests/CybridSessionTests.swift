@@ -222,7 +222,7 @@ class CybridSessionTests: XCTestCase {
     // Given
     let session = createSession(authenticator: authenticator)
     let scheduler = TaskSchedulerMock()
-    session.pricesFetchScheduler = scheduler
+    session.taskSchedulers.insert(scheduler)
 
     // When
     scheduler.start()
@@ -235,7 +235,7 @@ class CybridSessionTests: XCTestCase {
     // Given
     let session = createSession(authenticator: authenticator)
     let scheduler = TaskSchedulerMock()
-    session.pricesFetchScheduler = scheduler
+    session.taskSchedulers.insert(scheduler)
 
     // When
     scheduler.start()
@@ -249,7 +249,7 @@ class CybridSessionTests: XCTestCase {
     // Given
     let session = createSession(authenticator: authenticator)
     let scheduler = TaskSchedulerMock()
-    session.pricesFetchScheduler = scheduler
+    session.taskSchedulers.insert(scheduler)
 
     // When
     scheduler.start()

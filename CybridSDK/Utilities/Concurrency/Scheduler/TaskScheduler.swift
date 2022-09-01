@@ -7,11 +7,17 @@
 
 import Foundation
 
-protocol TaskScheduler: AnyObject {
-  var timerType: TimerType.Type { get }
-  var timer: TimerType? { get set }
-  var state: TimerTypeState { get set }
-  var block: (() -> Void)? { get set }
+class TaskScheduler: NSObject {
+  var timerType: TimerType.Type
+  var timer: TimerType?
+  var state: TimerTypeState
+  var block: (() -> Void)?
+
+  override init() {
+    self.timerType = Timer.self
+    self.state = .initial
+    super.init()
+  }
 }
 
 extension TaskScheduler {
@@ -58,25 +64,4 @@ enum TimerTypeState {
   case running
   case paused
   case cancelled
-}
-
-final class CybridTaskScheduler: TaskScheduler, Hashable {
-  let uuid = UUID()
-  var timerType: TimerType.Type
-  var timer: TimerType?
-  var state: TimerTypeState
-  var block: (() -> Void)?
-
-  init() {
-    self.timerType = Timer.self
-    self.state = .initial
-  }
-
-  static func == (lhs: CybridTaskScheduler, rhs: CybridTaskScheduler) -> Bool {
-    lhs.uuid == rhs.uuid
-  }
-
-  func hash(into hasher: inout Hasher) {
-    hasher.combine(uuid)
-  }
 }

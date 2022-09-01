@@ -22,7 +22,7 @@ protocol PricesRepoProvider: AuthenticatedServiceProvider {
 }
 
 extension PricesRepoProvider {
-  func fetchPriceList(symbol: String? = nil, with scheduler: CybridTaskScheduler? = nil, _ completion: @escaping FetchPricesCompletion) {
+  func fetchPriceList(symbol: String? = nil, with scheduler: TaskScheduler? = nil, _ completion: @escaping FetchPricesCompletion) {
     if let scheduler = scheduler {
       scheduler.start { [weak self] in
         guard let self = self else { return }

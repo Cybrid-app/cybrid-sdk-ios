@@ -34,7 +34,7 @@ class CryptoPriceViewModelTests: XCTestCase {
     let viewModel = createViewModel(viewProvider: viewProvider)
 
     // When
-    viewModel.fetchPriceList(liveUpdateEnabled: false)
+    viewModel.fetchPriceList()
     dataProvider.didFetchAssetsSuccessfully()
     dataProvider.didFetchPricesSuccessfully()
 
