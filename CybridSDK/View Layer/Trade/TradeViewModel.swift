@@ -49,6 +49,8 @@ final class TradeViewModel: NSObject {
 
   // MARK: Internal Properties
   internal let fiatCurrency: CurrencyModel // CounterAsset
+  internal var priceFetchScheduler: TaskScheduler?
+  internal var quoteFetchScheduler: TaskScheduler?
 
   // MARK: Computed properties
   internal var selectedPriceRate: BigInt? {
@@ -66,12 +68,12 @@ final class TradeViewModel: NSObject {
     }
   }
   private var quoteGUID: String?
-  private var priceFetchScheduler: TaskScheduler?
-  private var quoteFetchScheduler: TaskScheduler?
 
   init(selectedCrypto: AssetBankModel,
        dataProvider: DataProvider,
-       logger: CybridLogger?) {
+       logger: CybridLogger?,
+       priceScheduler: TaskScheduler? = nil,
+       quoteScheduler: TaskScheduler? = nil) {
     self.dataProvider = dataProvider
     self.fiatCurrency = CurrencyModel(asset: Cybrid.fiat.defaultAsset)
     self.assetList = Observable([])
@@ -82,24 +84,24 @@ final class TradeViewModel: NSObject {
       self.assetList.value = assetsCache.map { .init(asset: $0) }
     }
     cryptoCurrency.value = .init(asset: selectedCrypto)
+    self.priceFetchScheduler = priceScheduler ?? TaskScheduler()
+    self.quoteFetchScheduler = quoteScheduler ?? TaskScheduler()
   }
 
-  private func setupPriceScheduler() {
-    let priceScheduler = TaskScheduler()
-    priceFetchScheduler = priceScheduler
-
-    Cybrid.session.taskSchedulers.insert(priceScheduler)
+  private func registerPriceScheduler() {
+    if let scheduler = priceFetchScheduler {
+      Cybrid.session.taskSchedulers.insert(scheduler)
+    }
   }
 
-  private func setupQuoteScheduler() {
-    let quoteScheduler = TaskScheduler()
-    quoteFetchScheduler = quoteScheduler
-
-    Cybrid.session.taskSchedulers.insert(quoteScheduler)
+  private func registerQuoteScheduler() {
+    if let scheduler = quoteFetchScheduler {
+      Cybrid.session.taskSchedulers.insert(scheduler)
+    }
   }
 
   func fetchPriceList() {
-    setupPriceScheduler()
+    registerPriceScheduler()
     dataProvider.fetchAssetsList { [weak self] assetsResult in
       switch assetsResult {
       case .success(let assetList):
@@ -131,7 +133,7 @@ final class TradeViewModel: NSObject {
   }
 
   func createQuote() {
-    setupQuoteScheduler()
+    registerQuoteScheduler()
     logger?.log(.component(.trade(.quoteDataFetching)))
     guard
       let cryptoCode = cryptoCurrency.value?.asset.code,

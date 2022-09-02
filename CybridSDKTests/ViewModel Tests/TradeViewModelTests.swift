@@ -12,6 +12,7 @@ import XCTest
 
 class TradeViewModelTests: XCTestCase {
   let pricesFetchScheduler = TaskSchedulerMock()
+  let quoteFetchScheduler = TaskSchedulerMock()
   lazy var dataProvider = ServiceProviderMock()
 
   func testViewModel_initialization() {
@@ -335,6 +336,53 @@ class TradeViewModelTests: XCTestCase {
     XCTAssertEqual(viewModel.formatAndConvert("2019891"), "0.00")
   }
 
+  func testViewModel_stopPriceUpdate() {
+    // Given
+    let viewModel = createViewModel(priceScheduler: pricesFetchScheduler, quoteScheduler: quoteFetchScheduler)
+
+    // When
+    viewModel.fetchPriceList()
+    dataProvider.didFetchAssetsSuccessfully()
+
+    // Then
+    XCTAssertEqual(pricesFetchScheduler.state, .running)
+
+    viewModel.stopPriceUpdate()
+    XCTAssertEqual(pricesFetchScheduler.state, .cancelled)
+  }
+
+  func testViewModel_stopQuoteUpdate() {
+    // Given
+    let viewModel = createViewModel(priceScheduler: pricesFetchScheduler, quoteScheduler: quoteFetchScheduler)
+
+    // When
+    viewModel.fetchPriceList()
+    dataProvider.didFetchAssetsSuccessfully()
+    dataProvider.didFetchPricesSuccessfully()
+    viewModel.amountText.value = "0.00012343"
+    viewModel.createQuote()
+
+    // Then
+    XCTAssertEqual(quoteFetchScheduler.state, .running)
+
+    viewModel.stopQuoteUpdateIfNeeded()
+    XCTAssertEqual(quoteFetchScheduler.state, .cancelled)
+  }
+
+  func testViewModel_fetchPrices_once() {
+    // Given
+    let viewModel = createViewModel()
+    viewModel.priceFetchScheduler = nil
+
+    // When
+    viewModel.fetchPriceList()
+    dataProvider.didFetchAssetsSuccessfully()
+    dataProvider.didFetchPricesSuccessfully()
+
+    // Then
+    XCTAssertFalse(viewModel.assetList.value.isEmpty)
+    XCTAssertNotNil(viewModel.selectedPriceRate)
+  }
 }
 
 // MARK: - Buy and Sell tests
@@ -342,6 +390,26 @@ extension TradeViewModelTests {
   func testViewModel_createBuyQuote() {
     // Given
     let viewModel = createViewModel()
+    viewModel.fetchPriceList()
+    dataProvider.didFetchAssetsSuccessfully()
+    dataProvider.didFetchPricesSuccessfully()
+    viewModel.amountText.value = "0.00012343"
+
+    // When
+    viewModel.createQuote()
+    dataProvider.didCreateQuoteSuccessfully(.buyBitcoin)
+
+    // Then
+    XCTAssertNotNil(viewModel.generatedQuoteModel.value)
+    XCTAssertEqual(viewModel.generatedQuoteModel.value?.quoteType, .buy)
+    XCTAssertEqual(viewModel.generatedQuoteModel.value?.fiatAmount, "$2.68")
+    XCTAssertEqual(viewModel.generatedQuoteModel.value?.cryptoAmount, "0.00012343")
+  }
+
+  func testViewModel_createBuyQuote_once() {
+    // Given
+    let viewModel = createViewModel()
+    viewModel.quoteFetchScheduler = nil
     viewModel.fetchPriceList()
     dataProvider.didFetchAssetsSuccessfully()
     dataProvider.didFetchPricesSuccessfully()
@@ -633,9 +701,13 @@ extension TradeViewModelTests {
 }
 
 extension TradeViewModelTests {
-  func createViewModel(selectedCrypto: AssetBankModel = .bitcoin) -> TradeViewModel {
+  func createViewModel(selectedCrypto: AssetBankModel = .bitcoin,
+                       priceScheduler: TaskScheduler? = nil,
+                       quoteScheduler: TaskScheduler? = nil) -> TradeViewModel {
     return TradeViewModel(selectedCrypto: selectedCrypto,
                           dataProvider: self.dataProvider,
-                          logger: nil)
+                          logger: nil,
+                          priceScheduler: priceScheduler,
+                          quoteScheduler: quoteScheduler)
   }
 }

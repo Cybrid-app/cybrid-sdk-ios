@@ -193,6 +193,36 @@ class CybridSessionTests: XCTestCase {
     XCTAssertNil(actualResult)
   }
 
+  func testSession_authenticatedRequestWithParams_failure() {
+    // Given
+    let session = createSession(authenticator: authenticator)
+    let expectedResult = "Success"
+    var actualResult: String?
+
+    // When
+    session.authenticatedRequest(
+      _: { _, completion in
+        // Mock response
+        completion(Result<String, ErrorResponse>.failure(.error(1, nil, nil, CybridError.serviceError)))
+      },
+      parameters: "Input",
+      completion: { result in
+        switch result {
+        case .success(let value):
+          actualResult = value
+        case .failure:
+          actualResult = nil
+        }
+      }
+    )
+    authenticator.authenticationFailure()
+
+    // Then
+    XCTAssertFalse(session.isAuthenticated)
+    XCTAssertNotEqual(actualResult, expectedResult)
+    XCTAssertNil(actualResult)
+  }
+
   func testSession_unauthenticatedRequest() {
     // Given
     let session = createSession(authenticator: nil)
