@@ -3,7 +3,7 @@ Pod::Spec.new do |spec|
   # ―――  Spec Metadata  ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
 
   spec.name         = "CybridSDK"
-  spec.version      = "0.0.3"
+  spec.version      = "0.0.7"
   spec.summary      = "Cybrid iOS SDK"
 
   spec.description  = <<-DESC
