@@ -19,12 +19,12 @@ class CryptoPriceViewModel: NSObject {
   internal var cryptoPriceList: [CryptoPriceModel] = []
   internal var filteredCryptoPriceList: Observable<[CryptoPriceModel]> = Observable([])
   internal var selectedCrypto: Observable<TradeViewModel?> = Observable(nil)
+  internal var taskScheduler: TaskScheduler?
 
   // MARK: Private properties
   private unowned var cellProvider: CryptoPriceViewProvider
   private var dataProvider: DataProvider
   private var logger: CybridLogger?
-  private var taskScheduler: TaskScheduler
 
   init(cellProvider: CryptoPriceViewProvider,
        dataProvider: DataProvider,
@@ -36,12 +36,14 @@ class CryptoPriceViewModel: NSObject {
     self.taskScheduler = taskScheduler ?? TaskScheduler()
   }
 
-  private func setupScheduler() {
-    Cybrid.session.taskSchedulers.insert(taskScheduler)
+  private func registerScheduler() {
+    if let scheduler = taskScheduler {
+      Cybrid.session.taskSchedulers.insert(scheduler)
+    }
   }
 
   func fetchPriceList(with taskScheduler: TaskScheduler? = nil) {
-    setupScheduler()
+    registerScheduler()
     dataProvider.fetchAssetsList { [weak self] assetsResult in
       switch assetsResult {
       case .success(let assetsList):
@@ -67,8 +69,10 @@ class CryptoPriceViewModel: NSObject {
 
   func stopLiveUpdates() {
     logger?.log(.component(.priceList(.liveUpdateStop)))
-    taskScheduler.cancel()
-    Cybrid.session.taskSchedulers.remove(taskScheduler)
+    taskScheduler?.cancel()
+    if let taskScheduler = taskScheduler {
+      Cybrid.session.taskSchedulers.remove(taskScheduler)
+    }
   }
 
   private func buildModelList(symbols: [SymbolPriceBankModel], assets: [AssetBankModel]) -> [CryptoPriceModel] {

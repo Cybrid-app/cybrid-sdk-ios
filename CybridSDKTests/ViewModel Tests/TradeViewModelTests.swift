@@ -527,6 +527,30 @@ extension TradeViewModelTests {
     XCTAssertNil(viewModel.generatedQuoteModel.value)
   }
 
+  func testViewModel_createBuyQuote_withMemoryDeallocation() {
+    // Given
+    var optionalDataProvider: ServiceProviderMock? = ServiceProviderMock()
+    var viewModel: TradeViewModel? = createViewModel(dataProvider: optionalDataProvider,
+                                                     priceScheduler: pricesFetchScheduler,
+                                                     quoteScheduler: quoteFetchScheduler)
+
+    // When
+    viewModel?.fetchPriceList()
+    optionalDataProvider?.didFetchAssetsSuccessfully()
+    optionalDataProvider?.didFetchPricesSuccessfully()
+    viewModel?.amountText.value = "0.00012343"
+    viewModel?.createQuote()
+    XCTAssertTrue(quoteFetchScheduler.state == .running)
+
+    // When
+    viewModel = nil
+    optionalDataProvider = nil
+    quoteFetchScheduler.runNextLoop()
+
+    // Then
+    XCTAssertTrue(quoteFetchScheduler.state == .cancelled)
+  }
+
   func testViewModel_createSellQuote() {
     // Given
     let viewModel = createViewModel()
@@ -702,10 +726,14 @@ extension TradeViewModelTests {
 
 extension TradeViewModelTests {
   func createViewModel(selectedCrypto: AssetBankModel = .bitcoin,
+                       dataProvider: (AssetsRepoProvider
+                                      & PricesRepoProvider
+                                      & QuotesRepoProvider
+                                      & TradesRepoProvider)? = nil,
                        priceScheduler: TaskScheduler? = nil,
                        quoteScheduler: TaskScheduler? = nil) -> TradeViewModel {
     return TradeViewModel(selectedCrypto: selectedCrypto,
-                          dataProvider: self.dataProvider,
+                          dataProvider: dataProvider ?? self.dataProvider,
                           logger: nil,
                           priceScheduler: priceScheduler,
                           quoteScheduler: quoteScheduler)

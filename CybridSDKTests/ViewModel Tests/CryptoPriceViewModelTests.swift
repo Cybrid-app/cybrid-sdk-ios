@@ -33,6 +33,7 @@ class CryptoPriceViewModelTests: XCTestCase {
     // Given
     let viewProvider = CryptoPriceMockViewProvider()
     let viewModel = createViewModel(viewProvider: viewProvider)
+    viewModel.taskScheduler = nil
 
     // When
     viewModel.fetchPriceList()
@@ -232,6 +233,28 @@ extension CryptoPriceViewModelTests {
 
     // When
     viewModel.stopLiveUpdates()
+
+    // Then
+    XCTAssertTrue(pricesFetchScheduler.state == .cancelled)
+  }
+
+  func testPriceLiveUpdate_doubleCancel() {
+    // Given
+    let viewProvider = CryptoPriceMockViewProvider()
+    let viewModel = createViewModel(viewProvider: viewProvider,
+                                    pricesFetchScheduler: pricesFetchScheduler)
+
+    // When
+    viewModel.fetchPriceList()
+    dataProvider.didFetchAssetsSuccessfully()
+    dataProvider.didFetchPricesSuccessfully()
+
+    // Then
+    XCTAssertTrue(pricesFetchScheduler.state == .running)
+
+    // When
+    viewModel.stopLiveUpdates()
+    pricesFetchScheduler.cancel()
 
     // Then
     XCTAssertTrue(pricesFetchScheduler.state == .cancelled)

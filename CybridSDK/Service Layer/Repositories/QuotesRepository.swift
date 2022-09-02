@@ -27,7 +27,10 @@ extension QuotesRepoProvider {
                    _ completion: @escaping CreateQuoteCompletion) {
     if let scheduler = scheduler {
       scheduler.start { [weak self] in
-        guard let self = self else { return }
+        guard let self = self else {
+          scheduler.cancel()
+          return
+        }
         self.authenticatedRequest(self.quotesRepository.createQuote, parameters: params, completion: completion)
       }
     } else {
