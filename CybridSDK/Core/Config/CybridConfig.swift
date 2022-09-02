@@ -14,24 +14,30 @@ public final class CybridConfig {
 
   // MARK: Internal Properties
   internal var authenticator: CybridAuthenticator?
+  internal var customerGUID: String = ""
   internal var logger: CybridLogger?
   internal var refreshRate: TimeInterval = 5
   internal lazy var session: CybridSession = .current
   internal var theme: Theme = CybridTheme.default
   internal let assetsURL: String = "https://images.cybrid.xyz/sdk/assets/"
+  internal var fiat: FiatConfig = .usd
 
   // MARK: Private Properties
   private var _preferredLocale: Locale?
 
   // MARK: Public Methods
   /// Setup CybridSDK Configuration
-  public func setup(environment: CybridEnvironment = .sandbox,
-                    authenticator: CybridAuthenticator,
-                    theme: Theme? = nil,
+  public func setup(authenticator: CybridAuthenticator,
+                    customerGUID: String,
+                    environment: CybridEnvironment = .sandbox,
+                    fiat: FiatConfig = .cad,
                     locale: Locale? = nil,
+                    logger: CybridLogger? = nil,
                     refreshRate: TimeInterval = 5,
-                    logger: CybridLogger? = nil) {
+                    theme: Theme? = nil) {
     self.authenticator = authenticator
+    self.customerGUID = customerGUID
+    self.fiat = fiat
     self.theme = theme ?? CybridTheme.default
     self.refreshRate = refreshRate
     self._preferredLocale = locale

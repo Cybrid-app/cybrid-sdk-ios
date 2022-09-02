@@ -56,7 +56,7 @@ class CybridJSONDecoderTests: XCTestCase {
     XCTAssertEqual(cad?.symbol, "$")
   }
 
-  func test_decodingWrongType() throws {
+  func test_AssetBankModel_decodingWrongType() throws {
     let listAssetsData = getJSONData(from: "listAssetsResponse")
     XCTAssertNotNil(listAssetsData)
     let decoder = CybridJSONDecoder()
@@ -150,5 +150,63 @@ class CybridJSONDecoderTests: XCTestCase {
     let symbolPriceBankModel = SymbolPriceBankModel(json: jsonDict)
 
     XCTAssertNil(symbolPriceBankModel)
+  }
+
+  func test_QuoteBankModel_Decoding() throws {
+    let quoteData = getJSONData(from: "createQuoteResponse")
+    XCTAssertNotNil(quoteData)
+    let decoder = CybridJSONDecoder()
+
+    let result = try? decoder.decode(QuoteBankModel.self, from: quoteData!)
+    XCTAssertNotNil(result?.guid)
+    XCTAssertNotNil(result?.receiveAmount)
+    XCTAssertNotNil(result?.deliverAmount)
+  }
+
+  func test_QuoteBankModel_withInvalidJSON() throws {
+    let quoteData = getJSONData(from: "listAssetsResponse")
+    XCTAssertNotNil(quoteData)
+    let decoder = CybridJSONDecoder()
+
+    let result = try? decoder.decode(QuoteBankModel.self, from: quoteData!)
+    XCTAssertNil(result)
+  }
+
+  func test_QuoteBankModel_withInvalidArrayOfJSON() throws {
+    let quoteData = getJSONData(from: "listPricesResponse")
+    XCTAssertNotNil(quoteData)
+    let decoder = CybridJSONDecoder()
+
+    let result = try? decoder.decode(QuoteBankModel.self, from: quoteData!)
+    XCTAssertNil(result)
+  }
+
+  func test_TradeBankModel_Decoding() throws {
+    let tradeData = getJSONData(from: "createTradeResponse")
+    XCTAssertNotNil(tradeData)
+    let decoder = CybridJSONDecoder()
+
+    let result = try? decoder.decode(TradeBankModel.self, from: tradeData!)
+    XCTAssertNotNil(result?.guid)
+    XCTAssertNotNil(result?.receiveAmount)
+    XCTAssertNotNil(result?.deliverAmount)
+  }
+
+  func test_TradeBankModel_withInvalidJSON() throws {
+    let tradeData = getJSONData(from: "listAssetsResponse")
+    XCTAssertNotNil(tradeData)
+    let decoder = CybridJSONDecoder()
+
+    let result = try? decoder.decode(TradeBankModel.self, from: tradeData!)
+    XCTAssertNil(result)
+  }
+
+  func test_TradeBankModel_withInvalidArrayOfJSON() throws {
+    let tradeData = getJSONData(from: "listPricesResponse")
+    XCTAssertNotNil(tradeData)
+    let decoder = CybridJSONDecoder()
+
+    let result = try? decoder.decode(TradeBankModel.self, from: tradeData!)
+    XCTAssertNil(result)
   }
 }

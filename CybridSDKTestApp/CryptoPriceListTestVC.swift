@@ -10,7 +10,7 @@ import CybridSDK
 
 final class CryptoPriceListTestVC: UIViewController {
 
-  lazy var tableView = CryptoPriceListView()
+  lazy var tableView = CryptoPriceListView(navigationController: navigationController)
 
   init() {
     super.init(nibName: nil, bundle: nil)

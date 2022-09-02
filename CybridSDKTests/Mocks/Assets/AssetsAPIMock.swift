@@ -21,8 +21,10 @@ final class AssetsAPIMock: AssetsAPI {
     return listAssetsWithRequestBuilder().requestTask
   }
 
-  class func didFetchAssetsSuccessfully() {
+  @discardableResult
+  class func didFetchAssetsSuccessfully() -> AssetListBankModel {
     listAssetsCompletion?(.success(.mock))
+    return .mock
   }
 
   class func didFetchAssetsWithError() {

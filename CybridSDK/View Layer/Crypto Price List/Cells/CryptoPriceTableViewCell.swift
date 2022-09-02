@@ -25,12 +25,12 @@ class CryptoPriceTableViewCell: UITableViewCell {
     stackView.alignment = .center
     return stackView
   }()
-  private lazy var nameLabel = UILabel.makeLabel(with: .bodyLarge) { label in
+  private lazy var nameLabel = UILabel.makeLabel(.header2) { label in
     label.setContentCompressionResistancePriority(.defaultHigh - 1, for: .horizontal)
     label.setContentHuggingPriority(.required, for: .horizontal)
     label.setContentHuggingPriority(.defaultHigh, for: .vertical)
   }
-  private var priceLabel = UILabel.makeLabel(with: .body) { label in
+  private var priceLabel = UILabel.makeLabel(.body) { label in
     label.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
     label.setContentHuggingPriority(.defaultHigh, for: .vertical)
   }
@@ -47,12 +47,6 @@ class CryptoPriceTableViewCell: UITableViewCell {
   required init?(coder: NSCoder) {
     assertionFailure("init(coder:) should never be used")
     return nil
-  }
-
-  override func setSelected(_ selected: Bool, animated: Bool) {
-      super.setSelected(selected, animated: animated)
-
-      // Configure the view for the selected state
   }
 
   // MARK: Private functions
@@ -110,8 +104,8 @@ class CryptoPriceTableViewCell: UITableViewCell {
       string: currencyTitle,
       attributes: [
         NSAttributedString.Key.paragraphStyle: paragraphStyle,
-        NSAttributedString.Key.foregroundColor: FormatStyle.bodyLarge.textColor,
-        NSAttributedString.Key.font: FormatStyle.bodyLarge.font
+        NSAttributedString.Key.foregroundColor: FormatStyle.header2.textColor,
+        NSAttributedString.Key.font: FormatStyle.header2.font
       ]
     )
     attributedTitle.addAttributes(

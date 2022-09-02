@@ -20,3 +20,31 @@
 
 // Trade Sell
 "cybrid.trade.sell.title" = "VENDRE";
+"cybrid.trade.sell.cta" = "Vendre";
+
+// Trade Confirmation Modal
+"cybrid.trade.confirmationModal.title" = "Devis de Commande";
+"cybrid.trade.confirmationModal.subtitle" = "Les prix sont en temps réel. Les tarifs s'actualisent automatiquement.";
+"cybrid.trade.confirmationModal.purchaseAmount" = "Montant des achats";
+"cybrid.trade.confirmationModal.purchaseQuantity" = "Quantité d\'achat";
+"cybrid.trade.confirmationModal.sellAmount" = "Montant de la vente";
+"cybrid.trade.confirmationModal.sellQuantity" = "Quantité de vente";
+"cybrid.trade.confirmationModal.transactionFee" = "Frais de transaction";
+"cybrid.trade.confirmationModal.confirm" = "Confirmer";
+"cybrid.trade.confirmationModal.cancel" = "Annuler";
+
+// Trade Loading Modal
+"cybrid.trade.loadingModal.processingMessage" = "Soumettre une commande Crypto";
+
+// Trade Success Modal
+"cybrid.trade.successModal.title" = "Commande passée";
+"cybrid.trade.successModal.subtitle" = "Votre commande a été enregistrée";
+"cybrid.trade.successModal.transactionId" = "ID de transaction:";
+"cybrid.trade.successModal.date" = "Date:";
+"cybrid.trade.successModal.purchaseAmount" = "Montant des achats";
+"cybrid.trade.successModal.purchaseQuantity" = "Quantité d\'achat";
+"cybrid.trade.successModal.sellAmount" = "Montant de la vente";
+"cybrid.trade.successModal.sellQuantity" = "Quantité de vente";
+"cybrid.trade.successModal.transactionFee" = "Frais de transaction";
+"cybrid.trade.successModal.buyMore" = "Acheter plus de crypto";
+"cybrid.trade.successModal.sellMore" = "Vendre plus de crypto";

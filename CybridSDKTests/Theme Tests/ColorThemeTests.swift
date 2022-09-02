@@ -24,6 +24,7 @@ class ColorThemeTests: XCTestCase {
     XCTAssertEqual(testTheme.separatorColor.cgColor, UIConstants.gray180.cgColor)
     XCTAssertEqual(testTheme.disabledBackgroundColor.cgColor, UIConstants.gray250.cgColor)
     XCTAssertEqual(testTheme.accentColor.cgColor, UIConstants.brightBlue.cgColor)
+    XCTAssertEqual(testTheme.shadowColor.cgColor, UIConstants.overlayShadow.cgColor)
   }
 
   func testTheme_onDarkMode() {
@@ -40,6 +41,7 @@ class ColorThemeTests: XCTestCase {
     XCTAssertEqual(testTheme.separatorColor.cgColor, UIConstants.gray300.cgColor)
     XCTAssertEqual(testTheme.disabledBackgroundColor.cgColor, UIConstants.gray300.cgColor)
     XCTAssertEqual(testTheme.accentColor.cgColor, UIConstants.brightBlue.cgColor)
+    XCTAssertEqual(testTheme.shadowColor.cgColor, UIConstants.overlayShadow.cgColor)
   }
 
   func testTheme_onUnspecifiedMode() {
@@ -56,5 +58,6 @@ class ColorThemeTests: XCTestCase {
     XCTAssertEqual(testTheme.separatorColor.cgColor, UIConstants.gray180.cgColor)
     XCTAssertEqual(testTheme.disabledBackgroundColor.cgColor, UIConstants.gray250.cgColor)
     XCTAssertEqual(testTheme.accentColor.cgColor, UIConstants.brightBlue.cgColor)
+    XCTAssertEqual(testTheme.shadowColor.cgColor, UIConstants.overlayShadow.cgColor)
   }
 }

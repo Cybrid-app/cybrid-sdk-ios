@@ -19,9 +19,11 @@ enum UIConstants {
   static let minimumTargetSize: CGFloat = 44.0
 
   // MARK: Font Sizes
-  static let fontSizeSm: CGFloat = 12.0
-  static let fontSizeMd: CGFloat = 14.0
-  static let fontSizeLg: CGFloat = 17.0
+  static let fontSizeCaption: CGFloat = 12.0
+  static let fontSizeBody2: CGFloat = 13.0
+  static let fontSizeBody1: CGFloat = 14.0
+  static let fontSizeH2: CGFloat = 17.0
+  static let fontSizeH1: CGFloat = 22.0
 
   // MARK: Spacing
   static let spacingXxs: CGFloat = 2.0
@@ -37,6 +39,7 @@ enum UIConstants {
   // MARK: Radius
   static let radiusMd: CGFloat = 8.0
   static let radiusLg: CGFloat = 10.0
+  static let radiusXl: CGFloat = 28.0
 
   // MARK: Colors
   static let lightestColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
@@ -49,6 +52,7 @@ enum UIConstants {
   static let gray400 = UIColor(red: 0.235, green: 0.235, blue: 0.263, alpha: 0.6)
   static let gray800 = UIColor(red: 0.11, green: 0.11, blue: 0.118, alpha: 0.94)
   static let gray900 = UIColor(red: 0.11, green: 0.11, blue: 0.118, alpha: 1)
+  static let overlayShadow = UIColor(red: 0, green: 0, blue: 0, alpha: 0.42)
   static let darkestColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1)
   static let brightBlue = UIColor(red: 0, green: 0.478, blue: 1, alpha: 1)
 }

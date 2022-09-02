@@ -8,10 +8,10 @@
 import UIKit
 
 extension UILabel {
-  static func makeLabel(with style: FormatStyle, _ onDidMake: @escaping (UILabel) -> Void) -> UILabel {
+  static func makeLabel(_ style: FormatStyle, _ onDidMake: ((UILabel) -> Void)? = nil) -> UILabel {
     let label = UILabel()
     label.formatLabel(with: style)
-    onDidMake(label)
+    onDidMake?(label)
     return label
   }
 

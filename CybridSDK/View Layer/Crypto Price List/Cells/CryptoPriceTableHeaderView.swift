@@ -20,9 +20,9 @@ class CryptoPriceTableHeaderView: UITableViewHeaderFooterView {
       ]
     )
     searchBar.attributedPlaceholder = placeholder
-    searchBar.textColor = FormatStyle.bodyLarge.textColor
+    searchBar.textColor = FormatStyle.header2.textColor
     searchBar.font = FormatStyle.inputPlaceholder.font
-    searchBar.tintColor = FormatStyle.bodyLarge.textColor
+    searchBar.tintColor = FormatStyle.header2.textColor
     return searchBar
   }()
 
@@ -45,8 +45,8 @@ class CryptoPriceTableHeaderView: UITableViewHeaderFooterView {
     label.translatesAutoresizingMaskIntoConstraints = false
     label.baselineAdjustment = .alignCenters
     label.sizeToFit()
-    label.font = FormatStyle.headerSmall.font
-    label.textColor = FormatStyle.headerSmall.textColor
+    label.font = FormatStyle.header4.font
+    label.textColor = FormatStyle.header4.textColor
     let text = localizer.localize(with: CybridLocalizationKey.cryptoPriceList(.headerCurrency))
     label.text = text.uppercased()
     return label
@@ -57,8 +57,8 @@ class CryptoPriceTableHeaderView: UITableViewHeaderFooterView {
     label.setContentHuggingPriority(.defaultHigh, for: .horizontal)
     label.translatesAutoresizingMaskIntoConstraints = false
     label.sizeToFit()
-    label.font = FormatStyle.headerSmall.font
-    label.textColor = FormatStyle.headerSmall.textColor
+    label.font = FormatStyle.header4.font
+    label.textColor = FormatStyle.header4.textColor
     let text = localizer.localize(with: CybridLocalizationKey.cryptoPriceList(.headerPrice))
     label.text = text.uppercased()
     return label

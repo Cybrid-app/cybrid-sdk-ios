@@ -16,7 +16,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     // Override point for customization after application launch.
-    Cybrid.setup(authenticator: cryptoAuthenticator, logger: logger)
+    let guid = Bundle.main.object(forInfoDictionaryKey: "CybridCustomerGUID") as? String
+    Cybrid.setup(authenticator: cryptoAuthenticator,
+                 customerGUID: guid ?? "",
+                 fiat: .usd,
+                 logger: logger)
     return true
   }
 

@@ -12,7 +12,7 @@ import XCTest
 class CryptoPriceViewModelTests: XCTestCase {
 
   let pricesFetchScheduler = TaskSchedulerMock()
-  lazy var dataProvider = PriceListDataProviderMock(pricesFetchScheduler: pricesFetchScheduler)
+  lazy var dataProvider = ServiceProviderMock(pricesFetchScheduler: pricesFetchScheduler)
 
   func testFetchData_withLiveUpdate_successfully() {
     // Given
@@ -87,7 +87,7 @@ class CryptoPriceViewModelTests: XCTestCase {
   func testPriceRepoProvider_MemoryDeallocation() {
     // Given
     let viewProvider = CryptoPriceMockViewProvider()
-    var optionalDataProvider: PriceListDataProviderMock? = PriceListDataProviderMock(pricesFetchScheduler: pricesFetchScheduler)
+    var optionalDataProvider: ServiceProviderMock? = ServiceProviderMock(pricesFetchScheduler: pricesFetchScheduler)
     var viewModel: CryptoPriceViewModel? = createViewModel(viewProvider: viewProvider, dataProvider: optionalDataProvider)
 
     // When
@@ -238,7 +238,7 @@ extension CryptoPriceViewModelTests {
 extension CryptoPriceViewModelTests {
   func testTableViewRows() {
     // Given
-    let tableView = CryptoPriceListView()
+    let tableView = CryptoPriceListView(navigationController: nil)
     let viewModel = createViewModel(viewProvider: tableView)
 
     // When
@@ -253,7 +253,7 @@ extension CryptoPriceViewModelTests {
 
   func testTableViewValidCell() {
     // Given
-    let tableView = CryptoPriceListView()
+    let tableView = CryptoPriceListView(navigationController: nil)
     let viewModel = createViewModel(viewProvider: tableView)
 
     // When
@@ -284,7 +284,7 @@ extension CryptoPriceViewModelTests {
 
   func testTableViewHeader() {
     // Given
-    let tableView = CryptoPriceListView()
+    let tableView = CryptoPriceListView(navigationController: nil)
     let viewModel = createViewModel(viewProvider: tableView)
 
     // When
@@ -295,6 +295,43 @@ extension CryptoPriceViewModelTests {
     XCTAssertNotNil(headerView)
     XCTAssertTrue(headerView!.isKind(of: CryptoPriceTableHeaderView.self))
   }
+
+  func testTableView_didSelectRowAtIndex() {
+    // Given
+    let tableView = CryptoPriceListView(navigationController: nil)
+    let viewModel = createViewModel(viewProvider: tableView)
+
+    // When
+    viewModel.fetchPriceList()
+    dataProvider.didFetchAssetsSuccessfully()
+    dataProvider.didFetchPricesSuccessfully()
+    tableView.reloadData()
+    viewModel.tableView(tableView, didSelectRowAt: IndexPath(item: 0, section: 0))
+    let expectedCryptoViewModel = TradeViewModel(selectedCrypto: .bitcoin,
+                                                 dataProvider: dataProvider,
+                                                 logger: nil)
+
+    // Then
+    XCTAssertEqual(viewModel.selectedCrypto.value?.cryptoCurrency.value,
+                   expectedCryptoViewModel.cryptoCurrency.value)
+  }
+
+  func testTableView_didSelectRowAtIndex_withoutAssetsData() {
+    // Given
+    let tableView = CryptoPriceListView(navigationController: nil)
+    let viewModel = createViewModel(viewProvider: tableView)
+
+    // When
+    viewModel.fetchPriceList()
+    dataProvider.didFetchAssetsSuccessfully()
+    dataProvider.didFetchPricesSuccessfully()
+    tableView.reloadData()
+    dataProvider.assetsCache = nil // Clears cache
+    viewModel.tableView(tableView, didSelectRowAt: IndexPath(item: 0, section: 0))
+
+    // Then
+    XCTAssertNil(viewModel.selectedCrypto.value)
+  }
 }
 
 // MARK: - SearchBar Tests
@@ -302,7 +339,7 @@ extension CryptoPriceViewModelTests {
 extension CryptoPriceViewModelTests {
   func testSearchBar_filterWithValidQuery() {
     // Given
-    let tableView = CryptoPriceListView()
+    let tableView = CryptoPriceListView(navigationController: nil)
     let viewModel = createViewModel(viewProvider: tableView)
     let searchBar = UISearchTextField()
 
@@ -325,7 +362,7 @@ extension CryptoPriceViewModelTests {
 
   func testSearchBar_filterWithEmptyText() {
     // Given
-    let tableView = CryptoPriceListView()
+    let tableView = CryptoPriceListView(navigationController: nil)
     let viewModel = createViewModel(viewProvider: tableView)
 
     // When 1
@@ -352,8 +389,15 @@ extension CryptoPriceViewModelTests {
 
 extension CryptoPriceViewModelTests {
   func createViewModel(viewProvider: CryptoPriceViewProvider,
-                       dataProvider: (AssetsRepoProvider & PricesRepoProvider)? = nil) -> CryptoPriceViewModel {
-    let viewModel = CryptoPriceViewModel(cellProvider: viewProvider, dataProvider: dataProvider ?? self.dataProvider, logger: nil)
+                       dataProvider: (AssetsRepoProvider
+                                      & PricesRepoProvider
+                                      & QuotesRepoProvider
+                                      & TradesRepoProvider)? = nil) -> CryptoPriceViewModel {
+    let viewModel = CryptoPriceViewModel(
+      cellProvider: viewProvider,
+      dataProvider: dataProvider ?? self.dataProvider,
+      logger: nil
+    )
     return viewModel
   }
 }

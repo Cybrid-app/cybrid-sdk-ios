@@ -5,15 +5,18 @@
 //  Created by Cybrid on 20/06/22.
 //
 
+import CybridApiBankSwift
 import UIKit
 
 public class CryptoPriceListView: UITableView {
 
   private var viewModel: CryptoPriceViewModel!
+  private weak var navigationController: UINavigationController?
   private let theme: Theme
 
-  public init(theme: Theme? = nil) {
+  public init(navigationController: UINavigationController?, theme: Theme? = nil) {
     self.theme = theme ?? Cybrid.theme
+    self.navigationController = navigationController
 
     super.init(frame: .zero, style: .plain)
 
@@ -48,12 +51,20 @@ public class CryptoPriceListView: UITableView {
     rowHeight = Constants.rowHeight
     estimatedRowHeight = Constants.rowHeight
     translatesAutoresizingMaskIntoConstraints = false
+    allowsSelection = true
     makeKeyboardHandler()
   }
 
   private func startLiveUpdates() {
     viewModel.filteredCryptoPriceList.bind { _ in
       self.reloadData()
+    }
+    viewModel.selectedCrypto.bind { [navigationController, viewModel] selectedAsset in
+      if let assetVM = selectedAsset {
+        let viewController = TradeViewController(viewModel: assetVM)
+        navigationController?.pushViewController(viewController, animated: true)
+        viewModel?.selectedCrypto.value = nil
+      }
     }
     viewModel.fetchPriceList()
   }

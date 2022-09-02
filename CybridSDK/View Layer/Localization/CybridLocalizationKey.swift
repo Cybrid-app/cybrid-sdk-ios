@@ -52,6 +52,9 @@ extension CybridLocalizationKey {
   enum Trade {
     case buy(Buy)
     case sell(Sell)
+    case confirmationModal(ConfirmationModal)
+    case loadingModal(LoadingModal)
+    case successModal(SuccessModal)
 
     var prefix: String { "trade" }
     var stringValue: String {
@@ -59,6 +62,12 @@ extension CybridLocalizationKey {
       case .buy(let key):
         return "\(prefix).\(key.stringValue)"
       case .sell(let key):
+        return "\(prefix).\(key.stringValue)"
+      case .confirmationModal(let key):
+        return "\(prefix).\(key.stringValue)"
+      case .loadingModal(let key):
+        return "\(prefix).\(key.stringValue)"
+      case .successModal(let key):
         return "\(prefix).\(key.stringValue)"
       }
     }
@@ -76,8 +85,48 @@ extension CybridLocalizationKey {
 
     enum Sell: String {
       case title
+      case cta
 
       var prefix: String { "sell" }
+      var stringValue: String { "\(prefix).\(rawValue)" }
+    }
+
+    enum ConfirmationModal: String {
+      case title
+      case subtitle
+      case purchaseAmount
+      case purchaseQuantity
+      case sellAmount
+      case sellQuantity
+      case transactionFee
+      case confirm
+      case cancel
+
+      var prefix: String { "confirmationModal" }
+      var stringValue: String { "\(prefix).\(rawValue)" }
+    }
+
+    enum LoadingModal: String {
+      case processingMessage
+
+      var prefix: String { "loadingModal" }
+      var stringValue: String { "\(prefix).\(rawValue)" }
+    }
+
+    enum SuccessModal: String {
+      case title
+      case subtitle
+      case transactionId
+      case date
+      case purchaseAmount
+      case purchaseQuantity
+      case sellAmount
+      case sellQuantity
+      case transactionFee
+      case buyMore
+      case sellMore
+
+      var prefix: String { "successModal" }
       var stringValue: String { "\(prefix).\(rawValue)" }
     }
   }

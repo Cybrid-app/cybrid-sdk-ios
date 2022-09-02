@@ -7,21 +7,28 @@
 
 import CybridApiBankSwift
 
-// MARK: - Default Fiat Assets
-extension AssetBankModel {
-  static let cad = AssetBankModel(
-    type: .fiat,
-    code: "CAD",
-    name: "Canadian Dollar",
-    symbol: "$",
-    decimals: 2
-  )
+public enum FiatConfig {
+  case usd
+  case cad
 
-  static let usd = AssetBankModel(
-    type: .fiat,
-    code: "USD",
-    name: "United State Dollar",
-    symbol: "$",
-    decimals: 2
-  )
+  internal var defaultAsset: AssetBankModel {
+    switch self {
+    case .usd:
+      return AssetBankModel(
+        type: .fiat,
+        code: "USD",
+        name: "United State Dollar",
+        symbol: "$",
+        decimals: 2
+      )
+    case .cad:
+      return AssetBankModel(
+        type: .fiat,
+        code: "CAD",
+        name: "Canadian Dollar",
+        symbol: "$",
+        decimals: 2
+      )
+    }
+  }
 }

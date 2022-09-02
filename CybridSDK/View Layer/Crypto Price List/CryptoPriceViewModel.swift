@@ -13,17 +13,20 @@ protocol CryptoPriceViewProvider: AnyObject {
 }
 
 class CryptoPriceViewModel: NSObject {
+  typealias DataProvider = PricesRepoProvider & AssetsRepoProvider & QuotesRepoProvider & TradesRepoProvider
+
   // MARK: Observed properties
   internal var cryptoPriceList: [CryptoPriceModel] = []
-  internal var filteredCryptoPriceList: Observable<[CryptoPriceModel]> = .init([])
+  internal var filteredCryptoPriceList: Observable<[CryptoPriceModel]> = Observable([])
+  internal var selectedCrypto: Observable<TradeViewModel?> = Observable(nil)
 
   // MARK: Private properties
   private unowned var cellProvider: CryptoPriceViewProvider
-  private var dataProvider: PricesRepoProvider & AssetsRepoProvider
+  private var dataProvider: DataProvider
   private var logger: CybridLogger?
 
   init(cellProvider: CryptoPriceViewProvider,
-       dataProvider: PricesRepoProvider & AssetsRepoProvider,
+       dataProvider: DataProvider,
        logger: CybridLogger?) {
     self.cellProvider = cellProvider
     self.dataProvider = dataProvider
@@ -88,6 +91,18 @@ extension CryptoPriceViewModel: UITableViewDelegate, UITableViewDataSource {
   func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
     let view = CryptoPriceTableHeaderView(delegate: self)
     return view
+  }
+
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    let selectedModel = filteredCryptoPriceList.value[indexPath.row]
+    guard
+      let assetList = dataProvider.assetsCache,
+      let selectedAsset = assetList.first(where: { $0.code == selectedModel.assetCode })
+    else { return }
+    let viewModel = TradeViewModel(selectedCrypto: selectedAsset,
+                                   dataProvider: dataProvider,
+                                   logger: logger)
+    selectedCrypto.value = viewModel
   }
 }
 

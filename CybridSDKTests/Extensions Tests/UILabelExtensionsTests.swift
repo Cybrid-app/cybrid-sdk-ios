@@ -11,7 +11,7 @@ import XCTest
 class UILabelExtensionsTests: XCTestCase {
 
   func testLabelCreation() {
-    let testLabel = UILabel.makeLabel(with: .body) { _ in }
+    let testLabel = UILabel.makeLabel(.body) { _ in }
 
     XCTAssertEqual(testLabel.numberOfLines, 0)
     XCTAssertEqual(testLabel.translatesAutoresizingMaskIntoConstraints, false)
@@ -32,7 +32,7 @@ class UILabelExtensionsTests: XCTestCase {
   func testLabelUppercased_True() {
     let testLabel = UILabel()
     testLabel.text = "Test"
-    testLabel.formatLabel(with: .headerSmall)
+    testLabel.formatLabel(with: .header4)
 
     XCTAssertNotEqual(testLabel.text, "Test")
     XCTAssertEqual(testLabel.text, "TEST")
@@ -42,11 +42,19 @@ class UILabelExtensionsTests: XCTestCase {
     let testLabel = UILabel()
     testLabel.text = "Test"
 
-    testLabel.formatLabel(with: .bodyLarge)
+    testLabel.formatLabel(with: .header1)
+    XCTAssertNotEqual(testLabel.text, "TEST")
+    XCTAssertEqual(testLabel.text, "Test")
+
+    testLabel.formatLabel(with: .header2)
     XCTAssertNotEqual(testLabel.text, "TEST")
     XCTAssertEqual(testLabel.text, "Test")
 
     testLabel.formatLabel(with: .body)
+    XCTAssertNotEqual(testLabel.text, "TEST")
+    XCTAssertEqual(testLabel.text, "Test")
+
+    testLabel.formatLabel(with: .disclaimer)
     XCTAssertNotEqual(testLabel.text, "TEST")
     XCTAssertEqual(testLabel.text, "Test")
 
@@ -57,5 +65,6 @@ class UILabelExtensionsTests: XCTestCase {
     testLabel.formatLabel(with: .inputPlaceholder)
     XCTAssertNotEqual(testLabel.text, "TEST")
     XCTAssertEqual(testLabel.text, "Test")
+
   }
 }
