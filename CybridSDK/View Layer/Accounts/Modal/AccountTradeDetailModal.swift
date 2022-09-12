@@ -11,6 +11,7 @@ import UIKit
 class AccountTradeDetailModal: UIModal {
 
     private var trade: TradeUIModel
+    private var currentAssetURL: String
     private let localizer: Localizer
     private var onConfirm: (() -> Void)?
 
@@ -18,7 +19,7 @@ class AccountTradeDetailModal: UIModal {
         font: UIValues.titleFont, color: UIValues.titleColor, aligment: .left)
     private var subTitleView = UILabel.makeBasic(
         font: UIValues.subTitleFont, color: UIValues.subTitleColor, aligment: .left)
-    
+
     private lazy var divider: UIView = {
         let underline = UIView()
         underline.backgroundColor = UIValues.dividerColor
@@ -26,9 +27,10 @@ class AccountTradeDetailModal: UIModal {
         return underline
       }()
 
-    init(trade: TradeUIModel, theme: Theme, localizer: Localizer, onConfirm: (() -> Void)?) {
+    init(trade: TradeUIModel, assetURL: String, theme: Theme, localizer: Localizer, onConfirm: (() -> Void)?) {
 
         self.trade = trade
+        self.currentAssetURL = assetURL
         self.localizer = localizer
         self.onConfirm = onConfirm
         super.init(theme: theme, height: UIValues.modalSize)
@@ -48,8 +50,14 @@ class AccountTradeDetailModal: UIModal {
         // -- Title View
         let titleType = trade.tradeBankModel.side == .sell ? UIString.sold : UIString.bought
         let localizedTitle = localizer.localize(with: titleType)
-        titleView.asFirstIn(self.containerView, height: UIValues.titleSize, margins: UIValues.titleSizeMargin)
-        titleView.text = "\(trade.asset.code) \(localizedTitle)"
+        let balanceAssetIcon = URLImageView(urlString: self.currentAssetURL) ?? UIImageView()  
+
+        titleView.asFirstWithImage(
+            self.containerView,
+            icon: balanceAssetIcon,
+            height: UIValues.titleSize,
+            margins: UIValues.titleSizeMargin)
+        titleView.text = localizedTitle
 
         // -- Sub Title View
         subTitleView.addBelow(
@@ -88,12 +96,8 @@ class AccountTradeDetailModal: UIModal {
             belowOf: transactionDate,
             mainValue: date)
 
-        // -- Account ID
-        let accountID = addItemTitle(belowOf: transactionDateValue, titleKey: UIString.accountID)
-        let accountIDValue = addItemValue(belowOf: accountID, mainValue: trade.accoountGuid)
-
         // -- Order ID
-        let orderID = addItemTitle(belowOf: accountIDValue, titleKey: UIString.orderID)
+        let orderID = addItemTitle(belowOf: transactionDateValue, titleKey: UIString.orderID)
         let orderIDValue = addItemValue(belowOf: orderID, mainValue: trade.tradeBankModel.guid ?? "")
 
         // -- Divider
@@ -179,7 +183,7 @@ extension AccountTradeDetailModal {
         static let itemValueFont = UIFont.make(ofSize: 14)
 
         // -- Size
-        static let modalSize: CGFloat = 550
+        static let modalSize: CGFloat = 500
         static let titleSize: CGFloat = 28
         static let subTitleSize: CGFloat = 18
         static let itemTitleSize: CGFloat = 26

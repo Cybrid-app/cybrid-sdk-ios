@@ -194,6 +194,7 @@ extension AccountTradesViewController: AccountTradesViewProvider {
 
         let modal = AccountTradeDetailModal(
                 trade: trade,
+                assetURL: balance.accountAssetURL,
                 theme: theme,
                 localizer: localizer,
                 onConfirm: nil)

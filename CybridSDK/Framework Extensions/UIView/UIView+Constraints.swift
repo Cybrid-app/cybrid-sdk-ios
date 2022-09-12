@@ -173,4 +173,53 @@ extension UIView {
                         attribute: .notAnAttribute,
                         constant: height)
     }
+
+    func asFirstWithImage(_ parent: UIView, icon: UIImageView, height: CGFloat, margins: UIEdgeInsets) {
+
+        parent.addSubview(icon)
+        parent.addSubview(self)
+        self.translatesAutoresizingMaskIntoConstraints = false
+
+        icon.constraint(attribute: .top,
+                        relatedBy: .equal,
+                        toItem: parent,
+                        attribute: .topMargin,
+                        constant: margins.top)
+        icon.constraint(attribute: .leading,
+                        relatedBy: .equal,
+                        toItem: parent,
+                        attribute: .leading,
+                        constant: margins.left)
+        icon.constraint(attribute: .width,
+                        relatedBy: .equal,
+                        toItem: nil,
+                        attribute: .notAnAttribute,
+                        constant: height)
+        icon.constraint(attribute: .height,
+                        relatedBy: .equal,
+                        toItem: nil,
+                        attribute: .notAnAttribute,
+                        constant: height)
+
+        self.constraint(attribute: .top,
+                        relatedBy: .equal,
+                        toItem: parent,
+                        attribute: .topMargin,
+                        constant: margins.top)
+        self.constraint(attribute: .leading,
+                        relatedBy: .equal,
+                        toItem: icon,
+                        attribute: .leading,
+                        constant: margins.left)
+        self.constraint(attribute: .trailing,
+                        relatedBy: .equal,
+                        toItem: parent,
+                        attribute: .trailing,
+                        constant: -margins.right)
+        self.constraint(attribute: .height,
+                        relatedBy: .equal,
+                        toItem: nil,
+                        attribute: .notAnAttribute,
+                        constant: height)
+    }
 }

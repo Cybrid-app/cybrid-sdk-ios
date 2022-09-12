@@ -34,8 +34,8 @@
 "cybrid.account.trades.buyType" = "Buy";
 
 // Account Trade Detail - Modal
-"cybrid.account.trade.detail.bought" = "Bought";
-"cybrid.account.trade.detail.sold" = "Sold";
+"cybrid.account.trade.detail.bought" = "Buy";
+"cybrid.account.trade.detail.sold" = "Sell";
 "cybrid.account.trade.detail.status" = "Status";
 "cybrid.account.trade.detail.orderPlaced" = "Order Placed";
 "cybrid.account.trade.detail.orderFinalized" = "Order Finalized";
