@@ -56,7 +56,7 @@ final class TradeViewModel: NSObject {
   internal var selectedPriceRate: BigInt? {
     guard let cryptoCode = cryptoCurrency.value?.asset.code else { return nil }
     let priceRate = priceList.first { $0.symbol?.contains(cryptoCode) ?? false }
-    return priceRate?.buyPrice
+    return BigInt(priceRate?.buyPrice ?? "0")
   }
 
   // MARK: Private Properties
@@ -198,16 +198,16 @@ final class TradeViewModel: NSObject {
     var fiatAmount: BigInt
     switch segmentSelection.value {
     case .buy:
-      cryptoAmount = receiveAmount
-      fiatAmount = deliverAmount
+      cryptoAmount = BigInt("0")
+      fiatAmount = BigInt(deliverAmount)
     case .sell:
-      cryptoAmount = deliverAmount
-      fiatAmount = receiveAmount
+      cryptoAmount = BigInt(deliverAmount)
+      fiatAmount = BigInt(receiveAmount)
     }
     let fiatCode = fiatCurrency.asset.code
     let fiatDecimal = BigDecimal(fiatAmount, precision: fiatCurrency.asset.decimals)
     let formattedFiatAmount = CybridCurrencyFormatter.formatPrice(fiatDecimal, with: fiatCurrency.asset.symbol)
-    let feeDecimal = BigDecimal(quoteBankModel.fee ?? 0, precision: fiatCurrency.asset.decimals)
+    let feeDecimal = BigDecimal(quoteBankModel.fee ?? "0", precision: fiatCurrency.asset.decimals)
     let formattedFeeAmount = CybridCurrencyFormatter.formatPrice(feeDecimal, with: fiatCurrency.asset.symbol)
     let cryptoDecimal = BigDecimal(cryptoAmount, precision: cryptoAsset.decimals)
     let formattedCryptoAmount = CybridCurrencyFormatter.formatPrice(cryptoDecimal, with: "")
@@ -255,11 +255,11 @@ final class TradeViewModel: NSObject {
     var fiatAmount: BigInt
     switch segmentSelection.value {
     case .buy:
-      cryptoAmount = receiveAmount
-      fiatAmount = deliverAmount
+      cryptoAmount = BigInt(receiveAmount)
+      fiatAmount = BigInt(deliverAmount)
     case .sell:
-      cryptoAmount = deliverAmount
-      fiatAmount = receiveAmount
+      cryptoAmount = BigInt(deliverAmount)
+      fiatAmount = BigInt(receiveAmount)
     }
     let fiatCode = fiatCurrency.asset.code
     let fiatDecimal = BigDecimal(fiatAmount, precision: fiatCurrency.asset.decimals)

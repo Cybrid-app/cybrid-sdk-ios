@@ -5,7 +5,6 @@
 //  Created by Cybrid on 29/07/22.
 //
 
-import AnyCodable
 import BigInt
 import CybridApiBankSwift
 import Foundation
@@ -124,8 +123,8 @@ extension SymbolPriceBankModel {
       return nil
     }
     self.init(symbol: json[SymbolPriceBankModel.CodingKeys.symbol.rawValue] as? String,
-              buyPrice: buyPrice,
-              sellPrice: sellPrice,
+              buyPrice: buyPriceString,
+              sellPrice: sellPriceString,
               buyPriceLastUpdatedAt: json[SymbolPriceBankModel.CodingKeys.buyPriceLastUpdatedAt.rawValue] as? Date,
               sellPriceLastUpdatedAt: json[SymbolPriceBankModel.CodingKeys.sellPriceLastUpdatedAt.rawValue] as? Date)
   }
@@ -134,12 +133,12 @@ extension SymbolPriceBankModel {
 extension QuoteBankModel {
   init?(json: [String: Any]) {
     guard
-      let deliverAmountString = json[QuoteBankModel.CodingKeys.deliverAmount.rawValue] as? String,
-      let receiveAmountString = json[QuoteBankModel.CodingKeys.receiveAmount.rawValue] as? String,
-      let feeAmountString = json[QuoteBankModel.CodingKeys.fee.rawValue] as? String,
-      let deliverAmount = BigInt(deliverAmountString),
-      let receiveAmount = BigInt(receiveAmountString),
-      let feeAmount = BigInt(feeAmountString)
+      let deliverAmountString = json[QuoteBankModel.CodingKeys.deliverAmount.rawValue] as? String
+      //let receiveAmountString = json[QuoteBankModel.CodingKeys.receiveAmount.rawValue] as? String,
+      //let feeAmountString = json[QuoteBankModel.CodingKeys.fee.rawValue] as? String
+      //let deliverAmount = BigInt(deliverAmountString),
+      //let receiveAmount = BigInt(receiveAmountString),
+      //let feeAmount = BigInt(feeAmountString)
     else {
       return nil
     }
@@ -147,9 +146,9 @@ extension QuoteBankModel {
               customerGuid: json[QuoteBankModel.CodingKeys.customerGuid.rawValue] as? String,
               symbol: json[QuoteBankModel.CodingKeys.symbol.rawValue] as? String,
               side: json[QuoteBankModel.CodingKeys.side.rawValue] as? SideBankModel,
-              receiveAmount: receiveAmount,
-              deliverAmount: deliverAmount,
-              fee: feeAmount,
+              receiveAmount: json[QuoteBankModel.CodingKeys.receiveAmount.rawValue] as? String,
+              deliverAmount: json[QuoteBankModel.CodingKeys.deliverAmount.rawValue] as? String,
+              fee: json[QuoteBankModel.CodingKeys.fee.rawValue] as? String,
               issuedAt: json[QuoteBankModel.CodingKeys.issuedAt.rawValue] as? Date,
               expiresAt: json[QuoteBankModel.CodingKeys.expiresAt.rawValue] as? Date)
   }
@@ -174,9 +173,9 @@ extension TradeBankModel {
       symbol: json[TradeBankModel.CodingKeys.symbol.rawValue] as? String,
       side: json[TradeBankModel.CodingKeys.side.rawValue] as? SideBankModel,
       state: json[TradeBankModel.CodingKeys.state.rawValue] as? StateBankModel,
-      receiveAmount: receiveAmount,
-      deliverAmount: deliverAmount,
-      fee: feeAmount,
+      receiveAmount: json[QuoteBankModel.CodingKeys.receiveAmount.rawValue] as? String,
+      deliverAmount: json[QuoteBankModel.CodingKeys.deliverAmount.rawValue] as? String,
+      fee: json[QuoteBankModel.CodingKeys.fee.rawValue] as? String,
       createdAt: json[TradeBankModel.CodingKeys.createdAt.rawValue] as? Date
     )
   }
