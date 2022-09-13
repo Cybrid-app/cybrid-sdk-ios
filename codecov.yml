@@ -18,6 +18,7 @@ ignore:
   - "**/*Cell.swift"
   - "**/*View.swift"
   - "**/*ViewController.swift"
+  - "CybridSDK/View Layer/*"
   - "CybridSDK/Framework Extensions/UIView/*"
   - "CybridSDK/View Layer/Reusable Views/*"
   - "CybridSDK/View Layer/Reusable Views/**/*"
