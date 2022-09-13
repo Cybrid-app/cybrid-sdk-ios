@@ -194,22 +194,22 @@ final class TradeViewModel: NSObject {
     else {
       return nil
     }
-    var cryptoAmount: BigInt
-    var fiatAmount: BigInt
+    var cryptoAmount = BigInt(receiveAmount)
+    var fiatAmount = BigInt(deliverAmount)
     switch segmentSelection.value {
     case .buy:
-      cryptoAmount = BigInt("0")
-      fiatAmount = BigInt(deliverAmount)
+        cryptoAmount = BigInt(receiveAmount)
+        fiatAmount = BigInt(deliverAmount)
     case .sell:
       cryptoAmount = BigInt(deliverAmount)
       fiatAmount = BigInt(receiveAmount)
     }
     let fiatCode = fiatCurrency.asset.code
-    let fiatDecimal = BigDecimal(fiatAmount, precision: fiatCurrency.asset.decimals)
+      let fiatDecimal = BigDecimal(fiatAmount!, precision: fiatCurrency.asset.decimals)
     let formattedFiatAmount = CybridCurrencyFormatter.formatPrice(fiatDecimal, with: fiatCurrency.asset.symbol)
     let feeDecimal = BigDecimal(quoteBankModel.fee ?? "0", precision: fiatCurrency.asset.decimals)
-    let formattedFeeAmount = CybridCurrencyFormatter.formatPrice(feeDecimal, with: fiatCurrency.asset.symbol)
-    let cryptoDecimal = BigDecimal(cryptoAmount, precision: cryptoAsset.decimals)
+      let formattedFeeAmount = CybridCurrencyFormatter.formatPrice(feeDecimal!, with: fiatCurrency.asset.symbol)
+      let cryptoDecimal = BigDecimal(cryptoAmount!, precision: cryptoAsset.decimals)
     let formattedCryptoAmount = CybridCurrencyFormatter.formatPrice(cryptoDecimal, with: "")
     return .init(quoteGUID: guid,
                  fiatAmount: formattedFiatAmount,
@@ -251,8 +251,8 @@ final class TradeViewModel: NSObject {
     else {
       return nil
     }
-    var cryptoAmount: BigInt
-    var fiatAmount: BigInt
+    var cryptoAmount = BigInt(receiveAmount)
+    var fiatAmount = BigInt(deliverAmount)
     switch segmentSelection.value {
     case .buy:
       cryptoAmount = BigInt(receiveAmount)
@@ -262,11 +262,11 @@ final class TradeViewModel: NSObject {
       fiatAmount = BigInt(receiveAmount)
     }
     let fiatCode = fiatCurrency.asset.code
-    let fiatDecimal = BigDecimal(fiatAmount, precision: fiatCurrency.asset.decimals)
+      let fiatDecimal = BigDecimal(fiatAmount!, precision: fiatCurrency.asset.decimals)
     let formattedFiatAmount = CybridCurrencyFormatter.formatPrice(fiatDecimal, with: fiatCurrency.asset.symbol)
-    let feeDecimal = BigDecimal(tradeModel.fee ?? 0, precision: fiatCurrency.asset.decimals)
-    let formattedFeeAmount = CybridCurrencyFormatter.formatPrice(feeDecimal, with: fiatCurrency.asset.symbol)
-    let cryptoDecimal = BigDecimal(cryptoAmount, precision: cryptoAsset.decimals)
+    let feeDecimal = BigDecimal(tradeModel.fee ?? "0", precision: fiatCurrency.asset.decimals)
+      let formattedFeeAmount = CybridCurrencyFormatter.formatPrice(feeDecimal!, with: fiatCurrency.asset.symbol)
+      let cryptoDecimal = BigDecimal(cryptoAmount!, precision: cryptoAsset.decimals)
     let formattedCryptoAmount = CybridCurrencyFormatter.formatPrice(cryptoDecimal, with: "")
     return .init(
       transactionId: guid,
