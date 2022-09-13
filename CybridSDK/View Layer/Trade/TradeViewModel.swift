@@ -49,12 +49,14 @@ final class TradeViewModel: NSObject {
 
   // MARK: Internal Properties
   internal let fiatCurrency: CurrencyModel // CounterAsset
+  internal var priceFetchScheduler: TaskScheduler?
+  internal var quoteFetchScheduler: TaskScheduler?
 
   // MARK: Computed properties
   internal var selectedPriceRate: BigInt? {
     guard let cryptoCode = cryptoCurrency.value?.asset.code else { return nil }
     let priceRate = priceList.first { $0.symbol?.contains(cryptoCode) ?? false }
-    return priceRate?.buyPrice
+    return BigInt(priceRate?.buyPrice ?? "0")
   }
 
   // MARK: Private Properties
@@ -69,7 +71,9 @@ final class TradeViewModel: NSObject {
 
   init(selectedCrypto: AssetBankModel,
        dataProvider: DataProvider,
-       logger: CybridLogger?) {
+       logger: CybridLogger?,
+       priceScheduler: TaskScheduler? = nil,
+       quoteScheduler: TaskScheduler? = nil) {
     self.dataProvider = dataProvider
     self.fiatCurrency = CurrencyModel(asset: Cybrid.fiat.defaultAsset)
     self.assetList = Observable([])
@@ -80,18 +84,43 @@ final class TradeViewModel: NSObject {
       self.assetList.value = assetsCache.map { .init(asset: $0) }
     }
     cryptoCurrency.value = .init(asset: selectedCrypto)
+    self.priceFetchScheduler = priceScheduler ?? TaskScheduler()
+    self.quoteFetchScheduler = quoteScheduler ?? TaskScheduler()
+  }
+
+  private func registerPriceScheduler() {
+    if let scheduler = priceFetchScheduler {
+      Cybrid.session.taskSchedulers.insert(scheduler)
+    }
+  }
+
+  private func registerQuoteScheduler() {
+    if let scheduler = quoteFetchScheduler {
+      Cybrid.session.taskSchedulers.insert(scheduler)
+    }
   }
 
   func fetchPriceList() {
+    registerPriceScheduler()
     dataProvider.fetchAssetsList { [weak self] assetsResult in
       switch assetsResult {
       case .success(let assetList):
+        self?.logger?.log(.component(.trade(.priceDataFetching)))
         self?.assetList.value = assetList
           .filter { $0.type == .crypto }
           .map { CurrencyModel(asset: $0) }
-        self?.dataProvider.fetchPriceList { pricesResult in
+        guard
+          let cryptoCode = self?.cryptoCurrency.value?.asset.code,
+          let fiatCode = self?.fiatCurrency.asset.code
+        else {
+          self?.logger?.log(.component(.trade(.priceDataError)))
+          return
+        }
+        let symbol = cryptoCode + "-" + fiatCode
+        self?.dataProvider.fetchPriceList(symbol: symbol, with: self?.priceFetchScheduler) { pricesResult in
           switch pricesResult {
           case .success(let pricesList):
+            self?.logger?.log(.component(.trade(.priceDataRefreshed)))
             self?.priceList = pricesList
           case .failure:
             self?.logger?.log(.component(.trade(.priceDataError)))
@@ -104,26 +133,25 @@ final class TradeViewModel: NSObject {
   }
 
   func createQuote() {
+    registerQuoteScheduler()
     logger?.log(.component(.trade(.quoteDataFetching)))
     guard
       let cryptoCode = cryptoCurrency.value?.asset.code,
       let inputText = (amountText.value?.filter { $0 != "." && $0 != "," && $0 != " " })
     else { return }
     let fiatCode = fiatCurrency.asset.code
-    var symbol = ""
+    let symbol = cryptoCode + "-" + fiatCode
     var receiveAmount: String?
     var deliverAmount: String?
 
     switch segmentSelection.value {
     case .buy:
-      symbol = cryptoCode + "-" + fiatCode
       if shouldInputCrypto.value {
         receiveAmount = inputText
       } else {
         deliverAmount = inputText
       }
     case .sell:
-      symbol = fiatCode + "-" + cryptoCode
       if shouldInputCrypto.value {
         deliverAmount = inputText
       } else {
@@ -131,11 +159,14 @@ final class TradeViewModel: NSObject {
       }
     }
 
-    dataProvider.createQuote(symbol: symbol,
-                             type: segmentSelection.value,
-                             receiveAmount: receiveAmount,
-                             deliverAmount: deliverAmount
-    ) { [weak self] result in
+    let params = PostQuoteBankModel(
+      customerGuid: Cybrid.customerGUID,
+      symbol: symbol,
+      side: segmentSelection.value.sideBankModel,
+      receiveAmount: receiveAmount,
+      deliverAmount: deliverAmount
+    )
+    dataProvider.createQuote(params: params, with: quoteFetchScheduler) { [weak self] result in
       guard let self = self else { return }
       switch result {
       case .success(let quoteModel):
@@ -143,6 +174,7 @@ final class TradeViewModel: NSObject {
           self.logger?.log(.component(.trade(.quoteDataError)))
           return
         }
+        self.logger?.log(.component(.trade(.quoteDataRefreshed)))
         self.generatedQuoteModel.value = newDataModel
         self.quoteGUID = newDataModel.quoteGUID
         self.error.value = nil
@@ -162,22 +194,22 @@ final class TradeViewModel: NSObject {
     else {
       return nil
     }
-    var cryptoAmount: BigInt
-    var fiatAmount: BigInt
+    var cryptoAmount = BigInt(receiveAmount)
+    var fiatAmount = BigInt(deliverAmount)
     switch segmentSelection.value {
     case .buy:
-      cryptoAmount = receiveAmount
-      fiatAmount = deliverAmount
+        cryptoAmount = BigInt(receiveAmount)
+        fiatAmount = BigInt(deliverAmount)
     case .sell:
-      cryptoAmount = deliverAmount
-      fiatAmount = receiveAmount
+      cryptoAmount = BigInt(deliverAmount)
+      fiatAmount = BigInt(receiveAmount)
     }
     let fiatCode = fiatCurrency.asset.code
-    let fiatDecimal = BigDecimal(fiatAmount, precision: fiatCurrency.asset.decimals)
+      let fiatDecimal = BigDecimal(fiatAmount!, precision: fiatCurrency.asset.decimals)
     let formattedFiatAmount = CybridCurrencyFormatter.formatPrice(fiatDecimal, with: fiatCurrency.asset.symbol)
-    let feeDecimal = BigDecimal(quoteBankModel.fee ?? 0, precision: fiatCurrency.asset.decimals)
-    let formattedFeeAmount = CybridCurrencyFormatter.formatPrice(feeDecimal, with: fiatCurrency.asset.symbol)
-    let cryptoDecimal = BigDecimal(cryptoAmount, precision: cryptoAsset.decimals)
+    let feeDecimal = BigDecimal(quoteBankModel.fee ?? "0", precision: fiatCurrency.asset.decimals)
+      let formattedFeeAmount = CybridCurrencyFormatter.formatPrice(feeDecimal!, with: fiatCurrency.asset.symbol)
+      let cryptoDecimal = BigDecimal(cryptoAmount!, precision: cryptoAsset.decimals)
     let formattedCryptoAmount = CybridCurrencyFormatter.formatPrice(cryptoDecimal, with: "")
     return .init(quoteGUID: guid,
                  fiatAmount: formattedFiatAmount,
@@ -219,22 +251,22 @@ final class TradeViewModel: NSObject {
     else {
       return nil
     }
-    var cryptoAmount: BigInt
-    var fiatAmount: BigInt
+    var cryptoAmount = BigInt(receiveAmount)
+    var fiatAmount = BigInt(deliverAmount)
     switch segmentSelection.value {
     case .buy:
-      cryptoAmount = receiveAmount
-      fiatAmount = deliverAmount
+      cryptoAmount = BigInt(receiveAmount)
+      fiatAmount = BigInt(deliverAmount)
     case .sell:
-      cryptoAmount = deliverAmount
-      fiatAmount = receiveAmount
+      cryptoAmount = BigInt(deliverAmount)
+      fiatAmount = BigInt(receiveAmount)
     }
     let fiatCode = fiatCurrency.asset.code
-    let fiatDecimal = BigDecimal(fiatAmount, precision: fiatCurrency.asset.decimals)
+      let fiatDecimal = BigDecimal(fiatAmount!, precision: fiatCurrency.asset.decimals)
     let formattedFiatAmount = CybridCurrencyFormatter.formatPrice(fiatDecimal, with: fiatCurrency.asset.symbol)
-    let feeDecimal = BigDecimal(tradeModel.fee ?? 0, precision: fiatCurrency.asset.decimals)
-    let formattedFeeAmount = CybridCurrencyFormatter.formatPrice(feeDecimal, with: fiatCurrency.asset.symbol)
-    let cryptoDecimal = BigDecimal(cryptoAmount, precision: cryptoAsset.decimals)
+    let feeDecimal = BigDecimal(tradeModel.fee ?? "0", precision: fiatCurrency.asset.decimals)
+      let formattedFeeAmount = CybridCurrencyFormatter.formatPrice(feeDecimal!, with: fiatCurrency.asset.symbol)
+      let cryptoDecimal = BigDecimal(cryptoAmount!, precision: cryptoAsset.decimals)
     let formattedCryptoAmount = CybridCurrencyFormatter.formatPrice(cryptoDecimal, with: "")
     return .init(
       transactionId: guid,
@@ -246,6 +278,16 @@ final class TradeViewModel: NSObject {
       transactionFee: formattedFeeAmount,
       quoteType: segmentSelection.value
     )
+  }
+
+  func stopPriceUpdate() {
+    logger?.log(.component(.trade(.priceLiveUpdateStop)))
+    priceFetchScheduler?.cancel()
+  }
+
+  func stopQuoteUpdateIfNeeded() {
+    logger?.log(.component(.trade(.quoteLiveUpdateStop)))
+    quoteFetchScheduler?.cancel()
   }
 
   @objc

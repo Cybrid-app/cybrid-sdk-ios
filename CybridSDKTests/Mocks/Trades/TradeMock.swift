@@ -16,9 +16,9 @@ extension TradeBankModel {
     symbol: "BTC-USD",
     side: .buy,
     state: .initiating,
-    receiveAmount: BigInt(stringLiteral: "12343"),
-    deliverAmount: BigInt(stringLiteral: "268"),
-    fee: BigInt(stringLiteral: "259"),
+    receiveAmount: "12343",
+    deliverAmount: "268",
+    fee: "259",
     createdAt: nil
   )
 
@@ -29,9 +29,9 @@ extension TradeBankModel {
     symbol: "BTC-USD",
     side: .sell,
     state: .initiating,
-    receiveAmount: BigInt(stringLiteral: "268"),
-    deliverAmount: BigInt(stringLiteral: "12343"),
-    fee: BigInt(stringLiteral: "259"),
+    receiveAmount: "268",
+    deliverAmount: "12343",
+    fee: "259",
     createdAt: nil
   )
 
@@ -42,9 +42,9 @@ extension TradeBankModel {
     symbol: "BTC-USD",
     side: .sell,
     state: .initiating,
-    receiveAmount: BigInt(stringLiteral: "268"),
-    deliverAmount: BigInt(stringLiteral: "12343"),
-    fee: BigInt(stringLiteral: "259"),
+    receiveAmount: "268",
+    deliverAmount: "12343",
+    fee: "259",
     createdAt: nil
   )
 
@@ -55,8 +55,8 @@ extension TradeBankModel {
     symbol: "BTC-USD",
     side: .buy,
     state: .initiating,
-    receiveAmount: BigInt(stringLiteral: "12343"),
-    deliverAmount: BigInt(stringLiteral: "268"),
+    receiveAmount: "12343",
+    deliverAmount: "268",
     fee: nil,
     createdAt: nil
   )

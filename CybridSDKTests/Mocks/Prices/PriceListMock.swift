@@ -12,15 +12,15 @@ extension Array where Element == SymbolPriceBankModel {
   static let mockPrices: Self = [
     SymbolPriceBankModel(
       symbol: "BTC-USD",
-      buyPrice: 2_019_891,
-      sellPrice: 2_019_881,
+      buyPrice: "2019891",
+      sellPrice: "2019881",
       buyPriceLastUpdatedAt: nil,
       sellPriceLastUpdatedAt: nil
     ),
     SymbolPriceBankModel(
       symbol: "ETH-USD",
-      buyPrice: 209_891,
-      sellPrice: 209_881,
+      buyPrice: "209891",
+      sellPrice: "209881",
       buyPriceLastUpdatedAt: nil,
       sellPriceLastUpdatedAt: nil
     )
@@ -30,40 +30,40 @@ extension Array where Element == SymbolPriceBankModel {
 extension SymbolPriceBankModel {
   static let btcUSD1 = SymbolPriceBankModel(
     symbol: "BTC-USD",
-    buyPrice: 2_019_891,
-    sellPrice: 2_019_881,
+    buyPrice: "2019891",
+    sellPrice: "2019881",
     buyPriceLastUpdatedAt: nil,
     sellPriceLastUpdatedAt: nil
   )
 
   static let btcUSD2 = SymbolPriceBankModel(
     symbol: "BTC-USD",
-    buyPrice: 2_019_815,
-    sellPrice: 2_019_811,
+    buyPrice: "2019815",
+    sellPrice: "2019811",
     buyPriceLastUpdatedAt: nil,
     sellPriceLastUpdatedAt: nil
   )
 
   static let ethUSD1 = SymbolPriceBankModel(
     symbol: "ETH-USD",
-    buyPrice: 209_891,
-    sellPrice: 209_881,
+    buyPrice: "209891",
+    sellPrice: "209881",
     buyPriceLastUpdatedAt: nil,
     sellPriceLastUpdatedAt: nil
   )
 
   static let ethUSD2 = SymbolPriceBankModel(
     symbol: "ETH-USD",
-    buyPrice: 209_805,
-    sellPrice: 209_811,
+    buyPrice: "209805",
+    sellPrice: "209811",
     buyPriceLastUpdatedAt: nil,
     sellPriceLastUpdatedAt: nil
   )
 
   static let priceWithoutSymbol = SymbolPriceBankModel(
     symbol: nil,
-    buyPrice: 209_891,
-    sellPrice: 209_881,
+    buyPrice: "209891",
+    sellPrice: "209881",
     buyPriceLastUpdatedAt: nil,
     sellPriceLastUpdatedAt: nil
   )

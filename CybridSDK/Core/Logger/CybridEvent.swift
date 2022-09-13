@@ -154,10 +154,11 @@ extension CybridEvent {
       case dataFetching
       case dataError
       case dataRefreshed
+      case liveUpdateStop
 
       var level: LogLevel {
         switch self {
-        case .initSuccess, .dataFetching, .dataRefreshed:
+        case .initSuccess, .dataFetching, .dataRefreshed, .liveUpdateStop:
           return .info
         case .dataError:
           return .error
@@ -174,6 +175,8 @@ extension CybridEvent {
           return "DATA_ERROR"
         case .dataRefreshed:
           return "DATA_REFRESHED"
+        case .liveUpdateStop:
+          return "LIVE_UPDATE_STOP"
         }
       }
 
@@ -187,6 +190,8 @@ extension CybridEvent {
           return "There was an error fetching price list"
         case .dataRefreshed:
           return "Price list successfully updated"
+        case .liveUpdateStop:
+          return "Price list live update stop"
         }
       }
     }
@@ -196,9 +201,11 @@ extension CybridEvent {
       case priceDataFetching
       case priceDataError
       case priceDataRefreshed
+      case priceLiveUpdateStop
       case quoteDataFetching
       case quoteDataError
       case quoteDataRefreshed
+      case quoteLiveUpdateStop
       case tradeDataFetching
       case tradeDataError
       case tradeConfirmed
@@ -206,7 +213,8 @@ extension CybridEvent {
       var level: LogLevel {
         switch self {
         case .initSuccess, .priceDataFetching, .priceDataRefreshed, .quoteDataFetching,
-            .quoteDataRefreshed, .tradeDataFetching, .tradeConfirmed:
+            .quoteDataRefreshed, .tradeDataFetching, .tradeConfirmed,
+            .priceLiveUpdateStop, .quoteLiveUpdateStop:
           return .info
         case .priceDataError, .quoteDataError, .tradeDataError:
           return .error
@@ -235,6 +243,10 @@ extension CybridEvent {
           return "TRADE_DATA_ERROR"
         case .tradeConfirmed:
           return "TRADE_CONFIRMED"
+        case .priceLiveUpdateStop:
+          return "PRICE_LIVE_UPDATE_STOP"
+        case .quoteLiveUpdateStop:
+          return "QUOTE_LIVE_UPDATE_STOP"
         }
       }
 
@@ -260,6 +272,10 @@ extension CybridEvent {
           return "There was an error confirming trade"
         case .tradeConfirmed:
           return "Trade successfully confirmed"
+        case .priceLiveUpdateStop:
+          return "Price live update did stop"
+        case .quoteLiveUpdateStop:
+          return "Quote live update did stop"
         }
       }
     }

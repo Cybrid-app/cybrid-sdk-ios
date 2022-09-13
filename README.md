@@ -1,6 +1,6 @@
 # cybrid-sdk-ios
 
-iOS Component Library and Demo App for Cybrid API.
+iOS SDK Library and Demo App for Cybrid API.
 
 [![Platforms](https://img.shields.io/badge/Platforms-iOS-yellowgreen?style=flat-square)](https://img.shields.io/badge/Platforms-iOS-Green?style=flat-square)
 

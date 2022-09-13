@@ -168,6 +168,11 @@ public final class TradeViewController: UIViewController {
     bindViewModel()
   }
 
+  override public func viewDidDisappear(_ animated: Bool) {
+    viewModel.stopPriceUpdate()
+    super.viewDidDisappear(animated)
+  }
+
   private func didTapActionButton() {
     primaryButton.customState = .processing
     viewModel.createQuote()
@@ -194,6 +199,7 @@ public final class TradeViewController: UIViewController {
         dataModel: data,
         onCancel: { [weak self] in
           self?.dismissModal()
+          self?.viewModel.stopQuoteUpdateIfNeeded()
         }, onConfirm: { [weak self] in
           self?.confirmOperation()
         }
@@ -207,8 +213,12 @@ public final class TradeViewController: UIViewController {
     if !(modalViewController?.contentView === tradeConfirmationModalView), let view = tradeConfirmationModalView {
       modalViewController?.replaceContent(view)
     }
-    if !(modalViewController?.isBeingPresented ?? false) {
+    if presentedViewController == nil {
       modalViewController?.present()
+    } else if let presentedVC = presentedViewController, presentedVC != modalViewController {
+      presentedVC.dismiss(animated: true) { [weak modalViewController] in
+        modalViewController?.present()
+      }
     }
   }
 

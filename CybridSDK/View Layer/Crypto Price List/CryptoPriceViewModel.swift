@@ -19,6 +19,7 @@ class CryptoPriceViewModel: NSObject {
   internal var cryptoPriceList: [CryptoPriceModel] = []
   internal var filteredCryptoPriceList: Observable<[CryptoPriceModel]> = Observable([])
   internal var selectedCrypto: Observable<TradeViewModel?> = Observable(nil)
+  internal var taskScheduler: TaskScheduler?
 
   // MARK: Private properties
   private unowned var cellProvider: CryptoPriceViewProvider
@@ -27,18 +28,27 @@ class CryptoPriceViewModel: NSObject {
 
   init(cellProvider: CryptoPriceViewProvider,
        dataProvider: DataProvider,
-       logger: CybridLogger?) {
+       logger: CybridLogger?,
+       taskScheduler: TaskScheduler? = nil) {
     self.cellProvider = cellProvider
     self.dataProvider = dataProvider
     self.logger = logger
+    self.taskScheduler = taskScheduler ?? TaskScheduler()
   }
 
-  func fetchPriceList(liveUpdateEnabled: Bool = true) {
+  private func registerScheduler() {
+    if let scheduler = taskScheduler {
+      Cybrid.session.taskSchedulers.insert(scheduler)
+    }
+  }
+
+  func fetchPriceList(with taskScheduler: TaskScheduler? = nil) {
+    registerScheduler()
     dataProvider.fetchAssetsList { [weak self] assetsResult in
       switch assetsResult {
       case .success(let assetsList):
         self?.logger?.log(.component(.priceList(.dataFetching)))
-        self?.dataProvider.fetchPriceList(liveUpdateEnabled: liveUpdateEnabled) { pricesResult in
+        self?.dataProvider.fetchPriceList(with: taskScheduler ?? self?.taskScheduler) { pricesResult in
           switch pricesResult {
           case .success(let pricesList):
             self?.logger?.log(.component(.priceList(.dataRefreshed)))
@@ -58,7 +68,11 @@ class CryptoPriceViewModel: NSObject {
   }
 
   func stopLiveUpdates() {
-    self.dataProvider.pricesFetchScheduler.cancel()
+    logger?.log(.component(.priceList(.liveUpdateStop)))
+    taskScheduler?.cancel()
+    if let taskScheduler = taskScheduler {
+      Cybrid.session.taskSchedulers.remove(taskScheduler)
+    }
   }
 
   private func buildModelList(symbols: [SymbolPriceBankModel], assets: [AssetBankModel]) -> [CryptoPriceModel] {

@@ -12,12 +12,13 @@ import XCTest
 class CryptoPriceViewModelTests: XCTestCase {
 
   let pricesFetchScheduler = TaskSchedulerMock()
-  lazy var dataProvider = ServiceProviderMock(pricesFetchScheduler: pricesFetchScheduler)
+  lazy var dataProvider = ServiceProviderMock()
 
   func testFetchData_withLiveUpdate_successfully() {
     // Given
     let viewProvider = CryptoPriceMockViewProvider()
-    let viewModel = createViewModel(viewProvider: viewProvider)
+    let viewModel = createViewModel(viewProvider: viewProvider,
+                                    pricesFetchScheduler: pricesFetchScheduler)
 
     // When
     viewModel.fetchPriceList()
@@ -32,9 +33,10 @@ class CryptoPriceViewModelTests: XCTestCase {
     // Given
     let viewProvider = CryptoPriceMockViewProvider()
     let viewModel = createViewModel(viewProvider: viewProvider)
+    viewModel.taskScheduler = nil
 
     // When
-    viewModel.fetchPriceList(liveUpdateEnabled: false)
+    viewModel.fetchPriceList()
     dataProvider.didFetchAssetsSuccessfully()
     dataProvider.didFetchPricesSuccessfully()
 
@@ -87,8 +89,10 @@ class CryptoPriceViewModelTests: XCTestCase {
   func testPriceRepoProvider_MemoryDeallocation() {
     // Given
     let viewProvider = CryptoPriceMockViewProvider()
-    var optionalDataProvider: ServiceProviderMock? = ServiceProviderMock(pricesFetchScheduler: pricesFetchScheduler)
-    var viewModel: CryptoPriceViewModel? = createViewModel(viewProvider: viewProvider, dataProvider: optionalDataProvider)
+    var optionalDataProvider: ServiceProviderMock? = ServiceProviderMock()
+    var viewModel: CryptoPriceViewModel? = createViewModel(viewProvider: viewProvider,
+                                                           dataProvider: optionalDataProvider,
+                                                           pricesFetchScheduler: pricesFetchScheduler)
 
     // When
     viewModel?.fetchPriceList()
@@ -115,15 +119,15 @@ class CryptoPriceViewModelTests: XCTestCase {
     dataProvider.didFetchPricesSuccessfully([
       SymbolPriceBankModel(
         symbol: "BTC_USD",
-        buyPrice: 2_019_891,
-        sellPrice: 2_019_881,
+        buyPrice: "2019891",
+        sellPrice: "2019881",
         buyPriceLastUpdatedAt: nil,
         sellPriceLastUpdatedAt: nil
       ),
       SymbolPriceBankModel(
         symbol: "ETH_USD",
-        buyPrice: 209_891,
-        sellPrice: 209_881,
+        buyPrice: "209891",
+        sellPrice: "209881",
         buyPriceLastUpdatedAt: nil,
         sellPriceLastUpdatedAt: nil
       )
@@ -163,7 +167,8 @@ extension CryptoPriceViewModelTests {
   func testPriceLiveUpdate() {
     // Given
     let viewProvider = CryptoPriceMockViewProvider()
-    let viewModel = createViewModel(viewProvider: viewProvider)
+    let viewModel = createViewModel(viewProvider: viewProvider,
+                                    pricesFetchScheduler: pricesFetchScheduler)
     let firstList: [CryptoPriceModel] = [
       CryptoPriceModel(
         symbolPrice: .btcUSD1,
@@ -215,7 +220,8 @@ extension CryptoPriceViewModelTests {
   func testPriceLiveUpdate_cancel() {
     // Given
     let viewProvider = CryptoPriceMockViewProvider()
-    let viewModel = createViewModel(viewProvider: viewProvider)
+    let viewModel = createViewModel(viewProvider: viewProvider,
+                                    pricesFetchScheduler: pricesFetchScheduler)
 
     // When
     viewModel.fetchPriceList()
@@ -227,6 +233,28 @@ extension CryptoPriceViewModelTests {
 
     // When
     viewModel.stopLiveUpdates()
+
+    // Then
+    XCTAssertTrue(pricesFetchScheduler.state == .cancelled)
+  }
+
+  func testPriceLiveUpdate_doubleCancel() {
+    // Given
+    let viewProvider = CryptoPriceMockViewProvider()
+    let viewModel = createViewModel(viewProvider: viewProvider,
+                                    pricesFetchScheduler: pricesFetchScheduler)
+
+    // When
+    viewModel.fetchPriceList()
+    dataProvider.didFetchAssetsSuccessfully()
+    dataProvider.didFetchPricesSuccessfully()
+
+    // Then
+    XCTAssertTrue(pricesFetchScheduler.state == .running)
+
+    // When
+    viewModel.stopLiveUpdates()
+    pricesFetchScheduler.cancel()
 
     // Then
     XCTAssertTrue(pricesFetchScheduler.state == .cancelled)
@@ -392,11 +420,13 @@ extension CryptoPriceViewModelTests {
                        dataProvider: (AssetsRepoProvider
                                       & PricesRepoProvider
                                       & QuotesRepoProvider
-                                      & TradesRepoProvider)? = nil) -> CryptoPriceViewModel {
+                                      & TradesRepoProvider)? = nil,
+                       pricesFetchScheduler: TaskScheduler? = nil) -> CryptoPriceViewModel {
     let viewModel = CryptoPriceViewModel(
       cellProvider: viewProvider,
       dataProvider: dataProvider ?? self.dataProvider,
-      logger: nil
+      logger: nil,
+      taskScheduler: pricesFetchScheduler
     )
     return viewModel
   }

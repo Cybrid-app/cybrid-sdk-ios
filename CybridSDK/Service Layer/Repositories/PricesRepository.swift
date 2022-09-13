@@ -12,28 +12,27 @@ import CybridApiBankSwift
 typealias FetchPricesCompletion = (Result<[SymbolPriceBankModel], ErrorResponse>) -> Void
 
 protocol PricesRepository {
-  static func fetchPrices(_ completion: @escaping FetchPricesCompletion)
+  static func fetchPrices(symbol: String?, _ completion: @escaping FetchPricesCompletion)
 }
 
 // MARK: - PricesRepoProvider
 
 protocol PricesRepoProvider: AuthenticatedServiceProvider {
   var pricesRepository: PricesRepository.Type { get set }
-  var pricesFetchScheduler: TaskScheduler { get }
 }
 
 extension PricesRepoProvider {
-  func fetchPriceList(liveUpdateEnabled: Bool = true, _ completion: @escaping FetchPricesCompletion) {
-    if liveUpdateEnabled {
-      pricesFetchScheduler.start { [weak self, pricesFetchScheduler] in
+  func fetchPriceList(symbol: String? = nil, with scheduler: TaskScheduler? = nil, _ completion: @escaping FetchPricesCompletion) {
+    if let scheduler = scheduler {
+      scheduler.start { [weak self] in
         guard let self = self else {
-          pricesFetchScheduler.cancel()
+          scheduler.cancel()
           return
         }
-        self.authenticatedRequest(self.pricesRepository.fetchPrices, completion: completion)
+        self.authenticatedRequest(self.pricesRepository.fetchPrices, parameters: symbol, completion: completion)
       }
     } else {
-      authenticatedRequest(pricesRepository.fetchPrices, completion: completion)
+      authenticatedRequest(pricesRepository.fetchPrices, parameters: symbol, completion: completion)
     }
   }
 }
@@ -43,7 +42,7 @@ extension PricesRepoProvider {
 extension CybridSession: PricesRepoProvider {}
 
 extension PricesAPI: PricesRepository {
-  static func fetchPrices(_ completion: @escaping FetchPricesCompletion) {
-    listPrices(completion: completion)
+  static func fetchPrices(symbol: String?, _ completion: @escaping FetchPricesCompletion) {
+    listPrices(symbol: symbol, completion: completion)
   }
 }

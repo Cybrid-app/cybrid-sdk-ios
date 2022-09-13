@@ -13,10 +13,7 @@ import CybridApiBankSwift
 typealias CreateQuoteCompletion = (Result<QuoteBankModel, ErrorResponse>) -> Void
 
 protocol QuotesRepository {
-  static func createQuote(symbol: String,
-                          type: TradeType,
-                          receiveAmount: String?,
-                          deliverAmount: String?,
+  static func createQuote(_ params: PostQuoteBankModel,
                           _ completion: @escaping CreateQuoteCompletion)
 }
 
@@ -25,35 +22,30 @@ protocol QuotesRepoProvider: AuthenticatedServiceProvider {
 }
 
 extension QuotesRepoProvider {
-  func createQuote(symbol: String,
-                   type: TradeType,
-                   receiveAmount: String?,
-                   deliverAmount: String?,
+  func createQuote(params: PostQuoteBankModel,
+                   with scheduler: TaskScheduler?,
                    _ completion: @escaping CreateQuoteCompletion) {
-    quotesRepository.createQuote(symbol: symbol,
-                                 type: type,
-                                 receiveAmount: receiveAmount,
-                                 deliverAmount: deliverAmount,
-                                 completion)
+    if let scheduler = scheduler {
+      scheduler.start { [weak self] in
+        guard let self = self else {
+          scheduler.cancel()
+          return
+        }
+        self.authenticatedRequest(self.quotesRepository.createQuote, parameters: params, completion: completion)
+      }
+    } else {
+      authenticatedRequest(quotesRepository.createQuote, parameters: params, completion: completion)
+    }
   }
 }
 
 extension CybridSession: QuotesRepoProvider {}
 
 extension QuotesAPI: QuotesRepository {
-  static func createQuote(symbol: String,
-                          type: TradeType,
-                          receiveAmount: String?,
-                          deliverAmount: String?,
+  static func createQuote(_ params: PostQuoteBankModel,
                           _ completion: @escaping CreateQuoteCompletion) {
     createQuote(
-      postQuoteBankModel: PostQuoteBankModel(
-        customerGuid: Cybrid.customerGUID,
-        symbol: symbol,
-        side: type.sideBankModel,
-        receiveAmount: receiveAmount,
-        deliverAmount: deliverAmount
-      ),
+      postQuoteBankModel: params,
       completion: completion
     )
   }
