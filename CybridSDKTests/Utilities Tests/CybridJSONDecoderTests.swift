@@ -38,8 +38,8 @@ class CybridJSONDecoderTests: XCTestCase {
     let btc = result?.first
 
     XCTAssertEqual(btc?.symbol, "BTC-USD")
-    XCTAssertEqual(btc?.buyPrice, BigInt("2387700"))
-    XCTAssertEqual(btc?.sellPrice, BigInt("2387600"))
+    XCTAssertEqual(btc?.buyPrice, "2387700")
+    XCTAssertEqual(btc?.sellPrice, "2387600")
   }
 
   func test_AssetBankModel_defaultDecoder_fallback() throws {
@@ -75,8 +75,8 @@ class CybridJSONDecoderTests: XCTestCase {
 
     let model = result?.first
 
-    XCTAssertEqual(model?.buyPrice, BigInt("115792089237316195423570985008687907853269984665640564039457584007913129639935"))
-    XCTAssertEqual(model?.sellPrice, BigInt("115792089237316195423570985008687907853269954665640564039457584007913129639935"))
+    XCTAssertEqual(model?.buyPrice, "115792089237316195423570985008687907853269984665640564039457584007913129639935")
+    XCTAssertEqual(model?.sellPrice, "115792089237316195423570985008687907853269954665640564039457584007913129639935")
   }
 
   func test_stringValueOfKey_withValidJSONData() throws {

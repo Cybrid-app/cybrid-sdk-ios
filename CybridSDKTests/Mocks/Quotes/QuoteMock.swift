@@ -14,9 +14,9 @@ extension QuoteBankModel {
     customerGuid: "MOCK_CUSTOMER_GUID",
     symbol: "BTC-USD",
     side: .buy,
-    receiveAmount: BigInt(stringLiteral: "12343"),
-    deliverAmount: BigInt(stringLiteral: "268"),
-    fee: BigInt(stringLiteral: "259"),
+    receiveAmount: "12343",
+    deliverAmount: "268",
+    fee: "259",
     issuedAt: nil,
     expiresAt: nil
   )
@@ -26,9 +26,9 @@ extension QuoteBankModel {
     customerGuid: "MOCK_CUSTOMER_GUID",
     symbol: "BTC-USD",
     side: .sell,
-    receiveAmount: BigInt(stringLiteral: "268"),
-    deliverAmount: BigInt(stringLiteral: "12343"),
-    fee: BigInt(stringLiteral: "259"),
+    receiveAmount: "268",
+    deliverAmount: "12343",
+    fee: "259",
     issuedAt: nil,
     expiresAt: nil
   )
@@ -38,9 +38,9 @@ extension QuoteBankModel {
     customerGuid: "MOCK_CUSTOMER_GUID",
     symbol: "BTC-USD",
     side: .sell,
-    receiveAmount: BigInt(stringLiteral: "268"),
-    deliverAmount: BigInt(stringLiteral: "12343"),
-    fee: BigInt(stringLiteral: "259"),
+    receiveAmount: "268",
+    deliverAmount: "12343",
+    fee: "259",
     issuedAt: nil,
     expiresAt: nil
   )
@@ -50,8 +50,8 @@ extension QuoteBankModel {
     customerGuid: "MOCK_CUSTOMER_GUID",
     symbol: "BTC-USD",
     side: .buy,
-    receiveAmount: BigInt(stringLiteral: "12343"),
-    deliverAmount: BigInt(stringLiteral: "268"),
+    receiveAmount: "12343",
+    deliverAmount: "268",
     fee: nil,
     issuedAt: nil,
     expiresAt: nil

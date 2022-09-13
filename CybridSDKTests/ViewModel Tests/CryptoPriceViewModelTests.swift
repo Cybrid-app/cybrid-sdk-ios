@@ -119,15 +119,15 @@ class CryptoPriceViewModelTests: XCTestCase {
     dataProvider.didFetchPricesSuccessfully([
       SymbolPriceBankModel(
         symbol: "BTC_USD",
-        buyPrice: 2_019_891,
-        sellPrice: 2_019_881,
+        buyPrice: "2019891",
+        sellPrice: "2019881",
         buyPriceLastUpdatedAt: nil,
         sellPriceLastUpdatedAt: nil
       ),
       SymbolPriceBankModel(
         symbol: "ETH_USD",
-        buyPrice: 209_891,
-        sellPrice: 209_881,
+        buyPrice: "209891",
+        sellPrice: "209881",
         buyPriceLastUpdatedAt: nil,
         sellPriceLastUpdatedAt: nil
       )

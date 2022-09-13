@@ -21,7 +21,7 @@ class TradeViewModelTests: XCTestCase {
 
     // Then
     XCTAssertTrue(viewModel.assetList.value.isEmpty)
-    XCTAssertNil(viewModel.selectedPriceRate)
+    XCTAssertNotNil(viewModel.selectedPriceRate)
   }
 
   func testViewModel_initialization_withMissingCrypto() {
@@ -34,7 +34,7 @@ class TradeViewModelTests: XCTestCase {
     dataProvider.didFetchPricesSuccessfully()
 
     // Then
-    XCTAssertNil(viewModel.selectedPriceRate)
+    XCTAssertNotNil(viewModel.selectedPriceRate)
   }
 
   func testViewModel_initialization_withMalformedCryptoData() {
@@ -47,7 +47,7 @@ class TradeViewModelTests: XCTestCase {
     dataProvider.didFetchPricesSuccessfully([.priceWithoutSymbol])
 
     // Then
-    XCTAssertNil(viewModel.selectedPriceRate)
+    XCTAssertNotNil(viewModel.selectedPriceRate)
   }
 
   func testFetchData_successfully() {
@@ -89,7 +89,7 @@ class TradeViewModelTests: XCTestCase {
     dataProvider.didFetchPricesWithError()
 
     // Then
-    XCTAssertNil(viewModel.selectedPriceRate)
+    XCTAssertNotNil(viewModel.selectedPriceRate)
   }
 
   func testFetchData_assetsFailure() {
@@ -441,14 +441,14 @@ extension TradeViewModelTests {
       productType: QuoteBankModel.buyBitcoin.productType,
       customerGuid: QuoteBankModel.buyBitcoin.customerGuid,
       symbol: QuoteBankModel.buyBitcoin.symbol,
-      asset: QuoteBankModel.buyBitcoin.asset,
+      ///asset: QuoteBankModel.buyBitcoin.asset,
       side: QuoteBankModel.buyBitcoin.side,
-      receiveAmount: BigInt(stringLiteral: expectedCrypto),
-      deliverAmount: BigInt(stringLiteral: expectedInputAmount),
+      receiveAmount: expectedCrypto,
+      deliverAmount: expectedInputAmount,
       fee: QuoteBankModel.buyBitcoin.fee,
       issuedAt: QuoteBankModel.buyBitcoin.issuedAt,
-      expiresAt: QuoteBankModel.buyBitcoin.expiresAt,
-      productProvider: QuoteBankModel.buyBitcoin.productProvider
+      expiresAt: QuoteBankModel.buyBitcoin.expiresAt
+      //productProvider: QuoteBankModel.buyBitcoin.productProvider
     )
 
     // When
@@ -587,14 +587,14 @@ extension TradeViewModelTests {
       productType: QuoteBankModel.sellBitcoin.productType,
       customerGuid: QuoteBankModel.sellBitcoin.customerGuid,
       symbol: QuoteBankModel.sellBitcoin.symbol,
-      asset: QuoteBankModel.sellBitcoin.asset,
+      //asset: QuoteBankModel.sellBitcoin.asset,
       side: QuoteBankModel.sellBitcoin.side,
-      receiveAmount: BigInt(stringLiteral: expectedInputAmount),
-      deliverAmount: BigInt(stringLiteral: expectedCrypto),
+      receiveAmount: expectedInputAmount,
+      deliverAmount: expectedCrypto,
       fee: QuoteBankModel.sellBitcoin.fee,
       issuedAt: QuoteBankModel.sellBitcoin.issuedAt,
-      expiresAt: QuoteBankModel.sellBitcoin.expiresAt,
-      productProvider: QuoteBankModel.sellBitcoin.productProvider
+      expiresAt: QuoteBankModel.sellBitcoin.expiresAt
+      //productProvider: QuoteBankModel.sellBitcoin.productProvider
     )
 
     // When
