@@ -11,7 +11,6 @@ import BigNumber
 struct BigDecimal: Hashable {
 
     internal var value: BDouble
-    var scale: Int = 4
 
     init(_ value: Int) {
 
@@ -57,7 +56,7 @@ struct BigDecimal: Hashable {
         return BigDecimal(self.value ** (BInt(number) ?? BInt(0)))
     }
 
-    func toPlainString() -> String {
-        return self.value.decimalExpansion(precisionAfterDecimalPoint: self.scale)
+    func toPlainString(scale: Int = 4) -> String {
+        return self.value.decimalExpansion(precisionAfterDecimalPoint: scale)
     }
 }

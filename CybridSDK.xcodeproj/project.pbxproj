@@ -137,6 +137,11 @@
 		927233C028D1AA7E0080AAC4 /* TradeBankModel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927233BF28D1AA7E0080AAC4 /* TradeBankModel+Extensions.swift */; };
 		927233C228D1AAA20080AAC4 /* SymbolPriceBankModel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927233C128D1AAA20080AAC4 /* SymbolPriceBankModel+Extensions.swift */; };
 		927233C428D1ABE70080AAC4 /* BigDecimal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927233C328D1ABE70080AAC4 /* BigDecimal.swift */; };
+		927233C728D2278D0080AAC4 /* AssetPipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927233C628D2278D0080AAC4 /* AssetPipe.swift */; };
+		927233C928D22A050080AAC4 /* BigDecimalPipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927233C828D22A050080AAC4 /* BigDecimalPipe.swift */; };
+		927233CB28D23D060080AAC4 /* AccountsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927233CA28D23D060080AAC4 /* AccountsRepository.swift */; };
+		927233CD28D2419B0080AAC4 /* QuoteBankModel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927233CC28D2419B0080AAC4 /* QuoteBankModel+Extensions.swift */; };
+		927233CF28D242170080AAC4 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927233CE28D242170080AAC4 /* Utils.swift */; };
 		9E3B30420CC77D425A7A1C28 /* Pods_Abstract_CybridSDKTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80DCD8FC666A9176CF28F146 /* Pods_Abstract_CybridSDKTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -310,6 +315,11 @@
 		927233BF28D1AA7E0080AAC4 /* TradeBankModel+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TradeBankModel+Extensions.swift"; sourceTree = "<group>"; };
 		927233C128D1AAA20080AAC4 /* SymbolPriceBankModel+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SymbolPriceBankModel+Extensions.swift"; sourceTree = "<group>"; };
 		927233C328D1ABE70080AAC4 /* BigDecimal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigDecimal.swift; sourceTree = "<group>"; };
+		927233C628D2278D0080AAC4 /* AssetPipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetPipe.swift; sourceTree = "<group>"; };
+		927233C828D22A050080AAC4 /* BigDecimalPipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigDecimalPipe.swift; sourceTree = "<group>"; };
+		927233CA28D23D060080AAC4 /* AccountsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsRepository.swift; sourceTree = "<group>"; };
+		927233CC28D2419B0080AAC4 /* QuoteBankModel+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "QuoteBankModel+Extensions.swift"; sourceTree = "<group>"; };
+		927233CE28D242170080AAC4 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		D8168B44D4C796A81CF0902E /* Pods-Abstract-CybridSDKTestApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Abstract-CybridSDKTestApp.debug.xcconfig"; path = "Target Support Files/Pods-Abstract-CybridSDKTestApp/Pods-Abstract-CybridSDKTestApp.debug.xcconfig"; sourceTree = "<group>"; };
 		DA2CB27D937283DE5C4554C6 /* Pods-Abstract-CybridSDKTestApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Abstract-CybridSDKTestApp.release.xcconfig"; path = "Target Support Files/Pods-Abstract-CybridSDKTestApp/Pods-Abstract-CybridSDKTestApp.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -590,6 +600,7 @@
 		0B303CE22862E5C5007BF7FF /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				927233C528D227790080AAC4 /* Pipes */,
 				0B06A9CD28A55D0400AD43F2 /* Logger */,
 				0B2899E6288F3DF6001B3360 /* Auth */,
 				0B2899E7288F3DFF001B3360 /* Config */,
@@ -646,6 +657,7 @@
 				0B00E04D2885ADB300707F26 /* AssetsRepository.swift */,
 				0BBD0CD928B3E5D9001DBC5F /* QuotesRepository.swift */,
 				0BBD0CDB28B5D6F7001DBC5F /* TradesRepository.swift */,
+				927233CA28D23D060080AAC4 /* AccountsRepository.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -685,6 +697,7 @@
 				0BD660F8286B762C00F4DA6B /* Concurrency */,
 				0BD660F5286B75FF00F4DA6B /* Networking */,
 				0B2899EF288F51BD001B3360 /* Overrides */,
+				927233CE28D242170080AAC4 /* Utils.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -955,8 +968,18 @@
 				927233BD28D131BE0080AAC4 /* AccountBankModel+Extensions.swift */,
 				927233BF28D1AA7E0080AAC4 /* TradeBankModel+Extensions.swift */,
 				927233C128D1AAA20080AAC4 /* SymbolPriceBankModel+Extensions.swift */,
+				927233CC28D2419B0080AAC4 /* QuoteBankModel+Extensions.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		927233C528D227790080AAC4 /* Pipes */ = {
+			isa = PBXGroup;
+			children = (
+				927233C628D2278D0080AAC4 /* AssetPipe.swift */,
+				927233C828D22A050080AAC4 /* BigDecimalPipe.swift */,
+			);
+			path = Pipes;
 			sourceTree = "<group>";
 		};
 		E757BBB3F769F93B6529F753 /* Frameworks */ = {
@@ -1274,6 +1297,7 @@
 				927233C228D1AAA20080AAC4 /* SymbolPriceBankModel+Extensions.swift in Sources */,
 				0BD6612A286DE86A00F4DA6B /* CybridLocalizationKey.swift in Sources */,
 				0B00E02E287F6AE500707F26 /* CybridError.swift in Sources */,
+				927233CD28D2419B0080AAC4 /* QuoteBankModel+Extensions.swift in Sources */,
 				927233BE28D131BE0080AAC4 /* AccountBankModel+Extensions.swift in Sources */,
 				0BBD0CDE28B68C49001DBC5F /* CybridDateFormatter.swift in Sources */,
 				0BD6613A2872BC0B00F4DA6B /* CybridCurrencyFormatter.swift in Sources */,
@@ -1298,10 +1322,12 @@
 				0B00E04C2885AD8D00707F26 /* PricesRepository.swift in Sources */,
 				0BBD0CDC28B5D6F7001DBC5F /* TradesRepository.swift in Sources */,
 				0B96600F285AA0FC00584692 /* AssertionFailureOverride.swift in Sources */,
+				927233CF28D242170080AAC4 /* Utils.swift in Sources */,
 				0B6175D4288B7853004E4F5B /* TaskScheduler.swift in Sources */,
 				0B00E0222878D23100707F26 /* CybridSession.swift in Sources */,
 				0B2899E9288F3E1F001B3360 /* Cybrid.swift in Sources */,
 				927233BB28D12FD10080AAC4 /* UIFont+Extensions.swift in Sources */,
+				927233C928D22A050080AAC4 /* BigDecimalPipe.swift in Sources */,
 				0BD66118286B79C500F4DA6B /* UIView+Constraints.swift in Sources */,
 				0B303CE42862E5D9007BF7FF /* CybridConfig.swift in Sources */,
 				0BD660FD286B763E00F4DA6B /* ConcurrencyInterfaces.swift in Sources */,
@@ -1316,9 +1342,11 @@
 				0B00E0042877DF7F00707F26 /* Bundle+Extensions.swift in Sources */,
 				0BD26F2428A55D4800ED2A1B /* CybridEvent.swift in Sources */,
 				0BD26F2528A55D4800ED2A1B /* CybridLogger.swift in Sources */,
+				927233C728D2278D0080AAC4 /* AssetPipe.swift in Sources */,
 				0BD6610A286B768C00F4DA6B /* CryptoPriceViewModel.swift in Sources */,
 				0B00E05C2887256B00707F26 /* UIView+Keyboard.swift in Sources */,
 				0BBD0CCA28AAC025001DBC5F /* BigDecimalValidator.swift in Sources */,
+				927233CB28D23D060080AAC4 /* AccountsRepository.swift in Sources */,
 				0B2B2A8928629324002F0EC1 /* Theme.swift in Sources */,
 				0B289A07289E29D4001B3360 /* AssetBankModel+Extensions.swift in Sources */,
 				0BBD0CCE28AB71B7001DBC5F /* TradeViewModel.swift in Sources */,

@@ -36,7 +36,6 @@ opt_in_rules: # These rules are disabled by default, unless explicitly added bel
   - fatal_error_message
   - first_where
   - for_where
-  - force_cast
   - force_try
   - generic_type_name
   - identical_operands
@@ -84,17 +83,15 @@ opt_in_rules: # These rules are disabled by default, unless explicitly added bel
   - shorthand_operator
   - single_test_class
   - sorted_first_last
-  - sorted_imports
   - statement_position
   - static_operator
-  - superfluous_disable_command
   - switch_case_alignment
   - switch_case_on_newline
   - syntactic_sugar
   - trailing_comma
   - trailing_newline
   - trailing_semicolon
-  - trailing_whitespace
+  # - trailing_whitespace
   - type_contents_order
   - unavailable_function
   - unneeded_break_in_switch
@@ -167,8 +164,6 @@ fatal_error_message:
 first_where:
   severity: error
 for_where:
-  severity: error
-force_cast:
   severity: error
 force_try:
   severity: error
@@ -256,13 +251,9 @@ single_test_class:
   severity: error
 sorted_first_last:
   severity: error
-sorted_imports:
-  severity: error
 statement_position:
   severity: error
 static_operator:
-  severity: error
-superfluous_disable_command:
   severity: error
 switch_case_alignment:
   severity: error
@@ -313,10 +304,10 @@ file_length:
   warning: 1000
   error: 1200
 
-identifier_name:
-  excluded:
-    - id
-    - URL
+#identifier_name:
+#  excluded:
+#    - id
+#    - URL
 
 large_tuple:
   warning: 3
