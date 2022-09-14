@@ -8,13 +8,15 @@
 import UIKit
 
 extension UIView {
-  func makeKeyboardHandler() {
-    let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
-    addGestureRecognizer(tap)
-  }
 
-  @objc
-  func dismissKeyboard() {
-    endEditing(true)
-  }
+    func makeKeyboardHandler() {
+
+        let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        addGestureRecognizer(tap)
+    }
+
+    @objc
+    func dismissKeyboard() {
+        endEditing(true)
+    }
 }
