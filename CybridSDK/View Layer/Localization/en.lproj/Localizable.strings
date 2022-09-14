@@ -48,3 +48,26 @@
 "cybrid.trade.successModal.transactionFee" = "Transaction Fee";
 "cybrid.trade.successModal.buyMore" = "Buy more crypto";
 "cybrid.trade.successModal.sellMore" = "Sell more crypto";
+
+// Accounts
+"cybrid.accounts.accountComponentTitle" = "Account Value";
+"cybrid.accounts.assetTitle" = "ASSET";
+"cybrid.accounts.marketPriceTitle" = "Market Price";
+"cybrid.accounts.balanceTitle" = "BALANCE";
+
+// Account Trades
+"cybrid.account.trades.recentTransactionsTitle" = "RECENT TRANSACTIONS";
+"cybrid.account.trades.amountTitle" = "AMOUNT";
+"cybrid.account.trades.sellType" = "Sell";
+"cybrid.account.trades.buyType" = "Buy";
+
+// Account Trade Detail - Modal
+"cybrid.account.trade.detail.bought" = "Buy";
+"cybrid.account.trade.detail.sold" = "Sell";
+"cybrid.account.trade.detail.status" = "Status";
+"cybrid.account.trade.detail.orderPlaced" = "Order Placed";
+"cybrid.account.trade.detail.orderFinalized" = "Order Finalized";
+"cybrid.account.trade.detail.transactionDate" = "Transaction Date & Time";
+"cybrid.account.trade.detail.accountID" = "Account ID";
+"cybrid.account.trade.detail.orderID" = "Order ID";
+"cybrid.account.trade.detail.close" = "Close";

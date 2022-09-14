@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="cIp-MT-lRL">
-                                <rect key="frame" x="0.0" y="445" width="414" height="60"/>
+                                <rect key="frame" x="0.0" y="415" width="414" height="120"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5je-8O-oTJ">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="60"/>
@@ -29,6 +29,18 @@
                                         <buttonConfiguration key="configuration" style="plain" title="Crypto List"/>
                                         <connections>
                                             <action selector="didTapCryptoListButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="8Mn-iu-9Bk"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tlt-Xr-X0q">
+                                        <rect key="frame" x="0.0" y="60" width="414" height="60"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="60" id="VmJ-WR-NQ9"/>
+                                        </constraints>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Accounts Component"/>
+                                        <connections>
+                                            <action selector="didTapAccountsButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Ii7-c4-2jQ"/>
+                                            <action selector="didTapCryptoListButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ElP-Af-6DZ"/>
                                         </connections>
                                     </button>
                                 </subviews>
