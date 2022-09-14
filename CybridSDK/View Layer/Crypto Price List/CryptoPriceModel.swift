@@ -24,7 +24,7 @@ struct CryptoPriceModel: Equatable {
     self.assetName = asset.name
     self.imageURL = Cybrid.getCryptoIconURLString(with: asset.code)
     self.counterAssetCode = counterAsset.code
-    let bigDecimal = BigDecimal(buyPrice, precision: counterAsset.decimals) ?? BigDecimal(0)
+    let bigDecimal = OLDBigDecimal(buyPrice, precision: counterAsset.decimals) ?? OLDBigDecimal(0)
       self.formattedPrice = CybridCurrencyFormatter.formatPrice(bigDecimal, with: counterAsset.symbol)
   }
 }

@@ -43,7 +43,7 @@ struct CybridCurrencyFormatter {
     case trailing(symbol: String)
   }
 
-  static func formatPrice(_ price: BigDecimal,
+  static func formatPrice(_ price: OLDBigDecimal,
                           with currencySymbol: String,
                           locale: Locale = Locale.current) -> String {
     return localizedCurrencyString(from: price,
@@ -53,7 +53,7 @@ struct CybridCurrencyFormatter {
                                    currencySymbol: currencySymbol)
   }
 
-  static func formatInputNumber(_ number: BigDecimal,
+  static func formatInputNumber(_ number: OLDBigDecimal,
                                 decimalSeparator: String? = Locale.current.decimalSeparator) -> String {
     let decimalSeparator = decimalSeparator ?? "."
 
@@ -73,7 +73,7 @@ struct CybridCurrencyFormatter {
     return sign + magnitude
   }
 
-  static func localizedCurrencyString(from number: BigDecimal,
+  static func localizedCurrencyString(from number: OLDBigDecimal,
                                       locale: Locale,
                                       groupingSeparator: String?,
                                       decimalSeparator: String?,

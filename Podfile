@@ -10,6 +10,7 @@ use_frameworks!
 def common_pods
   pod 'CybridApiBankSwift'
   pod 'BigInt'
+  pod 'BigNumber', :git => 'https://github.com/mkrd/Swift-Big-Integer.git'
 end
 
 def quality_pods

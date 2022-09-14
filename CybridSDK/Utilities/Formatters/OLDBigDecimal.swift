@@ -7,7 +7,7 @@
 
 import BigInt
 
-struct BigDecimal: Hashable {
+struct OLDBigDecimal: Hashable {
   let value: BigInt
   let precision: Int
 
@@ -45,26 +45,26 @@ struct BigDecimal: Hashable {
     self.init(BigInt(value), precision: precision)
   }
 
-  static func zero(withPrecision precision: Int = 2) -> BigDecimal {
-    return BigDecimal(0, precision: precision)
+  static func zero(withPrecision precision: Int = 2) -> OLDBigDecimal {
+    return OLDBigDecimal(0, precision: precision)
   }
 }
 
 // MARK: - BigDecimal Operations
 
-extension BigDecimal {
-  typealias BigDecimalOperation = (BigDecimal, Int) throws -> BigDecimal
+extension OLDBigDecimal {
+  typealias BigDecimalOperation = (OLDBigDecimal, Int) throws -> OLDBigDecimal
 
-  func multiply(with decimal: BigDecimal, targetPrecision: Int) throws -> BigDecimal {
+  func multiply(with decimal: OLDBigDecimal, targetPrecision: Int) throws -> OLDBigDecimal {
     let resultInt = value * decimal.value
     let resultPrecision = precision + decimal.precision
-    let resultDecimal = BigDecimal(resultInt, precision: resultPrecision)
+    let resultDecimal = OLDBigDecimal(resultInt, precision: resultPrecision)
     try resultDecimal.performIntegrityCheck(with: resultInt)
 
     return resultDecimal.roundUp(to: targetPrecision)
   }
 
-  func divide(by decimal: BigDecimal, targetPrecision: Int) throws -> BigDecimal {
+  func divide(by decimal: OLDBigDecimal, targetPrecision: Int) throws -> OLDBigDecimal {
     let divisor = decimal.addPrecision(max(0, String(abs(value)).count - String(abs(decimal.value)).count))
     var (quotient, reminder) = value.quotientAndRemainder(dividingBy: divisor.value)
 
@@ -87,19 +87,19 @@ extension BigDecimal {
     let decimalString = decimalDigits.map { String($0) }.joined()
     let resultString = intString + decimalString
     let bigInt = BigInt(stringLiteral: resultString)
-    let resultDecimal = BigDecimal(bigInt, precision: targetPrecision + extraPrecision)
+    let resultDecimal = OLDBigDecimal(bigInt, precision: targetPrecision + extraPrecision)
     try resultDecimal.performIntegrityCheck(with: bigInt)
 
     // We create a decimal with all the extra precision needed
     return resultDecimal.roundUp(to: targetPrecision)
   }
 
-  func addPrecision(_ precision: Int) -> BigDecimal {
+  func addPrecision(_ precision: Int) -> OLDBigDecimal {
     let stringValue = String(abs(value)) + String(repeating: "0", count: precision)
-    return BigDecimal(BigInt(stringLiteral: stringValue), precision: self.precision + precision)
+    return OLDBigDecimal(BigInt(stringLiteral: stringValue), precision: self.precision + precision)
   }
 
-  func roundUp(to targetPrecision: Int) -> BigDecimal {
+  func roundUp(to targetPrecision: Int) -> OLDBigDecimal {
     guard precision > targetPrecision else { return self }
     let resultString = String(abs(value))
     // For small numbers we add leading zeros
@@ -131,6 +131,6 @@ extension BigDecimal {
 
     let finalNumberString = Array(result.reversed()).map { String($0) }.joined()
 
-    return BigDecimal(BigInt(stringLiteral: finalNumberString), precision: targetPrecision)
+    return OLDBigDecimal(BigInt(stringLiteral: finalNumberString), precision: targetPrecision)
   }
 }

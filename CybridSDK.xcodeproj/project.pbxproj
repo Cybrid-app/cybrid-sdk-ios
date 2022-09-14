@@ -14,7 +14,7 @@
 		0B00E0142877E87600707F26 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0B00E0122877E87600707F26 /* Main.storyboard */; };
 		0B00E0152877E93900707F26 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0B00E0172877E93900707F26 /* Localizable.strings */; };
 		0B00E01B2877EED600707F26 /* BundleExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B00E01A2877EED600707F26 /* BundleExtensionsTests.swift */; };
-		0B00E01D28789ADA00707F26 /* BigDecimal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B00E01C28789ADA00707F26 /* BigDecimal.swift */; };
+		0B00E01D28789ADA00707F26 /* OLDBigDecimal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B00E01C28789ADA00707F26 /* OLDBigDecimal.swift */; };
 		0B00E01F2878A16800707F26 /* BigDecimalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B00E01E2878A16800707F26 /* BigDecimalTests.swift */; };
 		0B00E0222878D23100707F26 /* CybridSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B00E0212878D23100707F26 /* CybridSession.swift */; };
 		0B00E024287CD72D00707F26 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B00E023287CD72D00707F26 /* Environment.swift */; };
@@ -136,6 +136,7 @@
 		927233BE28D131BE0080AAC4 /* AccountBankModel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927233BD28D131BE0080AAC4 /* AccountBankModel+Extensions.swift */; };
 		927233C028D1AA7E0080AAC4 /* TradeBankModel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927233BF28D1AA7E0080AAC4 /* TradeBankModel+Extensions.swift */; };
 		927233C228D1AAA20080AAC4 /* SymbolPriceBankModel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927233C128D1AAA20080AAC4 /* SymbolPriceBankModel+Extensions.swift */; };
+		927233C428D1ABE70080AAC4 /* BigDecimal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927233C328D1ABE70080AAC4 /* BigDecimal.swift */; };
 		9E3B30420CC77D425A7A1C28 /* Pods_Abstract_CybridSDKTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80DCD8FC666A9176CF28F146 /* Pods_Abstract_CybridSDKTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -177,7 +178,7 @@
 		0B00E0162877E93900707F26 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		0B00E0192877ED9E00707F26 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		0B00E01A2877EED600707F26 /* BundleExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BundleExtensionsTests.swift; sourceTree = "<group>"; };
-		0B00E01C28789ADA00707F26 /* BigDecimal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigDecimal.swift; sourceTree = "<group>"; };
+		0B00E01C28789ADA00707F26 /* OLDBigDecimal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OLDBigDecimal.swift; sourceTree = "<group>"; };
 		0B00E01E2878A16800707F26 /* BigDecimalTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigDecimalTests.swift; sourceTree = "<group>"; };
 		0B00E0212878D23100707F26 /* CybridSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CybridSession.swift; sourceTree = "<group>"; };
 		0B00E023287CD72D00707F26 /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
@@ -308,6 +309,7 @@
 		927233BD28D131BE0080AAC4 /* AccountBankModel+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AccountBankModel+Extensions.swift"; sourceTree = "<group>"; };
 		927233BF28D1AA7E0080AAC4 /* TradeBankModel+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TradeBankModel+Extensions.swift"; sourceTree = "<group>"; };
 		927233C128D1AAA20080AAC4 /* SymbolPriceBankModel+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SymbolPriceBankModel+Extensions.swift"; sourceTree = "<group>"; };
+		927233C328D1ABE70080AAC4 /* BigDecimal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigDecimal.swift; sourceTree = "<group>"; };
 		D8168B44D4C796A81CF0902E /* Pods-Abstract-CybridSDKTestApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Abstract-CybridSDKTestApp.debug.xcconfig"; path = "Target Support Files/Pods-Abstract-CybridSDKTestApp/Pods-Abstract-CybridSDKTestApp.debug.xcconfig"; sourceTree = "<group>"; };
 		DA2CB27D937283DE5C4554C6 /* Pods-Abstract-CybridSDKTestApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Abstract-CybridSDKTestApp.release.xcconfig"; path = "Target Support Files/Pods-Abstract-CybridSDKTestApp/Pods-Abstract-CybridSDKTestApp.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -593,6 +595,7 @@
 				0B2899E7288F3DFF001B3360 /* Config */,
 				0B2B2A6B28621D35002F0EC1 /* Theme */,
 				0B2899E8288F3E1F001B3360 /* Cybrid.swift */,
+				927233C328D1ABE70080AAC4 /* BigDecimal.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -925,7 +928,7 @@
 			children = (
 				0B303CE02862E062007BF7FF /* FormatStyle.swift */,
 				0BD661392872BC0B00F4DA6B /* CybridCurrencyFormatter.swift */,
-				0B00E01C28789ADA00707F26 /* BigDecimal.swift */,
+				0B00E01C28789ADA00707F26 /* OLDBigDecimal.swift */,
 				0BBD0CC928AAC025001DBC5F /* BigDecimalValidator.swift */,
 				0BBD0CDD28B68C49001DBC5F /* CybridDateFormatter.swift */,
 			);
@@ -1286,7 +1289,7 @@
 				0B00E034287F6D1000707F26 /* CybridAuthenticator.swift in Sources */,
 				0BBD0CD128ABF905001DBC5F /* TradeConfirmationModalView.swift in Sources */,
 				0BD660F7286B761200F4DA6B /* NetworkingInterfaces.swift in Sources */,
-				0B00E01D28789ADA00707F26 /* BigDecimal.swift in Sources */,
+				0B00E01D28789ADA00707F26 /* OLDBigDecimal.swift in Sources */,
 				0BBD0CD428AC0B60001DBC5F /* CybridModalViewController.swift in Sources */,
 				927233C028D1AA7E0080AAC4 /* TradeBankModel+Extensions.swift in Sources */,
 				0B2B2A8528629031002F0EC1 /* UIColor+Extensions.swift in Sources */,
@@ -1304,6 +1307,7 @@
 				0BD660FD286B763E00F4DA6B /* ConcurrencyInterfaces.swift in Sources */,
 				0BD66109286B768C00F4DA6B /* CryptoPriceListView.swift in Sources */,
 				0BD660FC286B763E00F4DA6B /* URLImageOperation.swift in Sources */,
+				927233C428D1ABE70080AAC4 /* BigDecimal.swift in Sources */,
 				0B00E024287CD72D00707F26 /* Environment.swift in Sources */,
 				0B078F1228497B070020B4F7 /* CybridSDK.docc in Sources */,
 				0BD66125286D7C0400F4DA6B /* Localizer.swift in Sources */,
