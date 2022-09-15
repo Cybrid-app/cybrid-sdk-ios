@@ -68,7 +68,6 @@ class CryptoPriceViewModel: NSObject {
   }
 
   func stopLiveUpdates() {
-    logger?.log(.component(.priceList(.liveUpdateStop)))
     taskScheduler?.cancel()
     if let taskScheduler = taskScheduler {
       Cybrid.session.taskSchedulers.remove(taskScheduler)

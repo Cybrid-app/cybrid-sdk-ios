@@ -15,7 +15,7 @@ public enum AssetPipeType: String {
 }
 
 struct AssetPipe {
-    
+
     static func transform(value: BigDecimal, asset: AssetBankModel, unit: AssetPipeType) -> BigDecimal {
         return transformAny(value: value, asset: asset, unit: unit)
     }

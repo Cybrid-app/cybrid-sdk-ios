@@ -9,7 +9,7 @@ import CybridApiBankSwift
 import Foundation
 
 final class CybridSession: AuthenticatedServiceProvider {
-  
+
     // MARK: Static Properties
     static var current = CybridSession(authenticator: Cybrid.authenticator,
                                        apiManager: CybridApiBankSwiftAPI.self,
@@ -30,7 +30,7 @@ final class CybridSession: AuthenticatedServiceProvider {
 
     // Trades Repository
     internal var tradesRepository: TradesRepository.Type
-    
+
     // Accounts Repository
     internal var accountsRepository: AccountsRepository.Type
 
@@ -75,14 +75,14 @@ final class CybridSession: AuthenticatedServiceProvider {
     }
 
     func stopListeners() {
-      
+
         notificationManager.removeObserver(self)
         isListeningToAppEvents = false
     }
 
     @objc
     func appMovedToBackground() {
-        
+
         taskSchedulers.forEach { scheduler in
             scheduler.pause()
         }
@@ -90,7 +90,7 @@ final class CybridSession: AuthenticatedServiceProvider {
 
     @objc
     func appMovedToForeground() {
-        
+
         taskSchedulers.forEach { scheduler in
             scheduler.resume()
         }
@@ -98,7 +98,7 @@ final class CybridSession: AuthenticatedServiceProvider {
 }
 
 protocol NotificationManager {
-    
+
     func addObserver(_ observer: Any, selector: Selector, name: NSNotification.Name?, object: Any?)
     func removeObserver(_ observer: Any)
     func post(name: NSNotification.Name, object: Any?, userInfo: [AnyHashable: Any]?)

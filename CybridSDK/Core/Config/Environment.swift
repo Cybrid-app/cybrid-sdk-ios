@@ -17,10 +17,8 @@ public enum CybridEnvironment {
     case .sandbox:
       return "https://bank.demo.cybrid.app"
     case .development:
-      // TODO: Add Development path
       return "https://bank.demo.cybrid.app"
     case .production:
-      // TODO: Add Prod path
       return "https://bank.demo.cybrid.app"
     }
   }

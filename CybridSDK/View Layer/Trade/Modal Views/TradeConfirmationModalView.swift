@@ -10,6 +10,7 @@ import CybridApiBankSwift
 import UIKit
 
 final class TradeConfirmationModalView: UIView {
+
   private var dataModel: DataModel
   private let localizer: Localizer
   private let theme: Theme

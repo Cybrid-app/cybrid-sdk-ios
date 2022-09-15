@@ -8,16 +8,16 @@
 import UIKit
 
 extension UILabel {
-  
+
     public enum AttributedSide {
 
       case left
       case right
       case center
     }
-  
+
     static func makeLabel(_ style: FormatStyle, _ onDidMake: ((UILabel) -> Void)? = nil) -> UILabel {
-  
+
       let label = UILabel()
       label.formatLabel(with: style)
       onDidMake?(label)
@@ -25,7 +25,7 @@ extension UILabel {
     }
 
     func formatLabel(with style: FormatStyle) {
-    
+
       numberOfLines = 0
       translatesAutoresizingMaskIntoConstraints = false
       sizeToFit()
@@ -35,7 +35,7 @@ extension UILabel {
         text = text?.uppercased()
       }
     }
-  
+
     func setAttributedText(
       mainText: String,
       mainTextFont: UIFont,
@@ -73,7 +73,7 @@ extension UILabel {
         )
         self.attributedText = attributedTitle
       }
-  
+
     func setLocalizedText(key: String, localizer: Localizer) {
 
       let text = localizer.localize(with: key)

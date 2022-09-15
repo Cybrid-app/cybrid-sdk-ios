@@ -30,7 +30,7 @@ struct CybridLocalizer: Localizer {
     )
     return String.localizedStringWithFormat(localizedStringFormat, parameters)
   }
-  
+
   func localize(with localizationKey: String,
                 parameters: CustomStringConvertible...) -> String {
     let localizationBundle = Bundle.localizationBundle(forLocale: locale)

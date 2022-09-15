@@ -155,7 +155,7 @@ extension AccountTradesCell {
                                   constant: -UIValues.margin)
     }
 
-    private func setupBasicLabel(_ label: UILabel, side: UILabel.Side, font: UIFont, color: UIColor?) {
+    private func setupBasicLabel(_ label: UILabel, side: UILabel.AttributedSide, font: UIFont, color: UIColor?) {
 
         switch side {
         case .left:

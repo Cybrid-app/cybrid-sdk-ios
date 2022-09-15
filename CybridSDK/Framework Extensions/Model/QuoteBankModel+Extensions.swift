@@ -6,18 +6,19 @@
 //
 
 import Foundation
+import CybridApiBankSwift
 
 extension QuoteBankModel {
-    
+
     init?(json: [String: Any]) {
-        
+
         guard
             let deliverAmountString = json[QuoteBankModel.CodingKeys.deliverAmount.rawValue] as? String
-            //let receiveAmountString = json[QuoteBankModel.CodingKeys.receiveAmount.rawValue] as? String,
-            //let feeAmountString = json[QuoteBankModel.CodingKeys.fee.rawValue] as? String
-            //let deliverAmount = BigInt(deliverAmountString),
-            //let receiveAmount = BigInt(receiveAmountString),
-            //let feeAmount = BigInt(feeAmountString)
+            // let receiveAmountString = json[QuoteBankModel.CodingKeys.receiveAmount.rawValue] as? String,
+            // let feeAmountString = json[QuoteBankModel.CodingKeys.fee.rawValue] as? String
+            // let deliverAmount = BigInt(deliverAmountString),
+            // let receiveAmount = BigInt(receiveAmountString),
+            // let feeAmount = BigInt(feeAmountString)
         else {
             return nil
         }

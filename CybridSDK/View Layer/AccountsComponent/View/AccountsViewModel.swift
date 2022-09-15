@@ -38,6 +38,7 @@ class AccountsViewModel: NSObject {
     }
 
     internal func getAssetsList() {
+
         if assets.isEmpty {
             dataProvider.fetchAssetsList { [weak self] assetsResult in
                 switch assetsResult {
@@ -57,7 +58,8 @@ class AccountsViewModel: NSObject {
     }
 
     internal func getAccountsList() {
-        dataProvider.fetchAccounts { [weak self] accountsResult in
+
+        dataProvider.fetchAccounts(customerGuid: Cybrid.customerGUID) { [weak self] accountsResult in
             print(accountsResult)
             switch accountsResult {
             case .success(let accountsList):
@@ -72,7 +74,7 @@ class AccountsViewModel: NSObject {
 
     internal func getPricesList() {
 
-        dataProvider.fetchPriceList(liveUpdateEnabled: true) { [weak self] pricesResult in
+        dataProvider.fetchPriceList(with: TaskScheduler()) { [weak self] pricesResult in
             print(pricesResult)
             switch pricesResult {
             case .success(let pricesList):
@@ -119,12 +121,12 @@ class AccountsViewModel: NSObject {
         if !self.assets.isEmpty && !self.balances.value.isEmpty {
             if let asset = assets.first(where: { $0.code == currentCurrency.uppercased() }) {
 
-                var total = SBigDecimal(0).value
+                var total = BigDecimal(0).value
                 for balance in self.balances.value {
                     total += balance.accountBalanceInFiat.value
                 }
-                let totalBigDecimal = SBigDecimal(total, precision: asset.decimals)
-                let totalFormatted = CybridCurrencyFormatter.formatPrice(totalBigDecimal, with: asset.symbol)
+                let totalBigDecimal = BigDecimal(total)
+                let totalFormatted = BigDecimalPipe.transform(value: totalBigDecimal, asset: asset) ?? ""
                 self.accountTotalBalance.value = "\(totalFormatted) \(asset.code)"
             }
         }

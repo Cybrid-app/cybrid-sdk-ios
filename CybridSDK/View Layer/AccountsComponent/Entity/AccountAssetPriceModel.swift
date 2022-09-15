@@ -35,35 +35,33 @@ struct AccountAssetPriceModel {
         price: SymbolPriceBankModel
     ) {
 
-        let emptyValue = SBigDecimal(0)
-        let balanceAccountBigDecimal = BigDecimal(value___: account.platformBalance ?? "0")
+        let balanceAccountBigDecimal = BigDecimal(account.platformBalance ?? "0")
 
-        let balanceValue = SBigDecimal(account.platformBalance ?? "0", precision: asset.decimals)
+        let balanceValue = BigDecimal(account.platformBalance ?? "0")
         let balanceValueFormatted = AssetPipe.transform(value: balanceAccountBigDecimal, asset: asset, unit: .trade).toPlainString()
 
-        let buyPrice = SBigDecimal(price.buyPrice ?? "0", precision: counterAsset.decimals)
-        let buyPriceFormatted = CybridCurrencyFormatter.formatPrice(buyPrice, with: counterAsset.symbol)
+        let buyPrice = BigDecimal(price.buyPrice ?? "0")
+        let buyPriceFormatted = BigDecimalPipe.transform(value: buyPrice, asset: counterAsset)
 
-        let accountBalanceInFiat = try? balanceValue?.multiply(with: buyPrice, targetPrecision: counterAsset.decimals)
-        let accountBalanceInFiatFormatted = CybridCurrencyFormatter.formatPrice(
-            accountBalanceInFiat ?? emptyValue, with: counterAsset.symbol)
+        let accountBalanceInFiat = balanceValue.times(multiplicand: buyPrice)
+        let accountBalanceInFiatFormatted = BigDecimalPipe.transform(value: accountBalanceInFiat, asset: counterAsset)
 
         self.accountAssetCode = account.asset ?? ""
         self.accountAssetURL = Cybrid.getCryptoIconURLString(with: self.accountAssetCode)
-        self.accountBalance = balanceValue ?? emptyValue
+        self.accountBalance = balanceValue
         self.accountBalanceFormatted = balanceValueFormatted
-        self.accountBalanceInFiat = accountBalanceInFiat ?? emptyValue
-        self.accountBalanceInFiatFormatted = accountBalanceInFiatFormatted
+        self.accountBalanceInFiat = accountBalanceInFiat
+        self.accountBalanceInFiatFormatted = accountBalanceInFiatFormatted ?? ""
         self.accountGuid = account.guid ?? ""
         self.accountType = account.type
         self.accountCreated = account.createdAt ?? Date()
         self.assetName = asset.name
         self.assetSymbol = asset.symbol
         self.assetType = asset.type
-        self.assetDecimals = BigDecimal(value: Int32(asset.decimals))
+        self.assetDecimals = asset.decimals
         self.pairAsset = counterAsset
         self.buyPrice = buyPrice
-        self.buyPriceFormatted = buyPriceFormatted
-        self.sellPrice = BigDecimal(value___: "0")
+        self.buyPriceFormatted = buyPriceFormatted ?? ""
+        self.sellPrice = BigDecimal(0)
     }
 }

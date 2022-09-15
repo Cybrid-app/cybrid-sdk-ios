@@ -63,7 +63,6 @@ opt_in_rules: # These rules are disabled by default, unless explicitly added bel
   - opening_brace
   - operator_usage_whitespace
   - operator_whitespace
-  - overridden_super_call
   - override_in_extension
   - pattern_matching_keywords
   - private_action
@@ -91,8 +90,6 @@ opt_in_rules: # These rules are disabled by default, unless explicitly added bel
   - trailing_comma
   - trailing_newline
   - trailing_semicolon
-  # - trailing_whitespace
-  - type_contents_order
   - unavailable_function
   - unneeded_break_in_switch
   - unneeded_parentheses_in_closure_argument
@@ -327,13 +324,25 @@ private_outlet:
   severity: error
   allow_private_set: true
 
+type_body_length:
+  warning: 1100
+  error: 1500
+
+function_body_length:
+  warning: 110
+  error: 150
+
+function_parameter_count:
+  warning: 10
+  error: 11
+
 type_name:
   min_length:
     warning: 3
     error: 2
   max_length:
-    warning: 40
-    error: 50
+    warning: 60
+    error: 80
   allowed_symbols: ["_"]
 
 reporter: "xcode"

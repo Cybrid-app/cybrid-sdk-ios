@@ -8,7 +8,7 @@
 import UIKit
 
 enum UIConstants {
-    
+
     // MARK: Global
     static let zero: CGFloat = 0
 

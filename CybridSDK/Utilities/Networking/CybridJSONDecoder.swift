@@ -10,9 +10,9 @@ import CybridApiBankSwift
 import Foundation
 
 final class CybridJSONDecoder: JSONDecoder {
-    
+
     override func decode<T>(_ type: T.Type, from data: Data) throws -> T where T: Decodable {
-    
+
         switch type {
         case is Array<SymbolPriceBankModel>.Type:
             // swiftlint:disable:next force_cast
@@ -33,9 +33,9 @@ final class CybridJSONDecoder: JSONDecoder {
 }
 
 extension CybridJSONDecoder {
-    
+
     func decodeSymbolPriceList(data: Data) throws -> [SymbolPriceBankModel] {
-    
+
         guard let jsonObject = try JSONSerialization.jsonObject(with: data) as? [[String: Any]] else {
             throw DecodingError.customDecodingError
         }
@@ -53,7 +53,7 @@ extension CybridJSONDecoder {
     }
 
     func decodeQuoteBankModel(data: Data) throws -> QuoteBankModel {
-        
+
         guard let jsonObject = try JSONSerialization.jsonObject(with: data) as? [String: Any] else {
             throw DecodingError.customDecodingError
         }
@@ -72,9 +72,9 @@ extension CybridJSONDecoder {
         }
         return model
     }
-    
+
     func decodeTradeBankModel(data: Data) throws -> TradeBankModel {
-        
+
         guard let jsonObject = try JSONSerialization.jsonObject(with: data) as? [String: Any] else {
             throw DecodingError.customDecodingError
         }
@@ -93,7 +93,7 @@ extension CybridJSONDecoder {
         }
         return model
     }
-    
+
     func decodeAccountList(data: Data) throws -> AccountListBankModel? {
 
         guard let jsonObject = try JSONSerialization.jsonObject(with: data) as? [String: Any] else {
