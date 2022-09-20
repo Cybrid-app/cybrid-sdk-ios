@@ -36,10 +36,10 @@ struct TradeUIModel {
         var returnValue = ""
         if self.tradeBankModel.side == .sell {
             let deliverAmount = BigDecimal(self.tradeBankModel.deliverAmount ?? "0")
-            returnValue = AssetPipe.transform(value: deliverAmount, asset: self.asset, unit: .trade).toPlainString()
+            returnValue = AssetPipe.transform(value: deliverAmount, asset: self.asset, unit: .trade).toPlainString(scale: asset.decimals).removeTrailingZeros()
         } else {
             let receiveAmount = BigDecimal(self.tradeBankModel.receiveAmount ?? "0")
-            returnValue = AssetPipe.transform(value: receiveAmount, asset: self.asset, unit: .trade).toPlainString()
+            returnValue = AssetPipe.transform(value: receiveAmount, asset: self.asset, unit: .trade).toPlainString(scale: asset.decimals).removeTrailingZeros()
         }
         return returnValue
     }

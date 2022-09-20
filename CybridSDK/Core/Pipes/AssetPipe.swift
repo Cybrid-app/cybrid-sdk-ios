@@ -61,4 +61,19 @@ struct AssetPipe {
         }
         return returnValue
     }
+
+    static func transform(value: SBigDecimal, asset: AssetBankModel, unit: AssetPipeType) -> String {
+
+        let divisor = String(pow(10, Double(asset.decimals)))
+        let tradeUnit = try? value.divide(by: SBigDecimal(divisor) ?? SBigDecimal(0), targetPrecision: asset.decimals)
+        let baseUnit = try? value.multiply(with: SBigDecimal(divisor) ?? SBigDecimal(0), targetPrecision: asset.decimals)
+        var returnValue = ""
+        switch unit {
+        case .trade:
+            returnValue = CybridCurrencyFormatter.formatInputNumber(tradeUnit ?? SBigDecimal(0))
+        case .base:
+            returnValue = CybridCurrencyFormatter.formatInputNumber(baseUnit ?? SBigDecimal(0))
+        }
+        return returnValue
+    }
 }
