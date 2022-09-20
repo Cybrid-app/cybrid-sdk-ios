@@ -79,66 +79,6 @@ class CybridJSONDecoderTests: XCTestCase {
     XCTAssertEqual(model?.sellPrice, "115792089237316195423570985008687907853269954665640564039457584007913129639935")
   }
 
-  func test_stringValueOfKey_withValidJSONData() throws {
-    let listPricesData = getJSONData(from: "listLargestPricesResponse")
-    XCTAssertNotNil(listPricesData)
-    let decoder = CybridJSONDecoder()
-
-    let stringValue = decoder.stringValue(forKey: "buy_price", in: listPricesData!)
-
-    XCTAssertEqual(stringValue, "115792089237316195423570985008687907853269984665640564039457584007913129639935")
-  }
-
-  func test_stringValueOfKey_withInvalidJSONData() throws {
-    let bundle = Bundle.init(for: Self.self)
-    let testImage = UIImage(named: "placeholder", in: bundle, compatibleWith: nil)
-    let testImageData = testImage?.jpegData(compressionQuality: 1)
-    XCTAssertNotNil(testImageData)
-    let decoder = CybridJSONDecoder()
-
-    let stringValue = decoder.stringValue(forKey: "buy_price", in: testImageData!)
-
-    XCTAssertNil(stringValue)
-  }
-
-  func test_stringValueOfKey_withInvalidJSON() throws {
-    let invalidJSONData = "}".data(using: .utf8)
-    XCTAssertNotNil(invalidJSONData)
-    let decoder = CybridJSONDecoder()
-
-    let stringValue = decoder.stringValue(forKey: "test", in: invalidJSONData!)
-
-    XCTAssertNil(stringValue)
-  }
-
-  func test_stringValueOfKey_notFound() throws {
-    let listPricesData = getJSONData(from: "listLargestPricesResponse")
-    XCTAssertNotNil(listPricesData)
-    let decoder = CybridJSONDecoder()
-
-    let stringValue = decoder.stringValue(forKey: "not_found_key", in: listPricesData!)
-
-    XCTAssertNil(stringValue)
-  }
-
-  func test_stringValueOfKey_withEmptyValue() throws {
-    let json = """
-    [
-      {
-        id: "example",
-        test_key:
-      }
-    ]
-    """
-    let testData = json.data(using: .utf8)
-    XCTAssertNotNil(testData)
-    let decoder = CybridJSONDecoder()
-
-    let stringValue = decoder.stringValue(forKey: "test_key", in: testData!)
-
-    XCTAssertNil(stringValue)
-  }
-
   func test_SymbolPriceBankModel_withInvalidJSON() throws {
     let jsonDict: [String: Any] = [
       "symbol": "BTC-USD",

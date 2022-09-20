@@ -22,7 +22,6 @@ class CybridEventTests: XCTestCase {
     XCTAssertEqual(CybridEvent.component(.priceList(.dataFetching)).level, .info)
     XCTAssertEqual(CybridEvent.component(.priceList(.dataError)).level, .error)
     XCTAssertEqual(CybridEvent.component(.priceList(.dataRefreshed)).level, .info)
-    XCTAssertEqual(CybridEvent.component(.priceList(.liveUpdateStop)).level, .info)
     // Trade
     XCTAssertEqual(CybridEvent.component(.trade(.initSuccess)).level, .info)
     XCTAssertEqual(CybridEvent.component(.trade(.priceDataFetching)).level, .info)
@@ -34,8 +33,6 @@ class CybridEventTests: XCTestCase {
     XCTAssertEqual(CybridEvent.component(.trade(.tradeDataFetching)).level, .info)
     XCTAssertEqual(CybridEvent.component(.trade(.tradeDataError)).level, .error)
     XCTAssertEqual(CybridEvent.component(.trade(.tradeConfirmed)).level, .info)
-    XCTAssertEqual(CybridEvent.component(.trade(.priceLiveUpdateStop)).level, .info)
-    XCTAssertEqual(CybridEvent.component(.trade(.quoteLiveUpdateStop)).level, .info)
   }
 
   func testEvent_Code() {
@@ -51,7 +48,7 @@ class CybridEventTests: XCTestCase {
     XCTAssertEqual(CybridEvent.component(.priceList(.dataFetching)).code, "COMPONENT_PRICE_LIST_DATA_FETCHING")
     XCTAssertEqual(CybridEvent.component(.priceList(.dataError)).code, "COMPONENT_PRICE_LIST_DATA_ERROR")
     XCTAssertEqual(CybridEvent.component(.priceList(.dataRefreshed)).code, "COMPONENT_PRICE_LIST_DATA_REFRESHED")
-    XCTAssertEqual(CybridEvent.component(.priceList(.liveUpdateStop)).code, "COMPONENT_PRICE_LIST_LIVE_UPDATE_STOP")
+    
     // Trade
     XCTAssertEqual(CybridEvent.component(.trade(.initSuccess)).code, "COMPONENT_TRADE_INIT")
     XCTAssertEqual(CybridEvent.component(.trade(.priceDataFetching)).code, "COMPONENT_TRADE_PRICE_DATA_FETCHING")
@@ -63,8 +60,6 @@ class CybridEventTests: XCTestCase {
     XCTAssertEqual(CybridEvent.component(.trade(.tradeDataFetching)).code, "COMPONENT_TRADE_TRADE_DATA_FETCHING")
     XCTAssertEqual(CybridEvent.component(.trade(.tradeDataError)).code, "COMPONENT_TRADE_TRADE_DATA_ERROR")
     XCTAssertEqual(CybridEvent.component(.trade(.tradeConfirmed)).code, "COMPONENT_TRADE_TRADE_CONFIRMED")
-    XCTAssertEqual(CybridEvent.component(.trade(.priceLiveUpdateStop)).code, "COMPONENT_TRADE_PRICE_LIVE_UPDATE_STOP")
-    XCTAssertEqual(CybridEvent.component(.trade(.quoteLiveUpdateStop)).code, "COMPONENT_TRADE_QUOTE_LIVE_UPDATE_STOP")
   }
 
   func testEvent_Message() {
@@ -80,7 +75,7 @@ class CybridEventTests: XCTestCase {
     XCTAssertEqual(CybridEvent.component(.priceList(.dataFetching)).message, "Fetching price list...")
     XCTAssertEqual(CybridEvent.component(.priceList(.dataError)).message, "There was an error fetching price list")
     XCTAssertEqual(CybridEvent.component(.priceList(.dataRefreshed)).message, "Price list successfully updated")
-    XCTAssertEqual(CybridEvent.component(.priceList(.liveUpdateStop)).message, "Price list live update stop")
+
     // Trade
     XCTAssertEqual(CybridEvent.component(.trade(.initSuccess)).message, "Initializing trade component")
     XCTAssertEqual(CybridEvent.component(.trade(.priceDataFetching)).message, "Fetching price...")
@@ -92,7 +87,5 @@ class CybridEventTests: XCTestCase {
     XCTAssertEqual(CybridEvent.component(.trade(.tradeDataFetching)).message, "Fetching trade...")
     XCTAssertEqual(CybridEvent.component(.trade(.tradeDataError)).message, "There was an error confirming trade")
     XCTAssertEqual(CybridEvent.component(.trade(.tradeConfirmed)).message, "Trade successfully confirmed")
-    XCTAssertEqual(CybridEvent.component(.trade(.priceLiveUpdateStop)).message, "Price live update did stop")
-    XCTAssertEqual(CybridEvent.component(.trade(.quoteLiveUpdateStop)).message, "Quote live update did stop")
   }
 }
