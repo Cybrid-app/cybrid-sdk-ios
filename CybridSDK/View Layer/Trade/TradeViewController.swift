@@ -35,7 +35,7 @@ public final class TradeViewController: UIViewController {
 
   private lazy var cryptoPickerTextField: CYBTextField = {
     let textField = CYBTextField(style: .rounded, icon: .urlImage(""), theme: theme)
-    textField.placeholder = localizer.localize(with: CybridLocalizationKey.trade(.buy(.selectCurrency)))
+    //textField.placeholder = localizer.localize(with: CybridLocalizationKey.trade(.buy(.selectCurrency)))
 
     return textField
   }()
@@ -323,7 +323,7 @@ extension TradeViewController {
       }
       self?.cryptoPickerTextField.text = selection.asset.name + " " + selection.asset.code
       self?.cryptoPickerTextField.updateIcon(.urlImage(selection.imageURL))
-      self?.amountTextField.placeholder = CybridCurrencyFormatter.formatInputNumber(SBigDecimal(0, precision: selection.asset.decimals))
+      //self?.amountTextField.placeholder = CybridCurrencyFormatter.formatInputNumber(SBigDecimal(0, precision: selection.asset.decimals))
       self?.amountTextField.updateIcon(.text(selection.asset.code))
       self?.updateIcons(shouldInputCrypto: self?.viewModel.shouldInputCrypto.value ?? true)
     }
