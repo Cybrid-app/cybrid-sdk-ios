@@ -32,15 +32,27 @@ extension String {
     }
 
     func removeTrailingZeros() -> String {
-
-        var result = ""
-        for character in self.stringValue.reversed() {
-            if character != "0" {
-                result = String(character) + result
-            } else {
-                return result
+        
+        let parts = self.stringValue.split(separator: ".")
+        if parts.count > 1 {
+            
+            let integer = String(parts[0])
+            let decimal = String(parts[1])
+            let result = integer + "."
+            var decimalResult = ""
+            for character in decimal.reversed() {
+                if character != "0" {
+                    decimalResult = String(character) + decimalResult
+                } else {
+                    if !decimalResult.isEmpty {
+                        return result + decimalResult
+                    }
+                }
             }
+            return result + decimalResult
+            
+        } else {
+            return self.stringValue
         }
-        return result
     }
 }

@@ -11,22 +11,23 @@ import CybridApiBankSwift
 struct TradeUIModel {
 
     let tradeBankModel: TradeBankModel
-    let feeValue: BigDecimal
+    let feeValue: SBigDecimal
     let feeFormatted: String
     let asset: AssetBankModel
     let counterAsset: AssetBankModel
     let accoountGuid: String
 
     init?(tradeBankModel: TradeBankModel, asset: AssetBankModel, counterAsset: AssetBankModel, accountGuid: String) {
-
-        let fee = BigDecimal(tradeBankModel.fee ?? "0")
-        let feeString = BigDecimalPipe.transform(value: fee, asset: counterAsset)
+        
+        let emptyValue = SBigDecimal(0)
+        let fee = SBigDecimal(tradeBankModel.fee ?? "0", precision: counterAsset.decimals)
+        let feeString = CybridCurrencyFormatter.formatPrice(fee ?? emptyValue, with: counterAsset.symbol)
 
         self.tradeBankModel = tradeBankModel
         self.asset = asset
         self.counterAsset = counterAsset
-        self.feeValue = fee
-        self.feeFormatted = feeString ?? ""
+        self.feeValue = fee ?? emptyValue
+        self.feeFormatted = feeString
         self.accoountGuid = accountGuid
     }
 
@@ -47,11 +48,11 @@ struct TradeUIModel {
 
         var returnValue = ""
         if self.tradeBankModel.side == .sell {
-            let receiveAmount = BigDecimal(self.tradeBankModel.receiveAmount ?? "0")
-            returnValue = BigDecimalPipe.transform(value: receiveAmount, asset: self.counterAsset) ?? ""
+            let receiveAmount = SBigDecimal(self.tradeBankModel.receiveAmount ?? "0", precision: counterAsset.decimals) ?? SBigDecimal(0)
+            returnValue = CybridCurrencyFormatter.formatPrice(receiveAmount, with: self.counterAsset.symbol)
         } else {
-            let deliverAmount = BigDecimal(self.tradeBankModel.deliverAmount ?? "0")
-            returnValue = BigDecimalPipe.transform(value: deliverAmount, asset: self.counterAsset) ?? ""
+            let deliverAmount = SBigDecimal(self.tradeBankModel.deliverAmount ?? "0", precision: counterAsset.decimals) ?? SBigDecimal(0)
+            returnValue = CybridCurrencyFormatter.formatPrice(deliverAmount, with: self.counterAsset.symbol)
         }
         return returnValue
     }

@@ -26,6 +26,9 @@ final class CybridJSONDecoder: JSONDecoder {
         case is AccountListBankModel.Type:
             // swiftlint:disable:next force_cast
             return try decodeAccountList(data: data) as! T
+        case is TradeListBankModel.Type:
+            // swiftlint:disable:next force_cast
+            return try decoedTradeList(data: data) as! T
         default:
             return try super.decode(type, from: data)
         }

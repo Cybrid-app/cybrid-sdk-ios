@@ -138,7 +138,6 @@
 		927233C228D1AAA20080AAC4 /* SymbolPriceBankModel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927233C128D1AAA20080AAC4 /* SymbolPriceBankModel+Extensions.swift */; };
 		927233C428D1ABE70080AAC4 /* BigDecimal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927233C328D1ABE70080AAC4 /* BigDecimal.swift */; };
 		927233C728D2278D0080AAC4 /* AssetPipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927233C628D2278D0080AAC4 /* AssetPipe.swift */; };
-		927233C928D22A050080AAC4 /* BigDecimalPipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927233C828D22A050080AAC4 /* BigDecimalPipe.swift */; };
 		927233CB28D23D060080AAC4 /* AccountsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927233CA28D23D060080AAC4 /* AccountsRepository.swift */; };
 		927233CD28D2419B0080AAC4 /* QuoteBankModel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927233CC28D2419B0080AAC4 /* QuoteBankModel+Extensions.swift */; };
 		927233CF28D242170080AAC4 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927233CE28D242170080AAC4 /* Utils.swift */; };
@@ -329,7 +328,6 @@
 		927233C128D1AAA20080AAC4 /* SymbolPriceBankModel+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SymbolPriceBankModel+Extensions.swift"; sourceTree = "<group>"; };
 		927233C328D1ABE70080AAC4 /* BigDecimal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigDecimal.swift; sourceTree = "<group>"; };
 		927233C628D2278D0080AAC4 /* AssetPipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetPipe.swift; sourceTree = "<group>"; };
-		927233C828D22A050080AAC4 /* BigDecimalPipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigDecimalPipe.swift; sourceTree = "<group>"; };
 		927233CA28D23D060080AAC4 /* AccountsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsRepository.swift; sourceTree = "<group>"; };
 		927233CC28D2419B0080AAC4 /* QuoteBankModel+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "QuoteBankModel+Extensions.swift"; sourceTree = "<group>"; };
 		927233CE28D242170080AAC4 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
@@ -1006,7 +1004,6 @@
 			isa = PBXGroup;
 			children = (
 				927233C628D2278D0080AAC4 /* AssetPipe.swift */,
-				927233C828D22A050080AAC4 /* BigDecimalPipe.swift */,
 			);
 			path = Pipes;
 			sourceTree = "<group>";
@@ -1413,7 +1410,6 @@
 				0B00E0222878D23100707F26 /* CybridSession.swift in Sources */,
 				0B2899E9288F3E1F001B3360 /* Cybrid.swift in Sources */,
 				927233BB28D12FD10080AAC4 /* UIFont+Extensions.swift in Sources */,
-				927233C928D22A050080AAC4 /* BigDecimalPipe.swift in Sources */,
 				0BD66118286B79C500F4DA6B /* UIView+Constraints.swift in Sources */,
 				927233EA28D244CC0080AAC4 /* AccountTradesHeaderCell.swift in Sources */,
 				0B303CE42862E5D9007BF7FF /* CybridConfig.swift in Sources */,

@@ -14,7 +14,7 @@ struct AccountAssetPriceModel {
     let accountAssetURL: String // http://
     let accountBalance: BigDecimal
     let accountBalanceFormatted: String
-    let accountBalanceInFiat: BigDecimal
+    let accountBalanceInFiat: SBigDecimal
     let accountBalanceInFiatFormatted: String
     let accountGuid: String
     let accountType: AccountBankModel.TypeBankModel?
@@ -24,7 +24,7 @@ struct AccountAssetPriceModel {
     let assetType: AssetBankModel.TypeBankModel
     let assetDecimals: Int
     let pairAsset: AssetBankModel?
-    let buyPrice: BigDecimal
+    let buyPrice: SBigDecimal
     let buyPriceFormatted: String
     let sellPrice: BigDecimal
 
@@ -35,24 +35,23 @@ struct AccountAssetPriceModel {
         price: SymbolPriceBankModel
     ) {
 
+        let empty = SBigDecimal(0)
         let balanceValue = BigDecimal(account.platformBalance ?? "0")
-        let balanceValueFormatted = AssetPipe.transform(value: balanceValue, asset: asset, unit: .trade).toPlainString()
+        let balanceValueSBD = SBigDecimal(account.platformBalance ?? "0", precision: asset.decimals)
+        let balanceValueFormatted = CybridCurrencyFormatter.formatInputNumber(balanceValueSBD ?? empty).removeTrailingZeros()
 
-        let buyPrice = BigDecimal(price.buyPrice ?? "0")
-        let buyPriceFormatted = BigDecimalPipe.transform(value: buyPrice, asset: counterAsset)
+        let buyPrice = SBigDecimal(price.buyPrice ?? "0", precision: counterAsset.decimals)
+        let buyPriceFormatted = CybridCurrencyFormatter.formatPrice(buyPrice ?? empty, with: counterAsset.symbol)
 
-        let accountBalanceInFiat = balanceValue.times(multiplicand: buyPrice)
-        print("BALANE ::::::")
-        print(accountBalanceInFiat)
-        let accountBalanceInFiatFormatted = BigDecimalPipe.transform(value: accountBalanceInFiat, asset: asset)
-        print(accountBalanceInFiatFormatted)
+        let accountBalanceInFiat = try? balanceValueSBD?.multiply(with: buyPrice ?? empty, targetPrecision: counterAsset.decimals)
+        let accountBalanceInFiatFormatted = CybridCurrencyFormatter.formatPrice(accountBalanceInFiat ?? empty, with: counterAsset.symbol)
 
         self.accountAssetCode = account.asset ?? ""
         self.accountAssetURL = Cybrid.getCryptoIconURLString(with: self.accountAssetCode)
         self.accountBalance = balanceValue
         self.accountBalanceFormatted = balanceValueFormatted
-        self.accountBalanceInFiat = accountBalanceInFiat
-        self.accountBalanceInFiatFormatted = accountBalanceInFiatFormatted ?? ""
+        self.accountBalanceInFiat = accountBalanceInFiat ?? SBigDecimal(0)
+        self.accountBalanceInFiatFormatted = accountBalanceInFiatFormatted
         self.accountGuid = account.guid ?? ""
         self.accountType = account.type
         self.accountCreated = account.createdAt ?? Date()
@@ -61,8 +60,8 @@ struct AccountAssetPriceModel {
         self.assetType = asset.type
         self.assetDecimals = asset.decimals
         self.pairAsset = counterAsset
-        self.buyPrice = buyPrice
-        self.buyPriceFormatted = buyPriceFormatted ?? ""
+        self.buyPrice = buyPrice ?? empty
+        self.buyPriceFormatted = buyPriceFormatted
         self.sellPrice = BigDecimal(0)
     }
 }
