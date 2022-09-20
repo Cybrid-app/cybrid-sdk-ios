@@ -57,6 +57,7 @@ struct BigDecimal: Hashable {
     }
 
     func toPlainString(scale: Int = 4) -> String {
+
         return self.value.decimalExpansion(precisionAfterDecimalPoint: scale)
     }
 }

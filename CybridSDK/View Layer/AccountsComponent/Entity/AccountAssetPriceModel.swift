@@ -35,16 +35,17 @@ struct AccountAssetPriceModel {
         price: SymbolPriceBankModel
     ) {
 
-        let balanceAccountBigDecimal = BigDecimal(account.platformBalance ?? "0")
-
         let balanceValue = BigDecimal(account.platformBalance ?? "0")
-        let balanceValueFormatted = AssetPipe.transform(value: balanceAccountBigDecimal, asset: asset, unit: .trade).toPlainString()
+        let balanceValueFormatted = AssetPipe.transform(value: balanceValue, asset: asset, unit: .trade).toPlainString()
 
         let buyPrice = BigDecimal(price.buyPrice ?? "0")
         let buyPriceFormatted = BigDecimalPipe.transform(value: buyPrice, asset: counterAsset)
 
         let accountBalanceInFiat = balanceValue.times(multiplicand: buyPrice)
-        let accountBalanceInFiatFormatted = BigDecimalPipe.transform(value: accountBalanceInFiat, asset: counterAsset)
+        print("BALANE ::::::")
+        print(accountBalanceInFiat)
+        let accountBalanceInFiatFormatted = BigDecimalPipe.transform(value: accountBalanceInFiat, asset: asset)
+        print(accountBalanceInFiatFormatted)
 
         self.accountAssetCode = account.asset ?? ""
         self.accountAssetURL = Cybrid.getCryptoIconURLString(with: self.accountAssetCode)

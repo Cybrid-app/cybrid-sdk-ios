@@ -29,25 +29,20 @@ struct BigDecimalPipe {
 
     private static func transformAny(baseUnit: BigDecimal, asset: AssetBankModel, prefix: String) -> String {
 
+        baseUnit.value.rounded()
         let baseUnitString = baseUnit.toPlainString(scale: asset.decimals)
         if baseUnitString.contains(".") {
 
             let baseParts = baseUnitString.split(separator: ".")
-            let integer = BigDecimal(String(baseParts[0]))
-            var decimal = String(baseParts[1])
+            let integer = String(baseParts[0])
+            var decimal = String(baseParts[1]).removeTrailingZeros()
             if decimal.count < 2 {
                 decimal += "0"
             }
 
-            let formater = NumberFormatter()
-            formater.numberStyle = .decimal
-            formater.minimumFractionDigits = 0
-            formater.decimalSeparator = "."
-            formater.groupingSeparator = ","
+            let valueFormatted = integer.currencyFormat()
+            return valueFormatted + "." + decimal
 
-            let number = NSNumber(pointer: integer.value.rawData().numerator)
-            let valueFormatted = formater.string(from: number)
-            return valueFormatted ?? "" + "." + decimal
         } else {
 
             let formater = NumberFormatter()
@@ -57,7 +52,8 @@ struct BigDecimalPipe {
             formater.decimalSeparator = "."
             formater.groupingSeparator = ","
             let number = NSNumber(pointer: baseUnit.value.rawData().numerator)
-            return formater.string(from: number) ?? ""
+            return baseUnit.toPlainString(scale: asset.decimals)
+            //return formater.string(from: number) ?? ""
         }
     }
 }

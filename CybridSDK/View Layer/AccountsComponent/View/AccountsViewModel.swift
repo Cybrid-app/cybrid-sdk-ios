@@ -33,6 +33,15 @@ class AccountsViewModel: NSObject {
     }
 
     func getAccounts() {
+        
+        let test = BigDecimal("100")
+        let test2 = AssetPipe.transform(value: test, decimals: 3, unit: .trade)
+        let test3 = AssetPipe.transform(value: test, decimals: 3, unit: .base)
+        print("LOLLL ============")
+        print(test.toPlainString())
+        print(test2.toPlainString())
+        print(test3.toPlainString())
+        print("===================")
 
         self.getAssetsList()
     }
@@ -60,7 +69,7 @@ class AccountsViewModel: NSObject {
     internal func getAccountsList() {
 
         dataProvider.fetchAccounts(customerGuid: Cybrid.customerGUID) { [weak self] accountsResult in
-            print(accountsResult)
+
             switch accountsResult {
             case .success(let accountsList):
                 self?.logger?.log(.component(.accounts(.accountsDataFetching)))
@@ -75,7 +84,7 @@ class AccountsViewModel: NSObject {
     internal func getPricesList() {
 
         dataProvider.fetchPriceList(with: TaskScheduler()) { [weak self] pricesResult in
-            print(pricesResult)
+
             switch pricesResult {
             case .success(let pricesList):
                 self?.logger?.log(.component(.accounts(.pricesDataFetching)))

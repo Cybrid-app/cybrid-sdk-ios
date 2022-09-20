@@ -43,6 +43,9 @@ extension AccountBankModel {
                 let platfomrBalanceKey = AccountBankModel.CodingKeys.platformBalance.rawValue
                 objectCopy[platfomrAvailableKey] = stringValue(forKey: platfomrAvailableKey, in: objectData)
                 objectCopy[platfomrBalanceKey] = stringValue(forKey: platfomrBalanceKey, in: objectData)
+                print("==============================")
+                print(objectCopy[platfomrBalanceKey])
+                print("=================:_____")
             }
             // -- Creating the AccountBankModel
             let model = AccountBankModel(json: objectCopy)

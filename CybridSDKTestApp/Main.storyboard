@@ -40,7 +40,6 @@
                                         <buttonConfiguration key="configuration" style="plain" title="Accounts Component"/>
                                         <connections>
                                             <action selector="didTapAccountsButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Ii7-c4-2jQ"/>
-                                            <action selector="didTapCryptoListButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ElP-Af-6DZ"/>
                                         </connections>
                                     </button>
                                 </subviews>

@@ -8,13 +8,13 @@
 import BigInt
 import Foundation
 
-extension OLDBigDecimal {
-  static func runOperation(_ operation: () throws -> OLDBigDecimal, errorEvent: CybridEvent) -> OLDBigDecimal {
+extension SBigDecimal {
+  static func runOperation(_ operation: () throws -> SBigDecimal, errorEvent: CybridEvent) -> SBigDecimal {
     do {
       return try operation()
     } catch {
       Cybrid.logger?.log(errorEvent)
-      return OLDBigDecimal.zero()
+      return SBigDecimal.zero()
     }
   }
 
