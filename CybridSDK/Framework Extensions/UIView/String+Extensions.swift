@@ -25,17 +25,13 @@ extension String {
             }
         }
         return result
-        
-        // CNN
-        // NBC
-        // Routers
     }
 
     func removeTrailingZeros() -> String {
-        
+
         let parts = self.stringValue.split(separator: ".")
         if parts.count > 1 {
-            
+
             let integer = String(parts[0])
             let decimal = String(parts[1])
             let result = integer + "."
@@ -50,7 +46,7 @@ extension String {
                 }
             }
             return result + decimalResult
-            
+
         } else {
             return self.stringValue
         }

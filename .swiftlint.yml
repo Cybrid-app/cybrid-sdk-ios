@@ -301,11 +301,6 @@ file_length:
   warning: 1000
   error: 1200
 
-#identifier_name:
-#  excluded:
-#    - id
-#    - URL
-
 large_tuple:
   warning: 3
 
