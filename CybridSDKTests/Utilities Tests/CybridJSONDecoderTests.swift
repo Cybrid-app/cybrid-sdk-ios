@@ -161,9 +161,53 @@ class CybridJSONDecoderTests: XCTestCase {
         XCTAssertNil(result)
     }
 
+    func test_TradesBankModel_Decoding() throws {
+
+        let tradeData = getJSONData(from: "listTradesResponse")
+        XCTAssertNotNil(tradeData)
+        let decoder = CybridJSONDecoder()
+
+        let result = try? decoder.decode(TradeListBankModel.self, from: tradeData!)
+        XCTAssertNotNil(result?.total)
+        XCTAssertNotNil(result?.page)
+        XCTAssertNotNil(result?.perPage)
+        XCTAssertNotNil(result?.objects)
+        XCTAssertNotNil(result?.objects[0])
+        XCTAssertNotNil(result?.objects[0].guid)
+        XCTAssertNotNil(result?.objects[0].customerGuid)
+        XCTAssertNotNil(result?.objects[0].quoteGuid)
+        XCTAssertNotNil(result?.objects[0].symbol)
+        XCTAssertNotNil(result?.objects[0].side)
+        XCTAssertNotNil(result?.objects[0].state)
+        XCTAssertNotNil(result?.objects[0].receiveAmount)
+        XCTAssertNotNil(result?.objects[0].deliverAmount)
+        XCTAssertNotNil(result?.objects[0].fee)
+        XCTAssertNotNil(result?.objects[0].createdAt)
+    }
+
+    func test_TradesBankModel_withInvalidJSON() throws {
+
+        let tradeData = getJSONData(from: "listPricesResponse")
+        XCTAssertNotNil(tradeData)
+        let decoder = CybridJSONDecoder()
+
+        let result = try? decoder.decode(TradeListBankModel.self, from: tradeData!)
+        XCTAssertNil(result)
+    }
+
+    func test_TradesBankModel_withInvalidArrayOfJSON() throws {
+
+        let tradeData = getJSONData(from: "listPricesResponse")
+        XCTAssertNotNil(tradeData)
+        let decoder = CybridJSONDecoder()
+
+        let result = try? decoder.decode(TradeListBankModel.self, from: tradeData!)
+        XCTAssertNil(result)
+    }
+
     func test_AccountBankModel_Decoding() throws {
 
-        let tradeData = getJSONData(from: "createAccountResponse")
+        let tradeData = getJSONData(from: "accountResponse")
         XCTAssertNotNil(tradeData)
         let decoder = CybridJSONDecoder()
 
