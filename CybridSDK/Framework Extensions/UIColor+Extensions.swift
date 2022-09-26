@@ -27,27 +27,12 @@ extension UIColor {
         }
     }
 
-    convenience init?(hex: String, alpha: CGFloat = 1.0) {
+    convenience init(hex: String, alpha: CGFloat = 1.0) {
 
-        let red, green, blue: CGFloat
-        if hex.hasPrefix("#") {
-
-            let start = hex.index(hex.startIndex, offsetBy: 1)
-            let hexColor = String(hex[start...])
-            if hexColor.count == 6 {
-
-                let scanner = Scanner(string: hexColor)
-                var hexNumber: UInt64 = 0
-                if scanner.scanHexInt64(&hexNumber) {
-
-                    red = CGFloat((hexNumber & 0xff0000) >> 16) / 255
-                    green = CGFloat((hexNumber & 0x00ff00) >> 8) / 255
-                    blue = CGFloat(hexNumber & 0x0000ff) / 255
-                    self.init(red: red, green: green, blue: blue, alpha: alpha)
-                    return
-                }
-            }
-        }
-        return nil
+        let chars = Array(hex.dropFirst())
+        self.init(red: .init(strtoul(String(chars[0...1]), nil, 16)) / 255,
+                  green: .init(strtoul(String(chars[2...3]), nil, 16)) / 255,
+                  blue: .init(strtoul(String(chars[4...5]), nil, 16)) / 255,
+                  alpha: alpha)
     }
 }

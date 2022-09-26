@@ -9,7 +9,7 @@ import CybridApiBankSwift
 import Foundation
 
 public final class CybridConfig {
-  
+
     // MARK: Internal Static Properties
     internal static var shared = CybridConfig()
 
@@ -59,7 +59,7 @@ public final class CybridConfig {
 // MARK: - CybridConfig + Locale
 
 extension CybridConfig {
-  
+
     func getPreferredLocale(with preferredLanguages: [String]? = nil) -> Locale {
         if
             let preferredLocale = _preferredLocale,
@@ -78,7 +78,7 @@ extension CybridConfig {
     }
 
     func supportsLanguage(_ languageCode: String?) -> Bool {
-    
+
         guard let languageCode = languageCode else { return false }
         let sdkBundle = Bundle(for: CybridConfig.self)
         let localeBundlePath = sdkBundle.path(

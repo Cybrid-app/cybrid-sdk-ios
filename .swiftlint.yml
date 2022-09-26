@@ -100,7 +100,6 @@ opt_in_rules: # These rules are disabled by default, unless explicitly added bel
   - unused_optional_binding
   - unused_declaration
   - valid_ibinspectable
-  - vertical_parameter_alignment_on_call
   - vertical_whitespace
   - weak_delegate
   - xctfail_message
@@ -305,8 +304,8 @@ large_tuple:
   warning: 3
 
 line_length:
-  warning: 140
-  error: 200
+  warning: 200
+  error: 300
   ignores_comments: true
   ignores_interpolated_strings: true
   ignores_urls: true

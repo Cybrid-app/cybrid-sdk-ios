@@ -33,7 +33,7 @@ class AccountsViewModel: NSObject {
     }
 
     func getAccounts() {
-        
+
         let test = BigDecimal("100")
         let test2 = AssetPipe.transform(value: test, decimals: 3, unit: .trade)
         let test3 = AssetPipe.transform(value: test, decimals: 3, unit: .base)

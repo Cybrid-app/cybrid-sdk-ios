@@ -18,7 +18,7 @@ struct TradeUIModel {
     let accoountGuid: String
 
     init?(tradeBankModel: TradeBankModel, asset: AssetBankModel, counterAsset: AssetBankModel, accountGuid: String) {
-        
+
         let emptyValue = SBigDecimal(0)
         let fee = SBigDecimal(tradeBankModel.fee ?? "0", precision: counterAsset.decimals)
         let feeString = CybridCurrencyFormatter.formatPrice(fee ?? emptyValue, with: counterAsset.symbol)

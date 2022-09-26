@@ -201,12 +201,12 @@ extension AccountTradeDetailModal {
 
         // -- Color
         static let titleColor = UIColor.black
-        static let subTitleColor = UIColor(hex: "#48484A") ?? UIColor.black
-        static let subTitleCodeColor = UIColor(hex: "#636366") ?? UIColor.black
-        static let itemTitleColor = UIColor(hex: "#424242") ?? UIColor.black
+        static let subTitleColor = UIColor(hex: "#48484A")
+        static let subTitleCodeColor = UIColor(hex: "#636366")
+        static let itemTitleColor = UIColor(hex: "#424242")
         static let itemValueColor = UIColor.black
-        static let itemValueCodeColor = UIColor(hex: "#757575") ?? UIColor.black
-        static let dividerColor = UIColor(hex: "#C6C6C8") ?? UIColor.black
-        static let closeButtonColor = UIColor(hex: "#007AFF") ?? UIColor.black
+        static let itemValueCodeColor = UIColor(hex: "#757575")
+        static let dividerColor = UIColor(hex: "#C6C6C8")
+        static let closeButtonColor = UIColor(hex: "#007AFF")
     }
 }
