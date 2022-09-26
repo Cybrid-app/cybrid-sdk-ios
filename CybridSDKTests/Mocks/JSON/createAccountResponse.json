@@ -1,0 +1,29 @@
+{
+  "total": 1,
+  "page": 1,
+  "perPage": 10,
+  "objects": [
+      {
+        "type": "trading",
+        "guid": "5b13ffda9fc47c322af321434818709a",
+        "created_at": "2022-06-27T19:46:42.504Z",
+        "asset": "ETH",
+        "name": "BTC-USD",
+        "customer_guid": "bf10305829337d106b82c521bb6c8fd2",
+        "platform_balance": 6000000000000000000,
+        "platform_available": 0,
+        "state": "created"
+      },
+      {
+        "type": "trading",
+        "guid": "15d755452f76634df53a88efc06248ec",
+        "created_at": "2022-06-27T19:46:35.874Z",
+        "asset": "BTC",
+        "name": "BTC-USD",
+        "customer_guid": "bf10305829337d106b82c521bb6c8fd2",
+        "platform_balance": 801836917,
+        "platform_available": 0,
+        "state": "created"
+      }
+  ]
+}

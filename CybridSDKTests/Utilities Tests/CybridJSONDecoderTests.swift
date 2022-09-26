@@ -12,141 +12,193 @@ import XCTest
 
 class CybridJSONDecoderTests: XCTestCase {
 
-  func test_SymbolPriceBankModel_Decoding() throws {
-    let listPricesData = getJSONData(from: "listPricesResponse")
-    XCTAssertNotNil(listPricesData)
-    let decoder = CybridJSONDecoder()
+    func test_SymbolPriceBankModel_Decoding() throws {
 
-    let result = try? decoder.decode(Array<SymbolPriceBankModel>.self, from: listPricesData!)
-    XCTAssertNotNil(result)
+        let listPricesData = getJSONData(from: "listPricesResponse")
+        XCTAssertNotNil(listPricesData)
+        let decoder = CybridJSONDecoder()
 
-    result!.forEach { model in
-      XCTAssertNotNil(model.symbol)
-      XCTAssertNotNil(model.buyPrice)
-      XCTAssertNotNil(model.sellPrice)
+        let result = try? decoder.decode(Array<SymbolPriceBankModel>.self, from: listPricesData!)
+        XCTAssertNotNil(result)
+
+        result!.forEach { model in
+            XCTAssertNotNil(model.symbol)
+            XCTAssertNotNil(model.buyPrice)
+            XCTAssertNotNil(model.sellPrice)
+        }
     }
+
+    func test_SymbolPriceBankModel_BTC_Decoding() throws {
+
+        let listPricesData = getJSONData(from: "listPricesResponse")
+        XCTAssertNotNil(listPricesData)
+        let decoder = CybridJSONDecoder()
+
+        let result = try? decoder.decode(Array<SymbolPriceBankModel>.self, from: listPricesData!)
+        XCTAssertNotNil(result)
+
+        let btc = result?.first
+
+        XCTAssertEqual(btc?.symbol, "BTC-USD")
+        XCTAssertEqual(btc?.buyPrice, "2387700")
+        XCTAssertEqual(btc?.sellPrice, "2387600")
+    }
+
+    func test_SymbolPriceBankModel_LargestNumber_Decoding() throws {
+
+        let listPricesData = getJSONData(from: "listLargestPricesResponse")
+        XCTAssertNotNil(listPricesData)
+        let decoder = CybridJSONDecoder()
+
+        let result = try? decoder.decode(Array<SymbolPriceBankModel>.self, from: listPricesData!)
+        XCTAssertNotNil(result)
+
+        let model = result?.first
+
+        XCTAssertEqual(model?.buyPrice, "115792089237316195423570985008687907853269984665640564039457584007913129639935")
+        XCTAssertEqual(model?.sellPrice, "115792089237316195423570985008687907853269954665640564039457584007913129639935")
+    }
+
+    func test_SymbolPriceBankModel_withInvalidJSON() throws {
+
+        let jsonDict: [String: Any] = [
+            "symbol": "BTC-USD",
+            "buy_price": 2_387_700,
+            "sell_price": 2_387_600,
+            "buy_price_last_updated_at": "2022-07-29T19:11:22.209Z",
+            "sell_price_last_updated_at": "2022-07-29T19:11:22.209Z"
+        ]
+        let symbolPriceBankModel = SymbolPriceBankModel(json: jsonDict)
+        XCTAssertNil(symbolPriceBankModel)
+    }
+
+    func test_AssetBankModel_defaultDecoder_fallback() throws {
+
+        let listAssetsData = getJSONData(from: "listAssetsResponse")
+        XCTAssertNotNil(listAssetsData)
+        let decoder = CybridJSONDecoder()
+
+        let result = try? decoder.decode(AssetListBankModel.self, from: listAssetsData!)
+        XCTAssertNotNil(result)
+
+        let cad = result?.objects.first
+
+        XCTAssertEqual(cad?.code, "CAD")
+        XCTAssertEqual(cad?.symbol, "$")
+    }
+
+    func test_AssetBankModel_decodingWrongType() throws {
+
+        let listAssetsData = getJSONData(from: "listAssetsResponse")
+        XCTAssertNotNil(listAssetsData)
+        let decoder = CybridJSONDecoder()
+
+        let result = try? decoder.decode(Array<SymbolPriceBankModel>.self, from: listAssetsData!)
+        XCTAssertNil(result)
   }
 
-  func test_SymbolPriceBankModel_BTC_Decoding() throws {
-    let listPricesData = getJSONData(from: "listPricesResponse")
-    XCTAssertNotNil(listPricesData)
-    let decoder = CybridJSONDecoder()
+    func test_QuoteBankModel_Decoding() throws {
 
-    let result = try? decoder.decode(Array<SymbolPriceBankModel>.self, from: listPricesData!)
-    XCTAssertNotNil(result)
+        let quoteData = getJSONData(from: "createQuoteResponse")
+        XCTAssertNotNil(quoteData)
+        let decoder = CybridJSONDecoder()
 
-    let btc = result?.first
+        let result = try? decoder.decode(QuoteBankModel.self, from: quoteData!)
+        XCTAssertNotNil(result?.guid)
+        XCTAssertNotNil(result?.receiveAmount)
+        XCTAssertNotNil(result?.deliverAmount)
+    }
 
-    XCTAssertEqual(btc?.symbol, "BTC-USD")
-    XCTAssertEqual(btc?.buyPrice, "2387700")
-    XCTAssertEqual(btc?.sellPrice, "2387600")
-  }
+    func test_QuoteBankModel_withInvalidJSON() throws {
 
-  func test_AssetBankModel_defaultDecoder_fallback() throws {
-    let listAssetsData = getJSONData(from: "listAssetsResponse")
-    XCTAssertNotNil(listAssetsData)
-    let decoder = CybridJSONDecoder()
+        let quoteData = getJSONData(from: "listAssetsResponse")
+        XCTAssertNotNil(quoteData)
+        let decoder = CybridJSONDecoder()
 
-    let result = try? decoder.decode(AssetListBankModel.self, from: listAssetsData!)
-    XCTAssertNotNil(result)
+        let result = try? decoder.decode(QuoteBankModel.self, from: quoteData!)
+        XCTAssertNil(result)
+    }
 
-    let cad = result?.objects.first
+    func test_QuoteBankModel_withInvalidArrayOfJSON() throws {
 
-    XCTAssertEqual(cad?.code, "CAD")
-    XCTAssertEqual(cad?.symbol, "$")
-  }
+        let quoteData = getJSONData(from: "listPricesResponse")
+        XCTAssertNotNil(quoteData)
+        let decoder = CybridJSONDecoder()
 
-  func test_AssetBankModel_decodingWrongType() throws {
-    let listAssetsData = getJSONData(from: "listAssetsResponse")
-    XCTAssertNotNil(listAssetsData)
-    let decoder = CybridJSONDecoder()
+        let result = try? decoder.decode(QuoteBankModel.self, from: quoteData!)
+        XCTAssertNil(result)
+    }
 
-    let result = try? decoder.decode(Array<SymbolPriceBankModel>.self, from: listAssetsData!)
-    XCTAssertNil(result)
-  }
+    func test_TradeBankModel_Decoding() throws {
 
-  func test_SymbolPriceBankModel_LargestNumber_Decoding() throws {
-    let listPricesData = getJSONData(from: "listLargestPricesResponse")
-    XCTAssertNotNil(listPricesData)
-    let decoder = CybridJSONDecoder()
+        let tradeData = getJSONData(from: "createTradeResponse")
+        XCTAssertNotNil(tradeData)
+        let decoder = CybridJSONDecoder()
 
-    let result = try? decoder.decode(Array<SymbolPriceBankModel>.self, from: listPricesData!)
-    XCTAssertNotNil(result)
+        let result = try? decoder.decode(TradeBankModel.self, from: tradeData!)
+        XCTAssertNotNil(result?.guid)
+        XCTAssertNotNil(result?.receiveAmount)
+        XCTAssertNotNil(result?.deliverAmount)
+    }
 
-    let model = result?.first
+    func test_TradeBankModel_withInvalidJSON() throws {
 
-    XCTAssertEqual(model?.buyPrice, "115792089237316195423570985008687907853269984665640564039457584007913129639935")
-    XCTAssertEqual(model?.sellPrice, "115792089237316195423570985008687907853269954665640564039457584007913129639935")
-  }
+        let tradeData = getJSONData(from: "listAssetsResponse")
+        XCTAssertNotNil(tradeData)
+        let decoder = CybridJSONDecoder()
 
-  func test_SymbolPriceBankModel_withInvalidJSON() throws {
-    let jsonDict: [String: Any] = [
-      "symbol": "BTC-USD",
-      "buy_price": 2_387_700,
-      "sell_price": 2_387_600,
-      "buy_price_last_updated_at": "2022-07-29T19:11:22.209Z",
-      "sell_price_last_updated_at": "2022-07-29T19:11:22.209Z"
-    ]
-    let symbolPriceBankModel = SymbolPriceBankModel(json: jsonDict)
+        let result = try? decoder.decode(TradeBankModel.self, from: tradeData!)
+        XCTAssertNil(result)
+    }
 
-    XCTAssertNil(symbolPriceBankModel)
-  }
+    func test_TradeBankModel_withInvalidArrayOfJSON() throws {
 
-  func test_QuoteBankModel_Decoding() throws {
-    let quoteData = getJSONData(from: "createQuoteResponse")
-    XCTAssertNotNil(quoteData)
-    let decoder = CybridJSONDecoder()
+        let tradeData = getJSONData(from: "listPricesResponse")
+        XCTAssertNotNil(tradeData)
+        let decoder = CybridJSONDecoder()
 
-    let result = try? decoder.decode(QuoteBankModel.self, from: quoteData!)
-    XCTAssertNotNil(result?.guid)
-    XCTAssertNotNil(result?.receiveAmount)
-    XCTAssertNotNil(result?.deliverAmount)
-  }
+        let result = try? decoder.decode(TradeBankModel.self, from: tradeData!)
+        XCTAssertNil(result)
+    }
 
-  func test_QuoteBankModel_withInvalidJSON() throws {
-    let quoteData = getJSONData(from: "listAssetsResponse")
-    XCTAssertNotNil(quoteData)
-    let decoder = CybridJSONDecoder()
+    func test_AccountBankModel_Decoding() throws {
 
-    let result = try? decoder.decode(QuoteBankModel.self, from: quoteData!)
-    XCTAssertNil(result)
-  }
+        let tradeData = getJSONData(from: "createAccountResponse")
+        XCTAssertNotNil(tradeData)
+        let decoder = CybridJSONDecoder()
 
-  func test_QuoteBankModel_withInvalidArrayOfJSON() throws {
-    let quoteData = getJSONData(from: "listPricesResponse")
-    XCTAssertNotNil(quoteData)
-    let decoder = CybridJSONDecoder()
+        let result = try? decoder.decode(AccountListBankModel.self, from: tradeData!)
+        XCTAssertNotNil(result?.total)
+        XCTAssertNotNil(result?.page)
+        XCTAssertNotNil(result?.perPage)
+        XCTAssertNotNil(result?.objects)
+        XCTAssertNotNil(result?.objects[0])
+        XCTAssertNotNil(result?.objects[0].type)
+        XCTAssertNotNil(result?.objects[0].guid)
+        XCTAssertNotNil(result?.objects[0].asset)
+        XCTAssertNotNil(result?.objects[0].name)
+        XCTAssertNotNil(result?.objects[0].platformBalance)
+        XCTAssertNotNil(result?.objects[0].platformAvailable)
+        XCTAssertNotNil(result?.objects[0].state)
+    }
 
-    let result = try? decoder.decode(QuoteBankModel.self, from: quoteData!)
-    XCTAssertNil(result)
-  }
+    func test_AccountBankModel_withInvalidJSON() throws {
 
-  func test_TradeBankModel_Decoding() throws {
-    let tradeData = getJSONData(from: "createTradeResponse")
-    XCTAssertNotNil(tradeData)
-    let decoder = CybridJSONDecoder()
+        let tradeData = getJSONData(from: "listAssetsResponse")
+        XCTAssertNotNil(tradeData)
+        let decoder = CybridJSONDecoder()
 
-    let result = try? decoder.decode(TradeBankModel.self, from: tradeData!)
-    XCTAssertNotNil(result?.guid)
-    XCTAssertNotNil(result?.receiveAmount)
-    XCTAssertNotNil(result?.deliverAmount)
-  }
+        let result = try? decoder.decode(TradeBankModel.self, from: tradeData!)
+        XCTAssertNil(result)
+    }
 
-  func test_TradeBankModel_withInvalidJSON() throws {
-    let tradeData = getJSONData(from: "listAssetsResponse")
-    XCTAssertNotNil(tradeData)
-    let decoder = CybridJSONDecoder()
+    func test_AccountBankModel_withInvalidArrayOfJSON() throws {
 
-    let result = try? decoder.decode(TradeBankModel.self, from: tradeData!)
-    XCTAssertNil(result)
-  }
+        let tradeData = getJSONData(from: "listPricesResponse")
+        XCTAssertNotNil(tradeData)
+        let decoder = CybridJSONDecoder()
 
-  func test_TradeBankModel_withInvalidArrayOfJSON() throws {
-    let tradeData = getJSONData(from: "listPricesResponse")
-    XCTAssertNotNil(tradeData)
-    let decoder = CybridJSONDecoder()
-
-    let result = try? decoder.decode(TradeBankModel.self, from: tradeData!)
-    XCTAssertNil(result)
-  }
+        let result = try? decoder.decode(TradeBankModel.self, from: tradeData!)
+        XCTAssertNil(result)
+    }
 }

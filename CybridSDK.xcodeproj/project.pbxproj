@@ -154,6 +154,7 @@
 		927233EA28D244CC0080AAC4 /* AccountTradesHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927233E928D244CC0080AAC4 /* AccountTradesHeaderCell.swift */; };
 		927233EC28D244DE0080AAC4 /* AccountTradesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927233EB28D244DE0080AAC4 /* AccountTradesCell.swift */; };
 		92AD743128D418610071F17F /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AD743028D418610071F17F /* String+Extensions.swift */; };
+		92F5EC7128E206CE009DC3F4 /* createAccountResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 92F5EC7028E206CE009DC3F4 /* createAccountResponse.json */; };
 		9E3B30420CC77D425A7A1C28 /* Pods_Abstract_CybridSDKTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80DCD8FC666A9176CF28F146 /* Pods_Abstract_CybridSDKTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -344,6 +345,7 @@
 		927233E928D244CC0080AAC4 /* AccountTradesHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTradesHeaderCell.swift; sourceTree = "<group>"; };
 		927233EB28D244DE0080AAC4 /* AccountTradesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTradesCell.swift; sourceTree = "<group>"; };
 		92AD743028D418610071F17F /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
+		92F5EC7028E206CE009DC3F4 /* createAccountResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = createAccountResponse.json; sourceTree = "<group>"; };
 		D8168B44D4C796A81CF0902E /* Pods-Abstract-CybridSDKTestApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Abstract-CybridSDKTestApp.debug.xcconfig"; path = "Target Support Files/Pods-Abstract-CybridSDKTestApp/Pods-Abstract-CybridSDKTestApp.debug.xcconfig"; sourceTree = "<group>"; };
 		DA2CB27D937283DE5C4554C6 /* Pods-Abstract-CybridSDKTestApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Abstract-CybridSDKTestApp.release.xcconfig"; path = "Target Support Files/Pods-Abstract-CybridSDKTestApp/Pods-Abstract-CybridSDKTestApp.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -572,6 +574,7 @@
 		0B2899FC289467C1001B3360 /* JSON */ = {
 			isa = PBXGroup;
 			children = (
+				92F5EC7028E206CE009DC3F4 /* createAccountResponse.json */,
 				0B2899FD289467EE001B3360 /* listPricesResponse.json */,
 				0BBD0CE928B7E6E6001DBC5F /* createQuoteResponse.json */,
 				0BBD0CEB28B7EC09001DBC5F /* createTradeResponse.json */,
@@ -1202,6 +1205,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				92F5EC7128E206CE009DC3F4 /* createAccountResponse.json in Resources */,
 				0BBD0CEA28B7E7EE001DBC5F /* createQuoteResponse.json in Resources */,
 				0B2899FE289467EE001B3360 /* listPricesResponse.json in Resources */,
 				0BFF8755289628EB00E44C74 /* listAssetsResponse.json in Resources */,

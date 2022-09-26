@@ -11,6 +11,7 @@ import CybridApiBankSwift
 extension AccountBankModel {
 
     init?(json: [String: Any]) {
+
         guard
             let platformAvailableValue = json[AccountBankModel.CodingKeys.platformAvailable.rawValue] as? String,
             let platfomrBalanceValue = json[AccountBankModel.CodingKeys.platformBalance.rawValue] as? String,
@@ -39,13 +40,10 @@ extension AccountBankModel {
             var objectCopy = object
             // -- Magic transform NSNumber to String
             if let objectData = objectData {
-                let platfomrAvailableKey = AccountBankModel.CodingKeys.platformAvailable.rawValue
-                let platfomrBalanceKey = AccountBankModel.CodingKeys.platformBalance.rawValue
-                objectCopy[platfomrAvailableKey] = stringValue(forKey: platfomrAvailableKey, in: objectData)
-                objectCopy[platfomrBalanceKey] = stringValue(forKey: platfomrBalanceKey, in: objectData)
-                print("==============================")
-                print(objectCopy[platfomrBalanceKey])
-                print("=================:_____")
+                let platformAvailableKey = AccountBankModel.CodingKeys.platformAvailable.rawValue
+                let platformBalanceKey = AccountBankModel.CodingKeys.platformBalance.rawValue
+                objectCopy[platformAvailableKey] = stringValue(forKey: platformAvailableKey, in: objectData)
+                objectCopy[platformBalanceKey] = stringValue(forKey: platformBalanceKey, in: objectData)
             }
             // -- Creating the AccountBankModel
             let model = AccountBankModel(json: objectCopy)
