@@ -185,6 +185,23 @@ class CybridJSONDecoderTests: XCTestCase {
         XCTAssertNotNil(result?.objects[0].createdAt)
     }
 
+    func test_TradesBankModel_Decoding_Default() throws {
+
+        let tradeData = getJSONData(from: "listTradesResponseIncomplete")
+        XCTAssertNotNil(tradeData)
+
+        let decoder = CybridJSONDecoder()
+
+        let result = try? decoder.decode(TradeListBankModel.self, from: tradeData!)
+        XCTAssertNotNil(result?.total)
+        XCTAssertEqual(result?.total, 0)
+        XCTAssertNotNil(result?.page)
+        XCTAssertEqual(result?.page, 0)
+        XCTAssertNotNil(result?.perPage)
+        XCTAssertEqual(result?.perPage, 0)
+        XCTAssertNotNil(result?.objects)
+    }
+
     func test_TradesBankModel_withInvalidJSON() throws {
 
         let tradeData = getJSONData(from: "listPricesResponse")
@@ -230,18 +247,44 @@ class CybridJSONDecoderTests: XCTestCase {
         XCTAssertNotNil(result?.objects[0].state)
     }
 
-    func test_AccountBankModel_Decoding_Nil() throws {
+    func test_AccountBankModel_Decoding_Default() throws {
+
+        let tradeData = getJSONData(from: "accountResponseIncomplete")
+        XCTAssertNotNil(tradeData)
+
+        let decoder = CybridJSONDecoder()
+
+        let result = try? decoder.decode(AccountListBankModel.self, from: tradeData!)
+        XCTAssertNotNil(result?.total)
+        XCTAssertEqual(result?.total, 0)
+        XCTAssertNotNil(result?.page)
+        XCTAssertEqual(result?.page, 0)
+        XCTAssertNotNil(result?.perPage)
+        XCTAssertEqual(result?.perPage, 0)
+        XCTAssertNotNil(result?.objects)
+        XCTAssertNotNil(result?.objects[0])
+        XCTAssertNotNil(result?.objects[0].type)
+        XCTAssertNotNil(result?.objects[0].guid)
+        XCTAssertNotNil(result?.objects[0].asset)
+        XCTAssertNotNil(result?.objects[0].name)
+        XCTAssertNotNil(result?.objects[0].platformBalance)
+        XCTAssertNotNil(result?.objects[0].platformAvailable)
+        XCTAssertNotNil(result?.objects[0].state)
+    }
+
+    /*func test_AccountBankModel_Decoding_Nil() throws {
 
         let data = Data()
         let decoder = CybridJSONDecoder()
         let result = try? decoder.decode(AccountListBankModel.self, from: data)
 
+        XCTAssertThrowsError(try decoder.decode(AccountListBankModel.self, from: data))
         XCTAssertNil(result)
-    }
+    }*/
 
     func test_AccountBankModel_withInvalidJSON() throws {
 
-        let tradeData = getJSONData(from: "listAssetsResponse")
+        let tradeData = getJSONData(from: "listPricesResponse")
         XCTAssertNotNil(tradeData)
         let decoder = CybridJSONDecoder()
 

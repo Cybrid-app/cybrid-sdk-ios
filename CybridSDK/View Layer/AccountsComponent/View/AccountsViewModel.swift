@@ -13,6 +13,7 @@ class AccountsViewModel: NSObject {
     // MARK: Observed properties
     internal var assets: [AssetBankModel] = []
     internal var accounts: [AccountBankModel] = []
+    internal var prices: [SymbolPriceBankModel] = []
     internal var balances: Observable<[AccountAssetPriceModel]> = .init([])
     internal var accountTotalBalance: Observable<String> = .init("")
 
@@ -33,16 +34,6 @@ class AccountsViewModel: NSObject {
     }
 
     func getAccounts() {
-
-        let test = BigDecimal("100")
-        let test2 = AssetPipe.transform(value: test, decimals: 3, unit: .trade)
-        let test3 = AssetPipe.transform(value: test, decimals: 3, unit: .base)
-        print("LOLLL ============")
-        print(test.toPlainString())
-        print(test2.toPlainString())
-        print(test3.toPlainString())
-        print("===================")
-
         self.getAssetsList()
     }
 
@@ -88,17 +79,25 @@ class AccountsViewModel: NSObject {
             switch pricesResult {
             case .success(let pricesList):
                 self?.logger?.log(.component(.accounts(.pricesDataFetching)))
-                guard let modelList = self?.buildModelList(
-                    assets: self?.assets ?? [],
-                    accounts: self?.accounts ?? [],
-                    prices: pricesList) else {
-                  return
-                }
-                self?.balances.value = modelList
-                self?.calculateTotalBalance()
-
-            case .failure(let error):
+                self?.prices = pricesList
+                self?.buildBalanceList()
+            case .failure:
                 self?.logger?.log(.component(.accounts(.pricesDataError)))
+            }
+        }
+    }
+
+    private func buildBalanceList() {
+
+        if !self.assets.isEmpty && !self.accounts.isEmpty && !self.prices.isEmpty {
+
+            if let list = self.buildModelList(
+                assets: self.assets,
+                accounts: self.accounts,
+                prices: self.prices) {
+
+                self.balances.value = list
+                self.calculateTotalBalance()
             }
         }
     }

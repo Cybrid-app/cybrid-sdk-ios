@@ -101,7 +101,6 @@ extension CybridJSONDecoder {
 
         guard let jsonObject = try JSONSerialization.jsonObject(with: data) as? [String: Any] else {
             throw DecodingError.customDecodingError
-            return nil
         }
         let jsonStringObject: [String: Any] = jsonObject
         let objectsValue = jsonStringObject[AccountListBankModel.CodingKeys.objects.rawValue] as? [[String: Any]]

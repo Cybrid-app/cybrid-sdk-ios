@@ -133,6 +133,10 @@
 		1F495DE1AAFBD94E36164435 /* Pods_Abstract_CybridSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 700DC16CEF5D9FBA00A3E597 /* Pods_Abstract_CybridSDK.framework */; };
 		37D3599E5CCE0BC3F9008FE9 /* Pods_Abstract_CybridSDKTestApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E8CA3228CBC00531723CD56 /* Pods_Abstract_CybridSDKTestApp.framework */; };
 		9205B8B228E3811800883279 /* UtilsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9205B8B128E3811800883279 /* UtilsTest.swift */; };
+		9205B8B428E3A43700883279 /* accountResponseIncomplete.json in Resources */ = {isa = PBXBuildFile; fileRef = 9205B8B328E3A43600883279 /* accountResponseIncomplete.json */; };
+		9205B8B628E3A52A00883279 /* listTradesResponseIncomplete.json in Resources */ = {isa = PBXBuildFile; fileRef = 9205B8B528E3A52A00883279 /* listTradesResponseIncomplete.json */; };
+		9205B8B928E3AB4300883279 /* AccountsAPIMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9205B8B828E3AB4300883279 /* AccountsAPIMock.swift */; };
+		9205B8BD28E3AD3C00883279 /* AccountsViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9205B8BC28E3AD3C00883279 /* AccountsViewModelTest.swift */; };
 		927233BB28D12FD10080AAC4 /* UIFont+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927233BA28D12FD10080AAC4 /* UIFont+Extensions.swift */; };
 		927233BE28D131BE0080AAC4 /* AccountBankModel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927233BD28D131BE0080AAC4 /* AccountBankModel+Extensions.swift */; };
 		927233C028D1AA7E0080AAC4 /* TradeBankModel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927233BF28D1AA7E0080AAC4 /* TradeBankModel+Extensions.swift */; };
@@ -326,6 +330,10 @@
 		7DF434D101E8F203F76846C4 /* Pods-Abstract-CybridSDKTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Abstract-CybridSDKTests.release.xcconfig"; path = "Target Support Files/Pods-Abstract-CybridSDKTests/Pods-Abstract-CybridSDKTests.release.xcconfig"; sourceTree = "<group>"; };
 		80DCD8FC666A9176CF28F146 /* Pods_Abstract_CybridSDKTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Abstract_CybridSDKTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9205B8B128E3811800883279 /* UtilsTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilsTest.swift; sourceTree = "<group>"; };
+		9205B8B328E3A43600883279 /* accountResponseIncomplete.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = accountResponseIncomplete.json; sourceTree = "<group>"; };
+		9205B8B528E3A52A00883279 /* listTradesResponseIncomplete.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = listTradesResponseIncomplete.json; sourceTree = "<group>"; };
+		9205B8B828E3AB4300883279 /* AccountsAPIMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsAPIMock.swift; sourceTree = "<group>"; };
+		9205B8BC28E3AD3C00883279 /* AccountsViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsViewModelTest.swift; sourceTree = "<group>"; };
 		927233BA28D12FD10080AAC4 /* UIFont+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extensions.swift"; sourceTree = "<group>"; };
 		927233BD28D131BE0080AAC4 /* AccountBankModel+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AccountBankModel+Extensions.swift"; sourceTree = "<group>"; };
 		927233BF28D1AA7E0080AAC4 /* TradeBankModel+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TradeBankModel+Extensions.swift"; sourceTree = "<group>"; };
@@ -579,12 +587,14 @@
 		0B2899FC289467C1001B3360 /* JSON */ = {
 			isa = PBXGroup;
 			children = (
-				92F5EC7228E24150009DC3F4 /* listTradesResponse.json */,
-				92F5EC7028E206CE009DC3F4 /* accountResponse.json */,
 				0B2899FD289467EE001B3360 /* listPricesResponse.json */,
+				0BFF87542896267C00E44C74 /* listAssetsResponse.json */,
+				92F5EC7228E24150009DC3F4 /* listTradesResponse.json */,
+				9205B8B528E3A52A00883279 /* listTradesResponseIncomplete.json */,
+				92F5EC7028E206CE009DC3F4 /* accountResponse.json */,
+				9205B8B328E3A43600883279 /* accountResponseIncomplete.json */,
 				0BBD0CE928B7E6E6001DBC5F /* createQuoteResponse.json */,
 				0BBD0CEB28B7EC09001DBC5F /* createTradeResponse.json */,
-				0BFF87542896267C00E44C74 /* listAssetsResponse.json */,
 				0B289A0128946F53001B3360 /* listLargestPricesResponse.json */,
 				0B2899FF28946B52001B3360 /* JSONMockHelper.swift */,
 			);
@@ -765,8 +775,9 @@
 			isa = PBXGroup;
 			children = (
 				0B2899FC289467C1001B3360 /* JSON */,
-				0B00E0502886F00B00707F26 /* Assets */,
 				0B2899EB288F4BC4001B3360 /* Concurrency */,
+				0B00E0502886F00B00707F26 /* Assets */,
+				9205B8B728E3AB1B00883279 /* Accounts */,
 				0B00E0552886F23800707F26 /* Prices */,
 				0BBD0CDF28B6BC79001DBC5F /* Quotes */,
 				0BBD0CE428B6C65E001DBC5F /* Trades */,
@@ -942,6 +953,7 @@
 			children = (
 				0BD66122286C20BC00F4DA6B /* CryptoPriceViewModelTests.swift */,
 				0B50F35A28A5890C00DDB01E /* TradeViewModelTests.swift */,
+				9205B8BC28E3AD3C00883279 /* AccountsViewModelTest.swift */,
 			);
 			path = "ViewModel Tests";
 			sourceTree = "<group>";
@@ -994,6 +1006,14 @@
 				7DF434D101E8F203F76846C4 /* Pods-Abstract-CybridSDKTests.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		9205B8B728E3AB1B00883279 /* Accounts */ = {
+			isa = PBXGroup;
+			children = (
+				9205B8B828E3AB4300883279 /* AccountsAPIMock.swift */,
+			);
+			path = Accounts;
 			sourceTree = "<group>";
 		};
 		927233BC28D1314B0080AAC4 /* Model */ = {
@@ -1220,7 +1240,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				92F5EC7128E206CE009DC3F4 /* accountResponse.json in Resources */,
+				9205B8B628E3A52A00883279 /* listTradesResponseIncomplete.json in Resources */,
 				0BBD0CEA28B7E7EE001DBC5F /* createQuoteResponse.json in Resources */,
+				9205B8B428E3A43700883279 /* accountResponseIncomplete.json in Resources */,
 				0B2899FE289467EE001B3360 /* listPricesResponse.json in Resources */,
 				0BFF8755289628EB00E44C74 /* listAssetsResponse.json in Resources */,
 				0B96601E285AF03700584692 /* TestAssets.xcassets in Resources */,
@@ -1491,8 +1513,10 @@
 				0B966004285A85C600584692 /* AsyncOperationTests.swift in Sources */,
 				0B00E01B2877EED600707F26 /* BundleExtensionsTests.swift in Sources */,
 				0B2899FA2894653F001B3360 /* CybridJSONDecoderTests.swift in Sources */,
+				9205B8B928E3AB4300883279 /* AccountsAPIMock.swift in Sources */,
 				0B00E0522886F01A00707F26 /* AssetsAPIMock.swift in Sources */,
 				0B289A0028946B52001B3360 /* JSONMockHelper.swift in Sources */,
+				9205B8BD28E3AD3C00883279 /* AccountsViewModelTest.swift in Sources */,
 				0B303CEC2862F898007BF7FF /* ColorThemeTests.swift in Sources */,
 				0B00E03C287F7BA500707F26 /* CybridSessionTests.swift in Sources */,
 				0B00E03E287F803800707F26 /* MockAPIManager.swift in Sources */,

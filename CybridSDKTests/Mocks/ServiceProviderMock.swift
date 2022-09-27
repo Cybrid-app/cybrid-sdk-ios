@@ -11,54 +11,73 @@ import CybridApiBankSwift
 final class ServiceProviderMock: AssetsRepoProvider,
                                  PricesRepoProvider,
                                  QuotesRepoProvider,
-                                 TradesRepoProvider {
-  var apiManager: CybridAPIManager.Type = MockAPIManager.self
-  var authenticator: CybridAuthenticator? = MockAuthenticator()
+                                 TradesRepoProvider,
+                                 AccountsRepoProvider {
 
-  // MARK: Repositories
-  var assetsRepository: AssetsRepository.Type = AssetsAPIMock.self
-  var pricesRepository: PricesRepository.Type = PricesAPIMock.self
-  var quotesRepository: QuotesRepository.Type = QuotesAPIMock.self
-  var tradesRepository: TradesRepository.Type = TradesAPIMock.self
+    var apiManager: CybridAPIManager.Type = MockAPIManager.self
+    var authenticator: CybridAuthenticator? = MockAuthenticator()
 
-  // MARK: Cache
-  var assetsCache: [AssetBankModel]?
+    // MARK: Repositories
+    var assetsRepository: AssetsRepository.Type = AssetsAPIMock.self
+    var pricesRepository: PricesRepository.Type = PricesAPIMock.self
+    var quotesRepository: QuotesRepository.Type = QuotesAPIMock.self
+    var tradesRepository: TradesRepository.Type = TradesAPIMock.self
+    var accountsRepository: AccountsRepository.Type = AccountsAPIMock.self
 
-  init() { }
+    // MARK: Cache
+    var assetsCache: [AssetBankModel]?
 
-  func didFetchPricesSuccessfully(_ prices: [SymbolPriceBankModel]? = nil) {
-    (authenticator as? MockAuthenticator)?.authenticationSuccess()
-    PricesAPIMock.didFetchPricesSuccessfully(prices)
-  }
+    init() { }
 
-  func didFetchPricesWithError() {
-    (authenticator as? MockAuthenticator)?.authenticationSuccess()
-    PricesAPIMock.didFetchPricesWithError()
-  }
+    func didFetchPricesSuccessfully(_ prices: [SymbolPriceBankModel]? = nil) {
 
-  func didFetchAssetsSuccessfully() {
-    (authenticator as? MockAuthenticator)?.authenticationSuccess()
-    assetsCache = AssetsAPIMock.didFetchAssetsSuccessfully().objects
-  }
+        (authenticator as? MockAuthenticator)?.authenticationSuccess()
+        PricesAPIMock.didFetchPricesSuccessfully(prices)
+    }
 
-  func didFetchAssetsWithError() {
-    (authenticator as? MockAuthenticator)?.authenticationSuccess()
-    AssetsAPIMock.didFetchAssetsWithError()
-  }
+    func didFetchPricesWithError() {
 
-  func didCreateQuoteSuccessfully(_ dataModel: QuoteBankModel) {
-    QuotesAPIMock.didCreateQuoteSuccessfully(mockQuote: dataModel)
-  }
+        (authenticator as? MockAuthenticator)?.authenticationSuccess()
+        PricesAPIMock.didFetchPricesWithError()
+    }
 
-  func didCreateQuoteFailed() {
-    QuotesAPIMock.didCreateQuoteFailed()
-  }
+    func didFetchAssetsSuccessfully() {
 
-  func didCreateTradeSuccessfully(_ dataModel: TradeBankModel) {
-    TradesAPIMock.didCreateTradeSuccessfully(mockTrade: dataModel)
-  }
+        (authenticator as? MockAuthenticator)?.authenticationSuccess()
+        assetsCache = AssetsAPIMock.didFetchAssetsSuccessfully().objects
+    }
 
-  func didCreateTradeFailed() {
-    TradesAPIMock.didCreateTradeFailed()
-  }
+    func didFetchAssetsWithError() {
+
+        (authenticator as? MockAuthenticator)?.authenticationSuccess()
+        AssetsAPIMock.didFetchAssetsWithError()
+    }
+
+    func didCreateQuoteSuccessfully(_ dataModel: QuoteBankModel) {
+        QuotesAPIMock.didCreateQuoteSuccessfully(mockQuote: dataModel)
+    }
+
+    func didCreateQuoteFailed() {
+        QuotesAPIMock.didCreateQuoteFailed()
+    }
+
+    func didCreateTradeSuccessfully(_ dataModel: TradeBankModel) {
+        TradesAPIMock.didCreateTradeSuccessfully(mockTrade: dataModel)
+    }
+
+    func didCreateTradeFailed() {
+        TradesAPIMock.didCreateTradeFailed()
+    }
+
+    func didFetchAccountsSuccessfully() {
+
+        (authenticator as? MockAuthenticator)?.authenticationSuccess()
+        AccountsAPIMock.didFetchAccountsSuccessfully()
+    }
+
+    func didFetchAccountsWithError() {
+
+        (authenticator as? MockAuthenticator)?.authenticationSuccess()
+        AccountsAPIMock.didFetchAccountsWithError()
+    }
 }
