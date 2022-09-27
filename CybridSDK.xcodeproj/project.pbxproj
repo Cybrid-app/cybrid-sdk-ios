@@ -648,7 +648,6 @@
 			isa = PBXGroup;
 			children = (
 				0B00E01A2877EED600707F26 /* BundleExtensionsTests.swift */,
-				0B303CE82862F5BB007BF7FF /* UILabelExtensionsTests.swift */,
 				0BD6611A286C197B00F4DA6B /* UIViewConstraintsTests.swift */,
 			);
 			path = "Extensions Tests";
@@ -1067,6 +1066,7 @@
 		92F5EC7428E24716009DC3F4 /* FrameworkExtensionsTest */ = {
 			isa = PBXGroup;
 			children = (
+				0B303CE82862F5BB007BF7FF /* UILabelExtensionsTests.swift */,
 				0B303CE62862E7E3007BF7FF /* UIColorExtensionsTests.swift */,
 			);
 			path = FrameworkExtensionsTest;
