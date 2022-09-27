@@ -209,12 +209,16 @@ class CybridJSONDecoderTests: XCTestCase {
 
         let tradeData = getJSONData(from: "accountResponse")
         XCTAssertNotNil(tradeData)
+
         let decoder = CybridJSONDecoder()
 
         let result = try? decoder.decode(AccountListBankModel.self, from: tradeData!)
         XCTAssertNotNil(result?.total)
+        XCTAssertEqual(result?.total, 1)
         XCTAssertNotNil(result?.page)
+        XCTAssertEqual(result?.page, 1)
         XCTAssertNotNil(result?.perPage)
+        XCTAssertEqual(result?.perPage, 0)
         XCTAssertNotNil(result?.objects)
         XCTAssertNotNil(result?.objects[0])
         XCTAssertNotNil(result?.objects[0].type)
@@ -224,6 +228,15 @@ class CybridJSONDecoderTests: XCTestCase {
         XCTAssertNotNil(result?.objects[0].platformBalance)
         XCTAssertNotNil(result?.objects[0].platformAvailable)
         XCTAssertNotNil(result?.objects[0].state)
+    }
+
+    func test_AccountBankModel_Decoding_Nil() throws {
+
+        let data = Data()
+        let decoder = CybridJSONDecoder()
+        let result = try? decoder.decode(AccountListBankModel.self, from: data)
+
+        XCTAssertNil(result)
     }
 
     func test_AccountBankModel_withInvalidJSON() throws {

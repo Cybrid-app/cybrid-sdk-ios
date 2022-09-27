@@ -47,7 +47,6 @@ func getFormattedDate(_ date: Date?, format: String) -> String {
         dateFormatter.timeZone = TimeZone(secondsFromGMT: 0)
         dateFormatter.dateFormat = format
         return dateFormatter.string(from: date)
-    } else {
-        return ""
     }
+    return ""
 }

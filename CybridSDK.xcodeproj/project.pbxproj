@@ -132,6 +132,7 @@
 		0BFF8755289628EB00E44C74 /* listAssetsResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 0BFF87542896267C00E44C74 /* listAssetsResponse.json */; };
 		1F495DE1AAFBD94E36164435 /* Pods_Abstract_CybridSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 700DC16CEF5D9FBA00A3E597 /* Pods_Abstract_CybridSDK.framework */; };
 		37D3599E5CCE0BC3F9008FE9 /* Pods_Abstract_CybridSDKTestApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E8CA3228CBC00531723CD56 /* Pods_Abstract_CybridSDKTestApp.framework */; };
+		9205B8B228E3811800883279 /* UtilsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9205B8B128E3811800883279 /* UtilsTest.swift */; };
 		927233BB28D12FD10080AAC4 /* UIFont+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927233BA28D12FD10080AAC4 /* UIFont+Extensions.swift */; };
 		927233BE28D131BE0080AAC4 /* AccountBankModel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927233BD28D131BE0080AAC4 /* AccountBankModel+Extensions.swift */; };
 		927233C028D1AA7E0080AAC4 /* TradeBankModel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927233BF28D1AA7E0080AAC4 /* TradeBankModel+Extensions.swift */; };
@@ -324,6 +325,7 @@
 		700DC16CEF5D9FBA00A3E597 /* Pods_Abstract_CybridSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Abstract_CybridSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7DF434D101E8F203F76846C4 /* Pods-Abstract-CybridSDKTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Abstract-CybridSDKTests.release.xcconfig"; path = "Target Support Files/Pods-Abstract-CybridSDKTests/Pods-Abstract-CybridSDKTests.release.xcconfig"; sourceTree = "<group>"; };
 		80DCD8FC666A9176CF28F146 /* Pods_Abstract_CybridSDKTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Abstract_CybridSDKTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9205B8B128E3811800883279 /* UtilsTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilsTest.swift; sourceTree = "<group>"; };
 		927233BA28D12FD10080AAC4 /* UIFont+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extensions.swift"; sourceTree = "<group>"; };
 		927233BD28D131BE0080AAC4 /* AccountBankModel+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AccountBankModel+Extensions.swift"; sourceTree = "<group>"; };
 		927233BF28D1AA7E0080AAC4 /* TradeBankModel+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TradeBankModel+Extensions.swift"; sourceTree = "<group>"; };
@@ -746,6 +748,7 @@
 				0B00E01E2878A16800707F26 /* BigDecimalTests.swift */,
 				0B2899F528904B11001B3360 /* TaskSchedulerTests.swift */,
 				0B2899F92894653F001B3360 /* CybridJSONDecoderTests.swift */,
+				9205B8B128E3811800883279 /* UtilsTest.swift */,
 			);
 			path = "Utilities Tests";
 			sourceTree = "<group>";
@@ -1477,6 +1480,7 @@
 				0BBCF640285C52D700D39C6D /* MockError.swift in Sources */,
 				0BD6613E2874AFAA00F4DA6B /* MockNumberFormatter.swift in Sources */,
 				0B966027285C2E8600584692 /* MockImageOperation.swift in Sources */,
+				9205B8B228E3811800883279 /* UtilsTest.swift in Sources */,
 				0B966029285C38F500584692 /* URLImageOperationTests.swift in Sources */,
 				0BBD0CE628B6C671001DBC5F /* TradesAPIMock.swift in Sources */,
 				0BBD0CE328B6BDFA001DBC5F /* QuoteMock.swift in Sources */,
