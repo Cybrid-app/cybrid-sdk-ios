@@ -12,7 +12,7 @@ public final class AccountTradesViewController: UIViewController {
 
     private var balance: AccountAssetPriceModel!
     private var accountsViewModel: AccountsViewModel!
-    private var tradesViewModel: AccountTradeViewModel!
+    private var tradesViewModel: AccountTradesViewModel!
 
     private var theme: Theme!
     private var localizer: Localizer!
@@ -31,7 +31,7 @@ public final class AccountTradesViewController: UIViewController {
         self.balance = balance
         self.accountsViewModel = accountsViewModel
 
-        self.tradesViewModel = AccountTradeViewModel(
+        self.tradesViewModel = AccountTradesViewModel(
             cellProvider: self,
             dataProvider: CybridSession.current,
             assets: accountsViewModel.assets,

@@ -69,6 +69,18 @@ final class ServiceProviderMock: AssetsRepoProvider,
         TradesAPIMock.didCreateTradeFailed()
     }
 
+    func didFetchTradesListSuccessfully() {
+
+        (authenticator as? MockAuthenticator)?.authenticationSuccess()
+        TradesAPIMock.didFetchTradesListSuccessfully()
+    }
+
+    func didFetchTradesListWithError() {
+
+        (authenticator as? MockAuthenticator)?.authenticationSuccess()
+        TradesAPIMock.didFetchTradesListWithError()
+    }
+
     func didFetchAccountsSuccessfully() {
 
         (authenticator as? MockAuthenticator)?.authenticationSuccess()

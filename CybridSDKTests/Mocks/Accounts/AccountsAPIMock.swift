@@ -20,6 +20,7 @@ final class AccountsAPIMock: AccountsAPI {
         return listAccountsWithRequestBuilder().requestTask
     }
 
+    @discardableResult
     class func didFetchAccountsSuccessfully(_ accounts: AccountListBankModel? = nil) -> AccountListBankModel {
 
         accountsCompletion?(.success(accounts ?? AccountsAPIMock.mock))

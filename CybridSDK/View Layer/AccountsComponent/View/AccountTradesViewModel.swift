@@ -8,7 +8,7 @@
 import Foundation
 import CybridApiBankSwift
 
-class AccountTradeViewModel: NSObject {
+class AccountTradesViewModel: NSObject {
 
     // MARK: Observed properties
     internal var trades: Observable<[TradeUIModel]> = .init([])
@@ -17,8 +17,11 @@ class AccountTradeViewModel: NSObject {
     private unowned var cellProvider: AccountTradesViewProvider
     private var dataProvider: TradesRepoProvider
     private var logger: CybridLogger?
-    private var assets: [AssetBankModel]?
-    private var currentCurrency: String = "USD"
+
+    internal var assets: [AssetBankModel]
+    internal var tradesList: [TradeBankModel] = []
+    internal var currentCurrency: String = "USD"
+    internal var currentAccountGUID: String = ""
 
     init(cellProvider: AccountTradesViewProvider,
          dataProvider: TradesRepoProvider,
@@ -34,18 +37,15 @@ class AccountTradeViewModel: NSObject {
     }
 
     func getTrades(accountGuid: String) {
+
+        self.currentAccountGUID = accountGuid
         dataProvider.fetchTrades(accountGuid: accountGuid) { [weak self] tradesResult in
 
             switch tradesResult {
             case .success(let tradesList):
                 self?.logger?.log(.component(.trades(.tradesDataFetching)))
-                guard let modelUIList = self?.createUIModelList(
-                    trades: tradesList.objects,
-                    assets: self?.assets,
-                    accountGuid: accountGuid) else {
-                    return
-                }
-                self?.trades.value = modelUIList
+                self?.tradesList = tradesList.objects
+                self?.buildModelList()
             case .failure(let error):
                 self?.logger?.log(.component(.trades(.tradesDataError)))
                 print(error)
@@ -53,16 +53,27 @@ class AccountTradeViewModel: NSObject {
         }
     }
 
-    private func createUIModelList(
+    internal func buildModelList() {
+
+        if let modelUIList = self.createUIModelList(
+            trades: self.tradesList,
+            assets: self.assets,
+            accountGuid: self.currentAccountGUID) {
+
+            self.trades.value = modelUIList
+        }
+    }
+
+    internal func createUIModelList(
         trades: [TradeBankModel],
-        assets: [AssetBankModel]?,
+        assets: [AssetBankModel],
         accountGuid: String) -> [TradeUIModel]? {
 
         return trades.compactMap { trade in
             guard
                 let tradeParts = trade.symbol?.split(separator: "-"),
-                let asset = assets?.first(where: { $0.code == tradeParts[0] }),
-                let counterAsset = assets?.first(where: { $0.code == tradeParts[1] })
+                let asset = assets.first(where: { $0.code == tradeParts[0] }),
+                let counterAsset = assets.first(where: { $0.code == tradeParts[1] })
             else {
                 return nil
             }
@@ -87,7 +98,7 @@ protocol AccountTradesViewProvider: AnyObject {
 
 // MARK: - TradesViewModel + UITableViewDelegate + UITableViewDataSource
 
-extension AccountTradeViewModel: UITableViewDelegate, UITableViewDataSource {
+extension AccountTradesViewModel: UITableViewDelegate, UITableViewDataSource {
 
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         trades.value.count

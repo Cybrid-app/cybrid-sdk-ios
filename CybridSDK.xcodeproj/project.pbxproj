@@ -132,6 +132,7 @@
 		0BFF8755289628EB00E44C74 /* listAssetsResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 0BFF87542896267C00E44C74 /* listAssetsResponse.json */; };
 		1F495DE1AAFBD94E36164435 /* Pods_Abstract_CybridSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 700DC16CEF5D9FBA00A3E597 /* Pods_Abstract_CybridSDK.framework */; };
 		37D3599E5CCE0BC3F9008FE9 /* Pods_Abstract_CybridSDKTestApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E8CA3228CBC00531723CD56 /* Pods_Abstract_CybridSDKTestApp.framework */; };
+		9201FA0428E3DEDF00C6F186 /* AccountTradesViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9201FA0328E3DEDF00C6F186 /* AccountTradesViewModelTest.swift */; };
 		9205B8B228E3811800883279 /* UtilsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9205B8B128E3811800883279 /* UtilsTest.swift */; };
 		9205B8B428E3A43700883279 /* accountResponseIncomplete.json in Resources */ = {isa = PBXBuildFile; fileRef = 9205B8B328E3A43600883279 /* accountResponseIncomplete.json */; };
 		9205B8B628E3A52A00883279 /* listTradesResponseIncomplete.json in Resources */ = {isa = PBXBuildFile; fileRef = 9205B8B528E3A52A00883279 /* listTradesResponseIncomplete.json */; };
@@ -153,7 +154,7 @@
 		927233DC28D244210080AAC4 /* AccountAssetPriceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927233DB28D244210080AAC4 /* AccountAssetPriceModel.swift */; };
 		927233DE28D2445C0080AAC4 /* TradeUIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927233DD28D2445C0080AAC4 /* TradeUIModel.swift */; };
 		927233E128D2447F0080AAC4 /* AccountsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927233E028D2447F0080AAC4 /* AccountsViewModel.swift */; };
-		927233E328D2448F0080AAC4 /* AccountTradeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927233E228D2448F0080AAC4 /* AccountTradeViewModel.swift */; };
+		927233E328D2448F0080AAC4 /* AccountTradesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927233E228D2448F0080AAC4 /* AccountTradesViewModel.swift */; };
 		927233E628D244AC0080AAC4 /* AccountsHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927233E528D244AC0080AAC4 /* AccountsHeaderCell.swift */; };
 		927233E828D244BD0080AAC4 /* AccountsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927233E728D244BD0080AAC4 /* AccountsCell.swift */; };
 		927233EA28D244CC0080AAC4 /* AccountTradesHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927233E928D244CC0080AAC4 /* AccountTradesHeaderCell.swift */; };
@@ -329,6 +330,7 @@
 		700DC16CEF5D9FBA00A3E597 /* Pods_Abstract_CybridSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Abstract_CybridSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7DF434D101E8F203F76846C4 /* Pods-Abstract-CybridSDKTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Abstract-CybridSDKTests.release.xcconfig"; path = "Target Support Files/Pods-Abstract-CybridSDKTests/Pods-Abstract-CybridSDKTests.release.xcconfig"; sourceTree = "<group>"; };
 		80DCD8FC666A9176CF28F146 /* Pods_Abstract_CybridSDKTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Abstract_CybridSDKTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9201FA0328E3DEDF00C6F186 /* AccountTradesViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTradesViewModelTest.swift; sourceTree = "<group>"; };
 		9205B8B128E3811800883279 /* UtilsTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilsTest.swift; sourceTree = "<group>"; };
 		9205B8B328E3A43600883279 /* accountResponseIncomplete.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = accountResponseIncomplete.json; sourceTree = "<group>"; };
 		9205B8B528E3A52A00883279 /* listTradesResponseIncomplete.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = listTradesResponseIncomplete.json; sourceTree = "<group>"; };
@@ -350,7 +352,7 @@
 		927233DB28D244210080AAC4 /* AccountAssetPriceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountAssetPriceModel.swift; sourceTree = "<group>"; };
 		927233DD28D2445C0080AAC4 /* TradeUIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeUIModel.swift; sourceTree = "<group>"; };
 		927233E028D2447F0080AAC4 /* AccountsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsViewModel.swift; sourceTree = "<group>"; };
-		927233E228D2448F0080AAC4 /* AccountTradeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTradeViewModel.swift; sourceTree = "<group>"; };
+		927233E228D2448F0080AAC4 /* AccountTradesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTradesViewModel.swift; sourceTree = "<group>"; };
 		927233E528D244AC0080AAC4 /* AccountsHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsHeaderCell.swift; sourceTree = "<group>"; };
 		927233E728D244BD0080AAC4 /* AccountsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsCell.swift; sourceTree = "<group>"; };
 		927233E928D244CC0080AAC4 /* AccountTradesHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTradesHeaderCell.swift; sourceTree = "<group>"; };
@@ -954,6 +956,7 @@
 				0BD66122286C20BC00F4DA6B /* CryptoPriceViewModelTests.swift */,
 				0B50F35A28A5890C00DDB01E /* TradeViewModelTests.swift */,
 				9205B8BC28E3AD3C00883279 /* AccountsViewModelTest.swift */,
+				9201FA0328E3DEDF00C6F186 /* AccountTradesViewModelTest.swift */,
 			);
 			path = "ViewModel Tests";
 			sourceTree = "<group>";
@@ -1070,7 +1073,7 @@
 			children = (
 				927233E428D2449C0080AAC4 /* Cell */,
 				927233E028D2447F0080AAC4 /* AccountsViewModel.swift */,
-				927233E228D2448F0080AAC4 /* AccountTradeViewModel.swift */,
+				927233E228D2448F0080AAC4 /* AccountTradesViewModel.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1468,7 +1471,7 @@
 				927233D928D243F80080AAC4 /* AccountTradeDetailModal.swift in Sources */,
 				0BD26F2428A55D4800ED2A1B /* CybridEvent.swift in Sources */,
 				0BD26F2528A55D4800ED2A1B /* CybridLogger.swift in Sources */,
-				927233E328D2448F0080AAC4 /* AccountTradeViewModel.swift in Sources */,
+				927233E328D2448F0080AAC4 /* AccountTradesViewModel.swift in Sources */,
 				927233C728D2278D0080AAC4 /* AssetPipe.swift in Sources */,
 				0BD6610A286B768C00F4DA6B /* CryptoPriceViewModel.swift in Sources */,
 				0B00E05C2887256B00707F26 /* UIView+Keyboard.swift in Sources */,
@@ -1514,6 +1517,7 @@
 				0B00E01B2877EED600707F26 /* BundleExtensionsTests.swift in Sources */,
 				0B2899FA2894653F001B3360 /* CybridJSONDecoderTests.swift in Sources */,
 				9205B8B928E3AB4300883279 /* AccountsAPIMock.swift in Sources */,
+				9201FA0428E3DEDF00C6F186 /* AccountTradesViewModelTest.swift in Sources */,
 				0B00E0522886F01A00707F26 /* AssetsAPIMock.swift in Sources */,
 				0B289A0028946B52001B3360 /* JSONMockHelper.swift in Sources */,
 				9205B8BD28E3AD3C00883279 /* AccountsViewModelTest.swift in Sources */,

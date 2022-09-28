@@ -8,7 +8,7 @@
 import Foundation
 import CybridApiBankSwift
 
-struct TradeUIModel {
+struct TradeUIModel: Equatable {
 
     let tradeBankModel: TradeBankModel
     let feeValue: SBigDecimal
