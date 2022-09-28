@@ -31,6 +31,7 @@ class AccountsViewModel: NSObject {
         self.cellProvider = cellProvider
         self.dataProvider = dataProvider
         self.logger = logger
+        self.currentCurrency = currency
     }
 
     func getAccounts() {
@@ -87,7 +88,7 @@ class AccountsViewModel: NSObject {
         }
     }
 
-    private func buildBalanceList() {
+    internal func buildBalanceList() {
 
         if !self.assets.isEmpty && !self.accounts.isEmpty && !self.prices.isEmpty {
 
@@ -102,10 +103,11 @@ class AccountsViewModel: NSObject {
         }
     }
 
-    private func buildModelList(
+    internal func buildModelList(
         assets: [AssetBankModel],
         accounts: [AccountBankModel],
         prices: [SymbolPriceBankModel]) -> [AccountAssetPriceModel]? {
+
       return accounts.compactMap { account in
         guard
           let asset = assets.first(where: { $0.code == account.asset }),

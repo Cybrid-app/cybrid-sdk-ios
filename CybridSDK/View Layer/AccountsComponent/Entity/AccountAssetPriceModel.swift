@@ -8,7 +8,7 @@
 import CybridApiBankSwift
 import Foundation
 
-struct AccountAssetPriceModel {
+struct AccountAssetPriceModel: Equatable {
 
     let accountAssetCode: String // BTC
     let accountAssetURL: String // http://

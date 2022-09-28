@@ -41,11 +41,11 @@ extension AccountsAPIMock {
                 guid: "GUID",
                 createdAt: Date(),
                 asset: "BTC",
-                name: "BTC",
+                name: "BTC-USD",
                 bankGuid: "BANK_GUID",
                 customerGuid: "CUSTOMER_GUID",
-                platformBalance: "",
-                platformAvailable: "",
+                platformBalance: "200000000",
+                platformAvailable: "2000000000",
                 state: .created
             )
         ]
