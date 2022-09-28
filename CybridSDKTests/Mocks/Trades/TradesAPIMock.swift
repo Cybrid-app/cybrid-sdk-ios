@@ -23,9 +23,9 @@ final class TradesAPIMock: TradesAPI {
         createTradeCompletion = completion
         return createTradeWithRequestBuilder(postTradeBankModel: postTradeBankModel).requestTask
     }
-    
+
     override class func listTrades(page: Int? = nil, perPage: Int? = nil, guid: String? = nil, bankGuid: String? = nil, customerGuid: String? = nil, accountGuid: String? = nil, apiResponseQueue: DispatchQueue = CybridApiBankSwiftAPI.apiResponseQueue, completion: @escaping ((Result<TradeListBankModel, ErrorResponse>) -> Void)) -> RequestTask {
-        
+
         tradesListCompletition = completion
         return listTradesWithRequestBuilder().requestTask
     }
@@ -68,6 +68,6 @@ extension TradesAPIMock {
                 createdAt: Date())
         ]
     }
-    
+
     static let mock = TradeListBankModel(total: 1, page: 1, perPage: 1, objects: getMockTrades())
 }

@@ -15,15 +15,15 @@ extension TradeBankModel {
             let createdAt = json[TradeBankModel.CodingKeys.createdAt.rawValue] as? String,
             let deliverAmount = json[TradeBankModel.CodingKeys.deliverAmount.rawValue] as? String,
             let fee = json[TradeBankModel.CodingKeys.fee.rawValue] as? String,
-            let receiveAmount = json[TradeBankModel.CodingKeys.receiveAmount.rawValue] as? String,
-            let side = json[TradeBankModel.CodingKeys.side.rawValue] as? String,
-            let state = json[TradeBankModel.CodingKeys.state.rawValue] as? String
+            let receiveAmount = json[TradeBankModel.CodingKeys.receiveAmount.rawValue] as? String
         else {
             return nil
         }
 
         let codingKeys = TradeBankModel.CodingKeys.self
         let createdAtDate = getDate(stringDate: createdAt)
+        let side = json[TradeBankModel.CodingKeys.side.rawValue] as? String ?? "buy"
+        let state = json[TradeBankModel.CodingKeys.state.rawValue] as? String ?? "settling"
         self.init(
             guid: json[codingKeys.guid.rawValue] as? String ?? "",
             customerGuid: json[codingKeys.customerGuid.rawValue] as? String ?? "",
