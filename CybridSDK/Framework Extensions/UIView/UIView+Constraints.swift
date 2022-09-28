@@ -213,8 +213,8 @@ extension UIView {
         self.constraint(attribute: .leading,
                         relatedBy: .equal,
                         toItem: icon,
-                        attribute: .leading,
-                        constant: margins.left)
+                        attribute: .trailing,
+                        constant: 10)
         self.constraint(attribute: .trailing,
                         relatedBy: .equal,
                         toItem: parent,

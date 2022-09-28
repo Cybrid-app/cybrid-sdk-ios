@@ -111,6 +111,33 @@ class TradeUIModelTest: XCTestCase {
         XCTAssertEqual(resutlt, "0.")
     }
 
+    func test_getTradeAmount_Sell_NaN() {
+
+        // -- Given
+        let trade = TradeBankModel(
+            guid: "GUID",
+            customerGuid: "CUSTOMER_GUID",
+            quoteGuid: "QUOTE_GUID",
+            symbol: "ETH-USD",
+            side: .sell,
+            state: .completed,
+            receiveAmount: "100000000000000000",
+            deliverAmount: "NaN",
+            fee: "0",
+            createdAt: Date())
+        let model = TradeUIModel(
+            tradeBankModel: trade,
+            asset: AssetBankModel.bitcoin,
+            counterAsset: AssetBankModel.usd,
+            accountGuid: "")
+
+        // -- When
+        let resutlt = model?.getTradeAmount()
+
+        // -- Then
+        XCTAssertEqual(resutlt, "0.")
+    }
+
     func test_getTradeAmount_Buy_Zero() {
 
         // -- Given
@@ -121,6 +148,33 @@ class TradeUIModelTest: XCTestCase {
             symbol: "ETH-USD",
             side: .buy,
             state: .completed,
+            deliverAmount: "100000000000000000",
+            fee: "0",
+            createdAt: Date())
+        let model = TradeUIModel(
+            tradeBankModel: trade,
+            asset: AssetBankModel.bitcoin,
+            counterAsset: AssetBankModel.usd,
+            accountGuid: "")
+
+        // -- When
+        let resutlt = model?.getTradeAmount()
+
+        // -- Then
+        XCTAssertEqual(resutlt, "0.")
+    }
+
+    func test_getTradeAmount_Buy_NaN() {
+
+        // -- Given
+        let trade = TradeBankModel(
+            guid: "GUID",
+            customerGuid: "CUSTOMER_GUID",
+            quoteGuid: "QUOTE_GUID",
+            symbol: "ETH-USD",
+            side: .buy,
+            state: .completed,
+            receiveAmount: "NaN",
             deliverAmount: "100000000000000000",
             fee: "0",
             createdAt: Date())
