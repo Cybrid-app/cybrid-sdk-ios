@@ -17,6 +17,7 @@ ignore:
   - "CybridSDKTests/**/*"
   - "**/*Cell.swift"
   - "**/*View.swift"
+  - "**/*Modal.swift"
   - "**/*ViewController.swift"
   - "CybridSDK/View Layer/Crypto Price List/CryptoPriceModel.swift"
   - "CybridSDK/Framework Extensions/UIView/*"

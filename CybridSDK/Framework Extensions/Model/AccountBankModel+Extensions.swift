@@ -21,7 +21,7 @@ extension AccountBankModel {
             return nil
         }
         self.init(
-            type: (AccountBankModel.TypeBankModel(rawValue: type) ?? .trading) as TypeBankModel,
+            type: (AccountBankModel.TypeBankModel(rawValue: type)!) as TypeBankModel,
             guid: json[AccountBankModel.CodingKeys.guid.rawValue] as? String,
             createdAt: json[AccountBankModel.CodingKeys.createdAt.rawValue] as? Date,
             asset: json[AccountBankModel.CodingKeys.asset.rawValue] as? String,

@@ -5,7 +5,6 @@
 //  Created by Erick Sanchez Perez on 27/09/22.
 //
 
-import Foundation
 import CybridApiBankSwift
 @testable import CybridSDK
 import XCTest

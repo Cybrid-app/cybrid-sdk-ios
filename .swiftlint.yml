@@ -59,7 +59,6 @@ opt_in_rules: # These rules are disabled by default, unless explicitly added bel
   - multiline_literal_brackets
   - multiline_parameters
   - nimble_operator
-  - number_separator
   - opening_brace
   - operator_usage_whitespace
   - operator_whitespace
