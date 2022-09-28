@@ -109,16 +109,6 @@ class CybridJSONDecoderTests: XCTestCase {
         XCTAssertNotNil(result?.deliverAmount)
     }
 
-    func test_QuoteBankModel_withInvalidJSON() throws {
-
-        let quoteData = getJSONData(from: "listAssetsResponse")
-        XCTAssertNotNil(quoteData)
-        let decoder = CybridJSONDecoder()
-
-        let result = try? decoder.decode(QuoteBankModel.self, from: quoteData!)
-        XCTAssertNil(result)
-    }
-
     func test_QuoteBankModel_withInvalidArrayOfJSON() throws {
 
         let quoteData = getJSONData(from: "listPricesResponse")

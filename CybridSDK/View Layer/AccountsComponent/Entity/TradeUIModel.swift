@@ -11,7 +11,7 @@ import CybridApiBankSwift
 struct TradeUIModel: Equatable {
 
     let tradeBankModel: TradeBankModel
-    let feeValue: SBigDecimal
+    let feeValue: BigDecimal
     let feeFormatted: String
     let asset: AssetBankModel
     let counterAsset: AssetBankModel
@@ -19,8 +19,8 @@ struct TradeUIModel: Equatable {
 
     init?(tradeBankModel: TradeBankModel, asset: AssetBankModel, counterAsset: AssetBankModel, accountGuid: String) {
 
-        let emptyValue = SBigDecimal(0)
-        let fee = SBigDecimal(tradeBankModel.fee ?? "0", precision: counterAsset.decimals)
+        let emptyValue = BigDecimal(0)
+        let fee = BigDecimal(tradeBankModel.fee ?? "0", precision: counterAsset.decimals)
         let feeString = CybridCurrencyFormatter.formatPrice(fee ?? emptyValue, with: counterAsset.symbol)
 
         self.tradeBankModel = tradeBankModel
@@ -35,12 +35,12 @@ struct TradeUIModel: Equatable {
 
         var returnValue = ""
         if self.tradeBankModel.side == .sell {
-            let deliverAmount = SBigDecimal(self.tradeBankModel.deliverAmount ?? "0", precision: asset.decimals)
-            returnValue = CybridCurrencyFormatter.formatInputNumber(deliverAmount ?? SBigDecimal(0)).removeTrailingZeros()
+            let deliverAmount = BigDecimal(self.tradeBankModel.deliverAmount ?? "0", precision: asset.decimals)
+            returnValue = CybridCurrencyFormatter.formatInputNumber(deliverAmount ?? BigDecimal(0)).removeTrailingZeros()
         } else {
 
-            let receiveAmount = SBigDecimal(self.tradeBankModel.receiveAmount ?? "0", precision: asset.decimals)
-            returnValue = CybridCurrencyFormatter.formatInputNumber(receiveAmount ?? SBigDecimal(0)).removeTrailingZeros()
+            let receiveAmount = BigDecimal(self.tradeBankModel.receiveAmount ?? "0", precision: asset.decimals)
+            returnValue = CybridCurrencyFormatter.formatInputNumber(receiveAmount ?? BigDecimal(0)).removeTrailingZeros()
         }
         return returnValue
     }
@@ -49,11 +49,11 @@ struct TradeUIModel: Equatable {
 
         var returnValue = ""
         if self.tradeBankModel.side == .sell {
-            let receiveAmount = SBigDecimal(self.tradeBankModel.receiveAmount ?? "0", precision: counterAsset.decimals) ?? SBigDecimal(0)
+            let receiveAmount = BigDecimal(self.tradeBankModel.receiveAmount ?? "0", precision: counterAsset.decimals) ?? BigDecimal(0)
             returnValue = CybridCurrencyFormatter.formatPrice(receiveAmount, with: self.counterAsset.symbol)
         } else {
 
-            let deliverAmount = SBigDecimal(self.tradeBankModel.deliverAmount ?? "0", precision: counterAsset.decimals) ?? SBigDecimal(0)
+            let deliverAmount = BigDecimal(self.tradeBankModel.deliverAmount ?? "0", precision: counterAsset.decimals) ?? BigDecimal(0)
             returnValue = CybridCurrencyFormatter.formatPrice(deliverAmount, with: self.counterAsset.symbol)
         }
         return returnValue

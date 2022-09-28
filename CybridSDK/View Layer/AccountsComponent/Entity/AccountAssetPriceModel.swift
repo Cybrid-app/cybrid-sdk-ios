@@ -12,9 +12,9 @@ struct AccountAssetPriceModel: Equatable {
 
     let accountAssetCode: String // BTC
     let accountAssetURL: String // http://
-    let accountBalance: SBigDecimal
+    let accountBalance: BigDecimal
     let accountBalanceFormatted: String
-    let accountBalanceInFiat: SBigDecimal
+    let accountBalanceInFiat: BigDecimal
     let accountBalanceInFiatFormatted: String
     let accountGuid: String
     let accountType: AccountBankModel.TypeBankModel?
@@ -24,9 +24,9 @@ struct AccountAssetPriceModel: Equatable {
     let assetType: AssetBankModel.TypeBankModel
     let assetDecimals: Int
     let pairAsset: AssetBankModel?
-    let buyPrice: SBigDecimal
+    let buyPrice: BigDecimal
     let buyPriceFormatted: String
-    let sellPrice: SBigDecimal
+    let sellPrice: BigDecimal
 
     init?(
         account: AccountBankModel,
@@ -35,12 +35,12 @@ struct AccountAssetPriceModel: Equatable {
         price: SymbolPriceBankModel
     ) {
 
-        let empty = SBigDecimal(0)
-        let balanceValue = SBigDecimal(account.platformBalance ?? "0")
-        let balanceValueSBD = SBigDecimal(account.platformBalance ?? "0", precision: asset.decimals)
+        let empty = BigDecimal(0)
+        let balanceValue = BigDecimal(account.platformBalance ?? "0")
+        let balanceValueSBD = BigDecimal(account.platformBalance ?? "0", precision: asset.decimals)
         let balanceValueFormatted = CybridCurrencyFormatter.formatInputNumber(balanceValueSBD ?? empty).removeTrailingZeros()
 
-        let buyPrice = SBigDecimal(price.buyPrice ?? "0", precision: counterAsset.decimals)
+        let buyPrice = BigDecimal(price.buyPrice ?? "0", precision: counterAsset.decimals)
         let buyPriceFormatted = CybridCurrencyFormatter.formatPrice(buyPrice ?? empty, with: counterAsset.symbol)
 
         let accountBalanceInFiat = try? balanceValueSBD?.multiply(with: buyPrice ?? empty, targetPrecision: counterAsset.decimals)
@@ -48,9 +48,9 @@ struct AccountAssetPriceModel: Equatable {
 
         self.accountAssetCode = account.asset ?? ""
         self.accountAssetURL = Cybrid.getCryptoIconURLString(with: self.accountAssetCode)
-        self.accountBalance = balanceValue ?? SBigDecimal(0)
+        self.accountBalance = balanceValue ?? BigDecimal(0)
         self.accountBalanceFormatted = balanceValueFormatted
-        self.accountBalanceInFiat = accountBalanceInFiat ?? SBigDecimal(0)
+        self.accountBalanceInFiat = accountBalanceInFiat ?? BigDecimal(0)
         self.accountBalanceInFiatFormatted = accountBalanceInFiatFormatted
         self.accountGuid = account.guid ?? ""
         self.accountType = account.type
@@ -62,6 +62,6 @@ struct AccountAssetPriceModel: Equatable {
         self.pairAsset = counterAsset
         self.buyPrice = buyPrice ?? empty
         self.buyPriceFormatted = buyPriceFormatted
-        self.sellPrice = SBigDecimal(0)
+        self.sellPrice = BigDecimal(0)
     }
 }

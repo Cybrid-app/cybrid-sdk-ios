@@ -131,11 +131,11 @@ class AccountsViewModel: NSObject {
         if !self.assets.isEmpty && !self.balances.value.isEmpty {
             if let asset = assets.first(where: { $0.code == currentCurrency.uppercased() }) {
 
-                var total = SBigDecimal(0).value
+                var total = BigDecimal(0).value
                 for balance in self.balances.value {
                     total += balance.accountBalanceInFiat.value
                 }
-                let totalBigDecimal = SBigDecimal(total, precision: asset.decimals)
+                let totalBigDecimal = BigDecimal(total, precision: asset.decimals)
                 let totalFormatted = CybridCurrencyFormatter.formatPrice(totalBigDecimal, with: asset.symbol)
                 self.accountTotalBalance.value = "\(totalFormatted) \(asset.code)"
             }

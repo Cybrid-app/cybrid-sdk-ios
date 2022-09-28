@@ -205,11 +205,11 @@ final class TradeViewModel: NSObject {
       fiatAmount = BigInt(receiveAmount)
     }
     let fiatCode = fiatCurrency.asset.code
-      let fiatDecimal = SBigDecimal(fiatAmount!, precision: fiatCurrency.asset.decimals)
+      let fiatDecimal = BigDecimal(fiatAmount!, precision: fiatCurrency.asset.decimals)
     let formattedFiatAmount = CybridCurrencyFormatter.formatPrice(fiatDecimal, with: fiatCurrency.asset.symbol)
-    let feeDecimal = SBigDecimal(quoteBankModel.fee ?? "0", precision: fiatCurrency.asset.decimals)
+    let feeDecimal = BigDecimal(quoteBankModel.fee ?? "0", precision: fiatCurrency.asset.decimals)
       let formattedFeeAmount = CybridCurrencyFormatter.formatPrice(feeDecimal!, with: fiatCurrency.asset.symbol)
-      let cryptoDecimal = SBigDecimal(cryptoAmount!, precision: cryptoAsset.decimals)
+      let cryptoDecimal = BigDecimal(cryptoAmount!, precision: cryptoAsset.decimals)
     let formattedCryptoAmount = CybridCurrencyFormatter.formatPrice(cryptoDecimal, with: "")
     return .init(quoteGUID: guid,
                  fiatAmount: formattedFiatAmount,
@@ -262,11 +262,11 @@ final class TradeViewModel: NSObject {
       fiatAmount = BigInt(receiveAmount)
     }
     let fiatCode = fiatCurrency.asset.code
-      let fiatDecimal = SBigDecimal(fiatAmount!, precision: fiatCurrency.asset.decimals)
+      let fiatDecimal = BigDecimal(fiatAmount!, precision: fiatCurrency.asset.decimals)
     let formattedFiatAmount = CybridCurrencyFormatter.formatPrice(fiatDecimal, with: fiatCurrency.asset.symbol)
-    let feeDecimal = SBigDecimal(tradeModel.fee ?? "0", precision: fiatCurrency.asset.decimals)
+    let feeDecimal = BigDecimal(tradeModel.fee ?? "0", precision: fiatCurrency.asset.decimals)
       let formattedFeeAmount = CybridCurrencyFormatter.formatPrice(feeDecimal!, with: fiatCurrency.asset.symbol)
-      let cryptoDecimal = SBigDecimal(cryptoAmount!, precision: cryptoAsset.decimals)
+      let cryptoDecimal = BigDecimal(cryptoAmount!, precision: cryptoAsset.decimals)
     let formattedCryptoAmount = CybridCurrencyFormatter.formatPrice(cryptoDecimal, with: "")
     return .init(
       transactionId: guid,
@@ -353,7 +353,7 @@ extension TradeViewModel: UITextFieldDelegate {
 
   func isInputGreaterThanZero(_ numberString: String) -> Bool {
     let inputPrecision = shouldInputCrypto.value ? (cryptoCurrency.value?.asset.decimals ?? 2) : fiatCurrency.asset.decimals
-    if let bigDecimal = SBigDecimal(numberString, precision: inputPrecision) {
+    if let bigDecimal = BigDecimal(numberString, precision: inputPrecision) {
       return bigDecimal.value > 0
     }
     return false
@@ -372,7 +372,7 @@ extension TradeViewModel: UITextFieldDelegate {
     } else {
       precision = fiatCurrency.asset.decimals
     }
-    return CybridCurrencyFormatter.formatInputNumber(SBigDecimal(bigInt, precision: precision))
+    return CybridCurrencyFormatter.formatInputNumber(BigDecimal(bigInt, precision: precision))
   }
 
   func formatAndConvert(_ amount: String?) -> String {
@@ -385,18 +385,18 @@ extension TradeViewModel: UITextFieldDelegate {
       let cryptoAsset = cryptoCurrency.value?.asset,
       let amountBigInt = BigInt(text.filter { $0 != "." && $0 != "," })
     else {
-      return (CybridCurrencyFormatter.formatPrice(SBigDecimal(0), with: symbol) + " " + code)
+      return (CybridCurrencyFormatter.formatPrice(BigDecimal(0), with: symbol) + " " + code)
         .trimmingCharacters(in: .whitespacesAndNewlines)
     }
     let originPrecision = shouldInputCrypto.value ? cryptoAsset.decimals : fiatCurrency.asset.decimals
     let targetPrecision = shouldInputCrypto.value ? fiatCurrency.asset.decimals : cryptoAsset.decimals
-    let amountBigDecimal = SBigDecimal(amountBigInt, precision: originPrecision)
-    let priceRateBigDecimal = SBigDecimal(priceBigInt, precision: fiatCurrency.asset.decimals)
+    let amountBigDecimal = BigDecimal(amountBigInt, precision: originPrecision)
+    let priceRateBigDecimal = BigDecimal(priceBigInt, precision: fiatCurrency.asset.decimals)
     let conversionAmount = shouldInputCrypto.value
-      ? SBigDecimal.runOperation({
+      ? BigDecimal.runOperation({
         try amountBigDecimal.multiply(with: priceRateBigDecimal, targetPrecision: targetPrecision)
       }, errorEvent: .component(.trade(.priceDataError)))
-      : SBigDecimal.runOperation({
+      : BigDecimal.runOperation({
         try amountBigDecimal.divide(by: priceRateBigDecimal, targetPrecision: targetPrecision)
       }, errorEvent: .component(.trade(.priceDataError)))
     return CybridCurrencyFormatter.formatPrice(conversionAmount, with: symbol) + " " + code

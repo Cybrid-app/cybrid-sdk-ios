@@ -31,7 +31,7 @@ class TradeUIModelTest: XCTestCase {
             accountGuid: "")
 
         // -- Then
-        XCTAssertEqual(model?.feeValue, SBigDecimal("0"))
+        XCTAssertEqual(model?.feeValue, BigDecimal("0"))
     }
 
     func test_init_fee_no_number() {
@@ -55,7 +55,7 @@ class TradeUIModelTest: XCTestCase {
             accountGuid: "")
 
         // -- Then
-        XCTAssertEqual(model?.feeValue, SBigDecimal("0"))
+        XCTAssertEqual(model?.feeValue, BigDecimal("0"))
     }
 
     func test_getTradeAmount_Sell() {
