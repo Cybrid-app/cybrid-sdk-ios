@@ -10,7 +10,7 @@ import CybridApiBankSwift
 
 extension QuoteBankModel {
 
-    init?(json: [String: Any]) {
+    init(json: [String: Any]) {
 
         self.init(guid: json[QuoteBankModel.CodingKeys.guid.rawValue] as? String,
                   customerGuid: json[QuoteBankModel.CodingKeys.customerGuid.rawValue] as? String,

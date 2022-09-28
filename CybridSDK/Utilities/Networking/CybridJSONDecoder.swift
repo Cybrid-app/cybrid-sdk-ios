@@ -68,11 +68,7 @@ extension CybridJSONDecoder {
         jsonStringObject[receiveAmountKey] = stringValue(forKey: receiveAmountKey, in: data, atIndex: 0)
         jsonStringObject[feeAmountKey] = stringValue(forKey: feeAmountKey, in: data, atIndex: 0)
 
-        guard
-            let model = QuoteBankModel(json: jsonStringObject)
-        else {
-            throw DecodingError.customDecodingError
-        }
+        let model = QuoteBankModel(json: jsonStringObject)
         return model
     }
 
