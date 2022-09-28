@@ -16,7 +16,7 @@ public enum AssetPipeType: String {
 
 struct AssetPipe {
 
-    static func transform(value: BigDecimal, asset: AssetBankModel, unit: AssetPipeType) -> BigDecimal {
+    /*static func transform(value: BigDecimal, asset: AssetBankModel, unit: AssetPipeType) -> BigDecimal {
         return transformAny(value: value, asset: asset, unit: unit)
     }
 
@@ -65,8 +65,10 @@ struct AssetPipe {
         }
         return returnValue
     }
+     
+     */
     
-    static func tttt(value: BigDecimal, asset: AssetBankModel, unit: AssetPipeType) -> String {
+    /*static func tttt(value: BigDecimal, asset: AssetBankModel, unit: AssetPipeType) -> String {
 
         let divisor = BigDecimal(10).pow(number: asset.decimals)
         let tradeUnit = value.div(divisor: divisor)
@@ -83,5 +85,5 @@ struct AssetPipe {
             returnValue = CybridCurrencyFormatter.formatInputNumber(baseUnit)
         }
         return returnValue
-    }
+    }*/
 }

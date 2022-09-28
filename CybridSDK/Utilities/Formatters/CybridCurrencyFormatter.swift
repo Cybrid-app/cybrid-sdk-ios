@@ -53,7 +53,7 @@ struct CybridCurrencyFormatter {
                                        currencySymbol: currencySymbol)
     }
     
-    static func formatPrice(_ price: BigDecimal,
+    /*static func formatPrice(_ price: BigDecimal,
                             with currencySymbol: String,
                             locale: Locale = Locale.current) -> String {
         return localizedCurrencyString(from: price,
@@ -61,7 +61,7 @@ struct CybridCurrencyFormatter {
                                        groupingSeparator: locale.groupingSeparator,
                                        decimalSeparator: locale.decimalSeparator,
                                        currencySymbol: currencySymbol)
-    }
+    }*/
 
     static func formatInputNumber(_ number: SBigDecimal, decimalSeparator: String? = Locale.current.decimalSeparator) -> String {
 
@@ -81,7 +81,7 @@ struct CybridCurrencyFormatter {
         return sign + magnitude
     }
 
-    static func formatInputNumber(_ number: BigDecimal,
+    /*static func formatInputNumber(_ number: BigDecimal,
                                   decimalSeparator: String? = Locale.current.decimalSeparator) -> String {
 
         let decimalSeparator = decimalSeparator ?? "."
@@ -95,7 +95,7 @@ struct CybridCurrencyFormatter {
         let magnitude = fractional.isEmpty ? integer : integer + decimalSeparator + fractional
         let sign = isNegative ? "-" : ""
         return sign + magnitude
-    }
+    }*/
 
     static func localizedCurrencyString(from number: SBigDecimal,
                                         locale: Locale,
@@ -140,7 +140,7 @@ struct CybridCurrencyFormatter {
         }
     }
 
-    static func localizedCurrencyString(from number: BigDecimal,
+    /*static func localizedCurrencyString(from number: BigDecimal,
                                         locale: Locale,
                                         groupingSeparator: String?,
                                         decimalSeparator: String?,
@@ -181,7 +181,7 @@ struct CybridCurrencyFormatter {
         case .trailing(let symbol):
             return sign + magnitude + symbol
         }
-    }
+    }*/
 
     // MARK: Utilities
     static func makeDefaultFormatter(locale: Locale = Locale.autoupdatingCurrent,

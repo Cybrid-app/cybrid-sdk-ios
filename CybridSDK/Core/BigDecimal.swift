@@ -8,7 +8,7 @@
 import Foundation
 import BigNumber
 
-struct BigDecimal: Hashable {
+struct FBigDecimal: Hashable {
 
     internal var value: BDouble
     var precision: Int = 2
@@ -33,28 +33,28 @@ struct BigDecimal: Hashable {
         self.value = value
     }
 
-    func plus(augend: BigDecimal) -> BigDecimal {
-        return BigDecimal(self.value + augend.value)
+    func plus(augend: FBigDecimal) -> FBigDecimal {
+        return FBigDecimal(self.value + augend.value)
     }
 
-    func minus(subtrahend: BigDecimal) -> BigDecimal {
-        return BigDecimal(self.value - subtrahend.value)
+    func minus(subtrahend: FBigDecimal) -> FBigDecimal {
+        return FBigDecimal(self.value - subtrahend.value)
     }
 
-    func times(multiplicand: BigDecimal) -> BigDecimal {
-        return BigDecimal(self.value * multiplicand.value)
+    func times(multiplicand: FBigDecimal) -> FBigDecimal {
+        return FBigDecimal(self.value * multiplicand.value)
     }
 
-    func div(divisor: BigDecimal) -> BigDecimal {
-        return BigDecimal(self.value / divisor.value)
+    func div(divisor: FBigDecimal) -> FBigDecimal {
+        return FBigDecimal(self.value / divisor.value)
     }
 
-    func pow(number: Int) -> BigDecimal {
-        return BigDecimal(self.value ** number)
+    func pow(number: Int) -> FBigDecimal {
+        return FBigDecimal(self.value ** number)
     }
 
-    func pow(number: String) -> BigDecimal {
-        return BigDecimal(self.value ** (BInt(number) ?? BInt(0)))
+    func pow(number: String) -> FBigDecimal {
+        return FBigDecimal(self.value ** (BInt(number) ?? BInt(0)))
     }
 
     func toPlainString(scale: Int = 4) -> String {

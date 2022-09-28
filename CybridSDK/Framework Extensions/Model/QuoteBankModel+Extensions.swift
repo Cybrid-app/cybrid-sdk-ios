@@ -12,16 +12,6 @@ extension QuoteBankModel {
 
     init?(json: [String: Any]) {
 
-        guard
-            let deliverAmountString = json[QuoteBankModel.CodingKeys.deliverAmount.rawValue] as? String
-            // let receiveAmountString = json[QuoteBankModel.CodingKeys.receiveAmount.rawValue] as? String,
-            // let feeAmountString = json[QuoteBankModel.CodingKeys.fee.rawValue] as? String
-            // let deliverAmount = BigInt(deliverAmountString),
-            // let receiveAmount = BigInt(receiveAmountString),
-            // let feeAmount = BigInt(feeAmountString)
-        else {
-            return nil
-        }
         self.init(guid: json[QuoteBankModel.CodingKeys.guid.rawValue] as? String,
                   customerGuid: json[QuoteBankModel.CodingKeys.customerGuid.rawValue] as? String,
                   symbol: json[QuoteBankModel.CodingKeys.symbol.rawValue] as? String,
