@@ -99,21 +99,21 @@ extension CybridJSONDecoder {
 
     func decodeAccountList(data: Data) throws -> AccountListBankModel? {
 
-        guard let jsonObject = try JSONSerialization.jsonObject(with: data) as? [String: Any] else {
-            throw DecodingError.customDecodingError
+        if let jsonObject = try JSONSerialization.jsonObject(with: data) as? [String: Any] {
+            let jsonStringObject: [String: Any] = jsonObject
+            let objectsValue = jsonStringObject[AccountListBankModel.CodingKeys.objects.rawValue] as? [[String: Any]]
+            var objects = [AccountBankModel]()
+            if let objectsValue = objectsValue {
+                objects = AccountBankModel.fromArray(objects: objectsValue)
+            }
+            // -- Create AccountListBankModel
+            return AccountListBankModel(
+                total: jsonStringObject[AccountListBankModel.CodingKeys.total.rawValue] as? Int ?? 0,
+                page: jsonStringObject[AccountListBankModel.CodingKeys.page.rawValue] as? Int ?? 0,
+                perPage: jsonStringObject[AccountListBankModel.CodingKeys.perPage.rawValue] as? Int ?? 0,
+                objects: objects)
         }
-        let jsonStringObject: [String: Any] = jsonObject
-        let objectsValue = jsonStringObject[AccountListBankModel.CodingKeys.objects.rawValue] as? [[String: Any]]
-        var objects = [AccountBankModel]()
-        if let objectsValue = objectsValue {
-            objects = AccountBankModel.fromArray(objects: objectsValue)
-        }
-        // -- Create AccountListBankModel
-        return AccountListBankModel(
-            total: jsonStringObject[AccountListBankModel.CodingKeys.total.rawValue] as? Int ?? 0,
-            page: jsonStringObject[AccountListBankModel.CodingKeys.page.rawValue] as? Int ?? 0,
-            perPage: jsonStringObject[AccountListBankModel.CodingKeys.perPage.rawValue] as? Int ?? 0,
-            objects: objects)
+        return nil
     }
 
     func decoedTradeList(data: Data) throws -> TradeListBankModel? {

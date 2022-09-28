@@ -272,7 +272,7 @@ class CybridJSONDecoderTests: XCTestCase {
         XCTAssertNotNil(result?.objects[0].state)
     }
 
-    /*func test_AccountBankModel_Decoding_Nil() throws {
+    func test_AccountBankModel_Decoding_Nil() throws {
 
         let data = Data()
         let decoder = CybridJSONDecoder()
@@ -280,7 +280,7 @@ class CybridJSONDecoderTests: XCTestCase {
 
         XCTAssertThrowsError(try decoder.decode(AccountListBankModel.self, from: data))
         XCTAssertNil(result)
-    }*/
+    }
 
     func test_AccountBankModel_withInvalidJSON() throws {
 
