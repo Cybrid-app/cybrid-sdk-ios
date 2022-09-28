@@ -3,11 +3,11 @@
 <plist version="1.0">
 <dict>
 	<key>CybridClientId</key>
-	<string>h2QUCitoRTqpav7_R-o8zgNeGWVeuNe3SR0IiCFdK14</string>
+	<string></string>
 	<key>CybridClientSecret</key>
-	<string>wY3rSas8j8XJO7bpF-VUiq91H2RqSelIjVx1PbcJ3kY</string>
+	<string></string>
 	<key>CybridCustomerGUID</key>
-	<string>bf10305829337d106b82c521bb6c8fd2</string>
+	<string></string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
