@@ -32,24 +32,13 @@ struct AssetPipe {
         return transformAny(value: BigDecimal(value), decimals: decimals, unit: unit)
     }
 
+    private static func transformAny(value: BigDecimal, asset: AssetBankModel, unit: AssetPipeType) -> BigDecimal {
+        return transformAny(value: value, decimals: asset.decimals, unit: unit)
+    }
+
     private static func transformAny(value: BigDecimal, decimals: Int, unit: AssetPipeType) -> BigDecimal {
 
         let divisor = BigDecimal(10).pow(number: decimals)
-        let tradeUnit = value.div(divisor: divisor)
-        let baseUnit = value.times(multiplicand: divisor)
-        var returnValue = BigDecimal(0)
-        switch unit {
-        case .trade:
-            returnValue = tradeUnit
-        case .base:
-            returnValue = baseUnit
-        }
-        return returnValue
-    }
-
-    private static func transformAny(value: BigDecimal, asset: AssetBankModel, unit: AssetPipeType) -> BigDecimal {
-
-        let divisor = BigDecimal(10).pow(number: asset.decimals)
         let tradeUnit = value.div(divisor: divisor)
         let baseUnit = value.times(multiplicand: divisor)
         var returnValue = BigDecimal(0)
@@ -73,6 +62,25 @@ struct AssetPipe {
             returnValue = CybridCurrencyFormatter.formatInputNumber(tradeUnit ?? SBigDecimal(0))
         case .base:
             returnValue = CybridCurrencyFormatter.formatInputNumber(baseUnit ?? SBigDecimal(0))
+        }
+        return returnValue
+    }
+    
+    static func tttt(value: BigDecimal, asset: AssetBankModel, unit: AssetPipeType) -> String {
+
+        let divisor = BigDecimal(10).pow(number: asset.decimals)
+        let tradeUnit = value.div(divisor: divisor)
+        print("*****")
+        print(tradeUnit.toPlainString())
+        print(tradeUnit.toPlainString(scale: 0))
+        print("*****")
+        let baseUnit = value.times(multiplicand: divisor)
+        var returnValue = ""
+        switch unit {
+        case .trade:
+            returnValue = CybridCurrencyFormatter.formatInputNumber(tradeUnit)
+        case .base:
+            returnValue = CybridCurrencyFormatter.formatInputNumber(baseUnit)
         }
         return returnValue
     }

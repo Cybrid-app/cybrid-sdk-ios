@@ -142,6 +142,7 @@
 		9217353D28E41C3F00DF58CA /* TradeBankModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9217353C28E41C3F00DF58CA /* TradeBankModelTest.swift */; };
 		9217354028E4200D00DF58CA /* TradeUIModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9217353F28E4200D00DF58CA /* TradeUIModelTest.swift */; };
 		9217354228E4255800DF58CA /* BigDecimalTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9217354128E4255800DF58CA /* BigDecimalTest.swift */; };
+		9217354528E4B0B400DF58CA /* AssetPipeTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9217354428E4B0B400DF58CA /* AssetPipeTest.swift */; };
 		927233BB28D12FD10080AAC4 /* UIFont+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927233BA28D12FD10080AAC4 /* UIFont+Extensions.swift */; };
 		927233BE28D131BE0080AAC4 /* AccountBankModel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927233BD28D131BE0080AAC4 /* AccountBankModel+Extensions.swift */; };
 		927233C028D1AA7E0080AAC4 /* TradeBankModel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927233BF28D1AA7E0080AAC4 /* TradeBankModel+Extensions.swift */; };
@@ -344,6 +345,7 @@
 		9217353C28E41C3F00DF58CA /* TradeBankModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeBankModelTest.swift; sourceTree = "<group>"; };
 		9217353F28E4200D00DF58CA /* TradeUIModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeUIModelTest.swift; sourceTree = "<group>"; };
 		9217354128E4255800DF58CA /* BigDecimalTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigDecimalTest.swift; sourceTree = "<group>"; };
+		9217354428E4B0B400DF58CA /* AssetPipeTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetPipeTest.swift; sourceTree = "<group>"; };
 		927233BA28D12FD10080AAC4 /* UIFont+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extensions.swift"; sourceTree = "<group>"; };
 		927233BD28D131BE0080AAC4 /* AccountBankModel+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AccountBankModel+Extensions.swift"; sourceTree = "<group>"; };
 		927233BF28D1AA7E0080AAC4 /* TradeBankModel+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TradeBankModel+Extensions.swift"; sourceTree = "<group>"; };
@@ -688,6 +690,7 @@
 		0B303CF1286369F7007BF7FF /* Core Tests */ = {
 			isa = PBXGroup;
 			children = (
+				9217354328E4B09D00DF58CA /* Pipes */,
 				0B50F35828A5885400DDB01E /* CybridEventTests.swift */,
 				0B00E047287FC4C800707F26 /* EnvironmentTests.swift */,
 				0B303CF228636A0D007BF7FF /* CybridConfigTests.swift */,
@@ -1045,6 +1048,14 @@
 				9217353F28E4200D00DF58CA /* TradeUIModelTest.swift */,
 			);
 			path = ModelTest;
+			sourceTree = "<group>";
+		};
+		9217354328E4B09D00DF58CA /* Pipes */ = {
+			isa = PBXGroup;
+			children = (
+				9217354428E4B0B400DF58CA /* AssetPipeTest.swift */,
+			);
+			path = Pipes;
 			sourceTree = "<group>";
 		};
 		927233BC28D1314B0080AAC4 /* Model */ = {
@@ -1558,6 +1569,7 @@
 				0B966025285C2CEF00584692 /* MockDispatchQueue.swift in Sources */,
 				0B2899F2288F53FE001B3360 /* NotificationCenterMock.swift in Sources */,
 				0BBD0CE828B6C730001DBC5F /* TradeMock.swift in Sources */,
+				9217354528E4B0B400DF58CA /* AssetPipeTest.swift in Sources */,
 				0B2899ED288F4BE5001B3360 /* TaskSchedulerMock.swift in Sources */,
 				0B966011285AA24300584692 /* AssertionFailureOverrideTests.swift in Sources */,
 				0B00E01F2878A16800707F26 /* BigDecimalTests.swift in Sources */,

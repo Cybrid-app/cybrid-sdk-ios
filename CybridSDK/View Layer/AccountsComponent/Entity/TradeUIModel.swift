@@ -48,11 +48,30 @@ struct TradeUIModel: Equatable {
 
         var returnValue = ""
         if self.tradeBankModel.side == .sell {
-            let receiveAmount = SBigDecimal(self.tradeBankModel.receiveAmount ?? "0", precision: counterAsset.decimals) ?? SBigDecimal(0)
+
+            var receiveAmount = BigDecimal(self.tradeBankModel.receiveAmount ?? "0")
+            receiveAmount.precision = counterAsset.decimals
             returnValue = CybridCurrencyFormatter.formatPrice(receiveAmount, with: self.counterAsset.symbol)
+
+            // let receiveAmount = SBigDecimal(self.tradeBankModel.receiveAmount ?? "0", precision: counterAsset.decimals) ?? SBigDecimal(0)
+            // returnValue = CybridCurrencyFormatter.formatPrice(receiveAmount, with: self.counterAsset.symbol)
+
         } else {
-            let deliverAmount = SBigDecimal(self.tradeBankModel.deliverAmount ?? "0", precision: counterAsset.decimals) ?? SBigDecimal(0)
+
+            var deliverAmount = BigDecimal(self.tradeBankModel.deliverAmount ?? "0")
+            deliverAmount.precision = counterAsset.decimals
+            
+            var test = AssetPipe.tttt(value: deliverAmount, asset: counterAsset, unit: .trade)
+            
+            print("============")
+            print(self.tradeBankModel.deliverAmount)
+            print(test)
+            print(deliverAmount.toPlainString(scale: deliverAmount.precision))
+            print("_____________")
             returnValue = CybridCurrencyFormatter.formatPrice(deliverAmount, with: self.counterAsset.symbol)
+            
+            // let deliverAmount = SBigDecimal(self.tradeBankModel.deliverAmount ?? "0", precision: counterAsset.decimals) ?? SBigDecimal(0)
+            // returnValue = CybridCurrencyFormatter.formatPrice(deliverAmount, with: self.counterAsset.symbol)
         }
         return returnValue
     }

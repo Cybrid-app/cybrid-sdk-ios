@@ -11,6 +11,7 @@ import BigNumber
 struct BigDecimal: Hashable {
 
     internal var value: BDouble
+    var precision: Int = 2
 
     init(_ value: Int) {
 
