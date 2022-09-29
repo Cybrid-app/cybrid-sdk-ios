@@ -281,12 +281,10 @@ final class TradeViewModel: NSObject {
   }
 
   func stopPriceUpdate() {
-    logger?.log(.component(.trade(.priceLiveUpdateStop)))
     priceFetchScheduler?.cancel()
   }
 
   func stopQuoteUpdateIfNeeded() {
-    logger?.log(.component(.trade(.quoteLiveUpdateStop)))
     quoteFetchScheduler?.cancel()
   }
 

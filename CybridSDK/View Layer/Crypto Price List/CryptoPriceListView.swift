@@ -52,7 +52,6 @@ public class CryptoPriceListView: UITableView {
     estimatedRowHeight = Constants.rowHeight
     translatesAutoresizingMaskIntoConstraints = false
     allowsSelection = true
-    makeKeyboardHandler()
   }
 
   private func startLiveUpdates() {

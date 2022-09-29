@@ -253,7 +253,7 @@ extension BuyQuoteViewController {
     }
 
     enum FlagIcon {
-      static let size: CGSize = CGSize(width: 28, height: UIConstants.sizeMd)
+      static let size = CGSize(width: 28, height: UIConstants.sizeMd)
     }
 
     enum Button {
@@ -266,7 +266,7 @@ extension BuyQuoteViewController {
     }
 
     enum SwitchButton {
-      static let size: CGSize = CGSize(width: UIConstants.sizeMd, height: UIConstants.sizeMd)
+      static let size = CGSize(width: UIConstants.sizeMd, height: UIConstants.sizeMd)
     }
   }
 }

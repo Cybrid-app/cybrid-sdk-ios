@@ -22,6 +22,9 @@ jobs:
           command: "fastlane test output_directory:$FASTLANE_OUTPUT_DIR/"
       - codecov/upload:
           file: "$FASTLANE_OUTPUT_DIR/cobertura.xml"
+      - run:
+          name: "Upload App to Appetize"
+          command: "fastlane update_fastlane"
 
   swiftlint:
     description: Runs swiftlint

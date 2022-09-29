@@ -36,7 +36,6 @@ opt_in_rules: # These rules are disabled by default, unless explicitly added bel
   - fatal_error_message
   - first_where
   - for_where
-  - force_cast
   - force_try
   - generic_type_name
   - identical_operands
@@ -60,11 +59,9 @@ opt_in_rules: # These rules are disabled by default, unless explicitly added bel
   - multiline_literal_brackets
   - multiline_parameters
   - nimble_operator
-  - number_separator
   - opening_brace
   - operator_usage_whitespace
   - operator_whitespace
-  - overridden_super_call
   - override_in_extension
   - pattern_matching_keywords
   - private_action
@@ -84,18 +81,14 @@ opt_in_rules: # These rules are disabled by default, unless explicitly added bel
   - shorthand_operator
   - single_test_class
   - sorted_first_last
-  - sorted_imports
   - statement_position
   - static_operator
-  - superfluous_disable_command
   - switch_case_alignment
   - switch_case_on_newline
   - syntactic_sugar
   - trailing_comma
   - trailing_newline
   - trailing_semicolon
-  - trailing_whitespace
-  - type_contents_order
   - unavailable_function
   - unneeded_break_in_switch
   - unneeded_parentheses_in_closure_argument
@@ -106,7 +99,6 @@ opt_in_rules: # These rules are disabled by default, unless explicitly added bel
   - unused_optional_binding
   - unused_declaration
   - valid_ibinspectable
-  - vertical_parameter_alignment_on_call
   - vertical_whitespace
   - weak_delegate
   - xctfail_message
@@ -168,8 +160,6 @@ first_where:
   severity: error
 for_where:
   severity: error
-force_cast:
-  severity: error
 force_try:
   severity: error
 generic_type_name:
@@ -222,8 +212,6 @@ operator_usage_whitespace:
   severity: error
 operator_whitespace:
   severity: error
-overridden_super_call:
-  severity: warning
 override_in_extension:
   severity: error
 pattern_matching_keywords:
@@ -256,8 +244,6 @@ single_test_class:
   severity: error
 sorted_first_last:
   severity: error
-sorted_imports:
-  severity: error
 statement_position:
   severity: error
 static_operator:
@@ -275,8 +261,6 @@ trailing_comma:
 trailing_newline:
   severity: error
 trailing_semicolon:
-  severity: error
-type_contents_order:
   severity: error
 unavailable_function:
   severity: error
@@ -298,8 +282,6 @@ unused_declaration:
   severity: error
 valid_ibinspectable:
   severity: error
-vertical_parameter_alignment_on_call:
-  severity: error
 vertical_whitespace:
   severity: error
 weak_delegate:
@@ -313,17 +295,12 @@ file_length:
   warning: 1000
   error: 1200
 
-identifier_name:
-  excluded:
-    - id
-    - URL
-
 large_tuple:
   warning: 3
 
 line_length:
-  warning: 140
-  error: 200
+  warning: 400
+  error: 500
   ignores_comments: true
   ignores_interpolated_strings: true
   ignores_urls: true
@@ -336,13 +313,25 @@ private_outlet:
   severity: error
   allow_private_set: true
 
+type_body_length:
+  warning: 1100
+  error: 1500
+
+function_body_length:
+  warning: 110
+  error: 150
+
+function_parameter_count:
+  warning: 10
+  error: 11
+
 type_name:
   min_length:
     warning: 3
     error: 2
   max_length:
-    warning: 40
-    error: 50
+    warning: 60
+    error: 80
   allowed_symbols: ["_"]
 
 reporter: "xcode"

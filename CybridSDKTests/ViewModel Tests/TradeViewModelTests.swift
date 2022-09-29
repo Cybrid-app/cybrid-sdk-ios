@@ -441,14 +441,12 @@ extension TradeViewModelTests {
       productType: QuoteBankModel.buyBitcoin.productType,
       customerGuid: QuoteBankModel.buyBitcoin.customerGuid,
       symbol: QuoteBankModel.buyBitcoin.symbol,
-      ///asset: QuoteBankModel.buyBitcoin.asset,
       side: QuoteBankModel.buyBitcoin.side,
       receiveAmount: expectedCrypto,
       deliverAmount: expectedInputAmount,
       fee: QuoteBankModel.buyBitcoin.fee,
       issuedAt: QuoteBankModel.buyBitcoin.issuedAt,
       expiresAt: QuoteBankModel.buyBitcoin.expiresAt
-      //productProvider: QuoteBankModel.buyBitcoin.productProvider
     )
 
     // When
@@ -587,14 +585,12 @@ extension TradeViewModelTests {
       productType: QuoteBankModel.sellBitcoin.productType,
       customerGuid: QuoteBankModel.sellBitcoin.customerGuid,
       symbol: QuoteBankModel.sellBitcoin.symbol,
-      //asset: QuoteBankModel.sellBitcoin.asset,
       side: QuoteBankModel.sellBitcoin.side,
       receiveAmount: expectedInputAmount,
       deliverAmount: expectedCrypto,
       fee: QuoteBankModel.sellBitcoin.fee,
       issuedAt: QuoteBankModel.sellBitcoin.issuedAt,
       expiresAt: QuoteBankModel.sellBitcoin.expiresAt
-      //productProvider: QuoteBankModel.sellBitcoin.productProvider
     )
 
     // When

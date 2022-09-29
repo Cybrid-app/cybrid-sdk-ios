@@ -9,88 +9,99 @@ import CybridApiBankSwift
 import Foundation
 
 final class CybridSession: AuthenticatedServiceProvider {
-  // MARK: Static Properties
-  static var current = CybridSession(authenticator: Cybrid.authenticator,
-                                     apiManager: CybridApiBankSwiftAPI.self,
-                                     notificationManager: NotificationCenter.default)
-  static let appMovedToBackgroundEvent = UIApplication.willResignActiveNotification
-  static let appMovedToForegroundEvent = UIApplication.didBecomeActiveNotification
 
-  // MARK: Internal Properties
-  // Assets Repository
-  internal var assetsRepository: AssetsRepository.Type
-  internal var assetsCache: [AssetBankModel]?
+    // MARK: Static Properties
+    static var current = CybridSession(authenticator: Cybrid.authenticator,
+                                       apiManager: CybridApiBankSwiftAPI.self,
+                                       notificationManager: NotificationCenter.default)
+    static let appMovedToBackgroundEvent = UIApplication.willResignActiveNotification
+    static let appMovedToForegroundEvent = UIApplication.didBecomeActiveNotification
 
-  // Prices Repository
-  internal var pricesRepository: PricesRepository.Type
+    // MARK: Internal Properties
+    // Assets Repository
+    internal var assetsRepository: AssetsRepository.Type
+    internal var assetsCache: [AssetBankModel]?
 
-  // Quotes Repository
-  internal var quotesRepository: QuotesRepository.Type
+    // Prices Repository
+    internal var pricesRepository: PricesRepository.Type
 
-  // Trades Repository
-  internal var tradesRepository: TradesRepository.Type
+    // Quotes Repository
+    internal var quotesRepository: QuotesRepository.Type
 
-  // Schedulers
-  internal var taskSchedulers: Set<TaskScheduler> = []
+    // Trades Repository
+    internal var tradesRepository: TradesRepository.Type
 
-  // MARK: Private(set) Internal Properties
-  private(set) var authenticator: CybridAuthenticator?
-  private(set) var apiManager: CybridAPIManager.Type
-  private(set) var notificationManager: NotificationManager
-  private(set) var isListeningToAppEvents = false
+    // Accounts Repository
+    internal var accountsRepository: AccountsRepository.Type
 
-  // MARK: Initializer
-  init(authenticator: CybridAuthenticator?,
-       apiManager: CybridAPIManager.Type,
-       notificationManager: NotificationManager) {
-    self.authenticator = authenticator
-    self.apiManager = apiManager
-    self.notificationManager = notificationManager
-    self.pricesRepository = PricesAPI.self
-    self.assetsRepository = AssetsAPI.self
-    self.quotesRepository = QuotesAPI.self
-    self.tradesRepository = TradesAPI.self
+    // Schedulers
+    internal var taskSchedulers: Set<TaskScheduler> = []
 
-    setupEventListeners()
-  }
+    // MARK: Private(set) Internal Properties
+    private(set) var authenticator: CybridAuthenticator?
+    private(set) var apiManager: CybridAPIManager.Type
+    private(set) var notificationManager: NotificationManager
+    private(set) var isListeningToAppEvents = false
 
-  func setupEventListeners() {
-    notificationManager.removeObserver(self)
-    notificationManager.addObserver(self,
-                                    selector: #selector(appMovedToBackground),
-                                    name: CybridSession.appMovedToBackgroundEvent,
-                                    object: nil)
-    notificationManager.addObserver(self,
-                                    selector: #selector(appMovedToForeground),
-                                    name: CybridSession.appMovedToForegroundEvent,
-                                    object: nil)
-    isListeningToAppEvents = true
-  }
+    // MARK: Initializer
+    init(authenticator: CybridAuthenticator?,
+         apiManager: CybridAPIManager.Type,
+         notificationManager: NotificationManager) {
 
-  func stopListeners() {
-    notificationManager.removeObserver(self)
-    isListeningToAppEvents = false
-  }
+        self.authenticator = authenticator
+        self.apiManager = apiManager
+        self.notificationManager = notificationManager
+        self.pricesRepository = PricesAPI.self
+        self.assetsRepository = AssetsAPI.self
+        self.quotesRepository = QuotesAPI.self
+        self.tradesRepository = TradesAPI.self
+        self.accountsRepository = AccountsAPI.self
 
-  @objc
-  func appMovedToBackground() {
-    taskSchedulers.forEach { scheduler in
-      scheduler.pause()
+        setupEventListeners()
     }
-  }
 
-  @objc
-  func appMovedToForeground() {
-    taskSchedulers.forEach { scheduler in
-      scheduler.resume()
+    func setupEventListeners() {
+
+        notificationManager.removeObserver(self)
+        notificationManager.addObserver(self,
+                                        selector: #selector(appMovedToBackground),
+                                        name: CybridSession.appMovedToBackgroundEvent,
+                                        object: nil)
+        notificationManager.addObserver(self,
+                                        selector: #selector(appMovedToForeground),
+                                        name: CybridSession.appMovedToForegroundEvent,
+                                        object: nil)
+        isListeningToAppEvents = true
     }
-  }
+
+    func stopListeners() {
+
+        notificationManager.removeObserver(self)
+        isListeningToAppEvents = false
+    }
+
+    @objc
+    func appMovedToBackground() {
+
+        taskSchedulers.forEach { scheduler in
+            scheduler.pause()
+        }
+    }
+
+    @objc
+    func appMovedToForeground() {
+
+        taskSchedulers.forEach { scheduler in
+            scheduler.resume()
+        }
+    }
 }
 
 protocol NotificationManager {
-  func addObserver(_ observer: Any, selector: Selector, name: NSNotification.Name?, object: Any?)
-  func removeObserver(_ observer: Any)
-  func post(name: NSNotification.Name, object: Any?, userInfo: [AnyHashable: Any]?)
+
+    func addObserver(_ observer: Any, selector: Selector, name: NSNotification.Name?, object: Any?)
+    func removeObserver(_ observer: Any)
+    func post(name: NSNotification.Name, object: Any?, userInfo: [AnyHashable: Any]?)
 }
 
 extension NotificationCenter: NotificationManager {}

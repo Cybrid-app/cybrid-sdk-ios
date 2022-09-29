@@ -118,15 +118,22 @@ extension CybridEvent {
 // MARK: - Component Event
 
 extension CybridEvent {
+
   public enum ComponentEvent {
     case priceList(PriceListEvent)
     case trade(TradeEvent)
+    case accounts(AccountsEvent)
+    case trades(TradesEvent)
 
     var level: LogLevel {
       switch self {
       case .priceList(let event):
         return event.level
       case .trade(let event):
+        return event.level
+      case .accounts(let event):
+          return event.level
+      case .trades(let event):
         return event.level
       }
     }
@@ -136,7 +143,11 @@ extension CybridEvent {
       case .priceList(let event):
         return "PRICE_LIST_" + event.code
       case .trade(let event):
-        return "TRADE_" + event.code
+          return "TRADE_" + event.code
+      case .accounts(let event):
+          return "ACCOUNTS_" + event.code
+      case .trades(let event):
+          return "TRADES_" + event.code
       }
     }
 
@@ -146,19 +157,23 @@ extension CybridEvent {
         return event.message
       case .trade(let event):
         return event.message
+      case .accounts(let event):
+        return event.message
+      case .trades(let event):
+        return event.message
       }
     }
+  }
 
     public enum PriceListEvent {
       case initSuccess
       case dataFetching
       case dataError
       case dataRefreshed
-      case liveUpdateStop
 
       var level: LogLevel {
         switch self {
-        case .initSuccess, .dataFetching, .dataRefreshed, .liveUpdateStop:
+        case .initSuccess, .dataFetching, .dataRefreshed:
           return .info
         case .dataError:
           return .error
@@ -175,8 +190,6 @@ extension CybridEvent {
           return "DATA_ERROR"
         case .dataRefreshed:
           return "DATA_REFRESHED"
-        case .liveUpdateStop:
-          return "LIVE_UPDATE_STOP"
         }
       }
 
@@ -190,8 +203,6 @@ extension CybridEvent {
           return "There was an error fetching price list"
         case .dataRefreshed:
           return "Price list successfully updated"
-        case .liveUpdateStop:
-          return "Price list live update stop"
         }
       }
     }
@@ -201,11 +212,9 @@ extension CybridEvent {
       case priceDataFetching
       case priceDataError
       case priceDataRefreshed
-      case priceLiveUpdateStop
       case quoteDataFetching
       case quoteDataError
       case quoteDataRefreshed
-      case quoteLiveUpdateStop
       case tradeDataFetching
       case tradeDataError
       case tradeConfirmed
@@ -213,8 +222,7 @@ extension CybridEvent {
       var level: LogLevel {
         switch self {
         case .initSuccess, .priceDataFetching, .priceDataRefreshed, .quoteDataFetching,
-            .quoteDataRefreshed, .tradeDataFetching, .tradeConfirmed,
-            .priceLiveUpdateStop, .quoteLiveUpdateStop:
+            .quoteDataRefreshed, .tradeDataFetching, .tradeConfirmed:
           return .info
         case .priceDataError, .quoteDataError, .tradeDataError:
           return .error
@@ -243,10 +251,6 @@ extension CybridEvent {
           return "TRADE_DATA_ERROR"
         case .tradeConfirmed:
           return "TRADE_CONFIRMED"
-        case .priceLiveUpdateStop:
-          return "PRICE_LIVE_UPDATE_STOP"
-        case .quoteLiveUpdateStop:
-          return "QUOTE_LIVE_UPDATE_STOP"
         }
       }
 
@@ -272,12 +276,104 @@ extension CybridEvent {
           return "There was an error confirming trade"
         case .tradeConfirmed:
           return "Trade successfully confirmed"
-        case .priceLiveUpdateStop:
-          return "Price live update did stop"
-        case .quoteLiveUpdateStop:
-          return "Quote live update did stop"
         }
       }
     }
-  }
+
+    public enum AccountsEvent {
+        case initSuccess
+        case assetsDataFetching
+        case accountsDataFetching
+        case pricesDataFetching
+        case assetsDataError
+        case accountsDataError
+        case pricesDataError
+
+        var level: LogLevel {
+          switch self {
+          case .initSuccess, .assetsDataFetching, .accountsDataFetching, .pricesDataFetching:
+            return .info
+          case .assetsDataError, .accountsDataError, .pricesDataError:
+            return .error
+          }
+        }
+
+        var code: String {
+          switch self {
+          case .initSuccess:
+            return "INIT"
+          case .assetsDataFetching:
+            return "ASSETS_DATA_FETCHING"
+          case .assetsDataError:
+            return "ASSETS_DATA_ERROR"
+          case .accountsDataFetching:
+            return "ACCOUNTS_DATA_FETCHING"
+          case .accountsDataError:
+            return "ACCOUNTS_DATA_ERROR"
+          case .pricesDataFetching:
+            return "PRICES_DATA_FETCHING"
+          case .pricesDataError:
+            return "PRICES_DATA_ERROR"
+
+          }
+        }
+
+        var message: String {
+          switch self {
+          case .initSuccess:
+            return "Initializing accounts component"
+          case .assetsDataFetching:
+            return "Fetching assets"
+          case .assetsDataError:
+            return "There was an error fetching prices"
+          case .accountsDataFetching:
+            return "Fetching accounts"
+          case .accountsDataError:
+            return "There was an error fetching accounts"
+          case .pricesDataFetching:
+            return "Fetching prices"
+          case .pricesDataError:
+            return "There was an error fetching accounts"
+
+          }
+        }
+    }
+
+    public enum TradesEvent {
+        case initSuccess
+        case tradesDataFetching
+        case tradesDataError
+
+        var level: LogLevel {
+          switch self {
+          case .initSuccess, .tradesDataFetching:
+            return .info
+          case .tradesDataError:
+            return .error
+          }
+        }
+
+        var code: String {
+          switch self {
+          case .initSuccess:
+            return "INIT"
+          case .tradesDataFetching:
+            return "TRADES_DATA_FETCHING"
+          case .tradesDataError:
+            return "TRADES_DATA_ERROR"
+
+          }
+        }
+
+        var message: String {
+          switch self {
+          case .initSuccess:
+            return "Initializing accounts component"
+          case .tradesDataFetching:
+            return "Fetching trades"
+          case .tradesDataError:
+            return "There was an error fetching trades"
+          }
+        }
+    }
 }
