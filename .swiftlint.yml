@@ -212,8 +212,6 @@ operator_usage_whitespace:
   severity: error
 operator_whitespace:
   severity: error
-overridden_super_call:
-  severity: warning
 override_in_extension:
   severity: error
 pattern_matching_keywords:
@@ -250,6 +248,8 @@ statement_position:
   severity: error
 static_operator:
   severity: error
+superfluous_disable_command:
+  severity: error
 switch_case_alignment:
   severity: error
 switch_case_on_newline:
@@ -261,8 +261,6 @@ trailing_comma:
 trailing_newline:
   severity: error
 trailing_semicolon:
-  severity: error
-type_contents_order:
   severity: error
 unavailable_function:
   severity: error
@@ -283,8 +281,6 @@ unused_optional_binding:
 unused_declaration:
   severity: error
 valid_ibinspectable:
-  severity: error
-vertical_parameter_alignment_on_call:
   severity: error
 vertical_whitespace:
   severity: error
