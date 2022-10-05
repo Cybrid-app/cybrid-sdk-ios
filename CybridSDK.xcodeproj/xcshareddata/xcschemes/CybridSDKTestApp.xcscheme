@@ -28,6 +28,16 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "928E236828EC90D6006AAE1A"
+               BuildableName = "CybridSDKTestAppUITests.xctest"
+               BlueprintName = "CybridSDKTestAppUITests"
+               ReferencedContainer = "container:CybridSDK.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction

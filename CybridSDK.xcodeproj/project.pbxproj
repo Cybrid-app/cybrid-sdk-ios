@@ -160,6 +160,10 @@
 		927233E828D244BD0080AAC4 /* AccountsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927233E728D244BD0080AAC4 /* AccountsCell.swift */; };
 		927233EA28D244CC0080AAC4 /* AccountTradesHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927233E928D244CC0080AAC4 /* AccountTradesHeaderCell.swift */; };
 		927233EC28D244DE0080AAC4 /* AccountTradesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927233EB28D244DE0080AAC4 /* AccountTradesCell.swift */; };
+		928E236C28EC90D6006AAE1A /* CybridSDKTestAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928E236B28EC90D6006AAE1A /* CybridSDKTestAppUITests.swift */; };
+		928E236E28EC90D6006AAE1A /* CybridSDKTestAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928E236D28EC90D6006AAE1A /* CybridSDKTestAppUITestsLaunchTests.swift */; };
+		928E237628ECA38B006AAE1A /* XCUIElement+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928E237528ECA38B006AAE1A /* XCUIElement+Extensions.swift */; };
+		928E237828ECB80E006AAE1A /* XCTestCase+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928E237728ECB80E006AAE1A /* XCTestCase+Extensions.swift */; };
 		92AD743128D418610071F17F /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AD743028D418610071F17F /* String+Extensions.swift */; };
 		92F5EC7128E206CE009DC3F4 /* accountResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 92F5EC7028E206CE009DC3F4 /* accountResponse.json */; };
 		92F5EC7328E24150009DC3F4 /* listTradesResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 92F5EC7228E24150009DC3F4 /* listTradesResponse.json */; };
@@ -180,6 +184,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 0B078F0C28497B070020B4F7;
 			remoteInfo = CybridSDK;
+		};
+		928E236F28EC90D6006AAE1A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0B078F0428497B070020B4F7 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0BBCF612285C43E000D39C6D;
+			remoteInfo = CybridSDKTestApp;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -359,6 +370,11 @@
 		927233E728D244BD0080AAC4 /* AccountsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsCell.swift; sourceTree = "<group>"; };
 		927233E928D244CC0080AAC4 /* AccountTradesHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTradesHeaderCell.swift; sourceTree = "<group>"; };
 		927233EB28D244DE0080AAC4 /* AccountTradesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTradesCell.swift; sourceTree = "<group>"; };
+		928E236928EC90D6006AAE1A /* CybridSDKTestAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CybridSDKTestAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		928E236B28EC90D6006AAE1A /* CybridSDKTestAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CybridSDKTestAppUITests.swift; sourceTree = "<group>"; };
+		928E236D28EC90D6006AAE1A /* CybridSDKTestAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CybridSDKTestAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		928E237528ECA38B006AAE1A /* XCUIElement+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCUIElement+Extensions.swift"; sourceTree = "<group>"; };
+		928E237728ECB80E006AAE1A /* XCTestCase+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+Extensions.swift"; sourceTree = "<group>"; };
 		92AD743028D418610071F17F /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		92F5EC7028E206CE009DC3F4 /* accountResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = accountResponse.json; sourceTree = "<group>"; };
 		92F5EC7228E24150009DC3F4 /* listTradesResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = listTradesResponse.json; sourceTree = "<group>"; };
@@ -390,6 +406,13 @@
 			files = (
 				0B00E0052877E56A00707F26 /* CybridSDK.framework in Frameworks */,
 				37D3599E5CCE0BC3F9008FE9 /* Pods_Abstract_CybridSDKTestApp.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		928E236628EC90D6006AAE1A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -485,6 +508,7 @@
 				0B078F0F28497B070020B4F7 /* CybridSDK */,
 				0B078F1B28497B070020B4F7 /* CybridSDKTests */,
 				0BBCF614285C43E000D39C6D /* CybridSDKTestApp */,
+				928E236A28EC90D6006AAE1A /* CybridSDKTestAppUITests */,
 				0B078F0E28497B070020B4F7 /* Products */,
 				81407DEC5E3C66990E8215E8 /* Pods */,
 				E757BBB3F769F93B6529F753 /* Frameworks */,
@@ -497,6 +521,7 @@
 				0B078F0D28497B070020B4F7 /* CybridSDK.framework */,
 				0B078F1728497B070020B4F7 /* CybridSDKTests.xctest */,
 				0BBCF613285C43E000D39C6D /* CybridSDKTestApp.app */,
+				928E236928EC90D6006AAE1A /* CybridSDKTestAppUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1100,6 +1125,25 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
+		928E236A28EC90D6006AAE1A /* CybridSDKTestAppUITests */ = {
+			isa = PBXGroup;
+			children = (
+				928E237428ECA373006AAE1A /* Extensions */,
+				928E236B28EC90D6006AAE1A /* CybridSDKTestAppUITests.swift */,
+				928E236D28EC90D6006AAE1A /* CybridSDKTestAppUITestsLaunchTests.swift */,
+			);
+			path = CybridSDKTestAppUITests;
+			sourceTree = "<group>";
+		};
+		928E237428ECA373006AAE1A /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				928E237528ECA38B006AAE1A /* XCUIElement+Extensions.swift */,
+				928E237728ECB80E006AAE1A /* XCTestCase+Extensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		92F5EC7428E24716009DC3F4 /* FrameworkExtensionsTest */ = {
 			isa = PBXGroup;
 			children = (
@@ -1195,6 +1239,24 @@
 			productReference = 0BBCF613285C43E000D39C6D /* CybridSDKTestApp.app */;
 			productType = "com.apple.product-type.application";
 		};
+		928E236828EC90D6006AAE1A /* CybridSDKTestAppUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 928E237328EC90D6006AAE1A /* Build configuration list for PBXNativeTarget "CybridSDKTestAppUITests" */;
+			buildPhases = (
+				928E236528EC90D6006AAE1A /* Sources */,
+				928E236628EC90D6006AAE1A /* Frameworks */,
+				928E236728EC90D6006AAE1A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				928E237028EC90D6006AAE1A /* PBXTargetDependency */,
+			);
+			name = CybridSDKTestAppUITests;
+			productName = CybridSDKTestAppUITests;
+			productReference = 928E236928EC90D6006AAE1A /* CybridSDKTestAppUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -1202,7 +1264,7 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1330;
+				LastSwiftUpdateCheck = 1340;
 				LastUpgradeCheck = 1330;
 				TargetAttributes = {
 					0B078F0C28497B070020B4F7 = {
@@ -1213,6 +1275,10 @@
 					};
 					0BBCF612285C43E000D39C6D = {
 						CreatedOnToolsVersion = 13.3.1;
+					};
+					928E236828EC90D6006AAE1A = {
+						CreatedOnToolsVersion = 13.4.1;
+						TestTargetID = 0BBCF612285C43E000D39C6D;
 					};
 				};
 			};
@@ -1233,6 +1299,7 @@
 				0B078F0C28497B070020B4F7 /* CybridSDK */,
 				0B078F1628497B070020B4F7 /* CybridSDKTests */,
 				0BBCF612285C43E000D39C6D /* CybridSDKTestApp */,
+				928E236828EC90D6006AAE1A /* CybridSDKTestAppUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -1273,6 +1340,13 @@
 				0B00E0142877E87600707F26 /* Main.storyboard in Resources */,
 				0BBCF61F285C43E000D39C6D /* Assets.xcassets in Resources */,
 				0B00E0132877E87600707F26 /* LaunchScreen.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		928E236728EC90D6006AAE1A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1574,6 +1648,17 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		928E236528EC90D6006AAE1A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				928E237828ECB80E006AAE1A /* XCTestCase+Extensions.swift in Sources */,
+				928E237628ECA38B006AAE1A /* XCUIElement+Extensions.swift in Sources */,
+				928E236E28EC90D6006AAE1A /* CybridSDKTestAppUITestsLaunchTests.swift in Sources */,
+				928E236C28EC90D6006AAE1A /* CybridSDKTestAppUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -1587,6 +1672,11 @@
 			isa = PBXTargetDependency;
 			target = 0B078F0C28497B070020B4F7 /* CybridSDK */;
 			targetProxy = 0B078F1928497B070020B4F7 /* PBXContainerItemProxy */;
+		};
+		928E237028EC90D6006AAE1A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0BBCF612285C43E000D39C6D /* CybridSDKTestApp */;
+			targetProxy = 928E236F28EC90D6006AAE1A /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1887,6 +1977,40 @@
 			};
 			name = Release;
 		};
+		928E237128EC90D6006AAE1A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = app.cybrid.CybridSDKTestAppUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = CybridSDKTestApp;
+			};
+			name = Debug;
+		};
+		928E237228EC90D6006AAE1A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = app.cybrid.CybridSDKTestAppUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = CybridSDKTestApp;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1922,6 +2046,15 @@
 			buildConfigurations = (
 				0BBCF625285C43E000D39C6D /* Debug */,
 				0BBCF626285C43E000D39C6D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		928E237328EC90D6006AAE1A /* Build configuration list for PBXNativeTarget "CybridSDKTestAppUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				928E237128EC90D6006AAE1A /* Debug */,
+				928E237228EC90D6006AAE1A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
