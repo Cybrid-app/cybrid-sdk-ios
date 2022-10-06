@@ -35,6 +35,7 @@ public final class TradeViewController: UIViewController {
 
   private lazy var cryptoPickerTextField: CYBTextField = {
     let textField = CYBTextField(style: .rounded, icon: .urlImage(""), theme: theme)
+    textField.accessibilityIdentifier = "cryptoPickerTextField"
     textField.placeholder = localizer.localize(with: CybridLocalizationKey.trade(.buy(.selectCurrency)))
 
     return textField
@@ -73,6 +74,7 @@ public final class TradeViewController: UIViewController {
     textField.delegate = viewModel
     textField.rightView = switchButton
     textField.rightViewMode = .always
+    textField.accessibilityIdentifier = "amountTextField"
 
     return textField
 
@@ -83,6 +85,7 @@ public final class TradeViewController: UIViewController {
     let button = UIButton(type: .custom)
     button.setImage(image, for: .normal)
     button.addTarget(viewModel, action: #selector(viewModel.didTapConversionSwitchButton), for: .touchUpInside)
+    button.accessibilityIdentifier = "switchButton"
     return button
   }()
 
@@ -114,6 +117,7 @@ public final class TradeViewController: UIViewController {
 
   private lazy var cryptoExchangePriceLabel: UILabel = {
     let label = UILabel.makeLabel(.caption, { _ in })
+    label.accessibilityIdentifier = "cryptoExchangePriceLabel"
     label.text = localizer.localize(with: CybridLocalizationKey.trade(.buy(.amount)))
     return label
   }()

@@ -161,9 +161,12 @@
 		927233EA28D244CC0080AAC4 /* AccountTradesHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927233E928D244CC0080AAC4 /* AccountTradesHeaderCell.swift */; };
 		927233EC28D244DE0080AAC4 /* AccountTradesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927233EB28D244DE0080AAC4 /* AccountTradesCell.swift */; };
 		928E236C28EC90D6006AAE1A /* CybridSDKTestAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928E236B28EC90D6006AAE1A /* CybridSDKTestAppUITests.swift */; };
-		928E236E28EC90D6006AAE1A /* CybridSDKTestAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928E236D28EC90D6006AAE1A /* CybridSDKTestAppUITestsLaunchTests.swift */; };
 		928E237628ECA38B006AAE1A /* XCUIElement+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928E237528ECA38B006AAE1A /* XCUIElement+Extensions.swift */; };
 		928E237828ECB80E006AAE1A /* XCTestCase+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928E237728ECB80E006AAE1A /* XCTestCase+Extensions.swift */; };
+		928E237A28EE0014006AAE1A /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928E237928EE0014006AAE1A /* LoginController.swift */; };
+		928E237D28EE02A6006AAE1A /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928E237C28EE02A6006AAE1A /* UIViewController+Extensions.swift */; };
+		928E237F28EE4996006AAE1A /* AccountsComponentTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928E237E28EE4996006AAE1A /* AccountsComponentTest.swift */; };
+		928E238128EE4A6D006AAE1A /* CryptoListComponentTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928E238028EE4A6D006AAE1A /* CryptoListComponentTest.swift */; };
 		92AD743128D418610071F17F /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AD743028D418610071F17F /* String+Extensions.swift */; };
 		92F5EC7128E206CE009DC3F4 /* accountResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 92F5EC7028E206CE009DC3F4 /* accountResponse.json */; };
 		92F5EC7328E24150009DC3F4 /* listTradesResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 92F5EC7228E24150009DC3F4 /* listTradesResponse.json */; };
@@ -372,9 +375,12 @@
 		927233EB28D244DE0080AAC4 /* AccountTradesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTradesCell.swift; sourceTree = "<group>"; };
 		928E236928EC90D6006AAE1A /* CybridSDKTestAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CybridSDKTestAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		928E236B28EC90D6006AAE1A /* CybridSDKTestAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CybridSDKTestAppUITests.swift; sourceTree = "<group>"; };
-		928E236D28EC90D6006AAE1A /* CybridSDKTestAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CybridSDKTestAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		928E237528ECA38B006AAE1A /* XCUIElement+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCUIElement+Extensions.swift"; sourceTree = "<group>"; };
 		928E237728ECB80E006AAE1A /* XCTestCase+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+Extensions.swift"; sourceTree = "<group>"; };
+		928E237928EE0014006AAE1A /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
+		928E237C28EE02A6006AAE1A /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
+		928E237E28EE4996006AAE1A /* AccountsComponentTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsComponentTest.swift; sourceTree = "<group>"; };
+		928E238028EE4A6D006AAE1A /* CryptoListComponentTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoListComponentTest.swift; sourceTree = "<group>"; };
 		92AD743028D418610071F17F /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		92F5EC7028E206CE009DC3F4 /* accountResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = accountResponse.json; sourceTree = "<group>"; };
 		92F5EC7228E24150009DC3F4 /* listTradesResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = listTradesResponse.json; sourceTree = "<group>"; };
@@ -435,6 +441,7 @@
 			children = (
 				0BD66113286B76F300F4DA6B /* CryptoPriceListTestVC.swift */,
 				0BD66112286B76F300F4DA6B /* RootViewController.swift */,
+				928E237928EE0014006AAE1A /* LoginController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -832,6 +839,7 @@
 		0BBCF614285C43E000D39C6D /* CybridSDKTestApp */ = {
 			isa = PBXGroup;
 			children = (
+				928E237B28EE0291006AAE1A /* Extensions */,
 				0BD26F2728A55D6000ED2A1B /* Logger */,
 				0B00E026287DBA7300707F26 /* Auth */,
 				0B00E025287DBA6300707F26 /* ViewControllers */,
@@ -1130,7 +1138,8 @@
 			children = (
 				928E237428ECA373006AAE1A /* Extensions */,
 				928E236B28EC90D6006AAE1A /* CybridSDKTestAppUITests.swift */,
-				928E236D28EC90D6006AAE1A /* CybridSDKTestAppUITestsLaunchTests.swift */,
+				928E237E28EE4996006AAE1A /* AccountsComponentTest.swift */,
+				928E238028EE4A6D006AAE1A /* CryptoListComponentTest.swift */,
 			);
 			path = CybridSDKTestAppUITests;
 			sourceTree = "<group>";
@@ -1142,6 +1151,14 @@
 				928E237728ECB80E006AAE1A /* XCTestCase+Extensions.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		928E237B28EE0291006AAE1A /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				928E237C28EE02A6006AAE1A /* UIViewController+Extensions.swift */,
+			);
+			name = Extensions;
 			sourceTree = "<group>";
 		};
 		92F5EC7428E24716009DC3F4 /* FrameworkExtensionsTest */ = {
@@ -1643,8 +1660,10 @@
 				0BD66114286B76F300F4DA6B /* RootViewController.swift in Sources */,
 				0BD26F2928A55D7F00ED2A1B /* ClientLogger.swift in Sources */,
 				0BBCF618285C43E000D39C6D /* SceneDelegate.swift in Sources */,
+				928E237D28EE02A6006AAE1A /* UIViewController+Extensions.swift in Sources */,
 				0BD66115286B76F300F4DA6B /* CryptoPriceListTestVC.swift in Sources */,
 				0B00E028287DBA8400707F26 /* CryptoAuthenticator.swift in Sources */,
+				928E237A28EE0014006AAE1A /* LoginController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1653,8 +1672,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				928E237828ECB80E006AAE1A /* XCTestCase+Extensions.swift in Sources */,
+				928E238128EE4A6D006AAE1A /* CryptoListComponentTest.swift in Sources */,
+				928E237F28EE4996006AAE1A /* AccountsComponentTest.swift in Sources */,
 				928E237628ECA38B006AAE1A /* XCUIElement+Extensions.swift in Sources */,
-				928E236E28EC90D6006AAE1A /* CybridSDKTestAppUITestsLaunchTests.swift in Sources */,
 				928E236C28EC90D6006AAE1A /* CybridSDKTestAppUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
