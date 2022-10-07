@@ -10,7 +10,7 @@ import CybridSDK
 class MockAuthenticator: CybridAuthenticator {
   private var authenticationCompletion: ((Result<CybridBearer, Error>) -> Void)?
 
-  func makeCybridAuthToken(completion: @escaping (Result<CybridBearer, Error>) -> Void) {
+  func getBearer(completion: @escaping (Result<CybridBearer, Error>) -> Void) {
     self.authenticationCompletion = completion
   }
 
