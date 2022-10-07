@@ -40,7 +40,7 @@ extension AuthenticatedServiceProvider {
       return
     }
     /// Otherwise, we retrieve a new token with authenticator.
-    authenticator.makeCybridAuthToken(completion: { [weak self] result in
+    authenticator.getBearer(completion: { [weak self] result in
       switch result {
       case .success(let bearer):
         self?.setupSession(authToken: bearer)

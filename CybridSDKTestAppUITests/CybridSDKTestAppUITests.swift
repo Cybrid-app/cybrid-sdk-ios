@@ -14,39 +14,6 @@ class CybridSDKTestAppUITests: XCTestCase {
     let clientSecretText = "Test ClientSecret"
     let customerGUIDText = "Test customerGUID"
     
-    func test_login() throws {
-        
-        app.launch()
-        
-        // -- Given
-        let clientID = app.textFields["clientID"]
-        let clientSecret = app.textFields["clientSecret"]
-        let customerGUID = app.textFields["customerGUID"]
-        let loginButton = app.buttons["login_button"]
-
-        // -- When
-        tapElementAndWaitForKeyboardToAppear(clientID)
-        clientID.typeText(clientIDText)
-        
-        tapElementAndWaitForKeyboardToAppear(clientSecret)
-        clientSecret.typeText(clientSecretText)
-        
-        tapElementAndWaitForKeyboardToAppear(customerGUID)
-        customerGUID.typeText(customerGUIDText)
-        
-        XCTAssertFalse(app.staticTexts["login_error"].exists)
-        loginButton.tap()
-        
-        // -- Then
-        XCTAssertTrue(clientID.exists)
-        XCTAssertTrue(clientSecret.exists)
-        XCTAssertTrue(customerGUID.exists)
-        XCTAssertEqual(clientID.value as? String, clientIDText)
-        XCTAssertEqual(clientSecret.value as? String, clientSecretText)
-        XCTAssertEqual(customerGUID.value as? String, customerGUIDText)
-        XCTAssertFalse(app.staticTexts["login_error"].exists)
-    }
-    
     func test_login_error_all_fields_empty() throws {
         
         app.launch()
