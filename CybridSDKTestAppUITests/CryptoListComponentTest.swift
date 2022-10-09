@@ -54,13 +54,13 @@ class CryptoListComponentTest: XCTestCase {
         
         // -- Crypto List
         app.staticTexts["Crypto List"].tap()
-        sleep(4)
         
         // -- Enter in BTC
         let btc = app.staticTexts["Bitcoin BTC"]
-        XCTAssertTrue(btc.exists)
+        if btc.waitForExistence(timeout: 4) {
+            XCTAssertTrue(btc.exists)
+        }
         btc.tap()
-        sleep(2)
     }
     
     func test_flow_buy() throws {
@@ -75,13 +75,13 @@ class CryptoListComponentTest: XCTestCase {
         
         // -- Crypto List
         app.staticTexts["Crypto List"].tap()
-        sleep(4)
         
         // -- Enter in BTC
         let btc = app.staticTexts[asset]
-        XCTAssertTrue(btc.exists)
+        if btc.waitForExistence(timeout: 4) {
+            XCTAssertTrue(btc.exists)
+        }
         btc.tap()
-        sleep(2)
         
         // -- Check UISegmentedControl
         XCTAssertTrue(app.buttons["BUY"].exists)
@@ -123,7 +123,6 @@ class CryptoListComponentTest: XCTestCase {
         
         // -- Click Buy Button
         app.buttons["Buy"].tap()
-        sleep(3)
         
         // -- Check Order Quote
         checkBuyOrderQuote()
@@ -141,13 +140,13 @@ class CryptoListComponentTest: XCTestCase {
         
         // -- Crypto List
         app.staticTexts["Crypto List"].tap()
-        sleep(4)
         
         // -- Enter in BTC
         let btc = app.staticTexts[asset]
-        XCTAssertTrue(btc.exists)
+        if btc.waitForExistence(timeout: 4) {
+            XCTAssertTrue(btc.exists)
+        }
         btc.tap()
-        sleep(2)
         
         // -- Check UISegmentedControl
         XCTAssertTrue(app.buttons["BUY"].exists)
@@ -190,7 +189,6 @@ class CryptoListComponentTest: XCTestCase {
         
         // -- Click Buy Button
         app.buttons["Buy"].tap()
-        sleep(3)
         
         // -- Check Order Quote
         checkSellOrderQuote()
@@ -198,8 +196,12 @@ class CryptoListComponentTest: XCTestCase {
     
     func checkBuyOrderQuote() {
         
+        let title = app.staticTexts["Order Quote"]
+        
         // -- Check Static Texts
-        XCTAssertTrue(app.staticTexts["Order Quote"].exists)
+        if title.waitForExistence(timeout: 4) {
+            XCTAssertTrue(title.exists)
+        }
         XCTAssertTrue(app.staticTexts["Purchase amount"].exists)
         XCTAssertTrue(app.staticTexts["Purchase quantity"].exists)
         XCTAssertTrue(app.staticTexts["1.00000000 BTC"].exists)
@@ -209,13 +211,16 @@ class CryptoListComponentTest: XCTestCase {
         XCTAssertTrue(app.buttons["Cancel"].exists)
         XCTAssertTrue(app.buttons["Confirm"].exists)
         app.buttons["Confirm"].tap()
-        sleep(4)
     }
     
     func checkSellOrderQuote() {
         
+        let title = app.staticTexts["Order Quote"]
+        
         // -- Check Static Texts
-        XCTAssertTrue(app.staticTexts["Order Quote"].exists)
+        if title.waitForExistence(timeout: 4) {
+            XCTAssertTrue(title.exists)
+        }
         XCTAssertTrue(app.staticTexts["Sell amount"].exists)
         XCTAssertTrue(app.staticTexts["Sell quantity"].exists)
         XCTAssertTrue(app.staticTexts["Transaction Fee"].exists)

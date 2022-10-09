@@ -48,11 +48,11 @@ class AccountsComponentTest: XCTestCase {
         
         // -- Accounts
         app.staticTexts["Accounts Component"].tap()
-        sleep(4)
-        
+
         let btc = app.staticTexts["Bitcoin BTC"]
-        XCTAssertTrue(btc.exists)
+        if btc.waitForExistence(timeout: 6) {
+            XCTAssertTrue(btc.exists)
+        }
         btc.tap()
-        sleep(2)
     }
 }
