@@ -11,6 +11,7 @@ import Foundation
 class CryptoAuthenticator: CybridAuthenticator {
 
     private let session: URLSession
+    private let params = "banks:read banks:write accounts:read accounts:execute customers:read customers:write customers:execute prices:read quotes:execute trades:execute trades:read"
 
     init(session: URLSession) {
         self.session = session
@@ -31,7 +32,7 @@ class CryptoAuthenticator: CybridAuthenticator {
             "grant_type": "client_credentials",
             "client_id": id ?? "",
             "client_secret": secret ?? "",
-            "scope": "banks:read banks:write accounts:read accounts:execute customers:read customers:write customers:execute prices:read quotes:execute trades:execute trades:read"
+            "scope": self.params
         ]
         do {
             request.httpBody = try JSONSerialization.data(withJSONObject: parameters, options: .prettyPrinted)
