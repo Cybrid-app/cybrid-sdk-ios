@@ -27,7 +27,6 @@ Run the following command:
 In your AppDelegate, call `Cybrid.setup` method to customize our SDK.
 ```
 func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-  // Pass CustomerGUID 
   let guid = Bundle.main.object(forInfoDictionaryKey: "CybridCustomerGUID") as? String
   Cybrid.setup(authenticator: cryptoAuthenticator,
                customerGUID: guid ?? "",
