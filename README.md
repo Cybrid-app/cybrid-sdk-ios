@@ -3,6 +3,8 @@
 iOS SDK Library and Demo App for Cybrid API.
 
 [![Platforms](https://img.shields.io/badge/Platforms-iOS-yellowgreen?style=flat-square)](https://img.shields.io/badge/Platforms-iOS-Green?style=flat-square)
+![CircleCI](https://circleci.com/gh/Cybrid-app/cybrid-sdk-ios.svg?style=svg)
+[![codecov](https://codecov.io/gh/Cybrid-app/cybrid-sdk-ios/branch/main/graph/badge.svg?token=LTJJFQJWEA)](https://codecov.io/gh/Cybrid-app/cybrid-sdk-ios)
 
 - [Installation](#installation)
 - [Contribution Guidelines](#contribution)
@@ -108,13 +110,22 @@ class CryptoAuthenticator: CybridAuthenticator {
 ### 3. Use our Components:
 
 - Price List View:
+
+This component allow you to display the latest prices of the supported assets:
+
 ```
 let tableView = CryptoPriceListView(navigationController: navigationController)
 ```
+
 - Trade Component: You can navigate to this component from Price List component.
 
+- Accounts Component:
 
-## Contribution
+This component allow you to display the available accounts and get the detail of each one.
 
-If you want to contribute to this project please follow this [wiki](https://github.com/Cybrid-app/cybrid-sdk-ios/wiki/Contribution-Guidelines).
+To show the component you only have to present the ViewController:
+
+```
+let accounts = AccountsViewController()
+```
 
