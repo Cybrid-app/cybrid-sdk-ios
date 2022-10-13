@@ -13,11 +13,11 @@ iOS SDK Library and Demo App for Cybrid API.
 
 ### CocoaPods
 
-Add our private podspec repo to your App's Podfile:
+Add our podspec repo to your App's Podfile:
 
 `source 'git@github.com:Cybrid-app/cybrid-podspecs.git'`
 
-Run the following command:
+An then install the depenedencies:
 
 `pod install CybridSDK`
 
