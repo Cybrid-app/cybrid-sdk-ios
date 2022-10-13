@@ -9,7 +9,6 @@ import CybridApiBankSwift
 import Foundation
 
 protocol AuthenticatedServiceProvider: AnyObject {
-  var authenticator: CybridAuthenticator? { get }
   var apiManager: CybridAPIManager.Type { get }
 }
 
@@ -34,21 +33,6 @@ extension AuthenticatedServiceProvider {
       completion(.success(()))
       return
     }
-    guard let authenticator = authenticator else {
-      clearSession()
-      completion(.failure(CybridError.authenticatorNotFound))
-      return
-    }
-    /// Otherwise, we retrieve a new token with authenticator.
-    authenticator.getBearer(completion: { [weak self] result in
-      switch result {
-      case .success(let bearer):
-        self?.setupSession(authToken: bearer)
-        completion(.success(()))
-      case .failure(let error):
-        completion(.failure(error))
-      }
-    })
   }
 
   func authenticatedRequest<ResponseType: Any>(

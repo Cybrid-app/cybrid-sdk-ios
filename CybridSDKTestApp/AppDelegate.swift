@@ -5,7 +5,6 @@
 //  Created by Cybrid on 17/06/22.
 //
 
-import CybridSDK
 import UIKit
 
 @main
@@ -16,11 +15,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     // Override point for customization after application launch.
-    let guid = Bundle.main.object(forInfoDictionaryKey: "CybridCustomerGUID") as? String
-    Cybrid.setup(authenticator: cryptoAuthenticator,
-                 customerGUID: guid ?? "",
-                 fiat: .usd,
-                 logger: logger)
+    // let guid = Bundle.main.object(forInfoDictionaryKey: "CybridCustomerGUID") as? String
+    
     return true
   }
 

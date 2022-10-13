@@ -5,6 +5,7 @@
 //  Created by Erick Sanchez Perez on 05/10/22.
 //
 
+import CybridSDK
 import Foundation
 import UIKit
 
@@ -35,6 +36,29 @@ class LoginController: UIViewController {
             self.errorLabel?.isHidden = false
             return
         }
+        self.getBearer(id: clientIDValue, secret: clientSecretValue, guid: customerGUIDValue)
+    }
+    
+    func getBearer(id: String, secret: String, guid: String) {
+        
+        let authenticator = CryptoAuthenticator(session: .shared, id: id, secret: secret)
+        authenticator.getBearer(completion: { [weak self] result in
+            
+            switch result {
+            case .success(let bearer):
+                self?.initCybridSDK(cutomerGuid: guid, bearer: bearer)
+            case .failure(let error):
+              print(error)
+            }
+        })
+    }
+    
+    func initCybridSDK(cutomerGuid: String, bearer: String) {
+        
+        Cybrid.setup(bearer: bearer,
+                     customerGUID: cutomerGuid,
+                     fiat: .usd,
+                     logger: ClientLogger())
         performSegue(withIdentifier: "goToComponentsList", sender: self)
     }
 }

@@ -11,8 +11,7 @@ import Foundation
 final class CybridSession: AuthenticatedServiceProvider {
 
     // MARK: Static Properties
-    static var current = CybridSession(authenticator: Cybrid.authenticator,
-                                       apiManager: CybridApiBankSwiftAPI.self,
+    static var current = CybridSession(apiManager: CybridApiBankSwiftAPI.self,
                                        notificationManager: NotificationCenter.default)
     static let appMovedToBackgroundEvent = UIApplication.willResignActiveNotification
     static let appMovedToForegroundEvent = UIApplication.didBecomeActiveNotification
@@ -38,17 +37,14 @@ final class CybridSession: AuthenticatedServiceProvider {
     internal var taskSchedulers: Set<TaskScheduler> = []
 
     // MARK: Private(set) Internal Properties
-    private(set) var authenticator: CybridAuthenticator?
     private(set) var apiManager: CybridAPIManager.Type
     private(set) var notificationManager: NotificationManager
     private(set) var isListeningToAppEvents = false
 
     // MARK: Initializer
-    init(authenticator: CybridAuthenticator?,
-         apiManager: CybridAPIManager.Type,
+    init(apiManager: CybridAPIManager.Type,
          notificationManager: NotificationManager) {
 
-        self.authenticator = authenticator
         self.apiManager = apiManager
         self.notificationManager = notificationManager
         self.pricesRepository = PricesAPI.self
