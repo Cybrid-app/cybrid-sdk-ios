@@ -9,7 +9,7 @@ import UIKit
 
 // MARK: - Constraints
 
-extension UIView {
+public extension UIView {
 
     @discardableResult
     func constraint(attribute attr1: NSLayoutConstraint.Attribute,

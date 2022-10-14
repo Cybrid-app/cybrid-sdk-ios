@@ -22,6 +22,7 @@ class CryptoListComponentTest: XCTestCase {
         let clientSecret = app.textFields["clientSecret"]
         let customerGUID = app.textFields["customerGUID"]
         let loginButton = app.buttons["login_button"]
+        let demoMode = app.buttons["demo_mode"]
         
         // -- Login Screen Basics
         XCTAssertTrue(app.images["login_image"].exists)
@@ -41,8 +42,10 @@ class CryptoListComponentTest: XCTestCase {
         customerGUID.typeText(customerGUIDText)
         XCTAssertEqual(customerGUID.value as? String, customerGUIDText)
         
+        dismissKeyboardIfPresent()
         XCTAssertTrue(loginButton.exists)
-        loginButton.tap()
+        XCTAssertTrue(demoMode.exists)
+        demoMode.tap()
     }
     
     func test_flow() throws {
@@ -53,7 +56,10 @@ class CryptoListComponentTest: XCTestCase {
         login()
         
         // -- Crypto List
-        app.staticTexts["Crypto List"].tap()
+        let list = app.staticTexts["Crypto List"]
+        if list.waitForExistence(timeout: 6) {
+            list.tap()
+        }
         
         // -- Enter in BTC
         let btc = app.staticTexts["Bitcoin BTC"]
@@ -74,7 +80,10 @@ class CryptoListComponentTest: XCTestCase {
         login()
         
         // -- Crypto List
-        app.staticTexts["Crypto List"].tap()
+        let list = app.staticTexts["Crypto List"]
+        if list.waitForExistence(timeout: 6) {
+            list.tap()
+        }
         
         // -- Enter in BTC
         let btc = app.staticTexts[asset]
@@ -139,7 +148,10 @@ class CryptoListComponentTest: XCTestCase {
         login()
         
         // -- Crypto List
-        app.staticTexts["Crypto List"].tap()
+        let list = app.staticTexts["Crypto List"]
+        if list.waitForExistence(timeout: 6) {
+            list.tap()
+        }
         
         // -- Enter in BTC
         let btc = app.staticTexts[asset]

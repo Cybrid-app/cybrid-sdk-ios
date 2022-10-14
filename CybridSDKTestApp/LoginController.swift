@@ -16,10 +16,19 @@ class LoginController: UIViewController {
     @IBOutlet var customerGUID: UITextField?
     @IBOutlet var errorLabel: UILabel?
     
+    private var loader: LoginLooader? = nil
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
         self.hideKeyboardWhenTappedAround()
+    }
+    
+    @IBAction func demoLogin(_ sender: Any) {
+
+        self.loader = LoginLooader()
+        self.loader?.present()
+        self.getBearer(id: "", secret: "", guid: "")
     }
     
     @IBAction func tryToLogin(_ sender: Any) {
@@ -36,6 +45,8 @@ class LoginController: UIViewController {
             self.errorLabel?.isHidden = false
             return
         }
+        self.loader = LoginLooader()
+        self.loader?.present()
         self.getBearer(id: clientIDValue, secret: clientSecretValue, guid: customerGUIDValue)
     }
     
@@ -46,20 +57,35 @@ class LoginController: UIViewController {
             
             switch result {
             case .success(let bearer):
-                self?.initCybridSDK(cutomerGuid: guid, bearer: bearer)
+                self?.initCybridSDK(guid: guid, bearer: bearer)
             case .failure(let error):
               print(error)
             }
         })
     }
     
-    func initCybridSDK(cutomerGuid: String, bearer: String) {
+    func initCybridSDK(guid: String, bearer: String) {
         
+        var guidClient = ""
+        if (guid == "") {
+            guidClient = Bundle.main.object(forInfoDictionaryKey: "CybridCustomerGUID") as? String ?? ""
+        } else {
+            guidClient = guid
+        }
         Cybrid.setup(bearer: bearer,
-                     customerGUID: cutomerGuid,
+                     customerGUID: guidClient,
                      fiat: .usd,
                      logger: ClientLogger())
-        performSegue(withIdentifier: "goToComponentsList", sender: self)
+        
+        if loader != nil {
+            DispatchQueue.main.async {
+                self.loader?.dismiss(animated: true)
+            }
+        }
+        
+        DispatchQueue.main.async {
+            self.performSegue(withIdentifier: "goToComponents", sender: self)
+        }
     }
 }
 

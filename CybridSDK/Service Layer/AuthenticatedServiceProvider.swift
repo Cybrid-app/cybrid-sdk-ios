@@ -29,6 +29,9 @@ extension AuthenticatedServiceProvider {
   /// Makes sure we have a valid authenticated session.
   func authenticate(_ completion: @escaping (Result<Void, Error>) -> Void) {
     /// If it has an Authorization header we return.
+    if !Cybrid.bearer.isEmpty {
+      self.setupSession(authToken: Cybrid.bearer)
+    }
     if isAuthenticated {
       completion(.success(()))
       return

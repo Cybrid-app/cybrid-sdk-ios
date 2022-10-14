@@ -145,6 +145,7 @@
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bDR-4B-oyo">
                                 <rect key="frame" x="30" y="548" width="354" height="30"/>
+                                <accessibility key="accessibilityConfiguration" identifier="demo_mode"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="YYU-Z4-lah"/>
                                 </constraints>
@@ -152,7 +153,7 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Enter in Demo Mode"/>
                                 <connections>
-                                    <segue destination="BYZ-38-t0r" kind="show" identifier="goToComponentsList" id="IMj-m3-AUp"/>
+                                    <action selector="demoLogin:" destination="u29-vx-Ptb" eventType="touchUpInside" id="K0y-ml-1Gb"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CXa-0i-KzW">
@@ -206,6 +207,7 @@
                         <outlet property="clientSecret" destination="0Jv-FV-bNS" id="kew-if-TZT"/>
                         <outlet property="customerGUID" destination="IkL-4M-hYw" id="3Ga-F9-sCD"/>
                         <outlet property="errorLabel" destination="OO4-iE-FhO" id="CWu-Et-L8I"/>
+                        <segue destination="BYZ-38-t0r" kind="show" identifier="goToComponents" id="WOD-eV-VDL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Trk-s0-tX1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

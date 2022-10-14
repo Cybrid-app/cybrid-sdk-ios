@@ -167,6 +167,7 @@
 		928E237F28EE4996006AAE1A /* AccountsComponentTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928E237E28EE4996006AAE1A /* AccountsComponentTest.swift */; };
 		928E238128EE4A6D006AAE1A /* CryptoListComponentTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928E238028EE4A6D006AAE1A /* CryptoListComponentTest.swift */; };
 		92AD743128D418610071F17F /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AD743028D418610071F17F /* String+Extensions.swift */; };
+		92E2133528F86F3300F420F2 /* LoginLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E2133428F86F3300F420F2 /* LoginLoader.swift */; };
 		92F5EC7128E206CE009DC3F4 /* accountResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 92F5EC7028E206CE009DC3F4 /* accountResponse.json */; };
 		92F5EC7328E24150009DC3F4 /* listTradesResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 92F5EC7228E24150009DC3F4 /* listTradesResponse.json */; };
 		9E3B30420CC77D425A7A1C28 /* Pods_Abstract_CybridSDKTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80DCD8FC666A9176CF28F146 /* Pods_Abstract_CybridSDKTests.framework */; };
@@ -380,6 +381,7 @@
 		928E237E28EE4996006AAE1A /* AccountsComponentTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsComponentTest.swift; sourceTree = "<group>"; };
 		928E238028EE4A6D006AAE1A /* CryptoListComponentTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoListComponentTest.swift; sourceTree = "<group>"; };
 		92AD743028D418610071F17F /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
+		92E2133428F86F3300F420F2 /* LoginLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginLoader.swift; sourceTree = "<group>"; };
 		92F5EC7028E206CE009DC3F4 /* accountResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = accountResponse.json; sourceTree = "<group>"; };
 		92F5EC7228E24150009DC3F4 /* listTradesResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = listTradesResponse.json; sourceTree = "<group>"; };
 		D8168B44D4C796A81CF0902E /* Pods-Abstract-CybridSDKTestApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Abstract-CybridSDKTestApp.debug.xcconfig"; path = "Target Support Files/Pods-Abstract-CybridSDKTestApp/Pods-Abstract-CybridSDKTestApp.debug.xcconfig"; sourceTree = "<group>"; };
@@ -437,6 +439,7 @@
 		0B00E025287DBA6300707F26 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				92E2133328F86F1300F420F2 /* Modal */,
 				0BD66113286B76F300F4DA6B /* CryptoPriceListTestVC.swift */,
 				0BD66112286B76F300F4DA6B /* RootViewController.swift */,
 				928E237928EE0014006AAE1A /* LoginController.swift */,
@@ -1150,6 +1153,14 @@
 			name = Extensions;
 			sourceTree = "<group>";
 		};
+		92E2133328F86F1300F420F2 /* Modal */ = {
+			isa = PBXGroup;
+			children = (
+				92E2133428F86F3300F420F2 /* LoginLoader.swift */,
+			);
+			name = Modal;
+			sourceTree = "<group>";
+		};
 		92F5EC7428E24716009DC3F4 /* FrameworkExtensionsTest */ = {
 			isa = PBXGroup;
 			children = (
@@ -1648,6 +1659,7 @@
 				0BD66114286B76F300F4DA6B /* RootViewController.swift in Sources */,
 				0BD26F2928A55D7F00ED2A1B /* ClientLogger.swift in Sources */,
 				0BBCF618285C43E000D39C6D /* SceneDelegate.swift in Sources */,
+				92E2133528F86F3300F420F2 /* LoginLoader.swift in Sources */,
 				928E237D28EE02A6006AAE1A /* UIViewController+Extensions.swift in Sources */,
 				0BD66115286B76F300F4DA6B /* CryptoPriceListTestVC.swift in Sources */,
 				0B00E028287DBA8400707F26 /* CryptoAuthenticator.swift in Sources */,

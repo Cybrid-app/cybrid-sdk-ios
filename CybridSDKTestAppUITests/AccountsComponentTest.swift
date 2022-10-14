@@ -24,6 +24,7 @@ class AccountsComponentTest: XCTestCase {
         let clientSecret = app.textFields["clientSecret"]
         let customerGUID = app.textFields["customerGUID"]
         let loginButton = app.buttons["login_button"]
+        let demoMode = app.buttons["demo_mode"]
         
         // -- Login Screen Basics
         XCTAssertTrue(app.images["login_image"].exists)
@@ -43,11 +44,16 @@ class AccountsComponentTest: XCTestCase {
         customerGUID.typeText(customerGUIDText)
         XCTAssertEqual(customerGUID.value as? String, customerGUIDText)
         
+        dismissKeyboardIfPresent()
         XCTAssertTrue(loginButton.exists)
-        loginButton.tap()
+        XCTAssertTrue(demoMode.exists)
+        demoMode.tap()
         
         // -- Accounts
-        app.staticTexts["Accounts Component"].tap()
+        let accounts = app.staticTexts["Accounts Component"]
+        if accounts.waitForExistence(timeout: 5) {
+            accounts.tap()
+        }
 
         let btc = app.staticTexts["Bitcoin BTC"]
         if btc.waitForExistence(timeout: 6) {
