@@ -60,7 +60,7 @@ class TradeViewModelTests: XCTestCase {
     dataProvider.didFetchPricesSuccessfully()
 
     // Then
-    XCTAssertFalse(viewModel.assetList.value.isEmpty)
+     XCTAssertFalse(viewModel.assetList.value.isEmpty)
     XCTAssertNotNil(viewModel.selectedPriceRate)
   }
 

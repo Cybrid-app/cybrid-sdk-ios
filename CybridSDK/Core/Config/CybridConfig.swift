@@ -35,7 +35,7 @@ public final class CybridConfig {
                       logger: CybridLogger? = nil,
                       refreshRate: TimeInterval = 5,
                       theme: Theme? = nil) {
-        
+
         self.bearer = bearer
         self.customerGUID = customerGUID
         self.fiat = fiat

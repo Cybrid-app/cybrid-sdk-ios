@@ -10,7 +10,6 @@ import CybridApiBankSwift
 import XCTest
 
 class CybridSessionTests: XCTestCase {
-  var authenticator = MockAuthenticator()
   var apiManager = MockAPIManager.self
   var notificationManager = NotificationCenterMock()
 
@@ -19,13 +18,13 @@ class CybridSessionTests: XCTestCase {
   }
 
   func testSessionInitialization() {
-    let newSession = createSession(authenticator: authenticator)
+    let newSession = createSession()
     XCTAssertFalse(newSession.isAuthenticated)
   }
 
   func testSession_setupBearer() {
     // Given
-    let session = createSession(authenticator: authenticator)
+    let session = createSession()
     let bearer = "Mock_Bearer"
 
     // When
@@ -37,7 +36,7 @@ class CybridSessionTests: XCTestCase {
 
   func testSession_setupBearer_andClear() {
     // Given
-    let session = createSession(authenticator: authenticator)
+    let session = createSession()
     let bearer = "Mock_Bearer"
 
     // When
@@ -54,12 +53,13 @@ class CybridSessionTests: XCTestCase {
 
   func testSession_authenticateFirstTime() {
     // Given
-    let session = createSession(authenticator: authenticator)
+    let session = createSession()
     let expectedToken = "Mock_Bearer"
     let expectedBearer = "Bearer Mock_Bearer"
     var didFail = false
 
     // When
+    session.setupSession(authToken: expectedToken)
     session.authenticate { result in
       switch result {
       case .failure:
@@ -68,7 +68,6 @@ class CybridSessionTests: XCTestCase {
         didFail = false
       }
     }
-    authenticator.authenticationSuccess(with: expectedToken)
 
     // Then
     XCTAssertFalse(didFail)
@@ -77,10 +76,9 @@ class CybridSessionTests: XCTestCase {
 
   func testSession_authenticateTwice() {
     // Given
-    let session = createSession(authenticator: authenticator)
+    let session = createSession()
     let initialToken = "Mock_Bearer_One"
     let initialBearer = "Bearer Mock_Bearer_One"
-    let secondToken = "Mock_Bearer"
     var didFail = false
 
     // When
@@ -94,7 +92,6 @@ class CybridSessionTests: XCTestCase {
         didFail = false
       }
     }
-    authenticator.authenticationSuccess(with: secondToken)
 
     // Then
     XCTAssertFalse(didFail)
@@ -103,7 +100,7 @@ class CybridSessionTests: XCTestCase {
 
   func testSession_authenticateWithoutAuthenticator() {
     // Given
-    let session = createSession(authenticator: nil)
+    let session = createSession()
     var didFail = false
 
     // When
@@ -123,7 +120,7 @@ class CybridSessionTests: XCTestCase {
 
   func testSession_authenticateFailure() {
     // Given
-    let session = createSession(authenticator: authenticator)
+    let session = createSession()
     var didFail = false
 
     // When
@@ -135,7 +132,6 @@ class CybridSessionTests: XCTestCase {
         didFail = false
       }
     }
-    authenticator.authenticationFailure()
 
     // Then
     XCTAssertTrue(didFail)
@@ -144,7 +140,7 @@ class CybridSessionTests: XCTestCase {
 
   func testSession_authenticatedRequest_successful() {
     // Given
-    let session = createSession(authenticator: authenticator)
+    let session = createSession()
     let expectedResult = "Success"
     var actualResult: String?
 
@@ -169,7 +165,7 @@ class CybridSessionTests: XCTestCase {
 
   func testSession_authenticatedRequest_failure() {
     // Given
-    let session = createSession(authenticator: authenticator)
+    let session = createSession()
     let expectedResult = "Success"
     var actualResult: String?
 
@@ -195,7 +191,7 @@ class CybridSessionTests: XCTestCase {
 
   func testSession_authenticatedRequestWithParams_failure() {
     // Given
-    let session = createSession(authenticator: authenticator)
+    let session = createSession()
     let expectedResult = "Success"
     var actualResult: String?
 
@@ -215,7 +211,6 @@ class CybridSessionTests: XCTestCase {
         }
       }
     )
-    authenticator.authenticationFailure()
 
     // Then
     XCTAssertFalse(session.isAuthenticated)
@@ -225,7 +220,7 @@ class CybridSessionTests: XCTestCase {
 
   func testSession_unauthenticatedRequest() {
     // Given
-    let session = createSession(authenticator: nil)
+    let session = createSession()
     let expectedResult = "Success"
     var actualResult: String?
 
@@ -250,7 +245,7 @@ class CybridSessionTests: XCTestCase {
 
   func testSession_startScheduler() {
     // Given
-    let session = createSession(authenticator: authenticator)
+    let session = createSession()
     let scheduler = TaskSchedulerMock()
     session.taskSchedulers.insert(scheduler)
 
@@ -263,7 +258,7 @@ class CybridSessionTests: XCTestCase {
 
   func testSession_moveToBackground() {
     // Given
-    let session = createSession(authenticator: authenticator)
+    let session = createSession()
     let scheduler = TaskSchedulerMock()
     session.taskSchedulers.insert(scheduler)
 
@@ -277,7 +272,7 @@ class CybridSessionTests: XCTestCase {
 
   func testSession_moveToForeground() {
     // Given
-    let session = createSession(authenticator: authenticator)
+    let session = createSession()
     let scheduler = TaskSchedulerMock()
     session.taskSchedulers.insert(scheduler)
 
@@ -292,7 +287,7 @@ class CybridSessionTests: XCTestCase {
 }
 
 extension CybridSessionTests {
-  func createSession(authenticator: CybridAuthenticator?) -> CybridSession {
-    CybridSession(authenticator: authenticator, apiManager: apiManager, notificationManager: notificationManager)
-  }
+    func createSession() -> CybridSession {
+      CybridSession(apiManager: apiManager, notificationManager: notificationManager)
+    }
 }

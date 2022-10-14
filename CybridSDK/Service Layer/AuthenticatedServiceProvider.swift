@@ -35,6 +35,9 @@ extension AuthenticatedServiceProvider {
     if isAuthenticated {
       completion(.success(()))
       return
+    } else {
+      completion(.failure(CybridError.authenticationError))
+      return
     }
   }
 
