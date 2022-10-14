@@ -43,6 +43,7 @@ public final class CybridConfig {
         self.refreshRate = refreshRate
         self._preferredLocale = locale
         self.logger = logger
+        self.session.setupSession(authToken: self.bearer)
         CybridApiBankSwiftAPI.basePath = environment.basePath
         CodableHelper.jsonDecoder = CybridJSONDecoder()
     }
