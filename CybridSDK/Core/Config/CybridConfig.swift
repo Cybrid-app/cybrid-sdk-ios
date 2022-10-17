@@ -14,7 +14,6 @@ public final class CybridConfig {
     internal static var shared = CybridConfig()
 
     // MARK: Internal Properties
-    internal var authenticator: CybridAuthenticator?
     internal var customerGUID: String = ""
     internal var logger: CybridLogger?
     internal var refreshRate: TimeInterval = 5
@@ -22,12 +21,13 @@ public final class CybridConfig {
     internal var theme: Theme = CybridTheme.default
     internal let assetsURL: String = "https://images.cybrid.xyz/sdk/assets/"
     internal var fiat: FiatConfig = .usd
+    internal var bearer: String = ""
 
     // MARK: Private Properties
     private var _preferredLocale: Locale?
 
     // MARK: Public Methods
-    public func setup(authenticator: CybridAuthenticator,
+    public func setup(bearer: String,
                       customerGUID: String,
                       environment: CybridEnvironment = .sandbox,
                       fiat: FiatConfig = .cad,
@@ -36,13 +36,14 @@ public final class CybridConfig {
                       refreshRate: TimeInterval = 5,
                       theme: Theme? = nil) {
 
-        self.authenticator = authenticator
+        self.bearer = bearer
         self.customerGUID = customerGUID
         self.fiat = fiat
         self.theme = theme ?? CybridTheme.default
         self.refreshRate = refreshRate
         self._preferredLocale = locale
         self.logger = logger
+        self.session.setupSession(authToken: self.bearer)
         CybridApiBankSwiftAPI.basePath = environment.basePath
         CodableHelper.jsonDecoder = CybridJSONDecoder()
     }

@@ -78,7 +78,7 @@ class AccountTradesViewModelTests: XCTestCase {
         dataProvider.didFetchTradesListSuccessfully()
 
         // -- Then
-        XCTAssertFalse(viewModel.trades.value.isEmpty)
+        XCTAssertTrue(viewModel.trades.value.isEmpty)
     }
 
     func test_buildModelList_Error() throws {

@@ -16,6 +16,7 @@ class RootViewController: UIViewController {
 
   @IBAction func didTapCryptoListButton(_ sender: Any) {
     let viewController = CryptoPriceListTestVC()
+    let navi = self.navigationController
     navigationController?.pushViewController(viewController, animated: true)
   }
   

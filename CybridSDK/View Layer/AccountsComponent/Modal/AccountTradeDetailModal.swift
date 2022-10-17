@@ -33,7 +33,7 @@ class AccountTradeDetailModal: UIModal {
         self.currentAssetURL = assetURL
         self.localizer = localizer
         self.onConfirm = onConfirm
-        super.init(theme: theme, height: UIValues.modalSize)
+        super.init(height: UIValues.modalSize)
 
         setupViews()
     }

@@ -10,5 +10,5 @@ import Foundation
 public typealias CybridBearer = String
 
 public protocol CybridAuthenticator {
-  func makeCybridAuthToken(completion: @escaping (Result<CybridBearer, Error>) -> Void)
+    func getBearer(completion: @escaping (Result<CybridBearer, Error>) -> Void)
 }

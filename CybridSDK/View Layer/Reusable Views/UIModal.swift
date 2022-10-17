@@ -8,27 +8,25 @@
 import Foundation
 import UIKit
 
-internal class UIModal: UIViewController {
+open class UIModal: UIViewController {
 
-    private let theme: Theme
     private let dispatchGroup = DispatchGroup()
 
-    internal var containerView = UIView()
+    public var containerView = UIView()
     var height: CGFloat = 100
 
-    init(theme: Theme, height: CGFloat = 100) {
+    public init(height: CGFloat = 100) {
 
-        self.theme = theme
         super.init(nibName: nil, bundle: nil)
 
-        self.containerView.backgroundColor = theme.colorTheme.secondaryBackgroundColor
+        self.containerView.backgroundColor = UIColor.white
         self.containerView.layer.cornerRadius = UIConstants.cornerRadius
         self.height = height
         self.setupViews()
     }
 
     @available(iOS, deprecated: 10, message: "You should never use this init method.")
-    required init?(coder: NSCoder) {
+    public required init?(coder: NSCoder) {
       assertionFailure("init(coder:) should never be used")
       return nil
     }
@@ -75,7 +73,7 @@ internal class UIModal: UIViewController {
         dismiss(animated: true)
     }
 
-    func present() {
+    public func present() {
 
         if var topController = UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.rootViewController {
             while let presentedViewController = topController.presentedViewController {
@@ -97,7 +95,7 @@ extension UIModal {
 
 extension UIModal: UIGestureRecognizerDelegate {
 
-    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+    public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
 
         let coordinates = touch.location(in: self.containerView)
         return coordinates.y < 0
