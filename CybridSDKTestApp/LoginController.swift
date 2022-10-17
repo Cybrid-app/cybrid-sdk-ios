@@ -61,7 +61,7 @@ class LoginController: UIViewController {
             case .failure(let error):
                 self?.loader?.dismiss(animated: true)
                 self?.errorLabel?.text = error.localizedDescription
-              print(error)
+                print(error)
             }
         })
     }
