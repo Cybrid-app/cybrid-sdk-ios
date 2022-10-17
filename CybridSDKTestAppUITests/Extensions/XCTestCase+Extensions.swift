@@ -28,14 +28,5 @@ extension XCTestCase {
         if app.keys.element(boundBy: 0).exists {
             app.typeText("\n")
         }
-        
-        /*let app = XCUIApplication()
-        if app.keyboards.element(boundBy: 0).exists {
-            if UIDevice.current.userInterfaceIdiom == .pad {
-                app.keyboards.buttons["Hide keyboard"].tap()
-            } else {
-                app.toolbars.buttons["aceptar"].tap()
-            }
-        }*/
     }
 }

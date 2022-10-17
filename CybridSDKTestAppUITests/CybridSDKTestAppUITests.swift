@@ -121,4 +121,40 @@ class CybridSDKTestAppUITests: XCTestCase {
         XCTAssertEqual(clientSecret.value as? String, clientSecretText)
         XCTAssertTrue(app.staticTexts["login_error"].exists)
     }
+    
+    func test_login_error_bad_credentials() throws {
+        
+        app.launch()
+        
+        // -- Given
+        let clientID = app.textFields["clientID"]
+        let clientSecret = app.textFields["clientSecret"]
+        let customerGUID = app.textFields["customerGUID"]
+        let loginButton = app.buttons["login_button"]
+
+        // -- When
+        tapElementAndWaitForKeyboardToAppear(clientID)
+        clientID.typeText(clientIDText)
+        
+        tapElementAndWaitForKeyboardToAppear(clientSecret)
+        clientSecret.typeText(clientSecretText)
+        
+        tapElementAndWaitForKeyboardToAppear(customerGUID)
+        customerGUID.typeText(customerGUIDText)
+        dismissKeyboardIfPresent()
+        
+        XCTAssertFalse(app.staticTexts["login_error"].exists)
+        loginButton.tap()
+        
+        // -- Then
+        XCTAssertTrue(clientID.exists)
+        XCTAssertTrue(clientSecret.exists)
+        XCTAssertTrue(customerGUID.exists)
+        XCTAssertEqual(clientSecret.value as? String, clientSecretText)
+        XCTAssertEqual(customerGUID.value as? String, customerGUIDText)
+        
+        if app.staticTexts["login_error"].waitForExistence(timeout: 5) {
+            XCTAssertTrue(app.staticTexts["login_error"].exists)
+        }
+    }
 }
