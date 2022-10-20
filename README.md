@@ -6,9 +6,6 @@ iOS SDK Library and Demo App for Cybrid API.
 ![CircleCI](https://circleci.com/gh/Cybrid-app/cybrid-sdk-ios.svg?style=svg)
 [![codecov](https://codecov.io/gh/Cybrid-app/cybrid-sdk-ios/branch/main/graph/badge.svg?token=LTJJFQJWEA)](https://codecov.io/gh/Cybrid-app/cybrid-sdk-ios)
 
-- [Installation](#installation)
-- [Contribution Guidelines](#contribution)
-
 ## Installation
 
 ### CocoaPods
@@ -24,99 +21,59 @@ An then install the depenedencies:
 ## Usage
 
 ### 1. Setup SDK
-In your AppDelegate, call `Cybrid.setup` method to customize our SDK.
+
+To use the SDK is neccesary have a `bearer` token, this token have to be requested to your API for security reasons.
+
+For Demo purposes we request `bearer` token in the DemoApp but the credentials have to setted in the Login Screen.
+
+After you get the token, setup the SDK like this:
+
 ```
-func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-  let guid = Bundle.main.object(forInfoDictionaryKey: "CybridCustomerGUID") as? String
-  Cybrid.setup(authenticator: cryptoAuthenticator,
-               customerGUID: guid ?? "",
-               fiat: .usd,
-               logger: logger)
-  return true
+Cybrid.setup(bearer: bearerToken,
+             customerGUID: guid ?? "",
+             fiat: .usd)
+```
+
+### 2. Logger
+
+Our logger allows to log every kind of event that happens in the SDK.
+You have to create your own logger implementation that extends of our logger. Check this basic implementation:
+
+```
+final class ClientLogger: CybridLogger {
+	func log(_ event: CybridEvent) {
+		print("\(event.level.rawValue):\(event.code) - \(event.message)")
+	}
 }
 ```
 
-### 2. Implement CybridAuthenticator in order to inject Bearer token to SDK
+To use your client you have to set it in the SDk setup:
 
 ```
-import CybridSDK
-import Foundation
-
-class CryptoAuthenticator: CybridAuthenticator {
-
-  private let session: URLSession
-
-  init(session: URLSession) {
-    self.session = session
-  }
-
-  func makeCybridAuthToken(completion: @escaping (Result<CybridBearer, Error>) -> Void) {
-    // 1. Setup a call to your own API to retrieve Cybrid's JWT
-    guard let url = URL(string: "https://id.demo.cybrid.app/oauth/token") else {
-      completion(.failure(CybridError.authenticationError))
-      return
-    }
-    var request = URLRequest(url: url)
-    request.httpMethod = "POST"
-    request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-
-    // 2. Pass parameters if needed
-    let parameters: [String: Any] = [ ... ]
-    do {
-      request.httpBody = try JSONSerialization.data(withJSONObject: parameters, options: .prettyPrinted)
-    } catch let error {
-      completion(.failure(error))
-      return
-    }
-    
-    // 3. Make request
-    session.dataTask(with: request) { data, response, error in
-      if let error = error {
-        completion(.failure(error))
-        return
-      }
-
-      guard
-        let httpResponse = response as? HTTPURLResponse,
-            (200...299).contains(httpResponse.statusCode),
-        let responseData = data
-      else {
-        completion(.failure(CybridError.serviceError))
-        return
-      }
-
-      do {
-        if
-          let jsonResponse = try JSONSerialization.jsonObject(with: responseData) as? [String: Any],
-          let bearer = jsonResponse["access_token"] as? String
-        {
-        // 4. Call completion success with Access Token
-          completion(.success(bearer))
-          return
-        } else {
-          completion(.failure(CybridError.serviceError))
-          return
-        }
-      } catch let error {
-        completion(.failure(error))
-        return
-      }
-    }.resume()
-  }
-}
+Cybrid.setup(...
+             logger: ClientLogger())
 ```
 
 ### 3. Use our Components:
 
+The SDK implemnts a list of comonents that you can implement easily in your application, all the components are `ViewControllers` so eaasily can be intancieted.
+
 - Price List View:
 
-This component allow you to display the latest prices of the supported assets:
+This component is the only component that is isoleted view.
+This component display the latest prices of the supported assets.
+
+```
+let tableView = CryptoPriceListView()
+```
+
+- Trade Component: 
+
+This component display the latest prices of the supported assets and allow you to trade (Buy, Sell) the asset :
 
 ```
 let tableView = CryptoPriceListView(navigationController: navigationController)
 ```
-
-- Trade Component: You can navigate to this component from Price List component.
 
 - Accounts Component:
 
@@ -128,3 +85,18 @@ To show the component you only have to present the ViewController:
 let accounts = AccountsViewController()
 ```
 
+## Demo App
+
+To setup the demo app you have two options:
+
+- 1: Add enviroment vars into the system
+
+```
+export CybridClientId = 'XXXX'
+export CybridClientSecret = 'XXXX'
+export CybridCustomerGUID = 'XXXX'
+```
+
+- 2: Use the Logn Screen and pass this 3 values
+
+To run the demo app you need to run the demo app inside the emulator or physical device.
