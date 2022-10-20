@@ -14,7 +14,7 @@ Add our podspec repo to your App's Podfile:
 
 `source 'git@github.com:Cybrid-app/cybrid-podspecs.git'`
 
-And then install the depenedencies:
+And then install the dependencies
 
 `pod install CybridSDK`
 
@@ -99,6 +99,6 @@ export CybridClientSecret = 'XXXX'
 export CybridCustomerGUID = 'XXXX'
 ```
 
-- 2: Use the Login Screen and pass this three values
+- 2: Use the Login Screen and pass the `clientId`, `clientSecret` and `customerGuid` values.
 
 The demo application can be run on the simulator or on a physical device.
