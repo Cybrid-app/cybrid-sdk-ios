@@ -165,6 +165,9 @@
 		928E237D28EE02A6006AAE1A /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928E237C28EE02A6006AAE1A /* UIViewController+Extensions.swift */; };
 		928E237F28EE4996006AAE1A /* AccountsComponentTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928E237E28EE4996006AAE1A /* AccountsComponentTest.swift */; };
 		928E238128EE4A6D006AAE1A /* CryptoListComponentTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928E238028EE4A6D006AAE1A /* CryptoListComponentTest.swift */; };
+		92A90A8729118C0C00CA0E08 /* CustomerRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A90A8629118C0C00CA0E08 /* CustomerRepository.swift */; };
+		92A90A8A2911939400CA0E08 /* IdentityVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A90A892911939400CA0E08 /* IdentityVerificationViewController.swift */; };
+		92A90A8D2911940600CA0E08 /* IdentityVerificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A90A8C2911940600CA0E08 /* IdentityVerificationViewModel.swift */; };
 		92AD743128D418610071F17F /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AD743028D418610071F17F /* String+Extensions.swift */; };
 		92E2133528F86F3300F420F2 /* LoginLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E2133428F86F3300F420F2 /* LoginLoader.swift */; };
 		92F5EC7128E206CE009DC3F4 /* accountResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 92F5EC7028E206CE009DC3F4 /* accountResponse.json */; };
@@ -378,6 +381,9 @@
 		928E237C28EE02A6006AAE1A /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
 		928E237E28EE4996006AAE1A /* AccountsComponentTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsComponentTest.swift; sourceTree = "<group>"; };
 		928E238028EE4A6D006AAE1A /* CryptoListComponentTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoListComponentTest.swift; sourceTree = "<group>"; };
+		92A90A8629118C0C00CA0E08 /* CustomerRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerRepository.swift; sourceTree = "<group>"; };
+		92A90A892911939400CA0E08 /* IdentityVerificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentityVerificationViewController.swift; sourceTree = "<group>"; };
+		92A90A8C2911940600CA0E08 /* IdentityVerificationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentityVerificationViewModel.swift; sourceTree = "<group>"; };
 		92AD743028D418610071F17F /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		92E2133428F86F3300F420F2 /* LoginLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginLoader.swift; sourceTree = "<group>"; };
 		92F5EC7028E206CE009DC3F4 /* accountResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = accountResponse.json; sourceTree = "<group>"; };
@@ -727,6 +733,7 @@
 				0BBD0CD928B3E5D9001DBC5F /* QuotesRepository.swift */,
 				0BBD0CDB28B5D6F7001DBC5F /* TradesRepository.swift */,
 				927233CA28D23D060080AAC4 /* AccountsRepository.swift */,
+				92A90A8629118C0C00CA0E08 /* CustomerRepository.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -925,6 +932,7 @@
 		0BD660FF286B765900F4DA6B /* View Layer */ = {
 			isa = PBXGroup;
 			children = (
+				92A90A882911935400CA0E08 /* IdentityComponent */,
 				0BD66100286B766B00F4DA6B /* Crypto Price List */,
 				0B557B902899F4CB00632A6D /* Trade */,
 				927233D228D243A30080AAC4 /* AccountsComponent */,
@@ -1148,6 +1156,23 @@
 				928E237C28EE02A6006AAE1A /* UIViewController+Extensions.swift */,
 			);
 			name = Extensions;
+			sourceTree = "<group>";
+		};
+		92A90A882911935400CA0E08 /* IdentityComponent */ = {
+			isa = PBXGroup;
+			children = (
+				92A90A8B291193F500CA0E08 /* View */,
+				92A90A892911939400CA0E08 /* IdentityVerificationViewController.swift */,
+			);
+			path = IdentityComponent;
+			sourceTree = "<group>";
+		};
+		92A90A8B291193F500CA0E08 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				92A90A8C2911940600CA0E08 /* IdentityVerificationViewModel.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		92E2133328F86F1300F420F2 /* Modal */ = {
@@ -1517,6 +1542,7 @@
 				927233C228D1AAA20080AAC4 /* SymbolPriceBankModel+Extensions.swift in Sources */,
 				0BD6612A286DE86A00F4DA6B /* CybridLocalizationKey.swift in Sources */,
 				0B00E02E287F6AE500707F26 /* CybridError.swift in Sources */,
+				92A90A8A2911939400CA0E08 /* IdentityVerificationViewController.swift in Sources */,
 				927233D628D243DC0080AAC4 /* AccountTradesViewController.swift in Sources */,
 				927233CD28D2419B0080AAC4 /* QuoteBankModel+Extensions.swift in Sources */,
 				927233BE28D131BE0080AAC4 /* AccountBankModel+Extensions.swift in Sources */,
@@ -1574,6 +1600,7 @@
 				0BBD0CCA28AAC025001DBC5F /* BigDecimalValidator.swift in Sources */,
 				927233D428D243C60080AAC4 /* AccountsViewController.swift in Sources */,
 				927233CB28D23D060080AAC4 /* AccountsRepository.swift in Sources */,
+				92A90A8D2911940600CA0E08 /* IdentityVerificationViewModel.swift in Sources */,
 				0B2B2A8928629324002F0EC1 /* Theme.swift in Sources */,
 				0B289A07289E29D4001B3360 /* AssetBankModel+Extensions.swift in Sources */,
 				927233E828D244BD0080AAC4 /* AccountsCell.swift in Sources */,
@@ -1585,6 +1612,7 @@
 				0BBD0CD628AC1DDC001DBC5F /* LoadingModalView.swift in Sources */,
 				0BD660FE286B763E00F4DA6B /* AsyncOperation.swift in Sources */,
 				0B2899E5288EE764001B3360 /* TimerType.swift in Sources */,
+				92A90A8729118C0C00CA0E08 /* CustomerRepository.swift in Sources */,
 				0B303CDF2862DD2C007BF7FF /* UIConstants.swift in Sources */,
 				0B00E040287F81A500707F26 /* CybridAPIManager.swift in Sources */,
 			);
