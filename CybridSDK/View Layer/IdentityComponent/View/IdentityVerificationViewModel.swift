@@ -40,15 +40,218 @@ class IdentityVerificationViewModel: NSObject {
             switch customerResponse {
 
             case .success(let customer):
-                self?.logger?.log(.component(.accounts(.pricesDataFetching)))
+                // self?.logger?.log(.component(.accounts(.pricesDataFetching)))
                 print("CREATE CUSTOMER")
                 print(customer)
                 print("---------------------------")
                 self?.customerGuid = customer.guid ?? (self?.customerGuid ?? "")
+                self?.getCustomerStatus()
 
             case .failure:
                 self?.logger?.log(.component(.accounts(.pricesDataError)))
             }
+        }
+    }
+
+    func getCustomerStatus() {
+
+        self.dataProvider.getCustomer(customerGuid: self.customerGuid) { [weak self] customerResponse in
+
+            switch customerResponse {
+
+            case .success(let customer):
+                // self?.logger?.log(.component(.accounts(.pricesDataFetching)))
+                print("CUSTOMER STATUS")
+                print(customer)
+                print("---------------------------")
+                self?.checkCustomerStatus(state: customer.state ?? .storing)
+
+            case .failure:
+                self?.logger?.log(.component(.accounts(.pricesDataError)))
+            }
+        }
+    }
+
+    func getIdentityVerificationStatus(record: IdentityVerificationBankModel? = nil) {
+
+        var lastVerification = record == nil ? fetchLastIdentityVerification() : record
+        print("---> LAST VERIFICATION")
+        print(lastVerification)
+        print("---------------------------")
+
+        if lastVerification == nil || lastVerification?.state == .expired || lastVerification?.personaState == .expired {
+
+            lastVerification = self.createIdentityVerification()
+            print("-----> CREATION")
+            print(lastVerification)
+            print("---------------------------")
+        }
+
+        self.dataProvider.getIdentityVerification(guid: lastVerification?.guid ?? "") { [weak self] identityResponse in
+
+            switch identityResponse {
+
+            case .success(let record):
+                print("IDENTITY STATUS")
+                print(record)
+                print("---------------------------")
+                self?.checkIdentityRecordStatus(record: record)
+
+            case .failure:
+                self?.logger?.log(.component(.accounts(.pricesDataError)))
+            }
+        }
+    }
+
+    func fetchLastIdentityVerification() -> IdentityVerificationBankModel? {
+
+        var verification: IdentityVerificationBankModel?
+        self.dataProvider.listIdentityVerifications(customerGuid: self.customerGuid) { [weak self] listCustomerResponse in
+
+            switch listCustomerResponse {
+
+            case .success(let list):
+                //self?.logger?.log(.component(.accounts(.pricesDataFetching)))
+                print("VERIFICATIONS LIST")
+                print(list)
+                print("---------------------------")
+
+                if list.total > 0 {
+
+                    let verifications = list.objects
+                    verification = verifications[0]
+                }
+
+            case .failure:
+                self?.logger?.log(.component(.accounts(.pricesDataError)))
+            }
+        }
+        return verification
+    }
+
+    func createIdentityVerification() -> IdentityVerificationBankModel? {
+
+        var verification: IdentityVerificationBankModel?
+        let postIdentityVerificationBankModel = PostIdentityVerificationBankModel(
+            type: .kyc,
+            method: .idAndSelfie,
+            customerGuid: self.customerGuid)
+
+        self.dataProvider.createIdentityVerification(postIdentityVerificationBankModel: postIdentityVerificationBankModel) { [weak self] identityResponse in
+
+            switch identityResponse {
+
+            case .success(let identity):
+
+                print("CREATED VERIFICATION")
+                print(identity)
+                print("---------------------")
+                verification = identity
+
+            case .failure:
+                self?.logger?.log(.component(.accounts(.pricesDataError)))
+            }
+        }
+
+        return verification
+    }
+
+    // MARK: Checker Funtions
+    func checkCustomerStatus(state: CustomerBankModel.StateBankModel) {
+
+        switch state {
+
+        case .storing:
+            if self.customerJob == nil {
+                self.customerJob = Polling { self.getCustomerStatus() }
+            }
+
+        case .verified:
+
+            self.customerJob?.stop()
+            self.customerJob = nil
+            self.UIState.value = .VERIFIED
+
+        case .unverified:
+
+            self.customerJob?.stop()
+            self.customerJob = nil
+            self.getIdentityVerificationStatus()
+
+        case .rejected:
+
+            self.customerJob?.stop()
+            self.customerJob = nil
+            self.UIState.value = .ERROR
+
+        default:
+            self.logger?.log(.component(.accounts(.pricesDataError)))
+
+        }
+    }
+
+    func checkIdentityRecordStatus(record: IdentityVerificationBankModel?) {
+
+        switch record?.state {
+
+        case .storing:
+
+            if identityJob == nil {
+                // identityJob = Polling { self.getIdentityVerificationStatus(record: record) }
+            }
+
+        case .waiting:
+
+            if record?.personaState == .completed || record?.personaState == .processing {
+                // self.identityJob = Polling { self.getIdentityVerificationStatus(record: record) }
+            } else {
+
+                self.identityJob?.stop()
+                self.identityJob = nil
+                self.checkIdentityPersonaStatus(record: record)
+            }
+
+        case .expired:
+
+            self.identityJob?.stop()
+            self.identityJob = nil
+            self.getIdentityVerificationStatus(record: nil)
+
+        case .completed:
+
+            self.identityJob?.stop()
+            self.identityJob = nil
+            UIState.value = .VERIFIED
+
+        default:
+            print("--")
+        }
+    }
+
+    func checkIdentityPersonaStatus(record: IdentityVerificationBankModel?) {
+
+        switch record?.personaState {
+
+        case .waiting:
+
+            self.latestIdentityVerification = record
+            UIState.value = .REQUIRED
+
+        case .pending:
+
+            self.latestIdentityVerification = record
+            UIState.value = .REQUIRED
+
+        case .reviewing:
+
+            UIState.value = .REVIEWING
+
+        case .unknown:
+
+            UIState.value = .ERROR
+
+        default:
+            print("--")
         }
     }
 }

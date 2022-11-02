@@ -18,11 +18,23 @@ protocol IdentityVerificationRepoProvider: AuthenticatedServiceProvider {
 
 extension IdentityVerificationRepoProvider {
 
-    func getIdentityVerification(guid: String, _ completion: @escaping FetchIdentityCompletion) {}
+    func getIdentityVerification(guid: String, _ completion: @escaping FetchIdentityCompletion) {
+        authenticatedRequest(identityVerificationRepository.getIdentityVerification,
+                             parameters: guid,
+                             completion: completion)
+    }
 
-    func listIdentityVerifications(customerGuid: String, _ completion: @escaping FetchIdentityListCompletion) {}
+    func listIdentityVerifications(customerGuid: String, _ completion: @escaping FetchIdentityListCompletion) {
+        authenticatedRequest(identityVerificationRepository.listIdentityVerifications,
+                             parameters: customerGuid,
+                             completion: completion)
+    }
 
-    func createIdentityVerification(postIdentityVerificationBankModel: PostIdentityVerificationBankModel, _ completion: @escaping CreateIdentityCompletion) {}
+    func createIdentityVerification(postIdentityVerificationBankModel: PostIdentityVerificationBankModel, _ completion: @escaping CreateIdentityCompletion) {
+        authenticatedRequest(identityVerificationRepository.createIdentityVerification,
+                             parameters: postIdentityVerificationBankModel,
+                             completion: completion)
+    }
 }
 
 extension CybridSession: IdentityVerificationRepoProvider {}

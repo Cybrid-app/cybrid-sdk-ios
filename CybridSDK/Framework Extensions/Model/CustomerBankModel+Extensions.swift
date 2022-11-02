@@ -28,4 +28,17 @@ extension CustomerBankModel {
             createdAt: createdAtDate,
             state: (CustomerBankModel.StateBankModel(rawValue: state) ?? .storing) as StateBankModel)
     }
+
+    static func fromArray(objects: [[String: Any]]) -> [CustomerBankModel] {
+
+        var models = [CustomerBankModel]()
+        for object in objects {
+            // -- Creating the AccountBankModel
+            let model = CustomerBankModel(json: object)
+            if let model = model {
+                models.append(model)
+            }
+        }
+        return models
+    }
 }
