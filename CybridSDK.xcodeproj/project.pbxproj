@@ -171,6 +171,7 @@
 		92A90A8F2911B91C00CA0E08 /* IdentityVerificationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A90A8E2911B91C00CA0E08 /* IdentityVerificationRepository.swift */; };
 		92AD743128D418610071F17F /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AD743028D418610071F17F /* String+Extensions.swift */; };
 		92C92C892911F2DA00B81719 /* Polling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C92C882911F2DA00B81719 /* Polling.swift */; };
+		92C92C8B2911FC6C00B81719 /* CustomerBankModel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C92C8A2911FC6C00B81719 /* CustomerBankModel+Extensions.swift */; };
 		92E2133528F86F3300F420F2 /* LoginLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E2133428F86F3300F420F2 /* LoginLoader.swift */; };
 		92F5EC7128E206CE009DC3F4 /* accountResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 92F5EC7028E206CE009DC3F4 /* accountResponse.json */; };
 		92F5EC7328E24150009DC3F4 /* listTradesResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 92F5EC7228E24150009DC3F4 /* listTradesResponse.json */; };
@@ -389,6 +390,7 @@
 		92A90A8E2911B91C00CA0E08 /* IdentityVerificationRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentityVerificationRepository.swift; sourceTree = "<group>"; };
 		92AD743028D418610071F17F /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		92C92C882911F2DA00B81719 /* Polling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Polling.swift; sourceTree = "<group>"; };
+		92C92C8A2911FC6C00B81719 /* CustomerBankModel+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CustomerBankModel+Extensions.swift"; sourceTree = "<group>"; };
 		92E2133428F86F3300F420F2 /* LoginLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginLoader.swift; sourceTree = "<group>"; };
 		92F5EC7028E206CE009DC3F4 /* accountResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = accountResponse.json; sourceTree = "<group>"; };
 		92F5EC7228E24150009DC3F4 /* listTradesResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = listTradesResponse.json; sourceTree = "<group>"; };
@@ -1082,6 +1084,7 @@
 				927233BF28D1AA7E0080AAC4 /* TradeBankModel+Extensions.swift */,
 				927233C128D1AAA20080AAC4 /* SymbolPriceBankModel+Extensions.swift */,
 				927233CC28D2419B0080AAC4 /* QuoteBankModel+Extensions.swift */,
+				92C92C8A2911FC6C00B81719 /* CustomerBankModel+Extensions.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1586,6 +1589,7 @@
 				0B2899E9288F3E1F001B3360 /* Cybrid.swift in Sources */,
 				927233BB28D12FD10080AAC4 /* UIFont+Extensions.swift in Sources */,
 				0BD66118286B79C500F4DA6B /* UIView+Constraints.swift in Sources */,
+				92C92C8B2911FC6C00B81719 /* CustomerBankModel+Extensions.swift in Sources */,
 				927233EA28D244CC0080AAC4 /* AccountTradesHeaderCell.swift in Sources */,
 				0B303CE42862E5D9007BF7FF /* CybridConfig.swift in Sources */,
 				0BD660FD286B763E00F4DA6B /* ConcurrencyInterfaces.swift in Sources */,

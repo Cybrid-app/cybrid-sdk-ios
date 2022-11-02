@@ -29,6 +29,8 @@ final class CybridJSONDecoder: JSONDecoder {
         case is TradeListBankModel.Type:
             // swiftlint:disable:next force_cast
             return try decoedTradeList(data: data) as! T
+        case is CustomerBankModel.Type:
+            return try decodeCustomerBankModel(data: data) as! T
         default:
             return try super.decode(type, from: data)
         }
@@ -128,6 +130,21 @@ extension CybridJSONDecoder {
             page: jsonStringObject[TradeListBankModel.CodingKeys.page.rawValue] as? Int ?? 0,
             perPage: jsonStringObject[TradeListBankModel.CodingKeys.perPage.rawValue] as? Int ?? 0,
             objects: objects)
+    }
+
+    func decodeCustomerBankModel(data: Data) throws -> CustomerBankModel {
+
+        guard let jsonObject = try JSONSerialization.jsonObject(with: data) as? [String: Any] else {
+            throw DecodingError.customDecodingError
+        }
+        let jsonStrongObject: [String: Any] = jsonObject
+
+        guard
+            let model = CustomerBankModel(json: jsonStrongObject)
+        else {
+            throw DecodingError.customDecodingError
+        }
+        return model
     }
 }
 
