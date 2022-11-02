@@ -10,10 +10,10 @@ import Foundation
 class IdentityVerificationViewModel: NSObject {
 
     // MARK: Private properties
-    private var dataProvider: CustomersRepoProvider
+    private var dataProvider: CustomersRepoProvider & IdentityVerificationRepoProvider
     private var logger: CybridLogger?
 
-    init(dataProvider: CustomersRepoProvider,
+    init(dataProvider: CustomersRepoProvider & IdentityVerificationRepoProvider,
          logger: CybridLogger?) {
 
         self.dataProvider = dataProvider

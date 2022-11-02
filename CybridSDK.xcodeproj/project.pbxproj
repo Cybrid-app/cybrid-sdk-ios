@@ -168,6 +168,7 @@
 		92A90A8729118C0C00CA0E08 /* CustomerRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A90A8629118C0C00CA0E08 /* CustomerRepository.swift */; };
 		92A90A8A2911939400CA0E08 /* IdentityVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A90A892911939400CA0E08 /* IdentityVerificationViewController.swift */; };
 		92A90A8D2911940600CA0E08 /* IdentityVerificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A90A8C2911940600CA0E08 /* IdentityVerificationViewModel.swift */; };
+		92A90A8F2911B91C00CA0E08 /* IdentityVerificationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A90A8E2911B91C00CA0E08 /* IdentityVerificationRepository.swift */; };
 		92AD743128D418610071F17F /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AD743028D418610071F17F /* String+Extensions.swift */; };
 		92E2133528F86F3300F420F2 /* LoginLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E2133428F86F3300F420F2 /* LoginLoader.swift */; };
 		92F5EC7128E206CE009DC3F4 /* accountResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 92F5EC7028E206CE009DC3F4 /* accountResponse.json */; };
@@ -384,6 +385,7 @@
 		92A90A8629118C0C00CA0E08 /* CustomerRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerRepository.swift; sourceTree = "<group>"; };
 		92A90A892911939400CA0E08 /* IdentityVerificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentityVerificationViewController.swift; sourceTree = "<group>"; };
 		92A90A8C2911940600CA0E08 /* IdentityVerificationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentityVerificationViewModel.swift; sourceTree = "<group>"; };
+		92A90A8E2911B91C00CA0E08 /* IdentityVerificationRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentityVerificationRepository.swift; sourceTree = "<group>"; };
 		92AD743028D418610071F17F /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		92E2133428F86F3300F420F2 /* LoginLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginLoader.swift; sourceTree = "<group>"; };
 		92F5EC7028E206CE009DC3F4 /* accountResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = accountResponse.json; sourceTree = "<group>"; };
@@ -734,6 +736,7 @@
 				0BBD0CDB28B5D6F7001DBC5F /* TradesRepository.swift */,
 				927233CA28D23D060080AAC4 /* AccountsRepository.swift */,
 				92A90A8629118C0C00CA0E08 /* CustomerRepository.swift */,
+				92A90A8E2911B91C00CA0E08 /* IdentityVerificationRepository.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -1566,6 +1569,7 @@
 				92AD743128D418610071F17F /* String+Extensions.swift in Sources */,
 				927233C028D1AA7E0080AAC4 /* TradeBankModel+Extensions.swift in Sources */,
 				927233E128D2447F0080AAC4 /* AccountsViewModel.swift in Sources */,
+				92A90A8F2911B91C00CA0E08 /* IdentityVerificationRepository.swift in Sources */,
 				0B2B2A8528629031002F0EC1 /* UIColor+Extensions.swift in Sources */,
 				0B2B2A872862906E002F0EC1 /* UILabel+Extensions.swift in Sources */,
 				0B2B2A6D28621D5C002F0EC1 /* ColorTheme.swift in Sources */,

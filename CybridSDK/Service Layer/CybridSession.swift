@@ -36,6 +36,9 @@ final class CybridSession: AuthenticatedServiceProvider {
     // Customers Repository
     internal var customersRepository: CustomersRepository.Type
 
+    // Identity Verification Repository
+    internal var identityVerificationRepository: identityVerificationRepository.Type
+
     // Schedulers
     internal var taskSchedulers: Set<TaskScheduler> = []
 
@@ -56,6 +59,7 @@ final class CybridSession: AuthenticatedServiceProvider {
         self.tradesRepository = TradesAPI.self
         self.accountsRepository = AccountsAPI.self
         self.customersRepository = CustomersAPI.self
+        self.identityVerificationRepository = IdentityVerificationsAPI.self
 
         setupEventListeners()
     }
