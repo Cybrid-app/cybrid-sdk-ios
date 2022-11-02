@@ -74,20 +74,49 @@ class IdentityVerificationViewModel: NSObject {
 
     func getIdentityVerificationStatus(record: IdentityVerificationBankModel? = nil) {
 
-        var lastVerification = record == nil ? fetchLastIdentityVerification() : record
-        print("---> LAST VERIFICATION")
-        print(lastVerification)
-        print("---------------------------")
+        if record == nil {
 
-        if lastVerification == nil || lastVerification?.state == .expired || lastVerification?.personaState == .expired {
+            self.fetchLastIdentityVerification { [weak self] lastVerification in
 
-            lastVerification = self.createIdentityVerification()
-            print("-----> CREATION")
-            print(lastVerification)
-            print("---------------------------")
+                print("---> LAST VERIFICATION")
+                print(lastVerification)
+                print("---------------------------")
+
+                if lastVerification == nil || lastVerification?.state == .expired || lastVerification?.personaState == .expired {
+
+                    self?.createIdentityVerification { [weak self] recordIdentity in
+
+                        print("-----> CREATION")
+                        print(recordIdentity)
+                        print("---------------------------")
+
+                        self?.fetchIdentityVerificationStatus(record: recordIdentity)
+                    }
+                } else {
+                    self?.fetchIdentityVerificationStatus(record: lastVerification)
+                }
+            }
+
+        } else {
+            if record?.state == .expired || record?.personaState == .expired {
+
+                self.createIdentityVerification { [weak self] recordIdentity in
+
+                    print("-----> CREATION")
+                    print(recordIdentity)
+                    print("---------------------------")
+
+                    self?.fetchIdentityVerificationStatus(record: recordIdentity)
+                }
+            } else {
+                self.fetchIdentityVerificationStatus(record: record)
+            }
         }
+    }
 
-        self.dataProvider.getIdentityVerification(guid: lastVerification?.guid ?? "") { [weak self] identityResponse in
+    func fetchIdentityVerificationStatus(record: IdentityVerificationBankModel?) {
+
+        self.dataProvider.getIdentityVerification(guid: record?.guid ?? "") { [weak self] identityResponse in
 
             switch identityResponse {
 
@@ -103,15 +132,14 @@ class IdentityVerificationViewModel: NSObject {
         }
     }
 
-    func fetchLastIdentityVerification() -> IdentityVerificationBankModel? {
+    func fetchLastIdentityVerification(_ completion: @escaping (_ record: IdentityVerificationBankModel?) -> Void) {
 
-        var verification: IdentityVerificationBankModel?
         self.dataProvider.listIdentityVerifications(customerGuid: self.customerGuid) { [weak self] listCustomerResponse in
 
             switch listCustomerResponse {
 
             case .success(let list):
-                //self?.logger?.log(.component(.accounts(.pricesDataFetching)))
+                // self?.logger?.log(.component(.accounts(.pricesDataFetching)))
                 print("VERIFICATIONS LIST")
                 print(list)
                 print("---------------------------")
@@ -119,19 +147,20 @@ class IdentityVerificationViewModel: NSObject {
                 if list.total > 0 {
 
                     let verifications = list.objects
-                    verification = verifications[0]
+                    let verification = verifications[0]
+                    completion(verification)
                 }
 
             case .failure:
+
                 self?.logger?.log(.component(.accounts(.pricesDataError)))
+                completion(nil)
             }
         }
-        return verification
     }
 
-    func createIdentityVerification() -> IdentityVerificationBankModel? {
+    func createIdentityVerification(_ completion: @escaping (_ record: IdentityVerificationBankModel?) -> Void) {
 
-        var verification: IdentityVerificationBankModel?
         let postIdentityVerificationBankModel = PostIdentityVerificationBankModel(
             type: .kyc,
             method: .idAndSelfie,
@@ -146,14 +175,14 @@ class IdentityVerificationViewModel: NSObject {
                 print("CREATED VERIFICATION")
                 print(identity)
                 print("---------------------")
-                verification = identity
+                completion(identity)
 
             case .failure:
+
                 self?.logger?.log(.component(.accounts(.pricesDataError)))
+                completion(nil)
             }
         }
-
-        return verification
     }
 
     // MARK: Checker Funtions
