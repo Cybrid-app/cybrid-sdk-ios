@@ -77,3 +77,9 @@
 "cybrid.kyc.required.text" = "Begin identity verification.";
 "cybrid.kyc.required.cancel" = "Cancel";
 "cybrid.kyc.required.begin" = "Begin";
+"cybrid.kyc.verified.text" = "You have been verified!";
+"cybrid.kyc.verified.done" = "Done";
+"cybrid.kyc.error.text" = "Unable to verify identity.";
+"cybrid.kyc.error.done" = "Done";
+"cybrid.kyc.reviewing.text" = "Identity being reviewed.";
+"cybrid.kyc.reviewing.done" = "Done";

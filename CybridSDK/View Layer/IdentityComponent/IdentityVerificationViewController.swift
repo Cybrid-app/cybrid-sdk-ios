@@ -109,27 +109,26 @@ extension IdentityVerificationViewController {
         // -- Await for UI State changes
         self.currentState.bind { state in
 
+            self.removeSubViewsFromContent()
             switch state {
 
             case .LOADING:
 
-                self.removeSubViewsFromContent()
                 self.KYCView_Loading()
 
             case .REQUIRED:
 
-                self.removeSubViewsFromContent()
                 self.KYCView_Required()
 
             case .VERIFIED:
-                break
+
+                self.KYCView_Verified()
 
             case .ERROR:
-                break
+                self.KYCView_Error()
 
             case .REVIEWING:
-                break
-
+                self.KYCView_Reviewing()
             }
         }
     }
@@ -226,6 +225,114 @@ extension IdentityVerificationViewController {
                            constant: UIValues.componentRequiredButtonsHeight)
     }
 
+    private func KYCView_Verified() {
+
+        // -- Title
+        self.createStateTitle(
+            stringKey: UIStrings.verifiedText,
+            image: UIImage(named: "kyc_verified", in: Bundle(for: Self.self), with: nil)!
+        )
+
+        // -- Buttons
+        let done = CYBButton(title: localizer.localize(with: UIStrings.verifiedDone)) {
+            self.dismiss(animated: true)
+        }
+
+        self.componentContent.addSubview(done)
+        done.constraint(attribute: .leading,
+                           relatedBy: .equal,
+                           toItem: self.componentContent,
+                           attribute: .leading,
+                           constant: UIValues.componentRequiredButtonsMargin.left)
+        done.constraint(attribute: .trailing,
+                           relatedBy: .equal,
+                           toItem: self.componentContent,
+                           attribute: .trailing,
+                           constant: UIValues.componentRequiredButtonsMargin.right)
+        done.constraint(attribute: .bottom,
+                           relatedBy: .equal,
+                           toItem: self.componentContent,
+                           attribute: .bottomMargin,
+                           constant: UIValues.componentRequiredButtonsMargin.bottom)
+        done.constraint(attribute: .height,
+                           relatedBy: .equal,
+                           toItem: nil,
+                           attribute: .notAnAttribute,
+                           constant: UIValues.componentRequiredButtonsHeight)
+    }
+
+    private func KYCView_Error() {
+
+        // -- Title
+        self.createStateTitle(
+            stringKey: UIStrings.errorText,
+            image: UIImage(named: "kyc_error", in: Bundle(for: Self.self), with: nil)!
+        )
+
+        // -- Buttons
+        let done = CYBButton(title: localizer.localize(with: UIStrings.errorDone)) {
+            self.dismiss(animated: true)
+        }
+
+        self.componentContent.addSubview(done)
+        done.constraint(attribute: .leading,
+                           relatedBy: .equal,
+                           toItem: self.componentContent,
+                           attribute: .leading,
+                           constant: UIValues.componentRequiredButtonsMargin.left)
+        done.constraint(attribute: .trailing,
+                           relatedBy: .equal,
+                           toItem: self.componentContent,
+                           attribute: .trailing,
+                           constant: UIValues.componentRequiredButtonsMargin.right)
+        done.constraint(attribute: .bottom,
+                           relatedBy: .equal,
+                           toItem: self.componentContent,
+                           attribute: .bottomMargin,
+                           constant: UIValues.componentRequiredButtonsMargin.bottom)
+        done.constraint(attribute: .height,
+                           relatedBy: .equal,
+                           toItem: nil,
+                           attribute: .notAnAttribute,
+                           constant: UIValues.componentRequiredButtonsHeight)
+    }
+
+    private func KYCView_Reviewing() {
+
+        // -- Title
+        self.createStateTitle(
+            stringKey: UIStrings.reviewingText,
+            image: UIImage(named: "kyc_reviewing", in: Bundle(for: Self.self), with: nil)!
+        )
+
+        // -- Buttons
+        let done = CYBButton(title: localizer.localize(with: UIStrings.reviewingDone)) {
+            self.dismiss(animated: true)
+        }
+
+        self.componentContent.addSubview(done)
+        done.constraint(attribute: .leading,
+                           relatedBy: .equal,
+                           toItem: self.componentContent,
+                           attribute: .leading,
+                           constant: UIValues.componentRequiredButtonsMargin.left)
+        done.constraint(attribute: .trailing,
+                           relatedBy: .equal,
+                           toItem: self.componentContent,
+                           attribute: .trailing,
+                           constant: UIValues.componentRequiredButtonsMargin.right)
+        done.constraint(attribute: .bottom,
+                           relatedBy: .equal,
+                           toItem: self.componentContent,
+                           attribute: .bottomMargin,
+                           constant: UIValues.componentRequiredButtonsMargin.bottom)
+        done.constraint(attribute: .height,
+                           relatedBy: .equal,
+                           toItem: nil,
+                           attribute: .notAnAttribute,
+                           constant: UIValues.componentRequiredButtonsHeight)
+    }
+
     private func createStateTitle(stringKey: String, image: UIImage) {
 
         let title = UILabel()
@@ -289,7 +396,7 @@ extension IdentityVerificationViewController {
 extension IdentityVerificationViewController: InquiryDelegate {
 
     public func inquiryComplete(inquiryId: String, status: String, fields: [String: Persona2.InquiryField]) {
-        
+
         self.currentState.value = .LOADING
         self.identityVerificationViewModel.getIdentityVerificationStatus(record: self.identityVerificationViewModel.latestIdentityVerification)
     }
@@ -328,5 +435,11 @@ extension IdentityVerificationViewController {
         static let requiredText = "cybrid.kyc.required.text"
         static let requiredCancelText = "cybrid.kyc.required.cancel"
         static let requiredBeginText = "cybrid.kyc.required.begin"
+        static let verifiedText = "cybrid.kyc.verified.text"
+        static let verifiedDone = "cybrid.kyc.verified.done"
+        static let errorText = "cybrid.kyc.error.text"
+        static let errorDone = "cybrid.kyc.error.done"
+        static let reviewingText = "cybrid.kyc.reviewing.text"
+        static let reviewingDone = "cybrid.kyc.reviewing.done"
     }
 }

@@ -236,7 +236,9 @@ class IdentityVerificationViewModel: NSObject {
         case .waiting:
 
             if record?.personaState == .completed || record?.personaState == .processing {
-                self.identityJob = Polling { self.getIdentityVerificationStatus(record: record) }
+                if identityJob == nil {
+                    self.identityJob = Polling { self.getIdentityVerificationStatus(record: record) }
+                }
             } else {
 
                 self.identityJob?.stop()
