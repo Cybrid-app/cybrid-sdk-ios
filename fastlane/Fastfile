@@ -22,7 +22,6 @@ platform :ios do
 
   desc "Runs tests"
   lane :test do |options|
-    xcversion(version: "14.1.0")
     outputPath = options[:output_directory]
     scan(
       scheme: "CybridSDK",
