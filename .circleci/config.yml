@@ -13,6 +13,7 @@ jobs:
 
     steps:
       - checkout
+      - run: bundle install
       - run:
           name: "Install CocoaPods"
           no_output_timeout: 3m
