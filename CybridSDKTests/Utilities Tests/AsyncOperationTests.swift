@@ -43,7 +43,7 @@ class AsyncOperationTests: XCTestCase {
       expectation.fulfill()
     }
     operationQueue.addOperation(operation)
-    waitForExpectations(timeout: 1.2)
+    waitForExpectations(timeout: 3.2)
     XCTAssertEqual(operation.state, .finished)
   }
 
