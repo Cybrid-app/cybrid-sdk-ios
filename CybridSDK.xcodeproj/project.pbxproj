@@ -174,6 +174,7 @@
 		92C92C8B2911FC6C00B81719 /* CustomerBankModel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C92C8A2911FC6C00B81719 /* CustomerBankModel+Extensions.swift */; };
 		92C92C8D29123C5F00B81719 /* IdentityVerificationBankModel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C92C8C29123C5F00B81719 /* IdentityVerificationBankModel+Extensions.swift */; };
 		92E2133528F86F3300F420F2 /* LoginLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E2133428F86F3300F420F2 /* LoginLoader.swift */; };
+		92F222D92914359C00137B11 /* PollingTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F222D82914359C00137B11 /* PollingTest.swift */; };
 		92F5EC7128E206CE009DC3F4 /* accountResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 92F5EC7028E206CE009DC3F4 /* accountResponse.json */; };
 		92F5EC7328E24150009DC3F4 /* listTradesResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 92F5EC7228E24150009DC3F4 /* listTradesResponse.json */; };
 		9E3B30420CC77D425A7A1C28 /* Pods_Abstract_CybridSDKTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80DCD8FC666A9176CF28F146 /* Pods_Abstract_CybridSDKTests.framework */; };
@@ -394,6 +395,7 @@
 		92C92C8A2911FC6C00B81719 /* CustomerBankModel+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CustomerBankModel+Extensions.swift"; sourceTree = "<group>"; };
 		92C92C8C29123C5F00B81719 /* IdentityVerificationBankModel+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IdentityVerificationBankModel+Extensions.swift"; sourceTree = "<group>"; };
 		92E2133428F86F3300F420F2 /* LoginLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginLoader.swift; sourceTree = "<group>"; };
+		92F222D82914359C00137B11 /* PollingTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PollingTest.swift; sourceTree = "<group>"; };
 		92F5EC7028E206CE009DC3F4 /* accountResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = accountResponse.json; sourceTree = "<group>"; };
 		92F5EC7228E24150009DC3F4 /* listTradesResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = listTradesResponse.json; sourceTree = "<group>"; };
 		D8168B44D4C796A81CF0902E /* Pods-Abstract-CybridSDKTestApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Abstract-CybridSDKTestApp.debug.xcconfig"; path = "Target Support Files/Pods-Abstract-CybridSDKTestApp/Pods-Abstract-CybridSDKTestApp.debug.xcconfig"; sourceTree = "<group>"; };
@@ -791,13 +793,13 @@
 		0B966005285A85FA00584692 /* Utilities Tests */ = {
 			isa = PBXGroup;
 			children = (
+				92F222D72914357700137B11 /* Events */,
 				0BD6611C286C1D5B00F4DA6B /* CurrencyFormatterTests.swift */,
 				0B966003285A85C600584692 /* AsyncOperationTests.swift */,
 				0B966010285AA24300584692 /* AssertionFailureOverrideTests.swift */,
 				0B966012285AA2EB00584692 /* URLImageViewTests.swift */,
 				0B966028285C38F500584692 /* URLImageOperationTests.swift */,
 				0B96602A285C3AC600584692 /* NetworkingInterfaceTests.swift */,
-				0BD6611E286C1EB800F4DA6B /* ObservableTests.swift */,
 				0B00E01E2878A16800707F26 /* BigDecimalTests.swift */,
 				0B2899F528904B11001B3360 /* TaskSchedulerTests.swift */,
 				0B2899F92894653F001B3360 /* CybridJSONDecoderTests.swift */,
@@ -1193,6 +1195,15 @@
 				92E2133428F86F3300F420F2 /* LoginLoader.swift */,
 			);
 			name = Modal;
+			sourceTree = "<group>";
+		};
+		92F222D72914357700137B11 /* Events */ = {
+			isa = PBXGroup;
+			children = (
+				0BD6611E286C1EB800F4DA6B /* ObservableTests.swift */,
+				92F222D82914359C00137B11 /* PollingTest.swift */,
+			);
+			path = Events;
 			sourceTree = "<group>";
 		};
 		92F5EC7428E24716009DC3F4 /* FrameworkExtensionsTest */ = {
@@ -1643,6 +1654,7 @@
 				9217353D28E41C3F00DF58CA /* TradeBankModelTest.swift in Sources */,
 				0BD6611D286C1D5B00F4DA6B /* CurrencyFormatterTests.swift in Sources */,
 				0B303CF328636A0D007BF7FF /* CybridConfigTests.swift in Sources */,
+				92F222D92914359C00137B11 /* PollingTest.swift in Sources */,
 				0BBCF640285C52D700D39C6D /* MockError.swift in Sources */,
 				0BD6613E2874AFAA00F4DA6B /* MockNumberFormatter.swift in Sources */,
 				0B966027285C2E8600584692 /* MockImageOperation.swift in Sources */,
