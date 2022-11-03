@@ -1,5 +1,6 @@
 source 'https://cdn.cocoapods.org/'
 source 'git@github.com:Cybrid-app/cybrid-podspecs.git'
+source 'https://github.com/CocoaPods/Specs.git'
 
 iphoneOS_deployment_target = '13.0'
 platform :ios, iphoneOS_deployment_target
@@ -10,6 +11,7 @@ use_frameworks!
 def common_pods
   pod 'CybridApiBankSwift'
   pod 'BigInt'
+  pod 'PersonaInquirySDK2'
 end
 
 def quality_pods

@@ -7,6 +7,7 @@
 
 import Foundation
 import CybridApiBankSwift
+import Persona2
 
 class IdentityVerificationViewModel: NSObject {
 
@@ -29,6 +30,7 @@ class IdentityVerificationViewModel: NSObject {
          logger: CybridLogger?) {
 
         self.dataProvider = dataProvider
+        self.UIState = UIState
         self.logger = logger
     }
 
@@ -149,6 +151,8 @@ class IdentityVerificationViewModel: NSObject {
                     let verifications = list.objects
                     let verification = verifications[0]
                     completion(verification)
+                } else {
+                    completion(nil)
                 }
 
             case .failure:
@@ -226,13 +230,13 @@ class IdentityVerificationViewModel: NSObject {
         case .storing:
 
             if identityJob == nil {
-                // identityJob = Polling { self.getIdentityVerificationStatus(record: record) }
+                identityJob = Polling { self.getIdentityVerificationStatus(record: record) }
             }
 
         case .waiting:
 
             if record?.personaState == .completed || record?.personaState == .processing {
-                // self.identityJob = Polling { self.getIdentityVerificationStatus(record: record) }
+                self.identityJob = Polling { self.getIdentityVerificationStatus(record: record) }
             } else {
 
                 self.identityJob?.stop()

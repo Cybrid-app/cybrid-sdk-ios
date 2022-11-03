@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import Persona2
 
 public final class IdentityVerificationViewController: UIViewController {
 
@@ -116,7 +117,9 @@ extension IdentityVerificationViewController {
                 self.KYCView_Loading()
 
             case .REQUIRED:
-                break
+
+                self.removeSubViewsFromContent()
+                self.KYCView_Required()
 
             case .VERIFIED:
                 break
@@ -144,12 +147,12 @@ extension IdentityVerificationViewController {
         title.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         title.translatesAutoresizingMaskIntoConstraints = false
         title.sizeToFit()
-        title.font = UIFont.make(ofSize: UIValues.componentTitleSize)
+        title.font = UIValues.componentTitleFont
         title.textColor = UIValues.componentTitleColor
         title.textAlignment = .center
-        title.text = "Checking Identity..."
+        title.setLocalizedText(key: UIStrings.loadingText, localizer: localizer)
 
-        self.view.addSubview(title)
+        self.componentContent.addSubview(title)
         title.constraint(attribute: .centerY,
                          relatedBy: .equal,
                          toItem: self.componentContent,
@@ -176,6 +179,126 @@ extension IdentityVerificationViewController {
         spinner.color = UIColor.black
         spinner.startAnimating()
     }
+
+    private func KYCView_Required() {
+
+        // -- Title
+        self.createStateTitle(
+            stringKey: UIStrings.requiredText,
+            image: UIImage(named: "kyc_required", in: Bundle(for: Self.self), with: nil)!
+        )
+
+        // -- Buttons
+        let cancel = CYBButton(title: localizer.localize(with: UIStrings.requiredCancelText)) {
+            self.dismiss(animated: true)
+        }
+        let begin = CYBButton(title: localizer.localize(with: UIStrings.requiredBeginText)) {
+            self.openPersona()
+        }
+
+        let buttons = UIStackView(arrangedSubviews: [cancel, begin])
+        buttons.translatesAutoresizingMaskIntoConstraints = false
+        buttons.axis = .horizontal
+        buttons.spacing = UIConstants.spacingLg
+        buttons.distribution = .fillEqually
+        buttons.alignment = .fill
+
+        self.componentContent.addSubview(buttons)
+        buttons.constraint(attribute: .leading,
+                           relatedBy: .equal,
+                           toItem: self.componentContent,
+                           attribute: .leading,
+                           constant: UIValues.componentRequiredButtonsMargin.left)
+        buttons.constraint(attribute: .trailing,
+                           relatedBy: .equal,
+                           toItem: self.componentContent,
+                           attribute: .trailing,
+                           constant: UIValues.componentRequiredButtonsMargin.right)
+        buttons.constraint(attribute: .bottom,
+                           relatedBy: .equal,
+                           toItem: self.componentContent,
+                           attribute: .bottomMargin,
+                           constant: UIValues.componentRequiredButtonsMargin.bottom)
+        buttons.constraint(attribute: .height,
+                           relatedBy: .equal,
+                           toItem: nil,
+                           attribute: .notAnAttribute,
+                           constant: UIValues.componentRequiredButtonsHeight)
+    }
+
+    private func createStateTitle(stringKey: String, image: UIImage) {
+
+        let title = UILabel()
+        title.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+        title.translatesAutoresizingMaskIntoConstraints = false
+        title.sizeToFit()
+        title.font = UIValues.componentTitleFont
+        title.textColor = UIValues.componentTitleColor
+        title.textAlignment = .center
+        title.setLocalizedText(key: stringKey, localizer: localizer)
+
+        self.componentContent.addSubview(title)
+        title.constraint(attribute: .centerX,
+                       relatedBy: .equal,
+                       toItem: self.componentContent,
+                       attribute: .centerX)
+        title.constraint(attribute: .centerY,
+                       relatedBy: .equal,
+                       toItem: self.componentContent,
+                       attribute: .centerY)
+        title.constraint(attribute: .height,
+                         relatedBy: .equal,
+                         toItem: nil,
+                         attribute: .notAnAttribute,
+                         constant: 25)
+
+        let icon = UIImageView(image: image)
+        self.componentContent.addSubview(icon)
+        icon.constraint(attribute: .centerY,
+                       relatedBy: .equal,
+                       toItem: self.componentContent,
+                       attribute: .centerY)
+        icon.constraint(attribute: .trailing,
+                        relatedBy: .equal,
+                        toItem: title,
+                        attribute: .leading,
+                        constant: -15)
+        icon.constraint(attribute: .width,
+                        relatedBy: .equal,
+                        toItem: nil,
+                        attribute: .notAnAttribute,
+                        constant: 25)
+        icon.constraint(attribute: .height,
+                        relatedBy: .equal,
+                        toItem: nil,
+                        attribute: .notAnAttribute,
+                        constant: 25)
+    }
+
+    private func openPersona() {
+
+        if let record = self.identityVerificationViewModel.latestIdentityVerification {
+            if let id = record.personaInquiryId {
+                let config = InquiryConfiguration(inquiryId: id)
+                Inquiry(config: config, delegate: self).start(from: self)
+            }
+        }
+    }
+}
+
+extension IdentityVerificationViewController: InquiryDelegate {
+
+    public func inquiryComplete(inquiryId: String, status: String, fields: [String: Persona2.InquiryField]) {
+        
+        self.currentState.value = .LOADING
+        self.identityVerificationViewModel.getIdentityVerificationStatus(record: self.identityVerificationViewModel.latestIdentityVerification)
+    }
+
+    public func inquiryCanceled(inquiryId: String?, sessionToken: String?) {}
+
+    public func inquiryError(_ error: Error) {
+        self.currentState.value = .ERROR
+    }
 }
 
 extension IdentityVerificationViewController {
@@ -186,16 +309,24 @@ extension IdentityVerificationViewController {
         static let componentTitleSize: CGFloat = 17
         static let componentTitleHeight: CGFloat = 20
         static let componentTitleMargin = UIEdgeInsets(top: 40, left: 10, bottom: 0, right: 10)
+        static let componentRequiredButtonsMargin = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: -10)
 
         static let loadingSpinnerHeight: CGFloat = 30
         static let loadingSpinnerMargin = UIEdgeInsets(top: 10, left: 10, bottom: 0, right: 10)
+        static let componentRequiredButtonsHeight: CGFloat = 50
 
         // -- Colors
         static let componentTitleColor = UIColor.black
+
+        // -- Fonts
+        static let componentTitleFont = UIFont.make(ofSize: 17, weight: .bold)
     }
 
     enum UIStrings {
 
-        static let accountComponentTitle = "cybrid.accounts.accountComponentTitle"
+        static let loadingText = "cybrid.kyc.loading.text"
+        static let requiredText = "cybrid.kyc.required.text"
+        static let requiredCancelText = "cybrid.kyc.required.cancel"
+        static let requiredBeginText = "cybrid.kyc.required.begin"
     }
 }
