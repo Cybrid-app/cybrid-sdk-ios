@@ -12,7 +12,9 @@ final class ServiceProviderMock: AssetsRepoProvider,
                                  PricesRepoProvider,
                                  QuotesRepoProvider,
                                  TradesRepoProvider,
-                                 AccountsRepoProvider {
+                                 AccountsRepoProvider,
+                                 CustomersRepoProvider,
+                                 IdentityVerificationRepoProvider {    
 
     var apiManager: CybridAPIManager.Type = MockAPIManager.self
 
@@ -22,6 +24,8 @@ final class ServiceProviderMock: AssetsRepoProvider,
     var quotesRepository: QuotesRepository.Type = QuotesAPIMock.self
     var tradesRepository: TradesRepository.Type = TradesAPIMock.self
     var accountsRepository: AccountsRepository.Type = AccountsAPIMock.self
+    var customerRepository: CustomersRepository.Type = CustomersAPIMock.self
+    var identityVerificationRepository: identityVerificationRepository.Type = IdentityVerificationsAPI.self
 
     // MARK: Cache
     var assetsCache: [AssetBankModel]?
@@ -85,5 +89,25 @@ final class ServiceProviderMock: AssetsRepoProvider,
     func didFetchAccountsWithError() {
 
         AccountsAPIMock.didFetchAccountsWithError()
+    }
+
+    func didCreateCustomerSuccessfully() {
+
+        CustomersAPIMock.didCreateCustomerSuccessfully(nil)
+    }
+
+    func didCreateCustomerFailed() {
+
+        CustomersAPIMock.didCreateCustomerFailed()
+    }
+
+    func didFetchCustomerSuccessfully() {
+
+        CustomersAPIMock.didFetchCustomerSuccessfully(nil)
+    }
+
+    func didFetchCustomerFailed() {
+
+        CustomersAPIMock.didFetchCustomerFailed()
     }
 }

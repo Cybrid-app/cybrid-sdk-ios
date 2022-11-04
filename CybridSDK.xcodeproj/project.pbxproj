@@ -173,6 +173,8 @@
 		92C92C892911F2DA00B81719 /* Polling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C92C882911F2DA00B81719 /* Polling.swift */; };
 		92C92C8B2911FC6C00B81719 /* CustomerBankModel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C92C8A2911FC6C00B81719 /* CustomerBankModel+Extensions.swift */; };
 		92C92C8D29123C5F00B81719 /* IdentityVerificationBankModel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C92C8C29123C5F00B81719 /* IdentityVerificationBankModel+Extensions.swift */; };
+		92CB9E3F2914C15000357873 /* CustomersAPIMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CB9E3E2914C15000357873 /* CustomersAPIMock.swift */; };
+		92CB9E412914CAD500357873 /* IdentityVerificationViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CB9E402914CAD500357873 /* IdentityVerificationViewModelTest.swift */; };
 		92E2133528F86F3300F420F2 /* LoginLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E2133428F86F3300F420F2 /* LoginLoader.swift */; };
 		92F222D92914359C00137B11 /* PollingTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F222D82914359C00137B11 /* PollingTest.swift */; };
 		92F5EC7128E206CE009DC3F4 /* accountResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 92F5EC7028E206CE009DC3F4 /* accountResponse.json */; };
@@ -394,6 +396,8 @@
 		92C92C882911F2DA00B81719 /* Polling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Polling.swift; sourceTree = "<group>"; };
 		92C92C8A2911FC6C00B81719 /* CustomerBankModel+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CustomerBankModel+Extensions.swift"; sourceTree = "<group>"; };
 		92C92C8C29123C5F00B81719 /* IdentityVerificationBankModel+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IdentityVerificationBankModel+Extensions.swift"; sourceTree = "<group>"; };
+		92CB9E3E2914C15000357873 /* CustomersAPIMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomersAPIMock.swift; sourceTree = "<group>"; };
+		92CB9E402914CAD500357873 /* IdentityVerificationViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentityVerificationViewModelTest.swift; sourceTree = "<group>"; };
 		92E2133428F86F3300F420F2 /* LoginLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginLoader.swift; sourceTree = "<group>"; };
 		92F222D82914359C00137B11 /* PollingTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PollingTest.swift; sourceTree = "<group>"; };
 		92F5EC7028E206CE009DC3F4 /* accountResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = accountResponse.json; sourceTree = "<group>"; };
@@ -819,6 +823,7 @@
 		0B96600B285A9A1A00584692 /* Mocks */ = {
 			isa = PBXGroup;
 			children = (
+				92CB9E3D2914C13200357873 /* Customer */,
 				0B2899FC289467C1001B3360 /* JSON */,
 				0B2899EB288F4BC4001B3360 /* Concurrency */,
 				0B00E0502886F00B00707F26 /* Assets */,
@@ -1001,6 +1006,7 @@
 				0B50F35A28A5890C00DDB01E /* TradeViewModelTests.swift */,
 				9205B8BC28E3AD3C00883279 /* AccountsViewModelTest.swift */,
 				9201FA0328E3DEDF00C6F186 /* AccountTradesViewModelTest.swift */,
+				92CB9E402914CAD500357873 /* IdentityVerificationViewModelTest.swift */,
 			);
 			path = "ViewModel Tests";
 			sourceTree = "<group>";
@@ -1187,6 +1193,14 @@
 				92A90A8C2911940600CA0E08 /* IdentityVerificationViewModel.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		92CB9E3D2914C13200357873 /* Customer */ = {
+			isa = PBXGroup;
+			children = (
+				92CB9E3E2914C15000357873 /* CustomersAPIMock.swift */,
+			);
+			path = Customer;
 			sourceTree = "<group>";
 		};
 		92E2133328F86F1300F420F2 /* Modal */ = {
@@ -1649,6 +1663,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				92CB9E412914CAD500357873 /* IdentityVerificationViewModelTest.swift in Sources */,
 				0BBD0CE128B6BCEE001DBC5F /* QuotesAPIMock.swift in Sources */,
 				0B2899F628904B11001B3360 /* TaskSchedulerTests.swift in Sources */,
 				9217353D28E41C3F00DF58CA /* TradeBankModelTest.swift in Sources */,
@@ -1683,6 +1698,7 @@
 				0BBD0CE828B6C730001DBC5F /* TradeMock.swift in Sources */,
 				0B2899ED288F4BE5001B3360 /* TaskSchedulerMock.swift in Sources */,
 				0B966011285AA24300584692 /* AssertionFailureOverrideTests.swift in Sources */,
+				92CB9E3F2914C15000357873 /* CustomersAPIMock.swift in Sources */,
 				0B00E01F2878A16800707F26 /* BigDecimalTests.swift in Sources */,
 				0B00E046287FBEDC00707F26 /* ServiceProviderMock.swift in Sources */,
 				0BD6611F286C1EB800F4DA6B /* ObservableTests.swift in Sources */,
