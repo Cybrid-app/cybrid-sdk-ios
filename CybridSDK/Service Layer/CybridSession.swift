@@ -37,7 +37,7 @@ final class CybridSession: AuthenticatedServiceProvider {
     internal var customersRepository: CustomersRepository.Type
 
     // Identity Verification Repository
-    internal var identityVerificationRepository: identityVerificationRepository.Type
+    internal var identityVerificationRepository: IdentityVerificationRepository.Type
 
     // Schedulers
     internal var taskSchedulers: Set<TaskScheduler> = []

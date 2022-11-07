@@ -13,7 +13,7 @@ typealias FetchIdentityListCompletion = (Result<IdentityVerificationListBankMode
 typealias CreateIdentityCompletion = (Result<IdentityVerificationBankModel, ErrorResponse>) -> Void
 
 protocol IdentityVerificationRepoProvider: AuthenticatedServiceProvider {
-    var identityVerificationRepository: identityVerificationRepository.Type { get set }
+    var identityVerificationRepository: IdentityVerificationRepository.Type { get set }
 }
 
 extension IdentityVerificationRepoProvider {
@@ -39,14 +39,14 @@ extension IdentityVerificationRepoProvider {
 
 extension CybridSession: IdentityVerificationRepoProvider {}
 
-protocol identityVerificationRepository {
+protocol IdentityVerificationRepository {
 
     static func getIdentityVerification(guid: String, _ completion: @escaping FetchIdentityCompletion)
     static func listIdentityVerifications(customerGuid: String, _ completion: @escaping FetchIdentityListCompletion)
     static func createIdentityVerification(postIdentityVerificationBankModel: PostIdentityVerificationBankModel, _ completion: @escaping CreateIdentityCompletion)
 }
 
-extension IdentityVerificationsAPI: identityVerificationRepository {
+extension IdentityVerificationsAPI: IdentityVerificationRepository {
 
     static func getIdentityVerification(guid: String, _ completion: @escaping FetchIdentityCompletion) {
         getIdentityVerification(identityVerificationGuid: guid, completion: completion)

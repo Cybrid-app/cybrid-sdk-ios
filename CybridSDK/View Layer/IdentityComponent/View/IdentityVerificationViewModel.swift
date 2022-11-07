@@ -37,7 +37,8 @@ class IdentityVerificationViewModel: NSObject {
     // MARK: ViewModel Methods
     func createCustomerTest() {
 
-        self.dataProvider.createCustomer { [weak self] customerResponse in
+        let postCustomerBankModel = PostCustomerBankModel(type: .individual)
+        self.dataProvider.createCustomer(postCustomerBankModel: postCustomerBankModel) { [weak self] customerResponse in
 
             switch customerResponse {
 

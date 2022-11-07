@@ -10,19 +10,23 @@ import CybridSDK
 
 final class CustomersAPIMock: CustomersAPI {
 
-    typealias CreateCustomerCompletion = (Result<CustomerBankModel, ErrorResponse>) -> Void
-    typealias FetchCustomerCompletion = (Result<CustomerBankModel, ErrorResponse>) -> Void
+    typealias CreateCustomerCompletion = (_ result: Result<CustomerBankModel, ErrorResponse>) -> Void
+    typealias FetchCustomerCompletion = (_ result: Result<CustomerBankModel, ErrorResponse>) -> Void
 
     private static var createCustomerCompletion: CreateCustomerCompletion?
     private static var fetchCustomerCompletion: FetchCustomerCompletion?
 
-    override class func createCustomer(postCustomerBankModel: PostCustomerBankModel, apiResponseQueue: DispatchQueue = CybridApiBankSwiftAPI.apiResponseQueue, completion: @escaping ((Result<CustomerBankModel, ErrorResponse>) -> Void)) -> RequestTask {
+    override class func createCustomer(postCustomerBankModel: PostCustomerBankModel,
+                                       apiResponseQueue: DispatchQueue = CybridApiBankSwiftAPI.apiResponseQueue,
+                                       completion: @escaping ((Result<CustomerBankModel, ErrorResponse>) -> Void)) -> RequestTask {
 
         createCustomerCompletion = completion
         return createCustomerWithRequestBuilder(postCustomerBankModel: postCustomerBankModel).requestTask
     }
 
-    override class func getCustomer(customerGuid: String, apiResponseQueue: DispatchQueue = CybridApiBankSwiftAPI.apiResponseQueue, completion: @escaping ((Result<CustomerBankModel, ErrorResponse>) -> Void)) -> RequestTask {
+    override class func getCustomer(customerGuid: String,
+                                    apiResponseQueue: DispatchQueue = CybridApiBankSwiftAPI.apiResponseQueue,
+                                    completion: @escaping ((Result<CustomerBankModel, ErrorResponse>) -> Void)) -> RequestTask {
 
         fetchCustomerCompletion = completion
         return getCustomerWithRequestBuilder(customerGuid: customerGuid).requestTask
@@ -30,7 +34,7 @@ final class CustomersAPIMock: CustomersAPI {
 
     class func didCreateCustomerSuccessfully(_ mockCustomer: CustomerBankModel?) {
 
-        createCustomerCompletion?(.success(CustomersAPIMock.customerMocker))
+        createCustomerCompletion?(.success(CustomerBankModel.mock))
     }
 
     class func didCreateCustomerFailed() {
@@ -40,7 +44,7 @@ final class CustomersAPIMock: CustomersAPI {
 
     class func didFetchCustomerSuccessfully(_ mockCustomer: CustomerBankModel?) {
 
-        fetchCustomerCompletion?(.success(CustomersAPIMock.customerMocker))
+        fetchCustomerCompletion?(.success(CustomerBankModel.mock))
     }
 
     class func didFetchCustomerFailed() {
@@ -49,10 +53,10 @@ final class CustomersAPIMock: CustomersAPI {
     }
 }
 
-extension CustomersAPIMock {
-    
-    static let customerMocker = CustomerBankModel(guid: "123",
-                                                  type: .individual,
-                                                  createdAt: Date(),
-                                                  state: .storing)
+extension CustomerBankModel {
+
+    static let mock = CustomerBankModel(guid: "123",
+                                        type: .individual,
+                                        createdAt: Date(),
+                                        state: .storing)
 }

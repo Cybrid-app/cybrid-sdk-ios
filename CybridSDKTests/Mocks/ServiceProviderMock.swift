@@ -14,7 +14,7 @@ final class ServiceProviderMock: AssetsRepoProvider,
                                  TradesRepoProvider,
                                  AccountsRepoProvider,
                                  CustomersRepoProvider,
-                                 IdentityVerificationRepoProvider {    
+                                 IdentityVerificationRepoProvider {
 
     var apiManager: CybridAPIManager.Type = MockAPIManager.self
 
@@ -24,8 +24,8 @@ final class ServiceProviderMock: AssetsRepoProvider,
     var quotesRepository: QuotesRepository.Type = QuotesAPIMock.self
     var tradesRepository: TradesRepository.Type = TradesAPIMock.self
     var accountsRepository: AccountsRepository.Type = AccountsAPIMock.self
-    var customerRepository: CustomersRepository.Type = CustomersAPIMock.self
-    var identityVerificationRepository: identityVerificationRepository.Type = IdentityVerificationsAPI.self
+    var customersRepository: CustomersRepository.Type = CustomersAPIMock.self
+    var identityVerificationRepository: IdentityVerificationRepository.Type = IdentityVerificationsAPIMock.self
 
     // MARK: Cache
     var assetsCache: [AssetBankModel]?

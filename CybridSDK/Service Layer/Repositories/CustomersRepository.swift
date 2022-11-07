@@ -17,8 +17,8 @@ protocol CustomersRepoProvider: AuthenticatedServiceProvider {
 
 extension CustomersRepoProvider {
 
-    func createCustomer(_ completion: @escaping CreateCustomerCompletion) {
-        authenticatedRequest(customersRepository.createCustomer, completion: completion)
+    func createCustomer(postCustomerBankModel: PostCustomerBankModel, _ completion: @escaping CreateCustomerCompletion) {
+        authenticatedRequest(customersRepository.createCustomer, parameters: postCustomerBankModel, completion: completion)
     }
 
     func getCustomer(customerGuid: String, _ completion: @escaping FetchCustomerCompletion) {
@@ -30,14 +30,14 @@ extension CybridSession: CustomersRepoProvider {}
 
 protocol CustomersRepository {
 
-    static func createCustomer(_ completion: @escaping CreateCustomerCompletion)
+    static func createCustomer(postCustomerBankModel: PostCustomerBankModel, _ completion: @escaping CreateCustomerCompletion)
     static func getCustomer(customerGuid: String, _ completion: @escaping FetchCustomerCompletion)
 }
 
 extension CustomersAPI: CustomersRepository {
 
-    static func createCustomer(_ completion: @escaping CreateCustomerCompletion) {
-        createCustomer(postCustomerBankModel: PostCustomerBankModel(type: .individual),
+    static func createCustomer(postCustomerBankModel: PostCustomerBankModel, _ completion: @escaping CreateCustomerCompletion) {
+        createCustomer(postCustomerBankModel: postCustomerBankModel,
                        completion: completion)
     }
 

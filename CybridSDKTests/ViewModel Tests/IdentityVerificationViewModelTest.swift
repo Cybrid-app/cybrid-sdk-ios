@@ -16,8 +16,8 @@ class IdentityVerificationViewModel: XCTestCase {
     func test_init() {
 
         let UIState: Observable<IdentityVerificationViewController.KYCViewState> = .init(.LOADING)
-        let viewModel = IdentityVerificationViewModel(dataProvider: self.dataProvider,
+        /*let viewModel = IdentityVerificationViewModel(dataProvider: self.dataProvider,
                                                       UIState: UIState,
-                                                      logger: nil)
+                                                      logger: nil)*/
     }
 }
