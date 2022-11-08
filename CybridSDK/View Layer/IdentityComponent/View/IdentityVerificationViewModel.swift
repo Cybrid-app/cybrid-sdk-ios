@@ -260,34 +260,32 @@ class IdentityVerificationViewModel: NSObject {
             UIState.value = .VERIFIED
 
         default:
-            print("--")
+
+            self.identityJob?.stop()
+            self.identityJob = nil
         }
     }
 
     func checkIdentityPersonaStatus(record: IdentityVerificationBankModel?) {
 
+        self.latestIdentityVerification = record
         switch record?.personaState {
 
         case .waiting:
 
-            self.latestIdentityVerification = record
             UIState.value = .REQUIRED
 
         case .pending:
 
-            self.latestIdentityVerification = record
             UIState.value = .REQUIRED
 
         case .reviewing:
 
             UIState.value = .REVIEWING
 
-        case .unknown:
+        default:
 
             UIState.value = .ERROR
-
-        default:
-            print("--")
         }
     }
 }
