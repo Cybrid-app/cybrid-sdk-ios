@@ -110,4 +110,34 @@ final class ServiceProviderMock: AssetsRepoProvider,
 
         CustomersAPIMock.didFetchCustomerFailed()
     }
+    
+    func didFetchIdentityVerificationSuccessfully() {
+        
+        IdentityVerificationsAPIMock.getIdentityVerificationSuccessfully()
+    }
+    
+    func didFetchIdentityVerificationFailed() {
+        
+        IdentityVerificationsAPIMock.getIdentityVerificationError()
+    }
+    
+    func didFetchListIdentityVerificationSuccessfully() {
+        
+        IdentityVerificationsAPIMock.listIdentityVerificationsSuccessfully()
+    }
+    
+    func didFetchListIdentityVerificationFailed() {
+        
+        IdentityVerificationsAPIMock.listIdentityVerificationsError()
+    }
+    
+    func didCreateIdentityVerificationSuccessfully() {
+        
+        IdentityVerificationsAPIMock.createIdentityVerificationSuccessfully()
+    }
+    
+    func didCreateIdentityVerificationFailed() {
+        
+        IdentityVerificationsAPIMock.createIdentityVerificationError()
+    }
 }

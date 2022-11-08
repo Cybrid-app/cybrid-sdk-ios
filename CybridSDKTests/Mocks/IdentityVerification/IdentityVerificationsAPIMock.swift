@@ -36,6 +36,7 @@ final class IdentityVerificationsAPIMock: IdentityVerificationsAPI {
         return listIdentityVerificationsWithRequestBuilder().requestTask
     }
 
+    @discardableResult
     override class func createIdentityVerification(postIdentityVerificationBankModel: PostIdentityVerificationBankModel,
                                                    apiResponseQueue: DispatchQueue = CybridApiBankSwiftAPI.apiResponseQueue,
                                                    completion: @escaping ((Result<IdentityVerificationBankModel, ErrorResponse>) -> Void)) -> RequestTask {

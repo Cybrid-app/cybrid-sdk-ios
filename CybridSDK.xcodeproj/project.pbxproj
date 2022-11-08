@@ -171,6 +171,7 @@
 		92A90A8F2911B91C00CA0E08 /* IdentityVerificationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A90A8E2911B91C00CA0E08 /* IdentityVerificationRepository.swift */; };
 		92AD743128D418610071F17F /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AD743028D418610071F17F /* String+Extensions.swift */; };
 		92B6819129197DDB00FD6E99 /* IdentityVerificationsAPIMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B6819029197DDB00FD6E99 /* IdentityVerificationsAPIMock.swift */; };
+		92B68193291AB9B900FD6E99 /* KYCComponentTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B68192291AB9B900FD6E99 /* KYCComponentTest.swift */; };
 		92C92C892911F2DA00B81719 /* Polling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C92C882911F2DA00B81719 /* Polling.swift */; };
 		92C92C8B2911FC6C00B81719 /* CustomerBankModel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C92C8A2911FC6C00B81719 /* CustomerBankModel+Extensions.swift */; };
 		92C92C8D29123C5F00B81719 /* IdentityVerificationBankModel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C92C8C29123C5F00B81719 /* IdentityVerificationBankModel+Extensions.swift */; };
@@ -395,6 +396,7 @@
 		92A90A8E2911B91C00CA0E08 /* IdentityVerificationRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentityVerificationRepository.swift; sourceTree = "<group>"; };
 		92AD743028D418610071F17F /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		92B6819029197DDB00FD6E99 /* IdentityVerificationsAPIMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentityVerificationsAPIMock.swift; sourceTree = "<group>"; };
+		92B68192291AB9B900FD6E99 /* KYCComponentTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KYCComponentTest.swift; sourceTree = "<group>"; };
 		92C92C882911F2DA00B81719 /* Polling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Polling.swift; sourceTree = "<group>"; };
 		92C92C8A2911FC6C00B81719 /* CustomerBankModel+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CustomerBankModel+Extensions.swift"; sourceTree = "<group>"; };
 		92C92C8C29123C5F00B81719 /* IdentityVerificationBankModel+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IdentityVerificationBankModel+Extensions.swift"; sourceTree = "<group>"; };
@@ -1160,6 +1162,7 @@
 				928E236B28EC90D6006AAE1A /* CybridSDKTestAppUITests.swift */,
 				928E237E28EE4996006AAE1A /* AccountsComponentTest.swift */,
 				928E238028EE4A6D006AAE1A /* CryptoListComponentTest.swift */,
+				92B68192291AB9B900FD6E99 /* KYCComponentTest.swift */,
 			);
 			path = CybridSDKTestAppUITests;
 			sourceTree = "<group>";
@@ -1754,6 +1757,7 @@
 				928E237828ECB80E006AAE1A /* XCTestCase+Extensions.swift in Sources */,
 				928E238128EE4A6D006AAE1A /* CryptoListComponentTest.swift in Sources */,
 				928E237F28EE4996006AAE1A /* AccountsComponentTest.swift in Sources */,
+				92B68193291AB9B900FD6E99 /* KYCComponentTest.swift in Sources */,
 				928E237628ECA38B006AAE1A /* XCUIElement+Extensions.swift in Sources */,
 				928E236C28EC90D6006AAE1A /* CybridSDKTestAppUITests.swift in Sources */,
 			);

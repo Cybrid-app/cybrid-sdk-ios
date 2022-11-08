@@ -30,6 +30,21 @@ class IdentityVerificationViewModelTest: XCTestCase {
         XCTAssertNil(viewModel.latestIdentityVerification)
     }
 
+    func test_createIdentityVerification_Successfully() {
+
+        // -- Given
+        let UIState: Observable<IdentityVerificationViewController.KYCViewState> = .init(.LOADING)
+        let viewModel = createViewModel(UIState: UIState)
+
+        // -- Then
+        viewModel.createIdentityVerification { identity in
+
+            XCTAssertNotNil(identity)
+            XCTAssertEqual(identity?.customerGuid, "12345")
+        }
+        dataProvider.didCreateIdentityVerificationSuccessfully()
+    }
+
     func test_checkCustomerStatus() {
 
         // -- Given
