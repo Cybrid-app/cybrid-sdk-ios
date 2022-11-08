@@ -43,11 +43,8 @@ class IdentityVerificationViewModel: NSObject {
             switch customerResponse {
 
             case .success(let customer):
-                // self?.logger?.log(.component(.accounts(.pricesDataFetching)))
-                print("CREATE CUSTOMER")
-                print(customer)
-                print("---------------------------")
-                self?.customerGuid = customer.guid ?? (self?.customerGuid ?? "")
+                self?.logger?.log(.component(.accounts(.pricesDataFetching)))
+                self?.customerGuid = customer.guid!
                 self?.getCustomerStatus()
 
             case .failure:
@@ -63,10 +60,7 @@ class IdentityVerificationViewModel: NSObject {
             switch customerResponse {
 
             case .success(let customer):
-                // self?.logger?.log(.component(.accounts(.pricesDataFetching)))
-                print("CUSTOMER STATUS")
-                print(customer)
-                print("---------------------------")
+                self?.logger?.log(.component(.accounts(.pricesDataFetching)))
                 self?.checkCustomerStatus(state: customer.state ?? .storing)
 
             case .failure:
@@ -80,19 +74,8 @@ class IdentityVerificationViewModel: NSObject {
         if record == nil {
 
             self.fetchLastIdentityVerification { [weak self] lastVerification in
-
-                print("---> LAST VERIFICATION")
-                print(lastVerification)
-                print("---------------------------")
-
                 if lastVerification == nil || lastVerification?.state == .expired || lastVerification?.personaState == .expired {
-
                     self?.createIdentityVerification { [weak self] recordIdentity in
-
-                        print("-----> CREATION")
-                        print(recordIdentity)
-                        print("---------------------------")
-
                         self?.fetchIdentityVerificationStatus(record: recordIdentity)
                     }
                 } else {
@@ -142,11 +125,7 @@ class IdentityVerificationViewModel: NSObject {
             switch listCustomerResponse {
 
             case .success(let list):
-                // self?.logger?.log(.component(.accounts(.pricesDataFetching)))
-                print("VERIFICATIONS LIST")
-                print(list)
-                print("---------------------------")
-
+                self?.logger?.log(.component(.accounts(.pricesDataFetching)))
                 if list.total > 0 {
 
                     let verifications = list.objects
@@ -176,10 +155,6 @@ class IdentityVerificationViewModel: NSObject {
             switch identityResponse {
 
             case .success(let identity):
-
-                print("CREATED VERIFICATION")
-                print(identity)
-                print("---------------------")
                 completion(identity)
 
             case .failure:

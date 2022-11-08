@@ -93,51 +93,73 @@ final class ServiceProviderMock: AssetsRepoProvider,
 
     func didCreateCustomerSuccessfully() {
 
-        CustomersAPIMock.didCreateCustomerSuccessfully(nil)
+        Cybrid.session.setupSession(authToken: "TEST-TOKEN")
+        CustomersAPIMock.didCreateCustomerSuccessfully()
     }
 
     func didCreateCustomerFailed() {
-
+        
+        Cybrid.session.setupSession(authToken: "TEST-TOKEN")
         CustomersAPIMock.didCreateCustomerFailed()
     }
 
     func didFetchCustomerSuccessfully() {
 
-        CustomersAPIMock.didFetchCustomerSuccessfully(nil)
+        Cybrid.session.setupSession(authToken: "TEST-TOKEN")
+        CustomersAPIMock.didFetchCustomerSuccessfully(CustomerBankModel.mock)
+    }
+
+    func didFetchCustomerSuccessfully_Empty() {
+
+        Cybrid.session.setupSession(authToken: "TEST-TOKEN")
+        CustomersAPIMock.didFetchCustomerSuccessfully(CustomerBankModel.mockEmpty)
     }
 
     func didFetchCustomerFailed() {
 
+        Cybrid.session.setupSession(authToken: "TEST-TOKEN")
         CustomersAPIMock.didFetchCustomerFailed()
     }
-    
+
     func didFetchIdentityVerificationSuccessfully() {
-        
+
+        Cybrid.session.setupSession(authToken: "TEST-TOKEN")
         IdentityVerificationsAPIMock.getIdentityVerificationSuccessfully()
     }
-    
+
     func didFetchIdentityVerificationFailed() {
-        
+
+        Cybrid.session.setupSession(authToken: "TEST-TOKEN")
         IdentityVerificationsAPIMock.getIdentityVerificationError()
     }
-    
+
     func didFetchListIdentityVerificationSuccessfully() {
-        
+
+        Cybrid.session.setupSession(authToken: "TEST-TOKEN")
         IdentityVerificationsAPIMock.listIdentityVerificationsSuccessfully()
     }
-    
+
+    func didFetchListEmptyIdentityVerificationSuccessfully() {
+
+        Cybrid.session.setupSession(authToken: "TEST-TOKEN")
+        IdentityVerificationsAPIMock.listEmptyIdentityVerificationsSuccessfully()
+    }
+
     func didFetchListIdentityVerificationFailed() {
-        
+
+        Cybrid.session.setupSession(authToken: "TEST-TOKEN")
         IdentityVerificationsAPIMock.listIdentityVerificationsError()
     }
-    
+
     func didCreateIdentityVerificationSuccessfully() {
-        
+
+        Cybrid.session.setupSession(authToken: "TEST-TOKEN")
         IdentityVerificationsAPIMock.createIdentityVerificationSuccessfully()
     }
-    
+
     func didCreateIdentityVerificationFailed() {
-        
+
+        Cybrid.session.setupSession(authToken: "TEST-TOKEN")
         IdentityVerificationsAPIMock.createIdentityVerificationError()
     }
 }

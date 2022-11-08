@@ -16,6 +16,7 @@ final class CustomersAPIMock: CustomersAPI {
     private static var createCustomerCompletion: CreateCustomerCompletion?
     private static var fetchCustomerCompletion: FetchCustomerCompletion?
 
+    @discardableResult
     override class func createCustomer(postCustomerBankModel: PostCustomerBankModel,
                                        apiResponseQueue: DispatchQueue = CybridApiBankSwiftAPI.apiResponseQueue,
                                        completion: @escaping ((Result<CustomerBankModel, ErrorResponse>) -> Void)) -> RequestTask {
@@ -32,7 +33,7 @@ final class CustomersAPIMock: CustomersAPI {
         return getCustomerWithRequestBuilder(customerGuid: customerGuid).requestTask
     }
 
-    class func didCreateCustomerSuccessfully(_ mockCustomer: CustomerBankModel?) {
+    class func didCreateCustomerSuccessfully() {
 
         createCustomerCompletion?(.success(CustomerBankModel.mock))
     }
@@ -42,9 +43,9 @@ final class CustomersAPIMock: CustomersAPI {
         createCustomerCompletion?(.failure(.error(0, nil, nil, CybridError.serviceError)))
     }
 
-    class func didFetchCustomerSuccessfully(_ mockCustomer: CustomerBankModel?) {
+    class func didFetchCustomerSuccessfully(_ mockCustomer: CustomerBankModel) {
 
-        fetchCustomerCompletion?(.success(CustomerBankModel.mock))
+        fetchCustomerCompletion?(.success(mockCustomer))
     }
 
     class func didFetchCustomerFailed() {
@@ -55,8 +56,12 @@ final class CustomersAPIMock: CustomersAPI {
 
 extension CustomerBankModel {
 
-    static let mock = CustomerBankModel(guid: "123",
+    static let mock = CustomerBankModel(guid: "12345",
                                         type: .individual,
                                         createdAt: Date(),
                                         state: .storing)
+
+    static let mockEmpty = CustomerBankModel(guid: "12345",
+                                        type: .individual,
+                                        createdAt: Date())
 }

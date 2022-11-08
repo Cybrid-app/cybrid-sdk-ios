@@ -58,6 +58,10 @@ final class IdentityVerificationsAPIMock: IdentityVerificationsAPI {
         fetchIdentityListCompletion?(.success(IdentityVerificationBankModel.getListMock()))
     }
 
+    class func listEmptyIdentityVerificationsSuccessfully() {
+        fetchIdentityListCompletion?(.success(IdentityVerificationBankModel.getEmptyListMock()))
+    }
+
     class func listIdentityVerificationsError() {
         fetchIdentityListCompletion?(.failure(.error(0, nil, nil, CybridError.serviceError)))
     }
@@ -92,5 +96,12 @@ extension IdentityVerificationBankModel {
                                                  page: 0,
                                                  perPage: 1,
                                                  objects: [getMock()])
+    }
+    
+    static func getEmptyListMock() -> IdentityVerificationListBankModel {
+        return IdentityVerificationListBankModel(total: 0,
+                                                 page: 0,
+                                                 perPage: 1,
+                                                 objects: [])
     }
 }

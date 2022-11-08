@@ -30,6 +30,99 @@ class IdentityVerificationViewModelTest: XCTestCase {
         XCTAssertNil(viewModel.latestIdentityVerification)
     }
 
+    func test_createCustomer_Successfully() {
+
+        // -- Given
+        let UIState: Observable<IdentityVerificationViewController.KYCViewState> = .init(.LOADING)
+        let viewModel = createViewModel(UIState: UIState)
+
+        // -- When
+        dataProvider.didCreateCustomerSuccessfully()
+        viewModel.createCustomerTest()
+        dataProvider.didCreateCustomerSuccessfully()
+
+        // -- Then
+        XCTAssertEqual(viewModel.customerGuid, "12345")
+    }
+
+    func test_createCustomer_Error() {
+
+        // -- Given
+        let UIState: Observable<IdentityVerificationViewController.KYCViewState> = .init(.LOADING)
+        let viewModel = createViewModel(UIState: UIState)
+        let originalCustomerGUID = viewModel.customerGuid
+
+        // -- When
+        dataProvider.didCreateCustomerFailed()
+        viewModel.createCustomerTest()
+
+        // -- Then
+        XCTAssertEqual(originalCustomerGUID, viewModel.customerGuid)
+
+    }
+
+    func test_getCustomerStatus_Successfully() {
+
+        // -- Given
+        let UIState: Observable<IdentityVerificationViewController.KYCViewState> = .init(.LOADING)
+        let viewModel = createViewModel(UIState: UIState)
+        let originalCustomerGUID = viewModel.customerGuid
+
+        // -- When
+        dataProvider.didFetchCustomerSuccessfully()
+        viewModel.getCustomerStatus()
+        dataProvider.didFetchCustomerSuccessfully()
+
+        // -- Then
+        XCTAssertEqual(originalCustomerGUID, viewModel.customerGuid)
+    }
+
+    func test_getCustomerStatus_Successfully_Empty() {
+
+        // -- Given
+        let UIState: Observable<IdentityVerificationViewController.KYCViewState> = .init(.LOADING)
+        let viewModel = createViewModel(UIState: UIState)
+        let originalCustomerGUID = viewModel.customerGuid
+
+        // -- When
+        dataProvider.didFetchCustomerSuccessfully_Empty()
+        viewModel.getCustomerStatus()
+        dataProvider.didFetchCustomerSuccessfully_Empty()
+
+        // -- Then
+        XCTAssertEqual(originalCustomerGUID, viewModel.customerGuid)
+    }
+
+    func test_getCustomerStatus_Failed() {
+
+        // -- Given
+        let UIState: Observable<IdentityVerificationViewController.KYCViewState> = .init(.LOADING)
+        let viewModel = createViewModel(UIState: UIState)
+        let originalCustomerGUID = viewModel.customerGuid
+
+        // -- When
+        viewModel.getCustomerStatus()
+        dataProvider.didFetchCustomerFailed()
+
+        // -- Then
+        XCTAssertEqual(originalCustomerGUID, viewModel.customerGuid)
+    }
+
+    func test_fetchLastIdentityVerification_Successfully() {
+
+        // -- Given
+        let UIState: Observable<IdentityVerificationViewController.KYCViewState> = .init(.LOADING)
+        let viewModel = createViewModel(UIState: UIState)
+
+        // -- Then
+        viewModel.fetchLastIdentityVerification { identity in
+
+            XCTAssertNotNil(identity)
+            XCTAssertEqual(identity?.customerGuid, "12345")
+        }
+        dataProvider.didFetchListIdentityVerificationSuccessfully()
+    }
+
     func test_createIdentityVerification_Successfully() {
 
         // -- Given
@@ -37,6 +130,7 @@ class IdentityVerificationViewModelTest: XCTestCase {
         let viewModel = createViewModel(UIState: UIState)
 
         // -- Then
+        dataProvider.didCreateIdentityVerificationSuccessfully()
         viewModel.createIdentityVerification { identity in
 
             XCTAssertNotNil(identity)
