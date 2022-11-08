@@ -5,26 +5,6 @@ orbs:
   swiftlint: ngs/swiftlint@0.0.1
 
 jobs:
-  build-and-test:
-    macos:
-      xcode: "14.0.1"
-    environment:
-      FASTLANE_OUTPUT_DIR: "./fastlane/output"
-
-    steps:
-      - checkout
-      - run:
-          name: "Install CocoaPods"
-          no_output_timeout: 3m
-          command: "pod install --verbose"
-      - run:
-          name: "Build and run tests"
-          command: "fastlane test output_directory:$FASTLANE_OUTPUT_DIR/"
-      - codecov/upload:
-          file: "$FASTLANE_OUTPUT_DIR/cobertura.xml"
-      - run:
-          name: "Upload App to Appetize"
-          command: "fastlane update_fastlane"
 
   swiftlint:
     description: Runs swiftlint
@@ -36,6 +16,7 @@ jobs:
           path: "result.xml"
       - store_test_results:
           path: "result.xml"
+
   pod-spec-lint:
     description: Runs podspec lint
     macos:
@@ -45,6 +26,38 @@ jobs:
       - run:
           name: "Run CocoaPods Podspec linter"
           command: "pod spec lint --verbose --quick"
+
+  build-and-test:
+    macos:
+      xcode: "14.0.1"
+    environment:
+      FASTLANE_OUTPUT_DIR: "./fastlane/output"
+    steps:
+      - checkout
+      - run:
+          name: "Install CocoaPods"
+          no_output_timeout: 3m
+          command: "pod install --verbose"
+      - run:
+          name: "Build and run tests"
+          command: "fastlane test output_directory:$FASTLANE_OUTPUT_DIR/"
+      - codecov/upload:
+          file: "$FASTLANE_OUTPUT_DIR/cobertura.xml"
+
+  publish:
+    macos:
+      xcode: "14.0.1"
+    environment:
+      FASTLANE_OUTPUT_DIR: "./fastlane/output"
+    steps:
+      - checkout
+      - run:
+          name: "Install CocoaPods"
+          no_output_timeout: 3m
+          command: "pod install --verbose"
+      - run:
+          name: "Upload App to Appetize"
+          command: "fastlane run build_and_upload_to_appetize api_token:${APPETIZE_API_TOKEN} public_key:${APPETIZE_PUBLIC_API_TOKEN}"
 
 executors:
   swiftlint:
@@ -57,3 +70,8 @@ workflows:
       - swiftlint
       - pod-spec-lint
       - build-and-test
+      - publish:
+          filters:
+            branches:
+              only:
+                - main
