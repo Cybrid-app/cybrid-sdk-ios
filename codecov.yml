@@ -22,6 +22,7 @@ ignore:
   - "CybridSDK/View Layer/Trade/TradeViewModel.swift"
   - "CybridSDK/View Layer/Crypto Price List/CryptoPriceModel.swift"
   - "CybridSDK/View Layer/AccountsComponent/Entity/AccountAssetPriceModel.swift"
+  - "CybridSDK/Framework Extensions/Model/*"
   - "CybridSDK/Framework Extensions/UIView/*"
   - "CybridSDK/View Layer/Reusable Views/*"
   - "CybridSDK/View Layer/Reusable Views/**/*"

@@ -45,7 +45,7 @@ public final class IdentityVerificationViewController: UIViewController {
         self.initComponentContent()
         self.manageCurrentStateUI()
 
-        self.identityVerificationViewModel.createCustomerTest()
+        self.identityVerificationViewModel.getCustomerStatus()
     }
 }
 
