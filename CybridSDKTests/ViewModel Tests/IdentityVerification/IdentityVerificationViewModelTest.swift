@@ -53,8 +53,8 @@ class IdentityVerificationViewModelTest: XCTestCase {
         let originalCustomerGUID = viewModel.customerGuid
 
         // -- When
-        dataProvider.didCreateCustomerFailed()
         viewModel.createCustomerTest()
+        dataProvider.didCreateCustomerFailed()
 
         // -- Then
         XCTAssertEqual(originalCustomerGUID, viewModel.customerGuid)
@@ -106,6 +106,51 @@ class IdentityVerificationViewModelTest: XCTestCase {
 
         // -- Then
         XCTAssertEqual(originalCustomerGUID, viewModel.customerGuid)
+    }
+
+    func test_getIdentityVerificationStatus_Nil() {
+
+        // -- Given
+        let UIState: Observable<IdentityVerificationViewController.KYCViewState> = .init(.LOADING)
+        let viewModel = createViewModel(UIState: UIState)
+
+        // -- When
+        viewModel.getIdentityVerificationStatus(record: nil)
+        dataProvider.didFetchListIdentityVerificationSuccessfully()
+
+        // -- Then
+        XCTAssertNil(viewModel.identityJob)
+    }
+
+    func test_getIdentityVerificationStatus_State_Expired() {
+
+        // -- Given
+        let UIState: Observable<IdentityVerificationViewController.KYCViewState> = .init(.LOADING)
+        let viewModel = createViewModel(UIState: UIState)
+        let record = IdentityVerificationBankModel.getExpiredMock()
+
+        // -- When
+        viewModel.getIdentityVerificationStatus(record: record)
+        dataProvider.didCreateIdentityVerificationSuccessfully()
+        dataProvider.didFetchListIdentityVerificationSuccessfully()
+
+        // -- Then
+        XCTAssertNil(viewModel.identityJob)
+    }
+
+    func test_fetchIdentityVerificationStatus_Successfully() {
+
+        // -- Given
+        let UIState: Observable<IdentityVerificationViewController.KYCViewState> = .init(.LOADING)
+        let viewModel = createViewModel(UIState: UIState)
+        let record = IdentityVerificationBankModel.getMock()
+
+        // -- When
+        viewModel.fetchIdentityVerificationStatus(record: record)
+        dataProvider.didFetchIdentityVerificationSuccessfully()
+
+        // -- Then
+        XCTAssertNotNil(viewModel.identityJob)
     }
 
     func test_fetchLastIdentityVerification_Successfully() {

@@ -98,7 +98,7 @@ final class ServiceProviderMock: AssetsRepoProvider,
     }
 
     func didCreateCustomerFailed() {
-        
+
         Cybrid.session.setupSession(authToken: "TEST-TOKEN")
         CustomersAPIMock.didCreateCustomerFailed()
     }
@@ -143,6 +143,18 @@ final class ServiceProviderMock: AssetsRepoProvider,
 
         Cybrid.session.setupSession(authToken: "TEST-TOKEN")
         IdentityVerificationsAPIMock.listEmptyIdentityVerificationsSuccessfully()
+    }
+
+    func didFetchListExpiredIdentityVerificationSuccessfully() {
+
+        Cybrid.session.setupSession(authToken: "TEST-TOKEN")
+        IdentityVerificationsAPIMock.listExpiredIdentityVerificationsSuccessfully()
+    }
+
+    func didFetchListPersonaExpiredIdentityVerificationSuccessfully() {
+
+        Cybrid.session.setupSession(authToken: "TEST-TOKEN")
+        IdentityVerificationsAPIMock.listPersonaExpiredIdentityVerificationsSuccessfully()
     }
 
     func didFetchListIdentityVerificationFailed() {

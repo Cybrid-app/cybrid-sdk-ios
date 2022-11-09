@@ -66,6 +66,14 @@ final class IdentityVerificationsAPIMock: IdentityVerificationsAPI {
         fetchIdentityListCompletion?(.failure(.error(0, nil, nil, CybridError.serviceError)))
     }
 
+    class func listExpiredIdentityVerificationsSuccessfully() {
+        fetchIdentityListCompletion?(.success(IdentityVerificationBankModel.getListExpiredMock()))
+    }
+
+    class func listPersonaExpiredIdentityVerificationsSuccessfully() {
+        fetchIdentityListCompletion?(.success(IdentityVerificationBankModel.getListPersonaExpiredMock()))
+    }
+
     class func createIdentityVerificationSuccessfully() {
         createIdentityCompletion?(.success(IdentityVerificationBankModel.getMock()))
     }
@@ -91,17 +99,59 @@ extension IdentityVerificationBankModel {
             personaState: .waiting)
     }
 
+    static func getExpiredMock() -> IdentityVerificationBankModel {
+        return IdentityVerificationBankModel(
+            guid: "12345",
+            customerGuid: "12345",
+            type: .kyc,
+            method: .idAndSelfie,
+            createdAt: Date(),
+            state: .expired,
+            outcome: .passed,
+            failureCodes: [],
+            personaInquiryId: "12345",
+            personaState: .waiting)
+    }
+
+    static func getPersonaExpiredMock() -> IdentityVerificationBankModel {
+        return IdentityVerificationBankModel(
+            guid: "12345",
+            customerGuid: "12345",
+            type: .kyc,
+            method: .idAndSelfie,
+            createdAt: Date(),
+            state: .storing,
+            outcome: .passed,
+            failureCodes: [],
+            personaInquiryId: "12345",
+            personaState: .expired)
+    }
+
     static func getListMock() -> IdentityVerificationListBankModel {
         return IdentityVerificationListBankModel(total: 1,
                                                  page: 0,
                                                  perPage: 1,
                                                  objects: [getMock()])
     }
-    
+
     static func getEmptyListMock() -> IdentityVerificationListBankModel {
         return IdentityVerificationListBankModel(total: 0,
                                                  page: 0,
                                                  perPage: 1,
                                                  objects: [])
+    }
+    
+    static func getListExpiredMock() -> IdentityVerificationListBankModel {
+        return IdentityVerificationListBankModel(total: 1,
+                                                 page: 0,
+                                                 perPage: 1,
+                                                 objects: [getExpiredMock()])
+    }
+    
+    static func getListPersonaExpiredMock() -> IdentityVerificationListBankModel {
+        return IdentityVerificationListBankModel(total: 1,
+                                                 page: 0,
+                                                 perPage: 1,
+                                                 objects: [getPersonaExpiredMock()])
     }
 }

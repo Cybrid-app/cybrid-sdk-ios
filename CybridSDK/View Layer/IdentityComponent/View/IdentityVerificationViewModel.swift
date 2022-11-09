@@ -87,11 +87,6 @@ class IdentityVerificationViewModel: NSObject {
             if record?.state == .expired || record?.personaState == .expired {
 
                 self.createIdentityVerification { [weak self] recordIdentity in
-
-                    print("-----> CREATION")
-                    print(recordIdentity)
-                    print("---------------------------")
-
                     self?.fetchIdentityVerificationStatus(record: recordIdentity)
                 }
             } else {
@@ -107,9 +102,6 @@ class IdentityVerificationViewModel: NSObject {
             switch identityResponse {
 
             case .success(let record):
-                print("IDENTITY STATUS")
-                print(record)
-                print("---------------------------")
                 self?.checkIdentityRecordStatus(record: record)
 
             case .failure:

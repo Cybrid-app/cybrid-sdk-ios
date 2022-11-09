@@ -19,6 +19,69 @@ class IdentityVerificationViewModelEmptyTest: XCTestCase {
                                              logger: nil)
     }
 
+    func test_getIdentityVerificationStatus_Nil_Last_Nil() {
+
+        // -- Given
+        let UIState: Observable<IdentityVerificationViewController.KYCViewState> = .init(.LOADING)
+        let viewModel = createViewModel(UIState: UIState)
+
+        // -- When
+        viewModel.getIdentityVerificationStatus(record: nil)
+        dataProvider.didFetchListIdentityVerificationFailed()
+        dataProvider.didCreateCustomerSuccessfully()
+
+        // -- Then
+        XCTAssertEqual(viewModel.customerGuid, "")
+        XCTAssertNil(viewModel.identityJob)
+    }
+
+    func test_getIdentityVerificationStatus_Nil_Last_Expired() {
+
+        // -- Given
+        let UIState: Observable<IdentityVerificationViewController.KYCViewState> = .init(.LOADING)
+        let viewModel = createViewModel(UIState: UIState)
+
+        // -- When
+        viewModel.getIdentityVerificationStatus(record: nil)
+        dataProvider.didFetchListExpiredIdentityVerificationSuccessfully()
+        dataProvider.didCreateCustomerSuccessfully()
+
+        // -- Then
+        XCTAssertEqual(viewModel.customerGuid, "")
+        XCTAssertNil(viewModel.identityJob)
+    }
+
+    func test_getIdentityVerificationStatus_Nil_Last_PersonaExpired() {
+
+        // -- Given
+        let UIState: Observable<IdentityVerificationViewController.KYCViewState> = .init(.LOADING)
+        let viewModel = createViewModel(UIState: UIState)
+
+        // -- When
+        viewModel.getIdentityVerificationStatus(record: nil)
+        dataProvider.didFetchListPersonaExpiredIdentityVerificationSuccessfully()
+        dataProvider.didCreateCustomerSuccessfully()
+
+        // -- Then
+        XCTAssertEqual(viewModel.customerGuid, "")
+        XCTAssertNil(viewModel.identityJob)
+    }
+
+    func test_fetchIdentityVerificationStatus_Failed() {
+
+        // -- Given
+        let UIState: Observable<IdentityVerificationViewController.KYCViewState> = .init(.LOADING)
+        let viewModel = createViewModel(UIState: UIState)
+        let record = IdentityVerificationBankModel.getMock()
+
+        // -- When
+        viewModel.fetchIdentityVerificationStatus(record: record)
+        dataProvider.didFetchIdentityVerificationFailed()
+
+        // -- Then
+        XCTAssertNil(viewModel.identityJob)
+    }
+
     func test_fetchLastIdentityVerification_Successfully_Empty() {
 
         // -- Given
