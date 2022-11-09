@@ -173,6 +173,12 @@
 		92B6819129197DDB00FD6E99 /* IdentityVerificationsAPIMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B6819029197DDB00FD6E99 /* IdentityVerificationsAPIMock.swift */; };
 		92B68193291AB9B900FD6E99 /* KYCComponentTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B68192291AB9B900FD6E99 /* KYCComponentTest.swift */; };
 		92B68196291B1C6300FD6E99 /* IdentityVerificationViewModelEmptyTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B68195291B1C6300FD6E99 /* IdentityVerificationViewModelEmptyTest.swift */; };
+		92B68198291C0D8500FD6E99 /* createCustomerBankModel.json in Resources */ = {isa = PBXBuildFile; fileRef = 92B68197291C0D8500FD6E99 /* createCustomerBankModel.json */; };
+		92B6819C291C0F1800FD6E99 /* createIdentityVerificationModel.json in Resources */ = {isa = PBXBuildFile; fileRef = 92B6819B291C0F1800FD6E99 /* createIdentityVerificationModel.json */; };
+		92B681A0291C0F4700FD6E99 /* listIdentityVerifications.json in Resources */ = {isa = PBXBuildFile; fileRef = 92B6819F291C0F4700FD6E99 /* listIdentityVerifications.json */; };
+		92B681A2291C119300FD6E99 /* createCustomerBankModel_Incomplete.json in Resources */ = {isa = PBXBuildFile; fileRef = 92B681A1291C119300FD6E99 /* createCustomerBankModel_Incomplete.json */; };
+		92B681A4291C141A00FD6E99 /* listIdentityVerifications_Incomplete.json in Resources */ = {isa = PBXBuildFile; fileRef = 92B681A3291C141A00FD6E99 /* listIdentityVerifications_Incomplete.json */; };
+		92B681A6291C173C00FD6E99 /* createIdentityVerificationModel_Incomplete.json in Resources */ = {isa = PBXBuildFile; fileRef = 92B681A5291C173C00FD6E99 /* createIdentityVerificationModel_Incomplete.json */; };
 		92C92C892911F2DA00B81719 /* Polling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C92C882911F2DA00B81719 /* Polling.swift */; };
 		92C92C8B2911FC6C00B81719 /* CustomerBankModel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C92C8A2911FC6C00B81719 /* CustomerBankModel+Extensions.swift */; };
 		92C92C8D29123C5F00B81719 /* IdentityVerificationBankModel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C92C8C29123C5F00B81719 /* IdentityVerificationBankModel+Extensions.swift */; };
@@ -399,6 +405,12 @@
 		92B6819029197DDB00FD6E99 /* IdentityVerificationsAPIMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentityVerificationsAPIMock.swift; sourceTree = "<group>"; };
 		92B68192291AB9B900FD6E99 /* KYCComponentTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KYCComponentTest.swift; sourceTree = "<group>"; };
 		92B68195291B1C6300FD6E99 /* IdentityVerificationViewModelEmptyTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentityVerificationViewModelEmptyTest.swift; sourceTree = "<group>"; };
+		92B68197291C0D8500FD6E99 /* createCustomerBankModel.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = createCustomerBankModel.json; sourceTree = "<group>"; };
+		92B6819B291C0F1800FD6E99 /* createIdentityVerificationModel.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = createIdentityVerificationModel.json; sourceTree = "<group>"; };
+		92B6819F291C0F4700FD6E99 /* listIdentityVerifications.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = listIdentityVerifications.json; sourceTree = "<group>"; };
+		92B681A1291C119300FD6E99 /* createCustomerBankModel_Incomplete.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = createCustomerBankModel_Incomplete.json; sourceTree = "<group>"; };
+		92B681A3291C141A00FD6E99 /* listIdentityVerifications_Incomplete.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = listIdentityVerifications_Incomplete.json; sourceTree = "<group>"; };
+		92B681A5291C173C00FD6E99 /* createIdentityVerificationModel_Incomplete.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = createIdentityVerificationModel_Incomplete.json; sourceTree = "<group>"; };
 		92C92C882911F2DA00B81719 /* Polling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Polling.swift; sourceTree = "<group>"; };
 		92C92C8A2911FC6C00B81719 /* CustomerBankModel+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CustomerBankModel+Extensions.swift"; sourceTree = "<group>"; };
 		92C92C8C29123C5F00B81719 /* IdentityVerificationBankModel+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IdentityVerificationBankModel+Extensions.swift"; sourceTree = "<group>"; };
@@ -651,6 +663,12 @@
 				0BBD0CE928B7E6E6001DBC5F /* createQuoteResponse.json */,
 				0BBD0CEB28B7EC09001DBC5F /* createTradeResponse.json */,
 				0B289A0128946F53001B3360 /* listLargestPricesResponse.json */,
+				92B68197291C0D8500FD6E99 /* createCustomerBankModel.json */,
+				92B681A1291C119300FD6E99 /* createCustomerBankModel_Incomplete.json */,
+				92B6819F291C0F4700FD6E99 /* listIdentityVerifications.json */,
+				92B681A3291C141A00FD6E99 /* listIdentityVerifications_Incomplete.json */,
+				92B6819B291C0F1800FD6E99 /* createIdentityVerificationModel.json */,
+				92B681A5291C173C00FD6E99 /* createIdentityVerificationModel_Incomplete.json */,
 				0B2899FF28946B52001B3360 /* JSONMockHelper.swift */,
 			);
 			path = JSON;
@@ -1422,13 +1440,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				92F5EC7128E206CE009DC3F4 /* accountResponse.json in Resources */,
+				92B681A0291C0F4700FD6E99 /* listIdentityVerifications.json in Resources */,
 				9205B8B628E3A52A00883279 /* listTradesResponseIncomplete.json in Resources */,
 				0BBD0CEA28B7E7EE001DBC5F /* createQuoteResponse.json in Resources */,
 				9205B8B428E3A43700883279 /* accountResponseIncomplete.json in Resources */,
 				0B2899FE289467EE001B3360 /* listPricesResponse.json in Resources */,
 				0BFF8755289628EB00E44C74 /* listAssetsResponse.json in Resources */,
+				92B6819C291C0F1800FD6E99 /* createIdentityVerificationModel.json in Resources */,
+				92B681A6291C173C00FD6E99 /* createIdentityVerificationModel_Incomplete.json in Resources */,
+				92B68198291C0D8500FD6E99 /* createCustomerBankModel.json in Resources */,
 				0B96601E285AF03700584692 /* TestAssets.xcassets in Resources */,
 				92F5EC7328E24150009DC3F4 /* listTradesResponse.json in Resources */,
+				92B681A4291C141A00FD6E99 /* listIdentityVerifications_Incomplete.json in Resources */,
+				92B681A2291C119300FD6E99 /* createCustomerBankModel_Incomplete.json in Resources */,
 				0B289A0228946F74001B3360 /* listLargestPricesResponse.json in Resources */,
 				0BBD0CEC28B7EC17001DBC5F /* createTradeResponse.json in Resources */,
 			);

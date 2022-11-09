@@ -30,9 +30,6 @@ final class CybridJSONDecoder: JSONDecoder {
         case is TradeListBankModel.Type:
             return try decodeTradeList(data: data) as! T
 
-        case is CustomerListBankModel.Type:
-            return try decodeCustomerListBankModel(data: data) as! T
-
         case is CustomerBankModel.Type:
             return try decodeCustomerBankModel(data: data) as! T
 
@@ -140,24 +137,6 @@ extension CybridJSONDecoder {
             total: jsonStringObject[TradeListBankModel.CodingKeys.total.rawValue] as? Int ?? 0,
             page: jsonStringObject[TradeListBankModel.CodingKeys.page.rawValue] as? Int ?? 0,
             perPage: jsonStringObject[TradeListBankModel.CodingKeys.perPage.rawValue] as? Int ?? 0,
-            objects: objects)
-    }
-
-    func decodeCustomerListBankModel(data: Data) throws -> CustomerListBankModel? {
-
-        guard let jsonObject = try JSONSerialization.jsonObject(with: data) as? [String: Any] else {
-            throw DecodingError.customDecodingError
-        }
-        let jsonStringObject: [String: Any] = jsonObject
-        let objectsValue = jsonStringObject[CustomerListBankModel.CodingKeys.objects.rawValue] as? [[String: Any]]
-        var objects = [CustomerBankModel]()
-        if let objectsValue = objectsValue {
-            objects = CustomerBankModel.fromArray(objects: objectsValue)
-        }
-        return CustomerListBankModel(
-            total: jsonStringObject[CustomerListBankModel.CodingKeys.total.rawValue] as? Int ?? 0,
-            page: jsonStringObject[CustomerListBankModel.CodingKeys.page.rawValue] as? Int ?? 0,
-            perPage: jsonStringObject[CustomerListBankModel.CodingKeys.perPage.rawValue] as? Int ?? 0,
             objects: objects)
     }
 
