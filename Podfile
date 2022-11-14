@@ -10,6 +10,7 @@ use_frameworks!
 def common_pods
   pod 'CybridApiBankSwift'
   pod 'BigInt'
+  pod 'PersonaInquirySDK2'
 end
 
 def quality_pods

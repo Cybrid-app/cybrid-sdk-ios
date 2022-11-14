@@ -24,4 +24,9 @@ class RootViewController: UIViewController {
     let viewController = AccountsViewController()
     navigationController?.pushViewController(viewController, animated: true)
   }
+  
+  @IBAction func didTapKYCButton(_ sender: Any) {
+    let viewController = IdentityVerificationViewController()
+    navigationController?.pushViewController(viewController, animated: true)
+  }
 }

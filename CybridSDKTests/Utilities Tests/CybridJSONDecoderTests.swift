@@ -291,4 +291,190 @@ class CybridJSONDecoderTests: XCTestCase {
         let result = try? decoder.decode(TradeBankModel.self, from: tradeData!)
         XCTAssertNil(result)
     }
+
+    // MARK: Customer Functions
+
+    func test_CustomerBankModel_Decoding() throws {
+
+        let customerData = getJSONData(from: "createCustomerBankModel")
+        XCTAssertNotNil(customerData)
+
+        let decoder = CybridJSONDecoder()
+
+        let result = try? decoder.decode(CustomerBankModel.self, from: customerData!)
+        XCTAssertNotNil(result?.guid)
+        XCTAssertNotNil(result?.type)
+        XCTAssertNotNil(result?.createdAt)
+        XCTAssertNotNil(result?.state)
+    }
+
+    func test_CustomerBankModel_Decoding_Init_Nil() throws {
+
+        let customerData = getJSONData(from: "createCustomerBankModel_Incomplete")
+        XCTAssertNotNil(customerData)
+
+        let decoder = CybridJSONDecoder()
+
+        let result = try? decoder.decode(CustomerBankModel.self, from: customerData!)
+        XCTAssertNil(result?.guid)
+    }
+
+    func test_CustomerBankModel_Decoding_Nil() throws {
+
+        let data = Data()
+        let decoder = CybridJSONDecoder()
+        let result = try? decoder.decode(CustomerBankModel.self, from: data)
+
+        XCTAssertThrowsError(try decoder.decode(CustomerBankModel.self, from: data))
+        XCTAssertNil(result)
+    }
+
+    func test_CustomerBankModel_withInvalidJSON() throws {
+
+        let tradeData = getJSONData(from: "listPricesResponse")
+        XCTAssertNotNil(tradeData)
+        let decoder = CybridJSONDecoder()
+
+        let result = try? decoder.decode(CustomerBankModel.self, from: tradeData!)
+        XCTAssertNil(result)
+    }
+
+    // MARK: List Identity Verification
+
+    func test_IdentityVerificationListBankModel_Decoding() throws {
+
+        let data = getJSONData(from: "listIdentityVerifications")
+        XCTAssertNotNil(data)
+
+        let decoder = CybridJSONDecoder()
+
+        let result = try? decoder.decode(IdentityVerificationListBankModel.self, from: data!)
+        XCTAssertNotNil(result?.total)
+        XCTAssertEqual(result?.total, 1)
+        XCTAssertNotNil(result?.page)
+        XCTAssertEqual(result?.page, 0)
+        XCTAssertNotNil(result?.perPage)
+        XCTAssertEqual(result?.perPage, 1)
+        XCTAssertNotNil(result?.objects)
+        XCTAssertNotNil(result?.objects[0])
+        XCTAssertNotNil(result?.objects[0].type)
+        XCTAssertNotNil(result?.objects[0].guid)
+        XCTAssertNotNil(result?.objects[0].customerGuid)
+        XCTAssertNotNil(result?.objects[0].method)
+        XCTAssertNotNil(result?.objects[0].state)
+        XCTAssertNotNil(result?.objects[0].outcome)
+        XCTAssertNil(result?.objects[0].failureCodes)
+        XCTAssertNotNil(result?.objects[0].personaInquiryId)
+        XCTAssertNotNil(result?.objects[0].personaState)
+    }
+
+    func test_IdentityVerificationListBankModel_Decoding_Incomplete() throws {
+
+        let data = getJSONData(from: "listIdentityVerifications_Incomplete")
+        XCTAssertNotNil(data)
+
+        let decoder = CybridJSONDecoder()
+
+        let result = try? decoder.decode(IdentityVerificationListBankModel.self, from: data!)
+        XCTAssertNotNil(result?.total)
+        XCTAssertEqual(result?.total, 0)
+        XCTAssertNotNil(result?.page)
+        XCTAssertEqual(result?.page, 0)
+        XCTAssertNotNil(result?.perPage)
+        XCTAssertEqual(result?.perPage, 0)
+        XCTAssertNotNil(result?.objects)
+        XCTAssertNotNil(result?.objects[0])
+        XCTAssertNotNil(result?.objects[0].type)
+        XCTAssertNotNil(result?.objects[0].guid)
+        XCTAssertNotNil(result?.objects[0].customerGuid)
+        XCTAssertNotNil(result?.objects[0].method)
+        XCTAssertNotNil(result?.objects[0].state)
+        XCTAssertNotNil(result?.objects[0].outcome)
+        XCTAssertNil(result?.objects[0].failureCodes)
+        XCTAssertNotNil(result?.objects[0].personaInquiryId)
+        XCTAssertNotNil(result?.objects[0].personaState)
+    }
+
+    func test_IdentityVerificationListBankModel_Decoding_Nil() throws {
+
+        let data = Data()
+        let decoder = CybridJSONDecoder()
+        let result = try? decoder.decode(IdentityVerificationListBankModel.self, from: data)
+
+        XCTAssertThrowsError(try decoder.decode(IdentityVerificationListBankModel.self, from: data))
+        XCTAssertNil(result)
+    }
+
+    func test_IdentityVerificationListBankModel_withInvalidJSON() throws {
+
+        let tradeData = getJSONData(from: "listPricesResponse")
+        XCTAssertNotNil(tradeData)
+        let decoder = CybridJSONDecoder()
+
+        let result = try? decoder.decode(IdentityVerificationListBankModel.self, from: tradeData!)
+        XCTAssertNil(result)
+    }
+
+    func test_IdentityVerificationListBankModel_withInvalidArrayOfJSON() throws {
+
+        let tradeData = getJSONData(from: "listPricesResponse")
+        XCTAssertNotNil(tradeData)
+        let decoder = CybridJSONDecoder()
+
+        let result = try? decoder.decode(IdentityVerificationListBankModel.self, from: tradeData!)
+        XCTAssertNil(result)
+    }
+
+    // MARK: Identity Verification
+
+    func test_IdentityVerificationBankModel_Decoding() throws {
+
+        let data = getJSONData(from: "createIdentityVerificationModel")
+        XCTAssertNotNil(data)
+
+        let decoder = CybridJSONDecoder()
+
+        let result = try? decoder.decode(IdentityVerificationBankModel.self, from: data!)
+        XCTAssertNotNil(result?.type)
+        XCTAssertNotNil(result?.guid)
+        XCTAssertNotNil(result?.customerGuid)
+        XCTAssertNotNil(result?.createdAt)
+        XCTAssertNotNil(result?.method)
+        XCTAssertNotNil(result?.state)
+        XCTAssertNotNil(result?.outcome)
+        XCTAssertNil(result?.failureCodes)
+        XCTAssertNotNil(result?.personaInquiryId)
+        XCTAssertNotNil(result?.personaState)
+    }
+
+    func test_IdentityVerificationBankModel_Decoding_Init_Nil() throws {
+
+        let data = getJSONData(from: "createIdentityVerificationModel_Incomplete")
+        XCTAssertNotNil(data)
+
+        let decoder = CybridJSONDecoder()
+
+        let result = try? decoder.decode(IdentityVerificationBankModel.self, from: data!)
+        XCTAssertNil(result?.guid)
+    }
+
+    func test_IdentityVerificationBankModel_Decoding_Nil() throws {
+
+        let data = Data()
+        let decoder = CybridJSONDecoder()
+        let result = try? decoder.decode(IdentityVerificationBankModel.self, from: data)
+
+        XCTAssertThrowsError(try decoder.decode(IdentityVerificationBankModel.self, from: data))
+        XCTAssertNil(result)
+    }
+
+    func test_IdentityVerificationBankModel_withInvalidJSON() throws {
+
+        let data = getJSONData(from: "listPricesResponse")
+        XCTAssertNotNil(data)
+        let decoder = CybridJSONDecoder()
+
+        let result = try? decoder.decode(IdentityVerificationBankModel.self, from: data!)
+        XCTAssertNil(result)
+    }
 }

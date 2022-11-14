@@ -59,8 +59,12 @@ class LoginController: UIViewController {
             case .success(let bearer):
                 self?.initCybridSDK(guid: guid, bearer: bearer)
             case .failure(let error):
-                self?.loader?.dismiss(animated: true)
-                self?.errorLabel?.text = error.localizedDescription
+                
+                DispatchQueue.main.async {
+
+                    self?.loader?.dismiss(animated: true)
+                    self?.errorLabel?.text = error.localizedDescription
+                }
                 print(error)
             }
         })

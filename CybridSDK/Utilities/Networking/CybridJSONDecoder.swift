@@ -14,21 +14,31 @@ final class CybridJSONDecoder: JSONDecoder {
     override func decode<T>(_ type: T.Type, from data: Data) throws -> T where T: Decodable {
 
         switch type {
+
         case is Array<SymbolPriceBankModel>.Type:
-            // swiftlint:disable:next force_cast
             return try decodeSymbolPriceList(data: data) as! T
+
         case is QuoteBankModel.Type:
-            // swiftlint:disable:next force_cast
             return try decodeQuoteBankModel(data: data) as! T
+
         case is TradeBankModel.Type:
-            // swiftlint:disable:next force_cast
             return try decodeTradeBankModel(data: data) as! T
+
         case is AccountListBankModel.Type:
-            // swiftlint:disable:next force_cast
             return try decodeAccountList(data: data) as! T
+
         case is TradeListBankModel.Type:
-            // swiftlint:disable:next force_cast
-            return try decoedTradeList(data: data) as! T
+            return try decodeTradeList(data: data) as! T
+
+        case is CustomerBankModel.Type:
+            return try decodeCustomerBankModel(data: data) as! T
+
+        case is IdentityVerificationListBankModel.Type:
+            return try decodeIdentityVerificationListBankModel(data: data) as! T
+
+        case is IdentityVerificationBankModel.Type:
+            return try decodeIdentityVerificationBankModel(data: data) as! T
+
         default:
             return try super.decode(type, from: data)
         }
@@ -112,7 +122,7 @@ extension CybridJSONDecoder {
         return nil
     }
 
-    func decoedTradeList(data: Data) throws -> TradeListBankModel? {
+    func decodeTradeList(data: Data) throws -> TradeListBankModel? {
 
         guard let jsonObject = try JSONSerialization.jsonObject(with: data) as? [String: Any] else {
             throw DecodingError.customDecodingError
@@ -128,6 +138,54 @@ extension CybridJSONDecoder {
             page: jsonStringObject[TradeListBankModel.CodingKeys.page.rawValue] as? Int ?? 0,
             perPage: jsonStringObject[TradeListBankModel.CodingKeys.perPage.rawValue] as? Int ?? 0,
             objects: objects)
+    }
+
+    func decodeCustomerBankModel(data: Data) throws -> CustomerBankModel {
+
+        guard let jsonObject = try JSONSerialization.jsonObject(with: data) as? [String: Any] else {
+            throw DecodingError.customDecodingError
+        }
+        let jsonStrongObject: [String: Any] = jsonObject
+
+        guard
+            let model = CustomerBankModel(json: jsonStrongObject)
+        else {
+            throw DecodingError.customDecodingError
+        }
+        return model
+    }
+
+    func decodeIdentityVerificationListBankModel(data: Data) throws -> IdentityVerificationListBankModel? {
+
+        guard let jsonObject = try JSONSerialization.jsonObject(with: data) as? [String: Any] else {
+            throw DecodingError.customDecodingError
+        }
+        let jsonStringObject: [String: Any] = jsonObject
+        let objectsValue = jsonStringObject[IdentityVerificationListBankModel.CodingKeys.objects.rawValue] as? [[String: Any]]
+        var objects = [IdentityVerificationBankModel]()
+        if let objectsValue = objectsValue {
+            objects = IdentityVerificationBankModel.fromArray(objects: objectsValue)
+        }
+        return IdentityVerificationListBankModel(
+            total: jsonStringObject[CustomerListBankModel.CodingKeys.total.rawValue] as? Int ?? 0,
+            page: jsonStringObject[CustomerListBankModel.CodingKeys.page.rawValue] as? Int ?? 0,
+            perPage: jsonStringObject[CustomerListBankModel.CodingKeys.perPage.rawValue] as? Int ?? 0,
+            objects: objects)
+    }
+
+    func decodeIdentityVerificationBankModel(data: Data) throws -> IdentityVerificationBankModel {
+
+        guard let jsonObject = try JSONSerialization.jsonObject(with: data) as? [String: Any] else {
+            throw DecodingError.customDecodingError
+        }
+        let jsonStrongObject: [String: Any] = jsonObject
+
+        guard
+            let model = IdentityVerificationBankModel(json: jsonStrongObject)
+        else {
+            throw DecodingError.customDecodingError
+        }
+        return model
     }
 }
 

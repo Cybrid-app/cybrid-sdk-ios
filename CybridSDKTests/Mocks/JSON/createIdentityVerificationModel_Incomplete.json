@@ -1,0 +1,11 @@
+{
+  "type": "kyc",
+  "guid": "70fc0d025fe2e2fd32cc856347d8b7da",
+  "customer_guid": "100e8ef51675b8a14d94d2207e109169",
+  "method": "id_and_selfie",
+  "state": "storing",
+  "outcome": null,
+  "failure_codes": [],
+  "persona_inquiry_id": null,
+  "persona_state": null
+}
