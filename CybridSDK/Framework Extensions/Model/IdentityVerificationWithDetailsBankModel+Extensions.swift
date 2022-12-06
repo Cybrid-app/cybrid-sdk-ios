@@ -39,17 +39,4 @@ extension IdentityVerificationWithDetailsBankModel {
             personaInquiryId: json[codingKeys.personaInquiryId.rawValue] as? String ?? "",
             personaState: IdentityVerificationWithDetailsBankModel.PersonaStateBankModel(rawValue: personaState) ?? .unknown)
     }
-
-    static func fromArray(objects: [[String: Any]]) -> [IdentityVerificationWithDetailsBankModel] {
-
-        var models = [IdentityVerificationWithDetailsBankModel]()
-        for object in objects {
-            // -- Creating the AccountBankModel
-            let model = IdentityVerificationWithDetailsBankModel(json: object)
-            if let model = model {
-                models.append(model)
-            }
-        }
-        return models
-    }
 }
