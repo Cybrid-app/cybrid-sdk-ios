@@ -14,7 +14,7 @@ class PollingTest: XCTestCase {
 
         // -- Given
         var num = 1
-        let polling = Polling { num = num + 1 }
+        let polling = Polling { num += 1 }
 
         // -- Tthen
         XCTAssertNotNil(polling)
@@ -27,7 +27,7 @@ class PollingTest: XCTestCase {
 
         // -- Given
         var num = 1
-        let polling = Polling { num = num + 1 }
+        let polling = Polling { num += 1 }
 
         // -- When
         polling.stop()

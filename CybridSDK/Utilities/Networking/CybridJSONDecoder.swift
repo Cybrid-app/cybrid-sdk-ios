@@ -39,6 +39,9 @@ final class CybridJSONDecoder: JSONDecoder {
         case is IdentityVerificationBankModel.Type:
             return try decodeIdentityVerificationBankModel(data: data) as! T
 
+        case is IdentityVerificationWithDetailsBankModel.Type:
+            return try decodeIdentityVerificationWithDetailsBankModel(data: data) as! T
+
         default:
             return try super.decode(type, from: data)
         }
@@ -182,6 +185,21 @@ extension CybridJSONDecoder {
 
         guard
             let model = IdentityVerificationBankModel(json: jsonStrongObject)
+        else {
+            throw DecodingError.customDecodingError
+        }
+        return model
+    }
+
+    func decodeIdentityVerificationWithDetailsBankModel(data: Data) throws -> IdentityVerificationWithDetailsBankModel {
+
+        guard let jsonObject = try JSONSerialization.jsonObject(with: data) as? [String: Any] else {
+            throw DecodingError.customDecodingError
+        }
+        let jsonStrongObject: [String: Any] = jsonObject
+
+        guard
+            let model = IdentityVerificationWithDetailsBankModel(json: jsonStrongObject)
         else {
             throw DecodingError.customDecodingError
         }

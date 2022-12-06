@@ -146,7 +146,7 @@ class IdentityVerificationViewModelTest: XCTestCase {
         let record = IdentityVerificationBankModel.getMock()
 
         // -- When
-        viewModel.fetchIdentityVerificationStatus(record: record)
+        viewModel.fetchIdentityVerificationWithDetailsStatus(record: record)
         dataProvider.didFetchIdentityVerificationSuccessfully()
 
         // -- Then

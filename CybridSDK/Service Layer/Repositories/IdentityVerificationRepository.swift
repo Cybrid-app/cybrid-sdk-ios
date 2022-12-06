@@ -8,7 +8,7 @@
 import Foundation
 import CybridApiBankSwift
 
-typealias FetchIdentityCompletion = (Result<IdentityVerificationBankModel, ErrorResponse>) -> Void
+typealias FetchIdentityCompletion = (Result<IdentityVerificationWithDetailsBankModel, ErrorResponse>) -> Void
 typealias FetchIdentityListCompletion = (Result<IdentityVerificationListBankModel, ErrorResponse>) -> Void
 typealias CreateIdentityCompletion = (Result<IdentityVerificationBankModel, ErrorResponse>) -> Void
 
