@@ -439,8 +439,6 @@ class CybridJSONDecoderTests: XCTestCase {
         XCTAssertNotNil(result?.state)
         XCTAssertNotNil(result?.outcome)
         XCTAssertNil(result?.failureCodes)
-        // XCTAssertNotNil(result?.personaInquiryId)
-        // XCTAssertNotNil(result?.personaState)
     }
 
     func test_IdentityVerificationBankModel_Decoding_Init_Nil() throws {

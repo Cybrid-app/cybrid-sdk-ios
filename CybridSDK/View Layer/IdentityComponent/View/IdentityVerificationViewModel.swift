@@ -263,11 +263,7 @@ class IdentityVerificationViewModel: NSObject {
     }
 }
 
-class IdentityVerificationWrapper: Equatable {
-
-    static func == (lhs: IdentityVerificationWrapper, rhs: IdentityVerificationWrapper) -> Bool {
-        return true
-    }
+class IdentityVerificationWrapper {
 
     var identityVerification: IdentityVerificationBankModel?
     var identityVerificationDetails: IdentityVerificationWithDetailsBankModel?

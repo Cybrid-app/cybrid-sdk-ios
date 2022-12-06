@@ -300,56 +300,64 @@ class IdentityVerificationViewModelTest: XCTestCase {
 
         // -- Persona: waiting - UIState: REQUIRED
         viewModel.checkIdentityPersonaStatus(wrapper: wrapper)
-        XCTAssertEqual(viewModel.latestIdentityVerification, wrapper)
+        XCTAssertEqual(viewModel.latestIdentityVerification?.identityVerification, wrapper.identityVerification)
+        XCTAssertEqual(viewModel.latestIdentityVerification?.identityVerificationDetails, wrapper.identityVerificationDetails)
         XCTAssertEqual(viewModel.UIState.value, IdentityVerificationViewController.KYCViewState.REQUIRED)
 
         // -- Persona: pending - UIState: REQUIRED
         wrapper.identityVerificationDetails?.personaState = .pending
         viewModel.UIState.value = .LOADING
         viewModel.checkIdentityPersonaStatus(wrapper: wrapper)
-        XCTAssertEqual(viewModel.latestIdentityVerification, wrapper)
+        XCTAssertEqual(viewModel.latestIdentityVerification?.identityVerification, wrapper.identityVerification)
+        XCTAssertEqual(viewModel.latestIdentityVerification?.identityVerificationDetails, wrapper.identityVerificationDetails)
         XCTAssertEqual(viewModel.UIState.value, IdentityVerificationViewController.KYCViewState.REQUIRED)
 
         // -- Persona: reviewing - UIState: REVIEWING
         wrapper.identityVerificationDetails?.personaState = .reviewing
         viewModel.UIState.value = .LOADING
         viewModel.checkIdentityPersonaStatus(wrapper: wrapper)
-        XCTAssertEqual(viewModel.latestIdentityVerification, wrapper)
+        XCTAssertEqual(viewModel.latestIdentityVerification?.identityVerification, wrapper.identityVerification)
+        XCTAssertEqual(viewModel.latestIdentityVerification?.identityVerificationDetails, wrapper.identityVerificationDetails)
         XCTAssertEqual(viewModel.UIState.value, IdentityVerificationViewController.KYCViewState.REVIEWING)
 
         // -- Persona: completed - UIState: ERROR
         wrapper.identityVerificationDetails?.personaState = .completed
         viewModel.UIState.value = .LOADING
         viewModel.checkIdentityPersonaStatus(wrapper: wrapper)
-        XCTAssertEqual(viewModel.latestIdentityVerification, wrapper)
+        XCTAssertEqual(viewModel.latestIdentityVerification?.identityVerification, wrapper.identityVerification)
+        XCTAssertEqual(viewModel.latestIdentityVerification?.identityVerificationDetails, wrapper.identityVerificationDetails)
         XCTAssertEqual(viewModel.UIState.value, IdentityVerificationViewController.KYCViewState.ERROR)
 
         // -- Persona: expired - UIState: ERROR
         wrapper.identityVerificationDetails?.personaState = .expired
         viewModel.UIState.value = .LOADING
         viewModel.checkIdentityPersonaStatus(wrapper: wrapper)
-        XCTAssertEqual(viewModel.latestIdentityVerification, wrapper)
+        XCTAssertEqual(viewModel.latestIdentityVerification?.identityVerification, wrapper.identityVerification)
+        XCTAssertEqual(viewModel.latestIdentityVerification?.identityVerificationDetails, wrapper.identityVerificationDetails)
         XCTAssertEqual(viewModel.UIState.value, IdentityVerificationViewController.KYCViewState.LOADING)
 
         // -- Persona: processing - UIState: ERROR
         wrapper.identityVerificationDetails?.personaState = .processing
         viewModel.UIState.value = .LOADING
         viewModel.checkIdentityPersonaStatus(wrapper: wrapper)
-        XCTAssertEqual(viewModel.latestIdentityVerification, wrapper)
+        XCTAssertEqual(viewModel.latestIdentityVerification?.identityVerification, wrapper.identityVerification)
+        XCTAssertEqual(viewModel.latestIdentityVerification?.identityVerificationDetails, wrapper.identityVerificationDetails)
         XCTAssertEqual(viewModel.UIState.value, IdentityVerificationViewController.KYCViewState.ERROR)
 
         // -- Persona: unknown - UIState: ERROR
         wrapper.identityVerificationDetails?.personaState = .unknown
         viewModel.UIState.value = .LOADING
         viewModel.checkIdentityPersonaStatus(wrapper: wrapper)
-        XCTAssertEqual(viewModel.latestIdentityVerification, wrapper)
+        XCTAssertEqual(viewModel.latestIdentityVerification?.identityVerification, wrapper.identityVerification)
+        XCTAssertEqual(viewModel.latestIdentityVerification?.identityVerificationDetails, wrapper.identityVerificationDetails)
         XCTAssertEqual(viewModel.UIState.value, IdentityVerificationViewController.KYCViewState.ERROR)
 
         // -- Persona: unknownDefaultOpenApi - UIState: ERROR
         wrapper.identityVerificationDetails?.personaState = .unknownDefaultOpenApi
         viewModel.UIState.value = .LOADING
         viewModel.checkIdentityPersonaStatus(wrapper: wrapper)
-        XCTAssertEqual(viewModel.latestIdentityVerification, wrapper)
+        XCTAssertEqual(viewModel.latestIdentityVerification?.identityVerification, wrapper.identityVerification)
+        XCTAssertEqual(viewModel.latestIdentityVerification?.identityVerificationDetails, wrapper.identityVerificationDetails)
         XCTAssertEqual(viewModel.UIState.value, IdentityVerificationViewController.KYCViewState.ERROR)
     }
 }
