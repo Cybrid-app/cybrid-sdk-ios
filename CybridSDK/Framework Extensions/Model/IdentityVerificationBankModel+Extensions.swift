@@ -22,7 +22,6 @@ extension IdentityVerificationBankModel {
         let method = json[IdentityVerificationBankModel.CodingKeys.method.rawValue] as? String ?? ""
         let state = json[IdentityVerificationBankModel.CodingKeys.state.rawValue] as? String ?? ""
         let outcome = json[IdentityVerificationBankModel.CodingKeys.outcome.rawValue] as? String ?? ""
-        let personaState = json[IdentityVerificationBankModel.CodingKeys.personaState.rawValue] as? String ?? ""
 
         let codingKeys = IdentityVerificationBankModel.CodingKeys.self
         let createdAtDate = getDate(stringDate: createdAt)
@@ -35,9 +34,7 @@ extension IdentityVerificationBankModel {
             createdAt: createdAtDate,
             state: IdentityVerificationBankModel.StateBankModel(rawValue: state) ?? .storing,
             outcome: IdentityVerificationBankModel.OutcomeBankModel(rawValue: outcome) ?? .passed,
-            failureCodes: nil,
-            personaInquiryId: json[codingKeys.personaInquiryId.rawValue] as? String ?? "",
-            personaState: IdentityVerificationBankModel.PersonaStateBankModel(rawValue: personaState) ?? .unknown)
+            failureCodes: nil)
     }
 
     static func fromArray(objects: [[String: Any]]) -> [IdentityVerificationBankModel] {

@@ -384,7 +384,7 @@ extension IdentityVerificationViewController {
 
     private func openPersona() {
 
-        if let record = self.identityVerificationViewModel.latestIdentityVerification {
+        if let record = self.identityVerificationViewModel.latestIdentityVerification?.identityVerificationDetails {
             if let id = record.personaInquiryId {
                 let config = InquiryConfiguration(inquiryId: id)
                 Inquiry(config: config, delegate: self).start(from: self)
@@ -398,7 +398,7 @@ extension IdentityVerificationViewController: InquiryDelegate {
     public func inquiryComplete(inquiryId: String, status: String, fields: [String: Persona2.InquiryField]) {
 
         self.currentState.value = .LOADING
-        self.identityVerificationViewModel.getIdentityVerificationStatus(record: self.identityVerificationViewModel.latestIdentityVerification)
+        self.identityVerificationViewModel.getIdentityVerificationStatus(identityWrapper: self.identityVerificationViewModel.latestIdentityVerification)
     }
 
     public func inquiryCanceled(inquiryId: String?, sessionToken: String?) {}

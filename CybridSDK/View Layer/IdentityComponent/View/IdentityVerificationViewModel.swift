@@ -22,7 +22,7 @@ class IdentityVerificationViewModel: NSObject {
 
     // MARK: Public properties
     var UIState: Observable<IdentityVerificationViewController.KYCViewState> = .init(.LOADING)
-    var latestIdentityVerification: IdentityVerificationBankModel?
+    var latestIdentityVerification: IdentityVerificationWrapper?
 
     // MARK: Constructor
     init(dataProvider: CustomersRepoProvider & IdentityVerificationRepoProvider,
@@ -69,40 +69,42 @@ class IdentityVerificationViewModel: NSObject {
         }
     }
 
-    func getIdentityVerificationStatus(record: IdentityVerificationBankModel? = nil) {
+    func getIdentityVerificationStatus(identityWrapper: IdentityVerificationWrapper? = nil) {
 
-        if record == nil {
+        if identityWrapper?.identityVerification == nil {
 
             self.fetchLastIdentityVerification { [weak self] lastVerification in
-                if lastVerification == nil || lastVerification?.state == .expired || lastVerification?.personaState == .expired {
+                if lastVerification == nil || lastVerification?.state == .expired {
                     self?.createIdentityVerification { [weak self] recordIdentity in
-                        self?.fetchIdentityVerificationStatus(record: recordIdentity)
+                        self?.fetchIdentityVerificationWithDetailsStatus(record: recordIdentity)
                     }
                 } else {
-                    self?.fetchIdentityVerificationStatus(record: lastVerification)
+                    self?.fetchIdentityVerificationWithDetailsStatus(record: lastVerification)
                 }
             }
 
         } else {
-            if record?.state == .expired || record?.personaState == .expired {
+            if identityWrapper?.identityVerification?.state == .expired {
 
                 self.createIdentityVerification { [weak self] recordIdentity in
-                    self?.fetchIdentityVerificationStatus(record: recordIdentity)
+                    self?.fetchIdentityVerificationWithDetailsStatus(record: recordIdentity)
                 }
             } else {
-                self.fetchIdentityVerificationStatus(record: record)
+                self.fetchIdentityVerificationWithDetailsStatus(record: identityWrapper?.identityVerification)
             }
         }
     }
 
-    func fetchIdentityVerificationStatus(record: IdentityVerificationBankModel?) {
+    func fetchIdentityVerificationWithDetailsStatus(record: IdentityVerificationBankModel?) {
 
         self.dataProvider.getIdentityVerification(guid: record?.guid ?? "") { [weak self] identityResponse in
 
             switch identityResponse {
 
-            case .success(let record):
-                self?.checkIdentityRecordStatus(record: record)
+            case .success(let recordDetails):
+
+                let wrapper = IdentityVerificationWrapper(identity: record, details: recordDetails)
+                self?.checkIdentityRecordStatus(wrapper: wrapper)
 
             case .failure:
                 self?.logger?.log(.component(.accounts(.pricesDataError)))
@@ -191,34 +193,34 @@ class IdentityVerificationViewModel: NSObject {
         }
     }
 
-    func checkIdentityRecordStatus(record: IdentityVerificationBankModel?) {
+    func checkIdentityRecordStatus(wrapper: IdentityVerificationWrapper?) {
 
-        switch record?.state {
+        switch wrapper?.identityVerificationDetails?.state {
 
         case .storing:
 
             if identityJob == nil {
-                identityJob = Polling { self.getIdentityVerificationStatus(record: record) }
+                identityJob = Polling { self.getIdentityVerificationStatus(identityWrapper: wrapper) }
             }
 
         case .waiting:
 
-            if record?.personaState == .completed || record?.personaState == .processing {
+            if wrapper?.identityVerificationDetails?.personaState == .completed || wrapper?.identityVerificationDetails?.personaState == .processing {
                 if identityJob == nil {
-                    self.identityJob = Polling { self.getIdentityVerificationStatus(record: record) }
+                    self.identityJob = Polling { self.getIdentityVerificationStatus(identityWrapper: wrapper) }
                 }
             } else {
 
                 self.identityJob?.stop()
                 self.identityJob = nil
-                self.checkIdentityPersonaStatus(record: record)
+                self.checkIdentityPersonaStatus(wrapper: wrapper)
             }
 
         case .expired:
 
             self.identityJob?.stop()
             self.identityJob = nil
-            self.getIdentityVerificationStatus(record: nil)
+            self.getIdentityVerificationStatus(identityWrapper: nil)
 
         case .completed:
 
@@ -233,10 +235,10 @@ class IdentityVerificationViewModel: NSObject {
         }
     }
 
-    func checkIdentityPersonaStatus(record: IdentityVerificationBankModel?) {
+    func checkIdentityPersonaStatus(wrapper: IdentityVerificationWrapper?) {
 
-        self.latestIdentityVerification = record
-        switch record?.personaState {
+        self.latestIdentityVerification = wrapper
+        switch wrapper?.identityVerificationDetails?.personaState {
 
         case .waiting:
 
@@ -250,9 +252,24 @@ class IdentityVerificationViewModel: NSObject {
 
             UIState.value = .REVIEWING
 
+        case .expired:
+
+            getIdentityVerificationStatus(identityWrapper: nil)
+
         default:
 
             UIState.value = .ERROR
         }
+    }
+}
+
+class IdentityVerificationWrapper {
+
+    var identityVerification: IdentityVerificationBankModel?
+    var identityVerificationDetails: IdentityVerificationWithDetailsBankModel?
+
+    init(identity: IdentityVerificationBankModel?, details: IdentityVerificationWithDetailsBankModel?) {
+        self.identityVerification = identity
+        self.identityVerificationDetails = details
     }
 }
