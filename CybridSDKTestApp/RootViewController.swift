@@ -29,4 +29,9 @@ class RootViewController: UIViewController {
     let viewController = IdentityVerificationViewController()
     navigationController?.pushViewController(viewController, animated: true)
   }
+  
+  @IBAction func didTapBankAccountsButton(_ sender: Any) {
+    let viewController = BankAccountsViewcontroller()
+    navigationController?.pushViewController(viewController, animated: true)
+  }
 }

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="h3g-jT-Vru">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="h3g-jT-Vru">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="cIp-MT-lRL">
-                                <rect key="frame" x="0.0" y="363" width="414" height="180"/>
+                                <rect key="frame" x="0.0" y="335" width="414" height="240"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5je-8O-oTJ">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="60"/>
@@ -53,6 +53,17 @@
                                             <action selector="didTapKYCButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="kRc-Vm-xj8"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pu5-2T-Fgv">
+                                        <rect key="frame" x="0.0" y="180" width="414" height="60"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="60" id="nTh-Ds-0bA"/>
+                                        </constraints>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Bank Accounts Component"/>
+                                        <connections>
+                                            <action selector="didTapBankAccountsButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Cau-ln-rhh"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                             </stackView>
                         </subviews>
@@ -81,14 +92,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cybrid_white" translatesAutoresizingMaskIntoConstraints="NO" id="rWa-BH-Roz">
-                                <rect key="frame" x="30" y="94" width="354" height="50"/>
+                                <rect key="frame" x="30" y="98" width="354" height="50"/>
                                 <accessibility key="accessibilityConfiguration" identifier="login_image"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="RtC-wb-BqA"/>
                                 </constraints>
                             </imageView>
                             <textField opaque="NO" tag="10" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="ClientID" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aY6-nz-Ed0">
-                                <rect key="frame" x="30" y="224" width="354" height="50"/>
+                                <rect key="frame" x="30" y="228" width="354" height="50"/>
                                 <color key="tintColor" systemColor="labelColor"/>
                                 <accessibility key="accessibilityConfiguration" identifier="clientID"/>
                                 <constraints>
@@ -107,7 +118,7 @@
                                 </connections>
                             </textField>
                             <textField opaque="NO" tag="11" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Client Secret" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0Jv-FV-bNS">
-                                <rect key="frame" x="30" y="304" width="354" height="50"/>
+                                <rect key="frame" x="30" y="308" width="354" height="50"/>
                                 <color key="tintColor" systemColor="labelColor"/>
                                 <accessibility key="accessibilityConfiguration" identifier="clientSecret"/>
                                 <constraints>
@@ -126,7 +137,7 @@
                                 </connections>
                             </textField>
                             <textField opaque="NO" tag="12" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="customer GUID" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="IkL-4M-hYw">
-                                <rect key="frame" x="30" y="384" width="354" height="50"/>
+                                <rect key="frame" x="30" y="388" width="354" height="50"/>
                                 <color key="tintColor" systemColor="labelColor"/>
                                 <accessibility key="accessibilityConfiguration" identifier="customerGUID"/>
                                 <constraints>
@@ -145,7 +156,7 @@
                                 </connections>
                             </textField>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please fill all the fields" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OO4-iE-FhO">
-                                <rect key="frame" x="30" y="464" width="354" height="24"/>
+                                <rect key="frame" x="30" y="468" width="354" height="24"/>
                                 <accessibility key="accessibilityConfiguration" identifier="login_error"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="24" id="mur-Kg-SBK"/>
@@ -155,7 +166,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bDR-4B-oyo">
-                                <rect key="frame" x="30" y="548" width="354" height="30"/>
+                                <rect key="frame" x="30" y="552" width="354" height="30"/>
                                 <accessibility key="accessibilityConfiguration" identifier="demo_mode"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="YYU-Z4-lah"/>
@@ -168,7 +179,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CXa-0i-KzW">
-                                <rect key="frame" x="30" y="493" width="354" height="50"/>
+                                <rect key="frame" x="30" y="497" width="354" height="50"/>
                                 <accessibility key="accessibilityConfiguration" identifier="login_button"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="qKI-Tz-ANH"/>
@@ -231,7 +242,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="h3g-jT-Vru" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="W88-oi-bPP">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <rect key="frame" x="0.0" y="48" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -247,7 +258,7 @@
     <resources>
         <image name="cybrid_white" width="1155" height="209"/>
         <systemColor name="labelColor">
-            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

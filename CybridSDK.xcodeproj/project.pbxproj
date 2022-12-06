@@ -187,6 +187,7 @@
 		92CB9E412914CAD500357873 /* IdentityVerificationViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CB9E402914CAD500357873 /* IdentityVerificationViewModelTest.swift */; };
 		92E2133528F86F3300F420F2 /* LoginLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E2133428F86F3300F420F2 /* LoginLoader.swift */; };
 		92F222D92914359C00137B11 /* PollingTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F222D82914359C00137B11 /* PollingTest.swift */; };
+		92F38C4F2924223E00008F58 /* BankAccountsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F38C4E2924223E00008F58 /* BankAccountsViewController.swift */; };
 		92F5EC7128E206CE009DC3F4 /* accountResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 92F5EC7028E206CE009DC3F4 /* accountResponse.json */; };
 		92F5EC7328E24150009DC3F4 /* listTradesResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 92F5EC7228E24150009DC3F4 /* listTradesResponse.json */; };
 		9E3B30420CC77D425A7A1C28 /* Pods_Abstract_CybridSDKTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80DCD8FC666A9176CF28F146 /* Pods_Abstract_CybridSDKTests.framework */; };
@@ -420,6 +421,7 @@
 		92CB9E402914CAD500357873 /* IdentityVerificationViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentityVerificationViewModelTest.swift; sourceTree = "<group>"; };
 		92E2133428F86F3300F420F2 /* LoginLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginLoader.swift; sourceTree = "<group>"; };
 		92F222D82914359C00137B11 /* PollingTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PollingTest.swift; sourceTree = "<group>"; };
+		92F38C4E2924223E00008F58 /* BankAccountsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankAccountsViewController.swift; sourceTree = "<group>"; };
 		92F5EC7028E206CE009DC3F4 /* accountResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = accountResponse.json; sourceTree = "<group>"; };
 		92F5EC7228E24150009DC3F4 /* listTradesResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = listTradesResponse.json; sourceTree = "<group>"; };
 		D8168B44D4C796A81CF0902E /* Pods-Abstract-CybridSDKTestApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Abstract-CybridSDKTestApp.debug.xcconfig"; path = "Target Support Files/Pods-Abstract-CybridSDKTestApp/Pods-Abstract-CybridSDKTestApp.debug.xcconfig"; sourceTree = "<group>"; };
@@ -976,6 +978,7 @@
 		0BD660FF286B765900F4DA6B /* View Layer */ = {
 			isa = PBXGroup;
 			children = (
+				92F38C4D2924220B00008F58 /* BankAcoountsComponent */,
 				92A90A882911935400CA0E08 /* IdentityComponent */,
 				0BD66100286B766B00F4DA6B /* Crypto Price List */,
 				0B557B902899F4CB00632A6D /* Trade */,
@@ -1264,6 +1267,14 @@
 				92F222D82914359C00137B11 /* PollingTest.swift */,
 			);
 			path = Events;
+			sourceTree = "<group>";
+		};
+		92F38C4D2924220B00008F58 /* BankAcoountsComponent */ = {
+			isa = PBXGroup;
+			children = (
+				92F38C4E2924223E00008F58 /* BankAccountsViewController.swift */,
+			);
+			path = BankAcoountsComponent;
 			sourceTree = "<group>";
 		};
 		92F5EC7428E24716009DC3F4 /* FrameworkExtensionsTest */ = {
@@ -1690,6 +1701,7 @@
 				927233E328D2448F0080AAC4 /* AccountTradesViewModel.swift in Sources */,
 				0BD6610A286B768C00F4DA6B /* CryptoPriceViewModel.swift in Sources */,
 				0B00E05C2887256B00707F26 /* UIView+Keyboard.swift in Sources */,
+				92F38C4F2924223E00008F58 /* BankAccountsViewController.swift in Sources */,
 				0BBD0CCA28AAC025001DBC5F /* BigDecimalValidator.swift in Sources */,
 				927233D428D243C60080AAC4 /* AccountsViewController.swift in Sources */,
 				927233CB28D23D060080AAC4 /* AccountsRepository.swift in Sources */,
