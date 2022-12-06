@@ -26,7 +26,7 @@ class IdentityVerificationViewModelEmptyTest: XCTestCase {
         let viewModel = createViewModel(UIState: UIState)
 
         // -- When
-        viewModel.getIdentityVerificationStatus(record: nil)
+        viewModel.getIdentityVerificationStatus(identityWrapper: nil)
         dataProvider.didFetchListIdentityVerificationFailed()
         dataProvider.didCreateCustomerSuccessfully()
 
@@ -42,7 +42,7 @@ class IdentityVerificationViewModelEmptyTest: XCTestCase {
         let viewModel = createViewModel(UIState: UIState)
 
         // -- When
-        viewModel.getIdentityVerificationStatus(record: nil)
+        viewModel.getIdentityVerificationStatus(identityWrapper: nil)
         dataProvider.didFetchListExpiredIdentityVerificationSuccessfully()
         dataProvider.didCreateCustomerSuccessfully()
 
@@ -58,7 +58,7 @@ class IdentityVerificationViewModelEmptyTest: XCTestCase {
         let viewModel = createViewModel(UIState: UIState)
 
         // -- When
-        viewModel.getIdentityVerificationStatus(record: nil)
+        viewModel.getIdentityVerificationStatus(identityWrapper: nil)
         dataProvider.didFetchListPersonaExpiredIdentityVerificationSuccessfully()
         dataProvider.didCreateCustomerSuccessfully()
 

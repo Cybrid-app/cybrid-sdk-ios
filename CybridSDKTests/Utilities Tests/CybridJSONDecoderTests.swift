@@ -364,8 +364,8 @@ class CybridJSONDecoderTests: XCTestCase {
         XCTAssertNotNil(result?.objects[0].state)
         XCTAssertNotNil(result?.objects[0].outcome)
         XCTAssertNil(result?.objects[0].failureCodes)
-        XCTAssertNotNil(result?.objects[0].personaInquiryId)
-        XCTAssertNotNil(result?.objects[0].personaState)
+        // XCTAssertNotNil(result?.objects[0].personaInquiryId)
+        // XCTAssertNotNil(result?.objects[0].personaState)
     }
 
     func test_IdentityVerificationListBankModel_Decoding_Incomplete() throws {
@@ -391,8 +391,8 @@ class CybridJSONDecoderTests: XCTestCase {
         XCTAssertNotNil(result?.objects[0].state)
         XCTAssertNotNil(result?.objects[0].outcome)
         XCTAssertNil(result?.objects[0].failureCodes)
-        XCTAssertNotNil(result?.objects[0].personaInquiryId)
-        XCTAssertNotNil(result?.objects[0].personaState)
+        // XCTAssertNotNil(result?.objects[0].personaInquiryId)
+        // XCTAssertNotNil(result?.objects[0].personaState)
     }
 
     func test_IdentityVerificationListBankModel_Decoding_Nil() throws {
@@ -443,8 +443,8 @@ class CybridJSONDecoderTests: XCTestCase {
         XCTAssertNotNil(result?.state)
         XCTAssertNotNil(result?.outcome)
         XCTAssertNil(result?.failureCodes)
-        XCTAssertNotNil(result?.personaInquiryId)
-        XCTAssertNotNil(result?.personaState)
+        // XCTAssertNotNil(result?.personaInquiryId)
+        // XCTAssertNotNil(result?.personaState)
     }
 
     func test_IdentityVerificationBankModel_Decoding_Init_Nil() throws {

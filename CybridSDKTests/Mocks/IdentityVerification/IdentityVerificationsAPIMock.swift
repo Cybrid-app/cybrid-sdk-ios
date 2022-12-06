@@ -10,7 +10,7 @@ import CybridSDK
 
 final class IdentityVerificationsAPIMock: IdentityVerificationsAPI {
 
-    typealias FetchIdentityCompletion = (_ result: Result<IdentityVerificationBankModel, ErrorResponse>) -> Void
+    typealias FetchIdentityCompletion = (_ result: Result<IdentityVerificationWithDetailsBankModel, ErrorResponse>) -> Void
     typealias FetchIdentityListCompletion = (_ result: Result<IdentityVerificationListBankModel, ErrorResponse>) -> Void
     typealias CreateIdentityCompletion = (_ result: Result<IdentityVerificationBankModel, ErrorResponse>) -> Void
 
@@ -20,7 +20,7 @@ final class IdentityVerificationsAPIMock: IdentityVerificationsAPI {
 
     override class func getIdentityVerification(identityVerificationGuid: String,
                                                 apiResponseQueue: DispatchQueue = CybridApiBankSwiftAPI.apiResponseQueue,
-                                                completion: @escaping ((Result<IdentityVerificationBankModel, ErrorResponse>) -> Void)) -> RequestTask {
+                                                completion: @escaping ((Result<IdentityVerificationWithDetailsBankModel, ErrorResponse>) -> Void)) -> RequestTask {
         fetchIdentityCompletion = completion
         return getIdentityVerificationWithRequestBuilder(identityVerificationGuid: identityVerificationGuid).requestTask
     }
@@ -47,7 +47,7 @@ final class IdentityVerificationsAPIMock: IdentityVerificationsAPI {
     // MARK: Class Functions
 
     class func getIdentityVerificationSuccessfully() {
-        fetchIdentityCompletion?(.success(IdentityVerificationBankModel.getMock()))
+        fetchIdentityCompletion?(.success(IdentityVerificationWithDetailsBankModel.getMock()))
     }
 
     class func getIdentityVerificationError() {
@@ -94,9 +94,7 @@ extension IdentityVerificationBankModel {
             createdAt: Date(),
             state: .storing,
             outcome: .passed,
-            failureCodes: [],
-            personaInquiryId: "12345",
-            personaState: .waiting)
+            failureCodes: [])
     }
 
     static func getExpiredMock() -> IdentityVerificationBankModel {
@@ -108,9 +106,7 @@ extension IdentityVerificationBankModel {
             createdAt: Date(),
             state: .expired,
             outcome: .passed,
-            failureCodes: [],
-            personaInquiryId: "12345",
-            personaState: .waiting)
+            failureCodes: [])
     }
 
     static func getPersonaExpiredMock() -> IdentityVerificationBankModel {
@@ -122,9 +118,7 @@ extension IdentityVerificationBankModel {
             createdAt: Date(),
             state: .storing,
             outcome: .passed,
-            failureCodes: [],
-            personaInquiryId: "12345",
-            personaState: .expired)
+            failureCodes: [])
     }
 
     static func getListMock() -> IdentityVerificationListBankModel {
@@ -140,18 +134,63 @@ extension IdentityVerificationBankModel {
                                                  perPage: 1,
                                                  objects: [])
     }
-    
+
     static func getListExpiredMock() -> IdentityVerificationListBankModel {
         return IdentityVerificationListBankModel(total: 1,
                                                  page: 0,
                                                  perPage: 1,
                                                  objects: [getExpiredMock()])
     }
-    
+
     static func getListPersonaExpiredMock() -> IdentityVerificationListBankModel {
         return IdentityVerificationListBankModel(total: 1,
                                                  page: 0,
                                                  perPage: 1,
                                                  objects: [getPersonaExpiredMock()])
+    }
+}
+
+extension IdentityVerificationWithDetailsBankModel {
+
+    static func getMock() -> IdentityVerificationWithDetailsBankModel {
+        return IdentityVerificationWithDetailsBankModel(
+            guid: "12345",
+            customerGuid: "12345",
+            type: .kyc,
+            method: .idAndSelfie,
+            createdAt: Date(),
+            state: .storing,
+            outcome: .passed,
+            failureCodes: [],
+            personaInquiryId: "12345",
+            personaState: .waiting)
+    }
+
+    static func getExpiredMock() -> IdentityVerificationWithDetailsBankModel {
+        return IdentityVerificationWithDetailsBankModel(
+            guid: "12345",
+            customerGuid: "12345",
+            type: .kyc,
+            method: .idAndSelfie,
+            createdAt: Date(),
+            state: .expired,
+            outcome: .passed,
+            failureCodes: [],
+            personaInquiryId: "12345",
+            personaState: .waiting)
+    }
+
+    static func getPersonaExpiredMock() -> IdentityVerificationWithDetailsBankModel {
+        return IdentityVerificationWithDetailsBankModel(
+            guid: "12345",
+            customerGuid: "12345",
+            type: .kyc,
+            method: .idAndSelfie,
+            createdAt: Date(),
+            state: .storing,
+            outcome: .passed,
+            failureCodes: [],
+            personaInquiryId: "12345",
+            personaState: .expired)
     }
 }
