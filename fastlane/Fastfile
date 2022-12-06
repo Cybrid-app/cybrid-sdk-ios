@@ -27,7 +27,7 @@ platform :ios do
       scheme: "CybridSDK",
       workspace: "CybridSDK.xcworkspace",
       code_coverage: true,
-      devices: ["iPhone 13 Pro"]
+      devices: ["iPhone 14 Pro"]
     )
     slather(
       scheme: "CybridSDK",
