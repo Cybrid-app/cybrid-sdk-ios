@@ -140,6 +140,8 @@
 		9217353D28E41C3F00DF58CA /* TradeBankModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9217353C28E41C3F00DF58CA /* TradeBankModelTest.swift */; };
 		9217354028E4200D00DF58CA /* TradeUIModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9217353F28E4200D00DF58CA /* TradeUIModelTest.swift */; };
 		92663D09293FACB900842E30 /* IdentityVerificationWithDetailsBankModel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92663D08293FACB900842E30 /* IdentityVerificationWithDetailsBankModel+Extensions.swift */; };
+		92663D05293F241F00842E30 /* BankAccountsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92663D04293F241F00842E30 /* BankAccountsViewModel.swift */; };
+		92663D07293F248900842E30 /* WorkflowRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92663D06293F248900842E30 /* WorkflowRepository.swift */; };
 		927233BB28D12FD10080AAC4 /* UIFont+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927233BA28D12FD10080AAC4 /* UIFont+Extensions.swift */; };
 		927233BE28D131BE0080AAC4 /* AccountBankModel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927233BD28D131BE0080AAC4 /* AccountBankModel+Extensions.swift */; };
 		927233C028D1AA7E0080AAC4 /* TradeBankModel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927233BF28D1AA7E0080AAC4 /* TradeBankModel+Extensions.swift */; };
@@ -372,7 +374,12 @@
 		9217353A28E3FF7500DF58CA /* AccountBankModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountBankModelTest.swift; sourceTree = "<group>"; };
 		9217353C28E41C3F00DF58CA /* TradeBankModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeBankModelTest.swift; sourceTree = "<group>"; };
 		9217353F28E4200D00DF58CA /* TradeUIModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeUIModelTest.swift; sourceTree = "<group>"; };
+<<<<<<< HEAD
 		92663D08293FACB900842E30 /* IdentityVerificationWithDetailsBankModel+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IdentityVerificationWithDetailsBankModel+Extensions.swift"; sourceTree = "<group>"; };
+=======
+		92663D04293F241F00842E30 /* BankAccountsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankAccountsViewModel.swift; sourceTree = "<group>"; };
+		92663D06293F248900842E30 /* WorkflowRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkflowRepository.swift; sourceTree = "<group>"; };
+>>>>>>> 0e3cc1d (Add: Workflow Service)
 		927233BA28D12FD10080AAC4 /* UIFont+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extensions.swift"; sourceTree = "<group>"; };
 		927233BD28D131BE0080AAC4 /* AccountBankModel+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AccountBankModel+Extensions.swift"; sourceTree = "<group>"; };
 		927233BF28D1AA7E0080AAC4 /* TradeBankModel+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TradeBankModel+Extensions.swift"; sourceTree = "<group>"; };
@@ -778,6 +785,7 @@
 				927233CA28D23D060080AAC4 /* AccountsRepository.swift */,
 				92A90A8629118C0C00CA0E08 /* CustomersRepository.swift */,
 				92A90A8E2911B91C00CA0E08 /* IdentityVerificationRepository.swift */,
+				92663D06293F248900842E30 /* WorkflowRepository.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -1116,6 +1124,14 @@
 			path = ModelTest;
 			sourceTree = "<group>";
 		};
+		92663D03293F240900842E30 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				92663D04293F241F00842E30 /* BankAccountsViewModel.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		927233BC28D1314B0080AAC4 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -1272,6 +1288,7 @@
 		92F38C4D2924220B00008F58 /* BankAcoountsComponent */ = {
 			isa = PBXGroup;
 			children = (
+				92663D03293F240900842E30 /* View */,
 				92F38C4E2924223E00008F58 /* BankAccountsViewController.swift */,
 			);
 			path = BankAcoountsComponent;
@@ -1696,6 +1713,8 @@
 				0B557B982899F56900632A6D /* CYBButton.swift in Sources */,
 				0B00E0042877DF7F00707F26 /* Bundle+Extensions.swift in Sources */,
 				927233D928D243F80080AAC4 /* AccountTradeDetailModal.swift in Sources */,
+				92663D07293F248900842E30 /* WorkflowRepository.swift in Sources */,
+				92663D05293F241F00842E30 /* BankAccountsViewModel.swift in Sources */,
 				0BD26F2428A55D4800ED2A1B /* CybridEvent.swift in Sources */,
 				0BD26F2528A55D4800ED2A1B /* CybridLogger.swift in Sources */,
 				927233E328D2448F0080AAC4 /* AccountTradesViewModel.swift in Sources */,
