@@ -82,24 +82,33 @@ class BankAccountsViewModel: NSObject {
 
     func createExternalBankAccount(publicToken: String, account: LinkKit.Account?) {
 
-        let postExternalBankAccount = PostExternalBankAccountBankModel(
-            name: account?.name ?? "",
-            accountKind: .plaid,
-            customerGuid: customerGuid,
-            asset: defaultAssetCurrency,
-            plaidPublicToken: publicToken,
-            plaidAccountId: account?.id ?? ""
-        )
-        self.dataProvider.createExternalBankAccount(postExternalBankAccountBankModel: postExternalBankAccount) { [weak self] externalBankAccountResponse in
+        self.assetIsSupported(asset: defaultAssetCurrency) { [weak self] supported in
 
-            switch externalBankAccountResponse {
+            if supported {
 
-            case .success:
-                self?.logger?.log(.component(.accounts(.pricesDataFetching)))
-                self?.uiState.value = .DONE
+                let postExternalBankAccount = PostExternalBankAccountBankModel(
+                    name: account?.name ?? "",
+                    accountKind: .plaid,
+                    customerGuid: self?.customerGuid,
+                    asset: self?.defaultAssetCurrency ?? "",
+                    plaidPublicToken: publicToken,
+                    plaidAccountId: account?.id ?? ""
+                )
+                self?.dataProvider.createExternalBankAccount(postExternalBankAccountBankModel: postExternalBankAccount) { [weak self ] externalBankAccountResponse in
 
-            case .failure:
-                self?.logger?.log(.component(.accounts(.pricesDataError)))
+                    switch externalBankAccountResponse {
+
+                    case .success:
+                        self?.logger?.log(.component(.accounts(.pricesDataFetching)))
+                        self?.uiState.value = .DONE
+
+                    case .failure:
+                        self?.logger?.log(.component(.accounts(.pricesDataError)))
+                        self?.uiState.value = .ERROR
+                    }
+                }
+
+            } else {
                 self?.uiState.value = .ERROR
             }
         }
@@ -113,6 +122,46 @@ class BankAccountsViewModel: NSObject {
     func fetchBank(bankGuid: String, _ completion: @escaping FetchBankCompletion) {
 
         self.dataProvider.fetchBank(guid: bankGuid, completion)
+    }
+
+    func assetIsSupported(asset: String?, _ completion: @escaping (Bool) -> Void) {
+
+        if asset == nil {
+            completion(false)
+        } else {
+
+            self.fetchCustomer { [weak self] customerResponse in
+
+                switch customerResponse {
+
+                case .success(let customer):
+
+                    self?.fetchBank(bankGuid: customer.bankGuid!) { bankResponse in
+
+                        switch bankResponse {
+
+                        case .success(let bank):
+                            if let supported = bank.supportedFiatAccountAssets {
+
+                                if supported.contains(asset!) {
+                                    completion(true)
+                                } else {
+                                    completion(false)
+                                }
+                            } else {
+                                completion(false)
+                            }
+
+                        case.failure:
+                            completion(false)
+                        }
+                    }
+
+                case .failure:
+                    completion(false)
+                }
+            }
+        }
     }
 
     func checkWorkflowStatus(workflow: WorkflowWithDetailsBankModel) {
