@@ -1,0 +1,7 @@
+{
+  "guid": "stringstringstringstringstringst",
+  "customer_guid": "stringstringstringstringstringst",
+  "type": "plaid",
+  "created_at": "2022-12-09T16:37:09.434Z",
+  "plaid_link_token": "string"
+}

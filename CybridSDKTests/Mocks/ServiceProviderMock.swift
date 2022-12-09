@@ -14,7 +14,10 @@ final class ServiceProviderMock: AssetsRepoProvider,
                                  TradesRepoProvider,
                                  AccountsRepoProvider,
                                  CustomersRepoProvider,
-                                 IdentityVerificationRepoProvider {
+                                 IdentityVerificationRepoProvider,
+                                 WorkflowProvider,
+                                 ExternalBankAccountProvider,
+                                 BankProvider {
 
     var apiManager: CybridAPIManager.Type = MockAPIManager.self
 
@@ -26,6 +29,9 @@ final class ServiceProviderMock: AssetsRepoProvider,
     var accountsRepository: AccountsRepository.Type = AccountsAPIMock.self
     var customersRepository: CustomersRepository.Type = CustomersAPIMock.self
     var identityVerificationRepository: IdentityVerificationRepository.Type = IdentityVerificationsAPIMock.self
+    var workflowRepository: WorkflowRepository.Type = WorkflowAPIMock.self
+    var externalBankAccountRepository: ExternalBankAccountRepository.Type = ExternalBankAccountsAPI.self
+    var bankRepository: BankRepository.Type = BanksAPI.self
 
     // MARK: Cache
     var assetsCache: [AssetBankModel]?
@@ -173,5 +179,42 @@ final class ServiceProviderMock: AssetsRepoProvider,
 
         Cybrid.session.setupSession(authToken: "TEST-TOKEN")
         IdentityVerificationsAPIMock.createIdentityVerificationError()
+    }
+
+    // MARK: Workflow
+    func didCreateWorkflowSuccessfully() {
+
+        Cybrid.session.setupSession(authToken: "TEST-TOKEN")
+        WorkflowAPIMock.createWorkflowSuccessfully()
+    }
+
+    func didCreateWorkflowFailed() {
+
+        Cybrid.session.setupSession(authToken: "TEST-TOKEN")
+        WorkflowAPIMock.createWorkflowError()
+    }
+
+    func didFetchWorkflowSuccessfully() {
+
+        Cybrid.session.setupSession(authToken: "TEST-TOKEN")
+        WorkflowAPIMock.fetchWorkflowSuccessfully()
+    }
+
+    func didFetchWorkflow_Empty_Successfully() {
+
+        Cybrid.session.setupSession(authToken: "TEST-TOKEN")
+        WorkflowAPIMock.fetchWorkflow_Empty_Successfully()
+    }
+
+    func didFetchWorkflow_Incomplete_Successfully() {
+
+        Cybrid.session.setupSession(authToken: "TEST-TOKEN")
+        WorkflowAPIMock.fetchWorkflow_Incomplete_Successfully()
+    }
+
+    func didFetchWorkflowFailed() {
+
+        Cybrid.session.setupSession(authToken: "TEST-TOKEN")
+        WorkflowAPIMock.fetchWorkflowError()
     }
 }

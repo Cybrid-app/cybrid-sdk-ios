@@ -166,7 +166,7 @@ class BankAccountsViewModel: NSObject {
 
     func checkWorkflowStatus(workflow: WorkflowWithDetailsBankModel) {
 
-        if workflow.plaidLinkToken != nil && workflow.plaidLinkToken?.isEmpty ?? false {
+        if !(workflow.plaidLinkToken?.isEmpty ?? true) {
 
             self.workflowJob?.stop()
             self.workflowJob = nil

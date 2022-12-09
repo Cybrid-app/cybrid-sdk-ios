@@ -1,0 +1,6 @@
+{
+  "guid": "stringstringstringstringstringst",
+  "customer_guid": "stringstringstringstringstringst",
+  "type": "plaid",
+  "plaid_link_token": "string"
+}
