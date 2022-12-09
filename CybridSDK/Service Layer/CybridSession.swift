@@ -45,6 +45,9 @@ final class CybridSession: AuthenticatedServiceProvider {
     // ExternalBankAccount Repository
     internal var externalBankAccountRepository: ExternalBankAccountRepository.Type
 
+    // Bank Repository
+    internal var bankRepository: BankRepository.Type
+
     // Schedulers
     internal var taskSchedulers: Set<TaskScheduler> = []
 
@@ -68,6 +71,7 @@ final class CybridSession: AuthenticatedServiceProvider {
         self.identityVerificationRepository = IdentityVerificationsAPI.self
         self.workflowRepository = WorkflowsAPI.self
         self.externalBankAccountRepository = ExternalBankAccountsAPI.self
+        self.bankRepository = BanksAPI.self
 
         setupEventListeners()
     }

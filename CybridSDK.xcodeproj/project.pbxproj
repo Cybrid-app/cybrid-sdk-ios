@@ -164,6 +164,8 @@
 		92827DA7294316C800231772 /* WorkflowBankModel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92827DA6294316C800231772 /* WorkflowBankModel+Extensions.swift */; };
 		92827DA92943182B00231772 /* WorkflowWithDetailsBankModel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92827DA82943182B00231772 /* WorkflowWithDetailsBankModel+Extensions.swift */; };
 		92827DAB294319AD00231772 /* ExternalBankAccountRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92827DAA294319AD00231772 /* ExternalBankAccountRepository.swift */; };
+		92827DAD294320EC00231772 /* BankRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92827DAC294320EC00231772 /* BankRepository.swift */; };
+		92827DAF294322AD00231772 /* BankBankModel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92827DAE294322AD00231772 /* BankBankModel+Extensions.swift */; };
 		928E236C28EC90D6006AAE1A /* CybridSDKTestAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928E236B28EC90D6006AAE1A /* CybridSDKTestAppUITests.swift */; };
 		928E237628ECA38B006AAE1A /* XCUIElement+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928E237528ECA38B006AAE1A /* XCUIElement+Extensions.swift */; };
 		928E237828ECB80E006AAE1A /* XCTestCase+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928E237728ECB80E006AAE1A /* XCTestCase+Extensions.swift */; };
@@ -402,6 +404,8 @@
 		92827DA6294316C800231772 /* WorkflowBankModel+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WorkflowBankModel+Extensions.swift"; sourceTree = "<group>"; };
 		92827DA82943182B00231772 /* WorkflowWithDetailsBankModel+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WorkflowWithDetailsBankModel+Extensions.swift"; sourceTree = "<group>"; };
 		92827DAA294319AD00231772 /* ExternalBankAccountRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExternalBankAccountRepository.swift; sourceTree = "<group>"; };
+		92827DAC294320EC00231772 /* BankRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankRepository.swift; sourceTree = "<group>"; };
+		92827DAE294322AD00231772 /* BankBankModel+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BankBankModel+Extensions.swift"; sourceTree = "<group>"; };
 		928E236928EC90D6006AAE1A /* CybridSDKTestAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CybridSDKTestAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		928E236B28EC90D6006AAE1A /* CybridSDKTestAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CybridSDKTestAppUITests.swift; sourceTree = "<group>"; };
 		928E237528ECA38B006AAE1A /* XCUIElement+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCUIElement+Extensions.swift"; sourceTree = "<group>"; };
@@ -790,6 +794,7 @@
 				92A90A8E2911B91C00CA0E08 /* IdentityVerificationRepository.swift */,
 				92663D0E293FD60800842E30 /* WorkflowRepository.swift */,
 				92827DAA294319AD00231772 /* ExternalBankAccountRepository.swift */,
+				92827DAC294320EC00231772 /* BankRepository.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -1149,6 +1154,7 @@
 				92663D08293FACB900842E30 /* IdentityVerificationWithDetailsBankModel+Extensions.swift */,
 				92827DA6294316C800231772 /* WorkflowBankModel+Extensions.swift */,
 				92827DA82943182B00231772 /* WorkflowWithDetailsBankModel+Extensions.swift */,
+				92827DAE294322AD00231772 /* BankBankModel+Extensions.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1661,6 +1667,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0B2899E0288E4860001B3360 /* AuthenticatedServiceProvider.swift in Sources */,
+				92827DAD294320EC00231772 /* BankRepository.swift in Sources */,
 				927233E628D244AC0080AAC4 /* AccountsHeaderCell.swift in Sources */,
 				927233C228D1AAA20080AAC4 /* SymbolPriceBankModel+Extensions.swift in Sources */,
 				0BD6612A286DE86A00F4DA6B /* CybridLocalizationKey.swift in Sources */,
@@ -1709,6 +1716,7 @@
 				0B2899E9288F3E1F001B3360 /* Cybrid.swift in Sources */,
 				927233BB28D12FD10080AAC4 /* UIFont+Extensions.swift in Sources */,
 				0BD66118286B79C500F4DA6B /* UIView+Constraints.swift in Sources */,
+				92827DAF294322AD00231772 /* BankBankModel+Extensions.swift in Sources */,
 				92C92C8B2911FC6C00B81719 /* CustomerBankModel+Extensions.swift in Sources */,
 				927233EA28D244CC0080AAC4 /* AccountTradesHeaderCell.swift in Sources */,
 				0B303CE42862E5D9007BF7FF /* CybridConfig.swift in Sources */,

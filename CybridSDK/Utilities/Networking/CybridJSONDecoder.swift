@@ -49,6 +49,9 @@ final class CybridJSONDecoder: JSONDecoder {
         case is WorkflowWithDetailsBankModel.Type:
             return try decodeWorkflowWithDetailsBankModel(data: data) as! T
 
+        case is BankBankModel.Type:
+            return try decodeBankBankModel(data: data) as! T
+
         default:
             return try super.decode(type, from: data)
         }
@@ -237,6 +240,21 @@ extension CybridJSONDecoder {
 
         guard
             let model = WorkflowWithDetailsBankModel(json: jsonStringObject)
+        else {
+            throw DecodingError.customDecodingError
+        }
+        return model
+    }
+
+    func decodeBankBankModel(data: Data) throws -> BankBankModel {
+
+        guard let jsonObject = try JSONSerialization.jsonObject(with: data) as? [String: Any] else {
+            throw DecodingError.customDecodingError
+        }
+        let jsonStringObject: [String: Any] = jsonObject
+
+        guard
+            let model = BankBankModel(json: jsonStringObject)
         else {
             throw DecodingError.customDecodingError
         }

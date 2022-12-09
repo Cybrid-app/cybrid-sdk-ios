@@ -11,7 +11,7 @@ import CybridApiBankSwift
 class BankAccountsViewModel: NSObject {
 
     // MARK: Private properties
-    private var dataProvider: WorkflowProvider & ExternalBankAccountProvider & CustomersRepoProvider
+    private var dataProvider: WorkflowProvider & ExternalBankAccountProvider & CustomersRepoProvider & BankProvider
     private var logger: CybridLogger?
 
     private let plaidCustomizationName = "default"
@@ -27,7 +27,7 @@ class BankAccountsViewModel: NSObject {
     var latestWorkflow: WorkflowWithDetailsBankModel?
 
     // MARK: Constructor
-    init(dataProvider: WorkflowProvider & ExternalBankAccountProvider & CustomersRepoProvider,
+    init(dataProvider: WorkflowProvider & ExternalBankAccountProvider & CustomersRepoProvider & BankProvider,
          UIState: Observable<BankAccountsViewcontroller.BankAccountsViewState>,
          logger: CybridLogger?) {
 
@@ -104,13 +104,16 @@ class BankAccountsViewModel: NSObject {
             }
         }
     }
-    
+
     func fetchCustomer(_ completion: @escaping FetchCustomerCompletion) {
-        
+
         self.dataProvider.getCustomer(customerGuid: customerGuid, completion)
     }
-    
-    func fetchBank() {}
+
+    func fetchBank(bankGuid: String, _ completion: @escaping FetchBankCompletion) {
+
+        self.dataProvider.fetchBank(guid: bankGuid, completion)
+    }
 
     func checkWorkflowStatus(workflow: WorkflowWithDetailsBankModel) {
 
