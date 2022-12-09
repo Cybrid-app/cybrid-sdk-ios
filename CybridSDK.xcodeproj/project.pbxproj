@@ -161,6 +161,8 @@
 		927233E828D244BD0080AAC4 /* AccountsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927233E728D244BD0080AAC4 /* AccountsCell.swift */; };
 		927233EA28D244CC0080AAC4 /* AccountTradesHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927233E928D244CC0080AAC4 /* AccountTradesHeaderCell.swift */; };
 		927233EC28D244DE0080AAC4 /* AccountTradesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927233EB28D244DE0080AAC4 /* AccountTradesCell.swift */; };
+		92827DA7294316C800231772 /* WorkflowBankModel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92827DA6294316C800231772 /* WorkflowBankModel+Extensions.swift */; };
+		92827DA92943182B00231772 /* WorkflowWithDetailsBankModel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92827DA82943182B00231772 /* WorkflowWithDetailsBankModel+Extensions.swift */; };
 		928E236C28EC90D6006AAE1A /* CybridSDKTestAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928E236B28EC90D6006AAE1A /* CybridSDKTestAppUITests.swift */; };
 		928E237628ECA38B006AAE1A /* XCUIElement+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928E237528ECA38B006AAE1A /* XCUIElement+Extensions.swift */; };
 		928E237828ECB80E006AAE1A /* XCTestCase+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928E237728ECB80E006AAE1A /* XCTestCase+Extensions.swift */; };
@@ -396,6 +398,8 @@
 		927233E728D244BD0080AAC4 /* AccountsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsCell.swift; sourceTree = "<group>"; };
 		927233E928D244CC0080AAC4 /* AccountTradesHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTradesHeaderCell.swift; sourceTree = "<group>"; };
 		927233EB28D244DE0080AAC4 /* AccountTradesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTradesCell.swift; sourceTree = "<group>"; };
+		92827DA6294316C800231772 /* WorkflowBankModel+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WorkflowBankModel+Extensions.swift"; sourceTree = "<group>"; };
+		92827DA82943182B00231772 /* WorkflowWithDetailsBankModel+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WorkflowWithDetailsBankModel+Extensions.swift"; sourceTree = "<group>"; };
 		928E236928EC90D6006AAE1A /* CybridSDKTestAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CybridSDKTestAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		928E236B28EC90D6006AAE1A /* CybridSDKTestAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CybridSDKTestAppUITests.swift; sourceTree = "<group>"; };
 		928E237528ECA38B006AAE1A /* XCUIElement+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCUIElement+Extensions.swift"; sourceTree = "<group>"; };
@@ -1140,6 +1144,8 @@
 				92C92C8A2911FC6C00B81719 /* CustomerBankModel+Extensions.swift */,
 				92C92C8C29123C5F00B81719 /* IdentityVerificationBankModel+Extensions.swift */,
 				92663D08293FACB900842E30 /* IdentityVerificationWithDetailsBankModel+Extensions.swift */,
+				92827DA6294316C800231772 /* WorkflowBankModel+Extensions.swift */,
+				92827DA82943182B00231772 /* WorkflowWithDetailsBankModel+Extensions.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1664,11 +1670,13 @@
 				92663D09293FACB900842E30 /* IdentityVerificationWithDetailsBankModel+Extensions.swift in Sources */,
 				92663D0D293FCC9500842E30 /* BankAccountsViewModel.swift in Sources */,
 				0BBD0CDE28B68C49001DBC5F /* CybridDateFormatter.swift in Sources */,
+				92827DA92943182B00231772 /* WorkflowWithDetailsBankModel+Extensions.swift in Sources */,
 				0BD6613A2872BC0B00F4DA6B /* CybridCurrencyFormatter.swift in Sources */,
 				0BD6610D286B769800F4DA6B /* Observable.swift in Sources */,
 				0BD66104286B768300F4DA6B /* CryptoPriceTableHeaderView.swift in Sources */,
 				0BBD0CDA28B3E5D9001DBC5F /* QuotesRepository.swift in Sources */,
 				927233DE28D2445C0080AAC4 /* TradeUIModel.swift in Sources */,
+				92827DA7294316C800231772 /* WorkflowBankModel+Extensions.swift in Sources */,
 				927233EC28D244DE0080AAC4 /* AccountTradesCell.swift in Sources */,
 				0B2B2A7128621DA7002F0EC1 /* FontTheme.swift in Sources */,
 				0BD6610B286B768C00F4DA6B /* CryptoPriceModel.swift in Sources */,
