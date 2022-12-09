@@ -11,7 +11,7 @@ import LinkKit
 
 public final class BankAccountsViewcontroller: UIViewController {
 
-    public enum BankAccountsViewState { case LOADING, REQUIRED, VERIFIED, ERROR, REVIEWING }
+    public enum BankAccountsViewState { case LOADING, REQUIRED, DONE, ERROR }
 
     // private var identityVerificationViewModel: IdentityVerificationViewModel!
     private var theme: Theme!
@@ -44,7 +44,7 @@ public final class BankAccountsViewcontroller: UIViewController {
         view.backgroundColor = .white
         self.initComponentContent()
         self.manageCurrentStateUI()
-        
+
         DispatchQueue.main.asyncAfter(deadline: .now() + 6.0) {
             self.currentState.value = .REQUIRED
         }
@@ -95,20 +95,15 @@ extension BankAccountsViewcontroller {
 
                 self.KYCView_Required()
 
-            case .VERIFIED:
-                
+            case .DONE:
+
                 print("")
                 // self.KYCView_Verified()
 
             case .ERROR:
-                
+
                 print("")
                 // self.KYCView_Error()
-
-            case .REVIEWING:
-                
-                print("")
-                // self.KYCView_Reviewing()
             }
         }
     }

@@ -11,7 +11,7 @@ import CybridApiBankSwift
 class BankAccountsViewModel: NSObject {
 
     // MARK: Private properties
-    private var dataProvider: WorkflowProvider
+    private var dataProvider: WorkflowProvider & ExternalBankAccountProvider & CustomersRepoProvider
     private var logger: CybridLogger?
 
     private let plaidCustomizationName = "default"
@@ -27,7 +27,7 @@ class BankAccountsViewModel: NSObject {
     var latestWorkflow: WorkflowWithDetailsBankModel?
 
     // MARK: Constructor
-    init(dataProvider: WorkflowProvider,
+    init(dataProvider: WorkflowProvider & ExternalBankAccountProvider & CustomersRepoProvider,
          UIState: Observable<BankAccountsViewcontroller.BankAccountsViewState>,
          logger: CybridLogger?) {
 
@@ -80,7 +80,37 @@ class BankAccountsViewModel: NSObject {
         }
     }
 
-    func createExternalBAnkAccount(publicToken: String) {}
+    func createExternalBankAccount(publicToken: String, account: LinkKit.Account?) {
+
+        let postExternalBankAccount = PostExternalBankAccountBankModel(
+            name: account?.name ?? "",
+            accountKind: .plaid,
+            customerGuid: customerGuid,
+            asset: defaultAssetCurrency,
+            plaidPublicToken: publicToken,
+            plaidAccountId: account?.id ?? ""
+        )
+        self.dataProvider.createExternalBankAccount(postExternalBankAccountBankModel: postExternalBankAccount) { [weak self] externalBankAccountResponse in
+
+            switch externalBankAccountResponse {
+
+            case .success:
+                self?.logger?.log(.component(.accounts(.pricesDataFetching)))
+                self?.uiState.value = .DONE
+
+            case .failure:
+                self?.logger?.log(.component(.accounts(.pricesDataError)))
+                self?.uiState.value = .ERROR
+            }
+        }
+    }
+    
+    func fetchCustomer(_ completion: @escaping FetchCustomerCompletion) {
+        
+        self.dataProvider.getCustomer(customerGuid: customerGuid, completion)
+    }
+    
+    func fetchBank() {}
 
     func checkWorkflowStatus(workflow: WorkflowWithDetailsBankModel) {
 
