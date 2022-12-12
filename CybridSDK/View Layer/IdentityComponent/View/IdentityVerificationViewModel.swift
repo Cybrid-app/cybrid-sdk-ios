@@ -75,7 +75,7 @@ class IdentityVerificationViewModel: NSObject {
 
             self.fetchLastIdentityVerification { [weak self] lastVerification in
                 if lastVerification == nil || lastVerification?.state == .expired {
-                    self?.createIdentityVerification { [weak self] recordIdentity in
+                    self?.createIdentityVerification { recordIdentity in
                         self?.fetchIdentityVerificationWithDetailsStatus(record: recordIdentity)
                     }
                 } else {
