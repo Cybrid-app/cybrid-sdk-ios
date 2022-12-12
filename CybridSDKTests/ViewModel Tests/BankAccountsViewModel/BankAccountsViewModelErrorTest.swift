@@ -79,4 +79,40 @@ class BankAccountsViewModelError: XCTestCase {
         dataProvider.didFetchCustomerSuccessfully()
         dataProvider.didFetchBankFailed()
     }
+
+    // MARK: createExternalBankAccount
+    func test_createExternalBankAccount_Successfully() {
+
+        // -- Given
+        let uiState: Observable<BankAccountsViewcontroller.BankAccountsViewState> = .init(.LOADING)
+        let viewModel = createViewModel(uiState: uiState)
+
+        // -- When
+        dataProvider.didFetchCustomerSuccessfully()
+        dataProvider.didFetchBankSuccessfully()
+        viewModel.createExternalBankAccount(publicToken: "", account: nil)
+        dataProvider.didFetchCustomerSuccessfully()
+        dataProvider.didFetchBankSuccessfully()
+        dataProvider.createExternalBankAccountFailed()
+
+        // -- Then
+        XCTAssertEqual(viewModel.uiState.value, .ERROR)
+    }
+
+    func test_createExternalBankAccount_NotSupported() {
+
+        // -- Given
+        let uiState: Observable<BankAccountsViewcontroller.BankAccountsViewState> = .init(.LOADING)
+        let viewModel = createViewModel(uiState: uiState)
+
+        // -- When
+        dataProvider.didFetchCustomerSuccessfully()
+        dataProvider.didFetchBankSuccessfully_Incomplete()
+        viewModel.createExternalBankAccount(publicToken: "", account: nil)
+        dataProvider.didFetchCustomerSuccessfully()
+        dataProvider.didFetchBankSuccessfully_Incomplete()
+
+        // -- Then
+        XCTAssertEqual(viewModel.uiState.value, .ERROR)
+    }
 }

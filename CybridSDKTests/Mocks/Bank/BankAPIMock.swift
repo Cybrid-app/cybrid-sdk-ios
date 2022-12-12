@@ -27,7 +27,7 @@ final class BankAPIMock: BanksAPI {
         fetchBankCompletion?(.success(BankBankModel.mock()))
         return BankBankModel.mock()
     }
-    
+
     @discardableResult
     class func fetchBankSuccessfully_Incomplete() -> BankBankModel {
         fetchBankCompletion?(.success(BankBankModel.mockIncomplete()))
@@ -51,7 +51,7 @@ extension BankBankModel {
             features: [],
             createdAt: Date())
     }
-    
+
     static func mockIncomplete() -> Self {
         return BankBankModel(
             guid: "1234",

@@ -189,16 +189,22 @@ class BankAccountsViewModelTest: XCTestCase {
     }
 
     // MARK: createExternalBankAccount
-    func test_createExternalBankAccount_NotSupported() {
-        
+    func test_createExternalBankAccount_Successfully() {
+
         // -- Given
         let uiState: Observable<BankAccountsViewcontroller.BankAccountsViewState> = .init(.LOADING)
         let viewModel = createViewModel(uiState: uiState)
-        
+
         // -- When
+        dataProvider.didFetchCustomerSuccessfully()
+        dataProvider.didFetchBankSuccessfully()
+        dataProvider.createExternalBankAccountSuccessfully()
         viewModel.createExternalBankAccount(publicToken: "", account: nil)
-        
+        dataProvider.didFetchCustomerSuccessfully()
+        dataProvider.didFetchBankSuccessfully()
+        dataProvider.createExternalBankAccountSuccessfully()
+
         // -- Then
-        XCTAssertEqual(viewModel.uiState.value, .ERROR)
+        XCTAssertEqual(viewModel.uiState.value, .DONE)
     }
 }
