@@ -175,6 +175,11 @@
 		92827DC32943DF6800231772 /* BankAccountsViewModelErrorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92827DC22943DF6800231772 /* BankAccountsViewModelErrorTest.swift */; };
 		92827DC62943E7A100231772 /* BankAPIMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92827DC52943E7A100231772 /* BankAPIMock.swift */; };
 		92827DC9294733F200231772 /* ExternalBankAccountAPIMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92827DC8294733F200231772 /* ExternalBankAccountAPIMock.swift */; };
+		92827DCB2947979C00231772 /* fetchBankResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 92827DCA2947979C00231772 /* fetchBankResponse.json */; };
+		92827DCD2947985300231772 /* fetchBankResponse_Incomplete.json in Resources */ = {isa = PBXBuildFile; fileRef = 92827DCC2947985300231772 /* fetchBankResponse_Incomplete.json */; };
+		92827DCF2947998C00231772 /* ExternalBankAccountBankModel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92827DCE2947998C00231772 /* ExternalBankAccountBankModel+Extensions.swift */; };
+		92827DD129479D7800231772 /* createExternalBankAccountBankModelResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 92827DD029479D7800231772 /* createExternalBankAccountBankModelResponse.json */; };
+		92827DD529479E4200231772 /* createExternalBankAccountBankModelResponse_Incomplete.json in Resources */ = {isa = PBXBuildFile; fileRef = 92827DD429479E4200231772 /* createExternalBankAccountBankModelResponse_Incomplete.json */; };
 		928E236C28EC90D6006AAE1A /* CybridSDKTestAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928E236B28EC90D6006AAE1A /* CybridSDKTestAppUITests.swift */; };
 		928E237628ECA38B006AAE1A /* XCUIElement+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928E237528ECA38B006AAE1A /* XCUIElement+Extensions.swift */; };
 		928E237828ECB80E006AAE1A /* XCTestCase+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928E237728ECB80E006AAE1A /* XCTestCase+Extensions.swift */; };
@@ -424,6 +429,11 @@
 		92827DC22943DF6800231772 /* BankAccountsViewModelErrorTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankAccountsViewModelErrorTest.swift; sourceTree = "<group>"; };
 		92827DC52943E7A100231772 /* BankAPIMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankAPIMock.swift; sourceTree = "<group>"; };
 		92827DC8294733F200231772 /* ExternalBankAccountAPIMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExternalBankAccountAPIMock.swift; sourceTree = "<group>"; };
+		92827DCA2947979C00231772 /* fetchBankResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = fetchBankResponse.json; sourceTree = "<group>"; };
+		92827DCC2947985300231772 /* fetchBankResponse_Incomplete.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = fetchBankResponse_Incomplete.json; sourceTree = "<group>"; };
+		92827DCE2947998C00231772 /* ExternalBankAccountBankModel+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ExternalBankAccountBankModel+Extensions.swift"; sourceTree = "<group>"; };
+		92827DD029479D7800231772 /* createExternalBankAccountBankModelResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = createExternalBankAccountBankModelResponse.json; sourceTree = "<group>"; };
+		92827DD429479E4200231772 /* createExternalBankAccountBankModelResponse_Incomplete.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = createExternalBankAccountBankModelResponse_Incomplete.json; sourceTree = "<group>"; };
 		928E236928EC90D6006AAE1A /* CybridSDKTestAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CybridSDKTestAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		928E236B28EC90D6006AAE1A /* CybridSDKTestAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CybridSDKTestAppUITests.swift; sourceTree = "<group>"; };
 		928E237528ECA38B006AAE1A /* XCUIElement+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCUIElement+Extensions.swift"; sourceTree = "<group>"; };
@@ -709,6 +719,10 @@
 				92827DBB2943A32300231772 /* createWorkflow_Incomplete.json */,
 				92827DB329439BCC00231772 /* fetchWorkflowResponse.json */,
 				92827DBD2943A37200231772 /* fetchWorkflow_Incomplete.json */,
+				92827DCA2947979C00231772 /* fetchBankResponse.json */,
+				92827DCC2947985300231772 /* fetchBankResponse_Incomplete.json */,
+				92827DD029479D7800231772 /* createExternalBankAccountBankModelResponse.json */,
+				92827DD429479E4200231772 /* createExternalBankAccountBankModelResponse_Incomplete.json */,
 				0B2899FF28946B52001B3360 /* JSONMockHelper.swift */,
 			);
 			path = JSON;
@@ -1181,6 +1195,7 @@
 				92827DA6294316C800231772 /* WorkflowBankModel+Extensions.swift */,
 				92827DA82943182B00231772 /* WorkflowWithDetailsBankModel+Extensions.swift */,
 				92827DAE294322AD00231772 /* BankBankModel+Extensions.swift */,
+				92827DCE2947998C00231772 /* ExternalBankAccountBankModel+Extensions.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1554,13 +1569,17 @@
 				92B6819C291C0F1800FD6E99 /* createIdentityVerificationModel.json in Resources */,
 				92B681A6291C173C00FD6E99 /* createIdentityVerificationModel_Incomplete.json in Resources */,
 				92B68198291C0D8500FD6E99 /* createCustomerBankModel.json in Resources */,
+				92827DD529479E4200231772 /* createExternalBankAccountBankModelResponse_Incomplete.json in Resources */,
 				0B96601E285AF03700584692 /* TestAssets.xcassets in Resources */,
+				92827DCB2947979C00231772 /* fetchBankResponse.json in Resources */,
 				92F5EC7328E24150009DC3F4 /* listTradesResponse.json in Resources */,
+				92827DD129479D7800231772 /* createExternalBankAccountBankModelResponse.json in Resources */,
 				92B681A4291C141A00FD6E99 /* listIdentityVerifications_Incomplete.json in Resources */,
 				92827DBC2943A32300231772 /* createWorkflow_Incomplete.json in Resources */,
 				92B681A2291C119300FD6E99 /* createCustomerBankModel_Incomplete.json in Resources */,
 				0B289A0228946F74001B3360 /* listLargestPricesResponse.json in Resources */,
 				0BBD0CEC28B7EC17001DBC5F /* createTradeResponse.json in Resources */,
+				92827DCD2947985300231772 /* fetchBankResponse_Incomplete.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1793,6 +1812,7 @@
 				0BD66111286B76DC00F4DA6B /* URLImageView.swift in Sources */,
 				0B557B982899F56900632A6D /* CYBButton.swift in Sources */,
 				0B00E0042877DF7F00707F26 /* Bundle+Extensions.swift in Sources */,
+				92827DCF2947998C00231772 /* ExternalBankAccountBankModel+Extensions.swift in Sources */,
 				927233D928D243F80080AAC4 /* AccountTradeDetailModal.swift in Sources */,
 				0BD26F2428A55D4800ED2A1B /* CybridEvent.swift in Sources */,
 				0BD26F2528A55D4800ED2A1B /* CybridLogger.swift in Sources */,

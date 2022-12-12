@@ -1,0 +1,10 @@
+{
+  "guid": "stringstringstringstringstringst",
+  "name": "string",
+  "asset": "string",
+  "account_kind": "plaid",
+  "environment": "sandbox",
+  "bank_guid": "stringstringstringstringstringst",
+  "customer_guid": "stringstringstringstringstringst",
+  "plaid_access_token": "string"
+}
