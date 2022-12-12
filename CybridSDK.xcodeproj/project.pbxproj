@@ -173,6 +173,7 @@
 		92827DBE2943A37200231772 /* fetchWorkflow_Incomplete.json in Resources */ = {isa = PBXBuildFile; fileRef = 92827DBD2943A37200231772 /* fetchWorkflow_Incomplete.json */; };
 		92827DC12943A5B900231772 /* BankAccountsViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92827DC02943A5B900231772 /* BankAccountsViewModelTest.swift */; };
 		92827DC32943DF6800231772 /* BankAccountsViewModelErrorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92827DC22943DF6800231772 /* BankAccountsViewModelErrorTest.swift */; };
+		92827DC62943E7A100231772 /* BankAPIMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92827DC52943E7A100231772 /* BankAPIMock.swift */; };
 		928E236C28EC90D6006AAE1A /* CybridSDKTestAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928E236B28EC90D6006AAE1A /* CybridSDKTestAppUITests.swift */; };
 		928E237628ECA38B006AAE1A /* XCUIElement+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928E237528ECA38B006AAE1A /* XCUIElement+Extensions.swift */; };
 		928E237828ECB80E006AAE1A /* XCTestCase+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928E237728ECB80E006AAE1A /* XCTestCase+Extensions.swift */; };
@@ -420,6 +421,7 @@
 		92827DBD2943A37200231772 /* fetchWorkflow_Incomplete.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = fetchWorkflow_Incomplete.json; sourceTree = "<group>"; };
 		92827DC02943A5B900231772 /* BankAccountsViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankAccountsViewModelTest.swift; sourceTree = "<group>"; };
 		92827DC22943DF6800231772 /* BankAccountsViewModelErrorTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankAccountsViewModelErrorTest.swift; sourceTree = "<group>"; };
+		92827DC52943E7A100231772 /* BankAPIMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankAPIMock.swift; sourceTree = "<group>"; };
 		928E236928EC90D6006AAE1A /* CybridSDKTestAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CybridSDKTestAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		928E236B28EC90D6006AAE1A /* CybridSDKTestAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CybridSDKTestAppUITests.swift; sourceTree = "<group>"; };
 		928E237528ECA38B006AAE1A /* XCUIElement+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCUIElement+Extensions.swift"; sourceTree = "<group>"; };
@@ -886,6 +888,7 @@
 		0B96600B285A9A1A00584692 /* Mocks */ = {
 			isa = PBXGroup;
 			children = (
+				92827DC42943E78700231772 /* Bank */,
 				92827DB029439B1E00231772 /* Workflow */,
 				92B6818F29197DAE00FD6E99 /* IdentityVerification */,
 				92CB9E3D2914C13200357873 /* Customer */,
@@ -1244,6 +1247,14 @@
 				92827DC22943DF6800231772 /* BankAccountsViewModelErrorTest.swift */,
 			);
 			path = BankAccountsViewModel;
+			sourceTree = "<group>";
+		};
+		92827DC42943E78700231772 /* Bank */ = {
+			isa = PBXGroup;
+			children = (
+				92827DC52943E7A100231772 /* BankAPIMock.swift */,
+			);
+			path = Bank;
 			sourceTree = "<group>";
 		};
 		928E236A28EC90D6006AAE1A /* CybridSDKTestAppUITests */ = {
@@ -1852,6 +1863,7 @@
 				0B00E048287FC4C800707F26 /* EnvironmentTests.swift in Sources */,
 				0B50F35B28A5890C00DDB01E /* TradeViewModelTests.swift in Sources */,
 				0B966019285AE8D300584692 /* MockURLSession.swift in Sources */,
+				92827DC62943E7A100231772 /* BankAPIMock.swift in Sources */,
 				0BD6611B286C197B00F4DA6B /* UIViewConstraintsTests.swift in Sources */,
 				0B00E0572886F25F00707F26 /* PricesAPIMock.swift in Sources */,
 				0B966013285AA2EB00584692 /* URLImageViewTests.swift in Sources */,

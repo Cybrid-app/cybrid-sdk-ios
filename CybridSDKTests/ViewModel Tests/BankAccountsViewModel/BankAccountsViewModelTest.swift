@@ -31,6 +31,7 @@ class BankAccountsViewModelTest: XCTestCase {
         XCTAssertNil(viewModel.workflowJob)
     }
 
+    // MARK: Workflow Test
     func test_createWorkflow_Successfully() {
 
         // -- Given
@@ -94,5 +95,110 @@ class BankAccountsViewModelTest: XCTestCase {
         // -- Then
         XCTAssertNotNil(viewModel.workflowJob)
         XCTAssertEqual(viewModel.uiState.value, .LOADING)
+    }
+
+    // MARK: Customer Test
+    func test_fetchCustomer() {
+
+        // -- Given
+        let uiState: Observable<BankAccountsViewcontroller.BankAccountsViewState> = .init(.LOADING)
+        let viewModel = createViewModel(uiState: uiState)
+
+        // -- When
+        dataProvider.didFetchCustomerSuccessfully()
+        viewModel.fetchCustomer { customer in
+            XCTAssertNotNil(customer)
+        }
+        dataProvider.didFetchCustomerSuccessfully()
+    }
+
+    // MARK: Bank Test
+    func test_fetchBank() {
+
+        // -- Given
+        let uiState: Observable<BankAccountsViewcontroller.BankAccountsViewState> = .init(.LOADING)
+        let viewModel = createViewModel(uiState: uiState)
+
+        // -- When
+        dataProvider.didFetchBankSuccessfully()
+        viewModel.fetchBank(bankGuid: "1234") { bank in
+            XCTAssertNotNil(bank)
+        }
+        dataProvider.didFetchBankSuccessfully()
+    }
+
+    // MARK: assetIsSupported
+    func test_assetIsSupported_Nil() {
+
+        // -- Given
+        let uiState: Observable<BankAccountsViewcontroller.BankAccountsViewState> = .init(.LOADING)
+        let viewModel = createViewModel(uiState: uiState)
+
+        // --
+        viewModel.assetIsSupported(asset: nil) { supported in
+            XCTAssertFalse(supported)
+        }
+    }
+
+    func test_assetIsSupported_Customer_Bank_Success_Supported() {
+
+        // -- Given
+        let uiState: Observable<BankAccountsViewcontroller.BankAccountsViewState> = .init(.LOADING)
+        let viewModel = createViewModel(uiState: uiState)
+
+        // -- When
+        dataProvider.didFetchCustomerSuccessfully()
+        dataProvider.didFetchBankSuccessfully()
+        viewModel.assetIsSupported(asset: "USD") { supported in
+            XCTAssertTrue(supported)
+        }
+        dataProvider.didFetchCustomerSuccessfully()
+        dataProvider.didFetchBankSuccessfully()
+    }
+
+    func test_assetIsSupported_Customer_Bank_Success_NotSupported() {
+
+        // -- Given
+        let uiState: Observable<BankAccountsViewcontroller.BankAccountsViewState> = .init(.LOADING)
+        let viewModel = createViewModel(uiState: uiState)
+
+        // -- When
+        dataProvider.didFetchCustomerSuccessfully()
+        dataProvider.didFetchBankSuccessfully()
+        viewModel.assetIsSupported(asset: "1234") { supported in
+            XCTAssertFalse(supported)
+        }
+        dataProvider.didFetchCustomerSuccessfully()
+        dataProvider.didFetchBankSuccessfully()
+    }
+
+    func test_assetIsSupported_Customer_Bank_Success_Incomplete() {
+
+        // -- Given
+        let uiState: Observable<BankAccountsViewcontroller.BankAccountsViewState> = .init(.LOADING)
+        let viewModel = createViewModel(uiState: uiState)
+
+        // -- When
+        dataProvider.didFetchCustomerSuccessfully()
+        dataProvider.didFetchBankSuccessfully_Incomplete()
+        viewModel.assetIsSupported(asset: "1234") { supported in
+            XCTAssertFalse(supported)
+        }
+        dataProvider.didFetchCustomerSuccessfully()
+        dataProvider.didFetchBankSuccessfully_Incomplete()
+    }
+
+    // MARK: createExternalBankAccount
+    func test_createExternalBankAccount_NotSupported() {
+        
+        // -- Given
+        let uiState: Observable<BankAccountsViewcontroller.BankAccountsViewState> = .init(.LOADING)
+        let viewModel = createViewModel(uiState: uiState)
+        
+        // -- When
+        viewModel.createExternalBankAccount(publicToken: "", account: nil)
+        
+        // -- Then
+        XCTAssertEqual(viewModel.uiState.value, .ERROR)
     }
 }

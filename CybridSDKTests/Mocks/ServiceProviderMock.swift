@@ -31,7 +31,7 @@ final class ServiceProviderMock: AssetsRepoProvider,
     var identityVerificationRepository: IdentityVerificationRepository.Type = IdentityVerificationsAPIMock.self
     var workflowRepository: WorkflowRepository.Type = WorkflowAPIMock.self
     var externalBankAccountRepository: ExternalBankAccountRepository.Type = ExternalBankAccountsAPI.self
-    var bankRepository: BankRepository.Type = BanksAPI.self
+    var bankRepository: BankRepository.Type = BankAPIMock.self
 
     // MARK: Cache
     var assetsCache: [AssetBankModel]?
@@ -216,5 +216,24 @@ final class ServiceProviderMock: AssetsRepoProvider,
 
         Cybrid.session.setupSession(authToken: "TEST-TOKEN")
         WorkflowAPIMock.fetchWorkflowError()
+    }
+
+    // MARK: Bank
+    func didFetchBankSuccessfully() {
+
+        Cybrid.session.setupSession(authToken: "TEST-TOKEN")
+        BankAPIMock.fetchBankSuccessfully()
+    }
+
+    func didFetchBankSuccessfully_Incomplete() {
+
+        Cybrid.session.setupSession(authToken: "TEST-TOKEN")
+        BankAPIMock.fetchBankSuccessfully_Incomplete()
+    }
+
+    func didFetchBankFailed() {
+
+        Cybrid.session.setupSession(authToken: "TEST-TOKEN")
+        BankAPIMock.fetchBankError()
     }
 }

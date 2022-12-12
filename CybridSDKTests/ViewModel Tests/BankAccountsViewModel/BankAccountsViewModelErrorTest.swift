@@ -49,4 +49,34 @@ class BankAccountsViewModelError: XCTestCase {
         XCTAssertNotNil(viewModel.workflowJob)
         XCTAssertEqual(viewModel.uiState.value, .LOADING)
     }
+
+    // MARK: assetIsSupported
+    func test_assetIsSupported_Customer_Nil() {
+
+        // -- Given
+        let uiState: Observable<BankAccountsViewcontroller.BankAccountsViewState> = .init(.LOADING)
+        let viewModel = createViewModel(uiState: uiState)
+
+        // --
+        dataProvider.didFetchCustomerFailed()
+        viewModel.assetIsSupported(asset: "1234") { supported in
+            XCTAssertFalse(supported)
+        }
+        dataProvider.didFetchCustomerFailed()
+    }
+
+    func test_assetIsSupported_Customer_Success_Bank_Nil() {
+
+        // -- Given
+        let uiState: Observable<BankAccountsViewcontroller.BankAccountsViewState> = .init(.LOADING)
+        let viewModel = createViewModel(uiState: uiState)
+
+        // -- When
+        dataProvider.didFetchCustomerSuccessfully()
+        viewModel.assetIsSupported(asset: "1234") { supported in
+            XCTAssertFalse(supported)
+        }
+        dataProvider.didFetchCustomerSuccessfully()
+        dataProvider.didFetchBankFailed()
+    }
 }
