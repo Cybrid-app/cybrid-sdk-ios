@@ -83,3 +83,6 @@
 "cybrid.kyc.error.done" = "Done";
 "cybrid.kyc.reviewing.text" = "Identity being reviewed.";
 "cybrid.kyc.reviewing.done" = "Done";
+
+// Bank Accounts Component
+"cybrid.bank.accounts.addAccount.button" = "Add account";

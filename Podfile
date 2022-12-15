@@ -11,6 +11,7 @@ def common_pods
   pod 'CybridApiBankSwift'
   pod 'BigInt'
   pod 'PersonaInquirySDK2'
+  pod 'Plaid'
 end
 
 def quality_pods

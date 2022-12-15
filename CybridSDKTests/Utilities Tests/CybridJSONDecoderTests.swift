@@ -473,7 +473,6 @@ class CybridJSONDecoderTests: XCTestCase {
     }
 
     // MARK: IdentityVerificationWithDetailsBankModel
-
     func test_IdentityVerificationWithDetailsBankModel_Decoding() throws {
 
         let data = getJSONData(from: "createIdentityVerificationModel")
@@ -522,6 +521,205 @@ class CybridJSONDecoderTests: XCTestCase {
         let decoder = CybridJSONDecoder()
 
         let result = try? decoder.decode(IdentityVerificationWithDetailsBankModel.self, from: data!)
+        XCTAssertNil(result)
+    }
+
+    // MARK: WorkflowBankModel
+    func test_WorkflowBankModel_Decoding() throws {
+
+        let data = getJSONData(from: "createWorkflowResponse")
+        XCTAssertNotNil(data)
+
+        let decoder = CybridJSONDecoder()
+
+        let result = try? decoder.decode(WorkflowBankModel.self, from: data!)
+        XCTAssertNotNil(result?.type)
+        XCTAssertNotNil(result?.guid)
+        XCTAssertNotNil(result?.customerGuid)
+        XCTAssertNotNil(result?.createdAt)
+    }
+
+    func test_WorkflowBankModel_Decoding_Init_Nil() throws {
+
+        let data = getJSONData(from: "createWorkflow_Incomplete")
+        XCTAssertNotNil(data)
+
+        let decoder = CybridJSONDecoder()
+
+        let result = try? decoder.decode(WorkflowBankModel.self, from: data!)
+        XCTAssertNil(result?.guid)
+    }
+
+    func test_WorkflowBankModel_Decoding_Nil() throws {
+
+        let data = Data()
+        let decoder = CybridJSONDecoder()
+        let result = try? decoder.decode(WorkflowBankModel.self, from: data)
+
+        XCTAssertThrowsError(try decoder.decode(WorkflowBankModel.self, from: data))
+        XCTAssertNil(result)
+    }
+
+    func test_WorkflowBankModel_withInvalidJSON() throws {
+
+        let data = getJSONData(from: "listPricesResponse")
+        XCTAssertNotNil(data)
+        let decoder = CybridJSONDecoder()
+
+        let result = try? decoder.decode(WorkflowBankModel.self, from: data!)
+        XCTAssertNil(result)
+    }
+
+    // MARK: WorkflowWithDetailsBankModel
+    func test_WorkflowWithDetailsBankModel_Decoding() throws {
+
+        let data = getJSONData(from: "fetchWorkflowResponse")
+        XCTAssertNotNil(data)
+
+        let decoder = CybridJSONDecoder()
+
+        let result = try? decoder.decode(WorkflowWithDetailsBankModel.self, from: data!)
+        XCTAssertNotNil(result?.type)
+        XCTAssertNotNil(result?.guid)
+        XCTAssertNotNil(result?.customerGuid)
+        XCTAssertNotNil(result?.createdAt)
+        XCTAssertNotNil(result?.plaidLinkToken)
+    }
+
+    func test_WorkflowWithDetailsBankModel_Decoding_Init_Nil() throws {
+
+        let data = getJSONData(from: "fetchWorkflow_Incomplete")
+        XCTAssertNotNil(data)
+
+        let decoder = CybridJSONDecoder()
+
+        let result = try? decoder.decode(WorkflowWithDetailsBankModel.self, from: data!)
+        XCTAssertNil(result?.guid)
+    }
+
+    func test_WorkflowWithDetailsBankModel_Decoding_Nil() throws {
+
+        let data = Data()
+        let decoder = CybridJSONDecoder()
+        let result = try? decoder.decode(WorkflowWithDetailsBankModel.self, from: data)
+
+        XCTAssertThrowsError(try decoder.decode(WorkflowWithDetailsBankModel.self, from: data))
+        XCTAssertNil(result)
+    }
+
+    func test_WorkflowWithDetailsBankModel_withInvalidJSON() throws {
+
+        let data = getJSONData(from: "listPricesResponse")
+        XCTAssertNotNil(data)
+        let decoder = CybridJSONDecoder()
+
+        let result = try? decoder.decode(WorkflowWithDetailsBankModel.self, from: data!)
+        XCTAssertNil(result)
+    }
+
+    // MARK: BankBankModel
+    func test_BankBankModel_Decoding() throws {
+
+        let data = getJSONData(from: "fetchBankResponse")
+        XCTAssertNotNil(data)
+
+        let decoder = CybridJSONDecoder()
+
+        let result = try? decoder.decode(BankBankModel.self, from: data!)
+        XCTAssertNotNil(result?.guid)
+        XCTAssertNotNil(result?.organizationGuid)
+        XCTAssertNotNil(result?.name)
+        XCTAssertNotNil(result?.type)
+        XCTAssertNotNil(result?.supportedTradingSymbols)
+        XCTAssertNotNil(result?.supportedFiatAccountAssets)
+        XCTAssertNotNil(result?.supportedCountryCodes)
+        XCTAssertNotNil(result?.features)
+        XCTAssertNotNil(result?.createdAt)
+    }
+
+    func test_BankBankModel_Decoding_Init_Nil() throws {
+
+        let data = getJSONData(from: "fetchBankResponse_Incomplete")
+        XCTAssertNotNil(data)
+
+        let decoder = CybridJSONDecoder()
+
+        let result = try? decoder.decode(BankBankModel.self, from: data!)
+        XCTAssertNil(result?.guid)
+    }
+
+    func test_BankBankModel_Decoding_Nil() throws {
+
+        let data = Data()
+        let decoder = CybridJSONDecoder()
+        let result = try? decoder.decode(BankBankModel.self, from: data)
+
+        XCTAssertThrowsError(try decoder.decode(BankBankModel.self, from: data))
+        XCTAssertNil(result)
+    }
+
+    func test_BankBankModel_withInvalidJSON() throws {
+
+        let data = getJSONData(from: "listPricesResponse")
+        XCTAssertNotNil(data)
+        let decoder = CybridJSONDecoder()
+
+        let result = try? decoder.decode(BankBankModel.self, from: data!)
+        XCTAssertNil(result)
+    }
+
+    // MARK: ExternalBankAccountBankModel
+    func test_ExternalBankAccountBankModel_Decoding() throws {
+
+        let data = getJSONData(from: "createExternalBankAccountBankModelResponse")
+        XCTAssertNotNil(data)
+
+        let decoder = CybridJSONDecoder()
+
+        let result = try? decoder.decode(ExternalBankAccountBankModel.self, from: data!)
+        XCTAssertNotNil(result?.guid)
+        XCTAssertNotNil(result?.name)
+        XCTAssertNotNil(result?.asset)
+        XCTAssertNotNil(result?.accountKind)
+        XCTAssertNotNil(result?.environment)
+        XCTAssertNotNil(result?.bankGuid)
+        XCTAssertNotNil(result?.customerGuid)
+        XCTAssertNotNil(result?.createdAt)
+        XCTAssertNotNil(result?.plaidInstitutionId)
+        XCTAssertNotNil(result?.plaidAccountMask)
+        XCTAssertNotNil(result?.plaidAccountName)
+        XCTAssertNotNil(result?.state)
+        XCTAssertNotNil(result?.failureCode)
+    }
+
+    func test_ExternalBankAccountBankModel_Decoding_Init_Nil() throws {
+
+        let data = getJSONData(from: "createExternalBankAccountBankModelResponse_Incomplete")
+        XCTAssertNotNil(data)
+
+        let decoder = CybridJSONDecoder()
+
+        let result = try? decoder.decode(ExternalBankAccountBankModel.self, from: data!)
+        XCTAssertNil(result?.guid)
+    }
+
+    func test_ExternalBankAccountBankModel_Decoding_Nil() throws {
+
+        let data = Data()
+        let decoder = CybridJSONDecoder()
+        let result = try? decoder.decode(ExternalBankAccountBankModel.self, from: data)
+
+        XCTAssertThrowsError(try decoder.decode(ExternalBankAccountBankModel.self, from: data))
+        XCTAssertNil(result)
+    }
+
+    func test_ExternalBankAccountBankModel_withInvalidJSON() throws {
+
+        let data = getJSONData(from: "listPricesResponse")
+        XCTAssertNotNil(data)
+        let decoder = CybridJSONDecoder()
+
+        let result = try? decoder.decode(ExternalBankAccountBankModel.self, from: data!)
         XCTAssertNil(result)
     }
 }

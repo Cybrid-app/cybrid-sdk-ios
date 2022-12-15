@@ -1,0 +1,18 @@
+{
+  "guid": "stringstringstringstringstringst",
+  "organization_guid": "stringstringstringstringstringst",
+  "name": "string",
+  "type": "sandbox",
+  "supported_trading_symbols": [
+    "string"
+  ],
+  "supported_fiat_account_assets": [
+    "string"
+  ],
+  "supported_country_codes": [
+    "string"
+  ],
+  "features": [
+    "attestation_identity_records"
+  ]
+}

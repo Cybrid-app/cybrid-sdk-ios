@@ -43,9 +43,11 @@ final class CustomersAPIMock: CustomersAPI {
         createCustomerCompletion?(.failure(.error(0, nil, nil, CybridError.serviceError)))
     }
 
-    class func didFetchCustomerSuccessfully(_ mockCustomer: CustomerBankModel) {
+    @discardableResult
+    class func didFetchCustomerSuccessfully(_ mockCustomer: CustomerBankModel) -> CustomerBankModel {
 
         fetchCustomerCompletion?(.success(mockCustomer))
+        return  mockCustomer
     }
 
     class func didFetchCustomerFailed() {
@@ -57,6 +59,7 @@ final class CustomersAPIMock: CustomersAPI {
 extension CustomerBankModel {
 
     static let mock = CustomerBankModel(guid: "12345",
+                                        bankGuid: "1234",
                                         type: .individual,
                                         createdAt: Date(),
                                         state: .storing)

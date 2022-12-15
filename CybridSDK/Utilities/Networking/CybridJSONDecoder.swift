@@ -11,6 +11,7 @@ import Foundation
 
 final class CybridJSONDecoder: JSONDecoder {
 
+    // swiftlint:disable:next cyclomatic_complexity
     override func decode<T>(_ type: T.Type, from data: Data) throws -> T where T: Decodable {
 
         switch type {
@@ -41,6 +42,18 @@ final class CybridJSONDecoder: JSONDecoder {
 
         case is IdentityVerificationWithDetailsBankModel.Type:
             return try decodeIdentityVerificationWithDetailsBankModel(data: data) as! T
+
+        case is WorkflowBankModel.Type:
+            return try decodeWorkflowBankModel(data: data) as! T
+
+        case is WorkflowWithDetailsBankModel.Type:
+            return try decodeWorkflowWithDetailsBankModel(data: data) as! T
+
+        case is BankBankModel.Type:
+            return try decodeBankBankModel(data: data) as! T
+
+        case is ExternalBankAccountBankModel.Type:
+            return try decodeExternalBankAccountBankModel(data: data) as! T
 
         default:
             return try super.decode(type, from: data)
@@ -181,10 +194,10 @@ extension CybridJSONDecoder {
         guard let jsonObject = try JSONSerialization.jsonObject(with: data) as? [String: Any] else {
             throw DecodingError.customDecodingError
         }
-        let jsonStrongObject: [String: Any] = jsonObject
+        let jsonStringObject: [String: Any] = jsonObject
 
         guard
-            let model = IdentityVerificationBankModel(json: jsonStrongObject)
+            let model = IdentityVerificationBankModel(json: jsonStringObject)
         else {
             throw DecodingError.customDecodingError
         }
@@ -196,10 +209,70 @@ extension CybridJSONDecoder {
         guard let jsonObject = try JSONSerialization.jsonObject(with: data) as? [String: Any] else {
             throw DecodingError.customDecodingError
         }
-        let jsonStrongObject: [String: Any] = jsonObject
+        let jsonStringObject: [String: Any] = jsonObject
 
         guard
-            let model = IdentityVerificationWithDetailsBankModel(json: jsonStrongObject)
+            let model = IdentityVerificationWithDetailsBankModel(json: jsonStringObject)
+        else {
+            throw DecodingError.customDecodingError
+        }
+        return model
+    }
+
+    func decodeWorkflowBankModel(data: Data) throws -> WorkflowBankModel {
+
+        guard let jsonObject = try JSONSerialization.jsonObject(with: data) as? [String: Any] else {
+            throw DecodingError.customDecodingError
+        }
+        let jsonStringObject: [String: Any] = jsonObject
+
+        guard
+            let model = WorkflowBankModel(json: jsonStringObject)
+        else {
+            throw DecodingError.customDecodingError
+        }
+        return model
+    }
+
+    func decodeWorkflowWithDetailsBankModel(data: Data) throws -> WorkflowWithDetailsBankModel {
+
+        guard let jsonObject = try JSONSerialization.jsonObject(with: data) as? [String: Any] else {
+            throw DecodingError.customDecodingError
+        }
+        let jsonStringObject: [String: Any] = jsonObject
+
+        guard
+            let model = WorkflowWithDetailsBankModel(json: jsonStringObject)
+        else {
+            throw DecodingError.customDecodingError
+        }
+        return model
+    }
+
+    func decodeBankBankModel(data: Data) throws -> BankBankModel {
+
+        guard let jsonObject = try JSONSerialization.jsonObject(with: data) as? [String: Any] else {
+            throw DecodingError.customDecodingError
+        }
+        let jsonStringObject: [String: Any] = jsonObject
+
+        guard
+            let model = BankBankModel(json: jsonStringObject)
+        else {
+            throw DecodingError.customDecodingError
+        }
+        return model
+    }
+
+    func decodeExternalBankAccountBankModel(data: Data) throws -> ExternalBankAccountBankModel {
+
+        guard let jsonObject = try JSONSerialization.jsonObject(with: data) as? [String: Any] else {
+            throw DecodingError.customDecodingError
+        }
+        let jsonStringObject: [String: Any] = jsonObject
+
+        guard
+            let model = ExternalBankAccountBankModel(json: jsonStringObject)
         else {
             throw DecodingError.customDecodingError
         }
