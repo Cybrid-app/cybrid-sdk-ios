@@ -20,6 +20,7 @@ class BankAccountsViewModel: NSObject {
 
     // MARK: Internal properties
     internal var workflowJob: Polling?
+    internal var externalBankAccountJob: Polling?
     internal var customerGuid = Cybrid.customerGUID
 
     // MARK: Public properties
@@ -98,9 +99,9 @@ class BankAccountsViewModel: NSObject {
 
                     switch externalBankAccountResponse {
 
-                    case .success:
+                    case .success(let externalBankAccount):
                         self?.logger?.log(.component(.accounts(.pricesDataFetching)))
-                        self?.uiState.value = .DONE
+                        self?.externalBankAccountJob = Polling { self?.fetchExternalBankAccount(account: externalBankAccount) }
 
                     case .failure:
                         self?.logger?.log(.component(.accounts(.pricesDataError)))
@@ -122,6 +123,21 @@ class BankAccountsViewModel: NSObject {
     func fetchBank(bankGuid: String, _ completion: @escaping FetchBankCompletion) {
 
         self.dataProvider.fetchBank(guid: bankGuid, completion)
+    }
+
+    func fetchExternalBankAccount(account: ExternalBankAccountBankModel) {
+
+        self.dataProvider.fetchExternalBankAccount(externalBankAccountGuid: account.guid!) { [weak self] externalBankAccountResponse in
+
+            switch externalBankAccountResponse {
+
+            case .success(let externalBankAccount):
+                self?.checkExternalBankAccountState(externalBankAccount: externalBankAccount)
+
+            case .failure:
+                self?.logger?.log(.component(.accounts(.pricesDataError)))
+            }
+        }
     }
 
     func assetIsSupported(asset: String?, _ completion: @escaping (Bool) -> Void) {
@@ -171,6 +187,16 @@ class BankAccountsViewModel: NSObject {
             self.workflowJob?.stop()
             self.workflowJob = nil
             self.uiState.value = .REQUIRED
+        }
+    }
+
+    func checkExternalBankAccountState(externalBankAccount: ExternalBankAccountBankModel) {
+
+        if externalBankAccount.state == .completed {
+
+            self.externalBankAccountJob?.stop()
+            self.externalBankAccountJob = nil
+            self.uiState.value = .DONE
         }
     }
 }

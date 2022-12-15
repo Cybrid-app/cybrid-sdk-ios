@@ -188,7 +188,7 @@ class BankAccountsViewModelTest: XCTestCase {
         dataProvider.didFetchBankSuccessfully_Incomplete()
     }
 
-    // MARK: createExternalBankAccount
+    // MARK: ExternalBankAccount
     func test_createExternalBankAccount_Successfully() {
 
         // -- Given
@@ -205,6 +205,40 @@ class BankAccountsViewModelTest: XCTestCase {
         dataProvider.createExternalBankAccountSuccessfully()
 
         // -- Then
+        XCTAssertEqual(viewModel.uiState.value, .LOADING)
+    }
+
+    func test_fetchExternalBankAccount() {
+
+        // -- Given
+        let uiState: Observable<BankAccountsViewcontroller.BankAccountsViewState> = .init(.LOADING)
+        let viewModel = createViewModel(uiState: uiState)
+
+        // -- When
+        dataProvider.fetchExternalBankAccountSuccessfully()
+        viewModel.fetchExternalBankAccount(account: ExternalBankAccountBankModel.mock())
+        dataProvider.fetchExternalBankAccountSuccessfully()
+
+        // -- Then
+        XCTAssertEqual(viewModel.uiState.value, .LOADING)
+    }
+
+    // MARK: checkExternalBankAccountState
+    func test_checkExternalBankAccountState() {
+
+        // -- Given
+        let uiState: Observable<BankAccountsViewcontroller.BankAccountsViewState> = .init(.LOADING)
+        let viewModel = createViewModel(uiState: uiState)
+        viewModel.externalBankAccountJob = Polling {}
+
+        // -- When
+        viewModel.checkExternalBankAccountState(externalBankAccount: ExternalBankAccountBankModel.mock())
+        XCTAssertNotNil(viewModel.externalBankAccountJob)
+        XCTAssertEqual(viewModel.uiState.value, .LOADING)
+
+        viewModel.checkExternalBankAccountState(externalBankAccount: ExternalBankAccountBankModel.mockCompleted())
+        XCTAssertNil(viewModel.externalBankAccountJob)
         XCTAssertEqual(viewModel.uiState.value, .DONE)
+
     }
 }

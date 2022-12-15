@@ -249,4 +249,16 @@ final class ServiceProviderMock: AssetsRepoProvider,
         Cybrid.session.setupSession(authToken: "TEST-TOKEN")
         ExternalBankAccountAPIMock.createExternalBankAccountError()
     }
+
+    func fetchExternalBankAccountSuccessfully() {
+
+        Cybrid.session.setupSession(authToken: "TEST-TOKEN")
+        ExternalBankAccountAPIMock.fetchExternalBankAccountSuccessfully()
+    }
+
+    func fetchExternalBankAccountFailed() {
+
+        Cybrid.session.setupSession(authToken: "TEST-TOKEN")
+        ExternalBankAccountAPIMock.fetchExternalBankAccountError()
+    }
 }

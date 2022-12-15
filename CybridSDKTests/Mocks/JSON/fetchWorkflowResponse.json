@@ -2,6 +2,8 @@
   "guid": "stringstringstringstringstringst",
   "customer_guid": "stringstringstringstringstringst",
   "type": "plaid",
-  "created_at": "2022-12-09T16:37:09.434Z",
+  "state": "storing",
+  "failure_code": "string",
+  "created_at": "2022-12-15T17:00:37.607Z",
   "plaid_link_token": "string"
 }

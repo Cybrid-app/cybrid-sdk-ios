@@ -11,8 +11,10 @@ import CybridSDK
 final class ExternalBankAccountAPIMock: ExternalBankAccountsAPI {
 
     typealias CreateExternalBankAccountCompletion = (_ result: Result<ExternalBankAccountBankModel, ErrorResponse>) -> Void
+    typealias FetchExternalBankAccountCompletion = (_ result: Result<ExternalBankAccountBankModel, ErrorResponse>) -> Void
 
     private static var createExternalBankAccountCompletion: CreateExternalBankAccountCompletion?
+    private static var fetchExternalBankAccountCompletion: FetchExternalBankAccountCompletion?
 
     override class func createExternalBankAccount(
         postExternalBankAccountBankModel: PostExternalBankAccountBankModel,
@@ -22,7 +24,15 @@ final class ExternalBankAccountAPIMock: ExternalBankAccountsAPI {
             return createExternalBankAccountWithRequestBuilder(postExternalBankAccountBankModel: postExternalBankAccountBankModel).requestTask
     }
 
-    // MARK: Create Bank
+    override class func getExternalBankAccount(
+        externalBankAccountGuid: String,
+        apiResponseQueue: DispatchQueue = CybridApiBankSwiftAPI.apiResponseQueue,
+        completion: @escaping ((Result<ExternalBankAccountBankModel, ErrorResponse>) -> Void)) -> RequestTask {
+            fetchExternalBankAccountCompletion = completion
+            return getExternalBankAccountWithRequestBuilder(externalBankAccountGuid: externalBankAccountGuid).requestTask
+    }
+
+    // MARK: Create External Bank Account
     @discardableResult
     class func createExternalBankAccountSuccessfully() -> ExternalBankAccountBankModel {
         createExternalBankAccountCompletion?(.success(ExternalBankAccountBankModel.mock()))
@@ -31,6 +41,17 @@ final class ExternalBankAccountAPIMock: ExternalBankAccountsAPI {
 
     class func createExternalBankAccountError() {
         createExternalBankAccountCompletion?(.failure(.error(0, nil, nil, CybridError.serviceError)))
+    }
+
+    // MARK: Create External Bank Account
+    @discardableResult
+    class func fetchExternalBankAccountSuccessfully() -> ExternalBankAccountBankModel {
+        fetchExternalBankAccountCompletion?(.success(ExternalBankAccountBankModel.mock()))
+        return ExternalBankAccountBankModel.mock()
+    }
+
+    class func fetchExternalBankAccountError() {
+        fetchExternalBankAccountCompletion?(.failure(.error(0, nil, nil, CybridError.serviceError)))
     }
 }
 
@@ -50,5 +71,21 @@ extension ExternalBankAccountBankModel {
         plaidAccountMask: "1234",
         plaidAccountName: "test",
         state: .storing)
+    }
+
+    static func mockCompleted() -> Self {
+        return ExternalBankAccountBankModel(
+        guid: "1234",
+        name: "test",
+        asset: "test",
+        accountKind: .plaid,
+        environment: .sandbox,
+        bankGuid: "1234",
+        customerGuid: "1234",
+        createdAt: Date(),
+        plaidInstitutionId: "1234",
+        plaidAccountMask: "1234",
+        plaidAccountName: "test",
+        state: .completed)
     }
 }
