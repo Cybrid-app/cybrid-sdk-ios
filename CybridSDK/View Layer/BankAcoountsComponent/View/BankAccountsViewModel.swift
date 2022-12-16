@@ -29,11 +29,9 @@ class BankAccountsViewModel: NSObject {
 
     // MARK: Constructor
     init(dataProvider: WorkflowProvider & ExternalBankAccountProvider & CustomersRepoProvider & BankProvider,
-         UIState: Observable<BankAccountsViewcontroller.BankAccountsViewState>,
          logger: CybridLogger?) {
 
         self.dataProvider = dataProvider
-        self.uiState = UIState
         self.logger = logger
     }
 
