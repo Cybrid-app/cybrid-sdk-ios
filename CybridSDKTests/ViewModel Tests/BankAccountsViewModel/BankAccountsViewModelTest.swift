@@ -13,16 +13,15 @@ class BankAccountsViewModelTest: XCTestCase {
 
     lazy var dataProvider = ServiceProviderMock()
 
-    func createViewModel(uiState: Observable<BankAccountsViewcontroller.BankAccountsViewState>) -> BankAccountsViewModel {
+    func createViewModel() -> BankAccountsViewModel {
         return BankAccountsViewModel(dataProvider: self.dataProvider,
-                                     UIState: uiState,
                                      logger: nil)
     }
 
     func test_init() {
 
         let uiState: Observable<BankAccountsViewcontroller.BankAccountsViewState> = .init(.LOADING)
-        let viewModel = createViewModel(uiState: uiState)
+        let viewModel = createViewModel()
 
         XCTAssertNotNil(viewModel)
         XCTAssertNotNil(viewModel.uiState)
@@ -35,8 +34,7 @@ class BankAccountsViewModelTest: XCTestCase {
     func test_createWorkflow_Successfully() {
 
         // -- Given
-        let uiState: Observable<BankAccountsViewcontroller.BankAccountsViewState> = .init(.LOADING)
-        let viewModel = createViewModel(uiState: uiState)
+        let viewModel = createViewModel()
 
         // -- When
         dataProvider.didCreateWorkflowSuccessfully()
@@ -50,8 +48,7 @@ class BankAccountsViewModelTest: XCTestCase {
     func test_fetchWorkflow_Successfully() {
 
         // -- Given
-        let uiState: Observable<BankAccountsViewcontroller.BankAccountsViewState> = .init(.LOADING)
-        let viewModel = createViewModel(uiState: uiState)
+        let viewModel = createViewModel()
 
         // -- When
         dataProvider.didFetchWorkflowSuccessfully()
@@ -66,8 +63,7 @@ class BankAccountsViewModelTest: XCTestCase {
     func test_fetchWorkflow_Empty_Successfully() {
 
         // -- Given
-        let uiState: Observable<BankAccountsViewcontroller.BankAccountsViewState> = .init(.LOADING)
-        let viewModel = createViewModel(uiState: uiState)
+        let viewModel = createViewModel()
         viewModel.workflowJob = Polling {}
 
         // -- When
@@ -83,8 +79,7 @@ class BankAccountsViewModelTest: XCTestCase {
     func test_fetchWorkflow_Incomplete_Successfully() {
 
         // -- Given
-        let uiState: Observable<BankAccountsViewcontroller.BankAccountsViewState> = .init(.LOADING)
-        let viewModel = createViewModel(uiState: uiState)
+        let viewModel = createViewModel()
         viewModel.workflowJob = Polling {}
 
         // -- When
@@ -101,8 +96,7 @@ class BankAccountsViewModelTest: XCTestCase {
     func test_fetchCustomer() {
 
         // -- Given
-        let uiState: Observable<BankAccountsViewcontroller.BankAccountsViewState> = .init(.LOADING)
-        let viewModel = createViewModel(uiState: uiState)
+        let viewModel = createViewModel()
 
         // -- When
         dataProvider.didFetchCustomerSuccessfully()
@@ -116,8 +110,7 @@ class BankAccountsViewModelTest: XCTestCase {
     func test_fetchBank() {
 
         // -- Given
-        let uiState: Observable<BankAccountsViewcontroller.BankAccountsViewState> = .init(.LOADING)
-        let viewModel = createViewModel(uiState: uiState)
+        let viewModel = createViewModel()
 
         // -- When
         dataProvider.didFetchBankSuccessfully()
@@ -131,8 +124,7 @@ class BankAccountsViewModelTest: XCTestCase {
     func test_assetIsSupported_Nil() {
 
         // -- Given
-        let uiState: Observable<BankAccountsViewcontroller.BankAccountsViewState> = .init(.LOADING)
-        let viewModel = createViewModel(uiState: uiState)
+        let viewModel = createViewModel()
 
         // --
         viewModel.assetIsSupported(asset: nil) { supported in
@@ -143,8 +135,7 @@ class BankAccountsViewModelTest: XCTestCase {
     func test_assetIsSupported_Customer_Bank_Success_Supported() {
 
         // -- Given
-        let uiState: Observable<BankAccountsViewcontroller.BankAccountsViewState> = .init(.LOADING)
-        let viewModel = createViewModel(uiState: uiState)
+        let viewModel = createViewModel()
 
         // -- When
         dataProvider.didFetchCustomerSuccessfully()
@@ -159,8 +150,7 @@ class BankAccountsViewModelTest: XCTestCase {
     func test_assetIsSupported_Customer_Bank_Success_NotSupported() {
 
         // -- Given
-        let uiState: Observable<BankAccountsViewcontroller.BankAccountsViewState> = .init(.LOADING)
-        let viewModel = createViewModel(uiState: uiState)
+        let viewModel = createViewModel()
 
         // -- When
         dataProvider.didFetchCustomerSuccessfully()
@@ -175,8 +165,7 @@ class BankAccountsViewModelTest: XCTestCase {
     func test_assetIsSupported_Customer_Bank_Success_Incomplete() {
 
         // -- Given
-        let uiState: Observable<BankAccountsViewcontroller.BankAccountsViewState> = .init(.LOADING)
-        let viewModel = createViewModel(uiState: uiState)
+        let viewModel = createViewModel()
 
         // -- When
         dataProvider.didFetchCustomerSuccessfully()
@@ -192,8 +181,7 @@ class BankAccountsViewModelTest: XCTestCase {
     func test_createExternalBankAccount_Successfully() {
 
         // -- Given
-        let uiState: Observable<BankAccountsViewcontroller.BankAccountsViewState> = .init(.LOADING)
-        let viewModel = createViewModel(uiState: uiState)
+        let viewModel = createViewModel()
 
         // -- When
         dataProvider.didFetchCustomerSuccessfully()
@@ -211,8 +199,7 @@ class BankAccountsViewModelTest: XCTestCase {
     func test_fetchExternalBankAccount() {
 
         // -- Given
-        let uiState: Observable<BankAccountsViewcontroller.BankAccountsViewState> = .init(.LOADING)
-        let viewModel = createViewModel(uiState: uiState)
+        let viewModel = createViewModel()
 
         // -- When
         dataProvider.fetchExternalBankAccountSuccessfully()
@@ -227,8 +214,7 @@ class BankAccountsViewModelTest: XCTestCase {
     func test_checkExternalBankAccountState() {
 
         // -- Given
-        let uiState: Observable<BankAccountsViewcontroller.BankAccountsViewState> = .init(.LOADING)
-        let viewModel = createViewModel(uiState: uiState)
+        let viewModel = createViewModel()
         viewModel.externalBankAccountJob = Polling {}
 
         // -- When

@@ -13,17 +13,15 @@ class BankAccountsViewModelError: XCTestCase {
 
     lazy var dataProvider = ServiceProviderMock()
 
-    func createViewModel(uiState: Observable<BankAccountsViewcontroller.BankAccountsViewState>) -> BankAccountsViewModel {
+    func createViewModel() -> BankAccountsViewModel {
         return BankAccountsViewModel(dataProvider: self.dataProvider,
-                                     UIState: uiState,
                                      logger: nil)
     }
 
     func test_createWorkflow_Failed() {
 
         // -- Given
-        let uiState: Observable<BankAccountsViewcontroller.BankAccountsViewState> = .init(.LOADING)
-        let viewModel = createViewModel(uiState: uiState)
+        let viewModel = createViewModel()
 
         // -- When
         viewModel.createWorkflow()
@@ -37,8 +35,7 @@ class BankAccountsViewModelError: XCTestCase {
     func test_fetchWorkflow_Failed() {
 
         // -- Given
-        let uiState: Observable<BankAccountsViewcontroller.BankAccountsViewState> = .init(.LOADING)
-        let viewModel = createViewModel(uiState: uiState)
+        let viewModel = createViewModel()
         viewModel.workflowJob = Polling {}
 
         // -- When
@@ -54,8 +51,7 @@ class BankAccountsViewModelError: XCTestCase {
     func test_assetIsSupported_Customer_Nil() {
 
         // -- Given
-        let uiState: Observable<BankAccountsViewcontroller.BankAccountsViewState> = .init(.LOADING)
-        let viewModel = createViewModel(uiState: uiState)
+        let viewModel = createViewModel()
 
         // --
         dataProvider.didFetchCustomerFailed()
@@ -68,8 +64,7 @@ class BankAccountsViewModelError: XCTestCase {
     func test_assetIsSupported_Customer_Success_Bank_Nil() {
 
         // -- Given
-        let uiState: Observable<BankAccountsViewcontroller.BankAccountsViewState> = .init(.LOADING)
-        let viewModel = createViewModel(uiState: uiState)
+        let viewModel = createViewModel()
 
         // -- When
         dataProvider.didFetchCustomerSuccessfully()
@@ -84,8 +79,7 @@ class BankAccountsViewModelError: XCTestCase {
     func test_createExternalBankAccount_Successfully() {
 
         // -- Given
-        let uiState: Observable<BankAccountsViewcontroller.BankAccountsViewState> = .init(.LOADING)
-        let viewModel = createViewModel(uiState: uiState)
+        let viewModel = createViewModel()
 
         // -- When
         dataProvider.didFetchCustomerSuccessfully()
@@ -102,8 +96,7 @@ class BankAccountsViewModelError: XCTestCase {
     func test_createExternalBankAccount_NotSupported() {
 
         // -- Given
-        let uiState: Observable<BankAccountsViewcontroller.BankAccountsViewState> = .init(.LOADING)
-        let viewModel = createViewModel(uiState: uiState)
+        let viewModel = createViewModel()
 
         // -- When
         dataProvider.didFetchCustomerSuccessfully()
@@ -119,8 +112,7 @@ class BankAccountsViewModelError: XCTestCase {
     func test_fetchExternalBankAccount() {
 
         // -- Given
-        let uiState: Observable<BankAccountsViewcontroller.BankAccountsViewState> = .init(.LOADING)
-        let viewModel = createViewModel(uiState: uiState)
+        let viewModel = createViewModel()
 
         // -- When
         dataProvider.fetchExternalBankAccountFailed()
