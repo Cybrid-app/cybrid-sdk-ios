@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-extension BankAccountsViewcontroller {
+extension BankAccountsViewController {
 
     internal func bankAccountsView_Loading() {
 
@@ -207,7 +207,7 @@ extension BankAccountsViewcontroller {
     }
 }
 
-extension BankAccountsViewcontroller {
+extension BankAccountsViewController {
 
     enum UIValues {
 

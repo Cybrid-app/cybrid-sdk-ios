@@ -24,7 +24,7 @@ class BankAccountsViewModel: NSObject {
     internal var customerGuid = Cybrid.customerGUID
 
     // MARK: Public properties
-    var uiState: Observable<BankAccountsViewcontroller.BankAccountsViewState> = .init(.LOADING)
+    var uiState: Observable<BankAccountsViewController.BankAccountsViewState> = .init(.LOADING)
     var latestWorkflow: WorkflowWithDetailsBankModel?
 
     // MARK: Constructor

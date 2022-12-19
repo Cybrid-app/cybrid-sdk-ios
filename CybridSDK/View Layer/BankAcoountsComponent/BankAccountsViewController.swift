@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 import LinkKit
 
-public final class BankAccountsViewcontroller: UIViewController {
+public final class BankAccountsViewController: UIViewController {
 
     public enum BankAccountsViewState { case LOADING, REQUIRED, DONE, ERROR }
 
@@ -50,7 +50,7 @@ public final class BankAccountsViewcontroller: UIViewController {
     }
 }
 
-extension BankAccountsViewcontroller {
+extension BankAccountsViewController {
 
     private func initComponentContent() {
 

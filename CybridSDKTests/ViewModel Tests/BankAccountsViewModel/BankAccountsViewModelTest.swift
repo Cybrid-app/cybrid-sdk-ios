@@ -20,7 +20,7 @@ class BankAccountsViewModelTest: XCTestCase {
 
     func test_init() {
 
-        let uiState: Observable<BankAccountsViewcontroller.BankAccountsViewState> = .init(.LOADING)
+        let uiState: Observable<BankAccountsViewController.BankAccountsViewState> = .init(.LOADING)
         let viewModel = createViewModel()
 
         XCTAssertNotNil(viewModel)
