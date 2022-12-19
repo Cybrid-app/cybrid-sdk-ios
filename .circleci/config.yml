@@ -73,7 +73,7 @@ workflows:
       - pod-spec-lint
       - build-and-test
       - publish:
-        filters:
+          filters:
             branches:
               only:
                 - main
