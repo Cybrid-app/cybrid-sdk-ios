@@ -19,6 +19,7 @@ ignore:
   - "**/*View.swift"
   - "**/*Modal.swift"
   - "**/*ViewController.swift"
+  - "**/*ViewController+Extensions.swift"
   - "CybridSDK/View Layer/Trade/TradeViewModel.swift"
   - "CybridSDK/View Layer/Crypto Price List/CryptoPriceModel.swift"
   - "CybridSDK/View Layer/AccountsComponent/Entity/AccountAssetPriceModel.swift"
