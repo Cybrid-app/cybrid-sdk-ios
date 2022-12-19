@@ -45,6 +45,7 @@ class IdentityVerificationViewModelEmptyTest: XCTestCase {
         viewModel.getIdentityVerificationStatus(identityWrapper: nil)
         dataProvider.didFetchListExpiredIdentityVerificationSuccessfully()
         dataProvider.didCreateCustomerSuccessfully()
+        dataProvider.didFetchIdentityVerificationSuccessfully()
 
         // -- Then
         XCTAssertEqual(viewModel.customerGuid, "")
