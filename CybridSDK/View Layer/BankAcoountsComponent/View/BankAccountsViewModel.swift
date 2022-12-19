@@ -24,16 +24,14 @@ class BankAccountsViewModel: NSObject {
     internal var customerGuid = Cybrid.customerGUID
 
     // MARK: Public properties
-    var uiState: Observable<BankAccountsViewcontroller.BankAccountsViewState> = .init(.LOADING)
+    var uiState: Observable<BankAccountsViewController.BankAccountsViewState> = .init(.LOADING)
     var latestWorkflow: WorkflowWithDetailsBankModel?
 
     // MARK: Constructor
     init(dataProvider: WorkflowProvider & ExternalBankAccountProvider & CustomersRepoProvider & BankProvider,
-         UIState: Observable<BankAccountsViewcontroller.BankAccountsViewState>,
          logger: CybridLogger?) {
 
         self.dataProvider = dataProvider
-        self.uiState = UIState
         self.logger = logger
     }
 

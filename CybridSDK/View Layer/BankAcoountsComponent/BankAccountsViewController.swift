@@ -9,26 +9,28 @@ import Foundation
 import UIKit
 import LinkKit
 
-public final class BankAccountsViewcontroller: UIViewController {
+public final class BankAccountsViewController: UIViewController {
 
     public enum BankAccountsViewState { case LOADING, REQUIRED, DONE, ERROR }
 
-    private var bankAccountsViewModel: BankAccountsViewModel!
-    private var theme: Theme!
-    private var localizer: Localizer!
+    internal var bankAccountsViewModel: BankAccountsViewModel!
+    internal var theme: Theme!
+    internal var localizer: Localizer!
 
-    private var componentContent = UIView()
-    private var currentState: Observable<BankAccountsViewState> = .init(.LOADING)
+    internal var componentContent = UIView()
+    internal var currentState: Observable<BankAccountsViewState> = .init(.LOADING)
+
+    internal var linkConfiguration: LinkTokenConfiguration!
 
     public init() {
 
         super.init(nibName: nil, bundle: nil)
         self.bankAccountsViewModel = BankAccountsViewModel(
             dataProvider: CybridSession.current,
-            UIState: self.currentState,
             logger: Cybrid.logger)
         self.theme = Cybrid.theme
         self.localizer = CybridLocalizer()
+        self.currentState = self.bankAccountsViewModel.uiState
         self.setupView()
     }
 
@@ -42,43 +44,92 @@ public final class BankAccountsViewcontroller: UIViewController {
     func setupView() {
 
         view.backgroundColor = .white
+        self.initComponentContent()
+        self.manageCurrentStateUI()
+        self.bankAccountsViewModel.createWorkflow()
     }
 }
 
-extension BankAccountsViewcontroller {
+extension BankAccountsViewController {
 
-    enum UIValues {
+    private func initComponentContent() {
 
-        // -- Sizes
-        static let componentTitleSize: CGFloat = 17
-        static let componentTitleHeight: CGFloat = 20
-        static let componentTitleMargin = UIEdgeInsets(top: 40, left: 10, bottom: 0, right: 10)
-        static let componentRequiredButtonsMargin = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: -10)
-
-        static let loadingSpinnerHeight: CGFloat = 30
-        static let loadingSpinnerMargin = UIEdgeInsets(top: 10, left: 10, bottom: 0, right: 10)
-        static let componentRequiredButtonsHeight: CGFloat = 50
-
-        // -- Colors
-        static let componentTitleColor = UIColor.black
-
-        // -- Fonts
-        static let componentTitleFont = UIFont.make(ofSize: 17, weight: .bold)
+        // -- Component Container
+        self.view.addSubview(self.componentContent)
+        self.componentContent.constraint(attribute: .top,
+                                         relatedBy: .equal,
+                                         toItem: self.view,
+                                         attribute: .topMargin,
+                                         constant: 10)
+        self.componentContent.constraint(attribute: .leading,
+                                         relatedBy: .equal,
+                                         toItem: self.view,
+                                         attribute: .leading,
+                                         constant: 10)
+        self.componentContent.constraint(attribute: .trailing,
+                                         relatedBy: .equal,
+                                         toItem: self.view,
+                                         attribute: .trailing,
+                                         constant: -10)
+        self.componentContent.constraint(attribute: .bottom,
+                                         relatedBy: .equal,
+                                         toItem: self.view,
+                                         attribute: .bottomMargin,
+                                         constant: 10)
     }
 
-    enum UIStrings {
+    private func manageCurrentStateUI() {
 
-        static let addAccountButtonText = "cybrid.bank.accounts.addAccount.button"
+        // -- Await for UI State changes
+        self.currentState.bind { state in
 
-        static let loadingText = "cybrid.kyc.loading.text"
-        static let requiredText = "cybrid.kyc.required.text"
-        static let requiredCancelText = "cybrid.kyc.required.cancel"
-        static let requiredBeginText = "cybrid.kyc.required.begin"
-        static let verifiedText = "cybrid.kyc.verified.text"
-        static let verifiedDone = "cybrid.kyc.verified.done"
-        static let errorText = "cybrid.kyc.error.text"
-        static let errorDone = "cybrid.kyc.error.done"
-        static let reviewingText = "cybrid.kyc.reviewing.text"
-        static let reviewingDone = "cybrid.kyc.reviewing.done"
+            self.removeSubViewsFromContent()
+            switch state {
+
+            case .LOADING:
+
+                self.bankAccountsView_Loading()
+
+            case .REQUIRED:
+
+                self.bankAccountsView_Required()
+
+            case .DONE:
+
+                self.bankAccountsView_Done()
+
+            case .ERROR:
+
+                self.bankAccountsView_Error()
+            }
+        }
+    }
+
+    internal func removeSubViewsFromContent() {
+
+        for view in self.componentContent.subviews {
+            view.removeFromSuperview()
+        }
+    }
+
+    internal func openPlaid() {
+
+        self.createLinkConfiguration(token: self.bankAccountsViewModel.latestWorkflow?.plaidLinkToken ?? "") { [self] in
+
+            let result = Plaid.create(self.linkConfiguration)
+            switch result {
+            case .failure(let error):
+                print("Unable to create Plaid handler due to: \(error)")
+            case .success(let handler):
+                handler.open(presentUsing: .viewController(self))
+            }
+        }
+    }
+
+    private func createLinkConfiguration(token: String, _ completion: @escaping () -> Void) {
+
+        self.linkConfiguration = LinkTokenConfiguration(token: token, onSuccess: { _ in
+            completion()
+        })
     }
 }

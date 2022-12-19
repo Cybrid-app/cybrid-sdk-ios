@@ -31,7 +31,7 @@ class RootViewController: UIViewController {
   }
   
   @IBAction func didTapBankAccountsButton(_ sender: Any) {
-    let viewController = BankAccountsViewcontroller()
+    let viewController = BankAccountsViewController()
     navigationController?.pushViewController(viewController, animated: true)
   }
 }

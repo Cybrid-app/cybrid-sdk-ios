@@ -85,4 +85,10 @@
 "cybrid.kyc.reviewing.done" = "Done";
 
 // Bank Accounts Component
-"cybrid.bank.accounts.addAccount.button" = "Add account";
+"cybrid.bank.accounts.loading.text" = "Checking Bank Accounts";
+"cybrid.bank.accounts.required.text" = "No banks accounts connected.";
+"cybrid.bank.accounts.required.button.text" = "Add account";
+"cybrid.bank.accounts.done.text" = "Account added successfully.";
+"cybrid.bank.accounts.done.button.text" = "Continue";
+"cybrid.bank.accounts.error.text" = "An error has occurred, try again.";
+"cybrid.bank.accounts.error.button.text" = "Done";
