@@ -129,7 +129,7 @@ class AccountTradesViewModelTests: XCTestCase {
 
         // -- Given
         let balance = AccountAssetPriceModel(
-            account: AccountsAPIMock.mock.objects[0],
+            account: AccountListBankModel.mock.objects[0],
             asset: AssetBankModel.bitcoin,
             counterAsset: AssetBankModel.usd,
             price: SymbolPriceBankModel.btcUSD1)
@@ -162,7 +162,7 @@ class AccountTradesViewModelTests: XCTestCase {
 
         // -- Given
         let balance = AccountAssetPriceModel(
-            account: AccountsAPIMock.mock.objects[0],
+            account: AccountListBankModel.mock.objects[0],
             asset: AssetBankModel.bitcoin,
             counterAsset: AssetBankModel.usd,
             price: SymbolPriceBankModel.btcUSD1)
@@ -197,7 +197,7 @@ class AccountTradesViewModelTests: XCTestCase {
 
         // -- Given
         let balance = AccountAssetPriceModel(
-            account: AccountsAPIMock.mock.objects[0],
+            account: AccountListBankModel.mock.objects[0],
             asset: AssetBankModel.bitcoin,
             counterAsset: AssetBankModel.usd,
             price: SymbolPriceBankModel.btcUSD1)
@@ -232,7 +232,7 @@ class AccountTradesViewModelTests: XCTestCase {
 
         // -- Given
         let balance = AccountAssetPriceModel(
-            account: AccountsAPIMock.mock.objects[0],
+            account: AccountListBankModel.mock.objects[0],
             asset: AssetBankModel.bitcoin,
             counterAsset: AssetBankModel.usd,
             price: SymbolPriceBankModel.btcUSD1)

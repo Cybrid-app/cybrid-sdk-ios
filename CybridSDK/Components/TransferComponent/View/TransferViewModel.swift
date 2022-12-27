@@ -119,13 +119,13 @@ class TransferViewModel: NSObject {
             deliverAmount: ""
         )
         self.dataProvider.createQuote(params: postQuoteBankModel, with: nil) { [weak self] quoteResponse in
-            
+
             switch quoteResponse {
-                
+
             case .success(let quote):
                 self?.logger?.log(.component(.accounts(.accountsDataFetching)))
                 self?.currentQuote.value = quote
-                
+
             case .failure:
                 self?.logger?.log(.component(.accounts(.accountsDataError)))
             }

@@ -23,8 +23,8 @@ final class AccountsAPIMock: AccountsAPI {
     @discardableResult
     class func didFetchAccountsSuccessfully(_ accounts: AccountListBankModel? = nil) -> AccountListBankModel {
 
-        accountsCompletion?(.success(accounts ?? AccountsAPIMock.mock))
-        return AccountsAPIMock.mock
+        accountsCompletion?(.success(accounts ?? AccountListBankModel.mock))
+        return AccountListBankModel.mock
     }
 
     class func didFetchAccountsWithError() {
@@ -32,25 +32,48 @@ final class AccountsAPIMock: AccountsAPI {
     }
 }
 
-extension AccountsAPIMock {
+extension AccountListBankModel {
 
-    static func getMockAccounts() -> [AccountBankModel] {
+    static let mock = AccountListBankModel(total: 1, page: 1, perPage: 1, objects: AccountBankModel.mock)
+}
 
-        return [
-            AccountBankModel(
-                type: .trading,
-                guid: "GUID",
-                createdAt: Date(),
-                asset: "BTC",
-                name: "BTC-USD",
-                bankGuid: "BANK_GUID",
-                customerGuid: "CUSTOMER_GUID",
-                platformBalance: "200000000",
-                platformAvailable: "2000000000",
-                state: .created
-            )
-        ]
-    }
+extension AccountBankModel {
 
-    static let mock = AccountListBankModel(total: 1, page: 1, perPage: 1, objects: getMockAccounts())
+    static let mock = [
+        AccountBankModel(
+            type: .trading,
+            guid: "GUID",
+            createdAt: Date(),
+            asset: "BTC",
+            name: "BTC-USD",
+            bankGuid: "BANK_GUID",
+            customerGuid: "CUSTOMER_GUID",
+            platformBalance: "200000000",
+            platformAvailable: "2000000000",
+            state: .created
+        ),
+        AccountBankModel(
+            type: .fiat,
+            guid: "GUID",
+            createdAt: Date(),
+            asset: "USD",
+            name: "USD",
+            bankGuid: "BANK_GUID",
+            customerGuid: "CUSTOMER_GUID",
+            platformBalance: "200000000",
+            platformAvailable: "2000000000",
+            state: .created
+        ),
+        AccountBankModel(
+            type: .fiat,
+            guid: "GUID",
+            createdAt: Date(),
+            asset: "USD",
+            name: "USD",
+            bankGuid: "BANK_GUID",
+            customerGuid: "CUSTOMER_GUID",
+            platformAvailable: "2000000000",
+            state: .created
+        )
+    ]
 }
