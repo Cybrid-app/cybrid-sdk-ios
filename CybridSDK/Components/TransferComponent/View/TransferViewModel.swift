@@ -13,11 +13,15 @@ class TransferViewModel: NSObject {
     // MARK: Private properties
     private var dataProvider: AccountsRepoProvider & ExternalBankAccountProvider & QuotesRepoProvider & TradesRepoProvider & AssetsRepoProvider
     private var logger: CybridLogger?
-    
+
     // MARK: Internal properties
     internal var customerGuid = Cybrid.customerGUID
     internal var assets: [AssetBankModel] = []
     internal var accounts: Observable<[AccountBankModel]> = .init([])
+    internal var externalBankAccounts: Observable<[ExternalBankAccountBankModel]> = .init([])
+    internal var fiatBalance: Observable<String> = .init("")
+    internal var currentQuote: Observable<QuoteBankModel?> = .init(nil)
+    internal var currentTrade: Observable<TradeBankModel?> = .init(nil)
 
     // MARK: Public properties
     var uiState: Observable<TransferViewController.ViewState> = .init(.LOADING)
@@ -70,5 +74,77 @@ class TransferViewModel: NSObject {
         }
     }
 
-    func fetchExternalAccounts() {}
+    func fetchExternalAccounts() {
+
+        self.dataProvider.fetchExternalBankAccounts { [weak self] accountsResponse in
+            switch accountsResponse {
+            case .success(let accountList):
+                self?.logger?.log(.component(.accounts(.accountsDataFetching)))
+                self?.externalBankAccounts.value = accountList.objects
+                self?.uiState.value = .ACCOUNTS
+
+            case .failure:
+                self?.logger?.log(.component(.accounts(.accountsDataError)))
+            }
+        }
+    }
+
+    func calculateFiatBalance() {
+
+        if !self.assets.isEmpty {
+            if let pairAsset = assets.first(where: { $0.code == self.currentFiatCurrency.uppercased() }) {
+
+                var total = BigDecimal(0).value
+                for account in self.accounts.value {
+                    if account.type == .fiat && account.state == .created {
+
+                        let accountBalance = BigDecimal(account.platformBalance ?? "0")
+                        total += accountBalance!.value
+                    }
+                }
+                let totalBigDecimal = BigDecimal(total, precision: pairAsset.decimals)
+                let totalFormatted = CybridCurrencyFormatter.formatPrice(totalBigDecimal, with: pairAsset.symbol)
+                self.fiatBalance.value = "\(totalFormatted) \(pairAsset.code)"
+            }
+        }
+    }
+
+    func createQuote(side: PostQuoteBankModel.SideBankModel, amount: BigDecimal) {
+
+        let postQuoteBankModel = PostQuoteBankModel(
+            productType: .funding,
+            customerGuid: self.customerGuid,
+            asset: self.currentFiatCurrency,
+            side: side,
+            deliverAmount: ""
+        )
+        self.dataProvider.createQuote(params: postQuoteBankModel, with: nil) { [weak self] quoteResponse in
+            
+            switch quoteResponse {
+                
+            case .success(let quote):
+                self?.logger?.log(.component(.accounts(.accountsDataFetching)))
+                self?.currentQuote.value = quote
+                
+            case .failure:
+                self?.logger?.log(.component(.accounts(.accountsDataError)))
+            }
+        }
+    }
+
+    func createTrade() {
+
+        self.dataProvider.createTrade(quoteGuid: self.currentQuote.value?.guid ?? "") { [weak self] tradeResponse in
+
+            switch tradeResponse {
+
+            case .success(let trade):
+                self?.logger?.log(.component(.accounts(.accountsDataFetching)))
+                self?.currentTrade.value = trade
+
+            case .failure:
+                self?.logger?.log(.component(.accounts(.accountsDataError)))
+            }
+        }
+    }
 }
