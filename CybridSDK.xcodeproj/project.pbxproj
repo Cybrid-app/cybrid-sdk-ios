@@ -211,6 +211,8 @@
 		92E08018295AD43200372460 /* TransferViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E08017295AD43200372460 /* TransferViewModel.swift */; };
 		92E0801B295B6AF800372460 /* TransferViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E0801A295B6AF800372460 /* TransferViewModelTest.swift */; };
 		92E0801D295B6D9A00372460 /* TransferViewModelErrorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E0801C295B6D9A00372460 /* TransferViewModelErrorTest.swift */; };
+		92E0801F295B91E200372460 /* externalBankAccountListBankModel_Response.json in Resources */ = {isa = PBXBuildFile; fileRef = 92E0801E295B91E200372460 /* externalBankAccountListBankModel_Response.json */; };
+		92E08021295B922200372460 /* externalBankAccountListBankModel_Response_Incomplete.json in Resources */ = {isa = PBXBuildFile; fileRef = 92E08020295B922200372460 /* externalBankAccountListBankModel_Response_Incomplete.json */; };
 		92E2133528F86F3300F420F2 /* LoginLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E2133428F86F3300F420F2 /* LoginLoader.swift */; };
 		92F222D92914359C00137B11 /* PollingTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F222D82914359C00137B11 /* PollingTest.swift */; };
 		92F38C4F2924223E00008F58 /* BankAccountsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F38C4E2924223E00008F58 /* BankAccountsViewController.swift */; };
@@ -471,6 +473,8 @@
 		92E08017295AD43200372460 /* TransferViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferViewModel.swift; sourceTree = "<group>"; };
 		92E0801A295B6AF800372460 /* TransferViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferViewModelTest.swift; sourceTree = "<group>"; };
 		92E0801C295B6D9A00372460 /* TransferViewModelErrorTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferViewModelErrorTest.swift; sourceTree = "<group>"; };
+		92E0801E295B91E200372460 /* externalBankAccountListBankModel_Response.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = externalBankAccountListBankModel_Response.json; sourceTree = "<group>"; };
+		92E08020295B922200372460 /* externalBankAccountListBankModel_Response_Incomplete.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = externalBankAccountListBankModel_Response_Incomplete.json; sourceTree = "<group>"; };
 		92E2133428F86F3300F420F2 /* LoginLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginLoader.swift; sourceTree = "<group>"; };
 		92F222D82914359C00137B11 /* PollingTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PollingTest.swift; sourceTree = "<group>"; };
 		92F38C4E2924223E00008F58 /* BankAccountsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankAccountsViewController.swift; sourceTree = "<group>"; };
@@ -734,6 +738,8 @@
 				92827DD029479D7800231772 /* createExternalBankAccountBankModelResponse.json */,
 				92827DD429479E4200231772 /* createExternalBankAccountBankModelResponse_Incomplete.json */,
 				0B2899FF28946B52001B3360 /* JSONMockHelper.swift */,
+				92E0801E295B91E200372460 /* externalBankAccountListBankModel_Response.json */,
+				92E08020295B922200372460 /* externalBankAccountListBankModel_Response_Incomplete.json */,
 			);
 			path = JSON;
 			sourceTree = "<group>";
@@ -1610,9 +1616,11 @@
 				92B68198291C0D8500FD6E99 /* createCustomerBankModel.json in Resources */,
 				92827DD529479E4200231772 /* createExternalBankAccountBankModelResponse_Incomplete.json in Resources */,
 				0B96601E285AF03700584692 /* TestAssets.xcassets in Resources */,
+				92E08021295B922200372460 /* externalBankAccountListBankModel_Response_Incomplete.json in Resources */,
 				92827DCB2947979C00231772 /* fetchBankResponse.json in Resources */,
 				92F5EC7328E24150009DC3F4 /* listTradesResponse.json in Resources */,
 				92827DD129479D7800231772 /* createExternalBankAccountBankModelResponse.json in Resources */,
+				92E0801F295B91E200372460 /* externalBankAccountListBankModel_Response.json in Resources */,
 				92B681A4291C141A00FD6E99 /* listIdentityVerifications_Incomplete.json in Resources */,
 				92827DBC2943A32300231772 /* createWorkflow_Incomplete.json in Resources */,
 				92B681A2291C119300FD6E99 /* createCustomerBankModel_Incomplete.json in Resources */,

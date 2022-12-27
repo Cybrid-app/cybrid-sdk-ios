@@ -1,0 +1,22 @@
+{
+  "total": 1,
+  "page": 0,
+  "per_page": 10,
+  "objects": [
+    {
+      "guid": "stringstringstringstringstringst",
+      "name": "string",
+      "asset": "string",
+      "account_kind": "plaid",
+      "environment": "sandbox",
+      "bank_guid": "stringstringstringstringstringst",
+      "customer_guid": "stringstringstringstringstringst",
+      "created_at": "2022-12-27T20:50:09.428Z",
+      "plaid_institution_id": "string",
+      "plaid_account_mask": "string",
+      "plaid_account_name": "string",
+      "state": "storing",
+      "failure_code": "string"
+    }
+  ]
+}
