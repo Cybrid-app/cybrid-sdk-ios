@@ -20,13 +20,13 @@ ignore:
   - "**/*Modal.swift"
   - "**/*ViewController.swift"
   - "**/*ViewController+Extensions.swift"
-  - "CybridSDK/View Layer/Trade/TradeViewModel.swift"
-  - "CybridSDK/View Layer/Crypto Price List/CryptoPriceModel.swift"
-  - "CybridSDK/View Layer/AccountsComponent/Entity/AccountAssetPriceModel.swift"
+  - "CybridSDK/Components/Trade/TradeViewModel.swift"
+  - "CybridSDK/Components/Crypto Price List/CryptoPriceModel.swift"
+  - "CybridSDK/Components/AccountsComponent/Entity/AccountAssetPriceModel.swift"
   - "CybridSDK/Framework Extensions/Model/*"
   - "CybridSDK/Framework Extensions/UIView/*"
-  - "CybridSDK/View Layer/Reusable Views/*"
-  - "CybridSDK/View Layer/Reusable Views/**/*"
+  - "CybridSDK/Utilities/ReusableViews/*"
+  - "CybridSDK/Utilities/ReusableViews/**/*"
   - "CybridSDK/Utilities/Formatters/BigDecimalValidator"
 
 parsers:

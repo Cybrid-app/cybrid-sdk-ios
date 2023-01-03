@@ -207,6 +207,12 @@
 		92C92C8D29123C5F00B81719 /* IdentityVerificationBankModel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C92C8C29123C5F00B81719 /* IdentityVerificationBankModel+Extensions.swift */; };
 		92CB9E3F2914C15000357873 /* CustomersAPIMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CB9E3E2914C15000357873 /* CustomersAPIMock.swift */; };
 		92CB9E412914CAD500357873 /* IdentityVerificationViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CB9E402914CAD500357873 /* IdentityVerificationViewModelTest.swift */; };
+		92E08015295AD31800372460 /* TransferViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E08014295AD31800372460 /* TransferViewController.swift */; };
+		92E08018295AD43200372460 /* TransferViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E08017295AD43200372460 /* TransferViewModel.swift */; };
+		92E0801B295B6AF800372460 /* TransferViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E0801A295B6AF800372460 /* TransferViewModelTest.swift */; };
+		92E0801D295B6D9A00372460 /* TransferViewModelErrorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E0801C295B6D9A00372460 /* TransferViewModelErrorTest.swift */; };
+		92E0801F295B91E200372460 /* externalBankAccountListBankModel_Response.json in Resources */ = {isa = PBXBuildFile; fileRef = 92E0801E295B91E200372460 /* externalBankAccountListBankModel_Response.json */; };
+		92E08021295B922200372460 /* externalBankAccountListBankModel_Response_Incomplete.json in Resources */ = {isa = PBXBuildFile; fileRef = 92E08020295B922200372460 /* externalBankAccountListBankModel_Response_Incomplete.json */; };
 		92E2133528F86F3300F420F2 /* LoginLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E2133428F86F3300F420F2 /* LoginLoader.swift */; };
 		92F222D92914359C00137B11 /* PollingTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F222D82914359C00137B11 /* PollingTest.swift */; };
 		92F38C4F2924223E00008F58 /* BankAccountsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F38C4E2924223E00008F58 /* BankAccountsViewController.swift */; };
@@ -463,6 +469,12 @@
 		92C92C8C29123C5F00B81719 /* IdentityVerificationBankModel+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IdentityVerificationBankModel+Extensions.swift"; sourceTree = "<group>"; };
 		92CB9E3E2914C15000357873 /* CustomersAPIMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomersAPIMock.swift; sourceTree = "<group>"; };
 		92CB9E402914CAD500357873 /* IdentityVerificationViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentityVerificationViewModelTest.swift; sourceTree = "<group>"; };
+		92E08014295AD31800372460 /* TransferViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferViewController.swift; sourceTree = "<group>"; };
+		92E08017295AD43200372460 /* TransferViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferViewModel.swift; sourceTree = "<group>"; };
+		92E0801A295B6AF800372460 /* TransferViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferViewModelTest.swift; sourceTree = "<group>"; };
+		92E0801C295B6D9A00372460 /* TransferViewModelErrorTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferViewModelErrorTest.swift; sourceTree = "<group>"; };
+		92E0801E295B91E200372460 /* externalBankAccountListBankModel_Response.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = externalBankAccountListBankModel_Response.json; sourceTree = "<group>"; };
+		92E08020295B922200372460 /* externalBankAccountListBankModel_Response_Incomplete.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = externalBankAccountListBankModel_Response_Incomplete.json; sourceTree = "<group>"; };
 		92E2133428F86F3300F420F2 /* LoginLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginLoader.swift; sourceTree = "<group>"; };
 		92F222D82914359C00137B11 /* PollingTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PollingTest.swift; sourceTree = "<group>"; };
 		92F38C4E2924223E00008F58 /* BankAccountsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankAccountsViewController.swift; sourceTree = "<group>"; };
@@ -628,7 +640,7 @@
 				0B00E0202878D20F00707F26 /* Service Layer */,
 				0B965FF828599E3A00584692 /* Supporting Files */,
 				0B965FFC28599FE700584692 /* Utilities */,
-				0BD660FF286B765900F4DA6B /* View Layer */,
+				0BD660FF286B765900F4DA6B /* Components */,
 			);
 			path = CybridSDK;
 			sourceTree = "<group>";
@@ -726,6 +738,8 @@
 				92827DD029479D7800231772 /* createExternalBankAccountBankModelResponse.json */,
 				92827DD429479E4200231772 /* createExternalBankAccountBankModelResponse_Incomplete.json */,
 				0B2899FF28946B52001B3360 /* JSONMockHelper.swift */,
+				92E0801E295B91E200372460 /* externalBankAccountListBankModel_Response.json */,
+				92E08020295B922200372460 /* externalBankAccountListBankModel_Response_Incomplete.json */,
 			);
 			path = JSON;
 			sourceTree = "<group>";
@@ -866,6 +880,8 @@
 		0B965FFC28599FE700584692 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				0BD66126286D7CCB00F4DA6B /* Localization */,
+				0BD6610E286B76AA00F4DA6B /* ReusableViews */,
 				0B2899EE288F51A8001B3360 /* Events */,
 				0BD661382872BBE900F4DA6B /* Formatters */,
 				0BD661352872BAF100F4DA6B /* Resources */,
@@ -1033,18 +1049,17 @@
 			path = Concurrency;
 			sourceTree = "<group>";
 		};
-		0BD660FF286B765900F4DA6B /* View Layer */ = {
+		0BD660FF286B765900F4DA6B /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				92E08013295AD2F300372460 /* TransferComponent */,
 				92F38C4D2924220B00008F58 /* BankAcoountsComponent */,
 				92A90A882911935400CA0E08 /* IdentityComponent */,
 				0BD66100286B766B00F4DA6B /* Crypto Price List */,
 				0B557B902899F4CB00632A6D /* Trade */,
 				927233D228D243A30080AAC4 /* AccountsComponent */,
-				0BD66126286D7CCB00F4DA6B /* Localization */,
-				0BD6610E286B76AA00F4DA6B /* Reusable Views */,
 			);
-			path = "View Layer";
+			path = Components;
 			sourceTree = "<group>";
 		};
 		0BD66100286B766B00F4DA6B /* Crypto Price List */ = {
@@ -1067,7 +1082,7 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
-		0BD6610E286B76AA00F4DA6B /* Reusable Views */ = {
+		0BD6610E286B76AA00F4DA6B /* ReusableViews */ = {
 			isa = PBXGroup;
 			children = (
 				0BBD0CD228AC0B54001DBC5F /* Modal */,
@@ -1076,7 +1091,7 @@
 				0B557B972899F56900632A6D /* CYBButton.swift */,
 				927233D028D243830080AAC4 /* UIModal.swift */,
 			);
-			path = "Reusable Views";
+			path = ReusableViews;
 			sourceTree = "<group>";
 		};
 		0BD6610F286B76CF00F4DA6B /* URLImageView */ = {
@@ -1090,6 +1105,7 @@
 		0BD66120286C208600F4DA6B /* ViewModel Tests */ = {
 			isa = PBXGroup;
 			children = (
+				92E08019295B6ACC00372460 /* TransferViewModel */,
 				92827DBF2943A59D00231772 /* BankAccountsViewModel */,
 				92B68194291B1C3900FD6E99 /* IdentityVerification */,
 				0BD66122286C20BC00F4DA6B /* CryptoPriceViewModelTests.swift */,
@@ -1356,6 +1372,32 @@
 			path = Customer;
 			sourceTree = "<group>";
 		};
+		92E08013295AD2F300372460 /* TransferComponent */ = {
+			isa = PBXGroup;
+			children = (
+				92E08016295AD41900372460 /* View */,
+				92E08014295AD31800372460 /* TransferViewController.swift */,
+			);
+			path = TransferComponent;
+			sourceTree = "<group>";
+		};
+		92E08016295AD41900372460 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				92E08017295AD43200372460 /* TransferViewModel.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		92E08019295B6ACC00372460 /* TransferViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				92E0801A295B6AF800372460 /* TransferViewModelTest.swift */,
+				92E0801C295B6D9A00372460 /* TransferViewModelErrorTest.swift */,
+			);
+			path = TransferViewModel;
+			sourceTree = "<group>";
+		};
 		92E2133328F86F1300F420F2 /* Modal */ = {
 			isa = PBXGroup;
 			children = (
@@ -1574,9 +1616,11 @@
 				92B68198291C0D8500FD6E99 /* createCustomerBankModel.json in Resources */,
 				92827DD529479E4200231772 /* createExternalBankAccountBankModelResponse_Incomplete.json in Resources */,
 				0B96601E285AF03700584692 /* TestAssets.xcassets in Resources */,
+				92E08021295B922200372460 /* externalBankAccountListBankModel_Response_Incomplete.json in Resources */,
 				92827DCB2947979C00231772 /* fetchBankResponse.json in Resources */,
 				92F5EC7328E24150009DC3F4 /* listTradesResponse.json in Resources */,
 				92827DD129479D7800231772 /* createExternalBankAccountBankModelResponse.json in Resources */,
+				92E0801F295B91E200372460 /* externalBankAccountListBankModel_Response.json in Resources */,
 				92B681A4291C141A00FD6E99 /* listIdentityVerifications_Incomplete.json in Resources */,
 				92827DBC2943A32300231772 /* createWorkflow_Incomplete.json in Resources */,
 				92B681A2291C119300FD6E99 /* createCustomerBankModel_Incomplete.json in Resources */,
@@ -1762,6 +1806,7 @@
 				927233CD28D2419B0080AAC4 /* QuoteBankModel+Extensions.swift in Sources */,
 				92635470294CEC0400660E0B /* BankAccountsViewController+Extensions.swift in Sources */,
 				92663D0F293FD60800842E30 /* WorkflowRepository.swift in Sources */,
+				92E08015295AD31800372460 /* TransferViewController.swift in Sources */,
 				927233BE28D131BE0080AAC4 /* AccountBankModel+Extensions.swift in Sources */,
 				92663D09293FACB900842E30 /* IdentityVerificationWithDetailsBankModel+Extensions.swift in Sources */,
 				92663D0D293FCC9500842E30 /* BankAccountsViewModel.swift in Sources */,
@@ -1789,6 +1834,7 @@
 				927233E128D2447F0080AAC4 /* AccountsViewModel.swift in Sources */,
 				92A90A8F2911B91C00CA0E08 /* IdentityVerificationRepository.swift in Sources */,
 				92C92C8D29123C5F00B81719 /* IdentityVerificationBankModel+Extensions.swift in Sources */,
+				92E08018295AD43200372460 /* TransferViewModel.swift in Sources */,
 				0B2B2A8528629031002F0EC1 /* UIColor+Extensions.swift in Sources */,
 				0B2B2A872862906E002F0EC1 /* UILabel+Extensions.swift in Sources */,
 				0B2B2A6D28621D5C002F0EC1 /* ColorTheme.swift in Sources */,
@@ -1885,6 +1931,7 @@
 				0B00E03C287F7BA500707F26 /* CybridSessionTests.swift in Sources */,
 				0B00E03E287F803800707F26 /* MockAPIManager.swift in Sources */,
 				0B966025285C2CEF00584692 /* MockDispatchQueue.swift in Sources */,
+				92E0801B295B6AF800372460 /* TransferViewModelTest.swift in Sources */,
 				0B2899F2288F53FE001B3360 /* NotificationCenterMock.swift in Sources */,
 				0BBD0CE828B6C730001DBC5F /* TradeMock.swift in Sources */,
 				0B2899ED288F4BE5001B3360 /* TaskSchedulerMock.swift in Sources */,
@@ -1900,6 +1947,7 @@
 				0B966019285AE8D300584692 /* MockURLSession.swift in Sources */,
 				92827DC62943E7A100231772 /* BankAPIMock.swift in Sources */,
 				0BD6611B286C197B00F4DA6B /* UIViewConstraintsTests.swift in Sources */,
+				92E0801D295B6D9A00372460 /* TransferViewModelErrorTest.swift in Sources */,
 				0B00E0572886F25F00707F26 /* PricesAPIMock.swift in Sources */,
 				0B966013285AA2EB00584692 /* URLImageViewTests.swift in Sources */,
 				0B50F35928A5885400DDB01E /* CybridEventTests.swift in Sources */,

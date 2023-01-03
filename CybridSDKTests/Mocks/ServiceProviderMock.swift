@@ -61,6 +61,8 @@ final class ServiceProviderMock: AssetsRepoProvider,
     }
 
     func didCreateQuoteSuccessfully(_ dataModel: QuoteBankModel) {
+
+        Cybrid.session.setupSession(authToken: "TEST-TOKEN")
         QuotesAPIMock.didCreateQuoteSuccessfully(mockQuote: dataModel)
     }
 
@@ -69,6 +71,8 @@ final class ServiceProviderMock: AssetsRepoProvider,
     }
 
     func didCreateTradeSuccessfully(_ dataModel: TradeBankModel) {
+
+        Cybrid.session.setupSession(authToken: "TEST-TOKEN")
         TradesAPIMock.didCreateTradeSuccessfully(mockTrade: dataModel)
     }
 
@@ -260,5 +264,17 @@ final class ServiceProviderMock: AssetsRepoProvider,
 
         Cybrid.session.setupSession(authToken: "TEST-TOKEN")
         ExternalBankAccountAPIMock.fetchExternalBankAccountError()
+    }
+    
+    func fetchExternalBankAccountsSuccessfully() {
+
+        Cybrid.session.setupSession(authToken: "TEST-TOKEN")
+        ExternalBankAccountAPIMock.fetchExternalBankAccountsSuccessfully()
+    }
+
+    func fetchExternalBankAccountsFailed() {
+
+        Cybrid.session.setupSession(authToken: "TEST-TOKEN")
+        ExternalBankAccountAPIMock.fetchExternalBankAccountsError()
     }
 }

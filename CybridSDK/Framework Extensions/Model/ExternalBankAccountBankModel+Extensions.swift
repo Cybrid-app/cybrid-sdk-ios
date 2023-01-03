@@ -46,4 +46,19 @@ extension ExternalBankAccountBankModel {
             failureCode: json[codingKeys.failureCode.rawValue] as? String ?? ""
         )
     }
+
+    static func fromArray(objects: [[String: Any]]) -> [ExternalBankAccountBankModel] {
+
+        var models = [ExternalBankAccountBankModel]()
+        for object in objects {
+            let objectData = try? JSONSerialization.data(withJSONObject: object)
+            var objectCopy = object
+            // -- Creating the AccountBankModel
+            let model = ExternalBankAccountBankModel(json: objectCopy)
+            if let model = model {
+                models.append(model)
+            }
+        }
+        return models
+    }
 }
