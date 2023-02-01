@@ -188,9 +188,7 @@ extension IdentityVerificationViewController {
         )
 
         // -- Buttons
-        let cancel = CYBButton(title: localizer.localize(with: UIStrings.requiredCancelText)) {
-            self.dismiss(animated: true)
-        }
+        let cancel = createButtonForDismiss(title: localizer.localize(with: UIStrings.requiredCancelText))
         let begin = CYBButton(title: localizer.localize(with: UIStrings.requiredBeginText)) {
             self.openPersona()
         }
@@ -234,9 +232,7 @@ extension IdentityVerificationViewController {
         )
 
         // -- Buttons
-        let done = CYBButton(title: localizer.localize(with: UIStrings.verifiedDone)) {
-            self.dismiss(animated: true)
-        }
+        let done = createButtonForDismiss(title: localizer.localize(with: UIStrings.verifiedDone))
 
         self.componentContent.addSubview(done)
         done.constraint(attribute: .leading,
@@ -270,9 +266,7 @@ extension IdentityVerificationViewController {
         )
 
         // -- Buttons
-        let done = CYBButton(title: localizer.localize(with: UIStrings.errorDone)) {
-            self.dismiss(animated: true)
-        }
+        let done = createButtonForDismiss(title: localizer.localize(with: UIStrings.errorDone))
 
         self.componentContent.addSubview(done)
         done.constraint(attribute: .leading,
@@ -306,9 +300,7 @@ extension IdentityVerificationViewController {
         )
 
         // -- Buttons
-        let done = CYBButton(title: localizer.localize(with: UIStrings.reviewingDone)) {
-            self.dismiss(animated: true)
-        }
+        let done = createButtonForDismiss(title: localizer.localize(with: UIStrings.reviewingDone))
 
         self.componentContent.addSubview(done)
         done.constraint(attribute: .leading,
@@ -382,6 +374,24 @@ extension IdentityVerificationViewController {
                         constant: 25)
     }
 
+    private func createButtonForDismiss(title: String) -> UIButton {
+
+        let button = UIButton(frame: .zero)
+        button.layer.cornerRadius = UIConstants.radiusLg
+        button.setContentHuggingPriority(.required, for: .horizontal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.constraint(attribute: .height,
+                   relatedBy: .greaterThanOrEqual,
+                   toItem: nil,
+                   attribute: .notAnAttribute,
+                   constant: UIConstants.minimumTargetSize)
+        button.backgroundColor = theme.colorTheme.accentColor
+        button.setTitleColor(UIColor.white, for: .normal)
+        button.setTitle(title, for: .normal)
+        button.addTarget(self, action: #selector(dimissController), for: .touchUpInside)
+        return button
+    }
+
     private func openPersona() {
 
         if let record = self.identityVerificationViewModel.latestIdentityVerification?.identityVerificationDetails {
@@ -390,6 +400,10 @@ extension IdentityVerificationViewController {
                 Inquiry(config: config, delegate: self).start(from: self)
             }
         }
+    }
+
+    @objc func dimissController() {
+        self.navigationController?.popViewController(animated: true)
     }
 }
 
