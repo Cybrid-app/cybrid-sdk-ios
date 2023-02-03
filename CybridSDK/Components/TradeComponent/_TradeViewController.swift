@@ -8,14 +8,14 @@
 import CybridApiBankSwift
 import UIKit
 
-public final class TradeViewController: UIViewController {
+public final class _TradeViewController: UIViewController {
   // MARK: Private properties
 
   private let theme: Theme
   private let localizer: Localizer
   private let logger: CybridLogger?
-  private var viewModel: TradeViewModel
-  private let segments = [TradeType.buy, TradeType.sell]
+  private var viewModel: _TradeViewModel
+  private let segments = [_TradeType.buy, _TradeType.sell]
 
   // MARK: UI Properties
   private lazy var segmentControl: UISegmentedControl = {
@@ -143,14 +143,14 @@ public final class TradeViewController: UIViewController {
     self.theme = Cybrid.theme
     self.localizer = CybridLocalizer()
     self.logger = Cybrid.logger
-    self.viewModel = TradeViewModel(selectedCrypto: selectedCrypto,
+    self.viewModel = _TradeViewModel(selectedCrypto: selectedCrypto,
                                     dataProvider: CybridSession.current,
                                     logger: logger)
 
     super.init(nibName: nil, bundle: nil)
   }
 
-  init(viewModel: TradeViewModel) {
+  init(viewModel: _TradeViewModel) {
     self.theme = Cybrid.theme
     self.localizer = CybridLocalizer()
     self.logger = Cybrid.logger
@@ -242,7 +242,7 @@ public final class TradeViewController: UIViewController {
 
 // MARK: - UI Setup
 
-extension TradeViewController {
+extension _TradeViewController {
   func setupViews() {
     view.backgroundColor = theme.colorTheme.primaryBackgroundColor
     setupContentStackView()
@@ -313,7 +313,7 @@ extension TradeViewController {
 
 // MARK: - Data Bindings
 
-extension TradeViewController {
+extension _TradeViewController {
   func bindViewModel() {
     viewModel.amountText.bind { [weak self] newAmountText in
       self?.amountTextField.text = newAmountText
@@ -381,7 +381,7 @@ extension TradeViewController {
     }
   }
 
-  private func updateButton(selectedSegment: TradeType) {
+  private func updateButton(selectedSegment: _TradeType) {
     switch selectedSegment {
     case .buy:
       primaryButton.setTitle(localizer.localize(with: CybridLocalizationKey.trade(.buy(.cta))), for: .normal)
@@ -393,7 +393,7 @@ extension TradeViewController {
 
 // MARK: - Constants
 
-extension TradeViewController {
+extension _TradeViewController {
   enum Constants {
     enum ContentStackView {
       static let insets = UIEdgeInsets(top: UIConstants.spacingXl3, // 24

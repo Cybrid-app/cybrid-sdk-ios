@@ -6,6 +6,9 @@
 
 */
 
+// TradeView Component
+"cybrid.tradeView.loading.title" = "Loading";
+
 // Crypto Price List
 "cybrid.cryptoPriceList.headerSearchPlaceholder" = "Search";
 "cybrid.cryptoPriceList.headerCurrency" = "Currency";
