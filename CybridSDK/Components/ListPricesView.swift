@@ -67,7 +67,7 @@ public class ListPricesView: UITableView {
 
     viewModel.selectedCrypto.bind { [action, viewModel] selectedAsset in
       if let assetVM = selectedAsset {
-        action!()
+        if action != nil { action!() }
         viewModel?.selectedCrypto.value = nil
       }
     }
