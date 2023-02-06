@@ -10,9 +10,9 @@ import UIKit
 
 public final class TradeViewController: UIViewController {
 
-    public enum ViewState { case LOADING, PRICES }
+    public enum ViewState { case LOADING, PRICES, CONTENT }
 
-    //private var identityVerificationViewModel: IdentityVerificationViewModel!
+    internal var tradeViewModel: TradeViewModel!
     internal var theme: Theme!
     internal var localizer: Localizer!
 
@@ -22,10 +22,11 @@ public final class TradeViewController: UIViewController {
     public init() {
 
         super.init(nibName: nil, bundle: nil)
-        // self.identityVerificationViewModel = IdentityVerificationViewModel(
-        //    dataProvider: CybridSession.current,
-        //    UIState: self.currentState,
-        //    logger: Cybrid.logger)
+        self.tradeViewModel = TradeViewModel(
+            dataProvider: CybridSession.current,
+            logger: Cybrid.logger)
+
+        self.currentState = self.tradeViewModel.uiState
         self.theme = Cybrid.theme
         self.localizer = CybridLocalizer()
         self.setupView()
@@ -90,6 +91,9 @@ extension TradeViewController {
 
             case .PRICES:
                 self.tradeView_ListPrices()
+
+            case .CONTENT:
+                self.tradeView_Content()
             }
         }
     }

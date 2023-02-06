@@ -8,27 +8,28 @@
 import CybridApiBankSwift
 import UIKit
 
-protocol CryptoPriceViewProvider: AnyObject {
+protocol ListPricesViewProvider: AnyObject {
 
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath, withData dataModel: CryptoPriceModel) -> UITableViewCell
 }
 
-class CryptoPriceViewModel: NSObject {
+class ListPricesViewModel: NSObject {
 
   typealias DataProvider = PricesRepoProvider & AssetsRepoProvider & QuotesRepoProvider & TradesRepoProvider
 
   // MARK: Observed properties
   internal var cryptoPriceList: [CryptoPriceModel] = []
   internal var filteredCryptoPriceList: Observable<[CryptoPriceModel]> = Observable([])
-  internal var selectedCrypto: Observable<_TradeViewModel?> = Observable(nil)
   internal var taskScheduler: TaskScheduler?
+  internal var selectedAsset: Observable<AssetBankModel?> = Observable(nil)
+  internal var selectPairAsset: Observable<AssetBankModel?> = Observable(nil)
 
   // MARK: Private properties
-  private unowned var cellProvider: CryptoPriceViewProvider
+  private unowned var cellProvider: ListPricesViewProvider
   private var dataProvider: DataProvider
   private var logger: CybridLogger?
 
-  init(cellProvider: CryptoPriceViewProvider,
+  init(cellProvider: ListPricesViewProvider,
        dataProvider: DataProvider,
        logger: CybridLogger?,
        taskScheduler: TaskScheduler? = nil) {
@@ -99,7 +100,7 @@ class CryptoPriceViewModel: NSObject {
 
 // MARK: - CryptoPriceViewModel + UITableViewDelegate + UITableViewDataSource
 
-extension CryptoPriceViewModel: UITableViewDelegate, UITableViewDataSource {
+extension ListPricesViewModel: UITableViewDelegate, UITableViewDataSource {
 
   public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return filteredCryptoPriceList.value.count
@@ -123,15 +124,16 @@ extension CryptoPriceViewModel: UITableViewDelegate, UITableViewDataSource {
   }
 
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+
     let selectedModel = filteredCryptoPriceList.value[indexPath.row]
     guard
       let assetList = dataProvider.assetsCache,
-      let selectedAsset = assetList.first(where: { $0.code == selectedModel.assetCode })
+      let asset = assetList.first(where: { $0.code == selectedModel.assetCode }),
+      let pairAsset = assetList.first(where: { $0.code == selectedModel.counterAssetCode })
     else { return }
-    let viewModel = _TradeViewModel(selectedCrypto: selectedAsset,
-                                   dataProvider: dataProvider,
-                                   logger: logger)
-    selectedCrypto.value = viewModel
+
+    selectedAsset.value = asset
+    selectPairAsset.value = pairAsset
   }
 
   func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
@@ -144,7 +146,8 @@ extension CryptoPriceViewModel: UITableViewDelegate, UITableViewDataSource {
 
 // MARK: - CryptoPriceViewModel + UISearchBarDelegate
 
-extension CryptoPriceViewModel: UISearchTextFieldDelegate {
+extension ListPricesViewModel: UISearchTextFieldDelegate {
+
   func textFieldDidChangeSelection(_ textField: UITextField) {
     filterPriceList(with: textField.text)
   }

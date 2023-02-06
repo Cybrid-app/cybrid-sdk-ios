@@ -10,15 +10,15 @@ import UIKit
 
 public class ListPricesView: UITableView {
 
-  private var viewModel: CryptoPriceViewModel!
-  private var action: (() -> Void)?
+  private var viewModel: ListPricesViewModel!
+  weak var itemDelegate: ListPricesItemDelegate?
   private let theme: Theme
 
   public init(theme: Theme? = nil) {
 
     self.theme = theme ?? Cybrid.theme
     super.init(frame: .zero, style: .plain)
-    self.viewModel = CryptoPriceViewModel(cellProvider: self,
+    self.viewModel = ListPricesViewModel(cellProvider: self,
                                           dataProvider: CybridSession.current,
                                           logger: Cybrid.logger)
     setupView()
@@ -44,10 +44,6 @@ public class ListPricesView: UITableView {
     }
   }
 
-  public func setItemListener(action: @escaping () -> Void) {
-    self.action = action
-  }
-
   private func setupView() {
 
     delegate = viewModel
@@ -65,10 +61,15 @@ public class ListPricesView: UITableView {
       self.reloadData()
     }
 
-    viewModel.selectedCrypto.bind { [action, viewModel] selectedAsset in
-      if let assetVM = selectedAsset {
-        if action != nil { action!() }
-        viewModel?.selectedCrypto.value = nil
+    viewModel.selectedAsset.bind { [itemDelegate, viewModel] selectedAsset in
+      if let asset = selectedAsset {
+        if itemDelegate != nil {
+          itemDelegate?.onSelected(
+            asset: asset,
+            pairAsset: (viewModel?.selectPairAsset.value)!)
+        }
+        viewModel?.selectedAsset.value = nil
+        viewModel?.selectPairAsset.value = nil
       }
     }
     viewModel.fetchPriceList()
@@ -155,7 +156,7 @@ public class ListPricesView: UITableView {
 
 // MARK: - CryptoPriceViewProvider
 
-extension ListPricesView: CryptoPriceViewProvider {
+extension ListPricesView: ListPricesViewProvider {
 
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath, withData dataModel: CryptoPriceModel) -> UITableViewCell {
 

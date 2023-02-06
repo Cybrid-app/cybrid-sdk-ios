@@ -141,8 +141,8 @@ class TradeViewModelTests: XCTestCase {
   }
 
   func testViewModel_segmentControl_localizationKeys() {
-    XCTAssertEqual(TradeType.buy.localizationKey, .trade(.buy(.title)))
-    XCTAssertEqual(TradeType.sell.localizationKey, .trade(.sell(.title)))
+    XCTAssertEqual(_TradeType.buy.localizationKey, .trade(.buy(.title)))
+    XCTAssertEqual(_TradeType.sell.localizationKey, .trade(.sell(.title)))
   }
 
   func testViewModel_pickerSetup() {
@@ -528,7 +528,7 @@ extension TradeViewModelTests {
   func testViewModel_createBuyQuote_withMemoryDeallocation() {
     // Given
     var optionalDataProvider: ServiceProviderMock? = ServiceProviderMock()
-    var viewModel: TradeViewModel? = createViewModel(dataProvider: optionalDataProvider,
+    var viewModel: _TradeViewModel? = createViewModel(dataProvider: optionalDataProvider,
                                                      priceScheduler: pricesFetchScheduler,
                                                      quoteScheduler: quoteFetchScheduler)
 
@@ -727,8 +727,8 @@ extension TradeViewModelTests {
                                       & QuotesRepoProvider
                                       & TradesRepoProvider)? = nil,
                        priceScheduler: TaskScheduler? = nil,
-                       quoteScheduler: TaskScheduler? = nil) -> TradeViewModel {
-    return TradeViewModel(selectedCrypto: selectedCrypto,
+                       quoteScheduler: TaskScheduler? = nil) -> _TradeViewModel {
+    return _TradeViewModel(selectedCrypto: selectedCrypto,
                           dataProvider: dataProvider ?? self.dataProvider,
                           logger: nil,
                           priceScheduler: priceScheduler,

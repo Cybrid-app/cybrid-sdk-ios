@@ -48,10 +48,12 @@ extension TradeViewController {
         spinner.color = UIColor.black
         spinner.startAnimating()
     }
-    
+
     internal func tradeView_ListPrices() {
-        
+
         let listPricesView = ListPricesView()
+        listPricesView.itemDelegate = tradeViewModel
+
         let listPricesViewContainer = UIView()
         self.componentContent.addSubview(listPricesViewContainer)
         listPricesViewContainer.constraint(attribute: .top,
@@ -71,6 +73,19 @@ extension TradeViewController {
                                   toItem: self.componentContent,
                                   attribute: .bottom)
         listPricesView.embed(in: listPricesViewContainer)
+    }
+
+    internal func tradeView_Content() {
+
+        let segmentsLabels = [_TradeType.buy, _TradeType.sell]
+        let segments = UISegmentedControl(items: segmentsLabels.map { localizer.localize(with: $0.localizationKey) })
+        segments.translatesAutoresizingMaskIntoConstraints = false
+        segments.selectedSegmentIndex = 0
+        segments.addTarget(tradeViewModel, action: #selector(TradeViewModel.segmentedControlValueChanged(_:)), for: .valueChanged)
+        segments.asFirstIn(
+            self.componentContent,
+            height: CGFloat(100),
+            margins: UIEdgeInsets())
     }
 }
 
