@@ -9,31 +9,27 @@ import CybridApiBankSwift
 import UIKit
 
 public class ListPricesView: UITableView {
-
+  
   private var viewModel: ListPricesViewModel!
   weak var itemDelegate: ListPricesItemDelegate?
   private let theme: Theme
-
+  
   public init(theme: Theme? = nil) {
-
+    
     self.theme = theme ?? Cybrid.theme
     super.init(frame: .zero, style: .plain)
-    self.viewModel = ListPricesViewModel(cellProvider: self,
-                                          dataProvider: CybridSession.current,
-                                          logger: Cybrid.logger)
-    setupView()
   }
-
+  
   @available(iOS, deprecated: 10, message: "You should never use this init method.")
   required init?(coder: NSCoder) {
-
+    
     assertionFailure("init(coder:) should never be used")
     return nil
   }
-
+  
   /// This method will detect when the Price List View is added or removed from the View Hierarchy.
   override public func didMoveToWindow() {
-
+    
     super.didMoveToWindow()
     if window == nil {
       /// If the ListView is been removed from the View Hierarchy we want to stop receiving live updates
@@ -42,6 +38,11 @@ public class ListPricesView: UITableView {
       /// If the ListView is been added to the View Hierarchy we want to start receiving live updates
       startLiveUpdates()
     }
+  }
+  
+  func setViewModel(listPricesViewModel: ListPricesViewModel) {
+    self.viewModel = listPricesViewModel
+    self.setupView()
   }
 
   private func setupView() {
@@ -61,12 +62,12 @@ public class ListPricesView: UITableView {
       self.reloadData()
     }
 
-    viewModel.selectedAsset.bind { [itemDelegate, viewModel] selectedAsset in
-      if let asset = selectedAsset {
+    viewModel.selectPairAsset.bind { [itemDelegate, viewModel] selectPairAsset in
+      if let asset = selectPairAsset {
         if itemDelegate != nil {
           itemDelegate?.onSelected(
-            asset: asset,
-            pairAsset: (viewModel?.selectPairAsset.value)!)
+            asset: (viewModel?.selectedAsset.value)!,
+            pairAsset: asset)
         }
         viewModel?.selectedAsset.value = nil
         viewModel?.selectPairAsset.value = nil

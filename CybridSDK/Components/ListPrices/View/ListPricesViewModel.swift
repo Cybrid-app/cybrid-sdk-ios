@@ -19,7 +19,6 @@ class ListPricesViewModel: NSObject {
 
   // MARK: Observed properties
   internal var cryptoPriceList: [CryptoPriceModel] = []
-  internal var filteredCryptoPriceList: Observable<[CryptoPriceModel]> = Observable([])
   internal var taskScheduler: TaskScheduler?
   internal var selectedAsset: Observable<AssetBankModel?> = Observable(nil)
   internal var selectPairAsset: Observable<AssetBankModel?> = Observable(nil)
@@ -28,6 +27,10 @@ class ListPricesViewModel: NSObject {
   private unowned var cellProvider: ListPricesViewProvider
   private var dataProvider: DataProvider
   private var logger: CybridLogger?
+
+  // MARK: Public porperties
+  var assets: [AssetBankModel] = []
+  var filteredCryptoPriceList: Observable<[CryptoPriceModel]> = Observable([])
 
   init(cellProvider: ListPricesViewProvider,
        dataProvider: DataProvider,
@@ -53,6 +56,7 @@ class ListPricesViewModel: NSObject {
     dataProvider.fetchAssetsList { [weak self] assetsResult in
       switch assetsResult {
       case .success(let assetsList):
+        self?.assets = assetsList
         self?.logger?.log(.component(.priceList(.dataFetching)))
         self?.dataProvider.fetchPriceList(with: taskScheduler ?? self?.taskScheduler) { pricesResult in
           switch pricesResult {

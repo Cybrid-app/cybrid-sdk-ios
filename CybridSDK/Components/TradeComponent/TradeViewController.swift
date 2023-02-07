@@ -19,6 +19,9 @@ public final class TradeViewController: UIViewController {
     internal var componentContent = UIView()
     internal var currentState: Observable<ViewState> = .init(.LOADING)
 
+    // MARK: Views
+    internal lazy var cryptoPickerView = UIPickerView()
+
     public init() {
 
         super.init(nibName: nil, bundle: nil)
@@ -30,6 +33,8 @@ public final class TradeViewController: UIViewController {
         self.theme = Cybrid.theme
         self.localizer = CybridLocalizer()
         self.setupView()
+        
+        self.tradeViewModel.fetchAccounts()
     }
 
     @available(iOS, deprecated: 10, message: "You should never use this init method.")

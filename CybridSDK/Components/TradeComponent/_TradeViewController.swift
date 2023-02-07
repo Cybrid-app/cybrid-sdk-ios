@@ -18,13 +18,6 @@ public final class _TradeViewController: UIViewController {
   private let segments = [_TradeType.buy, _TradeType.sell]
 
   // MARK: UI Properties
-  private lazy var segmentControl: UISegmentedControl = {
-    let view = UISegmentedControl(items: segments.map { localizer.localize(with: $0.localizationKey) })
-    view.translatesAutoresizingMaskIntoConstraints = false
-    view.selectedSegmentIndex = 0
-    view.addTarget(viewModel, action: #selector(viewModel.segmentedControlValueChanged(_:)), for: .valueChanged)
-    return view
-  }()
 
   private lazy var containerView: UIView = {
     let view = UIView()
@@ -33,23 +26,11 @@ public final class _TradeViewController: UIViewController {
     return view
   }()
 
-  private lazy var cryptoPickerTextField: CYBTextField = {
-    let textField = CYBTextField(style: .rounded, icon: .urlImage(""), theme: theme)
-    textField.accessibilityIdentifier = "cryptoPickerTextField"
-    textField.placeholder = localizer.localize(with: CybridLocalizationKey.trade(.buy(.selectCurrency)))
-
-    return textField
-  }()
-
-  private lazy var cryptoPickerView = UIPickerView()
-
   private lazy var contentStackView: UIStackView = {
     let spacerView = UIView()
     spacerView.setContentHuggingPriority(.fittingSizeLevel, for: .vertical)
     let stackView = UIStackView(arrangedSubviews: [
-      segmentControl,
       currencyLabel,
-      cryptoPickerTextField,
       amountLabel,
       amountTextField,
       cryptoExchangeStackView,
@@ -60,8 +41,6 @@ public final class _TradeViewController: UIViewController {
     stackView.axis = .vertical
     stackView.spacing = Constants.ContentStackView.itemSpacing
     stackView.distribution = .fill
-    stackView.setCustomSpacing(Constants.SegmentControl.bottomSpacing, after: segmentControl)
-    stackView.setCustomSpacing(Constants.PickerView.bottomSpacing, after: cryptoPickerTextField)
     stackView.setCustomSpacing(Constants.Button.topSpacing, after: cryptoExchangeStackView)
 
     return stackView
@@ -169,7 +148,7 @@ public final class _TradeViewController: UIViewController {
     super.viewDidLoad()
 
     setupViews()
-    bindViewModel()
+    //bindViewModel()
   }
 
   override public func viewDidDisappear(_ animated: Bool) {
@@ -259,9 +238,9 @@ extension _TradeViewController {
   }
 
   private func setupPickerView() {
-    cryptoPickerView.delegate = viewModel
-    cryptoPickerView.dataSource = viewModel
-    cryptoPickerTextField.inputView = cryptoPickerView
+    //cryptoPickerView.delegate = viewModel
+    //cryptoPickerView.dataSource = viewModel
+    //cryptoPickerTextField.inputView = cryptoPickerView
   }
 
   private func setupFlagIcon() {
@@ -314,7 +293,7 @@ extension _TradeViewController {
 // MARK: - Data Bindings
 
 extension _TradeViewController {
-  func bindViewModel() {
+  /*func bindViewModel() {
     viewModel.amountText.bind { [weak self] newAmountText in
       self?.amountTextField.text = newAmountText
     }
@@ -363,7 +342,7 @@ extension _TradeViewController {
       self.primaryButton.customState = .normal
     }
     viewModel.fetchPriceList()
-  }
+  }*/
 
   func updateConfirmationModalData() {
     viewModel.createQuote()

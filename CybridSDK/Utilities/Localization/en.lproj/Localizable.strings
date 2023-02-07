@@ -8,6 +8,8 @@
 
 // TradeView Component
 "cybrid.tradeView.loading.title" = "Loading";
+"cybrid.tradeView.content.subtitle.from" = "From:";
+"cybrid.tradeView.content.subtitle.to" = "To:";
 
 // Crypto Price List
 "cybrid.cryptoPriceList.headerSearchPlaceholder" = "Search";
