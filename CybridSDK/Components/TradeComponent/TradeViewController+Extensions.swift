@@ -105,6 +105,7 @@ extension TradeViewController {
         fromTextField.addBelow(toItem: fromLabel, height: 45, margins: UIMargins.fiatSelectorMargin)
         self.cryptoPickerView.delegate = tradeViewModel
         self.cryptoPickerView.dataSource = tradeViewModel
+        self.cryptoPickerView.accessibilityIdentifier = "fiatPicker"
         fromTextField.inputView = self.cryptoPickerView
 
         // -- From:

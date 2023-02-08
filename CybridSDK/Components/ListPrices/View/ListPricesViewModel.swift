@@ -30,6 +30,7 @@ class ListPricesViewModel: NSObject {
 
   // MARK: Public porperties
   var assets: [AssetBankModel] = []
+  var prices: Observable<[SymbolPriceBankModel]> = Observable([])
   var filteredCryptoPriceList: Observable<[CryptoPriceModel]> = Observable([])
 
   init(cellProvider: ListPricesViewProvider,
@@ -65,6 +66,7 @@ class ListPricesViewModel: NSObject {
             guard let modelList = self?.buildModelList(symbols: pricesList, assets: assetsList) else {
               return
             }
+            self?.prices.value = pricesList
             self?.cryptoPriceList = modelList
             self?.filteredCryptoPriceList.value = modelList
           case .failure:

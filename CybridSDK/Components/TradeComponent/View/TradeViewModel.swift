@@ -22,7 +22,11 @@ class TradeViewModel: NSObject, ListPricesItemDelegate {
     // MARK: Public properties
     var uiState: Observable<TradeViewController.ViewState> = .init(.PRICES)
     var listPricesViewModel: ListPricesViewModel?
-    var accounts: [AccountBankModel] = []
+
+    var accountsOriginal: [AccountBankModel] = []
+    var accounts: [AccountAssetPriceModel] = []
+    var fiatAccounts: [AccountAssetPriceModel] = []
+    var tradingAccounts: [AccountAssetPriceModel] = []
 
     // MARK: View Values
     internal var segmentSelection: Observable<_TradeType> = Observable(.buy)
@@ -35,22 +39,34 @@ class TradeViewModel: NSObject, ListPricesItemDelegate {
         self.logger = logger
     }
 
+    func initBindingValues() {}
+
     // MARK: ViewModel Methods
     func onSelected(asset: AssetBankModel, pairAsset: AssetBankModel) {
 
         currentAsset.value = asset
         currentPairAsset.value = pairAsset
-        uiState.value = .CONTENT
+        fetchAccounts()
     }
-    
+
     internal func fetchAccounts() {
 
+        uiState.value = .LOADING
         dataProvider.fetchAccounts(customerGuid: Cybrid.customerGUID) { [weak self] accountsResult in
 
             switch accountsResult {
             case .success(let accountsList):
+
                 self?.logger?.log(.component(.accounts(.accountsDataFetching)))
-                self?.accounts = accountsList.objects
+                let accounts = accountsList.objects
+                self?.accountsOriginal = accounts
+
+                let accountsFormatted = self?.buildModelList(accounts: accounts) ?? []
+                self?.accounts = accountsFormatted
+                self?.fiatAccounts = accountsFormatted.filter { $0.accountType == .fiat }
+                self?.tradingAccounts = accountsFormatted.filter { $0.accountType == .trading }
+                self?.uiState.value = .CONTENT
+
             case .failure:
                 self?.logger?.log(.component(.accounts(.accountsDataError)))
             }
@@ -64,6 +80,27 @@ class TradeViewModel: NSObject, ListPricesItemDelegate {
       guard let selectedIndex = _TradeType(rawValue: sender.selectedSegmentIndex) else { return }
       self.segmentSelection.value = selectedIndex
     }
+
+    internal func buildModelList(accounts: [AccountBankModel]) -> [AccountAssetPriceModel]? {
+
+        return accounts.compactMap { account in
+            guard
+                let assets = listPricesViewModel?.assets,
+                let prices = listPricesViewModel?.prices.value,
+                let asset = assets.first(where: { $0.code == account.asset }),
+                let assetCode = account.asset,
+                let counterAsset = assets.first(where: { $0.code == currentPairAsset.value?.code }),
+                let price = prices.first(where: { $0.symbol == "\(assetCode)-\(currentPairAsset.value?.code ?? "USD")" })
+            else {
+                return nil
+            }
+            return AccountAssetPriceModel(
+                account: account,
+                asset: asset,
+                counterAsset: counterAsset,
+                price: price)
+        }
+    }
 }
 
 extension TradeViewModel: UIPickerViewDelegate, UIPickerViewDataSource {
@@ -73,12 +110,21 @@ extension TradeViewModel: UIPickerViewDelegate, UIPickerViewDataSource {
     }
 
     public func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        
-        return listPricesViewModel?.assets.count ?? 0
+
+        if pickerView.accessibilityIdentifier == "fiatPicker" {
+            return fiatAccounts.count
+        } else {
+            return tradingAccounts.count
+        }
     }
 
     public func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return listPricesViewModel?.assets[row].name ?? ""
+
+        if pickerView.accessibilityIdentifier == "fiatPicker" {
+            return fiatAccounts[row].assetName
+        } else {
+            return tradingAccounts[row].assetName
+        }
     }
 
     public func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {

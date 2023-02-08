@@ -33,8 +33,6 @@ public final class TradeViewController: UIViewController {
         self.theme = Cybrid.theme
         self.localizer = CybridLocalizer()
         self.setupView()
-        
-        self.tradeViewModel.fetchAccounts()
     }
 
     @available(iOS, deprecated: 10, message: "You should never use this init method.")
@@ -92,7 +90,7 @@ extension TradeViewController {
             switch state {
 
             case .LOADING:
-                self.tradeView_ListPrices()
+                self.tradeView_Loading()
 
             case .PRICES:
                 self.tradeView_ListPrices()

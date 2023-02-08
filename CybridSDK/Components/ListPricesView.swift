@@ -9,24 +9,24 @@ import CybridApiBankSwift
 import UIKit
 
 public class ListPricesView: UITableView {
-  
+
   private var viewModel: ListPricesViewModel!
   weak var itemDelegate: ListPricesItemDelegate?
   private let theme: Theme
-  
+
   public init(theme: Theme? = nil) {
-    
+
     self.theme = theme ?? Cybrid.theme
     super.init(frame: .zero, style: .plain)
   }
-  
+
   @available(iOS, deprecated: 10, message: "You should never use this init method.")
   required init?(coder: NSCoder) {
     
     assertionFailure("init(coder:) should never be used")
     return nil
   }
-  
+
   /// This method will detect when the Price List View is added or removed from the View Hierarchy.
   override public func didMoveToWindow() {
     
@@ -39,7 +39,7 @@ public class ListPricesView: UITableView {
       startLiveUpdates()
     }
   }
-  
+
   func setViewModel(listPricesViewModel: ListPricesViewModel) {
     self.viewModel = listPricesViewModel
     self.setupView()
