@@ -20,7 +20,8 @@ public final class TradeViewController: UIViewController {
     internal var currentState: Observable<ViewState> = .init(.LOADING)
 
     // MARK: Views
-    internal lazy var cryptoPickerView = UIPickerView()
+    internal lazy var fiatPickerView = UIPickerView()
+    internal lazy var tradingPickerView = UIPickerView()
 
     public init() {
 

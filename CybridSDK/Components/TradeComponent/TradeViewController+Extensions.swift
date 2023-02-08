@@ -103,14 +103,24 @@ extension TradeViewController {
         fromTextField.accessibilityIdentifier = "fiatPickerTextField"
         fromTextField.placeholder = localizer.localize(with: CybridLocalizationKey.trade(.buy(.selectCurrency)))
         fromTextField.addBelow(toItem: fromLabel, height: 45, margins: UIMargins.fiatSelectorMargin)
-        self.cryptoPickerView.delegate = tradeViewModel
-        self.cryptoPickerView.dataSource = tradeViewModel
-        self.cryptoPickerView.accessibilityIdentifier = "fiatPicker"
-        fromTextField.inputView = self.cryptoPickerView
+        self.fiatPickerView.delegate = tradeViewModel
+        self.fiatPickerView.dataSource = tradeViewModel
+        self.fiatPickerView.accessibilityIdentifier = "fiatPicker"
+        fromTextField.inputView = self.fiatPickerView
 
-        // -- From:
+        // -- To:
         let toLabel = createSubTitleLabel(UIStrings.contentTo)
         toLabel.addBelow(toItem: fromTextField, height: 16, margins: UIMargins.subTitletoMargin)
+
+        // -- To UITextField
+        let toTextField = CYBTextField(style: .rounded, icon: .urlImage(""), theme: theme)
+        toTextField.accessibilityIdentifier = "tradingPickerTextField"
+        toTextField.placeholder = localizer.localize(with: CybridLocalizationKey.trade(.buy(.selectCurrency)))
+        toTextField.addBelow(toItem: toLabel, height: 45, margins: UIMargins.cryptoSelectorMargin)
+        self.tradingPickerView.delegate = tradeViewModel
+        self.tradingPickerView.dataSource = tradeViewModel
+        self.tradingPickerView.accessibilityIdentifier = "tradingPicker"
+        toTextField.inputView = self.tradingPickerView
     }
 }
 
@@ -158,6 +168,7 @@ extension TradeViewController {
         static let subTitleFromMargin = UIEdgeInsets(top: 30, left: 13, bottom: 0, right: 13)
         static let fiatSelectorMargin = UIEdgeInsets(top: 13, left: 13, bottom: 0, right: 13)
         static let subTitletoMargin = UIEdgeInsets(top: 24, left: 13, bottom: 0, right: 13)
+        static let cryptoSelectorMargin = UIEdgeInsets(top: 13, left: 13, bottom: 0, right: 13)
     }
 
     enum UIStrings {

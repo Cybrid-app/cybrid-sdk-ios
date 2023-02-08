@@ -24,9 +24,9 @@ class TradeViewModel: NSObject, ListPricesItemDelegate {
     var listPricesViewModel: ListPricesViewModel?
 
     var accountsOriginal: [AccountBankModel] = []
-    var accounts: [AccountAssetPriceModel] = []
-    var fiatAccounts: [AccountAssetPriceModel] = []
-    var tradingAccounts: [AccountAssetPriceModel] = []
+    var accounts: [AccountAssetUIModel] = []
+    var fiatAccounts: [AccountAssetUIModel] = []
+    var tradingAccounts: [AccountAssetUIModel] = []
 
     // MARK: View Values
     internal var segmentSelection: Observable<_TradeType> = Observable(.buy)
@@ -61,10 +61,10 @@ class TradeViewModel: NSObject, ListPricesItemDelegate {
                 let accounts = accountsList.objects
                 self?.accountsOriginal = accounts
 
-                let accountsFormatted = self?.buildModelList(accounts: accounts) ?? []
+                let accountsFormatted = self?.buildUIModelList(accounts: accounts) ?? []
                 self?.accounts = accountsFormatted
-                self?.fiatAccounts = accountsFormatted.filter { $0.accountType == .fiat }
-                self?.tradingAccounts = accountsFormatted.filter { $0.accountType == .trading }
+                self?.fiatAccounts = accountsFormatted.filter { $0.account.type == .fiat }
+                self?.tradingAccounts = accountsFormatted.filter { $0.account.type == .trading }
                 self?.uiState.value = .CONTENT
 
             case .failure:
@@ -81,24 +81,18 @@ class TradeViewModel: NSObject, ListPricesItemDelegate {
       self.segmentSelection.value = selectedIndex
     }
 
-    internal func buildModelList(accounts: [AccountBankModel]) -> [AccountAssetPriceModel]? {
+    internal func buildUIModelList(accounts: [AccountBankModel]) -> [AccountAssetUIModel]? {
 
         return accounts.compactMap { account in
             guard
                 let assets = listPricesViewModel?.assets,
-                let prices = listPricesViewModel?.prices.value,
-                let asset = assets.first(where: { $0.code == account.asset }),
-                let assetCode = account.asset,
-                let counterAsset = assets.first(where: { $0.code == currentPairAsset.value?.code }),
-                let price = prices.first(where: { $0.symbol == "\(assetCode)-\(currentPairAsset.value?.code ?? "USD")" })
+                let asset = assets.first(where: { $0.code == account.asset })
             else {
                 return nil
             }
-            return AccountAssetPriceModel(
+            return AccountAssetUIModel(
                 account: account,
-                asset: asset,
-                counterAsset: counterAsset,
-                price: price)
+                asset: asset)
         }
     }
 }
@@ -120,11 +114,16 @@ extension TradeViewModel: UIPickerViewDelegate, UIPickerViewDataSource {
 
     public func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
 
+        let account: AccountAssetUIModel!
         if pickerView.accessibilityIdentifier == "fiatPicker" {
-            return fiatAccounts[row].assetName
+           account = fiatAccounts[row]
         } else {
-            return tradingAccounts[row].assetName
+            account = tradingAccounts[row]
         }
+
+        let name = account.asset.name
+        let asset = account.account.asset ?? ""
+        return "\(name)(\(asset)) - \(account.balanceFormatted )"
     }
 
     public func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {

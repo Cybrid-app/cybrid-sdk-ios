@@ -35,18 +35,15 @@ extension String {
             let integer = String(parts[0])
             let decimal = String(parts[1])
             let result = integer + "."
-            var decimalResult = ""
+            var charactersToRemove = 0
             for character in decimal.reversed() {
-                if character != "0" {
-                    decimalResult = String(character) + decimalResult
+                if character == "0" {
+                    charactersToRemove += 1
                 } else {
-                    if !decimalResult.isEmpty {
-                        return result + decimalResult
-                    }
+                    break
                 }
             }
-            return result + decimalResult
-
+            return result + decimal.dropLast(charactersToRemove)
         } else {
             return self.stringValue
         }
