@@ -225,7 +225,6 @@ extension _TradeViewController {
   func setupViews() {
     view.backgroundColor = theme.colorTheme.primaryBackgroundColor
     setupContentStackView()
-    setupPickerView()
     setupFlagIcon()
     setupSwitchButton()
     setupButton()
@@ -235,12 +234,6 @@ extension _TradeViewController {
     view.addSubview(contentStackView)
     contentStackView.translatesAutoresizingMaskIntoConstraints = false
     contentStackView.constraintEdges(to: view, insets: Constants.ContentStackView.insets)
-  }
-
-  private func setupPickerView() {
-    //cryptoPickerView.delegate = viewModel
-    //cryptoPickerView.dataSource = viewModel
-    //cryptoPickerTextField.inputView = cryptoPickerView
   }
 
   private func setupFlagIcon() {
@@ -352,7 +345,7 @@ extension _TradeViewController {
     if shouldInputCrypto, let cryptoSelection = viewModel.cryptoCurrency.value {
       amountTextField.updateIcon(.text(cryptoSelection.asset.code))
       flagIcon.isHidden = false
-      flagIcon.setURL(Cybrid.getCryptoIconURLString(with: viewModel.fiatCurrency.asset.code))
+      flagIcon.setURL(Cybrid.getAssetURL(with: viewModel.fiatCurrency.asset.code))
     } else {
       let fiatSelection = viewModel.fiatCurrency
       amountTextField.updateIcon(.text(fiatSelection.asset.code))

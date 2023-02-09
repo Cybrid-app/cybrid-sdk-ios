@@ -22,7 +22,7 @@ struct CryptoPriceModel: Equatable {
     guard let buyPrice = symbolPrice.buyPrice else { return nil }
     self.assetCode = asset.code
     self.assetName = asset.name
-    self.imageURL = Cybrid.getCryptoIconURLString(with: asset.code)
+    self.imageURL = Cybrid.getAssetURL(with: asset.code)
     self.counterAssetCode = counterAsset.code
     let bigDecimal = BigDecimal(buyPrice, precision: counterAsset.decimals) ?? BigDecimal(0)
       self.formattedPrice = CybridCurrencyFormatter.formatPrice(bigDecimal, with: counterAsset.symbol)

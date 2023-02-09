@@ -123,11 +123,15 @@ extension TradeViewModel: UIPickerViewDelegate, UIPickerViewDataSource {
 
         let name = account.asset.name
         let asset = account.account.asset ?? ""
-        return "\(name)(\(asset)) - \(account.balanceFormatted )"
+        return "\(name)(\(asset)) - \(account.balanceFormatted)"
     }
 
     public func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        //cryptoCurrency.value = assetList.value[row]
-        //updateConversion()
+
+        if pickerView.accessibilityIdentifier == "fiatPicker" {
+            currentPairAsset.value = fiatAccounts[row].asset
+        } else {
+            currentAsset.value = tradingAccounts[row].asset
+        }
     }
 }

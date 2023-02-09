@@ -99,28 +99,30 @@ extension TradeViewController {
         fromLabel.addBelow(toItem: segments, height: 16, margins: UIMargins.subTitleFromMargin)
 
         // -- From UITextField
-        let fromTextField = CYBTextField(style: .rounded, icon: .urlImage(""), theme: theme)
-        fromTextField.accessibilityIdentifier = "fiatPickerTextField"
-        fromTextField.placeholder = localizer.localize(with: CybridLocalizationKey.trade(.buy(.selectCurrency)))
+        self.fromTextField = self.createFromField()
+        self.setFromFieldData()
         fromTextField.addBelow(toItem: fromLabel, height: 45, margins: UIMargins.fiatSelectorMargin)
-        self.fiatPickerView.delegate = tradeViewModel
-        self.fiatPickerView.dataSource = tradeViewModel
-        self.fiatPickerView.accessibilityIdentifier = "fiatPicker"
-        fromTextField.inputView = self.fiatPickerView
 
         // -- To:
         let toLabel = createSubTitleLabel(UIStrings.contentTo)
         toLabel.addBelow(toItem: fromTextField, height: 16, margins: UIMargins.subTitletoMargin)
 
         // -- To UITextField
-        let toTextField = CYBTextField(style: .rounded, icon: .urlImage(""), theme: theme)
-        toTextField.accessibilityIdentifier = "tradingPickerTextField"
-        toTextField.placeholder = localizer.localize(with: CybridLocalizationKey.trade(.buy(.selectCurrency)))
+        self.toTextField = self.createToField()
+        self.setToFieldData()
         toTextField.addBelow(toItem: toLabel, height: 45, margins: UIMargins.cryptoSelectorMargin)
-        self.tradingPickerView.delegate = tradeViewModel
-        self.tradingPickerView.dataSource = tradeViewModel
-        self.tradingPickerView.accessibilityIdentifier = "tradingPicker"
-        toTextField.inputView = self.tradingPickerView
+
+        // -- Amount
+        let amount = createSubTitleLabel(UIStrings.contentAmount)
+        amount.addBelow(toItem: toTextField, height: 16, margins: UIMargins.contentAmountMargin)
+
+        // -- Amount UITextField
+        amountTextField = self.createAmountField()
+        self.setAmountField()
+        amountTextField.addBelow(toItem: amount, height: 44, margins: UIMargins.contentAmountFieldMargin)
+
+        // -- View Binds
+        self.setViewBinds()
     }
 }
 
@@ -136,6 +138,102 @@ extension TradeViewController {
         view.textColor = UIValues.subTitleColor
         view.setLocalizedText(key: key, localizer: localizer)
         return view
+    }
+
+    func createFromField() -> CYBTextField {
+
+        let fromTextField = CYBTextField(style: .rounded, icon: .urlImage(""), theme: theme)
+        fromTextField.accessibilityIdentifier = "fiatPickerTextField"
+        fromTextField.tintColor = UIColor.clear
+        self.fiatPickerView.delegate = tradeViewModel
+        self.fiatPickerView.dataSource = tradeViewModel
+        self.fiatPickerView.accessibilityIdentifier = "fiatPicker"
+        if self.tradeViewModel.fiatAccounts.count > 1 {
+            fromTextField.inputView = self.fiatPickerView
+        }
+        return fromTextField
+    }
+
+    func setFromFieldData() {
+
+        let pairAsset = self.tradeViewModel.currentPairAsset.value
+        let pairAssetAccount = self.tradeViewModel.fiatAccounts.first(where: {
+            $0.asset.code == pairAsset?.code
+        })
+        let pairAssetAccountURL = pairAssetAccount?.assetURL ?? ""
+        let name = pairAssetAccount?.asset.name ?? ""
+        let asset = pairAssetAccount?.account.asset ?? ""
+        let balance = pairAssetAccount?.balanceFormatted ?? ""
+        let pairAssetAccountText = "\(name)(\(asset)) - \(balance)"
+
+        self.fromTextField.updateIcon(.urlImage(pairAssetAccountURL))
+        self.fromTextField.text = pairAssetAccountText
+    }
+
+    func createToField() -> CYBTextField {
+
+        let toTextField = CYBTextField(style: .rounded, icon: .urlImage(""), theme: theme)
+        toTextField.accessibilityIdentifier = "tradingPickerTextField"
+        toTextField.tintColor = UIColor.clear
+        self.tradingPickerView.delegate = tradeViewModel
+        self.tradingPickerView.dataSource = tradeViewModel
+        self.tradingPickerView.accessibilityIdentifier = "tradingPicker"
+        toTextField.inputView = self.tradingPickerView
+        return toTextField
+    }
+
+    func setToFieldData() {
+
+        let asset = self.tradeViewModel.currentAsset.value
+        let assetAccount = self.tradeViewModel.tradingAccounts.first(where: {
+            $0.asset.code == asset?.code
+        })
+        let assetAccountURL = assetAccount?.assetURL ?? ""
+        let name = assetAccount?.asset.name ?? ""
+        let code = assetAccount?.account.asset ?? ""
+        let balance = assetAccount?.balanceFormatted ?? ""
+        let assetAccountText = "\(name)(\(code)) - \(balance)"
+
+        self.toTextField.updateIcon(.urlImage(assetAccountURL))
+        self.toTextField.text = assetAccountText
+    }
+
+    func createAmountField() -> CYBTextField {
+
+        let textField = CYBTextField(style: .plain, icon: .text(""), theme: theme)
+        textField.placeholder = "0.0"
+        textField.keyboardType = .decimalPad
+        //textField.delegate = viewModel
+        //textField.rightView = switchButton
+        textField.rightViewMode = .always
+        textField.accessibilityIdentifier = "amountTextField"
+        return textField
+    }
+
+    func setAmountField() {
+
+        let asset = self.tradeViewModel.currentAsset.value
+        self.amountTextField.updateIcon(.text(asset?.code ?? ""))
+    }
+
+    // -- Binds
+    func setViewBinds() {
+
+        self.tradeViewModel.currentPairAsset.bind { [self] _ in
+
+            self.fromTextField.resignFirstResponder()
+            self.toTextField.resignFirstResponder()
+            self.setFromFieldData()
+            self.setToFieldData()
+        }
+
+        self.tradeViewModel.currentAsset.bind { [self] _ in
+
+            self.fromTextField.resignFirstResponder()
+            self.toTextField.resignFirstResponder()
+            self.setFromFieldData()
+            self.setToFieldData()
+        }
     }
 }
 
@@ -169,6 +267,8 @@ extension TradeViewController {
         static let fiatSelectorMargin = UIEdgeInsets(top: 13, left: 13, bottom: 0, right: 13)
         static let subTitletoMargin = UIEdgeInsets(top: 24, left: 13, bottom: 0, right: 13)
         static let cryptoSelectorMargin = UIEdgeInsets(top: 13, left: 13, bottom: 0, right: 13)
+        static let contentAmountMargin = UIEdgeInsets(top: 34, left: 13, bottom: 0, right: 13)
+        static let contentAmountFieldMargin = UIEdgeInsets(top: 16, left: 13, bottom: 0, right: 113)
     }
 
     enum UIStrings {
@@ -176,5 +276,6 @@ extension TradeViewController {
         static let loadingText = "cybrid.tradeView.loading.title"
         static let contentFrom = "cybrid.tradeView.content.subtitle.from"
         static let contentTo = "cybrid.tradeView.content.subtitle.to"
+        static let contentAmount = "cybrid.tradeView.content.subtitle.amount"
     }
 }

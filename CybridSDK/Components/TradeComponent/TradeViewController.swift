@@ -20,6 +20,9 @@ public final class TradeViewController: UIViewController {
     internal var currentState: Observable<ViewState> = .init(.LOADING)
 
     // MARK: Views
+    internal var fromTextField: CYBTextField!
+    internal var toTextField: CYBTextField!
+    internal var amountTextField: CYBTextField!
     internal lazy var fiatPickerView = UIPickerView()
     internal lazy var tradingPickerView = UIPickerView()
 

@@ -10,6 +10,7 @@
 "cybrid.tradeView.loading.title" = "Loading";
 "cybrid.tradeView.content.subtitle.from" = "From:";
 "cybrid.tradeView.content.subtitle.to" = "To:";
+"cybrid.tradeView.content.subtitle.amount" = "Amount";
 
 // Crypto Price List
 "cybrid.cryptoPriceList.headerSearchPlaceholder" = "Search";

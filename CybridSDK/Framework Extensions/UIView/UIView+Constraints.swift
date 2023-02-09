@@ -226,4 +226,17 @@ public extension UIView {
                         attribute: .notAnAttribute,
                         constant: height)
     }
+
+    func addThreeInLine(toItem: UIView, width: CGFloat, height: CGFloat, margins: UIEdgeInsets,
+                        second: UIView, secondWidth: CGFloat, secondHeight: CGFloat, secondMargins: UIEdgeInsets,
+                        third: UIView, thirdWidth:CGFloat, thirdHeight: CGFloat, thirdMargins: UIEdgeInsets) {
+        
+        if toItem.superview != nil {
+            
+            toItem.superview?.addSubview(self)
+            toItem.superview?.addSubview(second)
+            toItem.superview?.addSubview(third)
+            
+        }
+    }
 }

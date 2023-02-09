@@ -14,6 +14,7 @@ struct AccountAssetUIModel: Equatable {
     let account: AccountBankModel
     let asset: AssetBankModel
     let balanceFormatted: String
+    let assetURL: String
 
     init(account: AccountBankModel, asset: AssetBankModel) {
 
@@ -23,15 +24,14 @@ struct AccountAssetUIModel: Equatable {
         let balanceToUse = account.type == .fiat ? account.platformAvailable : account.platformBalance
 
         let empty = BigDecimal(0)
-        let balanceValueSBD = BigDecimal(balanceToUse ?? "0", precision: asset.decimals)
+        let balanceValue = BigDecimal(balanceToUse ?? "0", precision: asset.decimals)
         var balanceValueFormatted: String = ""
         if account.type == .fiat {
-            balanceValueFormatted = CybridCurrencyFormatter.formatPrice(balanceValueSBD ?? empty, with: asset.symbol)
+            balanceValueFormatted = CybridCurrencyFormatter.formatPrice(balanceValue ?? empty, with: asset.symbol)
         } else {
-
-            //balanceValueFormatted = String(AssetPipe.transform(value: balanceValueSBD ?? empty, asset: asset, unit: "trade").value)
-            balanceValueFormatted = CybridCurrencyFormatter.formatInputNumber(balanceValueSBD ?? empty).removeTrailingZeros()
+            balanceValueFormatted = CybridCurrencyFormatter.formatInputNumber(balanceValue ?? empty).removeTrailingZeros()
         }
         self.balanceFormatted = balanceValueFormatted
+        self.assetURL = Cybrid.getAssetURL(with: asset.code)
     }
 }

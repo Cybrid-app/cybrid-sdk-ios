@@ -410,7 +410,7 @@ extension _TradeViewModel {
 
     init(asset: AssetBankModel) {
       self.asset = asset
-      self.imageURL = Cybrid.getCryptoIconURLString(with: asset.code)
+      self.imageURL = Cybrid.getAssetURL(with: asset.code)
     }
   }
 }
