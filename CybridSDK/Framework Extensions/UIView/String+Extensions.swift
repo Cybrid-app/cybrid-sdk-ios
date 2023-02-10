@@ -43,7 +43,9 @@ extension String {
                     break
                 }
             }
-            return result + decimal.dropLast(charactersToRemove)
+            var decimals = decimal.dropLast(charactersToRemove)
+            if decimals.isEmpty { decimals = "0" }
+            return result + decimals
         } else {
             return self.stringValue
         }

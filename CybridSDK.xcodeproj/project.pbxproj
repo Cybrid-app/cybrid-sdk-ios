@@ -216,6 +216,7 @@
 		92E2133528F86F3300F420F2 /* LoginLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E2133428F86F3300F420F2 /* LoginLoader.swift */; };
 		92F12051299435140086EE18 /* AccountAssetUIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F12050299435140086EE18 /* AccountAssetUIModel.swift */; };
 		92F1205B2996B4D60086EE18 /* CryptoPriceModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F1205A2996B4D60086EE18 /* CryptoPriceModelTest.swift */; };
+		92F1205E2996BC080086EE18 /* AccountAssetUIModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F1205D2996BC080086EE18 /* AccountAssetUIModelTest.swift */; };
 		92F222D92914359C00137B11 /* PollingTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F222D82914359C00137B11 /* PollingTest.swift */; };
 		92F38C4F2924223E00008F58 /* BankAccountsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F38C4E2924223E00008F58 /* BankAccountsViewController.swift */; };
 		92F5EC7128E206CE009DC3F4 /* accountResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 92F5EC7028E206CE009DC3F4 /* accountResponse.json */; };
@@ -484,6 +485,7 @@
 		92E2133428F86F3300F420F2 /* LoginLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginLoader.swift; sourceTree = "<group>"; };
 		92F12050299435140086EE18 /* AccountAssetUIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountAssetUIModel.swift; sourceTree = "<group>"; };
 		92F1205A2996B4D60086EE18 /* CryptoPriceModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoPriceModelTest.swift; sourceTree = "<group>"; };
+		92F1205D2996BC080086EE18 /* AccountAssetUIModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountAssetUIModelTest.swift; sourceTree = "<group>"; };
 		92F222D82914359C00137B11 /* PollingTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PollingTest.swift; sourceTree = "<group>"; };
 		92F38C4E2924223E00008F58 /* BankAccountsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankAccountsViewController.swift; sourceTree = "<group>"; };
 		92F5EC7028E206CE009DC3F4 /* accountResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = accountResponse.json; sourceTree = "<group>"; };
@@ -1436,17 +1438,18 @@
 			isa = PBXGroup;
 			children = (
 				92F120582996B4B90086EE18 /* ListPrices */,
-				92F120562996A89F0086EE18 /* TradeComponent */,
+				92F120562996A89F0086EE18 /* Trade */,
 			);
 			path = Components;
 			sourceTree = "<group>";
 		};
-		92F120562996A89F0086EE18 /* TradeComponent */ = {
+		92F120562996A89F0086EE18 /* Trade */ = {
 			isa = PBXGroup;
 			children = (
+				92F1205C2996BBEC0086EE18 /* Entity */,
 				92F120572996A8AB0086EE18 /* View */,
 			);
-			path = TradeComponent;
+			path = Trade;
 			sourceTree = "<group>";
 		};
 		92F120572996A8AB0086EE18 /* View */ = {
@@ -1468,6 +1471,14 @@
 			isa = PBXGroup;
 			children = (
 				92F1205A2996B4D60086EE18 /* CryptoPriceModelTest.swift */,
+			);
+			path = Entity;
+			sourceTree = "<group>";
+		};
+		92F1205C2996BBEC0086EE18 /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+				92F1205D2996BC080086EE18 /* AccountAssetUIModelTest.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -2052,6 +2063,7 @@
 				92827DC62943E7A100231772 /* BankAPIMock.swift in Sources */,
 				0BD6611B286C197B00F4DA6B /* UIViewConstraintsTests.swift in Sources */,
 				92E0801D295B6D9A00372460 /* TransferViewModelErrorTest.swift in Sources */,
+				92F1205E2996BC080086EE18 /* AccountAssetUIModelTest.swift in Sources */,
 				0B00E0572886F25F00707F26 /* PricesAPIMock.swift in Sources */,
 				0B966013285AA2EB00584692 /* URLImageViewTests.swift in Sources */,
 				0B50F35928A5885400DDB01E /* CybridEventTests.swift in Sources */,
