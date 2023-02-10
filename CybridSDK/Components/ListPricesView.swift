@@ -22,14 +22,14 @@ public class ListPricesView: UITableView {
 
   @available(iOS, deprecated: 10, message: "You should never use this init method.")
   required init?(coder: NSCoder) {
-    
+
     assertionFailure("init(coder:) should never be used")
     return nil
   }
 
   /// This method will detect when the Price List View is added or removed from the View Hierarchy.
   override public func didMoveToWindow() {
-    
+
     super.didMoveToWindow()
     if window == nil {
       /// If the ListView is been removed from the View Hierarchy we want to stop receiving live updates

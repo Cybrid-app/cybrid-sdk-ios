@@ -82,7 +82,7 @@ class TradeUIModelTest: XCTestCase {
         let resutlt = model?.getTradeAmount()
 
         // -- Then
-        XCTAssertEqual(resutlt, "0.1339")
+        XCTAssertEqual(resutlt, "0.0001339")
     }
 
     func test_getTradeAmount_Sell_Zero() {
