@@ -117,9 +117,11 @@ class IdentityVerificationViewModelTest: XCTestCase {
         // -- When
         viewModel.getIdentityVerificationStatus(identityWrapper: nil)
         dataProvider.didFetchListIdentityVerificationSuccessfully()
+        dataProvider.didCreateIdentityVerificationSuccessfully()
+        dataProvider.didFetchIdentityVerificationSuccessfully()
 
         // -- Then
-        XCTAssertNil(viewModel.identityJob)
+        XCTAssertNotNil(viewModel.identityJob)
     }
 
     func test_getIdentityVerificationStatus_State_Expired() {
