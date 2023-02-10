@@ -301,25 +301,6 @@ final class _TradeViewModel: NSObject {
   }
 }
 
-extension _TradeViewModel: UIPickerViewDelegate, UIPickerViewDataSource {
-  public func numberOfComponents(in pickerView: UIPickerView) -> Int {
-    return 1
-  }
-
-  public func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-    return assetList.value.count
-  }
-
-  public func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-    return assetList.value[row].asset.name
-  }
-
-  public func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-    cryptoCurrency.value = assetList.value[row]
-    updateConversion()
-  }
-}
-
 extension _TradeViewModel: UITextFieldDelegate {
   public func textFieldDidChangeSelection(_ textField: UITextField) {
     guard self.amountText.value != textField.text else { return }

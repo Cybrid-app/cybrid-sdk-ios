@@ -18,6 +18,7 @@ class TradeViewModel: NSObject, ListPricesItemDelegate {
     internal var customerGuig = Cybrid.customerGUID
     internal var currentAsset: Observable<AssetBankModel?> = .init(nil)
     internal var currentPairAsset: Observable<AssetBankModel?> = .init(nil)
+    internal var currentAssetToTrade: Observable<AccountAssetUIModel?> = .init(nil)
 
     // MARK: Public properties
     var uiState: Observable<TradeViewController.ViewState> = .init(.PRICES)
@@ -27,6 +28,8 @@ class TradeViewModel: NSObject, ListPricesItemDelegate {
     var accounts: [AccountAssetUIModel] = []
     var fiatAccounts: [AccountAssetUIModel] = []
     var tradingAccounts: [AccountAssetUIModel] = []
+
+    var assetSwitchTopToBottom: Observable<Bool> = .init(true)
 
     // MARK: View Values
     internal var segmentSelection: Observable<_TradeType> = Observable(.buy)
@@ -65,6 +68,9 @@ class TradeViewModel: NSObject, ListPricesItemDelegate {
                 self?.accounts = accountsFormatted
                 self?.fiatAccounts = accountsFormatted.filter { $0.account.type == .fiat }
                 self?.tradingAccounts = accountsFormatted.filter { $0.account.type == .trading }
+                self?.currentAssetToTrade.value = self?.tradingAccounts.first(where: {
+                    $0.asset.code == self?.currentAsset.value?.code
+                })
                 self?.uiState.value = .CONTENT
 
             case .failure:
@@ -93,6 +99,24 @@ class TradeViewModel: NSObject, ListPricesItemDelegate {
             return AccountAssetUIModel(
                 account: account,
                 asset: asset)
+        }
+    }
+
+    @objc
+    internal func switchAction(_ sender: UIButton) {
+        self.switchActionHandler()
+    }
+
+    internal func switchActionHandler() {
+
+        if self.currentAssetToTrade.value?.account.type == .fiat {
+            self.currentAssetToTrade.value = self.tradingAccounts.first(where: {
+                $0.asset.code == self.currentAsset.value?.code
+            })
+        } else {
+            self.currentAssetToTrade.value = self.fiatAccounts.first(where: {
+                $0.asset.code == self.currentPairAsset.value?.code
+            })
         }
     }
 }
@@ -132,6 +156,14 @@ extension TradeViewModel: UIPickerViewDelegate, UIPickerViewDataSource {
             currentPairAsset.value = fiatAccounts[row].asset
         } else {
             currentAsset.value = tradingAccounts[row].asset
+            currentAssetToTrade.value = self.tradingAccounts.first(where: {
+                $0.asset.code == self.currentAsset.value?.code
+            })
         }
     }
+}
+
+extension TradeViewModel: UITextFieldDelegate {
+
+    func textFieldDidChangeSelection(_ textField: UITextField) {}
 }

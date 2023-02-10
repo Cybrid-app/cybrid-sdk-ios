@@ -117,9 +117,35 @@ extension TradeViewController {
         amount.addBelow(toItem: toTextField, height: 16, margins: UIMargins.contentAmountMargin)
 
         // -- Amount UITextField
-        amountTextField = self.createAmountField()
-        self.setAmountField()
+        let swithButton = self.createSwitchButton()
+        amountTextField = self.createAmountField(switchButton: swithButton)
+        self.setAmountFieldData()
         amountTextField.addBelow(toItem: amount, height: 44, margins: UIMargins.contentAmountFieldMargin)
+
+        // -- Flag, Amount calculated and MAX button
+        self.amountPriceLabel = createSubTitleLabel()
+        let maxButton = self.createMaxButton()
+        maxButton.isHidden = true
+        self.flagIcon.addThreeInLine(toItem: self.amountTextField,
+                                     width: 28,
+                                     height: 24,
+                                     margins: UIMargins.contentFlagMargin,
+                                     second: self.amountPriceLabel,
+                                     secondHeight: 24,
+                                     secondMargins: UIMargins.contentPriceLabelMargin,
+                                     third: maxButton,
+                                     thirdWidth: 40,
+                                     thirdHeight: 24,
+                                     thirdMargins: UIMargins.contentMaxButtonMargin)
+        self.setAmountPriceData()
+
+        // -- Action button
+        self.actionButton = CYBButton(
+            title: localizer.localize(with: CybridLocalizationKey.trade(.buy(.cta))),
+            action: { [weak self] in
+                print("")
+            })
+        self.actionButton.addBelow(toItem: self.flagIcon, height: 48, margins: UIMargins.contentActionButton)
 
         // -- View Binds
         self.setViewBinds()
@@ -128,7 +154,7 @@ extension TradeViewController {
 
 extension TradeViewController {
 
-    func createSubTitleLabel(_ key: String) -> UILabel {
+    func createSubTitleLabel(_ key: String? = nil) -> UILabel {
 
         let view = UILabel()
         view.numberOfLines = 0
@@ -136,7 +162,9 @@ extension TradeViewController {
         view.sizeToFit()
         view.font = UIValues.subTitleFont
         view.textColor = UIValues.subTitleColor
-        view.setLocalizedText(key: key, localizer: localizer)
+        if key != nil {
+            view.setLocalizedText(key: key!, localizer: localizer)
+        }
         return view
     }
 
@@ -198,22 +226,59 @@ extension TradeViewController {
         self.toTextField.text = assetAccountText
     }
 
-    func createAmountField() -> CYBTextField {
+    func createAmountField(switchButton: UIButton) -> CYBTextField {
 
         let textField = CYBTextField(style: .plain, icon: .text(""), theme: theme)
         textField.placeholder = "0.0"
         textField.keyboardType = .decimalPad
-        //textField.delegate = viewModel
-        //textField.rightView = switchButton
+        // textField.delegate = viewModel
+        textField.rightView = switchButton
         textField.rightViewMode = .always
         textField.accessibilityIdentifier = "amountTextField"
         return textField
     }
 
-    func setAmountField() {
+    func setAmountFieldData() {
 
-        let asset = self.tradeViewModel.currentAsset.value
-        self.amountTextField.updateIcon(.text(asset?.code ?? ""))
+        let asset = self.tradeViewModel.currentAssetToTrade.value
+        self.amountTextField.updateIcon(.text(asset?.asset.code ?? ""))
+    }
+
+    func createSwitchButton() -> UIButton {
+
+        let image = UIImage(named: "switchIcon", in: Bundle(for: Self.self), with: nil)
+        let switchButton = UIButton(type: .custom)
+        switchButton.setImage(image, for: .normal)
+        switchButton.addTarget(tradeViewModel, action: #selector(tradeViewModel.switchAction), for: .touchUpInside)
+        switchButton.accessibilityIdentifier = "switchButton"
+
+        switchButton.constraint(attribute: .height,
+                                relatedBy: .equal,
+                                toItem: nil,
+                                attribute: .notAnAttribute,
+                                constant: UIValues.switchButtonSize.height)
+        switchButton.constraint(attribute: .width,
+                                relatedBy: .equal,
+                                toItem: nil,
+                                attribute: .notAnAttribute,
+                                constant: UIValues.switchButtonSize.width)
+        return switchButton
+    }
+
+    func createMaxButton() -> UIButton {
+
+        let button = UIButton()
+        button.backgroundColor = UIColor.clear
+        button.setTitleColor(UIValues.contentMaxButton, for: .normal)
+        button.setTitle("MAX", for: .normal)
+        return button
+    }
+
+    func setAmountPriceData() {
+
+        let amount = self.amountTextField.text
+        self.flagIcon.setURL(self.tradeViewModel.currentAssetToTrade.value?.assetURL ?? "")
+        self.amountPriceLabel.text = "Hola mundo USD"
     }
 
     // -- Binds
@@ -225,6 +290,8 @@ extension TradeViewController {
             self.toTextField.resignFirstResponder()
             self.setFromFieldData()
             self.setToFieldData()
+            self.setAmountFieldData()
+            self.setAmountPriceData()
         }
 
         self.tradeViewModel.currentAsset.bind { [self] _ in
@@ -233,6 +300,14 @@ extension TradeViewController {
             self.toTextField.resignFirstResponder()
             self.setFromFieldData()
             self.setToFieldData()
+            self.setAmountFieldData()
+            self.setAmountPriceData()
+        }
+
+        self.tradeViewModel.currentAssetToTrade.bind { [self] _ in
+
+            self.setAmountFieldData()
+            self.setAmountPriceData()
         }
     }
 }
@@ -250,10 +325,12 @@ extension TradeViewController {
         static let loadingSpinnerHeight: CGFloat = 30
         static let loadingSpinnerMargin = UIEdgeInsets(top: 10, left: 10, bottom: 0, right: 10)
         static let componentRequiredButtonsHeight: CGFloat = 50
+        static let switchButtonSize = CGSize(width: 14, height: 18)
 
         // -- Colors
         static let componentTitleColor = UIColor.black
         static let subTitleColor = UIColor(hex: "#757575")
+        static let contentMaxButton = UIColor(hex: "#007AFF")
 
         // -- Fonts
         static let componentTitleFont = UIFont.make(ofSize: 17, weight: .bold)
@@ -262,13 +339,17 @@ extension TradeViewController {
 
     enum UIMargins {
 
-        static let segmentsMargin = UIEdgeInsets(top: 25, left: 13, bottom: 0, right: 13)
+        static let segmentsMargin = UIEdgeInsets(top: 10, left: 13, bottom: 0, right: 13)
         static let subTitleFromMargin = UIEdgeInsets(top: 30, left: 13, bottom: 0, right: 13)
         static let fiatSelectorMargin = UIEdgeInsets(top: 13, left: 13, bottom: 0, right: 13)
         static let subTitletoMargin = UIEdgeInsets(top: 24, left: 13, bottom: 0, right: 13)
         static let cryptoSelectorMargin = UIEdgeInsets(top: 13, left: 13, bottom: 0, right: 13)
         static let contentAmountMargin = UIEdgeInsets(top: 34, left: 13, bottom: 0, right: 13)
-        static let contentAmountFieldMargin = UIEdgeInsets(top: 16, left: 13, bottom: 0, right: 113)
+        static let contentAmountFieldMargin = UIEdgeInsets(top: 16, left: 13, bottom: 0, right: 13)
+        static let contentFlagMargin = UIEdgeInsets(top: 17, left: 13, bottom: 0, right: 0)
+        static let contentPriceLabelMargin = UIEdgeInsets(top: 17, left: 6, bottom: 0, right: 5)
+        static let contentMaxButtonMargin = UIEdgeInsets(top: 17, left: 0, bottom: 0, right: 14)
+        static let contentActionButton = UIEdgeInsets(top: 27, left: 13, bottom: 0, right: 13)
     }
 
     enum UIStrings {

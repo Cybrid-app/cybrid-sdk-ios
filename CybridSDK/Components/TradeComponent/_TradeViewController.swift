@@ -30,9 +30,6 @@ public final class _TradeViewController: UIViewController {
     let spacerView = UIView()
     spacerView.setContentHuggingPriority(.fittingSizeLevel, for: .vertical)
     let stackView = UIStackView(arrangedSubviews: [
-      currencyLabel,
-      amountLabel,
-      amountTextField,
       cryptoExchangeStackView,
       buttonContainer,
       spacerView
@@ -44,40 +41,6 @@ public final class _TradeViewController: UIViewController {
     stackView.setCustomSpacing(Constants.Button.topSpacing, after: cryptoExchangeStackView)
 
     return stackView
-  }()
-
-  private lazy var amountTextField: CYBTextField = {
-    let textField = CYBTextField(style: .plain, icon: .text(""), theme: theme)
-    textField.placeholder = "0.0"
-    textField.keyboardType = .decimalPad
-    textField.delegate = viewModel
-    textField.rightView = switchButton
-    textField.rightViewMode = .always
-    textField.accessibilityIdentifier = "amountTextField"
-
-    return textField
-
-  }()
-
-  private lazy var switchButton: UIButton = {
-    let image = UIImage(named: "switchIcon", in: Bundle(for: Self.self), with: nil)
-    let button = UIButton(type: .custom)
-    button.setImage(image, for: .normal)
-    button.addTarget(viewModel, action: #selector(viewModel.didTapConversionSwitchButton), for: .touchUpInside)
-    button.accessibilityIdentifier = "switchButton"
-    return button
-  }()
-
-  private lazy var currencyLabel: UILabel = {
-    let label = UILabel.makeLabel(.caption, { _ in })
-    label.text = localizer.localize(with: CybridLocalizationKey.trade(.buy(.currency)))
-    return label
-  }()
-
-  private lazy var amountLabel: UILabel = {
-    let label = UILabel.makeLabel(.caption, { _ in })
-    label.text = localizer.localize(with: CybridLocalizationKey.trade(.buy(.amount)))
-    return label
   }()
 
   private lazy var cryptoExchangeStackView: UIStackView = {
@@ -226,7 +189,6 @@ extension _TradeViewController {
     view.backgroundColor = theme.colorTheme.primaryBackgroundColor
     setupContentStackView()
     setupFlagIcon()
-    setupSwitchButton()
     setupButton()
   }
 
@@ -252,19 +214,6 @@ extension _TradeViewController {
                                        toItem: nil,
                                        attribute: .notAnAttribute,
                                        constant: Constants.FlagIcon.size.height)
-  }
-
-  private func setupSwitchButton() {
-    switchButton.constraint(attribute: .height,
-                            relatedBy: .equal,
-                            toItem: nil,
-                            attribute: .notAnAttribute,
-                            constant: Constants.SwitchButton.size.height)
-    switchButton.constraint(attribute: .width,
-                            relatedBy: .equal,
-                            toItem: nil,
-                            attribute: .notAnAttribute,
-                            constant: Constants.SwitchButton.size.width)
   }
 
   private func setupButton() {
@@ -343,12 +292,10 @@ extension _TradeViewController {
 
   private func updateIcons(shouldInputCrypto: Bool) {
     if shouldInputCrypto, let cryptoSelection = viewModel.cryptoCurrency.value {
-      amountTextField.updateIcon(.text(cryptoSelection.asset.code))
       flagIcon.isHidden = false
       flagIcon.setURL(Cybrid.getAssetURL(with: viewModel.fiatCurrency.asset.code))
     } else {
       let fiatSelection = viewModel.fiatCurrency
-      amountTextField.updateIcon(.text(fiatSelection.asset.code))
       flagIcon.isHidden = true
     }
   }
