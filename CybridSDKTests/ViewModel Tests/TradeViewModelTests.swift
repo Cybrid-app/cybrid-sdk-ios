@@ -145,37 +145,6 @@ class TradeViewModelTests: XCTestCase {
     XCTAssertEqual(_TradeType.sell.localizationKey, .trade(.sell(.title)))
   }
 
-  /*func testViewModel_pickerSetup() {
-    // Given
-    let viewModel = createViewModel()
-    let pickerView = UIPickerView()
-
-    // When
-    viewModel.fetchPriceList()
-    dataProvider.didFetchAssetsSuccessfully()
-    dataProvider.didFetchPricesSuccessfully()
-
-    // Then
-    XCTAssertEqual(viewModel.numberOfComponents(in: pickerView), 1)
-    XCTAssertEqual(viewModel.pickerView(pickerView, numberOfRowsInComponent: 0), 2)
-    XCTAssertEqual(viewModel.pickerView(pickerView, titleForRow: 0, forComponent: 0), "Bitcoin")
-  }*/
-
-  /*func testViewModel_pickerSelect() {
-    // Given
-    let viewModel = createViewModel()
-    let pickerView = UIPickerView()
-
-    // When
-    viewModel.fetchPriceList()
-    dataProvider.didFetchAssetsSuccessfully()
-    dataProvider.didFetchPricesSuccessfully()
-    viewModel.pickerView(pickerView, didSelectRow: 1, inComponent: 0)
-
-    // Then
-    XCTAssertEqual(viewModel.cryptoCurrency.value?.asset.name, "Ethereum")
-  }*/
-
   func testViewModel_amountInput() {
     // Given
     let viewModel = createViewModel()
