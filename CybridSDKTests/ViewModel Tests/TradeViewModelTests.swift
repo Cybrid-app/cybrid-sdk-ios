@@ -141,39 +141,8 @@ class TradeViewModelTests: XCTestCase {
   }
 
   func testViewModel_segmentControl_localizationKeys() {
-    XCTAssertEqual(TradeType.buy.localizationKey, .trade(.buy(.title)))
-    XCTAssertEqual(TradeType.sell.localizationKey, .trade(.sell(.title)))
-  }
-
-  func testViewModel_pickerSetup() {
-    // Given
-    let viewModel = createViewModel()
-    let pickerView = UIPickerView()
-
-    // When
-    viewModel.fetchPriceList()
-    dataProvider.didFetchAssetsSuccessfully()
-    dataProvider.didFetchPricesSuccessfully()
-
-    // Then
-    XCTAssertEqual(viewModel.numberOfComponents(in: pickerView), 1)
-    XCTAssertEqual(viewModel.pickerView(pickerView, numberOfRowsInComponent: 0), 2)
-    XCTAssertEqual(viewModel.pickerView(pickerView, titleForRow: 0, forComponent: 0), "Bitcoin")
-  }
-
-  func testViewModel_pickerSelect() {
-    // Given
-    let viewModel = createViewModel()
-    let pickerView = UIPickerView()
-
-    // When
-    viewModel.fetchPriceList()
-    dataProvider.didFetchAssetsSuccessfully()
-    dataProvider.didFetchPricesSuccessfully()
-    viewModel.pickerView(pickerView, didSelectRow: 1, inComponent: 0)
-
-    // Then
-    XCTAssertEqual(viewModel.cryptoCurrency.value?.asset.name, "Ethereum")
+    XCTAssertEqual(_TradeType.buy.localizationKey, .trade(.buy(.title)))
+    XCTAssertEqual(_TradeType.sell.localizationKey, .trade(.sell(.title)))
   }
 
   func testViewModel_amountInput() {
@@ -528,7 +497,7 @@ extension TradeViewModelTests {
   func testViewModel_createBuyQuote_withMemoryDeallocation() {
     // Given
     var optionalDataProvider: ServiceProviderMock? = ServiceProviderMock()
-    var viewModel: TradeViewModel? = createViewModel(dataProvider: optionalDataProvider,
+    var viewModel: _TradeViewModel? = createViewModel(dataProvider: optionalDataProvider,
                                                      priceScheduler: pricesFetchScheduler,
                                                      quoteScheduler: quoteFetchScheduler)
 
@@ -727,8 +696,8 @@ extension TradeViewModelTests {
                                       & QuotesRepoProvider
                                       & TradesRepoProvider)? = nil,
                        priceScheduler: TaskScheduler? = nil,
-                       quoteScheduler: TaskScheduler? = nil) -> TradeViewModel {
-    return TradeViewModel(selectedCrypto: selectedCrypto,
+                       quoteScheduler: TaskScheduler? = nil) -> _TradeViewModel {
+    return _TradeViewModel(selectedCrypto: selectedCrypto,
                           dataProvider: dataProvider ?? self.dataProvider,
                           logger: nil,
                           priceScheduler: priceScheduler,

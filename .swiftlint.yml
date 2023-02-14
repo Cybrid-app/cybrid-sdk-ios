@@ -325,8 +325,8 @@ function_body_length:
   error: 150
 
 function_parameter_count:
-  warning: 10
-  error: 11
+  warning: 15
+  error: 20
 
 type_name:
   min_length:

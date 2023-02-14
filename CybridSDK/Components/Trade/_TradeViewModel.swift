@@ -8,7 +8,7 @@
 import BigInt
 import CybridApiBankSwift
 
-enum TradeType: Int {
+enum _TradeType: Int {
   case buy = 0
   case sell = 1
 
@@ -31,7 +31,7 @@ enum TradeType: Int {
   }
 }
 
-final class TradeViewModel: NSObject {
+final class _TradeViewModel: NSObject {
   typealias DataProvider = AssetsRepoProvider & PricesRepoProvider & QuotesRepoProvider & TradesRepoProvider
 
   // MARK: Observed Properties
@@ -40,7 +40,7 @@ final class TradeViewModel: NSObject {
   internal var cryptoCurrency: Observable<CurrencyModel?> // Asset
   internal var ctaButtonEnabled: Observable<Bool> = Observable(false)
   internal var displayAmount: Observable<String?> = Observable(nil)
-  internal var segmentSelection: Observable<TradeType> = Observable(.buy)
+  internal var segmentSelection: Observable<_TradeType> = Observable(.buy)
   internal var shouldInputCrypto: Observable<Bool> = Observable(true)
 
   internal var generatedQuoteModel: Observable<TradeConfirmationModalView.DataModel?> = Observable(nil)
@@ -290,7 +290,7 @@ final class TradeViewModel: NSObject {
 
   @objc
   func segmentedControlValueChanged(_ sender: UISegmentedControl) {
-    guard let selectedIndex = TradeType(rawValue: sender.selectedSegmentIndex) else { return }
+    guard let selectedIndex = _TradeType(rawValue: sender.selectedSegmentIndex) else { return }
     self.segmentSelection.value = selectedIndex
   }
 
@@ -301,26 +301,7 @@ final class TradeViewModel: NSObject {
   }
 }
 
-extension TradeViewModel: UIPickerViewDelegate, UIPickerViewDataSource {
-  public func numberOfComponents(in pickerView: UIPickerView) -> Int {
-    return 1
-  }
-
-  public func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-    return assetList.value.count
-  }
-
-  public func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-    return assetList.value[row].asset.name
-  }
-
-  public func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-    cryptoCurrency.value = assetList.value[row]
-    updateConversion()
-  }
-}
-
-extension TradeViewModel: UITextFieldDelegate {
+extension _TradeViewModel: UITextFieldDelegate {
   public func textFieldDidChangeSelection(_ textField: UITextField) {
     guard self.amountText.value != textField.text else { return }
     let formattedInput = formatInputText(textField.text)
@@ -403,14 +384,14 @@ extension TradeViewModel: UITextFieldDelegate {
   }
 }
 
-extension TradeViewModel {
+extension _TradeViewModel {
   struct CurrencyModel: Equatable {
     let asset: AssetBankModel
     let imageURL: String
 
     init(asset: AssetBankModel) {
       self.asset = asset
-      self.imageURL = Cybrid.getCryptoIconURLString(with: asset.code)
+      self.imageURL = Cybrid.getAssetURL(with: asset.code)
     }
   }
 }

@@ -226,4 +226,93 @@ public extension UIView {
                         attribute: .notAnAttribute,
                         constant: height)
     }
+
+    func addThreeInLine(toItem: UIView,
+                        width: CGFloat,
+                        height: CGFloat,
+                        margins: UIEdgeInsets,
+                        second: UIView,
+                        secondHeight: CGFloat,
+                        secondMargins: UIEdgeInsets,
+                        third: UIView,
+                        thirdWidth: CGFloat,
+                        thirdHeight: CGFloat,
+                        thirdMargins: UIEdgeInsets) {
+
+        if toItem.superview != nil {
+
+            toItem.superview?.addSubview(self)
+            toItem.superview?.addSubview(second)
+            toItem.superview?.addSubview(third)
+
+            // -- First
+            self.translatesAutoresizingMaskIntoConstraints = false
+            self.constraint(attribute: .top,
+                            relatedBy: .equal,
+                            toItem: toItem,
+                            attribute: .bottom,
+                            constant: margins.top)
+            self.constraint(attribute: .leading,
+                            relatedBy: .equal,
+                            toItem: toItem.superview,
+                            attribute: .leading,
+                            constant: margins.left)
+            self.constraint(attribute: .width,
+                            relatedBy: .equal,
+                            toItem: nil,
+                            attribute: .notAnAttribute,
+                            constant: width)
+            self.constraint(attribute: .height,
+                            relatedBy: .equal,
+                            toItem: nil,
+                            attribute: .notAnAttribute,
+                            constant: height)
+
+            // -- Third
+            third.translatesAutoresizingMaskIntoConstraints = false
+            third.constraint(attribute: .top,
+                            relatedBy: .equal,
+                            toItem: toItem,
+                            attribute: .bottom,
+                            constant: thirdMargins.top)
+            third.constraint(attribute: .trailing,
+                            relatedBy: .equal,
+                            toItem: toItem.superview,
+                            attribute: .trailing,
+                            constant: -thirdMargins.right)
+            third.constraint(attribute: .width,
+                            relatedBy: .equal,
+                            toItem: nil,
+                            attribute: .notAnAttribute,
+                            constant: thirdWidth)
+            third.constraint(attribute: .height,
+                            relatedBy: .equal,
+                            toItem: nil,
+                            attribute: .notAnAttribute,
+                            constant: thirdHeight)
+
+            // -- Second
+            second.translatesAutoresizingMaskIntoConstraints = false
+            second.constraint(attribute: .top,
+                            relatedBy: .equal,
+                            toItem: toItem,
+                            attribute: .bottom,
+                            constant: secondMargins.top)
+            second.constraint(attribute: .leading,
+                            relatedBy: .equal,
+                            toItem: self,
+                            attribute: .trailing,
+                            constant: secondMargins.left)
+            second.constraint(attribute: .trailing,
+                            relatedBy: .equal,
+                            toItem: third,
+                            attribute: .leading,
+                              constant: -secondMargins.right)
+            second.constraint(attribute: .height,
+                            relatedBy: .equal,
+                            toItem: nil,
+                            attribute: .notAnAttribute,
+                            constant: secondHeight)
+        }
+    }
 }

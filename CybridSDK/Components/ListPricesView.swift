@@ -8,32 +8,28 @@
 import CybridApiBankSwift
 import UIKit
 
-public class CryptoPriceListView: UITableView {
+public class ListPricesView: UITableView {
 
-  private var viewModel: CryptoPriceViewModel!
-  private weak var navigationController: UINavigationController?
+  private var viewModel: ListPricesViewModel!
+  weak var itemDelegate: ListPricesItemDelegate?
   private let theme: Theme
 
-  public init(navigationController: UINavigationController?, theme: Theme? = nil) {
+  public init(theme: Theme? = nil) {
+
     self.theme = theme ?? Cybrid.theme
-    self.navigationController = navigationController
-
     super.init(frame: .zero, style: .plain)
-
-    self.viewModel = CryptoPriceViewModel(cellProvider: self,
-                                          dataProvider: CybridSession.current,
-                                          logger: Cybrid.logger)
-    setupView()
   }
 
   @available(iOS, deprecated: 10, message: "You should never use this init method.")
   required init?(coder: NSCoder) {
+
     assertionFailure("init(coder:) should never be used")
     return nil
   }
 
   /// This method will detect when the Price List View is added or removed from the View Hierarchy.
   override public func didMoveToWindow() {
+
     super.didMoveToWindow()
     if window == nil {
       /// If the ListView is been removed from the View Hierarchy we want to stop receiving live updates
@@ -44,7 +40,13 @@ public class CryptoPriceListView: UITableView {
     }
   }
 
+  func setViewModel(listPricesViewModel: ListPricesViewModel) {
+    self.viewModel = listPricesViewModel
+    self.setupView()
+  }
+
   private func setupView() {
+
     delegate = viewModel
     dataSource = viewModel
     register(CryptoPriceTableViewCell.self, forCellReuseIdentifier: CryptoPriceTableViewCell.reuseIdentifier)
@@ -55,14 +57,20 @@ public class CryptoPriceListView: UITableView {
   }
 
   private func startLiveUpdates() {
+
     viewModel.filteredCryptoPriceList.bind { _ in
       self.reloadData()
     }
-    viewModel.selectedCrypto.bind { [navigationController, viewModel] selectedAsset in
-      if let assetVM = selectedAsset {
-        let viewController = TradeViewController(viewModel: assetVM)
-        navigationController?.pushViewController(viewController, animated: true)
-        viewModel?.selectedCrypto.value = nil
+
+    viewModel.selectPairAsset.bind { [itemDelegate, viewModel] selectPairAsset in
+      if let asset = selectPairAsset {
+        if itemDelegate != nil {
+          itemDelegate?.onSelected(
+            asset: (viewModel?.selectedAsset.value)!,
+            pairAsset: asset)
+        }
+        viewModel?.selectedAsset.value = nil
+        viewModel?.selectPairAsset.value = nil
       }
     }
     viewModel.fetchPriceList()
@@ -72,7 +80,45 @@ public class CryptoPriceListView: UITableView {
     viewModel.stopLiveUpdates()
   }
 
+  public func embed(in view: UIView) {
+
+    willMove(toSuperview: view)
+    view.addSubview(self)
+    NSLayoutConstraint.activate([
+      NSLayoutConstraint(item: self,
+                         attribute: .top,
+                         relatedBy: .equal,
+                         toItem: view,
+                         attribute: .topMargin,
+                         multiplier: 1.0,
+                         constant: 0),
+      NSLayoutConstraint(item: self,
+                         attribute: .bottom,
+                         relatedBy: .equal,
+                         toItem: view,
+                         attribute: .bottomMargin,
+                         multiplier: 1.0,
+                         constant: 0),
+      NSLayoutConstraint(item: self,
+                         attribute: .leading,
+                         relatedBy: .equal,
+                         toItem: view,
+                         attribute: .leading,
+                         multiplier: 1.0,
+                         constant: 0),
+      NSLayoutConstraint(item: self,
+                         attribute: .trailing,
+                         relatedBy: .equal,
+                         toItem: view,
+                         attribute: .trailing,
+                         multiplier: 1.0,
+                         constant: 0)
+    ])
+    layoutSubviews()
+  }
+
   public func embed(in viewController: UIViewController) {
+
     willMove(toSuperview: viewController.view)
     viewController.view.addSubview(self)
     NSLayoutConstraint.activate([
@@ -111,8 +157,10 @@ public class CryptoPriceListView: UITableView {
 
 // MARK: - CryptoPriceViewProvider
 
-extension CryptoPriceListView: CryptoPriceViewProvider {
+extension ListPricesView: ListPricesViewProvider {
+
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath, withData dataModel: CryptoPriceModel) -> UITableViewCell {
+
     guard
       let cell = tableView.dequeueReusableCell(
         withIdentifier: CryptoPriceTableViewCell.reuseIdentifier, for: indexPath
@@ -127,8 +175,10 @@ extension CryptoPriceListView: CryptoPriceViewProvider {
 
 // MARK: - Constants
 
-fileprivate extension CryptoPriceListView {
+fileprivate extension ListPricesView {
+
   enum Constants {
+
     static let rowHeight: CGFloat = UIConstants.minimumTargetSize
   }
 }

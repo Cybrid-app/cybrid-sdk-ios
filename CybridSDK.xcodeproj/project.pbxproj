@@ -64,7 +64,7 @@
 		0B303CF328636A0D007BF7FF /* CybridConfigTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B303CF228636A0D007BF7FF /* CybridConfigTests.swift */; };
 		0B50F35928A5885400DDB01E /* CybridEventTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B50F35828A5885400DDB01E /* CybridEventTests.swift */; };
 		0B50F35B28A5890C00DDB01E /* TradeViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B50F35A28A5890C00DDB01E /* TradeViewModelTests.swift */; };
-		0B557B962899F4DE00632A6D /* TradeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B557B932899F4DE00632A6D /* TradeViewController.swift */; };
+		0B557B962899F4DE00632A6D /* _TradeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B557B932899F4DE00632A6D /* _TradeViewController.swift */; };
 		0B557B982899F56900632A6D /* CYBButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B557B972899F56900632A6D /* CYBButton.swift */; };
 		0B6175D4288B7853004E4F5B /* TaskScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6175D3288B7853004E4F5B /* TaskScheduler.swift */; };
 		0B966004285A85C600584692 /* AsyncOperationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B966003285A85C600584692 /* AsyncOperationTests.swift */; };
@@ -85,7 +85,7 @@
 		0BBCF61F285C43E000D39C6D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0BBCF61E285C43E000D39C6D /* Assets.xcassets */; };
 		0BBCF640285C52D700D39C6D /* MockError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BBCF63F285C52D700D39C6D /* MockError.swift */; };
 		0BBD0CCA28AAC025001DBC5F /* BigDecimalValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BBD0CC928AAC025001DBC5F /* BigDecimalValidator.swift */; };
-		0BBD0CCE28AB71B7001DBC5F /* TradeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BBD0CCD28AB71B7001DBC5F /* TradeViewModel.swift */; };
+		0BBD0CCE28AB71B7001DBC5F /* _TradeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BBD0CCD28AB71B7001DBC5F /* _TradeViewModel.swift */; };
 		0BBD0CD128ABF905001DBC5F /* TradeConfirmationModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BBD0CD028ABF905001DBC5F /* TradeConfirmationModalView.swift */; };
 		0BBD0CD428AC0B60001DBC5F /* CybridModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BBD0CD328AC0B60001DBC5F /* CybridModalViewController.swift */; };
 		0BBD0CD628AC1DDC001DBC5F /* LoadingModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BBD0CD528AC1DDC001DBC5F /* LoadingModalView.swift */; };
@@ -109,8 +109,8 @@
 		0BD660FE286B763E00F4DA6B /* AsyncOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD660FB286B763E00F4DA6B /* AsyncOperation.swift */; };
 		0BD66104286B768300F4DA6B /* CryptoPriceTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD66102286B768300F4DA6B /* CryptoPriceTableHeaderView.swift */; };
 		0BD66105286B768300F4DA6B /* CryptoPriceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD66103286B768300F4DA6B /* CryptoPriceTableViewCell.swift */; };
-		0BD66109286B768C00F4DA6B /* CryptoPriceListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD66106286B768C00F4DA6B /* CryptoPriceListView.swift */; };
-		0BD6610A286B768C00F4DA6B /* CryptoPriceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD66107286B768C00F4DA6B /* CryptoPriceViewModel.swift */; };
+		0BD66109286B768C00F4DA6B /* ListPricesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD66106286B768C00F4DA6B /* ListPricesView.swift */; };
+		0BD6610A286B768C00F4DA6B /* ListPricesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD66107286B768C00F4DA6B /* ListPricesViewModel.swift */; };
 		0BD6610B286B768C00F4DA6B /* CryptoPriceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD66108286B768C00F4DA6B /* CryptoPriceModel.swift */; };
 		0BD6610D286B769800F4DA6B /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD6610C286B769800F4DA6B /* Observable.swift */; };
 		0BD66111286B76DC00F4DA6B /* URLImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD66110286B76DC00F4DA6B /* URLImageView.swift */; };
@@ -214,10 +214,17 @@
 		92E0801F295B91E200372460 /* externalBankAccountListBankModel_Response.json in Resources */ = {isa = PBXBuildFile; fileRef = 92E0801E295B91E200372460 /* externalBankAccountListBankModel_Response.json */; };
 		92E08021295B922200372460 /* externalBankAccountListBankModel_Response_Incomplete.json in Resources */ = {isa = PBXBuildFile; fileRef = 92E08020295B922200372460 /* externalBankAccountListBankModel_Response_Incomplete.json */; };
 		92E2133528F86F3300F420F2 /* LoginLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E2133428F86F3300F420F2 /* LoginLoader.swift */; };
+		92F12051299435140086EE18 /* AccountAssetUIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F12050299435140086EE18 /* AccountAssetUIModel.swift */; };
+		92F1205B2996B4D60086EE18 /* CryptoPriceModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F1205A2996B4D60086EE18 /* CryptoPriceModelTest.swift */; };
+		92F1205E2996BC080086EE18 /* AccountAssetUIModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F1205D2996BC080086EE18 /* AccountAssetUIModelTest.swift */; };
 		92F222D92914359C00137B11 /* PollingTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F222D82914359C00137B11 /* PollingTest.swift */; };
 		92F38C4F2924223E00008F58 /* BankAccountsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F38C4E2924223E00008F58 /* BankAccountsViewController.swift */; };
 		92F5EC7128E206CE009DC3F4 /* accountResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 92F5EC7028E206CE009DC3F4 /* accountResponse.json */; };
 		92F5EC7328E24150009DC3F4 /* listTradesResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 92F5EC7228E24150009DC3F4 /* listTradesResponse.json */; };
+		92F707C2298C204F005A93E5 /* TradeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F707C1298C204F005A93E5 /* TradeViewController.swift */; };
+		92F707C4298C235F005A93E5 /* TradeViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F707C3298C235F005A93E5 /* TradeViewController+Extensions.swift */; };
+		92F707C9298D7557005A93E5 /* ListPricesItemDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F707C8298D7557005A93E5 /* ListPricesItemDelegate.swift */; };
+		92F707CC298D806A005A93E5 /* TradeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F707CB298D806A005A93E5 /* TradeViewModel.swift */; };
 		9E3B30420CC77D425A7A1C28 /* Pods_Abstract_CybridSDKTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80DCD8FC666A9176CF28F146 /* Pods_Abstract_CybridSDKTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -317,7 +324,7 @@
 		0B303CF228636A0D007BF7FF /* CybridConfigTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CybridConfigTests.swift; sourceTree = "<group>"; };
 		0B50F35828A5885400DDB01E /* CybridEventTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CybridEventTests.swift; sourceTree = "<group>"; };
 		0B50F35A28A5890C00DDB01E /* TradeViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeViewModelTests.swift; sourceTree = "<group>"; };
-		0B557B932899F4DE00632A6D /* TradeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TradeViewController.swift; sourceTree = "<group>"; };
+		0B557B932899F4DE00632A6D /* _TradeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = _TradeViewController.swift; sourceTree = "<group>"; };
 		0B557B972899F56900632A6D /* CYBButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CYBButton.swift; sourceTree = "<group>"; };
 		0B6175D3288B7853004E4F5B /* TaskScheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskScheduler.swift; sourceTree = "<group>"; };
 		0B966003285A85C600584692 /* AsyncOperationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncOperationTests.swift; sourceTree = "<group>"; };
@@ -340,7 +347,7 @@
 		0BBCF623285C43E000D39C6D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0BBCF63F285C52D700D39C6D /* MockError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockError.swift; sourceTree = "<group>"; };
 		0BBD0CC928AAC025001DBC5F /* BigDecimalValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigDecimalValidator.swift; sourceTree = "<group>"; };
-		0BBD0CCD28AB71B7001DBC5F /* TradeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeViewModel.swift; sourceTree = "<group>"; };
+		0BBD0CCD28AB71B7001DBC5F /* _TradeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = _TradeViewModel.swift; sourceTree = "<group>"; };
 		0BBD0CD028ABF905001DBC5F /* TradeConfirmationModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeConfirmationModalView.swift; sourceTree = "<group>"; };
 		0BBD0CD328AC0B60001DBC5F /* CybridModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CybridModalViewController.swift; sourceTree = "<group>"; };
 		0BBD0CD528AC1DDC001DBC5F /* LoadingModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingModalView.swift; sourceTree = "<group>"; };
@@ -364,8 +371,8 @@
 		0BD660FB286B763E00F4DA6B /* AsyncOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncOperation.swift; sourceTree = "<group>"; };
 		0BD66102286B768300F4DA6B /* CryptoPriceTableHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CryptoPriceTableHeaderView.swift; sourceTree = "<group>"; };
 		0BD66103286B768300F4DA6B /* CryptoPriceTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = CryptoPriceTableViewCell.swift; sourceTree = "<group>"; tabWidth = 2; };
-		0BD66106286B768C00F4DA6B /* CryptoPriceListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = CryptoPriceListView.swift; sourceTree = "<group>"; tabWidth = 2; };
-		0BD66107286B768C00F4DA6B /* CryptoPriceViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = CryptoPriceViewModel.swift; sourceTree = "<group>"; tabWidth = 2; };
+		0BD66106286B768C00F4DA6B /* ListPricesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = ListPricesView.swift; sourceTree = "<group>"; tabWidth = 2; };
+		0BD66107286B768C00F4DA6B /* ListPricesViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = ListPricesViewModel.swift; sourceTree = "<group>"; tabWidth = 2; };
 		0BD66108286B768C00F4DA6B /* CryptoPriceModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CryptoPriceModel.swift; sourceTree = "<group>"; };
 		0BD6610C286B769800F4DA6B /* Observable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		0BD66110286B76DC00F4DA6B /* URLImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLImageView.swift; sourceTree = "<group>"; };
@@ -476,10 +483,17 @@
 		92E0801E295B91E200372460 /* externalBankAccountListBankModel_Response.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = externalBankAccountListBankModel_Response.json; sourceTree = "<group>"; };
 		92E08020295B922200372460 /* externalBankAccountListBankModel_Response_Incomplete.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = externalBankAccountListBankModel_Response_Incomplete.json; sourceTree = "<group>"; };
 		92E2133428F86F3300F420F2 /* LoginLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginLoader.swift; sourceTree = "<group>"; };
+		92F12050299435140086EE18 /* AccountAssetUIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountAssetUIModel.swift; sourceTree = "<group>"; };
+		92F1205A2996B4D60086EE18 /* CryptoPriceModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoPriceModelTest.swift; sourceTree = "<group>"; };
+		92F1205D2996BC080086EE18 /* AccountAssetUIModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountAssetUIModelTest.swift; sourceTree = "<group>"; };
 		92F222D82914359C00137B11 /* PollingTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PollingTest.swift; sourceTree = "<group>"; };
 		92F38C4E2924223E00008F58 /* BankAccountsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankAccountsViewController.swift; sourceTree = "<group>"; };
 		92F5EC7028E206CE009DC3F4 /* accountResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = accountResponse.json; sourceTree = "<group>"; };
 		92F5EC7228E24150009DC3F4 /* listTradesResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = listTradesResponse.json; sourceTree = "<group>"; };
+		92F707C1298C204F005A93E5 /* TradeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeViewController.swift; sourceTree = "<group>"; };
+		92F707C3298C235F005A93E5 /* TradeViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TradeViewController+Extensions.swift"; sourceTree = "<group>"; };
+		92F707C8298D7557005A93E5 /* ListPricesItemDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListPricesItemDelegate.swift; sourceTree = "<group>"; };
+		92F707CB298D806A005A93E5 /* TradeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeViewModel.swift; sourceTree = "<group>"; };
 		D8168B44D4C796A81CF0902E /* Pods-Abstract-CybridSDKTestApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Abstract-CybridSDKTestApp.debug.xcconfig"; path = "Target Support Files/Pods-Abstract-CybridSDKTestApp/Pods-Abstract-CybridSDKTestApp.debug.xcconfig"; sourceTree = "<group>"; };
 		DA2CB27D937283DE5C4554C6 /* Pods-Abstract-CybridSDKTestApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Abstract-CybridSDKTestApp.release.xcconfig"; path = "Target Support Files/Pods-Abstract-CybridSDKTestApp/Pods-Abstract-CybridSDKTestApp.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -648,6 +662,7 @@
 		0B078F1B28497B070020B4F7 /* CybridSDKTests */ = {
 			isa = PBXGroup;
 			children = (
+				92F120552996A8890086EE18 /* Components */,
 				92F5EC7428E24716009DC3F4 /* FrameworkExtensionsTest */,
 				0B96601A285AEB9100584692 /* Resources */,
 				0B96600B285A9A1A00584692 /* Mocks */,
@@ -827,9 +842,13 @@
 		0B557B902899F4CB00632A6D /* Trade */ = {
 			isa = PBXGroup;
 			children = (
+				92F1204F2994347A0086EE18 /* Entity */,
+				92F707CA298D8057005A93E5 /* View */,
 				0BBD0CCF28ABF8F8001DBC5F /* Modal Views */,
-				0B557B932899F4DE00632A6D /* TradeViewController.swift */,
-				0BBD0CCD28AB71B7001DBC5F /* TradeViewModel.swift */,
+				0B557B932899F4DE00632A6D /* _TradeViewController.swift */,
+				0BBD0CCD28AB71B7001DBC5F /* _TradeViewModel.swift */,
+				92F707C1298C204F005A93E5 /* TradeViewController.swift */,
+				92F707C3298C235F005A93E5 /* TradeViewController+Extensions.swift */,
 			);
 			path = Trade;
 			sourceTree = "<group>";
@@ -1052,25 +1071,26 @@
 		0BD660FF286B765900F4DA6B /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				0BD66106286B768C00F4DA6B /* ListPricesView.swift */,
+				0B557B902899F4CB00632A6D /* Trade */,
 				92E08013295AD2F300372460 /* TransferComponent */,
 				92F38C4D2924220B00008F58 /* BankAcoountsComponent */,
 				92A90A882911935400CA0E08 /* IdentityComponent */,
-				0BD66100286B766B00F4DA6B /* Crypto Price List */,
-				0B557B902899F4CB00632A6D /* Trade */,
+				0BD66100286B766B00F4DA6B /* ListPrices */,
 				927233D228D243A30080AAC4 /* AccountsComponent */,
 			);
 			path = Components;
 			sourceTree = "<group>";
 		};
-		0BD66100286B766B00F4DA6B /* Crypto Price List */ = {
+		0BD66100286B766B00F4DA6B /* ListPrices */ = {
 			isa = PBXGroup;
 			children = (
-				0BD66106286B768C00F4DA6B /* CryptoPriceListView.swift */,
-				0BD66108286B768C00F4DA6B /* CryptoPriceModel.swift */,
-				0BD66107286B768C00F4DA6B /* CryptoPriceViewModel.swift */,
 				0BD66101286B767800F4DA6B /* Cells */,
+				92F707C7298D73CB005A93E5 /* Entity */,
+				92F707C6298D73B4005A93E5 /* View */,
+				92F707C5298D73AB005A93E5 /* Delegate */,
 			);
-			path = "Crypto Price List";
+			path = ListPrices;
 			sourceTree = "<group>";
 		};
 		0BD66101286B767800F4DA6B /* Cells */ = {
@@ -1406,6 +1426,63 @@
 			name = Modal;
 			sourceTree = "<group>";
 		};
+		92F1204F2994347A0086EE18 /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+				92F12050299435140086EE18 /* AccountAssetUIModel.swift */,
+			);
+			path = Entity;
+			sourceTree = "<group>";
+		};
+		92F120552996A8890086EE18 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				92F120582996B4B90086EE18 /* ListPrices */,
+				92F120562996A89F0086EE18 /* Trade */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		92F120562996A89F0086EE18 /* Trade */ = {
+			isa = PBXGroup;
+			children = (
+				92F1205C2996BBEC0086EE18 /* Entity */,
+				92F120572996A8AB0086EE18 /* View */,
+			);
+			path = Trade;
+			sourceTree = "<group>";
+		};
+		92F120572996A8AB0086EE18 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		92F120582996B4B90086EE18 /* ListPrices */ = {
+			isa = PBXGroup;
+			children = (
+				92F120592996B4C10086EE18 /* Entity */,
+			);
+			path = ListPrices;
+			sourceTree = "<group>";
+		};
+		92F120592996B4C10086EE18 /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+				92F1205A2996B4D60086EE18 /* CryptoPriceModelTest.swift */,
+			);
+			path = Entity;
+			sourceTree = "<group>";
+		};
+		92F1205C2996BBEC0086EE18 /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+				92F1205D2996BC080086EE18 /* AccountAssetUIModelTest.swift */,
+			);
+			path = Entity;
+			sourceTree = "<group>";
+		};
 		92F222D72914357700137B11 /* Events */ = {
 			isa = PBXGroup;
 			children = (
@@ -1432,6 +1509,38 @@
 				0B303CE62862E7E3007BF7FF /* UIColorExtensionsTests.swift */,
 			);
 			path = FrameworkExtensionsTest;
+			sourceTree = "<group>";
+		};
+		92F707C5298D73AB005A93E5 /* Delegate */ = {
+			isa = PBXGroup;
+			children = (
+				92F707C8298D7557005A93E5 /* ListPricesItemDelegate.swift */,
+			);
+			path = Delegate;
+			sourceTree = "<group>";
+		};
+		92F707C6298D73B4005A93E5 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				0BD66107286B768C00F4DA6B /* ListPricesViewModel.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		92F707C7298D73CB005A93E5 /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+				0BD66108286B768C00F4DA6B /* CryptoPriceModel.swift */,
+			);
+			path = Entity;
+			sourceTree = "<group>";
+		};
+		92F707CA298D8057005A93E5 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				92F707CB298D806A005A93E5 /* TradeViewModel.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		E757BBB3F769F93B6529F753 /* Frameworks */ = {
@@ -1798,6 +1907,7 @@
 				0B2899E0288E4860001B3360 /* AuthenticatedServiceProvider.swift in Sources */,
 				92827DAD294320EC00231772 /* BankRepository.swift in Sources */,
 				927233E628D244AC0080AAC4 /* AccountsHeaderCell.swift in Sources */,
+				92F707C2298C204F005A93E5 /* TradeViewController.swift in Sources */,
 				927233C228D1AAA20080AAC4 /* SymbolPriceBankModel+Extensions.swift in Sources */,
 				0BD6612A286DE86A00F4DA6B /* CybridLocalizationKey.swift in Sources */,
 				0B00E02E287F6AE500707F26 /* CybridError.swift in Sources */,
@@ -1806,6 +1916,7 @@
 				927233CD28D2419B0080AAC4 /* QuoteBankModel+Extensions.swift in Sources */,
 				92635470294CEC0400660E0B /* BankAccountsViewController+Extensions.swift in Sources */,
 				92663D0F293FD60800842E30 /* WorkflowRepository.swift in Sources */,
+				92F707C9298D7557005A93E5 /* ListPricesItemDelegate.swift in Sources */,
 				92E08015295AD31800372460 /* TransferViewController.swift in Sources */,
 				927233BE28D131BE0080AAC4 /* AccountBankModel+Extensions.swift in Sources */,
 				92663D09293FACB900842E30 /* IdentityVerificationWithDetailsBankModel+Extensions.swift in Sources */,
@@ -1821,7 +1932,7 @@
 				927233EC28D244DE0080AAC4 /* AccountTradesCell.swift in Sources */,
 				0B2B2A7128621DA7002F0EC1 /* FontTheme.swift in Sources */,
 				0BD6610B286B768C00F4DA6B /* CryptoPriceModel.swift in Sources */,
-				0B557B962899F4DE00632A6D /* TradeViewController.swift in Sources */,
+				0B557B962899F4DE00632A6D /* _TradeViewController.swift in Sources */,
 				0B00E04E2885ADB300707F26 /* AssetsRepository.swift in Sources */,
 				0BBD0CD828AC21F1001DBC5F /* TradeSuccessModalView.swift in Sources */,
 				0BD661372872BB0A00F4DA6B /* AssetPathBuilder.swift in Sources */,
@@ -1853,7 +1964,7 @@
 				927233EA28D244CC0080AAC4 /* AccountTradesHeaderCell.swift in Sources */,
 				0B303CE42862E5D9007BF7FF /* CybridConfig.swift in Sources */,
 				0BD660FD286B763E00F4DA6B /* ConcurrencyInterfaces.swift in Sources */,
-				0BD66109286B768C00F4DA6B /* CryptoPriceListView.swift in Sources */,
+				0BD66109286B768C00F4DA6B /* ListPricesView.swift in Sources */,
 				927233D128D243830080AAC4 /* UIModal.swift in Sources */,
 				0BD660FC286B763E00F4DA6B /* URLImageOperation.swift in Sources */,
 				0B00E024287CD72D00707F26 /* Environment.swift in Sources */,
@@ -1865,9 +1976,11 @@
 				92827DCF2947998C00231772 /* ExternalBankAccountBankModel+Extensions.swift in Sources */,
 				927233D928D243F80080AAC4 /* AccountTradeDetailModal.swift in Sources */,
 				0BD26F2428A55D4800ED2A1B /* CybridEvent.swift in Sources */,
+				92F707CC298D806A005A93E5 /* TradeViewModel.swift in Sources */,
 				0BD26F2528A55D4800ED2A1B /* CybridLogger.swift in Sources */,
 				927233E328D2448F0080AAC4 /* AccountTradesViewModel.swift in Sources */,
-				0BD6610A286B768C00F4DA6B /* CryptoPriceViewModel.swift in Sources */,
+				0BD6610A286B768C00F4DA6B /* ListPricesViewModel.swift in Sources */,
+				92F12051299435140086EE18 /* AccountAssetUIModel.swift in Sources */,
 				0B00E05C2887256B00707F26 /* UIView+Keyboard.swift in Sources */,
 				92F38C4F2924223E00008F58 /* BankAccountsViewController.swift in Sources */,
 				0BBD0CCA28AAC025001DBC5F /* BigDecimalValidator.swift in Sources */,
@@ -1878,10 +1991,11 @@
 				0B2B2A8928629324002F0EC1 /* Theme.swift in Sources */,
 				0B289A07289E29D4001B3360 /* AssetBankModel+Extensions.swift in Sources */,
 				927233E828D244BD0080AAC4 /* AccountsCell.swift in Sources */,
-				0BBD0CCE28AB71B7001DBC5F /* TradeViewModel.swift in Sources */,
+				0BBD0CCE28AB71B7001DBC5F /* _TradeViewModel.swift in Sources */,
 				0B289A0A289E333C001B3360 /* CYBTextField.swift in Sources */,
 				0B303CE12862E062007BF7FF /* FormatStyle.swift in Sources */,
 				0B2899F828942C54001B3360 /* CybridJSONDecoder.swift in Sources */,
+				92F707C4298C235F005A93E5 /* TradeViewController+Extensions.swift in Sources */,
 				0BD66105286B768300F4DA6B /* CryptoPriceTableViewCell.swift in Sources */,
 				0BBD0CD628AC1DDC001DBC5F /* LoadingModalView.swift in Sources */,
 				0BD660FE286B763E00F4DA6B /* AsyncOperation.swift in Sources */,
@@ -1904,6 +2018,7 @@
 				92B68196291B1C6300FD6E99 /* IdentityVerificationViewModelEmptyTest.swift in Sources */,
 				0BD6611D286C1D5B00F4DA6B /* CurrencyFormatterTests.swift in Sources */,
 				0B303CF328636A0D007BF7FF /* CybridConfigTests.swift in Sources */,
+				92F1205B2996B4D60086EE18 /* CryptoPriceModelTest.swift in Sources */,
 				92F222D92914359C00137B11 /* PollingTest.swift in Sources */,
 				92B6819129197DDB00FD6E99 /* IdentityVerificationsAPIMock.swift in Sources */,
 				0BBCF640285C52D700D39C6D /* MockError.swift in Sources */,
@@ -1948,6 +2063,7 @@
 				92827DC62943E7A100231772 /* BankAPIMock.swift in Sources */,
 				0BD6611B286C197B00F4DA6B /* UIViewConstraintsTests.swift in Sources */,
 				92E0801D295B6D9A00372460 /* TransferViewModelErrorTest.swift in Sources */,
+				92F1205E2996BC080086EE18 /* AccountAssetUIModelTest.swift in Sources */,
 				0B00E0572886F25F00707F26 /* PricesAPIMock.swift in Sources */,
 				0B966013285AA2EB00584692 /* URLImageViewTests.swift in Sources */,
 				0B50F35928A5885400DDB01E /* CybridEventTests.swift in Sources */,

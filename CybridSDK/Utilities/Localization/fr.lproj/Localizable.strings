@@ -6,6 +6,12 @@
 
 */
 
+// TradeView Component
+"cybrid.tradeView.loading.title" = "Chargement";
+"cybrid.tradeView.content.subtitle.from" = "Depuis:";
+"cybrid.tradeView.content.subtitle.to" = "Pour:";
+"cybrid.tradeView.content.subtitle.amount" = "Montante";
+
 // Crypto Price List
 "cybrid.cryptoPriceList.headerSearchPlaceholder" = "Chercher";
 "cybrid.cryptoPriceList.headerCurrency" = "Devise";

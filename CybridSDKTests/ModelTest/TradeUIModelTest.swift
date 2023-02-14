@@ -82,7 +82,7 @@ class TradeUIModelTest: XCTestCase {
         let resutlt = model?.getTradeAmount()
 
         // -- Then
-        XCTAssertEqual(resutlt, "0.1339")
+        XCTAssertEqual(resutlt, "0.0001339")
     }
 
     func test_getTradeAmount_Sell_Zero() {
@@ -108,7 +108,7 @@ class TradeUIModelTest: XCTestCase {
         let resutlt = model?.getTradeAmount()
 
         // -- Then
-        XCTAssertEqual(resutlt, "0.")
+        XCTAssertEqual(resutlt, "0.0")
     }
 
     func test_getTradeAmount_Sell_NaN() {
@@ -135,7 +135,7 @@ class TradeUIModelTest: XCTestCase {
         let resutlt = model?.getTradeAmount()
 
         // -- Then
-        XCTAssertEqual(resutlt, "0.")
+        XCTAssertEqual(resutlt, "0.0")
     }
 
     func test_getTradeAmount_Buy_Zero() {
@@ -161,7 +161,7 @@ class TradeUIModelTest: XCTestCase {
         let resutlt = model?.getTradeAmount()
 
         // -- Then
-        XCTAssertEqual(resutlt, "0.")
+        XCTAssertEqual(resutlt, "0.0")
     }
 
     func test_getTradeAmount_Buy_NaN() {
@@ -188,7 +188,7 @@ class TradeUIModelTest: XCTestCase {
         let resutlt = model?.getTradeAmount()
 
         // -- Then
-        XCTAssertEqual(resutlt, "0.")
+        XCTAssertEqual(resutlt, "0.0")
     }
 
     func test_getTradeFiatAmount_Sell() {

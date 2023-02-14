@@ -115,9 +115,7 @@ final class CYBButton: UIButton {
 
   @objc
   private func didTapButton() {
-    if customState == .normal {
       action()
-    }
   }
 }
 

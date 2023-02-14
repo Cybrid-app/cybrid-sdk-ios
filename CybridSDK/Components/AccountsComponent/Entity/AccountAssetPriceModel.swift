@@ -47,7 +47,7 @@ struct AccountAssetPriceModel: Equatable {
         let accountBalanceInFiatFormatted = CybridCurrencyFormatter.formatPrice(accountBalanceInFiat ?? empty, with: counterAsset.symbol)
 
         self.accountAssetCode = account.asset ?? ""
-        self.accountAssetURL = Cybrid.getCryptoIconURLString(with: self.accountAssetCode)
+        self.accountAssetURL = Cybrid.getAssetURL(with: self.accountAssetCode)
         self.accountBalance = balanceValue ?? BigDecimal(0)
         self.accountBalanceFormatted = balanceValueFormatted
         self.accountBalanceInFiat = accountBalanceInFiat ?? BigDecimal(0)
