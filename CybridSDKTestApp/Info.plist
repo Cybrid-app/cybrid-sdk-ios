@@ -7,11 +7,11 @@
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Photos permission to Identity Verification</string>
 	<key>CybridClientId</key>
-	<string></string>
+	<string>h2QUCitoRTqpav7_R-o8zgNeGWVeuNe3SR0IiCFdK14</string>
 	<key>CybridClientSecret</key>
-	<string></string>
+	<string>wY3rSas8j8XJO7bpF-VUiq91H2RqSelIjVx1PbcJ3kY</string>
 	<key>CybridCustomerGUID</key>
-	<string></string>
+	<string>bf10305829337d106b82c521bb6c8fd2</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

@@ -76,7 +76,7 @@ class TransferViewModel: NSObject {
 
     func fetchExternalAccounts() {
 
-        self.dataProvider.fetchExternalBankAccounts { [weak self] accountsResponse in
+        self.dataProvider.fetchExternalBankAccounts(customerGuid: self.customerGuid) { [weak self] accountsResponse in
             switch accountsResponse {
             case .success(let accountList):
                 self?.logger?.log(.component(.accounts(.accountsDataFetching)))

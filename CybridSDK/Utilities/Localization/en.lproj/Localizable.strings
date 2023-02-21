@@ -91,6 +91,8 @@
 "cybrid.kyc.reviewing.done" = "Done";
 
 // Bank Accounts Component
+"cybrid.bank.content.title.text" = "Bank Accounts";
+"cybrid.bank.content.noAccounts.text" = "No bank accounts connected.";
 "cybrid.bank.accounts.loading.text" = "Checking Bank Accounts";
 "cybrid.bank.accounts.required.text" = "No banks accounts connected.";
 "cybrid.bank.accounts.required.button.text" = "Add account";
@@ -98,3 +100,8 @@
 "cybrid.bank.accounts.done.button.text" = "Continue";
 "cybrid.bank.accounts.error.text" = "An error has occurred, try again.";
 "cybrid.bank.accounts.error.button.text" = "Done";
+"cybrid.bank.accounts.detail.title.text" = "Account Details";
+"cybrid.bank.accounts.detail.account.name.title" = "Account Name";
+"cybrid.bank.accounts.detail.account.status.title" = "Status";
+"cybrid.bank.accounts.detail.account.number.title" = "Account Number";
+"cybrid.bank.accounts.detail.account.disconnect.button" = "Disconnect";

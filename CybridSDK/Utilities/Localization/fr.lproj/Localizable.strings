@@ -56,6 +56,8 @@
 "cybrid.trade.successModal.sellMore" = "Vendre plus de crypto";
 
 // Bank Accounts Component
+"cybrid.bank.content.title.text" = "Comptes bancaires";
+"cybrid.bank.content.noAccounts.text" = "No bank accounts connected.";
 "cybrid.bank.accounts.loading.text" = "Vérification des comptes bancaires";
 "cybrid.bank.accounts.required.text" = "Aucun compte bancaire connecté.";
 "cybrid.bank.accounts.required.button.text" = "Ajouter un compte";
@@ -63,3 +65,8 @@
 "cybrid.bank.accounts.done.button.text" = "Continuer";
 "cybrid.bank.accounts.error.text" = "Une erreur s'est produite, réessayez.";
 "cybrid.bank.accounts.error.button.text" = "Fait";
+"cybrid.bank.accounts.detail.title.text" = "Account Details";
+"cybrid.bank.accounts.detail.account.name.title" = "Account Name";
+"cybrid.bank.accounts.detail.account.status.title" = "Status";
+"cybrid.bank.accounts.detail.account.number.title" = "Account Number";
+"cybrid.bank.accounts.detail.account.disconnect.button" = "Disconnect";

@@ -17,7 +17,7 @@ protocol ExternalBankAccountRepository {
 
     static func fetchExternalBankAccount(externalBankAccountGuid: String, _ completion: @escaping FetchExternalBankAccount)
 
-    static func fetchExternalBankAccounts(_ completion: @escaping FetchExternalBankAccounts)
+    static func fetchExternalBankAccounts(customerGuid: String, _ completion: @escaping FetchExternalBankAccounts)
 }
 
 protocol ExternalBankAccountProvider: AuthenticatedServiceProvider {
@@ -39,8 +39,9 @@ extension ExternalBankAccountProvider {
                              completion: completion)
     }
 
-    func fetchExternalBankAccounts(_ completion: @escaping FetchExternalBankAccounts) {
+    func fetchExternalBankAccounts(customerGuid: String, _ completion: @escaping FetchExternalBankAccounts) {
         authenticatedRequest(externalBankAccountRepository.fetchExternalBankAccounts,
+                             parameters: customerGuid,
                              completion: completion)
     }
 }
@@ -59,7 +60,7 @@ extension ExternalBankAccountsAPI: ExternalBankAccountRepository {
         getExternalBankAccount(externalBankAccountGuid: externalBankAccountGuid, completion: completion)
     }
 
-    static func fetchExternalBankAccounts(_ completion: @escaping FetchExternalBankAccounts) {
-        listExternalBankAccounts(completion: completion)
+    static func fetchExternalBankAccounts(customerGuid: String, _ completion: @escaping FetchExternalBankAccounts) {
+        listExternalBankAccounts(customerGuid: customerGuid, completion: completion)
     }
 }
