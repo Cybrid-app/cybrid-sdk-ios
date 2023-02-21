@@ -10,6 +10,7 @@ import BigInt
 struct BigDecimal: Hashable {
   let value: BigInt
   let precision: Int
+    let testValue: String
 
   /// Creates BigDecimal with Int
   ///
@@ -20,6 +21,7 @@ struct BigDecimal: Hashable {
   init(_ value: BigInt, precision: Int = 2) {
       self.value = value
       self.precision = precision
+      self.testValue = String(self.value)
   }
 
   /// Creates BigDecimal with String Number
@@ -56,17 +58,53 @@ extension BigDecimal {
   typealias BigDecimalOperation = (BigDecimal, Int) throws -> BigDecimal
 
   func multiply(with decimal: BigDecimal, targetPrecision: Int) throws -> BigDecimal {
+
     let resultInt = value * decimal.value
     let resultPrecision = precision + decimal.precision
     let resultDecimal = BigDecimal(resultInt, precision: resultPrecision)
     try resultDecimal.performIntegrityCheck(with: resultInt)
-
     return resultDecimal.roundUp(to: targetPrecision)
   }
 
+    func divCurrency(decimal: BigDecimal, precision: Int) throws -> BigDecimal {
+
+        let value = self.value * 100
+        let valueStringl = String(value)
+
+        let (quotient0, remainder0) = value.quotientAndRemainder(dividingBy: decimal.value)
+        let tee = Decimal(string: String(quotient0))! + Decimal(string: String(remainder0))! / Decimal(string: String(decimal.value))!
+
+        let lol = Decimal(string: String(remainder0))! / Decimal(string: String(decimal.value))!
+        let lolString = "\(lol)"
+        let formatter = NumberFormatter()
+        formatter.maximumFractionDigits = precision
+        let string = formatter.string(for: tee) ?? "?"
+        "0.000641930928232122"
+
+        let quotient0String = String(quotient0)
+        let remainder0String = String(remainder0)
+
+        let teeString = "\(tee)"
+        let divisor = value / decimal.value
+        let divisorString = String(divisor)
+
+        var (quotient, reminder) = value.quotientAndRemainder(dividingBy: decimal.value)
+        let quotientString = String(quotient)
+        let reminderString = String(reminder)
+        let result = "\(quotientString)\(reminderString)"
+        let resultBD = BigDecimal(result, precision: reminderString.count) ?? BigDecimal(0)
+        return resultBD
+    }
+
   func divide(by decimal: BigDecimal, targetPrecision: Int) throws -> BigDecimal {
-    let divisor = decimal.addPrecision(max(0, String(abs(value)).count - String(abs(decimal.value)).count))
+
+    // let divisor = decimal.addPrecision(max(0, String(abs(value * 100)).count - String(abs(decimal.value)).count))
+    // let divisor = BigDecimal(self.value * 100)
+    let divisor = decimal
+    let divisorString = String(divisor.value)
     var (quotient, reminder) = value.quotientAndRemainder(dividingBy: divisor.value)
+
+    let reminderString = String(reminder)
 
     let intString = String(abs(quotient))
     var decimalDigits: [Int] = []
@@ -75,7 +113,12 @@ extension BigDecimal {
     // If quotient equals 4 we need to look for more precision.
     // We should not look for precision beyond 18, which is Ethereum's precision
     while (decimalDigits.count <= targetPrecision || quotient == 4) && extraPrecision < 18 {
+
       (quotient, reminder) = (reminder * 10).quotientAndRemainder(dividingBy: divisor.value)
+
+        let one = String(quotient)
+        let two = String(reminder)
+
       if let digit = Int(String(abs(quotient))) {
         decimalDigits.append(digit)
       }

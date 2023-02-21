@@ -18,7 +18,7 @@ class TradeViewModel: NSObject, ListPricesItemDelegate {
     internal var customerGuig = Cybrid.customerGUID
     internal var currentAsset: Observable<AssetBankModel?> = .init(nil)
     internal var currentPairAsset: Observable<AssetBankModel?> = .init(nil)
-    internal var currentAssetToTrade: Observable<AccountAssetUIModel?> = .init(nil)
+    internal var currentSideTypeToTrade: Observable<AssetBankModel.TypeBankModel> = .init(.crypto)
 
     // MARK: Public properties
     var uiState: Observable<TradeViewController.ViewState> = .init(.PRICES)
@@ -30,6 +30,8 @@ class TradeViewModel: NSObject, ListPricesItemDelegate {
     var tradingAccounts: [AccountAssetUIModel] = []
 
     var assetSwitchTopToBottom: Observable<Bool> = .init(true)
+    var amountInput: Observable<String> = .init("0")
+    var amountPrice: Observable<String> = .init("0")
 
     // MARK: View Values
     internal var segmentSelection: Observable<_TradeType> = Observable(.buy)
@@ -40,9 +42,17 @@ class TradeViewModel: NSObject, ListPricesItemDelegate {
 
         self.dataProvider = dataProvider
         self.logger = logger
+
+        super.init()
+        self.initBindingValues()
     }
 
-    func initBindingValues() {}
+    func initBindingValues() {
+
+        self.amountInput.bind { [self] _ in
+            self.calculatePreQuote()
+        }
+    }
 
     // MARK: ViewModel Methods
     func onSelected(asset: AssetBankModel, pairAsset: AssetBankModel) {
@@ -68,9 +78,6 @@ class TradeViewModel: NSObject, ListPricesItemDelegate {
                 self?.accounts = accountsFormatted
                 self?.fiatAccounts = accountsFormatted.filter { $0.account.type == .fiat }
                 self?.tradingAccounts = accountsFormatted.filter { $0.account.type == .trading }
-                self?.currentAssetToTrade.value = self?.tradingAccounts.first(where: {
-                    $0.asset.code == self?.currentAsset.value?.code
-                })
                 self?.uiState.value = .CONTENT
 
             case .failure:
@@ -102,22 +109,79 @@ class TradeViewModel: NSObject, ListPricesItemDelegate {
         }
     }
 
-    @objc
-    internal func switchAction(_ sender: UIButton) {
-        self.switchActionHandler()
+    internal func getAccountAssetUIModel(asset: AssetBankModel) -> AccountAssetUIModel {
+
+        let accountsToUse: [AccountAssetUIModel]!
+        if asset.type == .crypto {
+            accountsToUse = self.tradingAccounts
+        } else {
+            accountsToUse = self.fiatAccounts
+        }
+        return accountsToUse.first(where: {
+            $0.asset.code == asset.code
+        })!
     }
 
-    internal func switchActionHandler() {
+    @objc
+    internal func switchAction(_ sender: UIButton) {
 
-        if self.currentAssetToTrade.value?.account.type == .fiat {
-            self.currentAssetToTrade.value = self.tradingAccounts.first(where: {
-                $0.asset.code == self.currentAsset.value?.code
-            })
+        if self.currentSideTypeToTrade.value == .fiat {
+            self.currentSideTypeToTrade.value = .crypto
         } else {
-            self.currentAssetToTrade.value = self.fiatAccounts.first(where: {
-                $0.asset.code == self.currentPairAsset.value?.code
-            })
+            self.currentSideTypeToTrade.value = .fiat
         }
+    }
+
+    internal func calculatePreQuote() {
+
+        var calculatedPrice = "0"
+        if self.currentAsset.value != nil {
+
+            let assetCode = self.currentAsset.value?.code ?? ""
+            let pairAssetCode = self.currentPairAsset.value?.code ?? ""
+            let symbol = "\(assetCode)-\(pairAssetCode)"
+            let symbolPrice = self.listPricesViewModel?.prices.value.first(where: {
+                $0.symbol == symbol
+            })
+
+            let buyPrice = symbolPrice?.buyPrice ?? "0"
+            let buyPriceBD = BigDecimal(buyPrice, precision: 0) ?? BigDecimal(0)
+
+            var currentAssetToTrade: AccountAssetUIModel!
+            if self.currentSideTypeToTrade.value == .crypto {
+                currentAssetToTrade = self.getAccountAssetUIModel(
+                    asset: self.currentPairAsset.value!)
+            } else {
+                currentAssetToTrade = self.getAccountAssetUIModel(
+                    asset: self.currentAsset.value!)
+            }
+            let currentAssetToTradeDecimals = currentAssetToTrade?.asset.decimals ?? 0
+
+            let amountInputBD = BigDecimal(self.amountInput.value)
+            let zero = BigDecimal(0)
+
+            switch self.currentSideTypeToTrade.value {
+            case .crypto:
+
+                let value = try? amountInputBD?.multiply(with: buyPriceBD, targetPrecision: currentAssetToTradeDecimals)
+                calculatedPrice = CybridCurrencyFormatter.formatPrice(value ?? zero, with: (currentAssetToTrade?.asset.symbol)!)
+
+            case .fiat:
+
+                /* calculatedPrice = BigDecimalPipe.divide(
+                    lhs: amountInputBD ?? BigDecimal(0),
+                    rhs: buyPriceBD,
+                    precision: currentAssetToTradeDecimals) */
+                // let value = try? amountInputBD?.divCurrency(decimal: buyPriceBD)
+                let value = try? amountInputBD?.divide(by: buyPriceBD, targetPrecision: currentAssetToTradeDecimals)
+                /// let valueString = String(value?.value ?? "")
+                calculatedPrice = CybridCurrencyFormatter.formatInputNumber(value ?? zero)//.removeTrailingZeros()
+
+            default:
+                print("")
+            }
+        }
+        self.amountPrice.value = calculatedPrice
     }
 }
 
@@ -156,14 +220,13 @@ extension TradeViewModel: UIPickerViewDelegate, UIPickerViewDataSource {
             currentPairAsset.value = fiatAccounts[row].asset
         } else {
             currentAsset.value = tradingAccounts[row].asset
-            currentAssetToTrade.value = self.tradingAccounts.first(where: {
-                $0.asset.code == self.currentAsset.value?.code
-            })
         }
     }
 }
 
 extension TradeViewModel: UITextFieldDelegate {
 
-    func textFieldDidChangeSelection(_ textField: UITextField) {}
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        self.amountInput.value = textField.text ?? ""
+    }
 }

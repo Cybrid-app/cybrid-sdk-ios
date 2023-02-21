@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import CybridApiBankSwift
 
 extension TradeViewController {
 
@@ -231,7 +232,7 @@ extension TradeViewController {
         let textField = CYBTextField(style: .plain, icon: .text(""), theme: theme)
         textField.placeholder = "0.0"
         textField.keyboardType = .decimalPad
-        // textField.delegate = viewModel
+        textField.delegate = self.tradeViewModel
         textField.rightView = switchButton
         textField.rightViewMode = .always
         textField.accessibilityIdentifier = "amountTextField"
@@ -240,7 +241,14 @@ extension TradeViewController {
 
     func setAmountFieldData() {
 
-        let asset = self.tradeViewModel.currentAssetToTrade.value
+        var asset: AccountAssetUIModel!
+        if tradeViewModel.currentSideTypeToTrade.value == .crypto {
+            asset = tradeViewModel.getAccountAssetUIModel(
+                asset: tradeViewModel.currentAsset.value!)
+        } else {
+            asset = tradeViewModel.getAccountAssetUIModel(
+                asset: tradeViewModel.currentPairAsset.value!)
+        }
         self.amountTextField.updateIcon(.text(asset?.asset.code ?? ""))
     }
 
@@ -267,18 +275,26 @@ extension TradeViewController {
 
     func createMaxButton() -> UIButton {
 
+        let buttonText = localizer.localize(with: UIStrings.contentMaxButton)
         let button = UIButton()
         button.backgroundColor = UIColor.clear
         button.setTitleColor(UIValues.contentMaxButton, for: .normal)
-        button.setTitle("MAX", for: .normal)
+        button.setTitle(buttonText, for: .normal)
         return button
     }
 
     func setAmountPriceData() {
 
-        let amount = self.amountTextField.text
-        self.flagIcon.setURL(self.tradeViewModel.currentAssetToTrade.value?.assetURL ?? "")
-        self.amountPriceLabel.text = "Hola mundo USD"
+        var asset: AccountAssetUIModel!
+        if tradeViewModel.currentSideTypeToTrade.value == .crypto {
+            asset = tradeViewModel.getAccountAssetUIModel(
+                asset: tradeViewModel.currentPairAsset.value!)
+        } else {
+            asset = tradeViewModel.getAccountAssetUIModel(
+                asset: tradeViewModel.currentAsset.value!)
+        }
+        self.flagIcon.setURL(asset.assetURL)
+        self.amountPriceLabel.text = "0"
     }
 
     // -- Binds
@@ -304,10 +320,13 @@ extension TradeViewController {
             self.setAmountPriceData()
         }
 
-        self.tradeViewModel.currentAssetToTrade.bind { [self] _ in
-
+        self.tradeViewModel.currentSideTypeToTrade.bind { [self] _ in
             self.setAmountFieldData()
             self.setAmountPriceData()
+        }
+
+        self.tradeViewModel.amountPrice.bind { [self] amountPrice in
+            self.amountPriceLabel.text = amountPrice
         }
     }
 }
@@ -358,5 +377,6 @@ extension TradeViewController {
         static let contentFrom = "cybrid.tradeView.content.subtitle.from"
         static let contentTo = "cybrid.tradeView.content.subtitle.to"
         static let contentAmount = "cybrid.tradeView.content.subtitle.amount"
+        static let contentMaxButton = "cybrid.tradeView.content.max.button"
     }
 }

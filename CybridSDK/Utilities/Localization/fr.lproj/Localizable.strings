@@ -11,6 +11,7 @@
 "cybrid.tradeView.content.subtitle.from" = "Depuis:";
 "cybrid.tradeView.content.subtitle.to" = "Pour:";
 "cybrid.tradeView.content.subtitle.amount" = "Montante";
+"cybrid.tradeView.content.max.button" = "MAX";
 
 // Crypto Price List
 "cybrid.cryptoPriceList.headerSearchPlaceholder" = "Chercher";
