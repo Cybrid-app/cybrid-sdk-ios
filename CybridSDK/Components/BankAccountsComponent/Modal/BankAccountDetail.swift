@@ -17,12 +17,6 @@ class BankAccountDetail: UIModal {
     private var account: ExternalBankAccountBankModel
 
     internal var componentContent = UIView()
-    private lazy var divider: UIView = {
-        let underline = UIView()
-        underline.backgroundColor = UIValues.dividerColor
-        underline.translatesAutoresizingMaskIntoConstraints = false
-        return underline
-      }()
 
     init(bankAccountsViewModel: BankAccountsViewModel, account: ExternalBankAccountBankModel) {
 
@@ -86,7 +80,10 @@ extension BankAccountDetail {
             switch state {
 
             case .CONTENT:
-                self.banAccountDetail_Content()
+                self.bankAccountDetail_Content()
+
+            case .CONFIRM:
+                self.bankAccountsDetail_Confirm()
 
             default:
                 print()
@@ -104,7 +101,7 @@ extension BankAccountDetail {
 
 extension BankAccountDetail {
 
-    internal func banAccountDetail_Content() {
+    internal func bankAccountDetail_Content() {
 
         // -- Title
         let title = self.createTitle(key: UIStrings.titleString)
@@ -132,16 +129,59 @@ extension BankAccountDetail {
         accountNumberValue.addBelow(toItem: accountNumberTitle, height: UIValues.accountValueHeight, margins: UIValues.accountValueMargin)
 
         // -- Divider
+        let divider = UIView()
+        divider.backgroundColor = UIValues.dividerColor
+        divider.translatesAutoresizingMaskIntoConstraints = false
         divider.addBelow(toItem: accountNumberValue, height: 1, margins: UIValues.dividerMargin)
 
         // -- Close Button
-        let closeButtonText = localizer.localize(with: UIStrings.disconnectButtonString)
-        let closeButton = UIButton()
-        closeButton.backgroundColor = .clear
-        closeButton.setTitle(closeButtonText, for: .normal)
-        closeButton.setTitleColor(UIValues.closeButtonColor, for: .normal)
-        //closeButton.addTarget(self, action: #selector(close), for: .touchUpInside)
-        closeButton.addBelowToBottom(topItem: divider, bottomItem: self.view, margins: UIValues.closeButtonMargin)
+        let nextButtonText = localizer.localize(with: UIStrings.disconnectButtonString)
+        let nextButton = UIButton()
+        nextButton.backgroundColor = .clear
+        nextButton.setTitle(nextButtonText, for: .normal)
+        nextButton.setTitleColor(UIValues.closeButtonColor, for: .normal)
+        nextButton.addTarget(self, action: #selector(bankAccountDetail_Content_Action), for: .touchUpInside)
+        nextButton.addBelowToBottom(topItem: divider, bottomItem: self.view, margins: UIValues.closeButtonMargin)
+    }
+
+    internal func bankAccountsDetail_Confirm() {
+
+        self.modifyHeight(height: UIValues.modalCofirmSize)
+
+        // -- Title
+        let title = self.createTitle(key: UIStrings.confirmTitleString)
+        title.asFirstIn(self.componentContent, height: UIValues.titleHeight, margins: UIValues.titleMargins)
+
+        // -- Body
+        let bodyOne = localizer.localize(with: UIStrings.confirmBodyOneString)
+        let bodyTwo = localizer.localize(with: UIStrings.confirmBodyTwoString)
+        let accountName = self.account.plaidAccountName ?? ""
+        let accountMask = self.account.plaidAccountMask ?? ""
+        let bodyData = "\(accountName) (\(accountMask))"
+        let bodyText = "\(bodyOne)\(bodyData)\(bodyTwo)"
+
+        let body = UILabel()
+        body.font = UIValues.confirmBodyFont
+        body.textColor = UIValues.confirmBodyColor
+        body.text = bodyText
+        body.numberOfLines = 4
+        body.addBelow(toItem: title, height: UIValues.confirmBodyHeight, margins: UIValues.confirmBodyMargin)
+
+        // -- Divider
+        let divider = UIView()
+        divider.backgroundColor = UIValues.dividerColor
+        divider.translatesAutoresizingMaskIntoConstraints = false
+        divider.addBelow(toItem: body, height: 1, margins: UIValues.dividerMargin)
+
+        // -- Buttons
+        let actionButtons = self.createActionButtons()
+        actionButtons.addBelow(toItem: divider, height: UIValues.confirmActionButtonsHeight, margins: UIValues.confirmActionButtonsMargin)
+    }
+
+    @objc
+    internal func bankAccountDetail_Content_Action() {
+
+        self.bankAccountsViewModel.modalState.value = .CONFIRM
     }
 }
 
@@ -185,6 +225,37 @@ extension BankAccountDetail {
         title.text = value
         return title
     }
+
+    private func createActionButtons() -> UIStackView {
+
+        let theme = Cybrid.theme
+        let cancelText = localizer.localize(with: UIStrings.confirmCancelButton)
+        let confirmText = localizer.localize(with: UIStrings.confirmConfirmButton)
+
+        // -- Cancel button
+        let cancelButton = CYBButton(title: cancelText,
+                                     style: .secondary,
+                                     theme: theme
+        ) { [weak self] in
+            
+            self?.bankAccountsViewModel.modalState.value = .CONTENT
+            self?.dismiss(animated: true)
+        }
+
+        // -- Confirm button
+        let confirmButton = CYBButton(title: confirmText,
+                                      theme: theme
+        ) { [weak self] in
+             self?.dismiss(animated: true)
+        }
+
+        // -- Stack
+        let stackView = UIStackView(arrangedSubviews: [cancelButton, confirmButton])
+        stackView.axis = .horizontal
+        stackView.alignment = .trailing
+        stackView.distribution = .fillEqually
+        return stackView
+    }
 }
 
 extension BankAccountDetail {
@@ -193,14 +264,18 @@ extension BankAccountDetail {
 
         // -- Sizes
         static let modalSize: CGFloat = 411
+        static let modalCofirmSize: CGFloat = 300
         static let titleHeight: CGFloat = 28
         static let accountTitleHeight: CGFloat = 26
         static let accountValueHeight: CGFloat = 16
+        static let confirmBodyHeight: CGFloat = 64
+        static let confirmActionButtonsHeight: CGFloat = 48
 
         // -- Fonts
         static let titleFont = UIFont.make(ofSize: 22)
         static let accountTitleFont = UIFont.make(ofSize: 12)
         static let accountValueFont = UIFont.make(ofSize: 14)
+        static let confirmBodyFont = UIFont.make(ofSize: 16)
 
         // -- Colors
         static let titleColor = UIColor.black
@@ -208,6 +283,7 @@ extension BankAccountDetail {
         static let accountValueColor = UIColor.black
         static let dividerColor = UIColor(hex: "#C6C6C8")
         static let closeButtonColor = UIColor(hex: "#007AFF")
+        static let confirmBodyColor = UIColor.black
 
         // -- Margins
         static let titleMargins = UIEdgeInsets(top: 28, left: 24, bottom: 0, right: 24)
@@ -215,7 +291,9 @@ extension BankAccountDetail {
         static let accountTitleMargin = UIEdgeInsets(top: 13, left: 24, bottom: 0, right: 24)
         static let accountValueMargin = UIEdgeInsets(top: 5, left: 24, bottom: 0, right: 24)
         static let dividerMargin = UIEdgeInsets(top: 22, left: 24, bottom: 0, right: 24)
-        static let closeButtonMargin = UIEdgeInsets(top: 28, left: 24, bottom: 26, right: 24)
+        static let closeButtonMargin = UIEdgeInsets(top: 18, left: 24, bottom: 26, right: 24)
+        static let confirmBodyMargin = UIEdgeInsets(top: 35, left: 24, bottom: 0, right: 24)
+        static let confirmActionButtonsMargin = UIEdgeInsets(top: 15, left: 24, bottom: 0, right: 24)
     }
 
     enum UIStrings {
@@ -225,5 +303,10 @@ extension BankAccountDetail {
         static let accountStatusString = "cybrid.bank.accounts.detail.account.status.title"
         static let accountNumberString = "cybrid.bank.accounts.detail.account.number.title"
         static let disconnectButtonString = "cybrid.bank.accounts.detail.account.disconnect.button"
+        static let confirmTitleString = "cybrid.bank.accounts.detail.confirm.title.text"
+        static let confirmBodyOneString = "cybrid.bank.accounts.detail.confirm.body.one.text"
+        static let confirmBodyTwoString = "cybrid.bank.accounts.detail.confirm.body.two.text"
+        static let confirmCancelButton = "cybrid.bank.accounts.detail.confirm.cancel.button"
+        static let confirmConfirmButton = "cybrid.bank.accounts.detail.confirm.confirm.button"
     }
 }

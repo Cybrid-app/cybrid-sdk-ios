@@ -105,3 +105,8 @@
 "cybrid.bank.accounts.detail.account.status.title" = "Status";
 "cybrid.bank.accounts.detail.account.number.title" = "Account Number";
 "cybrid.bank.accounts.detail.account.disconnect.button" = "Disconnect";
+"cybrid.bank.accounts.detail.confirm.title.text" = "Confirm Disconnect";
+"cybrid.bank.accounts.detail.confirm.body.one.text" = "Please confrim removal of ";
+"cybrid.bank.accounts.detail.confirm.body.two.text" = ". Deposits will no longer be possible from this account.";
+"cybrid.bank.accounts.detail.confirm.cancel.button" = "Cancel";
+"cybrid.bank.accounts.detail.confirm.confirm.button" = "Confirm";
