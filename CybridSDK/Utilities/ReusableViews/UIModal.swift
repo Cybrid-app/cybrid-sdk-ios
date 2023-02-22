@@ -15,6 +15,7 @@ open class UIModal: UIViewController {
 
     public var containerView = UIView()
     var height: CGFloat = 100
+    var disableDismiss = false
 
     public init(height: CGFloat = 100) {
 
@@ -71,7 +72,7 @@ open class UIModal: UIViewController {
     }
 
     @objc private func didTapBackground() {
-        dismiss(animated: true)
+        self.cancel()
     }
 
     public func present() {
@@ -88,6 +89,12 @@ open class UIModal: UIViewController {
 
         self.heighConstraint?.constant = height
         self.view.layoutIfNeeded()
+    }
+
+    public func cancel() {
+        if !self.disableDismiss {
+            dismiss(animated: true)
+        }
     }
 }
 

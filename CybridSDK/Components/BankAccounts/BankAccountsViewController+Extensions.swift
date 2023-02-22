@@ -71,7 +71,7 @@ extension BankAccountsViewController {
                          relatedBy: .equal,
                          toItem: self.componentContent,
                          attribute: .topMargin,
-                         constant: 27)
+                         constant: 15)
         title.constraint(attribute: .height,
                          relatedBy: .equal,
                          toItem: nil,
@@ -135,6 +135,7 @@ extension BankAccountsViewController {
                                  toItem: self.view,
                                  attribute: .trailing,
                                  constant: -UIValues.bankAccountsTableMargins.right)
+        self.accountsTable.reloadData()
     }
 
     internal func bankAccountsView_Required() {
@@ -315,7 +316,7 @@ extension BankAccountsViewController: BankAccountsViewProvider {
     func tableView(_ tableView: UITableView,
                    didSelectRowAt indexPath: IndexPath,
                    withAccount balance: ExternalBankAccountBankModel) {
-        
+
         let detail = BankAccountDetail(bankAccountsViewModel: self.bankAccountsViewModel, account: balance)
         detail.present()
     }
@@ -341,12 +342,12 @@ extension BankAccountsViewController {
         static let contentNoAccountsTitleColor = UIColor.init(hex: "#636366")
 
         // -- Fonts
-        static let compontntContentTitleFont = UIFont.make(ofSize: 23)
+        static let compontntContentTitleFont = UIFont.make(ofSize: 25)
         static let componentTitleFont = UIFont.make(ofSize: 17, weight: .bold)
         static let contentNoAccountsTitleFont = UIFont.make(ofSize: 18)
 
         // -- Margins
-        static let bankAccountsTableMargins = UIEdgeInsets(top: 40, left: 15, bottom: 30, right: 15)
+        static let bankAccountsTableMargins = UIEdgeInsets(top: 35, left: 15, bottom: 30, right: 15)
     }
 
     enum UIStrings {

@@ -17,6 +17,7 @@ class BankAccountDetail: UIModal {
     private var account: ExternalBankAccountBankModel
 
     internal var componentContent = UIView()
+    internal var confirmButton: CYBButton?
 
     init(bankAccountsViewModel: BankAccountsViewModel, account: ExternalBankAccountBankModel) {
 
@@ -84,9 +85,6 @@ extension BankAccountDetail {
 
             case .CONFIRM:
                 self.bankAccountsDetail_Confirm()
-
-            default:
-                print()
             }
         }
     }
@@ -183,6 +181,16 @@ extension BankAccountDetail {
 
         self.bankAccountsViewModel.modalState.value = .CONFIRM
     }
+
+    @objc
+    internal func bankAccountDetail_Confirm_Action() {
+
+        self.disableDismiss = true
+        self.confirmButton?.customState = .processing
+        self.bankAccountsViewModel.disconnectExternalBankAccount(account: account) {
+            self.dismiss(animated: true)
+        }
+    }
 }
 
 extension BankAccountDetail {
@@ -237,20 +245,21 @@ extension BankAccountDetail {
                                      style: .secondary,
                                      theme: theme
         ) { [weak self] in
-            
-            self?.bankAccountsViewModel.modalState.value = .CONTENT
-            self?.dismiss(animated: true)
+
+            if !(self?.disableDismiss ?? false) {
+                self?.bankAccountsViewModel.modalState.value = .CONTENT
+            }
+            self?.cancel()
         }
 
         // -- Confirm button
-        let confirmButton = CYBButton(title: confirmText,
-                                      theme: theme
-        ) { [weak self] in
-             self?.dismiss(animated: true)
-        }
+        confirmButton = CYBButton(title: confirmText,
+                                  theme: theme,
+                                  action: {})
+        confirmButton?.addTarget(self, action: #selector(bankAccountDetail_Confirm_Action), for: .touchUpInside)
 
         // -- Stack
-        let stackView = UIStackView(arrangedSubviews: [cancelButton, confirmButton])
+        let stackView = UIStackView(arrangedSubviews: [cancelButton, confirmButton!])
         stackView.axis = .horizontal
         stackView.alignment = .trailing
         stackView.distribution = .fillEqually
@@ -269,7 +278,7 @@ extension BankAccountDetail {
         static let accountTitleHeight: CGFloat = 26
         static let accountValueHeight: CGFloat = 16
         static let confirmBodyHeight: CGFloat = 64
-        static let confirmActionButtonsHeight: CGFloat = 48
+        static let confirmActionButtonsHeight: CGFloat = 50
 
         // -- Fonts
         static let titleFont = UIFont.make(ofSize: 22)

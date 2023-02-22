@@ -10,6 +10,7 @@ import CybridApiBankSwift
 typealias CreateExternalBankAccount = (Result<ExternalBankAccountBankModel, ErrorResponse>) -> Void
 typealias FetchExternalBankAccount = (Result<ExternalBankAccountBankModel, ErrorResponse>) -> Void
 typealias FetchExternalBankAccounts = (Result<ExternalBankAccountListBankModel, ErrorResponse>) -> Void
+typealias DeleteExternalBankAccount = (Result<ExternalBankAccountBankModel, ErrorResponse>) -> Void
 
 protocol ExternalBankAccountRepository {
 
@@ -18,6 +19,8 @@ protocol ExternalBankAccountRepository {
     static func fetchExternalBankAccount(externalBankAccountGuid: String, _ completion: @escaping FetchExternalBankAccount)
 
     static func fetchExternalBankAccounts(customerGuid: String, _ completion: @escaping FetchExternalBankAccounts)
+
+    static func deleteExternalBankAccount(bankAccountGuid: String, _ completion: @escaping DeleteExternalBankAccount)
 }
 
 protocol ExternalBankAccountProvider: AuthenticatedServiceProvider {
@@ -44,6 +47,12 @@ extension ExternalBankAccountProvider {
                              parameters: customerGuid,
                              completion: completion)
     }
+
+    func deleteExternalBankAccount(bankAccountGuid: String, _ completion: @escaping DeleteExternalBankAccount) {
+        authenticatedRequest(externalBankAccountRepository.deleteExternalBankAccount,
+                             parameters: bankAccountGuid,
+                             completion: completion)
+    }
 }
 
 // MARK: CybridSession Extensions
@@ -62,5 +71,9 @@ extension ExternalBankAccountsAPI: ExternalBankAccountRepository {
 
     static func fetchExternalBankAccounts(customerGuid: String, _ completion: @escaping FetchExternalBankAccounts) {
         listExternalBankAccounts(customerGuid: customerGuid, completion: completion)
+    }
+    
+    static func deleteExternalBankAccount(bankAccountGuid: String, _ completion: @escaping DeleteExternalBankAccount) {
+        deleteExternalBankAccount(externalBankAccountGuid: bankAccountGuid, completion: completion)
     }
 }

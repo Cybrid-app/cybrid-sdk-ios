@@ -104,7 +104,7 @@ extension BankAccountCell {
     enum UIValues {
 
         // -- Sizes
-        static let iconSize = CGSize(width: 25, height: 25)
+        static let iconSize = CGSize(width: 27, height: 27)
 
         // -- Fonts
         static let nameAccountFont = UIFont.make(ofSize: 17)

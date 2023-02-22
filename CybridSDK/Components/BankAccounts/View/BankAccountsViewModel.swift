@@ -50,15 +50,19 @@ class BankAccountsViewModel: NSObject {
 
             case .success(let accountsList):
 
+                self?.accounts = []
                 let accountsPreFilter = accountsList.objects
-                let accountsFiltered = accountsPreFilter.filter {
-                    $0.state != .deleted && $0.state != .deleting
+                var accountsFiltered: [ExternalBankAccountBankModel] = []
+                for account in accountsPreFilter {
+                    if account.state != .deleted && account.state != .deleting {
+                        accountsFiltered.append(account)
+                    }
                 }
                 self?.accounts = accountsFiltered
                 self?.uiState.value = .CONTENT
 
             case .failure:
-                print()
+                self?.logger?.log(.component(.accounts(.pricesDataError)))
             }
         }
     }
@@ -223,28 +227,48 @@ class BankAccountsViewModel: NSObject {
             self.uiState.value = .DONE
         }
     }
+
+    func disconnectExternalBankAccount(account: ExternalBankAccountBankModel, _ completion: @escaping () -> Void) {
+
+        self.dataProvider.deleteExternalBankAccount(bankAccountGuid: account.guid!) { [weak self] accountResponse in
+
+            switch accountResponse {
+
+            case .success:
+
+                completion()
+                self?.uiState.value = .LOADING
+                self?.fetchExternalBankAccounts()
+
+            case .failure:
+                self?.logger?.log(.component(.accounts(.pricesDataError)))
+            }
+        }
+    }
 }
 
 // MARK: - AccountsViewProvider
 
 protocol BankAccountsViewProvider: AnyObject {
-  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath, withAccount dataModel: ExternalBankAccountBankModel) -> UITableViewCell
 
-  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath, withAccount balance: ExternalBankAccountBankModel)
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath, withAccount dataModel: ExternalBankAccountBankModel) -> UITableViewCell
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath, withAccount balance: ExternalBankAccountBankModel)
 }
 
 // MARK: - AccountsViewModel + UITableViewDelegate + UITableViewDataSource
 
 extension BankAccountsViewModel: UITableViewDelegate, UITableViewDataSource {
-  public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-      accounts.count
-  }
 
-  public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-      cellProvider.tableView(tableView, cellForRowAt: indexPath, withAccount: accounts[indexPath.row])
-  }
+    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        accounts.count
+    }
 
-  public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-      cellProvider.tableView(tableView, didSelectRowAt: indexPath, withAccount: accounts[indexPath.row])
-  }
+    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        cellProvider.tableView(tableView, cellForRowAt: indexPath, withAccount: accounts[indexPath.row])
+    }
+
+    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        cellProvider.tableView(tableView, didSelectRowAt: indexPath, withAccount: accounts[indexPath.row])
+    }
 }

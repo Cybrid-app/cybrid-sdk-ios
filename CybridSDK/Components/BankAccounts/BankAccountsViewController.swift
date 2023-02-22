@@ -12,7 +12,7 @@ import LinkKit
 public final class BankAccountsViewController: UIViewController {
 
     public enum BankAccountsViewState { case LOADING, CONTENT, REQUIRED, DONE, ERROR }
-    public enum BankAccountsModalViewState { case LOADING, CONTENT, CONFIRM }
+    public enum BankAccountsModalViewState { case CONTENT, CONFIRM }
 
     internal var bankAccountsViewModel: BankAccountsViewModel!
     internal var theme: Theme!

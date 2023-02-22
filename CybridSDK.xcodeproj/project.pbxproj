@@ -1078,7 +1078,7 @@
 				0BD66106286B768C00F4DA6B /* ListPricesView.swift */,
 				0B557B902899F4CB00632A6D /* Trade */,
 				92E08013295AD2F300372460 /* TransferComponent */,
-				92F38C4D2924220B00008F58 /* BankAccountsComponent */,
+				92F38C4D2924220B00008F58 /* BankAccounts */,
 				92A90A882911935400CA0E08 /* IdentityComponent */,
 				0BD66100286B766B00F4DA6B /* ListPrices */,
 				927233D228D243A30080AAC4 /* AccountsComponent */,
@@ -1130,7 +1130,6 @@
 			isa = PBXGroup;
 			children = (
 				92E08019295B6ACC00372460 /* TransferViewModel */,
-				92827DBF2943A59D00231772 /* BankAccountsViewModel */,
 				92B68194291B1C3900FD6E99 /* IdentityVerification */,
 				0BD66122286C20BC00F4DA6B /* CryptoPriceViewModelTests.swift */,
 				0B50F35A28A5890C00DDB01E /* TradeViewModelTests.swift */,
@@ -1300,15 +1299,6 @@
 			path = Workflow;
 			sourceTree = "<group>";
 		};
-		92827DBF2943A59D00231772 /* BankAccountsViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				92827DC02943A5B900231772 /* BankAccountsViewModelTest.swift */,
-				92827DC22943DF6800231772 /* BankAccountsViewModelErrorTest.swift */,
-			);
-			path = BankAccountsViewModel;
-			sourceTree = "<group>";
-		};
 		92827DC42943E78700231772 /* Bank */ = {
 			isa = PBXGroup;
 			children = (
@@ -1438,6 +1428,23 @@
 			path = TransferViewModel;
 			sourceTree = "<group>";
 		};
+		92E13CBC29A6A94A00F0A537 /* BankAccounts */ = {
+			isa = PBXGroup;
+			children = (
+				92E13CBD29A6A95600F0A537 /* View */,
+			);
+			path = BankAccounts;
+			sourceTree = "<group>";
+		};
+		92E13CBD29A6A95600F0A537 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				92827DC02943A5B900231772 /* BankAccountsViewModelTest.swift */,
+				92827DC22943DF6800231772 /* BankAccountsViewModelErrorTest.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		92E2133328F86F1300F420F2 /* Modal */ = {
 			isa = PBXGroup;
 			children = (
@@ -1457,6 +1464,7 @@
 		92F120552996A8890086EE18 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				92E13CBC29A6A94A00F0A537 /* BankAccounts */,
 				92F120582996B4B90086EE18 /* ListPrices */,
 				92F120562996A89F0086EE18 /* Trade */,
 			);
@@ -1512,7 +1520,7 @@
 			path = Events;
 			sourceTree = "<group>";
 		};
-		92F38C4D2924220B00008F58 /* BankAccountsComponent */ = {
+		92F38C4D2924220B00008F58 /* BankAccounts */ = {
 			isa = PBXGroup;
 			children = (
 				929C087929A541710075BA89 /* Modal */,
@@ -1521,7 +1529,7 @@
 				92F38C4E2924223E00008F58 /* BankAccountsViewController.swift */,
 				9263546F294CEC0400660E0B /* BankAccountsViewController+Extensions.swift */,
 			);
-			path = BankAccountsComponent;
+			path = BankAccounts;
 			sourceTree = "<group>";
 		};
 		92F5EC7428E24716009DC3F4 /* FrameworkExtensionsTest */ = {
