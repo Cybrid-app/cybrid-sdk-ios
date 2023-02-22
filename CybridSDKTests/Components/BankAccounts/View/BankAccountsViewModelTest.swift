@@ -13,8 +13,9 @@ class BankAccountsViewModelTest: XCTestCase {
 
     lazy var dataProvider = ServiceProviderMock()
 
-    func createViewModel() -> BankAccountsViewModel {
+    func createViewModel(cellProvider: BankAccountsViewProvider = BankAccountsMockViewProvider()) -> BankAccountsViewModel {
         return BankAccountsViewModel(dataProvider: self.dataProvider,
+                                     cellProvider: cellProvider,
                                      logger: nil)
     }
 
@@ -28,6 +29,23 @@ class BankAccountsViewModelTest: XCTestCase {
         XCTAssertEqual(viewModel.uiState.value, uiState.value)
         XCTAssertNil(viewModel.latestWorkflow)
         XCTAssertNil(viewModel.workflowJob)
+    }
+
+    func test_fetchExternalBankAccounts_Successfully() {
+
+        // -- Given
+        let viewModel = createViewModel()
+
+        // -- PreThen - When
+        XCTAssertEqual(viewModel.accounts, [])
+        XCTAssertEqual(viewModel.uiState.value, .LOADING)
+        dataProvider.fetchExternalBankAccountsSuccessfully()
+        viewModel.fetchExternalBankAccounts()
+        dataProvider.fetchExternalBankAccountsSuccessfully()
+
+        // -- Then
+        XCTAssertFalse(viewModel.accounts.isEmpty)
+        XCTAssertEqual(viewModel.uiState.value, .CONTENT)
     }
 
     // MARK: Workflow Test
@@ -210,6 +228,25 @@ class BankAccountsViewModelTest: XCTestCase {
         XCTAssertEqual(viewModel.uiState.value, .LOADING)
     }
 
+    func test_disconnectExternalBankAccount_Successfully() {
+
+        // -- Given
+        let viewModel = createViewModel()
+        viewModel.uiState.value = .CONTENT
+
+        var sum = 2
+        let completion: () -> Void = { sum += 1 }
+
+        // -- PreThen - When
+        dataProvider.deleteExternalBankAccountSuccessfully()
+        viewModel.disconnectExternalBankAccount(account: ExternalBankAccountBankModel.mock(), completion)
+        dataProvider.deleteExternalBankAccountSuccessfully()
+
+        // -- Then
+        XCTAssertEqual(sum, 3)
+        XCTAssertEqual(viewModel.uiState.value, .LOADING)
+    }
+
     // MARK: checkExternalBankAccountState
     func test_checkExternalBankAccountState() {
 
@@ -227,4 +264,76 @@ class BankAccountsViewModelTest: XCTestCase {
         XCTAssertEqual(viewModel.uiState.value, .DONE)
 
     }
+
+    // MARK: TableView Delegation Test
+    func test_TableViewRows() {
+
+        // -- Given
+        let controller = BankAccountsViewController()
+        let tableView = controller.accountsTable
+        let viewModel = createViewModel(cellProvider: controller)
+
+        // -- When
+        dataProvider.fetchExternalBankAccountsSuccessfully()
+        viewModel.fetchExternalBankAccounts()
+        dataProvider.fetchExternalBankAccountsSuccessfully()
+        tableView.reloadData()
+
+        // Then
+        XCTAssertEqual(viewModel.tableView(tableView, numberOfRowsInSection: 0), 1)
+    }
+
+    func test_TableViewValidCell() {
+
+        // -- Given
+        let controller = BankAccountsViewController()
+        let tableView = controller.accountsTable
+        let viewModel = createViewModel(cellProvider: controller)
+        let indexPath = IndexPath(item: 0, section: 0)
+
+        // -- When
+        dataProvider.fetchExternalBankAccountsSuccessfully()
+        viewModel.fetchExternalBankAccounts()
+        dataProvider.fetchExternalBankAccountsSuccessfully()
+        tableView.reloadData()
+
+        // -- Then
+        XCTAssertTrue(viewModel.tableView(tableView, cellForRowAt: indexPath).isKind(of: BankAccountCell.self))
+    }
+
+    func test_TableView_didSelectRowAtIndex() throws {
+
+        // -- Given
+        let controller = BankAccountsViewController()
+        let tableView = controller.accountsTable
+        let viewModel = createViewModel(cellProvider: controller)
+        let indexPath = IndexPath(item: 0, section: 0)
+        let alertExpectation = XCTestExpectation(description: "testAlertShouldAppear")
+
+        // -- When
+        dataProvider.fetchExternalBankAccountsSuccessfully()
+        viewModel.fetchExternalBankAccounts()
+        dataProvider.fetchExternalBankAccountsSuccessfully()
+        tableView.reloadData()
+
+        viewModel.tableView(tableView, didSelectRowAt: indexPath)
+
+        // Then
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0, execute: {
+            XCTAssertNil(controller.presentingViewController)
+            XCTAssertNil(controller.presentedViewController)
+            XCTAssertNil(controller.navigationController)
+            alertExpectation.fulfill()
+        })
+        wait(for: [alertExpectation], timeout: 1.0)
+    }
+}
+
+class BankAccountsMockViewProvider: BankAccountsViewProvider {
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath, withAccount dataModel: ExternalBankAccountBankModel) -> UITableViewCell {
+        return UITableViewCell()
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath, withAccount balance: ExternalBankAccountBankModel) {}
 }

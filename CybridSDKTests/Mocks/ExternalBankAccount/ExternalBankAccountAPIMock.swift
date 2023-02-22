@@ -13,10 +13,12 @@ final class ExternalBankAccountAPIMock: ExternalBankAccountsAPI {
     typealias CreateExternalBankAccountCompletion = (_ result: Result<ExternalBankAccountBankModel, ErrorResponse>) -> Void
     typealias FetchExternalBankAccountCompletion = (_ result: Result<ExternalBankAccountBankModel, ErrorResponse>) -> Void
     typealias FetchExternalBankAccountsCompletion = (_ result: Result<ExternalBankAccountListBankModel, ErrorResponse>) -> Void
+    typealias DeleteExternalBankAccountCompletion = (_ result: Result<ExternalBankAccountBankModel, ErrorResponse>) -> Void
 
     private static var createExternalBankAccountCompletion: CreateExternalBankAccountCompletion?
     private static var fetchExternalBankAccountCompletion: FetchExternalBankAccountCompletion?
     private static var fetchExternalBankAccountsCompletion: FetchExternalBankAccountsCompletion?
+    private static var deleteExternalBankAccountCompletion: DeleteExternalBankAccountCompletion?
 
     override class func createExternalBankAccount(
         postExternalBankAccountBankModel: PostExternalBankAccountBankModel,
@@ -44,6 +46,11 @@ final class ExternalBankAccountAPIMock: ExternalBankAccountsAPI {
         completion: @escaping ((Result<ExternalBankAccountListBankModel, ErrorResponse>) -> Void)) -> RequestTask {
         fetchExternalBankAccountsCompletion = completion
             return listExternalBankAccountsWithRequestBuilder().requestTask
+    }
+
+    override class func deleteExternalBankAccount(externalBankAccountGuid: String, apiResponseQueue: DispatchQueue = CybridApiBankSwiftAPI.apiResponseQueue, completion: @escaping ((Result<ExternalBankAccountBankModel, ErrorResponse>) -> Void)) -> RequestTask {
+        deleteExternalBankAccountCompletion = completion
+        return deleteExternalBankAccountWithRequestBuilder(externalBankAccountGuid: externalBankAccountGuid).requestTask
     }
 
     // MARK: Create External Bank Account
@@ -77,6 +84,17 @@ final class ExternalBankAccountAPIMock: ExternalBankAccountsAPI {
 
     class func fetchExternalBankAccountsError() {
         fetchExternalBankAccountsCompletion?(.failure(.error(0, nil, nil, CybridError.serviceError)))
+    }
+
+    // MARK: Delete External Bank Account
+    @discardableResult
+    class func deleteExternalBankAccountSuccessfully() -> ExternalBankAccountBankModel {
+        deleteExternalBankAccountCompletion?(.success(ExternalBankAccountBankModel.mock()))
+        return ExternalBankAccountBankModel.mock()
+    }
+
+    class func deleteExternalBankAccountError() {
+        deleteExternalBankAccountCompletion?(.failure(.error(0, nil, nil, CybridError.serviceError)))
     }
 }
 

@@ -15,7 +15,24 @@ class BankAccountsViewModelError: XCTestCase {
 
     func createViewModel() -> BankAccountsViewModel {
         return BankAccountsViewModel(dataProvider: self.dataProvider,
+                                     cellProvider: BankAccountsMockViewProvider(),
                                      logger: nil)
+    }
+
+    func test_fetchExternalBankAccounts_Error() {
+
+        // -- Given
+        let viewModel = createViewModel()
+
+        // -- PreThen - When
+        XCTAssertEqual(viewModel.accounts, [])
+        XCTAssertEqual(viewModel.uiState.value, .LOADING)
+        viewModel.fetchExternalBankAccounts()
+        dataProvider.fetchExternalBankAccountsFailed()
+
+        // -- Then
+        XCTAssertTrue(viewModel.accounts.isEmpty)
+        XCTAssertEqual(viewModel.uiState.value, .LOADING)
     }
 
     func test_createWorkflow_Failed() {
@@ -121,5 +138,23 @@ class BankAccountsViewModelError: XCTestCase {
 
         // -- Then
         XCTAssertEqual(viewModel.uiState.value, .LOADING)
+    }
+
+    func test_disconnectExternalBankAccount_Failed() {
+
+        // -- Given
+        let viewModel = createViewModel()
+        viewModel.uiState.value = .CONTENT
+
+        var sum = 2
+        let completion: () -> Void = { sum += 1 }
+
+        // -- PreThen - When
+        viewModel.disconnectExternalBankAccount(account: ExternalBankAccountBankModel.mock(), completion)
+        dataProvider.deleteExternalBankAccountFailed()
+
+        // -- Then
+        XCTAssertEqual(sum, 2)
+        XCTAssertEqual(viewModel.uiState.value, .CONTENT)
     }
 }

@@ -52,6 +52,7 @@ public final class BankAccountsViewController: UIViewController {
         view.backgroundColor = .white
         self.initComponentContent()
         self.manageCurrentStateUI()
+        self.accountsTable.register(BankAccountCell.self, forCellReuseIdentifier: BankAccountCell.reuseIdentifier)
         self.bankAccountsViewModel.fetchExternalBankAccounts()
     }
 }

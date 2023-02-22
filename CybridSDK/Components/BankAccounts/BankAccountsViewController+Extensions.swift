@@ -12,7 +12,7 @@ import UIKit
 extension BankAccountsViewController {
 
     internal func bankAccountsView_Loading() {
-        
+
         let title = UILabel()
         title.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         title.translatesAutoresizingMaskIntoConstraints = false
@@ -21,7 +21,7 @@ extension BankAccountsViewController {
         title.textColor = UIValues.componentTitleColor
         title.textAlignment = .center
         title.setLocalizedText(key: UIStrings.loadingText, localizer: localizer)
-        
+
         self.componentContent.addSubview(title)
         title.constraint(attribute: .centerY,
                          relatedBy: .equal,
