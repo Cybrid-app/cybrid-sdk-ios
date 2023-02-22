@@ -2,10 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSCameraUsageDescription</key>
-	<string>Camera permission to Identity Verification</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Photos permission to Identity Verification</string>
 	<key>CybridClientId</key>
 	<string>h2QUCitoRTqpav7_R-o8zgNeGWVeuNe3SR0IiCFdK14</string>
 	<key>CybridClientSecret</key>
