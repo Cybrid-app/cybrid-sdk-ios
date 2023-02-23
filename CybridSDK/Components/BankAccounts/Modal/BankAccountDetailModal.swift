@@ -9,7 +9,7 @@ import CybridApiBankSwift
 import Foundation
 import UIKit
 
-class BankAccountDetail: UIModal {
+class BankAccountDetailModal: UIModal {
 
     internal var localizer: Localizer!
 
@@ -44,7 +44,7 @@ class BankAccountDetail: UIModal {
     }
 }
 
-extension BankAccountDetail {
+extension BankAccountDetailModal {
 
     private func initComponentContent() {
 
@@ -97,7 +97,7 @@ extension BankAccountDetail {
     }
 }
 
-extension BankAccountDetail {
+extension BankAccountDetailModal {
 
     internal func bankAccountDetail_Content() {
 
@@ -193,7 +193,7 @@ extension BankAccountDetail {
     }
 }
 
-extension BankAccountDetail {
+extension BankAccountDetailModal {
 
     private func createTitle(key: String) -> UILabel {
 
@@ -267,7 +267,7 @@ extension BankAccountDetail {
     }
 }
 
-extension BankAccountDetail {
+extension BankAccountDetailModal {
 
     enum UIValues {
 

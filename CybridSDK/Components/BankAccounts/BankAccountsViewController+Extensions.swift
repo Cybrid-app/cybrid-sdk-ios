@@ -317,7 +317,7 @@ extension BankAccountsViewController: BankAccountsViewProvider {
                    didSelectRowAt indexPath: IndexPath,
                    withAccount balance: ExternalBankAccountBankModel) {
 
-        let detail = BankAccountDetail(bankAccountsViewModel: self.bankAccountsViewModel, account: balance)
+        let detail = BankAccountDetailModal(bankAccountsViewModel: self.bankAccountsViewModel, account: balance)
         detail.present()
     }
 }
