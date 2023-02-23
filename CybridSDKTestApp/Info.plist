@@ -8,6 +8,10 @@
 	<string></string>
 	<key>CybridCustomerGUID</key>
 	<string></string>
+	<key>NSCameraUsageDescription</key>
+	<string>Camera permission to Identity Verification</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Photos permission to Identity Verification</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
