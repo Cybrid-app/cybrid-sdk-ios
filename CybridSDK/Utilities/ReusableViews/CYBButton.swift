@@ -35,6 +35,7 @@ final class CYBButton: UIButton {
 
   private lazy var spinner: UIActivityIndicatorView = {
     let spinner = UIActivityIndicatorView(style: .medium)
+    spinner.color = UIColor.white
     return spinner
   }()
 

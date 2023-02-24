@@ -265,7 +265,7 @@ final class ServiceProviderMock: AssetsRepoProvider,
         Cybrid.session.setupSession(authToken: "TEST-TOKEN")
         ExternalBankAccountAPIMock.fetchExternalBankAccountError()
     }
-    
+
     func fetchExternalBankAccountsSuccessfully() {
 
         Cybrid.session.setupSession(authToken: "TEST-TOKEN")
@@ -276,5 +276,17 @@ final class ServiceProviderMock: AssetsRepoProvider,
 
         Cybrid.session.setupSession(authToken: "TEST-TOKEN")
         ExternalBankAccountAPIMock.fetchExternalBankAccountsError()
+    }
+
+    func deleteExternalBankAccountSuccessfully() {
+
+        Cybrid.session.setupSession(authToken: "TEST-TOKEN")
+        ExternalBankAccountAPIMock.deleteExternalBankAccountSuccessfully()
+    }
+
+    func deleteExternalBankAccountFailed() {
+
+        Cybrid.session.setupSession(authToken: "TEST-TOKEN")
+        ExternalBankAccountAPIMock.deleteExternalBankAccountError()
     }
 }

@@ -11,7 +11,8 @@ import LinkKit
 
 public final class BankAccountsViewController: UIViewController {
 
-    public enum BankAccountsViewState { case LOADING, REQUIRED, DONE, ERROR }
+    public enum BankAccountsViewState { case LOADING, CONTENT, REQUIRED, DONE, ERROR }
+    public enum BankAccountsModalViewState { case CONTENT, CONFIRM }
 
     internal var bankAccountsViewModel: BankAccountsViewModel!
     internal var theme: Theme!
@@ -20,6 +21,10 @@ public final class BankAccountsViewController: UIViewController {
     internal var componentContent = UIView()
     internal var currentState: Observable<BankAccountsViewState> = .init(.LOADING)
 
+    // -- Views
+    internal let accountsTable = UITableView()
+
+    // -- Plaid
     internal var linkConfiguration: LinkTokenConfiguration!
 
     public init() {
@@ -27,6 +32,7 @@ public final class BankAccountsViewController: UIViewController {
         super.init(nibName: nil, bundle: nil)
         self.bankAccountsViewModel = BankAccountsViewModel(
             dataProvider: CybridSession.current,
+            cellProvider: self,
             logger: Cybrid.logger)
         self.theme = Cybrid.theme
         self.localizer = CybridLocalizer()
@@ -46,7 +52,8 @@ public final class BankAccountsViewController: UIViewController {
         view.backgroundColor = .white
         self.initComponentContent()
         self.manageCurrentStateUI()
-        self.bankAccountsViewModel.createWorkflow()
+        self.accountsTable.register(BankAccountCell.self, forCellReuseIdentifier: BankAccountCell.reuseIdentifier)
+        self.bankAccountsViewModel.fetchExternalBankAccounts()
     }
 }
 
@@ -87,19 +94,18 @@ extension BankAccountsViewController {
             switch state {
 
             case .LOADING:
-
                 self.bankAccountsView_Loading()
 
-            case .REQUIRED:
+            case .CONTENT:
+                self.bankAccountsView_Content()
 
+            case .REQUIRED:
                 self.bankAccountsView_Required()
 
             case .DONE:
-
                 self.bankAccountsView_Done()
 
             case .ERROR:
-
                 self.bankAccountsView_Error()
             }
         }

@@ -11,9 +11,11 @@ import UIKit
 open class UIModal: UIViewController {
 
     private let dispatchGroup = DispatchGroup()
+    private var heighConstraint: NSLayoutConstraint?
 
     public var containerView = UIView()
     var height: CGFloat = 100
+    var disableDismiss = false
 
     public init(height: CGFloat = 100) {
 
@@ -60,7 +62,7 @@ open class UIModal: UIViewController {
                                  relatedBy: .equal,
                                  toItem: view,
                                  attribute: .trailing)
-        containerView.constraint(attribute: .height,
+        heighConstraint = containerView.constraint(attribute: .height,
                                  relatedBy: .equal,
                                  toItem: nil,
                                  attribute: .notAnAttribute,
@@ -70,7 +72,7 @@ open class UIModal: UIViewController {
     }
 
     @objc private func didTapBackground() {
-        dismiss(animated: true)
+        self.cancel()
     }
 
     public func present() {
@@ -80,6 +82,18 @@ open class UIModal: UIViewController {
                 topController = presentedViewController
             }
             topController.present(self, animated: true, completion: nil)
+        }
+    }
+
+    public func modifyHeight(height: CGFloat) {
+
+        self.heighConstraint?.constant = height
+        self.view.layoutIfNeeded()
+    }
+
+    public func cancel() {
+        if !self.disableDismiss {
+            dismiss(animated: true)
         }
     }
 }
