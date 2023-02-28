@@ -10,6 +10,8 @@ import Foundation
 
 public final class CybridConfig {
 
+    static let baseUrl: String = "https://bank.%@.cybrid.app"
+
     // MARK: Internal Static Properties
     internal static var shared = CybridConfig()
 

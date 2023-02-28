@@ -14,14 +14,6 @@ public enum CybridEnvironment {
     case production
 
     var basePath: String {
-
-        switch self {
-        case .staging:
-            return "https://bank.staging.cybrid.app"
-        case .sandbox:
-            return "https://bank.sandbox.cybrid.app"
-        case .production:
-            return "https://bank.production.cybrid.app"
-        }
+        return String(format: CybridConfig.baseUrl, "\(self)")
     }
 }
