@@ -8,18 +8,20 @@
 import Foundation
 
 public enum CybridEnvironment {
-  case sandbox
-  case development
-  case production
 
-  var basePath: String {
-    switch self {
-    case .sandbox:
-      return "https://bank.demo.cybrid.app"
-    case .development:
-      return "https://bank.demo.cybrid.app"
-    case .production:
-      return "https://bank.demo.cybrid.app"
+    case staging
+    case sandbox
+    case production
+
+    var basePath: String {
+
+        switch self {
+        case .staging:
+            return "https://bank.staging.cybrid.app"
+        case .sandbox:
+            return "https://bank.sandbox.cybrid.app"
+        case .production:
+            return "https://bank.production.cybrid.app"
+        }
     }
-  }
 }
