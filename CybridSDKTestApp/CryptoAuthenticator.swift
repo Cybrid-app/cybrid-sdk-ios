@@ -34,7 +34,7 @@ class CryptoAuthenticator {
 
     func getBearer(completion: @escaping (Result<String, Error>) -> Void) {
 
-        guard let url = URL(string: "https://id.demo.cybrid.app/oauth/token") else {
+        guard let url = URL(string: "https://id.sandbox.cybrid.app/oauth/token") else {
             return
         }
         var request = URLRequest(url: url)
