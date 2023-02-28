@@ -9,9 +9,11 @@
 import XCTest
 
 class EnvironmentTests: XCTestCase {
-  func testEnvironmentPaths() {
-    XCTAssertEqual(CybridEnvironment.sandbox.basePath, "https://bank.demo.cybrid.app")
-    XCTAssertEqual(CybridEnvironment.development.basePath, "https://bank.demo.cybrid.app")
-    XCTAssertEqual(CybridEnvironment.production.basePath, "https://bank.demo.cybrid.app")
-  }
+
+    func testEnvironmentPaths() {
+
+        XCTAssertEqual(CybridEnvironment.staging.basePath, "https://bank.staging.cybrid.app")
+        XCTAssertEqual(CybridEnvironment.sandbox.basePath, "https://bank.sandbox.cybrid.app")
+        XCTAssertEqual(CybridEnvironment.production.basePath, "https://bank.production.cybrid.app")
+    }
 }
