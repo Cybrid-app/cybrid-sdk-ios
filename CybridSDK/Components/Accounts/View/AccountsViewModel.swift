@@ -23,6 +23,9 @@ class AccountsViewModel: NSObject {
     private var logger: CybridLogger?
     var currentCurrency: String = "USD"
 
+    // -- MARK: Public properties
+    var uiState: Observable<AccountsViewController.ViewState> = .init(.LOADING)
+
     init(cellProvider: AccountsViewProvider,
          dataProvider: PricesRepoProvider & AssetsRepoProvider & AccountsRepoProvider,
          logger: CybridLogger?,
@@ -79,9 +82,14 @@ class AccountsViewModel: NSObject {
 
             switch pricesResult {
             case .success(let pricesList):
+                
                 self?.logger?.log(.component(.accounts(.pricesDataFetching)))
                 self?.prices = pricesList
                 self?.buildBalanceList()
+                if self?.uiState.value == .LOADING {
+                    self?.uiState.value = .CONTENT
+                }
+                
             case .failure:
                 self?.logger?.log(.component(.accounts(.pricesDataError)))
             }

@@ -10,9 +10,14 @@ import UIKit
 
 public final class AccountsViewController: UIViewController {
 
+    public enum ViewState { case LOADING, CONTENT }
+
     private var accountsViewModel: AccountsViewModel!
     private var theme: Theme!
-    private var localizer: Localizer!
+    internal var localizer: Localizer!
+
+    internal var componentContent = UIView()
+    internal var currentState: Observable<ViewState> = .init(.LOADING)
 
     // -- UI Vars
     let accountTile = UILabel()
@@ -29,7 +34,8 @@ public final class AccountsViewController: UIViewController {
         )
         self.theme = Cybrid.theme
         self.localizer = CybridLocalizer()
-        self.accountsViewModel.getAccounts()
+
+        self.currentState = self.accountsViewModel.uiState
         self.setupView()
     }
 
@@ -42,9 +48,64 @@ public final class AccountsViewController: UIViewController {
     func setupView() {
 
         view.backgroundColor = .white
-        self.createAccountTitle()
-        self.createAccountValueTitle()
-        self.createAccountsTable()
+        self.initComponentContent()
+        self.manageCurrentStateUI()
+        self.accountsViewModel.getAccounts()
+        // self.createAccountTitle()
+        // self.createAccountValueTitle()
+        // self.createAccountsTable()
+    }
+}
+
+extension AccountsViewController {
+
+    private func initComponentContent() {
+
+        // -- Component Container
+        self.view.addSubview(self.componentContent)
+        self.componentContent.constraint(attribute: .top,
+                                         relatedBy: .equal,
+                                         toItem: self.view,
+                                         attribute: .topMargin,
+                                         constant: 10)
+        self.componentContent.constraint(attribute: .leading,
+                                         relatedBy: .equal,
+                                         toItem: self.view,
+                                         attribute: .leading,
+                                         constant: 10)
+        self.componentContent.constraint(attribute: .trailing,
+                                         relatedBy: .equal,
+                                         toItem: self.view,
+                                         attribute: .trailing,
+                                         constant: -10)
+        self.componentContent.constraint(attribute: .bottom,
+                                         relatedBy: .equal,
+                                         toItem: self.view,
+                                         attribute: .bottomMargin,
+                                         constant: 10)
+    }
+
+    private func manageCurrentStateUI() {
+
+        self.currentState.bind { state in
+
+            self.removeSubViewsFromContent()
+            switch state {
+
+            case .LOADING:
+                self.accountsView_Loading()
+
+            case .CONTENT:
+                print() // self.bankAccountsView_Content()
+            }
+        }
+    }
+
+    internal func removeSubViewsFromContent() {
+
+        for view in self.componentContent.subviews {
+            view.removeFromSuperview()
+        }
     }
 }
 
@@ -58,7 +119,7 @@ extension AccountsViewController {
         accountTile.font = UIFont.make(ofSize: UIValues.accountComponentTitleSize)
         accountTile.textColor = UIValues.accountComponentTitleColor
         accountTile.textAlignment = .center
-        accountTile.setLocalizedText(key: UIStrings.accountComponentTitle, localizer: localizer)
+        accountTile.setLocalizedText(key: UIStrings.accountsLoadingTitle, localizer: localizer)
 
         self.view.addSubview(accountTile)
         accountTile.translatesAutoresizingMaskIntoConstraints = false
@@ -194,30 +255,5 @@ extension AccountsViewController: AccountsViewProvider {
             self.modalPresentationStyle = .fullScreen
             self.present(accountTradesViewController, animated: true)
         }
-    }
-}
-
-extension AccountsViewController {
-
-    enum UIValues {
-
-        // -- Sizes
-        static let accountComponentTitleSize: CGFloat = 12
-        static let accountComponentTitleHeight: CGFloat = 20
-        static let accountComponentTitleMargin = UIEdgeInsets(top: 40, left: 10, bottom: 0, right: 10)
-        static let accountValueTitleSize: CGFloat = 23
-        static let accountValueTitleHeight: CGFloat = 40
-        static let accountValueTitleMargin = UIEdgeInsets(top: 3, left: 10, bottom: 0, right: 10)
-        static let accountsTableRowHeight: CGFloat = 64
-        static let accountsTableMargin = UIEdgeInsets(top: 20, left: 10, bottom: 4, right: 10)
-
-        // -- Colors
-        static let accountComponentTitleColor = UIColor(hex: "#636366")
-        static let accountValueTitleColor = UIColor.black
-    }
-
-    enum UIStrings {
-
-        static let accountComponentTitle = "cybrid.accounts.accountComponentTitle"
     }
 }

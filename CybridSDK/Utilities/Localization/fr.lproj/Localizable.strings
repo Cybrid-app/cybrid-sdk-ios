@@ -55,6 +55,9 @@
 "cybrid.trade.successModal.buyMore" = "Acheter plus de crypto";
 "cybrid.trade.successModal.sellMore" = "Vendre plus de crypto";
 
+// Accounts
+"cybrid.accounts.loading.title" = "Loading accounts";
+
 // Bank Accounts Component
 "cybrid.bank.content.title.text" = "Comptes bancaires";
 "cybrid.bank.content.noAccounts.text" = "No bank accounts connected.";
