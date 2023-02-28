@@ -82,14 +82,14 @@ class AccountsViewModel: NSObject {
 
             switch pricesResult {
             case .success(let pricesList):
-                
+
                 self?.logger?.log(.component(.accounts(.pricesDataFetching)))
                 self?.prices = pricesList
                 self?.buildBalanceList()
                 if self?.uiState.value == .LOADING {
                     self?.uiState.value = .CONTENT
                 }
-                
+
             case .failure:
                 self?.logger?.log(.component(.accounts(.pricesDataError)))
             }
