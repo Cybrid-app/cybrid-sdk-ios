@@ -32,9 +32,9 @@ class CryptoAuthenticator {
         }
     }
 
-    func getBearer(completion: @escaping (Result<String, Error>) -> Void) {
+    func getBearer(env: CybridEnvironment, completion: @escaping (Result<String, Error>) -> Void) {
 
-        guard let url = URL(string: "https://id.sandbox.cybrid.app/oauth/token") else {
+        guard let url = URL(string: "https://id.\(env).cybrid.app/oauth/token") else {
             return
         }
         var request = URLRequest(url: url)

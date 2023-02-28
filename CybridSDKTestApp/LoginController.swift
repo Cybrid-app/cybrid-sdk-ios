@@ -18,6 +18,8 @@ class LoginController: UIViewController {
     
     private var loader: LoginLooader? = nil
     
+    private var env = CybridEnvironment.sandbox
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -53,7 +55,7 @@ class LoginController: UIViewController {
     func getBearer(id: String, secret: String, guid: String) {
         
         let authenticator = CryptoAuthenticator(session: .shared, id: id, secret: secret)
-        authenticator.getBearer(completion: { [weak self] result in
+        authenticator.getBearer(env: env, completion: { [weak self] result in
             
             switch result {
             case .success(let bearer):
@@ -80,7 +82,7 @@ class LoginController: UIViewController {
         }
         Cybrid.setup(bearer: bearer,
                      customerGUID: guidClient,
-                     environment: .sandbox,
+                     environment: env,
                      fiat: .usd,
                      logger: ClientLogger())
         
