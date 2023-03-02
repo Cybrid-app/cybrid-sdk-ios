@@ -67,6 +67,10 @@ jobs:
     steps:
       - checkout
       - run:
+          name: "Install CocoaPods"
+          no_output_timeout: 3m
+          command: "pod install --verbose"
+      - run:
           name: "Upload app to Appetize"
           command: "fastlane run build_and_upload_to_appetize scheme:CybridSDKTestApp api_token:${APPETIZE_API_TOKEN} public_key:${APPETIZE_PUBLIC_API_TOKEN}"
 
