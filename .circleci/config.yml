@@ -61,6 +61,15 @@ jobs:
             zip -r test.zip /Users/distiller/Library/Developer/Xcode/DerivedData/CybridSDK-efaxduynejizoldojprczwaucfvp/Build/Products/Debug-iphonesimulator/CybridSDKTestApp.app
             curl --http1.1 https://${APPETIZE_API_TOKEN}@api.appetize.io/v1/apps/${APPETIZE_PUBLIC_API_TOKEN} -F "file=@/Users/distiller/Library/Developer/Xcode/DerivedData/CybridSDK-efaxduynejizoldojprczwaucfvp/Build/Products/Debug-iphonesimulator/test.zip" -F "platform=ios"
 
+  upload:
+    macos:
+      xcode: "14.0.1"
+    steps:
+      - checkout
+      - run:
+          name: "Upload app to Appetize"
+          command: "fastlane run build_and_upload_to_appetize api_token:${APPETIZE_API_TOKEN} public_key:${APPETIZE_PUBLIC_API_TOKEN}"
+
 executors:
   swiftlint:
     docker:
@@ -72,6 +81,7 @@ workflows:
       - swiftlint
       - pod-spec-lint
       - build-and-test
+      - upload
       - publish:
           filters:
             branches:
