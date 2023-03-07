@@ -41,7 +41,7 @@ public final class AccountTradesViewController: UIViewController {
         self.theme = Cybrid.theme
         self.localizer = CybridLocalizer()
 
-        self.tradesViewModel.getTrades(accountGuid: balance.accountGuid)
+        self.tradesViewModel.getTrades(accountGuid: balance.account.guid ?? "")
         self.setupView()
     }
 
@@ -76,7 +76,7 @@ extension AccountTradesViewController {
         balanceAssetName.font = UIValues.balanceAssetNameFont
         balanceAssetName.textColor = UIValues.balanceAssetNameColor
         balanceAssetName.textAlignment = .center
-        balanceAssetName.text = balance.assetName
+        balanceAssetName.text = balance.asset?.name ?? ""
 
         // -- AssetTitle Container
         assetTitleContainer = UIStackView(arrangedSubviews: [balanceAssetIcon, balanceAssetName])
@@ -102,7 +102,7 @@ extension AccountTradesViewController {
         balanceValueView.setAttributedText(mainText: balance.accountBalanceFormatted,
                                            mainTextFont: UIValues.balanceValueViewFont,
                                            mainTextColor: UIValues.balanceValueViewColor,
-                                           attributedText: balance.accountAssetCode,
+                                           attributedText: balance.asset?.code ?? "",
                                            attributedTextFont: UIValues.balanceValueCodeViewFont,
                                            attributedTextColor: UIValues.balanceValueCodeViewColor)
         balanceValueView.addBelow(
@@ -121,7 +121,7 @@ extension AccountTradesViewController {
         balanceFiatValueView.setAttributedText(mainText: balance.accountBalanceInFiatFormatted,
                                                mainTextFont: UIValues.balanceFiatValueFont,
                                                mainTextColor: UIValues.balanceFiatValueColor,
-                                               attributedText: balance.pairAsset?.code ?? "",
+                                               attributedText: balance.asset?.code ?? "",
                                                attributedTextFont: UIValues.balanceFiatValueCodeFont,
                                                attributedTextColor: UIValues.balanceFiatValueCodeColor)
         balanceFiatValueView.addBelow(

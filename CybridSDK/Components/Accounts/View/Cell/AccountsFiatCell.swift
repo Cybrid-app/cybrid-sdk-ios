@@ -1,23 +1,22 @@
 //
-//  AccountsCellç.swift
+//  AccountsFiatCell.swift
 //  CybridSDK
 //
-//  Created by Erick Sanchez Perez on 24/08/22.
+//  Created by Erick Sanchez Perez on 06/03/23.
 //
 
 import Foundation
 import UIKit
 
-class AccountsCell: UITableViewCell {
+class AccountsFiatCell: UITableViewCell {
 
-    static let reuseIdentifier = "accountsCell"
+    static let reuseIdentifier = "accountsFiatCell"
     override var reuseIdentifier: String? { Self.reuseIdentifier }
     private let theme: Theme
     private var icon = URLImageView(url: nil)
     private var assetName = UILabel()
     private var accountBalance = UILabel()
-    private var assetPrice = UILabel()
-    private var accountBalanceFiat = UILabel()
+    private var accountBalancePending = UILabel()
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
 
@@ -45,10 +44,10 @@ class AccountsCell: UITableViewCell {
         // -- Vertical Stacks
         let leftSide = createVerticalStackView(
             top: assetName,
-            bottom: assetPrice)
+            bottom: UILabel())
         let rightSide = createVerticalStackView(
             top: accountBalance,
-            bottom: accountBalanceFiat,
+            bottom: accountBalancePending,
             withConstraints: true)
 
         // -- Horizontal Stack
@@ -67,7 +66,7 @@ class AccountsCell: UITableViewCell {
     }
 }
 
-extension AccountsCell {
+extension AccountsFiatCell {
 
     private func setupIcon() {
 
@@ -98,14 +97,8 @@ extension AccountsCell {
                              font: UIFont.make(ofSize: UIValues.accountBalanceSize, weight: .medium),
                              color: UIValues.accountBalanceColor)
 
-        // -- Asset price
-        self.setupBasicLabel(assetPrice,
-                             side: .left,
-                             font: UIFont.make(ofSize: UIValues.assetPriceSize),
-                             color: UIValues.assetPriceColor)
-
         // -- Account balance fiat
-        self.setupBasicLabel(accountBalanceFiat,
+        self.setupBasicLabel(accountBalancePending,
                              side: .right,
                              font: UIFont.make(ofSize: UIValues.accountBalanceFiatSize),
                              color: UIValues.accountBalanceFiatColor)
@@ -213,17 +206,14 @@ extension AccountsCell {
             side: .left)
 
         // -- Account balance
-        accountBalance.text = balance.accountBalanceFormatted
-
-        // -- Asset price
-        assetPrice.text = balance.buyPriceFormatted
+        accountBalance.text = balance.accountBalanceInFiatFormatted
 
         // -- Account balance fiat
-        accountBalanceFiat.text = balance.accountBalanceInFiatFormatted
+        accountBalancePending.text = balance.accountBalanceInFiatFormatted
     }
 }
 
-extension AccountsCell {
+extension AccountsFiatCell {
 
     enum UIValues {
 

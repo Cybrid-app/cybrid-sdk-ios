@@ -26,6 +26,9 @@ class AccountsViewModel: NSObject {
     // -- MARK: Public properties
     var uiState: Observable<AccountsViewController.ViewState> = .init(.LOADING)
 
+    // -- MARK: Poll
+    internal var pricesPolling: Polling?
+
     init(cellProvider: AccountsViewProvider,
          dataProvider: PricesRepoProvider & AssetsRepoProvider & AccountsRepoProvider,
          logger: CybridLogger?,
@@ -38,30 +41,10 @@ class AccountsViewModel: NSObject {
     }
 
     func getAccounts() {
-        self.getAssetsList()
-    }
 
-    internal func getAssetsList() {
-
-        if assets.isEmpty {
-            dataProvider.fetchAssetsList { [weak self] assetsResult in
-                switch assetsResult {
-                case .success(let assetsList):
-
-                    self?.logger?.log(.component(.accounts(.assetsDataFetching)))
-                    self?.assets = assetsList
-                    self?.getAccountsList()
-
-                case .failure:
-                    self?.logger?.log(.component(.accounts(.assetsDataError)))
-                }
-            }
-        } else {
-            self.getAccountsList()
+        if self.assets.isEmpty {
+            Task { self.assets = await self.getAssetsList() }
         }
-    }
-
-    internal func getAccountsList() {
 
         dataProvider.fetchAccounts(customerGuid: Cybrid.customerGUID) { [weak self] accountsResult in
 
@@ -76,27 +59,47 @@ class AccountsViewModel: NSObject {
         }
     }
 
-    internal func getPricesList() {
+    internal func getAssetsList() async -> [AssetBankModel] {
 
-        dataProvider.fetchPriceList(with: TaskScheduler()) { [weak self] pricesResult in
+        await withCheckedContinuation { continuation in
+            dataProvider.fetchAssetsList { [weak self] assetsResult in
+                switch assetsResult {
+                case .success(let assetsList):
 
-            switch pricesResult {
-            case .success(let pricesList):
+                    self?.logger?.log(.component(.accounts(.assetsDataFetching)))
+                    continuation.resume(returning: assetsList)
 
-                self?.logger?.log(.component(.accounts(.pricesDataFetching)))
-                self?.prices = pricesList
-                self?.buildBalanceList()
-                if self?.uiState.value == .LOADING {
-                    self?.uiState.value = .CONTENT
+                case .failure:
+                    self?.logger?.log(.component(.accounts(.assetsDataError)))
+                    continuation.resume(returning: [])
                 }
-
-            case .failure:
-                self?.logger?.log(.component(.accounts(.pricesDataError)))
             }
         }
     }
 
-    internal func buildBalanceList() {
+    internal func getPricesList() {
+
+        self.pricesPolling = Polling { [self] in
+            self.dataProvider.fetchPriceList { [weak self] pricesResult in
+
+                switch pricesResult {
+                case .success(let pricesList):
+
+                    self?.logger?.log(.component(.accounts(.pricesDataFetching)))
+                    self?.prices = pricesList
+                    self?.createAccountsFormatted()
+                    if self?.uiState.value == .LOADING {
+                        self?.uiState.value = .CONTENT
+                    }
+
+                case .failure:
+                    self?.logger?.log(.component(.accounts(.pricesDataError)))
+                }
+            }
+        }
+    }
+
+    internal func createAccountsFormatted() {
 
         if !self.assets.isEmpty && !self.accounts.isEmpty && !self.prices.isEmpty {
 
@@ -117,15 +120,12 @@ class AccountsViewModel: NSObject {
         prices: [SymbolPriceBankModel]) -> [AccountAssetPriceModel]? {
 
       return accounts.compactMap { account in
-        guard
-          let asset = assets.first(where: { $0.code == account.asset }),
-          let assetCode = account.asset,
-          let counterAsset = assets.first(where: { $0.code == currentCurrency }),
-          let price = prices.first(where: { $0.symbol == "\(assetCode)-\(currentCurrency)" })
 
-        else {
-          return nil
-        }
+        let code = account.asset ?? ""
+        let symbol = "\(code)-\(currentCurrency)"
+        let asset = assets.first(where: { $0.code == code })
+        let counterAsset = assets.first(where: { $0.code == currentCurrency })
+        let price = prices.first(where: { $0.symbol == symbol })
         return AccountAssetPriceModel(
             account: account,
             asset: asset,
