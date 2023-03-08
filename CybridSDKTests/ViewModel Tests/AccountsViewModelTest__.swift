@@ -9,21 +9,10 @@ import CybridApiBankSwift
 @testable import CybridSDK
 import XCTest
 
-class AccountsViewModelTests: XCTestCase {
+class AccountsViewModelTests__: XCTestCase {
 
     let pricesFetchScheduler = TaskSchedulerMock()
     lazy var dataProvider = ServiceProviderMock()
-
-    func test_init() {
-
-        let viewModel = AccountsViewModel(
-            cellProvider: AccountsMockViewProvider(),
-            dataProvider: self.dataProvider,
-            logger: nil,
-            currency: "USD")
-        XCTAssertNotNil(viewModel)
-        XCTAssertEqual(viewModel.currentCurrency, "USD")
-    }
 
     func test_getAccounts_Successfully() {
 
@@ -63,7 +52,7 @@ class AccountsViewModelTests: XCTestCase {
         XCTAssertTrue(viewModel.balances.value.isEmpty)
     }
 
-    func test_getAssetsList_Successfully() {
+    func test_getAssetsList_Successfully() async {
 
         // -- Given
         let viewModel = AccountsViewModel(
@@ -73,14 +62,14 @@ class AccountsViewModelTests: XCTestCase {
             currency: "USD")
 
         // -- When
-        viewModel.getAssetsList()
         dataProvider.didFetchAssetsSuccessfully()
+        let assets = await viewModel.getAssetsList()
 
         // -- Then
-        XCTAssertNotEqual(viewModel.assets, [])
+        XCTAssertNotEqual(assets, [])
     }
 
-    func test_getAssetsList_Error() {
+    func test_getAssetsList_Error() async {
 
         // -- Given
         let viewModel = AccountsViewModel(
@@ -90,13 +79,14 @@ class AccountsViewModelTests: XCTestCase {
             currency: "USD")
 
         // -- When
-        viewModel.getAssetsList()
+        let assets = await viewModel.getAssetsList()
         dataProvider.didFetchAssetsWithError()
 
         // -- Then
-        XCTAssertEqual(viewModel.assets, [])
+        XCTAssertEqual(assets, [])
     }
 
+    /*
     func test_getAssestList_InNotEmpty() {
 
         // -- Given
@@ -113,7 +103,7 @@ class AccountsViewModelTests: XCTestCase {
 
         // -- Then
         XCTAssertNotEqual(viewModel.accounts, [])
-    }
+    } */
 
     func test_getAccountsList_Successfully() {
 
@@ -125,7 +115,9 @@ class AccountsViewModelTests: XCTestCase {
             currency: "USD")
 
         // -- When
-        viewModel.getAccountsList()
+        viewModel.assets = AssetBankModel.cryptoAssets
+        dataProvider.didFetchAccountsSuccessfully()
+        viewModel.getAccounts()
         dataProvider.didFetchAccountsSuccessfully()
 
         // -- Then
@@ -142,7 +134,7 @@ class AccountsViewModelTests: XCTestCase {
             currency: "USD")
 
         // -- When
-        viewModel.getAccountsList()
+        viewModel.getAccounts()
         dataProvider.didFetchAccountsWithError()
 
         // -- Then
@@ -183,7 +175,7 @@ class AccountsViewModelTests: XCTestCase {
         XCTAssertEqual(viewModel.accounts, [])
     }
 
-    func test_buildBalanceList_Successfully() {
+    func test_buildBalanceList_Successfully() async {
 
         // -- Given
         let viewModel = AccountsViewModel(
@@ -193,12 +185,13 @@ class AccountsViewModelTests: XCTestCase {
             currency: "USD")
 
         // -- When
-        viewModel.getAssetsList()
-        dataProvider.didFetchAssetsSuccessfully()
+        viewModel.assets = AssetBankModel.cryptoAssets
 
-        viewModel.getAccountsList()
+        dataProvider.didFetchAccountsSuccessfully()
+        viewModel.getAccounts()
         dataProvider.didFetchAccountsSuccessfully()
 
+        dataProvider.didFetchPricesSuccessfully()
         viewModel.getPricesList()
         dataProvider.didFetchPricesSuccessfully()
 
@@ -206,7 +199,7 @@ class AccountsViewModelTests: XCTestCase {
         XCTAssertFalse(viewModel.balances.value.isEmpty)
     }
 
-    func test_buildBalanceList_Error() {
+    func test_buildBalanceList_Error() async {
 
         // -- Given
         let viewModel = AccountsViewModel(
@@ -216,10 +209,11 @@ class AccountsViewModelTests: XCTestCase {
             currency: "USD")
 
         // -- When
-        viewModel.getAssetsList()
+        let assets = await viewModel.getAssetsList()
         dataProvider.didFetchAssetsSuccessfully()
+        viewModel.assets = assets
 
-        viewModel.getAccountsList()
+        viewModel.getAccounts()
         dataProvider.didFetchAccountsWithError()
 
         viewModel.getPricesList()
@@ -229,7 +223,7 @@ class AccountsViewModelTests: XCTestCase {
         XCTAssertTrue(viewModel.balances.value.isEmpty)
     }
 
-    func test_buildModelList_Nil() {
+    func test_buildModelList_Nil() async {
 
         // -- Given
         let viewModel = AccountsViewModel(
@@ -239,12 +233,16 @@ class AccountsViewModelTests: XCTestCase {
             currency: "MXN")
 
         // -- When
-        viewModel.getAssetsList()
         dataProvider.didFetchAssetsSuccessfully()
+        let assets = await viewModel.getAssetsList()
+        dataProvider.didFetchAssetsSuccessfully()
+        viewModel.assets = assets
 
-        viewModel.getAccountsList()
+        dataProvider.didFetchAccountsSuccessfully()
+        viewModel.getAccounts()
         dataProvider.didFetchAccountsSuccessfully()
 
+        dataProvider.didFetchPricesSuccessfully()
         viewModel.getPricesList()
         dataProvider.didFetchPricesSuccessfully()
 

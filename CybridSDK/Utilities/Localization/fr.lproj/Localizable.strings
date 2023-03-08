@@ -57,6 +57,7 @@
 
 // Accounts
 "cybrid.accounts.loading.title" = "Loading accounts";
+"cybrid.accounts.item.fiat.pending" = " pending";
 
 // Bank Accounts Component
 "cybrid.bank.content.title.text" = "Comptes bancaires";

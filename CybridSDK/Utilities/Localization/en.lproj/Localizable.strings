@@ -57,10 +57,13 @@
 
 // Accounts
 "cybrid.accounts.loading.title" = "Loading accounts";
-"cybrid.accounts.accountComponentTitle" = "Account Value";
+"cybrid.accounts.content.title" = "Account Value";
+"cybrid.accounts.content.transfer.button" = "Transfer Funds";
+
 "cybrid.accounts.assetTitle" = "ASSET";
 "cybrid.accounts.marketPriceTitle" = "Market Price";
 "cybrid.accounts.balanceTitle" = "BALANCE";
+"cybrid.accounts.item.fiat.pending" = " pending";
 
 // Account Trades
 "cybrid.account.trades.recentTransactionsTitle" = "RECENT TRANSACTIONS";

@@ -13,17 +13,22 @@ final class AccountsAPIMock: AccountsAPI {
     typealias AccountsListCompletion = (_ result: Result<AccountListBankModel, ErrorResponse>) -> Void
     private static var accountsCompletion: AccountsListCompletion?
 
-    @discardableResult
-    override class func listAccounts(page: Int? = nil, perPage: Int? = nil, guid: String? = nil, bankGuid: String? = nil, customerGuid: String? = nil, apiResponseQueue: DispatchQueue = CybridApiBankSwiftAPI.apiResponseQueue, completion: @escaping ((Result<AccountListBankModel, ErrorResponse>) -> Void)) -> RequestTask {
+    override class func listAccounts(page: Int? = nil,
+                                     perPage: Int? = nil,
+                                     guid: String? = nil,
+                                     bankGuid: String? = nil,
+                                     customerGuid: String? = nil,
+                                     apiResponseQueue: DispatchQueue = CybridApiBankSwiftAPI.apiResponseQueue,
+                                     completion: @escaping ((Result<AccountListBankModel, ErrorResponse>) -> Void)) -> RequestTask {
 
         accountsCompletion = completion
         return listAccountsWithRequestBuilder().requestTask
     }
 
     @discardableResult
-    class func didFetchAccountsSuccessfully(_ accounts: AccountListBankModel? = nil) -> AccountListBankModel {
+    class func didFetchAccountsSuccessfully() -> AccountListBankModel {
 
-        accountsCompletion?(.success(accounts ?? AccountListBankModel.mock))
+        accountsCompletion?(.success(AccountListBankModel.mock))
         return AccountListBankModel.mock
     }
 

@@ -151,6 +151,61 @@ public extension UIView {
                             constant: -margins.bottom)
         }
     }
+    
+    func addInTheMiddle(topItem: UIView, bottomItem: UIView, margins: UIEdgeInsets) {
+
+        if topItem.superview != nil {
+
+            topItem.superview?.addSubview(self)
+            self.translatesAutoresizingMaskIntoConstraints = false
+            self.constraint(attribute: .top,
+                            relatedBy: .equal,
+                            toItem: topItem,
+                            attribute: .bottom,
+                            constant: margins.top)
+            self.constraint(attribute: .leading,
+                            relatedBy: .equal,
+                            toItem: topItem.superview,
+                            attribute: .leading,
+                            constant: margins.left)
+            self.constraint(attribute: .trailing,
+                            relatedBy: .equal,
+                            toItem: topItem.superview,
+                            attribute: .trailing,
+                            constant: -margins.right)
+            self.constraint(attribute: .bottom,
+                            relatedBy: .equal,
+                            toItem: bottomItem,
+                            attribute: .top,
+                            constant: -margins.bottom)
+        }
+    }
+
+    func asLast(parent: UIView, height: CGFloat, margins: UIEdgeInsets) {
+
+        parent.addSubview(self)
+        self.translatesAutoresizingMaskIntoConstraints = false
+        self.constraint(attribute: .leading,
+                        relatedBy: .equal,
+                        toItem: parent,
+                        attribute: .leading,
+                        constant: margins.left)
+        self.constraint(attribute: .trailing,
+                        relatedBy: .equal,
+                        toItem: parent,
+                        attribute: .trailing,
+                        constant: -margins.right)
+        self.constraint(attribute: .bottom,
+                        relatedBy: .equal,
+                        toItem: parent,
+                        attribute: .bottom,
+                        constant: -margins.bottom)
+        self.constraint(attribute: .height,
+                        relatedBy: .equal,
+                        toItem: nil,
+                        attribute: .notAnAttribute,
+                        constant: height)
+    }
 
     func asFirstIn(_ parent: UIView, height: CGFloat, margins: UIEdgeInsets) {
 

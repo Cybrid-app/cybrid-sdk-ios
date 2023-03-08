@@ -40,6 +40,24 @@ class AccountsViewModel: NSObject {
         self.currentCurrency = currency
     }
 
+    internal func getAssetsList() async -> [AssetBankModel] {
+
+        await withCheckedContinuation { continuation in
+            dataProvider.fetchAssetsList { [weak self] assetsResult in
+                switch assetsResult {
+                case .success(let assetsList):
+
+                    self?.logger?.log(.component(.accounts(.assetsDataFetching)))
+                    continuation.resume(returning: assetsList)
+
+                case .failure:
+                    self?.logger?.log(.component(.accounts(.assetsDataError)))
+                    continuation.resume(returning: [])
+                }
+            }
+        }
+    }
+
     func getAccounts() {
 
         if self.assets.isEmpty {
@@ -55,24 +73,6 @@ class AccountsViewModel: NSObject {
                 self?.getPricesList()
             case .failure:
                 self?.logger?.log(.component(.accounts(.accountsDataError)))
-            }
-        }
-    }
-
-    internal func getAssetsList() async -> [AssetBankModel] {
-
-        await withCheckedContinuation { continuation in
-            dataProvider.fetchAssetsList { [weak self] assetsResult in
-                switch assetsResult {
-                case .success(let assetsList):
-
-                    self?.logger?.log(.component(.accounts(.assetsDataFetching)))
-                    continuation.resume(returning: assetsList)
-
-                case .failure:
-                    self?.logger?.log(.component(.accounts(.assetsDataError)))
-                    continuation.resume(returning: [])
-                }
             }
         }
     }

@@ -91,17 +91,17 @@ extension AccountsFiatCell {
                              font: UIFont.make(ofSize: UIValues.assetNameSize),
                              color: UIValues.assetNameColor)
 
-        // -- Account balance
+        // -- Account balance fiat
         self.setupBasicLabel(accountBalance,
                              side: .right,
                              font: UIFont.make(ofSize: UIValues.accountBalanceSize, weight: .medium),
                              color: UIValues.accountBalanceColor)
 
-        // -- Account balance fiat
+        // -- Account pending balance fiat
         self.setupBasicLabel(accountBalancePending,
                              side: .right,
                              font: UIFont.make(ofSize: UIValues.accountBalanceFiatSize),
-                             color: UIValues.accountBalanceFiatColor)
+                             color: UIValues.accountsITemFiatPEndingColor)
     }
 
     private func createVerticalStackView(top: UIView, bottom: UIView, withConstraints: Bool = false) -> UIStackView {
@@ -205,11 +205,13 @@ extension AccountsFiatCell {
             attributedTextColor: UIValues.assetNameCodeColor,
             side: .left)
 
-        // -- Account balance
+        // -- Account balance fiat
         accountBalance.text = balance.accountBalanceInFiatFormatted
 
-        // -- Account balance fiat
-        accountBalancePending.text = balance.accountBalanceInFiatFormatted
+        // -- Account pending balance fiat
+        let pendignString = CybridLocalizer().localize(with: UIStrings.accountsItemFiatPending)
+        let pendingValue = "\(balance.accountPendingBalanceFormatted)\(pendignString)"
+        accountBalancePending.text = pendingValue
     }
 }
 
@@ -234,5 +236,11 @@ extension AccountsFiatCell {
         static let accountBalanceColor = UIColor.black
         static let assetPriceColor = UIColor(hex: "#636366")
         static let accountBalanceFiatColor = UIColor(hex: "#636366")
+        static let accountsITemFiatPEndingColor = UIColor(hex: "#5AC8FA")
+    }
+
+    enum UIStrings {
+
+        static let accountsItemFiatPending = "cybrid.accounts.item.fiat.pending"
     }
 }

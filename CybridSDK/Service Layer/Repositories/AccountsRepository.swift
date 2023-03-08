@@ -10,10 +10,15 @@ import CybridApiBankSwift
 
 typealias FetchAccountsCompletion = (Result<AccountListBankModel, ErrorResponse>) -> Void
 
+protocol AccountsRepository {
+    static func fetchAccounts(customerGuid: String, _ completion: @escaping FetchAccountsCompletion)
+}
+
 protocol AccountsRepoProvider: AuthenticatedServiceProvider {
   var accountsRepository: AccountsRepository.Type { get set }
 }
 
+// MARK: AccountsRepoProvider Extensions
 extension AccountsRepoProvider {
 
     func fetchAccounts(customerGuid: String, _ completion: @escaping FetchAccountsCompletion) {
@@ -21,13 +26,10 @@ extension AccountsRepoProvider {
     }
 }
 
+// MARK: CybridSession Extensions
 extension CybridSession: AccountsRepoProvider {}
 
-// MARK: - AccountsRepository, AccountsAPI
-protocol AccountsRepository {
-    static func fetchAccounts(customerGuid: String, _ completion: @escaping FetchAccountsCompletion)
-}
-
+// MARK: AccountsAPI Extensions
 extension AccountsAPI: AccountsRepository {
 
     static func fetchAccounts(customerGuid: String, _ completion: @escaping FetchAccountsCompletion) {

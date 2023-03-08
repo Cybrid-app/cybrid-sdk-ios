@@ -12,6 +12,7 @@ typealias FetchExternalBankAccount = (Result<ExternalBankAccountBankModel, Error
 typealias FetchExternalBankAccounts = (Result<ExternalBankAccountListBankModel, ErrorResponse>) -> Void
 typealias DeleteExternalBankAccount = (Result<ExternalBankAccountBankModel, ErrorResponse>) -> Void
 
+// MARK: Protocols
 protocol ExternalBankAccountRepository {
 
     static func createExternalBankAccount(postExternalBankAccountBankModel: PostExternalBankAccountBankModel, _ completion: @escaping CreateExternalBankAccount)
@@ -72,7 +73,7 @@ extension ExternalBankAccountsAPI: ExternalBankAccountRepository {
     static func fetchExternalBankAccounts(customerGuid: String, _ completion: @escaping FetchExternalBankAccounts) {
         listExternalBankAccounts(customerGuid: customerGuid, completion: completion)
     }
-    
+
     static func deleteExternalBankAccount(bankAccountGuid: String, _ completion: @escaping DeleteExternalBankAccount) {
         deleteExternalBankAccount(externalBankAccountGuid: bankAccountGuid, completion: completion)
     }

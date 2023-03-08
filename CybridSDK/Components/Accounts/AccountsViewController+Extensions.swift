@@ -58,7 +58,7 @@ extension AccountsViewController {
         accountsTitle.font = UIFont.make(ofSize: UIValues.accountComponentTitleSize)
         accountsTitle.textColor = UIValues.accountComponentTitleColor
         accountsTitle.textAlignment = .center
-        accountsTitle.setLocalizedText(key: UIStrings.accountsLoadingTitle, localizer: localizer)
+        accountsTitle.setLocalizedText(key: UIStrings.accountsContentTitle, localizer: localizer)
         accountsTitle.asFirstIn(self.componentContent,
                                 height: UIValues.accountComponentTitleHeight,
                                 margins: UIValues.accountComponentTitleMargin)
@@ -81,6 +81,14 @@ extension AccountsViewController {
             accountsValueTitle.text = value
         }
 
+        // -- Button
+        let transferButton = CYBButton(title: localizer.localize(with: UIStrings.accountsContentTransferButton)) {
+            self.dismiss(animated: true)
+        }
+        transferButton.asLast(parent: self.componentContent,
+                              height: UIValues.accountsContentTransferButtonHeight,
+                              margins: UIValues.accountsContentTransferButtonMargins)
+
         // -- Table
         self.accountsTable.delegate = self.accountsViewModel
         self.accountsTable.dataSource = self.accountsViewModel
@@ -91,8 +99,8 @@ extension AccountsViewController {
         self.accountsTable.rowHeight = UIValues.accountsTableRowHeight
         self.accountsTable.estimatedRowHeight = UIValues.accountsTableRowHeight
         self.accountsTable.translatesAutoresizingMaskIntoConstraints = false
-        self.accountsTable.addBelowToBottom(topItem: accountsValueTitle,
-                                            bottomItem: self.componentContent,
+        self.accountsTable.addInTheMiddle(topItem: accountsValueTitle,
+                                            bottomItem: transferButton,
                                             margins: UIValues.accountsTableMargin)
 
         // -- Live Data - Table
@@ -152,7 +160,6 @@ extension AccountsViewController {
         static let accountValueTitleHeight: CGFloat = 40
         static let accountValueTitleMargin = UIEdgeInsets(top: 3, left: 10, bottom: 0, right: 10)
         static let accountsTableRowHeight: CGFloat = 64
-        static let accountsTableMargin = UIEdgeInsets(top: 10, left: 10, bottom: 4, right: 10)
 
         // -- Colors
         static let accountComponentTitleColor = UIColor(hex: "#636366")
@@ -168,6 +175,7 @@ extension AccountsViewController {
         static let loadingSpinnerMargin = UIEdgeInsets(top: 10, left: 10, bottom: 0, right: 10)
         static let componentRequiredButtonsHeight: CGFloat = 50
         static let bankAccountsRowHeight: CGFloat = 47
+        static let accountsContentTransferButtonHeight: CGFloat = 48
 
         // -- Colors
         static let componentTitleColor = UIColor.black
@@ -179,22 +187,14 @@ extension AccountsViewController {
         static let contentNoAccountsTitleFont = UIFont.make(ofSize: 18)
 
         // -- Margins
-        static let bankAccountsTableMargins = UIEdgeInsets(top: 35, left: 15, bottom: 30, right: 15)
+        static let accountsTableMargin = UIEdgeInsets(top: 10, left: 10, bottom: 20, right: 10)
+        static let accountsContentTransferButtonMargins = UIEdgeInsets(top: 0, left: 20, bottom: 10, right: 20)
     }
 
     enum UIStrings {
 
         static let accountsLoadingTitle = "cybrid.accounts.loading.title"
-
-        static let componentContentTitleText = "cybrid.bank.content.title.text"
-        static let componentContentNoAccountText = "cybrid.bank.content.noAccounts.text"
-
-        static let loadingText = "cybrid.bank.accounts.loading.text"
-        static let requiredText = "cybrid.bank.accounts.required.text"
-        static let requiredButtonText = "cybrid.bank.accounts.required.button.text"
-        static let doneText = "cybrid.bank.accounts.done.text"
-        static let doneButtonText = "cybrid.bank.accounts.done.button.text"
-        static let errorText = "cybrid.bank.accounts.error.text"
-        static let errorButtonText = "cybrid.bank.accounts.error.button.text"
+        static let accountsContentTitle = "cybrid.accounts.content.title"
+        static let accountsContentTransferButton = "cybrid.accounts.content.transfer.button"
     }
 }

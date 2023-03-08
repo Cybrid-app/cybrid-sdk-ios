@@ -93,6 +93,7 @@ final class ServiceProviderMock: AssetsRepoProvider,
 
     func didFetchAccountsSuccessfully() {
 
+        Cybrid.session.setupSession(authToken: "TEST-TOKEN")
         AccountsAPIMock.didFetchAccountsSuccessfully()
     }
 
