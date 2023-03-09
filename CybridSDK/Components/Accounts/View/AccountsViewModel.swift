@@ -40,61 +40,68 @@ class AccountsViewModel: NSObject {
         self.currentCurrency = currency
     }
 
-    internal func getAssetsList() async -> [AssetBankModel] {
+    internal func getAssetsList(_ completion: @escaping (_ assetsReady: Bool) -> Void) {
 
-        await withCheckedContinuation { continuation in
-            dataProvider.fetchAssetsList { [weak self] assetsResult in
+        if self.assets.isEmpty {
+
+            self.dataProvider.fetchAssetsList { [weak self] assetsResult in
                 switch assetsResult {
                 case .success(let assetsList):
 
                     self?.logger?.log(.component(.accounts(.assetsDataFetching)))
-                    continuation.resume(returning: assetsList)
+                    self?.assets = assetsList
+                    completion(true)
 
                 case .failure:
+
                     self?.logger?.log(.component(.accounts(.assetsDataError)))
-                    continuation.resume(returning: [])
+                    self?.assets = []
+                    completion(true)
                 }
             }
+        } else {
+            completion(true)
         }
     }
 
     func getAccounts() {
 
-        if self.assets.isEmpty {
-            Task { self.assets = await self.getAssetsList() }
-        }
+        self.getAssetsList { [weak self] _ in
 
-        dataProvider.fetchAccounts(customerGuid: Cybrid.customerGUID) { [weak self] accountsResult in
+            self?.dataProvider.fetchAccounts(customerGuid: Cybrid.customerGUID) { [weak self] accountsResult in
 
-            switch accountsResult {
-            case .success(let accountsList):
-                self?.logger?.log(.component(.accounts(.accountsDataFetching)))
-                self?.accounts = accountsList.objects
-                self?.getPricesList()
-            case .failure:
-                self?.logger?.log(.component(.accounts(.accountsDataError)))
+                switch accountsResult {
+                case .success(let accountsList):
+                    self?.logger?.log(.component(.accounts(.accountsDataFetching)))
+                    self?.accounts = accountsList.objects
+
+                    self?.pricesPolling = Polling { [self] in
+                        self?.getPricesList()
+                    }
+
+                case .failure:
+                    self?.logger?.log(.component(.accounts(.accountsDataError)))
+                }
             }
         }
     }
 
     internal func getPricesList() {
 
-        self.pricesPolling = Polling { [self] in
-            self.dataProvider.fetchPriceList { [weak self] pricesResult in
+        self.dataProvider.fetchPriceList { [weak self] pricesResult in
 
-                switch pricesResult {
-                case .success(let pricesList):
+            switch pricesResult {
+            case .success(let pricesList):
 
-                    self?.logger?.log(.component(.accounts(.pricesDataFetching)))
-                    self?.prices = pricesList
-                    self?.createAccountsFormatted()
-                    if self?.uiState.value == .LOADING {
-                        self?.uiState.value = .CONTENT
-                    }
-
-                case .failure:
-                    self?.logger?.log(.component(.accounts(.pricesDataError)))
+                self?.logger?.log(.component(.accounts(.pricesDataFetching)))
+                self?.prices = pricesList
+                self?.createAccountsFormatted()
+                if self?.uiState.value == .LOADING {
+                    self?.uiState.value = .CONTENT
                 }
+
+            case .failure:
+                self?.logger?.log(.component(.accounts(.pricesDataError)))
             }
         }
     }
@@ -121,7 +128,7 @@ class AccountsViewModel: NSObject {
 
       return accounts.compactMap { account in
 
-        let code = account.asset ?? ""
+        let code = account.asset!
         let symbol = "\(code)-\(currentCurrency)"
         let asset = assets.first(where: { $0.code == code })
         let counterAsset = assets.first(where: { $0.code == currentCurrency })
@@ -134,7 +141,7 @@ class AccountsViewModel: NSObject {
       }
     }
 
-    private func calculateTotalBalance() {
+    internal func calculateTotalBalance() {
 
         if !self.assets.isEmpty && !self.balances.value.isEmpty {
             if let asset = assets.first(where: { $0.code == currentCurrency.uppercased() }) {

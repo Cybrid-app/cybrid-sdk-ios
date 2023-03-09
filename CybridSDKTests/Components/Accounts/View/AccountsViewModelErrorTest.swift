@@ -10,32 +10,58 @@ import CybridApiBankSwift
 import XCTest
 
 class AccountsViewModelErrorTest: XCTestCase {
-    
+
     lazy var dataProvider = ServiceProviderMock()
-    
+
     func createViewModel() -> AccountsViewModel {
-        
+
         return AccountsViewModel(
             cellProvider: AccountsMockViewProvider(),
             dataProvider: self.dataProvider,
             logger: nil,
             currency: "USD")
     }
-    
-    func test_getAssetsList_Error() async {
+
+    func test_getAssetsList_Error() {
 
         // -- Given
-        let viewModel = AccountsViewModel(
-            cellProvider: AccountsMockViewProvider(),
-            dataProvider: self.dataProvider,
-            logger: nil,
-            currency: "USD")
+        let viewModel = self.createViewModel()
 
         // -- When
-        let assets = await viewModel.getAssetsList()
+        viewModel.getAssetsList { ready in
+            XCTAssertTrue(ready)
+        }
         dataProvider.didFetchAssetsWithError()
 
         // -- Then
-        XCTAssertEqual(assets, [])
+        XCTAssertEqual(viewModel.assets, [])
+    }
+
+    func test_getAccounts_Error() {
+
+        // -- Given
+        let viewModel = self.createViewModel()
+
+        // -- When
+        viewModel.assets = AssetBankModel.cryptoAssets
+        viewModel.getAccounts()
+        dataProvider.didFetchAccountsWithError()
+
+        // -- Then
+        XCTAssertNil(viewModel.pricesPolling)
+        XCTAssertEqual(viewModel.accounts, [])
+    }
+
+    func test_getPricesList_Error() {
+
+        // -- Given
+        let viewModel = self.createViewModel()
+
+        // -- When
+        viewModel.getPricesList()
+        dataProvider.didFetchPricesWithError()
+
+        // -- Then
+        XCTAssertEqual(viewModel.prices, [])
     }
 }

@@ -48,6 +48,10 @@ public final class AccountsViewController: UIViewController {
         view.backgroundColor = .white
         self.initComponentContent()
         self.manageCurrentStateUI()
+
+        self.accountsTable.register(AccountsCell.self, forCellReuseIdentifier: AccountsCell.reuseIdentifier)
+        self.accountsTable.register(AccountsFiatCell.self, forCellReuseIdentifier: AccountsFiatCell.reuseIdentifier)
+
         self.accountsViewModel.getAccounts()
     }
 

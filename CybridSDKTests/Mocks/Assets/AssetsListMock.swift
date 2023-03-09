@@ -31,4 +31,5 @@ extension AssetBankModel {
 
   static let cryptoAssets: [AssetBankModel] = [.bitcoin, .ethereum, .dogecoin]
   static let fiatAssets: [AssetBankModel] = [.usd, .cad, .eur]
+  static let mock: [AssetBankModel] = [.bitcoin, .ethereum, .usd]
 }
