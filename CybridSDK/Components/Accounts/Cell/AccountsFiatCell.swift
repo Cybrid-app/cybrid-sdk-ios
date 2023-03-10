@@ -56,7 +56,7 @@ class AccountsFiatCell: UITableViewCell {
                              right: rightSide)
     }
 
-    func setData(balance: AccountAssetPriceModel) {
+    func setData(balance: BalanceUIModel) {
 
         // -- Setup icon
         icon.setURL(balance.accountAssetURL)
@@ -120,40 +120,40 @@ extension AccountsFiatCell {
 
     private func createStackView(left: UIView, center: UIView, right: UIView) {
 
-      center.setContentCompressionResistancePriority(.defaultHigh - 1, for: .horizontal)
-      center.setContentHuggingPriority(.required, for: .horizontal)
-      center.setContentHuggingPriority(.defaultHigh, for: .vertical)
+        center.setContentCompressionResistancePriority(.defaultHigh - 1, for: .horizontal)
+        center.setContentHuggingPriority(.required, for: .horizontal)
+        center.setContentHuggingPriority(.defaultHigh, for: .vertical)
 
-      right.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
-      right.setContentHuggingPriority(.defaultHigh, for: .vertical)
+        right.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
+        right.setContentHuggingPriority(.defaultHigh, for: .vertical)
 
-      let contentStackView = UIStackView(arrangedSubviews: [left, center, right])
-      contentStackView.axis = .horizontal
+        let contentStackView = UIStackView(arrangedSubviews: [left, center, right])
+        contentStackView.axis = .horizontal
         contentStackView.spacing = UIValues.margin
-      contentStackView.distribution = .fill
-      contentStackView.alignment = .center
-      addSubview(contentStackView)
-      contentStackView.translatesAutoresizingMaskIntoConstraints = false
-      contentStackView.constraint(attribute: .top,
-                                  relatedBy: .equal,
-                                  toItem: self,
-                                  attribute: .top,
-                                  constant: UIValues.margin)
-      contentStackView.constraint(attribute: .bottom,
-                                  relatedBy: .equal,
-                                  toItem: self,
-                                  attribute: .bottom,
-                                  constant: -UIValues.margin)
-      contentStackView.constraint(attribute: .leading,
-                                  relatedBy: .equal,
-                                  toItem: self,
-                                  attribute: .leading,
-                                  constant: UIValues.margin)
-      contentStackView.constraint(attribute: .trailing,
-                                  relatedBy: .equal,
-                                  toItem: self,
-                                  attribute: .trailing,
-                                  constant: -UIValues.margin)
+        contentStackView.distribution = .fill
+        contentStackView.alignment = .center
+        addSubview(contentStackView)
+        contentStackView.translatesAutoresizingMaskIntoConstraints = false
+        contentStackView.constraint(attribute: .top,
+                                    relatedBy: .equal,
+                                    toItem: self,
+                                    attribute: .top,
+                                    constant: UIValues.margin)
+        contentStackView.constraint(attribute: .bottom,
+                                    relatedBy: .equal,
+                                    toItem: self,
+                                    attribute: .bottom,
+                                    constant: -UIValues.margin)
+        contentStackView.constraint(attribute: .leading,
+                                    relatedBy: .equal,
+                                    toItem: self,
+                                    attribute: .leading,
+                                    constant: UIValues.margin)
+        contentStackView.constraint(attribute: .trailing,
+                                    relatedBy: .equal,
+                                    toItem: self,
+                                    attribute: .trailing,
+                                    constant: -UIValues.margin)
     }
 
     private func setupBasicLabel(_ label: UILabel, side: UILabel.AttributedSide, font: UIFont, color: UIColor?) {
@@ -193,7 +193,7 @@ extension AccountsFiatCell {
                         constant: UIConstants.zero)
     }
 
-    private func setLabelsData(balance: AccountAssetPriceModel) {
+    private func setLabelsData(balance: BalanceUIModel) {
 
         // -- Asset name
         assetName.setAttributedText(

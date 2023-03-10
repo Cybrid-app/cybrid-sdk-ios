@@ -8,7 +8,7 @@
 import CybridApiBankSwift
 import Foundation
 
-struct AccountAssetPriceModel: Equatable {
+struct BalanceUIModel: Equatable {
 
     let account: AccountBankModel
     let asset: AssetBankModel?

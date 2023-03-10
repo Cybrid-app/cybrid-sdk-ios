@@ -142,7 +142,7 @@
 		9257E78D29B7B2E500846E12 /* AccountsFiatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9257E78C29B7B2E500846E12 /* AccountsFiatCell.swift */; };
 		9257E79129B7DE5A00846E12 /* AccountsViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9257E79029B7DE5A00846E12 /* AccountsViewModelTest.swift */; };
 		9257E79329B7E27400846E12 /* AccountsViewModelErrorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9257E79229B7E27400846E12 /* AccountsViewModelErrorTest.swift */; };
-		9257E79629BB9BCA00846E12 /* AccountAssetPriceModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9257E79529BB9BC900846E12 /* AccountAssetPriceModelTest.swift */; };
+		9257E79629BB9BCA00846E12 /* BalanceUIModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9257E79529BB9BC900846E12 /* BalanceUIModelTest.swift */; };
 		92635470294CEC0400660E0B /* BankAccountsViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9263546F294CEC0400660E0B /* BankAccountsViewController+Extensions.swift */; };
 		92663D09293FACB900842E30 /* IdentityVerificationWithDetailsBankModel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92663D08293FACB900842E30 /* IdentityVerificationWithDetailsBankModel+Extensions.swift */; };
 		92663D0D293FCC9500842E30 /* BankAccountsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92663D0C293FCC9500842E30 /* BankAccountsViewModel.swift */; };
@@ -158,7 +158,7 @@
 		927233D428D243C60080AAC4 /* AccountsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927233D328D243C60080AAC4 /* AccountsViewController.swift */; };
 		927233D628D243DC0080AAC4 /* AccountTradesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927233D528D243DC0080AAC4 /* AccountTradesViewController.swift */; };
 		927233D928D243F80080AAC4 /* AccountTradeDetailModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927233D828D243F80080AAC4 /* AccountTradeDetailModal.swift */; };
-		927233DC28D244210080AAC4 /* AccountAssetPriceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927233DB28D244210080AAC4 /* AccountAssetPriceModel.swift */; };
+		927233DC28D244210080AAC4 /* BalanceUIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927233DB28D244210080AAC4 /* BalanceUIModel.swift */; };
 		927233DE28D2445C0080AAC4 /* TradeUIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927233DD28D2445C0080AAC4 /* TradeUIModel.swift */; };
 		927233E128D2447F0080AAC4 /* AccountsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927233E028D2447F0080AAC4 /* AccountsViewModel.swift */; };
 		927233E328D2448F0080AAC4 /* AccountTradesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927233E228D2448F0080AAC4 /* AccountTradesViewModel.swift */; };
@@ -417,7 +417,7 @@
 		9257E78C29B7B2E500846E12 /* AccountsFiatCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsFiatCell.swift; sourceTree = "<group>"; };
 		9257E79029B7DE5A00846E12 /* AccountsViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsViewModelTest.swift; sourceTree = "<group>"; };
 		9257E79229B7E27400846E12 /* AccountsViewModelErrorTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsViewModelErrorTest.swift; sourceTree = "<group>"; };
-		9257E79529BB9BC900846E12 /* AccountAssetPriceModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountAssetPriceModelTest.swift; sourceTree = "<group>"; };
+		9257E79529BB9BC900846E12 /* BalanceUIModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceUIModelTest.swift; sourceTree = "<group>"; };
 		9263546F294CEC0400660E0B /* BankAccountsViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BankAccountsViewController+Extensions.swift"; sourceTree = "<group>"; };
 		92663D08293FACB900842E30 /* IdentityVerificationWithDetailsBankModel+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IdentityVerificationWithDetailsBankModel+Extensions.swift"; sourceTree = "<group>"; };
 		92663D0C293FCC9500842E30 /* BankAccountsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankAccountsViewModel.swift; sourceTree = "<group>"; };
@@ -433,7 +433,7 @@
 		927233D328D243C60080AAC4 /* AccountsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsViewController.swift; sourceTree = "<group>"; };
 		927233D528D243DC0080AAC4 /* AccountTradesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTradesViewController.swift; sourceTree = "<group>"; };
 		927233D828D243F80080AAC4 /* AccountTradeDetailModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTradeDetailModal.swift; sourceTree = "<group>"; };
-		927233DB28D244210080AAC4 /* AccountAssetPriceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountAssetPriceModel.swift; sourceTree = "<group>"; };
+		927233DB28D244210080AAC4 /* BalanceUIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceUIModel.swift; sourceTree = "<group>"; };
 		927233DD28D2445C0080AAC4 /* TradeUIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeUIModel.swift; sourceTree = "<group>"; };
 		927233E028D2447F0080AAC4 /* AccountsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsViewModel.swift; sourceTree = "<group>"; };
 		927233E228D2448F0080AAC4 /* AccountTradesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTradesViewModel.swift; sourceTree = "<group>"; };
@@ -1245,7 +1245,7 @@
 		9257E79429BB9BB500846E12 /* Entity */ = {
 			isa = PBXGroup;
 			children = (
-				9257E79529BB9BC900846E12 /* AccountAssetPriceModelTest.swift */,
+				9257E79529BB9BC900846E12 /* BalanceUIModelTest.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -1302,7 +1302,7 @@
 		927233DA28D2440C0080AAC4 /* Entity */ = {
 			isa = PBXGroup;
 			children = (
-				927233DB28D244210080AAC4 /* AccountAssetPriceModel.swift */,
+				927233DB28D244210080AAC4 /* BalanceUIModel.swift */,
 				927233DD28D2445C0080AAC4 /* TradeUIModel.swift */,
 			);
 			path = Entity;
@@ -2022,7 +2022,7 @@
 				0B2B2A872862906E002F0EC1 /* UILabel+Extensions.swift in Sources */,
 				0B2B2A6D28621D5C002F0EC1 /* ColorTheme.swift in Sources */,
 				0B00E04C2885AD8D00707F26 /* PricesRepository.swift in Sources */,
-				927233DC28D244210080AAC4 /* AccountAssetPriceModel.swift in Sources */,
+				927233DC28D244210080AAC4 /* BalanceUIModel.swift in Sources */,
 				0BBD0CDC28B5D6F7001DBC5F /* TradesRepository.swift in Sources */,
 				0B96600F285AA0FC00584692 /* AssertionFailureOverride.swift in Sources */,
 				927233CF28D242170080AAC4 /* Utils.swift in Sources */,
@@ -2143,7 +2143,7 @@
 				0B966013285AA2EB00584692 /* URLImageViewTests.swift in Sources */,
 				0B50F35928A5885400DDB01E /* CybridEventTests.swift in Sources */,
 				9217353B28E3FF7500DF58CA /* AccountBankModelTest.swift in Sources */,
-				9257E79629BB9BCA00846E12 /* AccountAssetPriceModelTest.swift in Sources */,
+				9257E79629BB9BCA00846E12 /* BalanceUIModelTest.swift in Sources */,
 				0B966008285A92E700584692 /* XCTestCase+expectFailure.swift in Sources */,
 				92827DC9294733F200231772 /* ExternalBankAccountAPIMock.swift in Sources */,
 				0B96602B285C3AC600584692 /* NetworkingInterfaceTests.swift in Sources */,
@@ -2448,7 +2448,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = 5789WJ9F6P;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CybridSDKTestApp/Info.plist;
@@ -2465,7 +2465,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3;
+				MARKETING_VERSION = 1.4;
 				PRODUCT_BUNDLE_IDENTIFIER = app.cybrid.CybridSDKTestApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -2481,7 +2481,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = 5789WJ9F6P;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CybridSDKTestApp/Info.plist;
@@ -2498,7 +2498,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3;
+				MARKETING_VERSION = 1.4;
 				PRODUCT_BUNDLE_IDENTIFIER = app.cybrid.CybridSDKTestApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

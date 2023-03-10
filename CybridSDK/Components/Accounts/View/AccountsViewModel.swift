@@ -14,7 +14,7 @@ class AccountsViewModel: NSObject {
     internal var assets: [AssetBankModel] = []
     internal var accounts: [AccountBankModel] = []
     internal var prices: [SymbolPriceBankModel] = []
-    internal var balances: Observable<[AccountAssetPriceModel]> = .init([])
+    internal var balances: Observable<[BalanceUIModel]> = .init([])
     internal var accountTotalBalance: Observable<String> = .init("")
 
     // MARK: Private properties
@@ -124,7 +124,7 @@ class AccountsViewModel: NSObject {
     internal func buildModelList(
         assets: [AssetBankModel],
         accounts: [AccountBankModel],
-        prices: [SymbolPriceBankModel]) -> [AccountAssetPriceModel]? {
+        prices: [SymbolPriceBankModel]) -> [BalanceUIModel]? {
 
       return accounts.compactMap { account in
 
@@ -133,7 +133,7 @@ class AccountsViewModel: NSObject {
         let asset = assets.first(where: { $0.code == code })
         let counterAsset = assets.first(where: { $0.code == currentCurrency })
         let price = prices.first(where: { $0.symbol == symbol })
-        return AccountAssetPriceModel(
+        return BalanceUIModel(
             account: account,
             asset: asset,
             counterAsset: counterAsset,
@@ -161,9 +161,9 @@ class AccountsViewModel: NSObject {
 // MARK: - AccountsViewProvider
 
 protocol AccountsViewProvider: AnyObject {
-  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath, withData dataModel: AccountAssetPriceModel) -> UITableViewCell
+  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath, withData dataModel: BalanceUIModel) -> UITableViewCell
 
-  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath, withBalance balance: AccountAssetPriceModel)
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath, withBalance balance: BalanceUIModel)
 }
 
 // MARK: - AccountsViewModel + UITableViewDelegate + UITableViewDataSource

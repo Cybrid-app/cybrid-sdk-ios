@@ -22,7 +22,7 @@ class AccountsViewModelTest: XCTestCase {
             currency: "USD")
     }
 
-    func createBalanceList() -> [AccountAssetPriceModel] {
+    func createBalanceList() -> [BalanceUIModel] {
 
         let viewModel = self.createViewModel()
         let assets = AssetBankModel.cryptoAssets
@@ -253,9 +253,9 @@ class AccountsViewModelTest: XCTestCase {
 
 class AccountsMockViewProvider: AccountsViewProvider {
 
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath, withData dataModel: AccountAssetPriceModel) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath, withData dataModel: BalanceUIModel) -> UITableViewCell {
         return UITableViewCell()
     }
 
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath, withBalance balance: AccountAssetPriceModel) {}
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath, withBalance balance: BalanceUIModel) {}
 }

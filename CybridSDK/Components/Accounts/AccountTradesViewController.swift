@@ -10,7 +10,7 @@ import UIKit
 
 public final class AccountTradesViewController: UIViewController {
 
-    private var balance: AccountAssetPriceModel!
+    private var balance: BalanceUIModel!
     private var accountsViewModel: AccountsViewModel!
     private var tradesViewModel: AccountTradesViewModel!
 
@@ -25,7 +25,7 @@ public final class AccountTradesViewController: UIViewController {
     var balanceFiatValueView: UILabel!
     let tradesTable = UITableView()
 
-    internal init(balance: AccountAssetPriceModel, accountsViewModel: AccountsViewModel) {
+    internal init(balance: BalanceUIModel, accountsViewModel: AccountsViewModel) {
 
         super.init(nibName: nil, bundle: nil)
         self.balance = balance

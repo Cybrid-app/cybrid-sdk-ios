@@ -114,7 +114,7 @@ extension AccountsViewController: AccountsViewProvider {
 
     func tableView(_ tableView: UITableView,
                    cellForRowAt indexPath: IndexPath,
-                   withData dataModel: AccountAssetPriceModel) -> UITableViewCell {
+                   withData dataModel: BalanceUIModel) -> UITableViewCell {
 
         if dataModel.account.type == .trading {
             let cell = (tableView.dequeueReusableCell(
@@ -133,7 +133,7 @@ extension AccountsViewController: AccountsViewProvider {
 
     func tableView(_ tableView: UITableView,
                    didSelectRowAt indexPath: IndexPath,
-                   withBalance balance: AccountAssetPriceModel) {
+                   withBalance balance: BalanceUIModel) {
 
         let accountTradesViewController = AccountTradesViewController(
             balance: balance,

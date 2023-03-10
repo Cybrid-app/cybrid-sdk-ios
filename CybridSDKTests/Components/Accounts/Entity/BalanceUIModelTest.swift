@@ -9,7 +9,7 @@ import CybridApiBankSwift
 @testable import CybridSDK
 import XCTest
 
-class AccountAssetPriceModelTest: XCTestCase {
+class BalanceUIModelTest: XCTestCase {
 
     func test_init_with_emptys() {
 
@@ -36,7 +36,7 @@ class AccountAssetPriceModelTest: XCTestCase {
         )
 
         // -- When
-        let balance = AccountAssetPriceModel(
+        let balance = BalanceUIModel(
             account: account,
             asset: AssetBankModel.usd,
             counterAsset: AssetBankModel.bitcoin,
@@ -73,7 +73,7 @@ class AccountAssetPriceModelTest: XCTestCase {
         )
 
         // -- When
-        let balance = AccountAssetPriceModel(
+        let balance = BalanceUIModel(
             account: account,
             asset: AssetBankModel.usd,
             counterAsset: AssetBankModel.bitcoin,

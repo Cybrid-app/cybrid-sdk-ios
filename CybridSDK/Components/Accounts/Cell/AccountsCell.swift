@@ -57,7 +57,7 @@ class AccountsCell: UITableViewCell {
                              right: rightSide)
     }
 
-    func setData(balance: AccountAssetPriceModel) {
+    func setData(balance: BalanceUIModel) {
 
         // -- Setup icon
         icon.setURL(balance.accountAssetURL)
@@ -200,7 +200,7 @@ extension AccountsCell {
                         constant: UIConstants.zero)
     }
 
-    private func setLabelsData(balance: AccountAssetPriceModel) {
+    private func setLabelsData(balance: BalanceUIModel) {
 
         // -- Asset name
         assetName.setAttributedText(

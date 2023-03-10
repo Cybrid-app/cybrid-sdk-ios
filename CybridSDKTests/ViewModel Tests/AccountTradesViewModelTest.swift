@@ -128,7 +128,7 @@ class AccountTradesViewModelTests: XCTestCase {
     func test_TableViewRows() throws {
 
         // -- Given
-        let balance = AccountAssetPriceModel(
+        let balance = BalanceUIModel(
             account: AccountListBankModel.mock.objects[0],
             asset: AssetBankModel.bitcoin,
             counterAsset: AssetBankModel.usd,
@@ -161,7 +161,7 @@ class AccountTradesViewModelTests: XCTestCase {
     func test_TableViewHeader() throws {
 
         // -- Given
-        let balance = AccountAssetPriceModel(
+        let balance = BalanceUIModel(
             account: AccountListBankModel.mock.objects[0],
             asset: AssetBankModel.bitcoin,
             counterAsset: AssetBankModel.usd,
@@ -196,7 +196,7 @@ class AccountTradesViewModelTests: XCTestCase {
     func test_TableViewValidCell() throws {
 
         // -- Given
-        let balance = AccountAssetPriceModel(
+        let balance = BalanceUIModel(
             account: AccountListBankModel.mock.objects[0],
             asset: AssetBankModel.bitcoin,
             counterAsset: AssetBankModel.usd,
@@ -231,7 +231,7 @@ class AccountTradesViewModelTests: XCTestCase {
     func test_TableView_didSelectRowAtIndex() throws {
 
         // -- Given
-        let balance = AccountAssetPriceModel(
+        let balance = BalanceUIModel(
             account: AccountListBankModel.mock.objects[0],
             asset: AssetBankModel.bitcoin,
             counterAsset: AssetBankModel.usd,
