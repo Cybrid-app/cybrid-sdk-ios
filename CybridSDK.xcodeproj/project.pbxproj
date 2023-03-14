@@ -135,10 +135,13 @@
 		9205B8B428E3A43700883279 /* accountResponseIncomplete.json in Resources */ = {isa = PBXBuildFile; fileRef = 9205B8B328E3A43600883279 /* accountResponseIncomplete.json */; };
 		9205B8B628E3A52A00883279 /* listTradesResponseIncomplete.json in Resources */ = {isa = PBXBuildFile; fileRef = 9205B8B528E3A52A00883279 /* listTradesResponseIncomplete.json */; };
 		9205B8B928E3AB4300883279 /* AccountsAPIMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9205B8B828E3AB4300883279 /* AccountsAPIMock.swift */; };
-		9205B8BD28E3AD3C00883279 /* AccountsViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9205B8BC28E3AD3C00883279 /* AccountsViewModelTest.swift */; };
 		9217353B28E3FF7500DF58CA /* AccountBankModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9217353A28E3FF7500DF58CA /* AccountBankModelTest.swift */; };
 		9217353D28E41C3F00DF58CA /* TradeBankModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9217353C28E41C3F00DF58CA /* TradeBankModelTest.swift */; };
 		9217354028E4200D00DF58CA /* TradeUIModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9217353F28E4200D00DF58CA /* TradeUIModelTest.swift */; };
+		9257E78D29B7B2E500846E12 /* AccountsFiatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9257E78C29B7B2E500846E12 /* AccountsFiatCell.swift */; };
+		9257E79129B7DE5A00846E12 /* AccountsViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9257E79029B7DE5A00846E12 /* AccountsViewModelTest.swift */; };
+		9257E79329B7E27400846E12 /* AccountsViewModelErrorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9257E79229B7E27400846E12 /* AccountsViewModelErrorTest.swift */; };
+		9257E79629BB9BCA00846E12 /* BalanceUIModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9257E79529BB9BC900846E12 /* BalanceUIModelTest.swift */; };
 		92635470294CEC0400660E0B /* BankAccountsViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9263546F294CEC0400660E0B /* BankAccountsViewController+Extensions.swift */; };
 		92663D09293FACB900842E30 /* IdentityVerificationWithDetailsBankModel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92663D08293FACB900842E30 /* IdentityVerificationWithDetailsBankModel+Extensions.swift */; };
 		92663D0D293FCC9500842E30 /* BankAccountsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92663D0C293FCC9500842E30 /* BankAccountsViewModel.swift */; };
@@ -154,7 +157,7 @@
 		927233D428D243C60080AAC4 /* AccountsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927233D328D243C60080AAC4 /* AccountsViewController.swift */; };
 		927233D628D243DC0080AAC4 /* AccountTradesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927233D528D243DC0080AAC4 /* AccountTradesViewController.swift */; };
 		927233D928D243F80080AAC4 /* AccountTradeDetailModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927233D828D243F80080AAC4 /* AccountTradeDetailModal.swift */; };
-		927233DC28D244210080AAC4 /* AccountAssetPriceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927233DB28D244210080AAC4 /* AccountAssetPriceModel.swift */; };
+		927233DC28D244210080AAC4 /* BalanceUIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927233DB28D244210080AAC4 /* BalanceUIModel.swift */; };
 		927233DE28D2445C0080AAC4 /* TradeUIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927233DD28D2445C0080AAC4 /* TradeUIModel.swift */; };
 		927233E128D2447F0080AAC4 /* AccountsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927233E028D2447F0080AAC4 /* AccountsViewModel.swift */; };
 		927233E328D2448F0080AAC4 /* AccountTradesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927233E228D2448F0080AAC4 /* AccountTradesViewModel.swift */; };
@@ -190,6 +193,7 @@
 		928E238128EE4A6D006AAE1A /* CryptoListComponentTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928E238028EE4A6D006AAE1A /* CryptoListComponentTest.swift */; };
 		929C087829A535740075BA89 /* BankAccountCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929C087729A535740075BA89 /* BankAccountCell.swift */; };
 		929C087B29A5461E0075BA89 /* BankAccountDetailModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929C087A29A5461E0075BA89 /* BankAccountDetailModal.swift */; };
+		92A2FD8429AE837200146D1E /* AccountsViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A2FD8329AE837200146D1E /* AccountsViewController+Extensions.swift */; };
 		92A90A8729118C0C00CA0E08 /* CustomersRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A90A8629118C0C00CA0E08 /* CustomersRepository.swift */; };
 		92A90A8A2911939400CA0E08 /* IdentityVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A90A892911939400CA0E08 /* IdentityVerificationViewController.swift */; };
 		92A90A8D2911940600CA0E08 /* IdentityVerificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A90A8C2911940600CA0E08 /* IdentityVerificationViewModel.swift */; };
@@ -405,10 +409,13 @@
 		9205B8B328E3A43600883279 /* accountResponseIncomplete.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = accountResponseIncomplete.json; sourceTree = "<group>"; };
 		9205B8B528E3A52A00883279 /* listTradesResponseIncomplete.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = listTradesResponseIncomplete.json; sourceTree = "<group>"; };
 		9205B8B828E3AB4300883279 /* AccountsAPIMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsAPIMock.swift; sourceTree = "<group>"; };
-		9205B8BC28E3AD3C00883279 /* AccountsViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsViewModelTest.swift; sourceTree = "<group>"; };
 		9217353A28E3FF7500DF58CA /* AccountBankModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountBankModelTest.swift; sourceTree = "<group>"; };
 		9217353C28E41C3F00DF58CA /* TradeBankModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeBankModelTest.swift; sourceTree = "<group>"; };
 		9217353F28E4200D00DF58CA /* TradeUIModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeUIModelTest.swift; sourceTree = "<group>"; };
+		9257E78C29B7B2E500846E12 /* AccountsFiatCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsFiatCell.swift; sourceTree = "<group>"; };
+		9257E79029B7DE5A00846E12 /* AccountsViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsViewModelTest.swift; sourceTree = "<group>"; };
+		9257E79229B7E27400846E12 /* AccountsViewModelErrorTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsViewModelErrorTest.swift; sourceTree = "<group>"; };
+		9257E79529BB9BC900846E12 /* BalanceUIModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceUIModelTest.swift; sourceTree = "<group>"; };
 		9263546F294CEC0400660E0B /* BankAccountsViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BankAccountsViewController+Extensions.swift"; sourceTree = "<group>"; };
 		92663D08293FACB900842E30 /* IdentityVerificationWithDetailsBankModel+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IdentityVerificationWithDetailsBankModel+Extensions.swift"; sourceTree = "<group>"; };
 		92663D0C293FCC9500842E30 /* BankAccountsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankAccountsViewModel.swift; sourceTree = "<group>"; };
@@ -424,7 +431,7 @@
 		927233D328D243C60080AAC4 /* AccountsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsViewController.swift; sourceTree = "<group>"; };
 		927233D528D243DC0080AAC4 /* AccountTradesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTradesViewController.swift; sourceTree = "<group>"; };
 		927233D828D243F80080AAC4 /* AccountTradeDetailModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTradeDetailModal.swift; sourceTree = "<group>"; };
-		927233DB28D244210080AAC4 /* AccountAssetPriceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountAssetPriceModel.swift; sourceTree = "<group>"; };
+		927233DB28D244210080AAC4 /* BalanceUIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceUIModel.swift; sourceTree = "<group>"; };
 		927233DD28D2445C0080AAC4 /* TradeUIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeUIModel.swift; sourceTree = "<group>"; };
 		927233E028D2447F0080AAC4 /* AccountsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsViewModel.swift; sourceTree = "<group>"; };
 		927233E228D2448F0080AAC4 /* AccountTradesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTradesViewModel.swift; sourceTree = "<group>"; };
@@ -461,6 +468,7 @@
 		928E238028EE4A6D006AAE1A /* CryptoListComponentTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoListComponentTest.swift; sourceTree = "<group>"; };
 		929C087729A535740075BA89 /* BankAccountCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankAccountCell.swift; sourceTree = "<group>"; };
 		929C087A29A5461E0075BA89 /* BankAccountDetailModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankAccountDetailModal.swift; sourceTree = "<group>"; };
+		92A2FD8329AE837200146D1E /* AccountsViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AccountsViewController+Extensions.swift"; sourceTree = "<group>"; };
 		92A90A8629118C0C00CA0E08 /* CustomersRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomersRepository.swift; sourceTree = "<group>"; };
 		92A90A892911939400CA0E08 /* IdentityVerificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentityVerificationViewController.swift; sourceTree = "<group>"; };
 		92A90A8C2911940600CA0E08 /* IdentityVerificationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentityVerificationViewModel.swift; sourceTree = "<group>"; };
@@ -1081,7 +1089,7 @@
 				92F38C4D2924220B00008F58 /* BankAccounts */,
 				92A90A882911935400CA0E08 /* IdentityComponent */,
 				0BD66100286B766B00F4DA6B /* ListPrices */,
-				927233D228D243A30080AAC4 /* AccountsComponent */,
+				927233D228D243A30080AAC4 /* Accounts */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -1133,7 +1141,6 @@
 				92B68194291B1C3900FD6E99 /* IdentityVerification */,
 				0BD66122286C20BC00F4DA6B /* CryptoPriceViewModelTests.swift */,
 				0B50F35A28A5890C00DDB01E /* TradeViewModelTests.swift */,
-				9205B8BC28E3AD3C00883279 /* AccountsViewModelTest.swift */,
 				9201FA0328E3DEDF00C6F186 /* AccountTradesViewModelTest.swift */,
 			);
 			path = "ViewModel Tests";
@@ -1214,6 +1221,32 @@
 			path = ModelTest;
 			sourceTree = "<group>";
 		};
+		9257E78E29B7DE4700846E12 /* Accounts */ = {
+			isa = PBXGroup;
+			children = (
+				9257E79429BB9BB500846E12 /* Entity */,
+				9257E78F29B7DE4D00846E12 /* View */,
+			);
+			path = Accounts;
+			sourceTree = "<group>";
+		};
+		9257E78F29B7DE4D00846E12 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				9257E79029B7DE5A00846E12 /* AccountsViewModelTest.swift */,
+				9257E79229B7E27400846E12 /* AccountsViewModelErrorTest.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		9257E79429BB9BB500846E12 /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+				9257E79529BB9BC900846E12 /* BalanceUIModelTest.swift */,
+			);
+			path = Entity;
+			sourceTree = "<group>";
+		};
 		92663D03293F240900842E30 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -1241,16 +1274,18 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		927233D228D243A30080AAC4 /* AccountsComponent */ = {
+		927233D228D243A30080AAC4 /* Accounts */ = {
 			isa = PBXGroup;
 			children = (
+				927233E428D2449C0080AAC4 /* Cell */,
 				927233D728D243EC0080AAC4 /* Modal */,
 				927233DA28D2440C0080AAC4 /* Entity */,
 				927233DF28D2446E0080AAC4 /* View */,
 				927233D328D243C60080AAC4 /* AccountsViewController.swift */,
 				927233D528D243DC0080AAC4 /* AccountTradesViewController.swift */,
+				92A2FD8329AE837200146D1E /* AccountsViewController+Extensions.swift */,
 			);
-			path = AccountsComponent;
+			path = Accounts;
 			sourceTree = "<group>";
 		};
 		927233D728D243EC0080AAC4 /* Modal */ = {
@@ -1264,7 +1299,7 @@
 		927233DA28D2440C0080AAC4 /* Entity */ = {
 			isa = PBXGroup;
 			children = (
-				927233DB28D244210080AAC4 /* AccountAssetPriceModel.swift */,
+				927233DB28D244210080AAC4 /* BalanceUIModel.swift */,
 				927233DD28D2445C0080AAC4 /* TradeUIModel.swift */,
 			);
 			path = Entity;
@@ -1273,7 +1308,6 @@
 		927233DF28D2446E0080AAC4 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				927233E428D2449C0080AAC4 /* Cell */,
 				927233E028D2447F0080AAC4 /* AccountsViewModel.swift */,
 				927233E228D2448F0080AAC4 /* AccountTradesViewModel.swift */,
 			);
@@ -1285,6 +1319,7 @@
 			children = (
 				927233E528D244AC0080AAC4 /* AccountsHeaderCell.swift */,
 				927233E728D244BD0080AAC4 /* AccountsCell.swift */,
+				9257E78C29B7B2E500846E12 /* AccountsFiatCell.swift */,
 				927233E928D244CC0080AAC4 /* AccountTradesHeaderCell.swift */,
 				927233EB28D244DE0080AAC4 /* AccountTradesCell.swift */,
 			);
@@ -1464,6 +1499,7 @@
 		92F120552996A8890086EE18 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				9257E78E29B7DE4700846E12 /* Accounts */,
 				92E13CBC29A6A94A00F0A537 /* BankAccounts */,
 				92F120582996B4B90086EE18 /* ListPrices */,
 				92F120562996A89F0086EE18 /* Trade */,
@@ -1944,8 +1980,10 @@
 				92A90A8A2911939400CA0E08 /* IdentityVerificationViewController.swift in Sources */,
 				927233D628D243DC0080AAC4 /* AccountTradesViewController.swift in Sources */,
 				927233CD28D2419B0080AAC4 /* QuoteBankModel+Extensions.swift in Sources */,
+				92A2FD8429AE837200146D1E /* AccountsViewController+Extensions.swift in Sources */,
 				92635470294CEC0400660E0B /* BankAccountsViewController+Extensions.swift in Sources */,
 				92663D0F293FD60800842E30 /* WorkflowRepository.swift in Sources */,
+				9257E78D29B7B2E500846E12 /* AccountsFiatCell.swift in Sources */,
 				92F707C9298D7557005A93E5 /* ListPricesItemDelegate.swift in Sources */,
 				929C087829A535740075BA89 /* BankAccountCell.swift in Sources */,
 				92E08015295AD31800372460 /* TransferViewController.swift in Sources */,
@@ -1981,7 +2019,7 @@
 				0B2B2A872862906E002F0EC1 /* UILabel+Extensions.swift in Sources */,
 				0B2B2A6D28621D5C002F0EC1 /* ColorTheme.swift in Sources */,
 				0B00E04C2885AD8D00707F26 /* PricesRepository.swift in Sources */,
-				927233DC28D244210080AAC4 /* AccountAssetPriceModel.swift in Sources */,
+				927233DC28D244210080AAC4 /* BalanceUIModel.swift in Sources */,
 				0BBD0CDC28B5D6F7001DBC5F /* TradesRepository.swift in Sources */,
 				0B96600F285AA0FC00584692 /* AssertionFailureOverride.swift in Sources */,
 				927233CF28D242170080AAC4 /* Utils.swift in Sources */,
@@ -2051,6 +2089,7 @@
 				0BD6611D286C1D5B00F4DA6B /* CurrencyFormatterTests.swift in Sources */,
 				0B303CF328636A0D007BF7FF /* CybridConfigTests.swift in Sources */,
 				92F1205B2996B4D60086EE18 /* CryptoPriceModelTest.swift in Sources */,
+				9257E79329B7E27400846E12 /* AccountsViewModelErrorTest.swift in Sources */,
 				92F222D92914359C00137B11 /* PollingTest.swift in Sources */,
 				92B6819129197DDB00FD6E99 /* IdentityVerificationsAPIMock.swift in Sources */,
 				0BBCF640285C52D700D39C6D /* MockError.swift in Sources */,
@@ -2073,7 +2112,6 @@
 				9201FA0428E3DEDF00C6F186 /* AccountTradesViewModelTest.swift in Sources */,
 				0B00E0522886F01A00707F26 /* AssetsAPIMock.swift in Sources */,
 				0B289A0028946B52001B3360 /* JSONMockHelper.swift in Sources */,
-				9205B8BD28E3AD3C00883279 /* AccountsViewModelTest.swift in Sources */,
 				0B303CEC2862F898007BF7FF /* ColorThemeTests.swift in Sources */,
 				0B00E03C287F7BA500707F26 /* CybridSessionTests.swift in Sources */,
 				0B00E03E287F803800707F26 /* MockAPIManager.swift in Sources */,
@@ -2095,11 +2133,13 @@
 				92827DC62943E7A100231772 /* BankAPIMock.swift in Sources */,
 				0BD6611B286C197B00F4DA6B /* UIViewConstraintsTests.swift in Sources */,
 				92E0801D295B6D9A00372460 /* TransferViewModelErrorTest.swift in Sources */,
+				9257E79129B7DE5A00846E12 /* AccountsViewModelTest.swift in Sources */,
 				92F1205E2996BC080086EE18 /* AccountAssetUIModelTest.swift in Sources */,
 				0B00E0572886F25F00707F26 /* PricesAPIMock.swift in Sources */,
 				0B966013285AA2EB00584692 /* URLImageViewTests.swift in Sources */,
 				0B50F35928A5885400DDB01E /* CybridEventTests.swift in Sources */,
 				9217353B28E3FF7500DF58CA /* AccountBankModelTest.swift in Sources */,
+				9257E79629BB9BCA00846E12 /* BalanceUIModelTest.swift in Sources */,
 				0B966008285A92E700584692 /* XCTestCase+expectFailure.swift in Sources */,
 				92827DC9294733F200231772 /* ExternalBankAccountAPIMock.swift in Sources */,
 				0B96602B285C3AC600584692 /* NetworkingInterfaceTests.swift in Sources */,
@@ -2404,7 +2444,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = 5789WJ9F6P;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CybridSDKTestApp/Info.plist;
@@ -2421,7 +2461,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3;
+				MARKETING_VERSION = 1.4;
 				PRODUCT_BUNDLE_IDENTIFIER = app.cybrid.CybridSDKTestApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -2437,7 +2477,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = 5789WJ9F6P;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CybridSDKTestApp/Info.plist;
@@ -2454,7 +2494,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3;
+				MARKETING_VERSION = 1.4;
 				PRODUCT_BUNDLE_IDENTIFIER = app.cybrid.CybridSDKTestApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

@@ -57,7 +57,7 @@ class AccountsCell: UITableViewCell {
                              right: rightSide)
     }
 
-    func setData(balance: AccountAssetPriceModel) {
+    func setData(balance: BalanceUIModel) {
 
         // -- Setup icon
         icon.setURL(balance.accountAssetURL)
@@ -95,7 +95,7 @@ extension AccountsCell {
         // -- Account balance
         self.setupBasicLabel(accountBalance,
                              side: .right,
-                             font: UIFont.make(ofSize: UIValues.accountBalanceSize),
+                             font: UIFont.make(ofSize: UIValues.accountBalanceSize, weight: .medium),
                              color: UIValues.accountBalanceColor)
 
         // -- Asset price
@@ -200,14 +200,14 @@ extension AccountsCell {
                         constant: UIConstants.zero)
     }
 
-    private func setLabelsData(balance: AccountAssetPriceModel) {
+    private func setLabelsData(balance: BalanceUIModel) {
 
         // -- Asset name
         assetName.setAttributedText(
-            mainText: balance.assetName,
+            mainText: balance.asset?.name ?? "",
             mainTextFont: UIFont.systemFont(ofSize: UIValues.assetNameSize),
             mainTextColor: UIValues.assetNameColor,
-            attributedText: balance.accountAssetCode,
+            attributedText: balance.asset?.code ?? "",
             attributedTextFont: UIFont.systemFont(ofSize: UIValues.assetNameCodeSize),
             attributedTextColor: UIValues.assetNameCodeColor,
             side: .left)

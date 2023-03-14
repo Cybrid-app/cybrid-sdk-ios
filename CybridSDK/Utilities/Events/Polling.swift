@@ -18,7 +18,7 @@ open class Polling {
 
         self.runner = runner
         self.timer = DispatchSource.makeTimerSource(queue: queue)
-        self.timer.schedule(deadline: .now(), repeating: .seconds(self.updateInterval), leeway: .seconds(1))
+        self.timer.schedule(deadline: .now(), repeating: .seconds(self.updateInterval), leeway: .seconds(0))
         self.timer.setEventHandler { self.runner() }
         timer.resume()
     }

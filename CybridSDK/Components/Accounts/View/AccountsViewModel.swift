@@ -14,7 +14,7 @@ class AccountsViewModel: NSObject {
     internal var assets: [AssetBankModel] = []
     internal var accounts: [AccountBankModel] = []
     internal var prices: [SymbolPriceBankModel] = []
-    internal var balances: Observable<[AccountAssetPriceModel]> = .init([])
+    internal var balances: Observable<[BalanceUIModel]> = .init([])
     internal var accountTotalBalance: Observable<String> = .init("")
 
     // MARK: Private properties
@@ -22,6 +22,12 @@ class AccountsViewModel: NSObject {
     private var dataProvider: PricesRepoProvider & AssetsRepoProvider & AccountsRepoProvider
     private var logger: CybridLogger?
     var currentCurrency: String = "USD"
+
+    // -- MARK: Public properties
+    var uiState: Observable<AccountsViewController.ViewState> = .init(.LOADING)
+
+    // -- MARK: Poll
+    internal var pricesPolling: Polling?
 
     init(cellProvider: AccountsViewProvider,
          dataProvider: PricesRepoProvider & AssetsRepoProvider & AccountsRepoProvider,
@@ -34,61 +40,73 @@ class AccountsViewModel: NSObject {
         self.currentCurrency = currency
     }
 
-    func getAccounts() {
-        self.getAssetsList()
-    }
+    internal func getAssetsList(_ completion: @escaping (_ assetsReady: Bool) -> Void) {
 
-    internal func getAssetsList() {
+        if self.assets.isEmpty {
 
-        if assets.isEmpty {
-            dataProvider.fetchAssetsList { [weak self] assetsResult in
+            self.dataProvider.fetchAssetsList { [weak self] assetsResult in
                 switch assetsResult {
                 case .success(let assetsList):
 
                     self?.logger?.log(.component(.accounts(.assetsDataFetching)))
                     self?.assets = assetsList
-                    self?.getAccountsList()
+                    completion(true)
 
                 case .failure:
+
                     self?.logger?.log(.component(.accounts(.assetsDataError)))
+                    self?.assets = []
+                    completion(true)
                 }
             }
         } else {
-            self.getAccountsList()
+            completion(true)
         }
     }
 
-    internal func getAccountsList() {
+    func getAccounts() {
 
-        dataProvider.fetchAccounts(customerGuid: Cybrid.customerGUID) { [weak self] accountsResult in
+        self.getAssetsList { [weak self] _ in
 
-            switch accountsResult {
-            case .success(let accountsList):
-                self?.logger?.log(.component(.accounts(.accountsDataFetching)))
-                self?.accounts = accountsList.objects
-                self?.getPricesList()
-            case .failure:
-                self?.logger?.log(.component(.accounts(.accountsDataError)))
+            self?.dataProvider.fetchAccounts(customerGuid: Cybrid.customerGUID) { [weak self] accountsResult in
+
+                switch accountsResult {
+                case .success(let accountsList):
+                    self?.logger?.log(.component(.accounts(.accountsDataFetching)))
+                    self?.accounts = accountsList.objects
+
+                    self?.pricesPolling = Polling { [self] in
+                        self?.getPricesList()
+                    }
+
+                case .failure:
+                    self?.logger?.log(.component(.accounts(.accountsDataError)))
+                }
             }
         }
     }
 
     internal func getPricesList() {
 
-        dataProvider.fetchPriceList(with: TaskScheduler()) { [weak self] pricesResult in
+        self.dataProvider.fetchPriceList { [weak self] pricesResult in
 
             switch pricesResult {
             case .success(let pricesList):
+
                 self?.logger?.log(.component(.accounts(.pricesDataFetching)))
                 self?.prices = pricesList
-                self?.buildBalanceList()
+                self?.createAccountsFormatted()
+                if self?.uiState.value == .LOADING {
+                    self?.uiState.value = .CONTENT
+                }
+
             case .failure:
                 self?.logger?.log(.component(.accounts(.pricesDataError)))
             }
         }
     }
 
-    internal func buildBalanceList() {
+    internal func createAccountsFormatted() {
 
         if !self.assets.isEmpty && !self.accounts.isEmpty && !self.prices.isEmpty {
 
@@ -106,19 +124,16 @@ class AccountsViewModel: NSObject {
     internal func buildModelList(
         assets: [AssetBankModel],
         accounts: [AccountBankModel],
-        prices: [SymbolPriceBankModel]) -> [AccountAssetPriceModel]? {
+        prices: [SymbolPriceBankModel]) -> [BalanceUIModel]? {
 
       return accounts.compactMap { account in
-        guard
-          let asset = assets.first(where: { $0.code == account.asset }),
-          let assetCode = account.asset,
-          let counterAsset = assets.first(where: { $0.code == currentCurrency }),
-          let price = prices.first(where: { $0.symbol == "\(assetCode)-\(currentCurrency)" })
 
-        else {
-          return nil
-        }
-        return AccountAssetPriceModel(
+        let code = account.asset!
+        let symbol = "\(code)-\(currentCurrency)"
+        let asset = assets.first(where: { $0.code == code })
+        let counterAsset = assets.first(where: { $0.code == currentCurrency })
+        let price = prices.first(where: { $0.symbol == symbol })
+        return BalanceUIModel(
             account: account,
             asset: asset,
             counterAsset: counterAsset,
@@ -126,7 +141,7 @@ class AccountsViewModel: NSObject {
       }
     }
 
-    private func calculateTotalBalance() {
+    internal func calculateTotalBalance() {
 
         if !self.assets.isEmpty && !self.balances.value.isEmpty {
             if let asset = assets.first(where: { $0.code == currentCurrency.uppercased() }) {
@@ -146,9 +161,9 @@ class AccountsViewModel: NSObject {
 // MARK: - AccountsViewProvider
 
 protocol AccountsViewProvider: AnyObject {
-  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath, withData dataModel: AccountAssetPriceModel) -> UITableViewCell
+  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath, withData dataModel: BalanceUIModel) -> UITableViewCell
 
-  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath, withBalance balance: AccountAssetPriceModel)
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath, withBalance balance: BalanceUIModel)
 }
 
 // MARK: - AccountsViewModel + UITableViewDelegate + UITableViewDataSource
