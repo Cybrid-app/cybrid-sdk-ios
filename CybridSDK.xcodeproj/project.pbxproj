@@ -1085,7 +1085,7 @@
 			children = (
 				0BD66106286B768C00F4DA6B /* ListPricesView.swift */,
 				0B557B902899F4CB00632A6D /* Trade */,
-				92E08013295AD2F300372460 /* TransferComponent */,
+				92E08013295AD2F300372460 /* Transfer */,
 				92F38C4D2924220B00008F58 /* BankAccounts */,
 				92A90A882911935400CA0E08 /* IdentityComponent */,
 				0BD66100286B766B00F4DA6B /* ListPrices */,
@@ -1437,13 +1437,13 @@
 			path = Customer;
 			sourceTree = "<group>";
 		};
-		92E08013295AD2F300372460 /* TransferComponent */ = {
+		92E08013295AD2F300372460 /* Transfer */ = {
 			isa = PBXGroup;
 			children = (
 				92E08016295AD41900372460 /* View */,
 				92E08014295AD31800372460 /* TransferViewController.swift */,
 			);
-			path = TransferComponent;
+			path = Transfer;
 			sourceTree = "<group>";
 		};
 		92E08016295AD41900372460 /* View */ = {
