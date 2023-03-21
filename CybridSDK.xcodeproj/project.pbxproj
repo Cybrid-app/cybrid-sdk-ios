@@ -1643,6 +1643,7 @@
 				0B078F0928497B070020B4F7 /* Sources */,
 				0B078F0A28497B070020B4F7 /* Frameworks */,
 				0B078F0B28497B070020B4F7 /* Resources */,
+				9257E79729C4C81900846E12 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -1862,6 +1863,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "# Run only when not running on CI. CI should run SwiftLint with Fastlane.\nif [ -z \"$CI\"]; then\n  ${PODS_ROOT}/SwiftLint/swiftlint\nfi\n";
+		};
+		9257E79729C4C81900846E12 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "target_plist=\"$TARGET_BUILD_DIR/$INFOPLIST_PATH\"\ndsym_plist=\"$DWARF_DSYM_FOLDER_PATH/$DWARF_DSYM_FILE_NAME/Contents/Info.plist\"\nver=\"9.9\"\nvers=\"0.9.9\"\n\nfor plist in \"$target_plist\" \"$dsym_plist\"; do\n if [ -f \"$plist\" ]; then\n /usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $ver\" \"$plist\"\n /usr/libexec/PlistBuddy -c \"Set :CFBundleShortVersionString $vers\" \"$plist\"\n fi\ndone\n";
 		};
 		A572D48104302B65F0264972 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -2340,7 +2358,7 @@
 			baseConfigurationReference = 4A0BAAD494D2ACB2E58731D9 /* Pods-Abstract-CybridSDK.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 0.7;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 5789WJ9F6P;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -2372,7 +2390,7 @@
 			baseConfigurationReference = 304BBE8FCEA6609F15FE451E /* Pods-Abstract-CybridSDK.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 0.7;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 5789WJ9F6P;
 				DYLIB_COMPATIBILITY_VERSION = 1;
