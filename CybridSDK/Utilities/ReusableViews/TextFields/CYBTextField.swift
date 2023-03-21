@@ -12,6 +12,7 @@ final class CYBTextField: UITextField {
   enum Icon {
     case text(String)
     case urlImage(_ url: String)
+      case image(_ name: String)
   }
 
   enum Style {
@@ -93,6 +94,8 @@ final class CYBTextField: UITextField {
       setupTextIcon(content: content)
     case .urlImage(let imageURLString):
       setupImageIcon(urlString: imageURLString)
+    case .image(let name):
+        setupImage(name: name)
     case .none:
       return
     }
@@ -176,6 +179,23 @@ final class CYBTextField: UITextField {
                          attribute: .notAnAttribute,
                          constant: Constants.Icon.size.width)
   }
+
+    private func setupImage(name: String) {
+        let imageView = UIImageView(image: UIImage(named: name, in: Bundle(for: Self.self), with: nil)!)
+      imageView.translatesAutoresizingMaskIntoConstraints = false
+      iconContainer.addSubview(imageView)
+      imageView.constraintEdges(to: iconContainer, insets: Constants.Icon.insets)
+      imageView.constraint(attribute: .height,
+                           relatedBy: .equal,
+                           toItem: nil,
+                           attribute: .notAnAttribute,
+                           constant: Constants.Icon.size.height)
+      imageView.constraint(attribute: .width,
+                           relatedBy: .equal,
+                           toItem: nil,
+                           attribute: .notAnAttribute,
+                           constant: Constants.Icon.size.width)
+    }
 }
 
 extension CYBTextField {

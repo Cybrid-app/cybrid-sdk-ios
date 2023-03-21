@@ -151,7 +151,7 @@ public extension UIView {
                             constant: -margins.bottom)
         }
     }
-    
+
     func addInTheMiddle(topItem: UIView, bottomItem: UIView, margins: UIEdgeInsets) {
 
         if topItem.superview != nil {
