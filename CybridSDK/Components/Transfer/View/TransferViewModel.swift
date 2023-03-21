@@ -81,6 +81,7 @@ class TransferViewModel: NSObject {
             case .success(let accountList):
                 self?.logger?.log(.component(.accounts(.accountsDataFetching)))
                 self?.externalBankAccounts.value = accountList.objects
+                self?.calculateFiatBalance()
                 self?.uiState.value = .ACCOUNTS
 
             case .failure:

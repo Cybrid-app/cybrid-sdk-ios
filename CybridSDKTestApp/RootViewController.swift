@@ -19,6 +19,11 @@ class RootViewController: UIViewController {
     navigationController?.pushViewController(viewController, animated: true)
   }
   
+  @IBAction func didTapTransfersButton(_ sender: Any) {
+    let viewController = TransferViewController()
+    navigationController?.pushViewController(viewController, animated: true)
+  }
+  
   @IBAction func didTapAccountsButton(_ sender: Any) {
     let viewController = AccountsViewController()
     navigationController?.pushViewController(viewController, animated: true)

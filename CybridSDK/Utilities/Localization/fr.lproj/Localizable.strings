@@ -79,3 +79,14 @@
 "cybrid.bank.accounts.detail.confirm.body.two.text" = ". Les dépôts ne seront plus possibles à partir de ce compte.";
 "cybrid.bank.accounts.detail.confirm.cancel.button" = "Annuler";
 "cybrid.bank.accounts.detail.confirm.confirm.button" = "Confirmer";
+
+// -- Transfer Component
+"cybrid.transfer.loading.text" = "Loading";
+"cybrid.transfer.error.text" = "Error fetching accounts, try again.";
+"cybrid.transfer.error.button" = "Done";
+"cybrid.transfer.account.title.text" = "Available to Trade";
+"cybrid.transfer.account.deposit.text" = "Deposit";
+"cybrid.transfer.account.withdraw.text" = "Withdraw";
+"cybrid.transfer.account.from.text" = "From Bank Account";
+"cybrid.transfer.account.to.text" = "From Bank Account";
+"cybrid.transfer.action.button.text" = "Continue";
