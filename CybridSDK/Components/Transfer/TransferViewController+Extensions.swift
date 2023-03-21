@@ -50,7 +50,7 @@ extension TransferViewController {
     }
 
     internal func transferView_Accounts() {
-        
+
         // -- Title
         let title = UILabel()
         title.setContentHuggingPriority(.defaultHigh, for: .horizontal)
@@ -81,12 +81,19 @@ extension TransferViewController {
         let segments = UISegmentedControl(items: segmentsLabels.map { localizer.localize(with: $0) })
         segments.translatesAutoresizingMaskIntoConstraints = false
         segments.selectedSegmentIndex = 0
-        // segments.addTarget(tradeViewModel, action: #selector(tradeViewModel.segmentedControlValueChanged(_:)), for: .valueChanged)
+        segments.addTarget(transferViewModel, action: #selector(transferViewModel.segmentedControlValueChanged(_:)), for: .valueChanged)
         segments.addBelow(toItem: balance, height: UIValues.accountsSegmentHeight, margins: UIValues.accountsSegmentMargin)
 
         // -- From/to
         let fromTo = self.createSubTitleLabel(key: UIStrings.accountsFromText)
         fromTo.addBelow(toItem: segments, height: UIValues.accountsFromToHeight, margins: UIValues.accountsFromToMargin)
+        transferViewModel.isWithdraw.bind { [self] value in
+            if value {
+                fromTo.setLocalizedText(key: UIStrings.accountsToText, localizer: localizer)
+            } else {
+                fromTo.setLocalizedText(key: UIStrings.accountsFromText, localizer: localizer)
+            }
+        }
 
         // -- From/To Field
         let fromToField = self.createFromField()
@@ -214,8 +221,8 @@ extension TransferViewController {
         let fromTextField = CYBTextField(style: .rounded, icon: .urlImage(""), theme: theme)
         fromTextField.accessibilityIdentifier = "accountsPickerTextField"
         fromTextField.tintColor = UIColor.clear
-        // self.fiatPickerView.delegate = tradeViewModel
-        // self.fiatPickerView.dataSource = tradeViewModel
+        self.accountsPickerView.delegate = self.transferViewModel
+        self.accountsPickerView.dataSource = self.transferViewModel
         self.accountsPickerView.accessibilityIdentifier = "accountsPicker"
         if self.transferViewModel.externalBankAccounts.value.count > 1 {
             fromTextField.inputView = self.accountsPickerView

@@ -1249,6 +1249,13 @@
 			path = Entity;
 			sourceTree = "<group>";
 		};
+		9257E79A29CA26BA00846E12 /* Modal */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Modal;
+			sourceTree = "<group>";
+		};
 		92663D03293F240900842E30 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -1442,6 +1449,7 @@
 		92E08013295AD2F300372460 /* Transfer */ = {
 			isa = PBXGroup;
 			children = (
+				9257E79A29CA26BA00846E12 /* Modal */,
 				92E08016295AD41900372460 /* View */,
 				92E08014295AD31800372460 /* TransferViewController.swift */,
 				9257E79829CA037E00846E12 /* TransferViewController+Extensions.swift */,

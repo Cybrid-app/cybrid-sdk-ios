@@ -123,6 +123,6 @@
 "cybrid.transfer.account.deposit.text" = "Deposit";
 "cybrid.transfer.account.withdraw.text" = "Withdraw";
 "cybrid.transfer.account.from.text" = "From Bank Account";
-"cybrid.transfer.account.to.text" = "From Bank Account";
+"cybrid.transfer.account.to.text" = "To Bank Account";
 "cybrid.transfer.account.amount.text" = "Amount";
 "cybrid.transfer.action.button.text" = "Continue";

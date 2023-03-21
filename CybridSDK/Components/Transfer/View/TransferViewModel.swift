@@ -22,6 +22,8 @@ class TransferViewModel: NSObject {
     internal var fiatBalance: Observable<String> = .init("")
     internal var currentQuote: Observable<QuoteBankModel?> = .init(nil)
     internal var currentTrade: Observable<TradeBankModel?> = .init(nil)
+    internal var currentExternalBankAccount: Observable<ExternalBankAccountBankModel?> = .init(nil)
+    internal var isWithdraw: Observable<Bool> = .init(false)
 
     // MARK: Public properties
     var uiState: Observable<TransferViewController.ViewState> = .init(.LOADING)
@@ -147,5 +149,35 @@ class TransferViewModel: NSObject {
                 self?.logger?.log(.component(.accounts(.accountsDataError)))
             }
         }
+    }
+
+    @objc
+    func segmentedControlValueChanged(_ sender: UISegmentedControl) {
+
+        self.isWithdraw.value = sender.selectedSegmentIndex == 0 ? false : true
+    }
+}
+
+extension TransferViewModel: UIPickerViewDelegate, UIPickerViewDataSource {
+
+    public func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+
+    public func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return externalBankAccounts.value.count
+    }
+
+    public func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+
+        let account = self.externalBankAccounts.value[row]
+        let accountMask = account.plaidAccountMask ?? ""
+        let accountName = account.plaidAccountName ?? ""
+        let accountID = account.plaidInstitutionId ?? ""
+        return "\(accountID) - \(accountName) (\(accountMask))"
+    }
+
+    public func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        self.currentExternalBankAccount.value = self.externalBankAccounts.value[row]
     }
 }
