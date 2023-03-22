@@ -256,7 +256,7 @@ extension TransferViewController {
 
     func setAmountFieldData(field: CYBTextField) {
 
-        let asset = self.transferViewModel.currentFiatCurrency
+        let asset = Cybrid.fiat.code
         field.updateIcon(.text(asset))
     }
 }

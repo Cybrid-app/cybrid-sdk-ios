@@ -28,7 +28,6 @@ class TransferViewModel: NSObject {
     // MARK: Public properties
     var uiState: Observable<TransferViewController.ViewState> = .init(.LOADING)
     var modalUIState: Observable<TransferViewController.ModalViewState> = .init(.CONTENT)
-    var currentFiatCurrency = "USD"
 
     // MARK: Constructor
     init(dataProvider: AccountsRepoProvider & ExternalBankAccountProvider & QuotesRepoProvider & TradesRepoProvider & AssetsRepoProvider,
@@ -40,24 +39,10 @@ class TransferViewModel: NSObject {
 
     // MARK: ViewModel Methods
     func getAccounts() {
-        self.fetchAssets()
-    }
+        Cybrid.readyForRequest {
 
-    func fetchAssets() {
-
-        self.dataProvider.fetchAssetsList { [weak self] assetsResponse in
-
-            switch assetsResponse {
-
-            case .success(let assets):
-
-                self?.logger?.log(.component(.accounts(.pricesDataFetching)))
-                self?.assets = assets
-                self?.fetchAccounts()
-
-            case .failure:
-                self?.logger?.log(.component(.accounts(.pricesDataError)))
-            }
+            self.assets = Cybrid.assets
+            self.fetchAccounts()
         }
     }
 
@@ -96,7 +81,7 @@ class TransferViewModel: NSObject {
     func calculateFiatBalance() {
 
         if !self.assets.isEmpty {
-            if let pairAsset = assets.first(where: { $0.code == self.currentFiatCurrency.uppercased() }) {
+            if let pairAsset = assets.first(where: { $0.code == Cybrid.fiat.code }) {
 
                 var total = BigDecimal(0).value
                 for account in self.accounts.value {
@@ -118,7 +103,7 @@ class TransferViewModel: NSObject {
         let postQuoteBankModel = PostQuoteBankModel(
             productType: .funding,
             customerGuid: self.customerGuid,
-            asset: self.currentFiatCurrency,
+            asset: Cybrid.fiat.code,
             side: side,
             deliverAmount: ""
         )
