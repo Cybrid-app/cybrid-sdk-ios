@@ -112,8 +112,10 @@ extension TransferViewController {
         // -- Action button
         let actionButton = CYBButton(
             title: localizer.localize(with: UIStrings.accountsActionButtonText),
-            action: { [weak self] in
-                print("")
+            action: { [self] in
+
+                let modal = TransferModal(transferViewModel: self.transferViewModel!)
+                modal.present()
             })
         actionButton.addBelow(toItem: amountField, height: 48, margins: UIValues.accountsActionButtonMargin)
 

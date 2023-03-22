@@ -129,3 +129,12 @@
 
 // -- Transfer Modal Component
 "cybrid.transfer.modal.loading.text" = "Loading";
+"cybrid.transfer.modal.content.title.deposit.text" = "Confirm Deposit Details";
+"cybrid.transfer.modal.content.title.withdraw.text" = "Confirm Withdraw Details";
+"cybrid.transfer.modal.content.amount.text" = "Amount";
+"cybrid.transfer.modal.content.deposit.text" = "Deposit Date";
+"cybrid.transfer.modal.content.withdraw.text" = "Withdraw Date";
+"cybrid.transfer.modal.content.from.text" = "From";
+"cybrid.transfer.modal.content.to.text" = "To";
+"cybrid.transfer.modal.content.button.deposit.text" = "Confirm Deposit";
+"cybrid.transfer.modal.content.button.withdraw.text" = "Confirm Withdraw";
