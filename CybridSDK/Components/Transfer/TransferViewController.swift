@@ -10,7 +10,7 @@ import UIKit
 public final class TransferViewController: UIViewController {
 
     public enum ViewState { case LOADING, ACCOUNTS, ERROR }
-    public enum ModalViewState { case CONTENT, CONFIRM }
+    public enum ModalViewState { case LOADING, CONTENT, CONFIRM }
 
     internal var transferViewModel: TransferViewModel!
     internal var theme: Theme!
@@ -40,7 +40,7 @@ public final class TransferViewController: UIViewController {
       assertionFailure("init(coder:) should never be used")
       return nil
     }
-    
+
     func setupView() {
 
         view.backgroundColor = .white
