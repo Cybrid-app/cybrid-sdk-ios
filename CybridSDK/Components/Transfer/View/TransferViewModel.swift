@@ -27,6 +27,7 @@ class TransferViewModel: NSObject {
 
     // MARK: Public properties
     var uiState: Observable<TransferViewController.ViewState> = .init(.LOADING)
+    var modalUIState: Observable<TransferViewController.ModalViewState> = .init(.CONTENT)
     var currentFiatCurrency = "USD"
 
     // MARK: Constructor

@@ -126,3 +126,6 @@
 "cybrid.transfer.account.to.text" = "To Bank Account";
 "cybrid.transfer.account.amount.text" = "Amount";
 "cybrid.transfer.action.button.text" = "Continue";
+
+// -- Transfer Modal Component
+"cybrid.transfer.modal.loading.text" = "Loading";
