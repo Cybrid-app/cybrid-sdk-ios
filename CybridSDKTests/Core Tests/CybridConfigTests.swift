@@ -6,11 +6,14 @@
 //
 
 @testable import CybridSDK
+import CybridApiBankSwift
 import XCTest
 
 class CybridConfigTests: XCTestCase {
 
-    func testCybrid_configSetup() {
+    lazy var dataProvider = ServiceProviderMock()
+
+    func test_setup() {
 
         let cybridConfig = CybridConfig()
         XCTAssertEqual(cybridConfig.theme.fontTheme, CybridTheme.default.fontTheme)
@@ -27,9 +30,37 @@ class CybridConfigTests: XCTestCase {
             bearer: "TEST-BEARER",
             customerGUID: "MOCK_GUID",
             theme: testTheme,
-            delegate: CybridConfigDelgateTest()
+            completion: {}
         )
         XCTAssertEqual(cybridConfig.theme.fontTheme, testTheme.fontTheme)
+    }
+
+    func test_setup_internal() {
+
+        let cybridConfig = CybridConfig()
+        XCTAssertEqual(cybridConfig.theme.fontTheme, CybridTheme.default.fontTheme)
+
+        let testTheme = CybridTheme(
+            colorTheme: .default,
+            fontTheme: FontTheme(header1: .systemFont(ofSize: 32),
+                                 header2: .systemFont(ofSize: 20),
+                                 body: .systemFont(ofSize: 16),
+                                 body2: .systemFont(ofSize: 16),
+                                 caption: .systemFont(ofSize: 12))
+        )
+
+        // -- When
+        cybridConfig.setup(
+            bearer: "TEST-BEARER",
+            customerGUID: "MOCK_GUID",
+            theme: testTheme,
+            dataProvider: dataProvider,
+            completion: {}
+        )
+
+        // -- Then
+        XCTAssertEqual(cybridConfig.theme.fontTheme, testTheme.fontTheme)
+        XCTAssertNotNil(cybridConfig.dataProvider)
     }
 
     func testCybrid_configSetup_withoutPassingTheme() {
@@ -38,12 +69,12 @@ class CybridConfigTests: XCTestCase {
         cybridConfig.setup(
             bearer: "TEST-BEARER",
             customerGUID: "MOCK_GUID",
-            delegate: CybridConfigDelgateTest()
+            completion: {}
         )
 
         XCTAssertEqual(cybridConfig.theme.colorTheme, CybridTheme.default.colorTheme)
         XCTAssertEqual(cybridConfig.theme.fontTheme, CybridTheme.default.fontTheme)
-  }
+    }
 
     func testCybrid_supportsLanguage() {
 
@@ -92,7 +123,7 @@ class CybridConfigTests: XCTestCase {
             customerGUID: "MOCK_GUID",
             locale: nil,
             theme: cybridConfig.theme,
-            delegate: CybridConfigDelgateTest()
+            completion: {}
         )
         /// Default locale in local Simulator is `en-US`, while in CI it's `en`
         let possiblePreferredLocales = ["en", "en-US", "en-CA"]
@@ -112,7 +143,7 @@ class CybridConfigTests: XCTestCase {
             bearer: "TEST-BEARER",
             customerGUID: "MOCK_GUID",
             locale: nil,
-            delegate: CybridConfigDelgateTest()
+            completion: {}
         )
         let preferredLanguages = ["en-US", "fr-CA"]
 
@@ -131,7 +162,7 @@ class CybridConfigTests: XCTestCase {
             bearer: "TEST-BEARER",
             customerGUID: "MOCK_GUID",
             locale: Locale(identifier: "fr-CA"),
-            delegate: CybridConfigDelgateTest()
+            completion: {}
         )
         let preferredLanguages = ["en-US", "fr-CA"]
 
@@ -150,7 +181,7 @@ class CybridConfigTests: XCTestCase {
             bearer: "TEST-BEARER",
             customerGUID: "MOCK_GUID",
             locale: Locale(identifier: "es-PE"),
-            delegate: CybridConfigDelgateTest()
+            completion: {}
         )
         let preferredLanguages = ["en-US", "fr-CA"]
 
@@ -159,7 +190,7 @@ class CybridConfigTests: XCTestCase {
 
         // Then
         XCTAssertEqual(preferredLocale.identifier, "en-US")
-  }
+    }
 
     func testCybrid_getPreferredLocale_withNoPreferredLanguages() {
 
@@ -169,7 +200,7 @@ class CybridConfigTests: XCTestCase {
             bearer: "TEST-BEARER",
             customerGUID: "MOCK_GUID",
             locale: nil,
-            delegate: CybridConfigDelgateTest()
+            completion: {}
         )
         let preferredLanguages: [String] = []
 
@@ -178,32 +209,17 @@ class CybridConfigTests: XCTestCase {
 
         // Then
         XCTAssertEqual(preferredLocale.languageCode, "en")
-  }
-
-  /*func testCybrid_getFiat() {
-    // Given
-    let cybridConfig = CybridConfig()
-    cybridConfig.setup(bearer: "TEST-BEARER", customerGUID: "MOCK_GUID", fiat: .cad, locale: nil)
-
-    // Then
-    XCTAssertEqual(cybridConfig.fiat.defaultAsset.code, "CAD")
-
-    // When
-    cybridConfig.setup(bearer: "TEST-BEARER", customerGUID: "MOCK_GUID", fiat: .usd, locale: nil)
-
-    // Then
-    XCTAssertEqual(cybridConfig.fiat.defaultAsset.code, "USD")
-  }*/
+    }
 
     func testCybrid_startListeners() {
-        
+
         // Given
         let cybridConfig = CybridConfig()
         cybridConfig.setup(
             bearer: "TEST-BEARER",
             customerGUID: "MOCK_GUID",
             locale: nil,
-            delegate: CybridConfigDelgateTest()
+            completion: {}
         )
         let notificationManager = NotificationCenterMock()
         cybridConfig.session = CybridSession(apiManager: MockAPIManager.self,
@@ -214,7 +230,7 @@ class CybridConfigTests: XCTestCase {
 
         // Then
         XCTAssertEqual(notificationManager.observers.count, 2)
-  }
+    }
 
     func testCybrid_stopListeners() {
 
@@ -224,7 +240,7 @@ class CybridConfigTests: XCTestCase {
             bearer: "TEST-BEARER",
             customerGUID: "MOCK_GUID",
             locale: nil,
-            delegate: CybridConfigDelgateTest()
+            completion: {}
         )
         let notificationManager = NotificationCenterMock()
         cybridConfig.session = CybridSession(apiManager: MockAPIManager.self,
@@ -246,7 +262,7 @@ class CybridConfigTests: XCTestCase {
         cybridConfig.setup(
             bearer: "TEST-BEARER",
             customerGUID: "MOCK_GUID",
-            delegate: CybridConfigDelgateTest()
+            completion: {}
         )
         XCTAssertEqual(cybridConfig.bearer, "TEST-BEARER")
 
@@ -256,8 +272,277 @@ class CybridConfigTests: XCTestCase {
         // -- Then
         XCTAssertEqual(cybridConfig.bearer, "12345")
     }
-}
 
-internal class CybridConfigDelgateTest: CybridDelegate {
-    func onSDKReady() {}
+    func test_autoLoad() {
+
+        // -- Given
+        let cybridConfig = CybridConfig()
+        cybridConfig.setup(
+            bearer: "TEST-BEARER",
+            customerGUID: "MOCK_GUID",
+            dataProvider: dataProvider,
+            completion: {
+                XCTAssertTrue(cybridConfig.customerLoaded)
+            }
+        )
+
+        // -- When
+        self.dataProvider.didFetchCustomerSuccessfully()
+        self.dataProvider.didFetchBankSuccessfully()
+        self.dataProvider.didFetchAssetsSuccessfully()
+
+        // -- Then
+        XCTAssertNotNil(cybridConfig.completion)
+    }
+
+    func test_fetchCustomer() {
+
+        // -- Given
+        var customer: CustomerBankModel?
+        let cybridConfig = CybridConfig()
+        cybridConfig.setup(
+            bearer: "TEST-BEARER",
+            customerGUID: "MOCK_GUID",
+            dataProvider: dataProvider,
+            completion: {}
+        )
+
+        // -- When
+        cybridConfig.fetchCustomer {
+
+            XCTAssertNotNil(cybridConfig.customer)
+            customer = cybridConfig.customer
+        }
+        dataProvider.didFetchCustomerSuccessfully()
+
+        // -- When customer setted
+        cybridConfig.fetchCustomer {
+
+            XCTAssertNotNil(cybridConfig.customer)
+            XCTAssertEqual(customer, cybridConfig.customer)
+        }
+    }
+
+    func test_fetchCustomer_Error() {
+
+        // -- Given
+        let cybridConfig = CybridConfig()
+        cybridConfig.setup(
+            bearer: "TEST-BEARER",
+            customerGUID: "MOCK_GUID",
+            dataProvider: dataProvider,
+            completion: {}
+        )
+
+        // -- When
+        cybridConfig.fetchCustomer {
+
+            XCTAssertNil(cybridConfig.customer)
+        }
+        dataProvider.didFetchCustomerFailed()
+    }
+
+    func test_fetchBank() {
+
+        // -- Given
+        var bank: BankBankModel?
+        let cybridConfig = CybridConfig()
+        cybridConfig.setup(
+            bearer: "TEST-BEARER",
+            customerGUID: "MOCK_GUID",
+            dataProvider: dataProvider,
+            completion: {}
+        )
+
+        // -- When
+        cybridConfig.fetchCustomer {
+
+            XCTAssertNotNil(cybridConfig.customer)
+            cybridConfig.fetchBank {
+
+                XCTAssertNotNil(cybridConfig.bank)
+                bank = cybridConfig.bank
+            }
+            self.dataProvider.didFetchBankSuccessfully()
+        }
+        dataProvider.didFetchCustomerSuccessfully()
+
+        // -- When bank setted
+        cybridConfig.fetchBank {
+
+            XCTAssertNotNil(cybridConfig.bank)
+            XCTAssertEqual(bank, cybridConfig.bank)
+        }
+    }
+
+    func test_fetchBank_Error() {
+
+        // -- Given
+        let cybridConfig = CybridConfig()
+        cybridConfig.setup(
+            bearer: "TEST-BEARER",
+            customerGUID: "MOCK_GUID",
+            dataProvider: dataProvider,
+            completion: {}
+        )
+
+        // -- When
+        cybridConfig.fetchCustomer {
+
+            XCTAssertNotNil(cybridConfig.customer)
+            cybridConfig.fetchBank {
+
+                XCTAssertNil(cybridConfig.bank)
+            }
+            self.dataProvider.didFetchBankFailed()
+        }
+        dataProvider.didFetchCustomerSuccessfully()
+    }
+
+    func test_fetchAssets() {
+
+        // -- Given
+        var assets: [AssetBankModel] = []
+        let cybridConfig = CybridConfig()
+        cybridConfig.setup(
+            bearer: "TEST-BEARER",
+            customerGUID: "MOCK_GUID",
+            dataProvider: dataProvider,
+            completion: {}
+        )
+
+        // -- When
+        cybridConfig.fetchCustomer {
+
+            XCTAssertNotNil(cybridConfig.customer)
+            cybridConfig.fetchBank {
+
+                XCTAssertNotNil(cybridConfig.bank)
+                cybridConfig.fetchAssets {
+
+                    XCTAssertFalse(cybridConfig.assets.isEmpty)
+                    XCTAssertEqual(cybridConfig.fiat.code, "USD")
+                    assets = cybridConfig.assets
+                }
+                self.dataProvider.didFetchAssetsSuccessfully()
+            }
+            self.dataProvider.didFetchBankSuccessfully()
+        }
+        dataProvider.didFetchCustomerSuccessfully()
+
+        // -- When bank setted
+        cybridConfig.fetchAssets {
+
+            XCTAssertFalse(cybridConfig.assets.isEmpty)
+            XCTAssertEqual(assets, cybridConfig.assets)
+        }
+    }
+
+    func test_fetchAssets_Bank_Without_FiatAssets() {
+
+        // -- Given
+        var assets: [AssetBankModel] = []
+        let cybridConfig = CybridConfig()
+        cybridConfig.setup(
+            bearer: "TEST-BEARER",
+            customerGUID: "MOCK_GUID",
+            dataProvider: dataProvider,
+            completion: {}
+        )
+
+        // -- When
+        cybridConfig.fetchCustomer {
+
+            XCTAssertNotNil(cybridConfig.customer)
+            cybridConfig.fetchBank {
+
+                XCTAssertNotNil(cybridConfig.bank)
+                cybridConfig.fetchAssets {
+
+                    XCTAssertFalse(cybridConfig.assets.isEmpty)
+                    XCTAssertEqual(cybridConfig.fiat.code, "USD")
+                    assets = cybridConfig.assets
+                }
+                self.dataProvider.didFetchAssetsSuccessfully()
+            }
+            self.dataProvider.didFetchBankSuccessfully_Without_Fiat_Assets()
+        }
+        dataProvider.didFetchCustomerSuccessfully()
+
+        // -- When bank setted
+        cybridConfig.fetchAssets {
+
+            XCTAssertFalse(cybridConfig.assets.isEmpty)
+            XCTAssertEqual(assets, cybridConfig.assets)
+        }
+    }
+
+    func test_fetchAssets_Bank_With_MXN_FiatAssets() {
+
+        // -- Given
+        var assets: [AssetBankModel] = []
+        let cybridConfig = CybridConfig()
+        cybridConfig.setup(
+            bearer: "TEST-BEARER",
+            customerGUID: "MOCK_GUID",
+            dataProvider: dataProvider,
+            completion: {}
+        )
+
+        // -- When
+        cybridConfig.fetchCustomer {
+
+            XCTAssertNotNil(cybridConfig.customer)
+            cybridConfig.fetchBank {
+
+                XCTAssertNotNil(cybridConfig.bank)
+                cybridConfig.fetchAssets {
+
+                    XCTAssertFalse(cybridConfig.assets.isEmpty)
+                    XCTAssertEqual(cybridConfig.fiat.code, "USD")
+                    assets = cybridConfig.assets
+                }
+                self.dataProvider.didFetchAssetsSuccessfully()
+            }
+            self.dataProvider.didFetchBankSuccessfully_With_MXN_Fiat_Assets()
+        }
+        dataProvider.didFetchCustomerSuccessfully()
+
+        // -- When bank setted
+        cybridConfig.fetchAssets {
+
+            XCTAssertFalse(cybridConfig.assets.isEmpty)
+            XCTAssertEqual(assets, cybridConfig.assets)
+        }
+    }
+
+    func test_fetchAssets_Error() {
+
+        // -- Given
+        let cybridConfig = CybridConfig()
+        cybridConfig.setup(
+            bearer: "TEST-BEARER",
+            customerGUID: "MOCK_GUID",
+            dataProvider: dataProvider,
+            completion: {}
+        )
+
+        // -- When
+        cybridConfig.fetchCustomer {
+
+            XCTAssertNotNil(cybridConfig.customer)
+            cybridConfig.fetchBank {
+
+                XCTAssertNotNil(cybridConfig.bank)
+                cybridConfig.fetchAssets {
+
+                    XCTAssertTrue(cybridConfig.assets.isEmpty)
+                    XCTAssertEqual(cybridConfig.fiat.code, "USD")
+                }
+                self.dataProvider.didFetchAssetsWithError()
+            }
+            self.dataProvider.didFetchBankSuccessfully()
+        }
+        dataProvider.didFetchCustomerSuccessfully()
+    }
 }

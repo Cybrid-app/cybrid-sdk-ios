@@ -27,10 +27,11 @@ public final class CybridConfig {
     internal private(set) var bearer: String = ""
 
     // MARK: Propertis for Auto Init
-    internal private(set) weak var delegate: CybridDelegate?
+    internal private(set) var completion: (() -> Void)?
     internal private(set) var fiat: AssetBankModel = FiatConfig.usd.defaultAsset
     internal var dataProvider: (CustomersRepoProvider & BankProvider & AssetsRepoProvider)?
     internal private(set) var customer: CustomerBankModel?
+    internal private(set) var customerLoaded = false
     internal private(set) var bank: BankBankModel?
     internal var assets: [AssetBankModel] = []
 
@@ -45,7 +46,8 @@ public final class CybridConfig {
                       logger: CybridLogger? = nil,
                       refreshRate: TimeInterval = 5,
                       theme: Theme? = nil,
-                      delegate: CybridDelegate) {
+                      completion: (() -> Void)?
+    ) {
 
         self.bearer = bearer
         self.customerGUID = customerGUID
@@ -54,7 +56,32 @@ public final class CybridConfig {
         self._preferredLocale = locale
         self.logger = logger
         self.dataProvider = CybridSession.current
-        self.delegate = delegate
+        self.completion = completion
+        self.session.setupSession(authToken: self.bearer)
+        CybridApiBankSwiftAPI.basePath = environment.basePath
+        CodableHelper.jsonDecoder = CybridJSONDecoder()
+        self.autoLoad()
+    }
+
+    internal func setup(bearer: String,
+                        customerGUID: String,
+                        environment: CybridEnvironment = .sandbox,
+                        locale: Locale? = nil,
+                        logger: CybridLogger? = nil,
+                        refreshRate: TimeInterval = 5,
+                        theme: Theme? = nil,
+                        dataProvider: CustomersRepoProvider & BankProvider & AssetsRepoProvider,
+                        completion: (() -> Void)?
+    ) {
+
+        self.bearer = bearer
+        self.customerGUID = customerGUID
+        self.theme = theme ?? CybridTheme.default
+        self.refreshRate = refreshRate
+        self._preferredLocale = locale
+        self.logger = logger
+        self.dataProvider = dataProvider
+        self.completion = completion
         self.session.setupSession(authToken: self.bearer)
         CybridApiBankSwiftAPI.basePath = environment.basePath
         CodableHelper.jsonDecoder = CybridJSONDecoder()
@@ -111,85 +138,77 @@ extension CybridConfig {
         self.bearer = bearer
     }
 
-    internal func overrideDataProvider(dataProvider: CustomersRepoProvider & BankProvider & AssetsRepoProvider) {
-        self.dataProvider = dataProvider
-    }
-
-    private func autoLoad() {
+    internal func autoLoad() {
 
         // -- 1. Fetch Customer or check if exists
-        self.fetchCustomer { [self] _ in
+        self.fetchCustomer {
+            self.customerLoaded = true
 
             // -- 2. Fetch Bank or check if exists
-            self.fetchBank { _ in
+            self.fetchBank {
 
                 // -- 3. Fetch Assets
-                self.fetchAssets { _ in
+                self.fetchAssets {
 
                     // -- 4. SDK Ready
-                    self.delegate?.onSDKReady()
+                    self.completion?()
                 }
             }
         }
     }
 
-    private func fetchCustomer(_ completion: @escaping (_ ready: Bool) -> Void) {
+    internal func fetchCustomer(_ completion: @escaping () -> Void) {
 
         if self.customer == nil {
             self.dataProvider!.getCustomer(customerGuid: self.customerGUID) { [self] customerResponse in
                 switch customerResponse {
                 case .success(let customer):
                     self.customer = customer
-                    completion(true)
+                    completion()
                 case .failure:
                     self.logger?.log(.component(.accounts(.pricesDataError)))
                 }
             }
         } else {
-            completion(true)
+            completion()
         }
     }
 
-    private func fetchBank(_ completion: @escaping (_ ready: Bool) -> Void) {
+    internal func fetchBank(_ completion: @escaping () -> Void) {
 
         if self.bank == nil {
             self.dataProvider!.fetchBank(guid: (self.customer?.bankGuid)!) { [self] bankResponse in
                 switch bankResponse {
                 case .success(let bank):
                     self.bank = bank
-                    completion(true)
+                    completion()
                 case .failure:
                     self.logger?.log(.component(.accounts(.pricesDataError)))
                 }
             }
         } else {
-            completion(true)
+            completion()
         }
     }
 
-    private func fetchAssets(_ completion: @escaping (_ ready: Bool) -> Void) {
+    internal func fetchAssets(_ completion: @escaping () -> Void) {
 
         if self.assets.isEmpty {
             self.dataProvider!.fetchAssetsList { [self] assetsResponse in
                 switch assetsResponse {
                 case .success(let assets):
 
-                    let defaultAssetCode = self.bank?.supportedFiatAccountAssets![0] ?? "USD"
+                    let defaultAssetCode = self.bank?.supportedFiatAccountAssets?.first
                     self.assets = assets
                     self.fiat = assets.first(where: { $0.code == defaultAssetCode }) ?? FiatConfig.usd.defaultAsset
-                    completion(true)
+                    completion()
 
                 case .failure:
                     self.logger?.log(.component(.accounts(.pricesDataError)))
                 }
             }
         } else {
-            completion(true)
+            completion()
         }
     }
-}
-
-// MARK: Protocol
-public protocol CybridDelegate: AnyObject {
-    func onSDKReady()
 }

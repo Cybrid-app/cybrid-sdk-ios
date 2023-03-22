@@ -230,6 +230,18 @@ final class ServiceProviderMock: AssetsRepoProvider,
         BankAPIMock.fetchBankSuccessfully()
     }
 
+    func didFetchBankSuccessfully_Without_Fiat_Assets() {
+
+        Cybrid.session.setupSession(authToken: "TEST-TOKEN")
+        BankAPIMock.fetchBankSuccessfully_Without_Fiat_Assets()
+    }
+
+    func didFetchBankSuccessfully_With_MXN_Fiat_Assets() {
+
+        Cybrid.session.setupSession(authToken: "TEST-TOKEN")
+        BankAPIMock.fetchBankSuccessfully_With_MXN_Fiat_Assets()
+    }
+
     func didFetchBankSuccessfully_Incomplete() {
 
         Cybrid.session.setupSession(authToken: "TEST-TOKEN")

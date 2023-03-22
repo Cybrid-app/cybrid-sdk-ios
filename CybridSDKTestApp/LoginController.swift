@@ -83,8 +83,18 @@ class LoginController: UIViewController {
         Cybrid.setup(bearer: bearer,
                      customerGUID: guidClient,
                      environment: env,
-                     logger: ClientLogger(),
-                     delegate: self)
+                     logger: ClientLogger()) {
+            
+            if self.loader != nil {
+                DispatchQueue.main.async {
+                    self.loader?.dismiss(animated: true)
+                }
+            }
+            
+            DispatchQueue.main.async {
+                self.performSegue(withIdentifier: "goToComponents", sender: self)
+            }
+        }
     }
 }
 
@@ -100,22 +110,5 @@ extension LoginController: UITextFieldDelegate {
             textField.resignFirstResponder();
         }
         return true;
-    }
-}
-
-// MARK: Cybrid Delegation
-extension LoginController: CybridDelegate {
-    
-    func onSDKReady() {
-        
-        if loader != nil {
-            DispatchQueue.main.async {
-                self.loader?.dismiss(animated: true)
-            }
-        }
-        
-        DispatchQueue.main.async {
-            self.performSegue(withIdentifier: "goToComponents", sender: self)
-        }
     }
 }
