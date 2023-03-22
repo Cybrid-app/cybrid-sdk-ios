@@ -137,7 +137,7 @@ extension ExternalBankAccountBankModel {
         plaidAccountName: "test",
         state: .completed)
     }
-    
+
     static let list = [
         mock()
     ]

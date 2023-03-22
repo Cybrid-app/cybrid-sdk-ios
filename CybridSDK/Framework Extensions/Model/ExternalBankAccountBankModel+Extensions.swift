@@ -51,8 +51,7 @@ extension ExternalBankAccountBankModel {
 
         var models = [ExternalBankAccountBankModel]()
         for object in objects {
-            let objectData = try? JSONSerialization.data(withJSONObject: object)
-            var objectCopy = object
+            let objectCopy = object
             // -- Creating the AccountBankModel
             let model = ExternalBankAccountBankModel(json: objectCopy)
             if let model = model {

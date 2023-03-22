@@ -211,7 +211,7 @@ class CybridJSONDecoderTests: XCTestCase {
         let result = try? decoder.decode(TradeListBankModel.self, from: tradeData!)
         XCTAssertNil(result)
     }
-    
+
     // MARK: AccountBankModel
     func test_AccountBankModel_Decoding() throws {
 
@@ -720,7 +720,7 @@ class CybridJSONDecoderTests: XCTestCase {
         let result = try? decoder.decode(ExternalBankAccountBankModel.self, from: data!)
         XCTAssertNil(result)
     }
-    
+
     // MARK: ExternalBankAccountListBankModel
     func test_ExternalBankAccountListBankModel_Decoding() throws {
 
