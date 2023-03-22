@@ -83,21 +83,12 @@ class LoginController: UIViewController {
         Cybrid.setup(bearer: bearer,
                      customerGUID: guidClient,
                      environment: env,
-                     logger: ClientLogger())
-        
-        if loader != nil {
-            DispatchQueue.main.async {
-                self.loader?.dismiss(animated: true)
-            }
-        }
-        
-        DispatchQueue.main.async {
-            self.performSegue(withIdentifier: "goToComponents", sender: self)
-        }
+                     logger: ClientLogger(),
+                     delegate: self)
     }
 }
 
-// # MARK: UITextField Delegation
+// MARK: UITextField Delegation
 extension LoginController: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -109,5 +100,22 @@ extension LoginController: UITextFieldDelegate {
             textField.resignFirstResponder();
         }
         return true;
+    }
+}
+
+// MARK: Cybrid Delegation
+extension LoginController: CybridDelegate {
+    
+    func onSDKReady() {
+        
+        if loader != nil {
+            DispatchQueue.main.async {
+                self.loader?.dismiss(animated: true)
+            }
+        }
+        
+        DispatchQueue.main.async {
+            self.performSegue(withIdentifier: "goToComponents", sender: self)
+        }
     }
 }

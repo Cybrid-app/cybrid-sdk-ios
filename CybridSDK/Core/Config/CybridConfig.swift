@@ -27,6 +27,7 @@ public final class CybridConfig {
     internal private(set) var bearer: String = ""
 
     // MARK: Propertis for Auto Init
+    internal private(set) weak var delegate: CybridDelegate?
     internal private(set) var fiat: AssetBankModel = FiatConfig.usd.defaultAsset
     internal var dataProvider: (CustomersRepoProvider & BankProvider & AssetsRepoProvider)?
     internal private(set) var customer: CustomerBankModel?
@@ -43,7 +44,8 @@ public final class CybridConfig {
                       locale: Locale? = nil,
                       logger: CybridLogger? = nil,
                       refreshRate: TimeInterval = 5,
-                      theme: Theme? = nil) {
+                      theme: Theme? = nil,
+                      delegate: CybridDelegate) {
 
         self.bearer = bearer
         self.customerGUID = customerGUID
@@ -52,10 +54,11 @@ public final class CybridConfig {
         self._preferredLocale = locale
         self.logger = logger
         self.dataProvider = CybridSession.current
+        self.delegate = delegate
         self.session.setupSession(authToken: self.bearer)
         CybridApiBankSwiftAPI.basePath = environment.basePath
         CodableHelper.jsonDecoder = CybridJSONDecoder()
-        self.readyForRequest {}
+        self.autoLoad()
     }
 
     public func startListeners() {
@@ -112,7 +115,7 @@ extension CybridConfig {
         self.dataProvider = dataProvider
     }
 
-    public func readyForRequest(_ completion: @escaping () -> Void) {
+    private func autoLoad() {
 
         // -- 1. Fetch Customer or check if exists
         self.fetchCustomer { [self] _ in
@@ -123,8 +126,8 @@ extension CybridConfig {
                 // -- 3. Fetch Assets
                 self.fetchAssets { _ in
 
-                    // -- 4. Ready for request
-                    completion()
+                    // -- 4. SDK Ready
+                    self.delegate?.onSDKReady()
                 }
             }
         }
@@ -184,4 +187,9 @@ extension CybridConfig {
             completion(true)
         }
     }
+}
+
+// MARK: Protocol
+public protocol CybridDelegate: AnyObject {
+    func onSDKReady()
 }

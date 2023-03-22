@@ -39,11 +39,9 @@ class TransferViewModel: NSObject {
 
     // MARK: ViewModel Methods
     func getAccounts() {
-        Cybrid.readyForRequest {
 
-            self.assets = Cybrid.assets
-            self.fetchAccounts()
-        }
+        self.assets = Cybrid.assets
+        self.fetchAccounts()
     }
 
     func fetchAccounts() {
