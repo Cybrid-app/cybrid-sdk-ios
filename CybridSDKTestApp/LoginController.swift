@@ -83,7 +83,6 @@ class LoginController: UIViewController {
         Cybrid.setup(bearer: bearer,
                      customerGUID: guidClient,
                      environment: env,
-                     fiat: .usd,
                      logger: ClientLogger())
         
         if loader != nil {
