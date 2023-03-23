@@ -24,6 +24,7 @@ extension CustomerBankModel {
 
         self.init(
             guid: json[codingKeys.guid.rawValue] as? String ?? "",
+            bankGuid: json[codingKeys.bankGuid.rawValue] as? String ?? "",
             type: (CustomerBankModel.TypeBankModel(rawValue: type) ?? .individual) as TypeBankModel,
             createdAt: createdAtDate,
             state: (CustomerBankModel.StateBankModel(rawValue: state) ?? .storing) as StateBankModel)

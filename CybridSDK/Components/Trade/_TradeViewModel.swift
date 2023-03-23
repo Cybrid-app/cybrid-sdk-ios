@@ -75,7 +75,7 @@ final class _TradeViewModel: NSObject {
        priceScheduler: TaskScheduler? = nil,
        quoteScheduler: TaskScheduler? = nil) {
     self.dataProvider = dataProvider
-    self.fiatCurrency = CurrencyModel(asset: Cybrid.fiat.defaultAsset)
+    self.fiatCurrency = CurrencyModel(asset: Cybrid.fiat)
     self.assetList = Observable([])
     self.logger = Cybrid.logger
     self.priceList = []

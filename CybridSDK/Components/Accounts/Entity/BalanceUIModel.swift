@@ -38,7 +38,7 @@ struct BalanceUIModel: Equatable {
         let assetDecimals = asset?.decimals ?? 0 // 18
 
         let balanceValue = BigDecimal(account.platformBalance ?? "0", precision: assetDecimals) ?? zero
-        var balanceValueFormatted = CybridCurrencyFormatter.formatInputNumber(balanceValue).removeTrailingZeros()
+        let balanceValueFormatted = CybridCurrencyFormatter.formatInputNumber(balanceValue).removeTrailingZeros()
 
         let balanceAvailable = BigDecimal(account.platformAvailable ?? "0", precision: assetDecimals) ?? zero
         let balanceAvailableFormatted = CybridCurrencyFormatter.formatPrice(balanceAvailable, with: asset?.symbol ?? "")

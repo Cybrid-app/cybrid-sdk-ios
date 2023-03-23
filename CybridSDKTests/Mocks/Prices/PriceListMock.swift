@@ -77,7 +77,7 @@ extension SymbolPriceBankModel {
         buyPriceLastUpdatedAt: nil,
         sellPriceLastUpdatedAt: nil
     )
-    
+
     static let btcUsdBuyPriceUndefined = SymbolPriceBankModel(
         symbol: nil,
         buyPrice: "Hola",
