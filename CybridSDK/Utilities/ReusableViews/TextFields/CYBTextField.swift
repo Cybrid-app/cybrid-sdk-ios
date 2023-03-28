@@ -214,7 +214,7 @@ final class CYBTextField: UITextField {
 extension CYBTextField {
 
     enum Constants {
-    
+
         static let cornerRadius = UIConstants.radiusLg
         static let insets = UIEdgeInsets(top: 0,
                                          left: UIConstants.spacingMd,
