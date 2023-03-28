@@ -28,10 +28,11 @@ class TransferViewModel: NSObject {
 
     internal var currentExternalBankAccount: Observable<ExternalBankAccountBankModel?> = .init(nil)
     internal var isWithdraw: Observable<Bool> = .init(false)
+    internal var amount: String = ""
 
     // MARK: Public properties
     var uiState: Observable<TransferViewController.ViewState> = .init(.LOADING)
-    var modalUIState: Observable<TransferViewController.ModalViewState> = .init(.CONTENT)
+    var modalUIState: Observable<TransferViewController.ModalViewState> = .init(.LOADING)
 
     // MARK: Constructor
     init(dataProvider: AccountsRepoProvider & ExternalBankAccountProvider & QuotesRepoProvider & TransfersRepoProvider,
@@ -44,6 +45,7 @@ class TransferViewModel: NSObject {
     // MARK: ViewModel Methods
     func fetchAccounts() {
 
+        self.uiState.value = .LOADING
         self.dataProvider.fetchAccounts(customerGuid: self.customerGuid) { [weak self] accountsResponse in
 
             switch accountsResponse {
@@ -94,14 +96,16 @@ class TransferViewModel: NSObject {
         }
     }
 
-    func createQuote(side: PostQuoteBankModel.SideBankModel, amount: BigDecimal) {
+    func createQuote(amount: BigDecimal) {
 
+        self.modalUIState.value = .LOADING
+        let side: PostQuoteBankModel.SideBankModel = self.isWithdraw.value ? .withdrawal : .deposit
         let postQuoteBankModel = PostQuoteBankModel(
             productType: .funding,
             customerGuid: self.customerGuid,
             asset: Cybrid.fiat.code,
             side: side,
-            deliverAmount: ""
+            deliverAmount: "1000"
         )
         self.dataProvider.createQuote(params: postQuoteBankModel, with: nil) { [weak self] quoteResponse in
 
@@ -121,14 +125,20 @@ class TransferViewModel: NSObject {
 
     func createTransfer() {
 
-        self.dataProvider.createTransfer(quoteGuid: self.currentQuote.value?.guid ?? "") { [weak self] transferResponse in
+        self.modalUIState.value = .LOADING
+        let postTransferBankModel = PostTransferBankModel(
+            quoteGuid: self.currentQuote.value?.guid ?? "",
+            transferType: .funding,
+            externalBankAccountGuid: self.currentExternalBankAccount.value?.guid ?? ""
+        )
+        self.dataProvider.createTransfer(postTransferBankModel: postTransferBankModel) { [weak self] transferResponse in
 
             switch transferResponse {
-                
+
             case .success(let transfer):
                 self?.currentTransfer.value = transfer
-                self?.modalUIState.value = .CONTENT
-                
+                self?.modalUIState.value = .DETAILS
+
             case .failure:
                 self?.logger?.log(.component(.accounts(.accountsDataError)))
             }
@@ -139,6 +149,15 @@ class TransferViewModel: NSObject {
     func segmentedControlValueChanged(_ sender: UISegmentedControl) {
 
         self.isWithdraw.value = sender.selectedSegmentIndex == 0 ? false : true
+    }
+
+    func getAccountNameInFormat(_ account: ExternalBankAccountBankModel?) -> String {
+
+        let accountMask = account?.plaidAccountMask ?? ""
+        let accountName = account?.plaidAccountName ?? ""
+        let accountID = account?.plaidInstitutionId ?? ""
+        let name = "\(accountID) - \(accountName) (\(accountMask))"
+        return name
     }
 }
 
@@ -158,6 +177,7 @@ extension TransferViewModel: UIPickerViewDelegate, UIPickerViewDataSource {
         let accountMask = account.plaidAccountMask ?? ""
         let accountName = account.plaidAccountName ?? ""
         let accountID = account.plaidInstitutionId ?? ""
+        self.currentExternalBankAccount.value = account
         return "\(accountID) - \(accountName) (\(accountMask))"
     }
 

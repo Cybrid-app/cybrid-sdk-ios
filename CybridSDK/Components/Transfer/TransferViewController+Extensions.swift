@@ -105,15 +105,18 @@ extension TransferViewController {
         amount.addBelow(toItem: fromToField, height: UIValues.accountsFromToHeight, margins: UIValues.accountsAmountMargin)
 
         // -- Amount Field
-        let amountField = self.createAmountField()
-        self.setAmountFieldData(field: amountField)
-        amountField.addBelow(toItem: amount, height: UIValues.accountsAmountFieldHeight, margins: UIValues.accountsAmountFieldMargin)
+        self.amountField = self.createAmountField()
+        self.setAmountFieldData(field: self.amountField)
+        self.amountField.addBelow(toItem: amount, height: UIValues.accountsAmountFieldHeight, margins: UIValues.accountsAmountFieldMargin)
 
         // -- Action button
         let actionButton = CYBButton(
             title: localizer.localize(with: UIStrings.accountsActionButtonText),
             action: { [self] in
 
+                let amount = self.amountField.text ?? ""
+                transferViewModel.amount = amount
+                transferViewModel.createQuote(amount: BigDecimal(10))
                 let modal = TransferModal(transferViewModel: self.transferViewModel!)
                 modal.present()
             })
@@ -235,10 +238,8 @@ extension TransferViewController {
     func setFromFieldData(field: CYBTextField) {
 
         let account = self.transferViewModel.externalBankAccounts.value.first
-        let accountMask = account?.plaidAccountMask ?? ""
-        let accountName = account?.plaidAccountName ?? ""
-        let accountID = account?.plaidInstitutionId ?? ""
-        let name = "\(accountID) - \(accountName) (\(accountMask))"
+        self.transferViewModel.currentExternalBankAccount.value = account
+        let name = self.transferViewModel.getAccountNameInFormat(account)
 
         field.updateIcon(.image("test_bank"))
         field.text = name

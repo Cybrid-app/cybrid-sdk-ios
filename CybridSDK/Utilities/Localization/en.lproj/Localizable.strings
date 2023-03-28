@@ -138,3 +138,6 @@
 "cybrid.transfer.modal.content.to.text" = "To";
 "cybrid.transfer.modal.content.button.deposit.text" = "Confirm Deposit";
 "cybrid.transfer.modal.content.button.withdraw.text" = "Confirm Withdraw";
+"cybrid.transfer.modal.details.title.deposit.text" = "Deposit Details";
+"cybrid.transfer.modal.details.title.withdraw.text" = "Withdraw Details";
+"cybrid.transfer.modal.details.button.text" = "Continue";

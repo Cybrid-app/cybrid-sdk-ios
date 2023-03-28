@@ -76,11 +76,11 @@ extension TransferModal {
             case .LOADING:
                 self.transferViewModal_Loading()
 
-            case .CONTENT:
-                self.transferViewModal_Content()
-
             case .CONFIRM:
-                self.transferViewModal_Content()
+                self.transferViewModal_Confirm()
+
+            case .DETAILS:
+                self.transferViewModal_Details()
             }
         }
     }
@@ -173,39 +173,93 @@ extension TransferModal {
         spinner.startAnimating()
     }
 
-    internal func transferViewModal_Content() {
+    internal func transferViewModal_Confirm() {
 
         // -- Title
-        let title = self.createTitle(key: UIStrings.contentDepositTitleString)
+        let titleKey = transferViewModel.isWithdraw.value ? UIStrings.contentWithdrawTitleString : UIStrings.contentDepositTitleString
+        let title = self.createTitle(key: titleKey)
         title.asFirstIn(self.componentContent, height: UIValues.contentTitleHeight, margins: UIValues.contentTitleMargins)
 
-        // -- Account name/value
+        // -- Amount name/value
         let amountTitle = self.createAccountTitle(key: UIStrings.contentAmountString)
         amountTitle.addBelow(toItem: title, height: UIValues.contentAmountHeight, margins: UIValues.contentAmountMargins)
 
-        let amountValue = self.createAccountValue(value: "10 USD")
+        let amountValueString = "$\(self.transferViewModel.amount) USD"
+        let amountValue = self.createAccountValue(value: amountValueString)
         amountValue.addBelow(toItem: amountTitle, height: UIValues.contentAmountValueHeight, margins: UIValues.contentAmountValueMargins)
 
         // -- Deposit/Withdraw date value
-        let dateTitle = self.createAccountTitle(key: UIStrings.contentDepositDateString)
+        let dateKey = transferViewModel.isWithdraw.value ? UIStrings.contentWithdrawDateString : UIStrings.contentDepositDateString
+        let dateTitle = self.createAccountTitle(key: dateKey)
         dateTitle.addBelow(toItem: amountValue, height: UIValues.contentDepositDateHeight, margins: UIValues.contentDepositDateMargins)
 
-        let dateValue = self.createAccountValue(value: "Hoy")
+        let dateValueString = getFormattedDate(Date(), format: "MMMM dd, YYYY")
+        let dateValue = self.createAccountValue(value: dateValueString)
         dateValue.addBelow(toItem: dateTitle, height: UIValues.contentDateValueHeight, margins: UIValues.contentDateValueMargins)
 
         // -- From/To
-        let fromToTitle = self.createAccountTitle(key: UIStrings.contentFromString)
+        let fromToKey = transferViewModel.isWithdraw.value ? UIStrings.contentToString : UIStrings.contentFromString
+        let fromToTitle = self.createAccountTitle(key: fromToKey)
         fromToTitle.addBelow(toItem: dateValue, height: UIValues.contentFromToHeight, margins: UIValues.contentFromToMargins)
 
-        let fromToValue = self.createAccountValue(value: "1234 Plaid Account")
+        let accoutnName = self.transferViewModel.getAccountNameInFormat(self.transferViewModel.currentExternalBankAccount.value)
+        let fromToValue = self.createAccountValue(value: accoutnName)
         fromToValue.addBelow(toItem: fromToTitle, height: UIValues.contentFromToValueHeight, margins: UIValues.contentFromToValueMargins)
 
         // -- Continue Button
-        let confrimButtonText = localizer.localize(with: UIStrings.contentButtonDepositString)
-        let confrimButton = CYBButton(title: confrimButtonText,
+        let confirmButtonKey = transferViewModel.isWithdraw.value ? UIStrings.contentButtonDepositString : UIStrings.contentButtonWithdrawString
+        let confirmButtonText = localizer.localize(with: confirmButtonKey)
+        let confirmButton = CYBButton(title: confirmButtonText,
                                       theme: Cybrid.theme,
-                                   action: {})
-        confrimButton.addBelow(toItem: fromToValue, height: 48, margins: UIValues.contentButtonMargins)
+                                      action: {
+            self.transferViewModel.createTransfer()
+        })
+        confirmButton.addBelow(toItem: fromToValue, height: 48, margins: UIValues.contentButtonMargins)
+    }
+
+    internal func transferViewModal_Details() {
+
+        // -- Title
+        let titleKey = transferViewModel.isWithdraw.value ? UIStrings.detailsWithdrawTitleString : UIStrings.detailsDepositTitleString
+        let title = self.createTitle(key: titleKey)
+        title.asFirstIn(self.componentContent, height: UIValues.contentTitleHeight, margins: UIValues.contentTitleMargins)
+
+        // -- Amount name/value
+        let amountTitle = self.createAccountTitle(key: UIStrings.contentAmountString)
+        amountTitle.addBelow(toItem: title, height: UIValues.contentAmountHeight, margins: UIValues.contentAmountMargins)
+
+        let amountValueString = "$\(self.transferViewModel.amount) USD"
+        let amountValue = self.createAccountValue(value: amountValueString)
+        amountValue.addBelow(toItem: amountTitle, height: UIValues.contentAmountValueHeight, margins: UIValues.contentAmountValueMargins)
+
+        // -- Deposit/Withdraw date value
+        let dateKey = transferViewModel.isWithdraw.value ? UIStrings.contentWithdrawDateString : UIStrings.contentDepositDateString
+        let dateTitle = self.createAccountTitle(key: dateKey)
+        dateTitle.addBelow(toItem: amountValue, height: UIValues.contentDepositDateHeight, margins: UIValues.contentDepositDateMargins)
+
+        let dateValueString = getFormattedDate(Date(), format: "MMMM dd, YYYY")
+        let dateValue = self.createAccountValue(value: dateValueString)
+        dateValue.addBelow(toItem: dateTitle, height: UIValues.contentDateValueHeight, margins: UIValues.contentDateValueMargins)
+
+        // -- From/To
+        let fromToKey = transferViewModel.isWithdraw.value ? UIStrings.contentToString : UIStrings.contentFromString
+        let fromToTitle = self.createAccountTitle(key: fromToKey)
+        fromToTitle.addBelow(toItem: dateValue, height: UIValues.contentFromToHeight, margins: UIValues.contentFromToMargins)
+
+        let accoutnName = self.transferViewModel.getAccountNameInFormat(self.transferViewModel.currentExternalBankAccount.value)
+        let fromToValue = self.createAccountValue(value: accoutnName)
+        fromToValue.addBelow(toItem: fromToTitle, height: UIValues.contentFromToValueHeight, margins: UIValues.contentFromToValueMargins)
+
+        // -- Continue Button
+        let confirmButtonText = localizer.localize(with: UIStrings.detailsButtonString)
+        let confirmButton = CYBButton(title: confirmButtonText,
+                                      theme: Cybrid.theme,
+                                      action: {
+
+            self.transferViewModel.fetchAccounts()
+            self.dismiss(animated: true)
+        })
+        confirmButton.addBelow(toItem: fromToValue, height: 48, margins: UIValues.contentButtonMargins)
     }
 }
 
@@ -254,7 +308,7 @@ extension TransferModal {
 
         static let loadingTitleString = "cybrid.transfer.modal.loading.text"
         static let contentDepositTitleString = "cybrid.transfer.modal.content.title.deposit.text"
-        static let contentWithdrawTitleString = "cybrid.transfer.modal.content.title.deposit.text"
+        static let contentWithdrawTitleString = "cybrid.transfer.modal.content.title.withdraw.text"
         static let contentAmountString = "cybrid.transfer.modal.content.amount.text"
         static let contentDepositDateString = "cybrid.transfer.modal.content.deposit.text"
         static let contentWithdrawDateString = "cybrid.transfer.modal.content.withdraw.text"
@@ -262,5 +316,9 @@ extension TransferModal {
         static let contentToString = "cybrid.transfer.modal.content.to.text"
         static let contentButtonDepositString = "cybrid.transfer.modal.content.button.deposit.text"
         static let contentButtonWithdrawString = "cybrid.transfer.modal.content.button.withdraw.text"
+
+        static let detailsDepositTitleString = "cybrid.transfer.modal.details.title.deposit.text"
+        static let detailsWithdrawTitleString = "cybrid.transfer.modal.details.title.withdraw.text"
+        static let detailsButtonString = "cybrid.transfer.modal.details.button.text"
     }
 }

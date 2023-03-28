@@ -18,9 +18,9 @@ protocol TransfersRepoProvider: AuthenticatedServiceProvider {
 
 extension TransfersRepoProvider {
 
-    func createTransfer(quoteGuid: String, _ completion: @escaping CreateTransferCompletion) {
+    func createTransfer(postTransferBankModel: PostTransferBankModel, _ completion: @escaping CreateTransferCompletion) {
 
-        authenticatedRequest(transfersRepository.createTransfer, parameters: quoteGuid, completion: completion)
+        authenticatedRequest(transfersRepository.createTransfer, parameters: postTransferBankModel, completion: completion)
     }
 
     func fetchTransfers(accountGuid: String, _ completion: @escaping FetchTransfersCompletition) {
@@ -33,19 +33,17 @@ extension CybridSession: TransfersRepoProvider {}
 
 protocol TransfersRepository {
 
-    static func createTransfer(quoteGuid: String, _ completion: @escaping CreateTransferCompletion)
+    static func createTransfer(postTransferBankModel: PostTransferBankModel, _ completion: @escaping CreateTransferCompletion)
 
     static func fetchTransfers(accountGuid: String, _ completiton: @escaping FetchTransfersCompletition)
 }
 
 extension TransfersAPI: TransfersRepository {
 
-    static func createTransfer(quoteGuid: String, _ completion: @escaping CreateTransferCompletion) {
+    static func createTransfer(postTransferBankModel: PostTransferBankModel, _ completion: @escaping CreateTransferCompletion) {
 
-        createTransfer(
-            postTransferBankModel: PostTransferBankModel(quoteGuid: quoteGuid,
-                                                         transferType: .funding),
-            completion: completion
+        createTransfer(postTransferBankModel: postTransferBankModel,
+                       completion: completion
         )
     }
 

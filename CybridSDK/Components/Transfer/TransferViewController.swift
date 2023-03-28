@@ -10,7 +10,7 @@ import UIKit
 public final class TransferViewController: UIViewController {
 
     public enum ViewState { case LOADING, ACCOUNTS, ERROR }
-    public enum ModalViewState { case LOADING, CONTENT, CONFIRM }
+    public enum ModalViewState { case LOADING, CONFIRM, DETAILS }
 
     internal var transferViewModel: TransferViewModel!
     internal var theme: Theme!
@@ -20,6 +20,7 @@ public final class TransferViewController: UIViewController {
     internal var currentState: Observable<ViewState> = .init(.LOADING)
 
     internal var accountsPickerView = UIPickerView()
+    internal var amountField: CYBTextField!
 
     public init() {
 
