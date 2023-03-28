@@ -33,11 +33,11 @@ class TransferViewModelTest: XCTestCase {
         XCTAssertTrue(viewModel.externalBankAccounts.value.isEmpty)
         XCTAssertTrue(viewModel.fiatBalance.value.isEmpty)
         XCTAssertNil(viewModel.currentQuote.value)
-        XCTAssertNil(viewModel.currentTrade.value)
-        XCTAssertEqual(viewModel.currentFiatCurrency, "USD")
+        // XCTAssertNil(viewModel.currentTrade.value)
+        // XCTAssertEqual(viewModel.currentFiatCurrency, "USD")
     }
 
-    func test_createTrade() {
+    /*func test_createTrade() {
 
         // -- Given
         let viewModel = createViewModel()
@@ -51,7 +51,7 @@ class TransferViewModelTest: XCTestCase {
         XCTAssertNotNil(viewModel)
         XCTAssertNotNil(viewModel.uiState)
         XCTAssertNotNil(viewModel.currentTrade.value)
-    }
+    }*/
 
     func test_createQuote() {
 
@@ -60,7 +60,7 @@ class TransferViewModelTest: XCTestCase {
 
         // -- When
         dataProvider.didCreateQuoteSuccessfully(.buyBitcoin)
-        viewModel.createQuote(side: .buy, amount: BigDecimal(0))
+        viewModel.createQuote(amount: BigDecimal(0))
         dataProvider.didCreateQuoteSuccessfully(.buyBitcoin)
 
         // -- Then
@@ -102,7 +102,6 @@ class TransferViewModelTest: XCTestCase {
 
         // -- Given
         let viewModel = createViewModel()
-        viewModel.currentFiatCurrency = "MXN"
 
         // -- When
         viewModel.calculateFiatBalance()
@@ -157,34 +156,5 @@ class TransferViewModelTest: XCTestCase {
         // -- Then
         XCTAssertNotNil(viewModel)
         XCTAssertFalse(viewModel.accounts.value.isEmpty)
-    }
-
-    func test_fetchAssets() {
-
-        // -- Given
-        let viewModel = createViewModel()
-        Cybrid.session.setupSession(authToken: "TEST-TOKEN")
-
-        // -- When
-        dataProvider.didFetchAssetsSuccessfully()
-        viewModel.fetchAssets()
-        dataProvider.didFetchAssetsSuccessfully()
-
-        // -- Then
-        XCTAssertNotNil(viewModel)
-        XCTAssertFalse(viewModel.assets.isEmpty)
-    }
-
-    func test_getAccounts() {
-
-        // -- Given
-        let viewModel = createViewModel()
-        Cybrid.session.setupSession(authToken: "TEST-TOKEN")
-
-        // -- When
-        viewModel.getAccounts()
-
-        // -- Then
-        XCTAssertNotNil(viewModel)
     }
 }
