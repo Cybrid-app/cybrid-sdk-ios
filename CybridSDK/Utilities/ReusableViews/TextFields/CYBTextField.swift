@@ -9,81 +9,88 @@ import Foundation
 import UIKit
 
 final class CYBTextField: UITextField {
-  enum Icon {
-    case text(String)
-    case urlImage(_ url: String)
-      case image(_ name: String)
-  }
 
-  enum Style {
-    case rounded
-    case plain
-  }
-
-  let style: Style
-  let theme: Theme
-  private var icon: Icon?
-
-  private var insets: UIEdgeInsets {
-    return style == .rounded ? Constants.insets : .zero
-  }
-
-  private lazy var iconContainer: UIView = {
-    let view = UIView()
-    view.translatesAutoresizingMaskIntoConstraints = false
-    return view
-  }()
-
-  init(style: Style, icon: Icon?, theme: Theme) {
-    self.style = style
-    self.icon = icon
-    self.theme = theme
-
-    super.init(frame: CGRect.zero)
-    setupView(theme: theme)
-  }
-
-  @available(iOS, deprecated: 10, message: "You should never use this init method.")
-  required init?(coder: NSCoder) {
-    assertionFailure("init(coder:) should never be used")
-    return nil
-  }
-
-  func updateIcon(_ icon: Icon?) {
-    self.icon = icon
-    setupIcon()
-  }
-
-  private func setupView(theme: Theme) {
-    switch style {
-    case .rounded:
-      backgroundColor = theme.colorTheme.textFieldBackgroundColor
-      layer.cornerRadius = Constants.cornerRadius
-    case .plain:
-      backgroundColor = .clear
-      borderStyle = UITextField.BorderStyle.none
-      layer.cornerRadius = 0
+    enum Icon {
+        case text(String)
+        case urlImage(_ url: String)
+        case image(_ name: String)
     }
-    leftViewMode = .always
-    leftView = iconContainer
-    textColor = theme.colorTheme.primaryTextColor
-    setupConstraints()
-    setupIcon()
-    setupUnderline()
-  }
 
-  private func setupConstraints() {
-    iconContainer.constraint(attribute: .width,
-                             relatedBy: .equal,
-                             toItem: nil,
-                             attribute: .notAnAttribute,
-                             constant: Constants.IconContainer.minWidth)
-    constraint(attribute: .height,
-               relatedBy: .greaterThanOrEqual,
-               toItem: nil,
-               attribute: .notAnAttribute,
-               constant: Constants.minHeight)
-  }
+    enum Style {
+        case rounded
+        case plain
+    }
+
+    let style: Style
+    let theme: Theme
+    private var icon: Icon?
+
+    private var insets: UIEdgeInsets {
+        return style == .rounded ? Constants.insets : .zero
+    }
+
+    private lazy var iconContainer: UIView = {
+
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+
+    init(style: Style, icon: Icon?, theme: Theme) {
+
+        self.style = style
+        self.icon = icon
+        self.theme = theme
+
+        super.init(frame: CGRect.zero)
+        setupView(theme: theme)
+    }
+
+    @available(iOS, deprecated: 10, message: "You should never use this init method.")
+    required init?(coder: NSCoder) {
+
+        assertionFailure("init(coder:) should never be used")
+        return nil
+    }
+
+    func updateIcon(_ icon: Icon?) {
+
+        self.icon = icon
+        setupIcon()
+    }
+
+    private func setupView(theme: Theme) {
+
+        switch style {
+        case .rounded:
+            backgroundColor = theme.colorTheme.textFieldBackgroundColor
+            layer.cornerRadius = Constants.cornerRadius
+        case .plain:
+            backgroundColor = .clear
+            borderStyle = UITextField.BorderStyle.none
+            layer.cornerRadius = 0
+        }
+        leftViewMode = .always
+        leftView = iconContainer
+        textColor = theme.colorTheme.primaryTextColor
+        setupConstraints()
+        setupIcon()
+        setupUnderline()
+    }
+
+    private func setupConstraints() {
+
+        iconContainer.constraint(attribute: .width,
+                                 relatedBy: .equal,
+                                 toItem: nil,
+                                 attribute: .notAnAttribute,
+                                 constant: Constants.IconContainer.minWidth)
+        constraint(attribute: .height,
+                   relatedBy: .greaterThanOrEqual,
+                   toItem: nil,
+                   attribute: .notAnAttribute,
+                   constant: Constants.minHeight)
+    }
 
   private func setupIcon() {
     iconContainer.subviews.forEach { subview in
