@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="cIp-MT-lRL">
-                                <rect key="frame" x="0.0" y="365" width="414" height="180"/>
+                                <rect key="frame" x="0.0" y="335" width="414" height="240"/>
                                 <subviews>
                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5je-8O-oTJ">
                                         <rect key="frame" x="0.0" y="-60" width="414" height="60"/>
@@ -31,8 +31,8 @@
                                             <action selector="didTapCryptoListButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="8Mn-iu-9Bk"/>
                                         </connections>
                                     </button>
-                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="98G-2L-Txb">
-                                        <rect key="frame" x="0.0" y="-60" width="414" height="60"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="98G-2L-Txb">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="60"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="60" id="nXO-L2-PZX"/>
                                         </constraints>
@@ -43,7 +43,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tlt-Xr-X0q">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="60"/>
+                                        <rect key="frame" x="0.0" y="60" width="414" height="60"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="60" id="VmJ-WR-NQ9"/>
                                         </constraints>
@@ -54,7 +54,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lx8-gf-UVX">
-                                        <rect key="frame" x="0.0" y="60" width="414" height="60"/>
+                                        <rect key="frame" x="0.0" y="120" width="414" height="60"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="60" id="VZk-rS-UBn"/>
                                         </constraints>
@@ -65,7 +65,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pu5-2T-Fgv">
-                                        <rect key="frame" x="0.0" y="120" width="414" height="60"/>
+                                        <rect key="frame" x="0.0" y="180" width="414" height="60"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="60" id="nTh-Ds-0bA"/>
                                         </constraints>

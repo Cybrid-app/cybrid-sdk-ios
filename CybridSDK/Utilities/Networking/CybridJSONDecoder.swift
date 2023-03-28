@@ -25,11 +25,11 @@ final class CybridJSONDecoder: JSONDecoder {
         case is TradeBankModel.Type:
             return try decodeTradeBankModel(data: data) as! T
 
-        case is AccountListBankModel.Type:
-            return try decodeAccountList(data: data) as! T
-
         case is TradeListBankModel.Type:
             return try decodeTradeList(data: data) as! T
+
+        case is AccountListBankModel.Type:
+            return try decodeAccountList(data: data) as! T
 
         case is CustomerBankModel.Type:
             return try decodeCustomerBankModel(data: data) as! T
@@ -57,6 +57,12 @@ final class CybridJSONDecoder: JSONDecoder {
 
         case is ExternalBankAccountListBankModel.Type:
             return try decodeExternalBankAccountListBankModel(data: data) as! T
+
+        case is TransferBankModel.Type:
+            return try decodeTransferBankModel(data: data) as! T
+
+        case is TransferListBankModel.Type:
+            return try decodeTransferList(data: data) as! T
 
         default:
             return try super.decode(type, from: data)
@@ -122,6 +128,24 @@ extension CybridJSONDecoder {
         return model
     }
 
+    func decodeTradeList(data: Data) throws -> TradeListBankModel? {
+
+        guard let jsonObject = try JSONSerialization.jsonObject(with: data) as? [String: Any] else {
+            throw DecodingError.customDecodingError
+        }
+        let jsonStringObject: [String: Any] = jsonObject
+        let objectsValue = jsonStringObject[TradeListBankModel.CodingKeys.objects.rawValue] as? [[String: Any]]
+        var objects = [TradeBankModel]()
+        if let objectsValue = objectsValue {
+            objects = TradeBankModel.fromArray(objects: objectsValue)
+        }
+        return TradeListBankModel(
+            total: jsonStringObject[TradeListBankModel.CodingKeys.total.rawValue] as? Int ?? 0,
+            page: jsonStringObject[TradeListBankModel.CodingKeys.page.rawValue] as? Int ?? 0,
+            perPage: jsonStringObject[TradeListBankModel.CodingKeys.perPage.rawValue] as? Int ?? 0,
+            objects: objects)
+    }
+
     func decodeAccountList(data: Data) throws -> AccountListBankModel? {
 
         if let jsonObject = try JSONSerialization.jsonObject(with: data) as? [String: Any] {
@@ -139,24 +163,6 @@ extension CybridJSONDecoder {
                 objects: objects)
         }
         return nil
-    }
-
-    func decodeTradeList(data: Data) throws -> TradeListBankModel? {
-
-        guard let jsonObject = try JSONSerialization.jsonObject(with: data) as? [String: Any] else {
-            throw DecodingError.customDecodingError
-        }
-        let jsonStringObject: [String: Any] = jsonObject
-        let objectsValue = jsonStringObject[TradeListBankModel.CodingKeys.objects.rawValue] as? [[String: Any]]
-        var objects = [TradeBankModel]()
-        if let objectsValue = objectsValue {
-            objects = TradeBankModel.fromArray(objects: objectsValue)
-        }
-        return TradeListBankModel(
-            total: jsonStringObject[TradeListBankModel.CodingKeys.total.rawValue] as? Int ?? 0,
-            page: jsonStringObject[TradeListBankModel.CodingKeys.page.rawValue] as? Int ?? 0,
-            perPage: jsonStringObject[TradeListBankModel.CodingKeys.perPage.rawValue] as? Int ?? 0,
-            objects: objects)
     }
 
     func decodeCustomerBankModel(data: Data) throws -> CustomerBankModel {
@@ -294,6 +300,45 @@ extension CybridJSONDecoder {
             objects = ExternalBankAccountBankModel.fromArray(objects: objectsValue)
         }
         return ExternalBankAccountListBankModel(
+            total: jsonStringObject[TradeListBankModel.CodingKeys.total.rawValue] as? Int ?? 0,
+            page: jsonStringObject[TradeListBankModel.CodingKeys.page.rawValue] as? Int ?? 0,
+            perPage: jsonStringObject[TradeListBankModel.CodingKeys.perPage.rawValue] as? Int ?? 0,
+            objects: objects)
+    }
+
+    func decodeTransferBankModel(data: Data) throws -> TradeBankModel {
+
+        guard let jsonObject = try JSONSerialization.jsonObject(with: data) as? [String: Any] else {
+            throw DecodingError.customDecodingError
+        }
+        var jsonStringObject: [String: Any] = jsonObject
+        let deliverAmountKey = TradeBankModel.CodingKeys.deliverAmount.rawValue
+        let receiveAmountKey = TradeBankModel.CodingKeys.receiveAmount.rawValue
+        let feeAmountKey = TradeBankModel.CodingKeys.fee.rawValue
+        jsonStringObject[deliverAmountKey] = stringValue(forKey: deliverAmountKey, in: data, atIndex: 0)
+        jsonStringObject[receiveAmountKey] = stringValue(forKey: receiveAmountKey, in: data, atIndex: 0)
+        jsonStringObject[feeAmountKey] = stringValue(forKey: feeAmountKey, in: data, atIndex: 0)
+
+        guard
+            let model = TradeBankModel(json: jsonStringObject)
+        else {
+            throw DecodingError.customDecodingError
+        }
+        return model
+    }
+    
+    func decodeTransferList(data: Data) throws -> TradeListBankModel? {
+
+        guard let jsonObject = try JSONSerialization.jsonObject(with: data) as? [String: Any] else {
+            throw DecodingError.customDecodingError
+        }
+        let jsonStringObject: [String: Any] = jsonObject
+        let objectsValue = jsonStringObject[TradeListBankModel.CodingKeys.objects.rawValue] as? [[String: Any]]
+        var objects = [TradeBankModel]()
+        if let objectsValue = objectsValue {
+            objects = TradeBankModel.fromArray(objects: objectsValue)
+        }
+        return TradeListBankModel(
             total: jsonStringObject[TradeListBankModel.CodingKeys.total.rawValue] as? Int ?? 0,
             page: jsonStringObject[TradeListBankModel.CodingKeys.page.rawValue] as? Int ?? 0,
             perPage: jsonStringObject[TradeListBankModel.CodingKeys.perPage.rawValue] as? Int ?? 0,

@@ -16,19 +16,22 @@ class TransferViewModel: NSObject {
 
     // MARK: Internal properties
     internal var customerGuid = Cybrid.customerGUID
-    internal var assets: [AssetBankModel] = []
+    internal var assets = Cybrid.assets
+
     internal var accounts: Observable<[AccountBankModel]> = .init([])
     internal var externalBankAccounts: Observable<[ExternalBankAccountBankModel]> = .init([])
+
     internal var fiatBalance: Observable<String> = .init("")
+
     internal var currentQuote: Observable<QuoteBankModel?> = .init(nil)
     internal var currentTrade: Observable<TradeBankModel?> = .init(nil)
+
     internal var currentExternalBankAccount: Observable<ExternalBankAccountBankModel?> = .init(nil)
     internal var isWithdraw: Observable<Bool> = .init(false)
 
     // MARK: Public properties
     var uiState: Observable<TransferViewController.ViewState> = .init(.LOADING)
     var modalUIState: Observable<TransferViewController.ModalViewState> = .init(.CONTENT)
-    var currentFiatCurrency = "USD"
 
     // MARK: Constructor
     init(dataProvider: AccountsRepoProvider & ExternalBankAccountProvider & QuotesRepoProvider & TradesRepoProvider & AssetsRepoProvider,
@@ -39,28 +42,6 @@ class TransferViewModel: NSObject {
     }
 
     // MARK: ViewModel Methods
-    func getAccounts() {
-        self.fetchAssets()
-    }
-
-    func fetchAssets() {
-
-        self.dataProvider.fetchAssetsList { [weak self] assetsResponse in
-
-            switch assetsResponse {
-
-            case .success(let assets):
-
-                self?.logger?.log(.component(.accounts(.pricesDataFetching)))
-                self?.assets = assets
-                self?.fetchAccounts()
-
-            case .failure:
-                self?.logger?.log(.component(.accounts(.pricesDataError)))
-            }
-        }
-    }
-
     func fetchAccounts() {
 
         self.dataProvider.fetchAccounts(customerGuid: self.customerGuid) { [weak self] accountsResponse in
@@ -96,7 +77,7 @@ class TransferViewModel: NSObject {
     func calculateFiatBalance() {
 
         if !self.assets.isEmpty {
-            if let pairAsset = assets.first(where: { $0.code == self.currentFiatCurrency.uppercased() }) {
+            if let pairAsset = assets.first(where: { $0.code == Cybrid.fiat.code.uppercased() }) {
 
                 var total = BigDecimal(0).value
                 for account in self.accounts.value {
@@ -118,7 +99,7 @@ class TransferViewModel: NSObject {
         let postQuoteBankModel = PostQuoteBankModel(
             productType: .funding,
             customerGuid: self.customerGuid,
-            asset: self.currentFiatCurrency,
+            asset: Cybrid.fiat.code,
             side: side,
             deliverAmount: ""
         )
@@ -127,8 +108,10 @@ class TransferViewModel: NSObject {
             switch quoteResponse {
 
             case .success(let quote):
+
                 self?.logger?.log(.component(.accounts(.accountsDataFetching)))
                 self?.currentQuote.value = quote
+                self?.modalUIState.value = .CONFIRM
 
             case .failure:
                 self?.logger?.log(.component(.accounts(.accountsDataError)))
@@ -136,7 +119,7 @@ class TransferViewModel: NSObject {
         }
     }
 
-    func createTrade() {
+    func createTransfer() {
 
         self.dataProvider.createTrade(quoteGuid: self.currentQuote.value?.guid ?? "") { [weak self] tradeResponse in
 

@@ -46,7 +46,7 @@ public final class TransferViewController: UIViewController {
         view.backgroundColor = .white
         self.initComponentContent()
         self.manageCurrentStateUI()
-        self.transferViewModel.getAccounts()
+        self.transferViewModel.fetchAccounts()
     }
 }
 
