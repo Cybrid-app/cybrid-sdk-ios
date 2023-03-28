@@ -306,42 +306,35 @@ extension CybridJSONDecoder {
             objects: objects)
     }
 
-    func decodeTransferBankModel(data: Data) throws -> TradeBankModel {
+    func decodeTransferBankModel(data: Data) throws -> TransferBankModel {
 
         guard let jsonObject = try JSONSerialization.jsonObject(with: data) as? [String: Any] else {
             throw DecodingError.customDecodingError
         }
         var jsonStringObject: [String: Any] = jsonObject
-        let deliverAmountKey = TradeBankModel.CodingKeys.deliverAmount.rawValue
-        let receiveAmountKey = TradeBankModel.CodingKeys.receiveAmount.rawValue
-        let feeAmountKey = TradeBankModel.CodingKeys.fee.rawValue
-        jsonStringObject[deliverAmountKey] = stringValue(forKey: deliverAmountKey, in: data, atIndex: 0)
-        jsonStringObject[receiveAmountKey] = stringValue(forKey: receiveAmountKey, in: data, atIndex: 0)
-        jsonStringObject[feeAmountKey] = stringValue(forKey: feeAmountKey, in: data, atIndex: 0)
-
         guard
-            let model = TradeBankModel(json: jsonStringObject)
+            let model = TransferBankModel(json: jsonStringObject)
         else {
             throw DecodingError.customDecodingError
         }
         return model
     }
-    
-    func decodeTransferList(data: Data) throws -> TradeListBankModel? {
+
+    func decodeTransferList(data: Data) throws -> TransferListBankModel? {
 
         guard let jsonObject = try JSONSerialization.jsonObject(with: data) as? [String: Any] else {
             throw DecodingError.customDecodingError
         }
         let jsonStringObject: [String: Any] = jsonObject
-        let objectsValue = jsonStringObject[TradeListBankModel.CodingKeys.objects.rawValue] as? [[String: Any]]
-        var objects = [TradeBankModel]()
+        let objectsValue = jsonStringObject[TransferListBankModel.CodingKeys.objects.rawValue] as? [[String: Any]]
+        var objects = [TransferBankModel]()
         if let objectsValue = objectsValue {
-            objects = TradeBankModel.fromArray(objects: objectsValue)
+            objects = TransferBankModel.fromArray(objects: objectsValue)
         }
-        return TradeListBankModel(
-            total: jsonStringObject[TradeListBankModel.CodingKeys.total.rawValue] as? Int ?? 0,
-            page: jsonStringObject[TradeListBankModel.CodingKeys.page.rawValue] as? Int ?? 0,
-            perPage: jsonStringObject[TradeListBankModel.CodingKeys.perPage.rawValue] as? Int ?? 0,
+        return TransferListBankModel(
+            total: jsonStringObject[TransferListBankModel.CodingKeys.total.rawValue] as? Int ?? 0,
+            page: jsonStringObject[TransferListBankModel.CodingKeys.page.rawValue] as? Int ?? 0,
+            perPage: jsonStringObject[TransferListBankModel.CodingKeys.perPage.rawValue] as? Int ?? 0,
             objects: objects)
     }
 }

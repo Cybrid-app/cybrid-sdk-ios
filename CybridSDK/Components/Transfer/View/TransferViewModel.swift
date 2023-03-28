@@ -11,7 +11,7 @@ import CybridApiBankSwift
 class TransferViewModel: NSObject {
 
     // MARK: Private properties
-    private var dataProvider: AccountsRepoProvider & ExternalBankAccountProvider & QuotesRepoProvider & TradesRepoProvider & AssetsRepoProvider
+    private var dataProvider: AccountsRepoProvider & ExternalBankAccountProvider & QuotesRepoProvider & TransfersRepoProvider
     private var logger: CybridLogger?
 
     // MARK: Internal properties
@@ -24,7 +24,7 @@ class TransferViewModel: NSObject {
     internal var fiatBalance: Observable<String> = .init("")
 
     internal var currentQuote: Observable<QuoteBankModel?> = .init(nil)
-    internal var currentTrade: Observable<TradeBankModel?> = .init(nil)
+    internal var currentTransfer: Observable<TransferBankModel?> = .init(nil)
 
     internal var currentExternalBankAccount: Observable<ExternalBankAccountBankModel?> = .init(nil)
     internal var isWithdraw: Observable<Bool> = .init(false)
@@ -34,7 +34,7 @@ class TransferViewModel: NSObject {
     var modalUIState: Observable<TransferViewController.ModalViewState> = .init(.CONTENT)
 
     // MARK: Constructor
-    init(dataProvider: AccountsRepoProvider & ExternalBankAccountProvider & QuotesRepoProvider & TradesRepoProvider & AssetsRepoProvider,
+    init(dataProvider: AccountsRepoProvider & ExternalBankAccountProvider & QuotesRepoProvider & TransfersRepoProvider,
          logger: CybridLogger?) {
 
         self.dataProvider = dataProvider
@@ -121,14 +121,14 @@ class TransferViewModel: NSObject {
 
     func createTransfer() {
 
-        self.dataProvider.createTrade(quoteGuid: self.currentQuote.value?.guid ?? "") { [weak self] tradeResponse in
+        self.dataProvider.createTransfer(quoteGuid: self.currentQuote.value?.guid ?? "") { [weak self] transferResponse in
 
-            switch tradeResponse {
-
-            case .success(let trade):
-                self?.logger?.log(.component(.accounts(.accountsDataFetching)))
-                self?.currentTrade.value = trade
-
+            switch transferResponse {
+                
+            case .success(let transfer):
+                self?.currentTransfer.value = transfer
+                self?.modalUIState.value = .CONTENT
+                
             case .failure:
                 self?.logger?.log(.component(.accounts(.accountsDataError)))
             }
