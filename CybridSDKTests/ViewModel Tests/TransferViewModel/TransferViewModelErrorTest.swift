@@ -39,7 +39,7 @@ class TransferViewModelErrorTest: XCTestCase {
         let viewModel = createViewModel()
 
         // -- When
-        viewModel.createQuote(amount: BigDecimal(0))
+        viewModel.createQuote(amount: "0")
         dataProvider.didCreateQuoteFailed()
 
         // -- Then

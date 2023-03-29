@@ -50,6 +50,10 @@ extension String {
             return self.stringValue
         }
     }
+    
+    func getParts() -> [String] {
+        return self.stringValue.map { String($0) }
+    }
 
     subscript(_ range: CountableRange<Int>) -> String {
         let start = index(startIndex, offsetBy: max(0, range.lowerBound))

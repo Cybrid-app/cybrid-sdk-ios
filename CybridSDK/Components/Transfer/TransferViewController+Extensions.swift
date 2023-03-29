@@ -114,9 +114,9 @@ extension TransferViewController {
             title: localizer.localize(with: UIStrings.accountsActionButtonText),
             action: { [self] in
 
-                let amount = self.amountField.text ?? ""
+                let amount = self.amountField.text ?? "0"
                 transferViewModel.amount = amount
-                transferViewModel.createQuote(amount: BigDecimal(10))
+                transferViewModel.createQuote(amount: amount)
                 let modal = TransferModal(transferViewModel: self.transferViewModel!)
                 modal.present()
             })

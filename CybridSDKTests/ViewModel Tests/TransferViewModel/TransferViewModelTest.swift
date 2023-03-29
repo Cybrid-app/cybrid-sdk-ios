@@ -60,7 +60,7 @@ class TransferViewModelTest: XCTestCase {
 
         // -- When
         dataProvider.didCreateQuoteSuccessfully(.buyBitcoin)
-        viewModel.createQuote(amount: BigDecimal(0))
+        viewModel.createQuote(amount: "0")
         dataProvider.didCreateQuoteSuccessfully(.buyBitcoin)
 
         // -- Then

@@ -96,16 +96,18 @@ class TransferViewModel: NSObject {
         }
     }
 
-    func createQuote(amount: BigDecimal) {
+    func createQuote(amount: String) {
 
         self.modalUIState.value = .LOADING
         let side: PostQuoteBankModel.SideBankModel = self.isWithdraw.value ? .withdrawal : .deposit
+        let amountDecimal = CDecimal(amount)
+
         let postQuoteBankModel = PostQuoteBankModel(
             productType: .funding,
             customerGuid: self.customerGuid,
             asset: Cybrid.fiat.code,
             side: side,
-            deliverAmount: "1000"
+            deliverAmount: AssetFormatter.forTrade(Cybrid.fiat, amount: amountDecimal)
         )
         self.dataProvider.createQuote(params: postQuoteBankModel, with: nil) { [weak self] quoteResponse in
 
