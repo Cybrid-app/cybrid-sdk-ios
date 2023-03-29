@@ -12,10 +12,11 @@ open class Polling {
     var timer: DispatchSourceTimer
     var runner: () -> Void
     let queue = DispatchQueue.global(qos: .background)
-    let updateInterval = 4
+    internal var updateInterval = 4
 
-    init(_ runner: @escaping () -> Void) {
-
+    init(interval: Int = 4, _ runner: @escaping () -> Void) {
+        
+        self.updateInterval = interval
         self.runner = runner
         self.timer = DispatchSource.makeTimerSource(queue: queue)
         self.timer.schedule(deadline: .now(), repeating: .seconds(self.updateInterval), leeway: .seconds(0))

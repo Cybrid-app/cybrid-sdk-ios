@@ -184,8 +184,10 @@ extension TransferModal {
         let amountTitle = self.createAccountTitle(key: UIStrings.contentAmountString)
         amountTitle.addBelow(toItem: title, height: UIValues.contentAmountHeight, margins: UIValues.contentAmountMargins)
 
-        let amountValueString = "$\(self.transferViewModel.amount) USD"
-        let amountValue = self.createAccountValue(value: amountValueString)
+        let amountValueString = self.transferViewModel.currentQuote.value?.receiveAmount
+        let amountBase = AssetFormatter.forBase(Cybrid.fiat, amount: CDecimal(amountValueString!))
+        let amountBaseFormatted = AssetFormatter.format(Cybrid.fiat, amount: amountBase)
+        let amountValue = self.createAccountValue(value: amountBaseFormatted)
         amountValue.addBelow(toItem: amountTitle, height: UIValues.contentAmountValueHeight, margins: UIValues.contentAmountValueMargins)
 
         // -- Deposit/Withdraw date value
@@ -207,7 +209,7 @@ extension TransferModal {
         fromToValue.addBelow(toItem: fromToTitle, height: UIValues.contentFromToValueHeight, margins: UIValues.contentFromToValueMargins)
 
         // -- Continue Button
-        let confirmButtonKey = transferViewModel.isWithdraw.value ? UIStrings.contentButtonDepositString : UIStrings.contentButtonWithdrawString
+        let confirmButtonKey = transferViewModel.isWithdraw.value ? UIStrings.contentButtonWithdrawString : UIStrings.contentButtonDepositString
         let confirmButtonText = localizer.localize(with: confirmButtonKey)
         let confirmButton = CYBButton(title: confirmButtonText,
                                       theme: Cybrid.theme,
@@ -228,8 +230,10 @@ extension TransferModal {
         let amountTitle = self.createAccountTitle(key: UIStrings.contentAmountString)
         amountTitle.addBelow(toItem: title, height: UIValues.contentAmountHeight, margins: UIValues.contentAmountMargins)
 
-        let amountValueString = "$\(self.transferViewModel.amount) USD"
-        let amountValue = self.createAccountValue(value: amountValueString)
+        let amountValueString = self.transferViewModel.currentTransfer.value?.amount
+        let amountBase = AssetFormatter.forBase(Cybrid.fiat, amount: CDecimal(amountValueString!))
+        let amountBaseFormatted = AssetFormatter.format(Cybrid.fiat, amount: amountBase)
+        let amountValue = self.createAccountValue(value: amountBaseFormatted)
         amountValue.addBelow(toItem: amountTitle, height: UIValues.contentAmountValueHeight, margins: UIValues.contentAmountValueMargins)
 
         // -- Deposit/Withdraw date value
@@ -256,7 +260,7 @@ extension TransferModal {
                                       theme: Cybrid.theme,
                                       action: {
 
-            self.transferViewModel.fetchAccounts()
+            self.transferViewModel.fetchAccountsInPolling()
             self.dismiss(animated: true)
         })
         confirmButton.addBelow(toItem: fromToValue, height: 48, margins: UIValues.contentButtonMargins)

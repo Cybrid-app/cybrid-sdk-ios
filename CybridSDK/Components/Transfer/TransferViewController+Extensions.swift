@@ -76,6 +76,25 @@ extension TransferViewController {
             balance.text = value
         }
 
+        // -- Balance Loader
+        let balanceLoader = self.createBalanceLoader()
+        balanceLoader.addBelow(toItem: title, height: UIValues.accountsBalanceHeight, margins: UIValues.accountsBalanceMargin)
+        balanceLoader.isHidden = true
+
+        // -- Balance and balance loader visivility
+        self.transferViewModel.balanceLoading.bind { value in
+
+            DispatchQueue.main.async {
+                if value == .CONTENT {
+                    balance.isHidden = false
+                    balanceLoader.isHidden = true
+                } else {
+                    balance.isHidden = true
+                    balanceLoader.isHidden = false
+                }
+            }
+        }
+
         // -- Segment
         let segmentsLabels = [UIStrings.accountsDepositText, UIStrings.accountsWithdrawText]
         let segments = UISegmentedControl(items: segmentsLabels.map { localizer.localize(with: $0) })
@@ -114,11 +133,14 @@ extension TransferViewController {
             title: localizer.localize(with: UIStrings.accountsActionButtonText),
             action: { [self] in
 
-                let amount = self.amountField.text ?? "0"
-                transferViewModel.amount = amount
-                transferViewModel.createQuote(amount: amount)
-                let modal = TransferModal(transferViewModel: self.transferViewModel!)
-                modal.present()
+                let amount = self.amountField.text ?? ""
+                if !amount.isEmpty {
+
+                    transferViewModel.amount = amount
+                    transferViewModel.createQuote(amount: amount)
+                    let modal = TransferModal(transferViewModel: self.transferViewModel!)
+                    modal.present()
+                }
             })
         actionButton.addBelow(toItem: amountField, height: 48, margins: UIValues.accountsActionButtonMargin)
 
@@ -219,6 +241,37 @@ extension TransferViewController {
         view.textColor = UIValues.componentSubTitleColor
         view.setLocalizedText(key: key, localizer: localizer)
         return view
+    }
+
+    func createBalanceLoader() -> UIView {
+
+        let loaderContainer = UIView()
+
+        let spinner = UIActivityIndicatorView(style: .medium)
+        loaderContainer.addSubview(spinner)
+        spinner.constraint(attribute: .centerY,
+                          relatedBy: .equal,
+                          toItem: loaderContainer,
+                          attribute: .centerY)
+        spinner.constraint(attribute: .centerX,
+                          relatedBy: .equal,
+                          toItem: loaderContainer,
+                          attribute: .centerX)
+        spinner.constraint(attribute: .width,
+                          relatedBy: .equal,
+                          toItem: nil,
+                          attribute: .notAnAttribute,
+                          constant: UIValues.loadingTitleHeight)
+        spinner.constraint(attribute: .height,
+                           relatedBy: .equal,
+                           toItem: nil,
+                           attribute: .notAnAttribute,
+                           constant: UIValues.loadingTitleHeight)
+
+        loaderContainer.backgroundColor = UIColor.white.withAlphaComponent(0)
+        spinner.color = UIColor.black
+        spinner.startAnimating()
+        return loaderContainer
     }
 
     func createFromField() -> CYBTextField {

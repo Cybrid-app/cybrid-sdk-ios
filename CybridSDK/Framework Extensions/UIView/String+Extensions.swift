@@ -14,8 +14,18 @@ extension String {
         let separator = ","
         var result: String = ""
         var iterator = 1
+        var intValue = self.stringValue
+        var decimalValue = ""
 
-        for character in self.stringValue.reversed() {
+        // Check if has dot
+        if self.contains(".") {
+
+            let parts = self.stringValue.split(separator: ".")
+            intValue = String(parts[0])
+            decimalValue = String(parts[1])
+        }
+
+        for character in intValue.reversed() {
             if iterator < 4 {
                 result = String(character) + result
                 iterator += 1
@@ -24,6 +34,11 @@ extension String {
                 iterator = 2
             }
         }
+
+        if !decimalValue.isEmpty {
+            result = "\(result).\(decimalValue)"
+        }
+
         return result
     }
 
@@ -50,7 +65,7 @@ extension String {
             return self.stringValue
         }
     }
-    
+
     func getParts() -> [String] {
         return self.stringValue.map { String($0) }
     }

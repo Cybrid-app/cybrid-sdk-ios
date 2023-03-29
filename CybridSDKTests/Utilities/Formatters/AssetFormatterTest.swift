@@ -12,6 +12,20 @@ class AssetFormatterTest: XCTestCase {
 
     // MARK: USD Test
 
+    func test_forTrade_0_5_USD_to_50() {
+
+        // -- Given
+        let fiatAmount = CDecimal("0.5")
+        let asset = AssetBankModel.usd
+        let result = "50"
+
+        // -- When
+        let formatted = AssetFormatter.forTrade(asset, amount: fiatAmount)
+
+        // -- Then
+        XCTAssertEqual(formatted, result)
+    }
+
     func test_forTrade_1_USD_to_100() {
 
         // -- Given
@@ -182,7 +196,7 @@ class AssetFormatterTest: XCTestCase {
         XCTAssertEqual(formatted, result)
     }
 
-    func test_forBase_6421809000000000000__6_421809000000009000_ETH() {
+    func test_forBase_6421809000000000000__6_421809000000000000_ETH() {
 
         // -- Given
         let amountToConvert = CDecimal("6421809000000000000")
@@ -196,7 +210,7 @@ class AssetFormatterTest: XCTestCase {
         XCTAssertEqual(formatted, result)
     }
 
-    func test_forBase_64218090000000000000__64_218090000000090000_ETH() {
+    func test_forBase_64218090000000000000__64_218090000000000000_ETH() {
 
         // -- Given
         let amountToConvert = CDecimal("64218090000000000000")
@@ -208,5 +222,21 @@ class AssetFormatterTest: XCTestCase {
 
         // -- Then
         XCTAssertEqual(formatted, result)
+    }
+
+    // MARK: Format test (Only USD and CAD)
+
+    func test_format__10_00__10_00_USD() {
+
+        // -- Given
+        let amountToFormat = "10.00"
+        let asset = AssetBankModel.usd
+        let resultToCheck = "$10.00 USD"
+
+        // -- When
+        let result = AssetFormatter.format(asset, amount: amountToFormat)
+
+        // -- Then
+        XCTAssertEqual(result, resultToCheck)
     }
 }

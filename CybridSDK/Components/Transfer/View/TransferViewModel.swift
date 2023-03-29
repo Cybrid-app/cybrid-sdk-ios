@@ -22,7 +22,6 @@ class TransferViewModel: NSObject {
     internal var externalBankAccounts: Observable<[ExternalBankAccountBankModel]> = .init([])
 
     internal var fiatBalance: Observable<String> = .init("")
-
     internal var currentQuote: Observable<QuoteBankModel?> = .init(nil)
     internal var currentTransfer: Observable<TransferBankModel?> = .init(nil)
 
@@ -30,9 +29,12 @@ class TransferViewModel: NSObject {
     internal var isWithdraw: Observable<Bool> = .init(false)
     internal var amount: String = ""
 
+    internal var accountsPolling: Polling?
+
     // MARK: Public properties
     var uiState: Observable<TransferViewController.ViewState> = .init(.LOADING)
     var modalUIState: Observable<TransferViewController.ModalViewState> = .init(.LOADING)
+    var balanceLoading: Observable<TransferViewController.BalanceViewState> = .init(.CONTENT)
 
     // MARK: Constructor
     init(dataProvider: AccountsRepoProvider & ExternalBankAccountProvider & QuotesRepoProvider & TransfersRepoProvider,
@@ -50,9 +52,29 @@ class TransferViewModel: NSObject {
 
             switch accountsResponse {
             case .success(let accountList):
+
                 self?.logger?.log(.component(.accounts(.accountsDataFetching)))
                 self?.accounts.value = accountList.objects
                 self?.fetchExternalAccounts()
+
+            case .failure:
+                self?.logger?.log(.component(.accounts(.accountsDataError)))
+            }
+        }
+    }
+
+    func fetchAccountsInPolling() {
+
+        self.balanceLoading.value = .LOADING
+        self.dataProvider.fetchAccounts(customerGuid: self.customerGuid) { [weak self] accountsResponse in
+
+            switch accountsResponse {
+            case .success(let accountList):
+
+                self?.logger?.log(.component(.accounts(.accountsDataFetching)))
+                self?.accounts.value = accountList.objects
+                self?.calculateFiatBalance()
+                self?.balanceLoading.value = .CONTENT
 
             case .failure:
                 self?.logger?.log(.component(.accounts(.accountsDataError)))
@@ -65,14 +87,23 @@ class TransferViewModel: NSObject {
         self.dataProvider.fetchExternalBankAccounts(customerGuid: self.customerGuid) { [weak self] accountsResponse in
             switch accountsResponse {
             case .success(let accountList):
+
                 self?.logger?.log(.component(.accounts(.accountsDataFetching)))
                 self?.externalBankAccounts.value = accountList.objects
                 self?.calculateFiatBalance()
                 self?.uiState.value = .ACCOUNTS
+                self?.createAccountsPolling()
 
             case .failure:
                 self?.logger?.log(.component(.accounts(.accountsDataError)))
             }
+        }
+    }
+
+    func createAccountsPolling() {
+
+        self.accountsPolling = Polling(interval: 8) {
+            self.fetchAccountsInPolling()
         }
     }
 

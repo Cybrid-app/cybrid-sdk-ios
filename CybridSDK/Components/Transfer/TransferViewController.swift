@@ -11,6 +11,7 @@ public final class TransferViewController: UIViewController {
 
     public enum ViewState { case LOADING, ACCOUNTS, ERROR }
     public enum ModalViewState { case LOADING, CONFIRM, DETAILS }
+    public enum BalanceViewState { case LOADING, CONTENT }
 
     internal var transferViewModel: TransferViewModel!
     internal var theme: Theme!
