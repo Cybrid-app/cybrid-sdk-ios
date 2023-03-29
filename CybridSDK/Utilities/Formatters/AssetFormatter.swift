@@ -15,6 +15,6 @@ class AssetFormatter {
     /// - 10.5 USD --> 1050
     /// Parameters:
     ///  - asset: AssetBankModel to take the decimals and symbol ($)
-    ///  - amount: Decimal object with preloaded amount
-    static func setForTrade(_ asset: AssetBankModel, amount: Decimal) {}
+    ///  - amount: CDecimal object with preloaded amount
+    static func setForTrade(_ asset: AssetBankModel, amount: CDecimal) {}
 }

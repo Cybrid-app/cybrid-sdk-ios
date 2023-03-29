@@ -7,7 +7,7 @@
 
 import BigInt
 
-struct Decimal: Hashable {
+struct CDecimal: Hashable {
 
     let originalValue: String
     let intValue: BigInt
@@ -36,5 +36,9 @@ struct Decimal: Hashable {
             self.decimalValue = String(repeating: "0", count: 2)
         }
         self.newValue = "\(self.intValue).\(self.decimalValue)"
+    }
+
+    init(_ value: Int) {
+        self.init(String(value))
     }
 }
