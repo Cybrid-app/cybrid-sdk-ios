@@ -9,14 +9,26 @@ import BigInt
 
 struct CDecimal: Hashable {
 
-    let originalValue: String
-    let intValue: BigInt
-    let decimalValue: String
-    let newValue: String
+    private(set) var originalValue: String
+    private(set) var intValue: BigInt
+    private(set) var decimalValue: String
+    private(set) var newValue: String
 
     init(_ value: String) {
 
         self.originalValue = value
+        self.intValue = BigInt(0)
+        self.decimalValue = ""
+        self.newValue = ""
+        self.calculateValues(value)
+    }
+
+    init(_ value: Int) {
+        self.init(String(value))
+    }
+
+    internal mutating func calculateValues(_ value: String) {
+
         if value.contains(".") {
 
             let parts = value.split(separator: ".")
@@ -38,7 +50,9 @@ struct CDecimal: Hashable {
         self.newValue = "\(self.intValue).\(self.decimalValue)"
     }
 
-    init(_ value: Int) {
-        self.init(String(value))
+    mutating func changeValue(_ value: String) {
+
+        self.originalValue = value
+        self.calculateValues(value)
     }
 }

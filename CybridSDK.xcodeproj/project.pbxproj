@@ -198,6 +198,7 @@
 		9299104829D38C69007E9832 /* CDecimal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9299104729D38C69007E9832 /* CDecimal.swift */; };
 		9299104A29D38F3C007E9832 /* CDecimalTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9299104929D38F3C007E9832 /* CDecimalTest.swift */; };
 		9299104D29D3912B007E9832 /* TransfersAPIMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9299104C29D3912B007E9832 /* TransfersAPIMock.swift */; };
+		9299105329D3E364007E9832 /* AssetFormatterTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9299105229D3E364007E9832 /* AssetFormatterTest.swift */; };
 		929C087829A535740075BA89 /* BankAccountCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929C087729A535740075BA89 /* BankAccountCell.swift */; };
 		929C087B29A5461E0075BA89 /* BankAccountDetailModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929C087A29A5461E0075BA89 /* BankAccountDetailModal.swift */; };
 		92A2FD8429AE837200146D1E /* AccountsViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A2FD8329AE837200146D1E /* AccountsViewController+Extensions.swift */; };
@@ -480,6 +481,7 @@
 		9299104729D38C69007E9832 /* CDecimal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CDecimal.swift; sourceTree = "<group>"; };
 		9299104929D38F3C007E9832 /* CDecimalTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CDecimalTest.swift; sourceTree = "<group>"; };
 		9299104C29D3912B007E9832 /* TransfersAPIMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransfersAPIMock.swift; sourceTree = "<group>"; };
+		9299105229D3E364007E9832 /* AssetFormatterTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetFormatterTest.swift; sourceTree = "<group>"; };
 		929C087729A535740075BA89 /* BankAccountCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankAccountCell.swift; sourceTree = "<group>"; };
 		929C087A29A5461E0075BA89 /* BankAccountDetailModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankAccountDetailModal.swift; sourceTree = "<group>"; };
 		92A2FD8329AE837200146D1E /* AccountsViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AccountsViewController+Extensions.swift"; sourceTree = "<group>"; };
@@ -695,6 +697,7 @@
 				0B966006285A92C000584692 /* Extensions */,
 				0B303CE52862E7BC007BF7FF /* Extensions Tests */,
 				0B303CF1286369F7007BF7FF /* Core */,
+				9299105029D3E342007E9832 /* Utilities */,
 				0BD661312872A04800F4DA6B /* Localization Tests */,
 				0B00E03A287F7B5D00707F26 /* Services Tests */,
 				0B303CEA2862F888007BF7FF /* Theme Tests */,
@@ -1412,6 +1415,22 @@
 				9299104C29D3912B007E9832 /* TransfersAPIMock.swift */,
 			);
 			path = Transfers;
+			sourceTree = "<group>";
+		};
+		9299105029D3E342007E9832 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				9299105129D3E359007E9832 /* Formatters */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		9299105129D3E359007E9832 /* Formatters */ = {
+			isa = PBXGroup;
+			children = (
+				9299105229D3E364007E9832 /* AssetFormatterTest.swift */,
+			);
+			path = Formatters;
 			sourceTree = "<group>";
 		};
 		929C087629A535580075BA89 /* Cell */ = {
@@ -2185,6 +2204,7 @@
 				9217353B28E3FF7500DF58CA /* AccountBankModelTest.swift in Sources */,
 				9257E79629BB9BCA00846E12 /* BalanceUIModelTest.swift in Sources */,
 				0B966008285A92E700584692 /* XCTestCase+expectFailure.swift in Sources */,
+				9299105329D3E364007E9832 /* AssetFormatterTest.swift in Sources */,
 				92827DC9294733F200231772 /* ExternalBankAccountAPIMock.swift in Sources */,
 				0B96602B285C3AC600584692 /* NetworkingInterfaceTests.swift in Sources */,
 				0B2899F4289049F3001B3360 /* TimerMock.swift in Sources */,
