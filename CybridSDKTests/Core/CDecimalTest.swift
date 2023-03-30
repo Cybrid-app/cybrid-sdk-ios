@@ -136,4 +136,27 @@ class CDecimalTest: XCTestCase {
         XCTAssertEqual(decimal.decimalValue, decimalDecimalValue)
         XCTAssertEqual(decimal.newValue, decimalnewValue)
     }
+
+    func test_changeValue_String_From_2_to_10() {
+
+        // -- Given
+        let valueToConvert = "2"
+        let decimalIntValue = BigInt(2)
+        let decimalDecimalValue = "00"
+        let decimalnewValue = "2.00"
+
+        // -- When
+        var decimal = CDecimal(valueToConvert)
+        XCTAssertEqual(decimal.originalValue, valueToConvert)
+        XCTAssertEqual(decimal.intValue, BigInt(2))
+        XCTAssertEqual(decimal.decimalValue, "00")
+        XCTAssertEqual(decimal.newValue, "2.00")
+        decimal.changeValue("10.56")
+
+        // -- Then
+        XCTAssertEqual(decimal.originalValue, "10.56")
+        XCTAssertEqual(decimal.intValue, BigInt(10))
+        XCTAssertEqual(decimal.decimalValue, "56")
+        XCTAssertEqual(decimal.newValue, "10.56")
+    }
 }
