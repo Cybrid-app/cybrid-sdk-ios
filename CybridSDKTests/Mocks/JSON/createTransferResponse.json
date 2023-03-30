@@ -1,0 +1,14 @@
+{
+  "guid": "stringstringstringstringstringst",
+  "transfer_type": "savings",
+  "customer_guid": "stringstringstringstringstringst",
+  "quote_guid": "stringstringstringstringstringst",
+  "asset": "string",
+  "side": "deposit",
+  "state": "storing",
+  "amount": 0,
+  "fee": 0,
+  "network_fee": 0,
+  "network_fee_asset": "string",
+  "created_at": "2023-03-30T17:44:56.483Z"
+}

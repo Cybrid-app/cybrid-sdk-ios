@@ -199,6 +199,9 @@
 		9299104A29D38F3C007E9832 /* CDecimalTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9299104929D38F3C007E9832 /* CDecimalTest.swift */; };
 		9299104D29D3912B007E9832 /* TransfersAPIMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9299104C29D3912B007E9832 /* TransfersAPIMock.swift */; };
 		9299105329D3E364007E9832 /* AssetFormatterTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9299105229D3E364007E9832 /* AssetFormatterTest.swift */; };
+		9299105529D6020C007E9832 /* createTransferResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 9299105429D6020C007E9832 /* createTransferResponse.json */; };
+		9299105729D602BB007E9832 /* listTransfersResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 9299105629D602BB007E9832 /* listTransfersResponse.json */; };
+		9299105929D603B8007E9832 /* listTransfersResponseIncomplete.json in Resources */ = {isa = PBXBuildFile; fileRef = 9299105829D603B8007E9832 /* listTransfersResponseIncomplete.json */; };
 		929C087829A535740075BA89 /* BankAccountCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929C087729A535740075BA89 /* BankAccountCell.swift */; };
 		929C087B29A5461E0075BA89 /* BankAccountDetailModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929C087A29A5461E0075BA89 /* BankAccountDetailModal.swift */; };
 		92A2FD8429AE837200146D1E /* AccountsViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A2FD8329AE837200146D1E /* AccountsViewController+Extensions.swift */; };
@@ -482,6 +485,9 @@
 		9299104929D38F3C007E9832 /* CDecimalTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CDecimalTest.swift; sourceTree = "<group>"; };
 		9299104C29D3912B007E9832 /* TransfersAPIMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransfersAPIMock.swift; sourceTree = "<group>"; };
 		9299105229D3E364007E9832 /* AssetFormatterTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetFormatterTest.swift; sourceTree = "<group>"; };
+		9299105429D6020C007E9832 /* createTransferResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = createTransferResponse.json; sourceTree = "<group>"; };
+		9299105629D602BB007E9832 /* listTransfersResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = listTransfersResponse.json; sourceTree = "<group>"; };
+		9299105829D603B8007E9832 /* listTransfersResponseIncomplete.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = listTransfersResponseIncomplete.json; sourceTree = "<group>"; };
 		929C087729A535740075BA89 /* BankAccountCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankAccountCell.swift; sourceTree = "<group>"; };
 		929C087A29A5461E0075BA89 /* BankAccountDetailModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankAccountDetailModal.swift; sourceTree = "<group>"; };
 		92A2FD8329AE837200146D1E /* AccountsViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AccountsViewController+Extensions.swift"; sourceTree = "<group>"; };
@@ -758,6 +764,7 @@
 		0B2899FC289467C1001B3360 /* JSON */ = {
 			isa = PBXGroup;
 			children = (
+				0B2899FF28946B52001B3360 /* JSONMockHelper.swift */,
 				0B2899FD289467EE001B3360 /* listPricesResponse.json */,
 				0BFF87542896267C00E44C74 /* listAssetsResponse.json */,
 				92F5EC7228E24150009DC3F4 /* listTradesResponse.json */,
@@ -781,9 +788,11 @@
 				92827DCC2947985300231772 /* fetchBankResponse_Incomplete.json */,
 				92827DD029479D7800231772 /* createExternalBankAccountBankModelResponse.json */,
 				92827DD429479E4200231772 /* createExternalBankAccountBankModelResponse_Incomplete.json */,
-				0B2899FF28946B52001B3360 /* JSONMockHelper.swift */,
 				92E0801E295B91E200372460 /* externalBankAccountListBankModel_Response.json */,
 				92E08020295B922200372460 /* externalBankAccountListBankModel_Response_Incomplete.json */,
+				9299105429D6020C007E9832 /* createTransferResponse.json */,
+				9299105629D602BB007E9832 /* listTransfersResponse.json */,
+				9299105829D603B8007E9832 /* listTransfersResponseIncomplete.json */,
 			);
 			path = JSON;
 			sourceTree = "<group>";
@@ -1837,10 +1846,12 @@
 				92827DB429439BCC00231772 /* fetchWorkflowResponse.json in Resources */,
 				9205B8B628E3A52A00883279 /* listTradesResponseIncomplete.json in Resources */,
 				0BBD0CEA28B7E7EE001DBC5F /* createQuoteResponse.json in Resources */,
+				9299105529D6020C007E9832 /* createTransferResponse.json in Resources */,
 				92827DBE2943A37200231772 /* fetchWorkflow_Incomplete.json in Resources */,
 				9205B8B428E3A43700883279 /* accountResponseIncomplete.json in Resources */,
 				0B2899FE289467EE001B3360 /* listPricesResponse.json in Resources */,
 				92827DB229439B8200231772 /* createWorkflowResponse.json in Resources */,
+				9299105929D603B8007E9832 /* listTransfersResponseIncomplete.json in Resources */,
 				0BFF8755289628EB00E44C74 /* listAssetsResponse.json in Resources */,
 				92B6819C291C0F1800FD6E99 /* createIdentityVerificationModel.json in Resources */,
 				92B681A6291C173C00FD6E99 /* createIdentityVerificationModel_Incomplete.json in Resources */,
@@ -1856,6 +1867,7 @@
 				92827DBC2943A32300231772 /* createWorkflow_Incomplete.json in Resources */,
 				92B681A2291C119300FD6E99 /* createCustomerBankModel_Incomplete.json in Resources */,
 				0B289A0228946F74001B3360 /* listLargestPricesResponse.json in Resources */,
+				9299105729D602BB007E9832 /* listTransfersResponse.json in Resources */,
 				0BBD0CEC28B7EC17001DBC5F /* createTradeResponse.json in Resources */,
 				92827DCD2947985300231772 /* fetchBankResponse_Incomplete.json in Resources */,
 			);
