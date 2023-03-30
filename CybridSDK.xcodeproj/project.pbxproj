@@ -1167,7 +1167,6 @@
 		0BD66120286C208600F4DA6B /* ViewModel Tests */ = {
 			isa = PBXGroup;
 			children = (
-				92E08019295B6ACC00372460 /* TransferViewModel */,
 				92B68194291B1C3900FD6E99 /* IdentityVerification */,
 				0BD66122286C20BC00F4DA6B /* CryptoPriceViewModelTests.swift */,
 				0B50F35A28A5890C00DDB01E /* TradeViewModelTests.swift */,
@@ -1442,6 +1441,23 @@
 			path = Formatters;
 			sourceTree = "<group>";
 		};
+		9299105A29D63B98007E9832 /* Transfer */ = {
+			isa = PBXGroup;
+			children = (
+				9299105B29D63BB8007E9832 /* View */,
+			);
+			path = Transfer;
+			sourceTree = "<group>";
+		};
+		9299105B29D63BB8007E9832 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				92E0801A295B6AF800372460 /* TransferViewModelTest.swift */,
+				92E0801C295B6D9A00372460 /* TransferViewModelErrorTest.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		929C087629A535580075BA89 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
@@ -1519,15 +1535,6 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		92E08019295B6ACC00372460 /* TransferViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				92E0801A295B6AF800372460 /* TransferViewModelTest.swift */,
-				92E0801C295B6D9A00372460 /* TransferViewModelErrorTest.swift */,
-			);
-			path = TransferViewModel;
-			sourceTree = "<group>";
-		};
 		92E13CBC29A6A94A00F0A537 /* BankAccounts */ = {
 			isa = PBXGroup;
 			children = (
@@ -1568,6 +1575,7 @@
 				92E13CBC29A6A94A00F0A537 /* BankAccounts */,
 				92F120582996B4B90086EE18 /* ListPrices */,
 				92F120562996A89F0086EE18 /* Trade */,
+				9299105A29D63B98007E9832 /* Transfer */,
 			);
 			path = Components;
 			sourceTree = "<group>";

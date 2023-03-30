@@ -279,8 +279,8 @@ extension TransferViewController {
         let fromTextField = CYBTextField(style: .rounded, icon: .urlImage(""), theme: theme)
         fromTextField.accessibilityIdentifier = "accountsPickerTextField"
         fromTextField.tintColor = UIColor.clear
-        self.accountsPickerView.delegate = self.transferViewModel
-        self.accountsPickerView.dataSource = self.transferViewModel
+        self.accountsPickerView.delegate = self
+        self.accountsPickerView.dataSource = self
         self.accountsPickerView.accessibilityIdentifier = "accountsPicker"
         if self.transferViewModel.externalBankAccounts.value.count > 1 {
             fromTextField.inputView = self.accountsPickerView
@@ -312,6 +312,29 @@ extension TransferViewController {
 
         let asset = Cybrid.fiat.code
         field.updateIcon(.text(asset))
+    }
+}
+
+extension TransferViewController: UIPickerViewDelegate, UIPickerViewDataSource {
+
+    public func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+
+    public func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return self.transferViewModel.externalBankAccounts.value.count
+    }
+
+    public func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+
+        let account = self.transferViewModel.externalBankAccounts.value[row]
+        self.transferViewModel.currentExternalBankAccount.value = account
+        let name = self.transferViewModel.getAccountNameInFormat(account)
+        return name
+    }
+
+    public func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        self.transferViewModel.currentExternalBankAccount.value = self.transferViewModel.externalBankAccounts.value[row]
     }
 }
 

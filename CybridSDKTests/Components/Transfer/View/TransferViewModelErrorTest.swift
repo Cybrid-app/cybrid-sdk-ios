@@ -18,20 +18,49 @@ class TransferViewModelErrorTest: XCTestCase {
                                      logger: nil)
     }
 
-    /*func test_createTrade_Failed() {
+    func test_fetchAccounts_Failed() {
 
         // -- Given
         let viewModel = createViewModel()
 
         // -- When
-        viewModel.createTrade()
-        dataProvider.didCreateTradeFailed()
+        viewModel.fetchAccounts()
+        dataProvider.didFetchAccountsWithError()
 
         // -- Then
         XCTAssertNotNil(viewModel)
-        XCTAssertNotNil(viewModel.uiState)
-        XCTAssertNil(viewModel.currentTrade.value)
-    }*/
+        XCTAssertTrue(viewModel.accounts.value.isEmpty)
+    }
+
+    func test_fetchAccountsInPolling_Failed() {
+
+        // -- Given
+        let viewModel = createViewModel()
+
+        // -- When
+        viewModel.fetchAccountsInPolling()
+        dataProvider.didFetchAccountsWithError()
+
+        // -- Then
+        XCTAssertNotNil(viewModel)
+        XCTAssertTrue(viewModel.accounts.value.isEmpty)
+    }
+
+    func test_fetchExternalAccounts_Failed() {
+
+        // -- Given
+        let viewModel = createViewModel()
+
+        // -- When
+        viewModel.fetchExternalAccounts()
+        dataProvider.fetchExternalBankAccountsFailed()
+
+        // -- Then
+        XCTAssertNotNil(viewModel)
+        XCTAssertNil(viewModel.accountsPolling)
+        XCTAssertTrue(viewModel.externalBankAccounts.value.isEmpty)
+        XCTAssertEqual(viewModel.uiState.value, .LOADING)
+    }
 
     func test_createQuote_Failed() {
 
@@ -46,34 +75,23 @@ class TransferViewModelErrorTest: XCTestCase {
         XCTAssertNotNil(viewModel)
         XCTAssertNotNil(viewModel.uiState)
         XCTAssertNil(viewModel.currentQuote.value)
+        XCTAssertEqual(viewModel.modalUIState.value, TransferViewController.ModalViewState.LOADING)
     }
 
-    func test_fetchExternalAccounts_Failed() {
+    func test_createTransfer_Failed() {
 
         // -- Given
         let viewModel = createViewModel()
+        viewModel.currentQuote.value = QuoteBankModel(guid: "1234")
 
         // -- When
-        viewModel.fetchExternalAccounts()
-        dataProvider.fetchExternalBankAccountsFailed()
+        viewModel.createTransfer()
+        dataProvider.didCreateTransferFailed()
 
         // -- Then
         XCTAssertNotNil(viewModel)
-        XCTAssertTrue(viewModel.externalBankAccounts.value.isEmpty)
-        XCTAssertEqual(viewModel.uiState.value, .LOADING)
-    }
-
-    func test_fetchAccounts_Failed() {
-
-        // -- Given
-        let viewModel = createViewModel()
-
-        // -- When
-        viewModel.fetchAccounts()
-        dataProvider.didFetchAccountsWithError()
-
-        // -- Then
-        XCTAssertNotNil(viewModel)
-        XCTAssertTrue(viewModel.accounts.value.isEmpty)
+        XCTAssertNotNil(viewModel.uiState)
+        XCTAssertEqual(viewModel.modalUIState.value, TransferViewController.ModalViewState.LOADING)
+        XCTAssertNil(viewModel.currentTransfer.value)
     }
 }

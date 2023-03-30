@@ -130,8 +130,8 @@ class TransferViewModel: NSObject {
     func createQuote(amount: String) {
 
         self.modalUIState.value = .LOADING
-        let side: PostQuoteBankModel.SideBankModel = self.isWithdraw.value ? .withdrawal : .deposit
         let amountDecimal = CDecimal(amount)
+        let side = self.getQuoteSide()
 
         let postQuoteBankModel = PostQuoteBankModel(
             productType: .funding,
@@ -160,7 +160,7 @@ class TransferViewModel: NSObject {
 
         self.modalUIState.value = .LOADING
         let postTransferBankModel = PostTransferBankModel(
-            quoteGuid: self.currentQuote.value?.guid ?? "",
+            quoteGuid: self.currentQuote.value!.guid!,
             transferType: .funding,
             externalBankAccountGuid: self.currentExternalBankAccount.value?.guid ?? ""
         )
@@ -192,29 +192,10 @@ class TransferViewModel: NSObject {
         let name = "\(accountID) - \(accountName) (\(accountMask))"
         return name
     }
-}
 
-extension TransferViewModel: UIPickerViewDelegate, UIPickerViewDataSource {
+    func getQuoteSide() -> PostQuoteBankModel.SideBankModel {
 
-    public func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
-    }
-
-    public func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return externalBankAccounts.value.count
-    }
-
-    public func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-
-        let account = self.externalBankAccounts.value[row]
-        let accountMask = account.plaidAccountMask ?? ""
-        let accountName = account.plaidAccountName ?? ""
-        let accountID = account.plaidInstitutionId ?? ""
-        self.currentExternalBankAccount.value = account
-        return "\(accountID) - \(accountName) (\(accountMask))"
-    }
-
-    public func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        self.currentExternalBankAccount.value = self.externalBankAccounts.value[row]
+        let side: PostQuoteBankModel.SideBankModel = self.isWithdraw.value ? .withdrawal : .deposit
+        return side
     }
 }
