@@ -66,6 +66,10 @@ extension String {
         }
     }
 
+    func removeLeadingZeros() -> String {
+        return self.stringValue.replacingOccurrences(of: "^0+", with: "", options: .regularExpression)
+    }
+
     func getParts() -> [String] {
         return self.stringValue.map { String($0) }
     }

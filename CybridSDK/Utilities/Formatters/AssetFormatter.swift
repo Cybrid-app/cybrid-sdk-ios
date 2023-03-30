@@ -2,7 +2,7 @@
 //  AssetFormatter.swift
 //  CybridSDK
 //
-//  Created by Erick Sanchez Perez on 28/03/23.
+//  Created by Erick Sanchez Perez on 27/03/23.
 //
 
 import Foundation
@@ -14,6 +14,7 @@ struct AssetFormatter {
     /// Example:
     /// - 10 USD --> 1000
     /// - 10.5 USD --> 1050
+    /// - 0.064218090000000000 ETH --> 64218090000000000
     /// Parameters:
     ///  - asset: AssetBankModel to take the decimals and symbol ($)
     ///  - amount: CDecimal object with preloaded amount
@@ -34,6 +35,9 @@ struct AssetFormatter {
 
         // Sanity check in intValue is zero, has to be removed
         if intValue == "0" { intValue = "" }
+        if asset.type == .crypto {
+            decimalValue = decimalValue.removeLeadingZeros()
+        }
 
         // Removing the dot
         let formatted = "\(intValue)\(decimalValue)"
@@ -44,6 +48,7 @@ struct AssetFormatter {
     /// Example:
     /// - 1000 --> 10.00
     /// - 1050 --> 10.50
+    /// - 64218090000000000 --> 0.064218090000000000
     /// Parameters:
     ///  - asset: AssetBankModel to take the decimals and symbol ($)
     ///  - amount: CDecimal object with preloaded amount
@@ -74,10 +79,9 @@ struct AssetFormatter {
         intArray = intArray.reversed()
         decimalArray = decimalArray.reversed()
         var intString = intArray.joined()
-        var decimalString = decimalArray.joined()
+        let decimalString = decimalArray.joined()
 
         if intString.isEmpty { intString = "0" }
-        if decimalString.isEmpty { decimalString = "00" }
 
         let formatted = "\(intString).\(decimalString)"
         return formatted
@@ -89,13 +93,15 @@ struct AssetFormatter {
     /// - 10.00 --> $10.00 USD
     /// - 10.50 --> $10.50 USD
     /// - 1000 --> $1,000 USD
+    /// - 90071992.54740991 --> ₿90,071,992.54740991
     /// Parameters:
     ///  - asset: AssetBankModel to take the decimals and symbol ($)
     ///  - amount: String of the amount to be formatted
     static func format(_ asset: AssetBankModel, amount: String) -> String {
 
         var amountFormatted = amount.currencyFormat()
-        amountFormatted = "\(asset.symbol)\(amountFormatted) \(asset.code)"
+        var code = asset.type == .fiat ? " \(asset.code)" : ""
+        amountFormatted = "\(asset.symbol)\(amountFormatted)\(code)"
         return amountFormatted
     }
 }
