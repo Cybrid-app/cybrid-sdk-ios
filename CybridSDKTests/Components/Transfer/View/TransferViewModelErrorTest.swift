@@ -75,7 +75,7 @@ class TransferViewModelErrorTest: XCTestCase {
         XCTAssertNotNil(viewModel)
         XCTAssertNotNil(viewModel.uiState)
         XCTAssertNil(viewModel.currentQuote.value)
-        XCTAssertEqual(viewModel.modalUIState.value, TransferViewController.ModalViewState.LOADING)
+        XCTAssertEqual(viewModel.modalUIState.value, TransferViewController.ModalViewState.ERROR)
     }
 
     func test_createTransfer_Failed() {
@@ -91,7 +91,7 @@ class TransferViewModelErrorTest: XCTestCase {
         // -- Then
         XCTAssertNotNil(viewModel)
         XCTAssertNotNil(viewModel.uiState)
-        XCTAssertEqual(viewModel.modalUIState.value, TransferViewController.ModalViewState.LOADING)
+        XCTAssertEqual(viewModel.modalUIState.value, TransferViewController.ModalViewState.ERROR)
         XCTAssertNil(viewModel.currentTransfer.value)
     }
 }

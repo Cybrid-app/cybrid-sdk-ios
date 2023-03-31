@@ -151,6 +151,8 @@ class TransferViewModel: NSObject {
                 self?.modalUIState.value = .CONFIRM
 
             case .failure:
+
+                self?.modalUIState.value = .ERROR
                 self?.logger?.log(.component(.accounts(.accountsDataError)))
             }
         }
@@ -173,6 +175,8 @@ class TransferViewModel: NSObject {
                 self?.modalUIState.value = .DETAILS
 
             case .failure:
+
+                self?.modalUIState.value = .ERROR
                 self?.logger?.log(.component(.accounts(.accountsDataError)))
             }
         }

@@ -141,3 +141,6 @@
 "cybrid.transfer.modal.details.title.deposit.text" = "Deposit Details";
 "cybrid.transfer.modal.details.title.withdraw.text" = "Withdraw Details";
 "cybrid.transfer.modal.details.button.text" = "Continue";
+"cybrid.transfer.modal.error.title.text" = "Action error";
+"cybrid.transfer.modal.error.desc.text" = "There was an error accessing your bank account. Please try again or contact support.";
+"cybrid.transfer.modal.error.doneButton.text" = "Done";

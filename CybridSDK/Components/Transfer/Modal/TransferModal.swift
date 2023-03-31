@@ -81,6 +81,9 @@ extension TransferModal {
 
             case .DETAILS:
                 self.transferViewModal_Details()
+
+            case .ERROR:
+                self.transferViewModal_Error()
             }
         }
     }
@@ -265,6 +268,85 @@ extension TransferModal {
         })
         confirmButton.addBelow(toItem: fromToValue, height: 48, margins: UIValues.contentButtonMargins)
     }
+
+    internal func transferViewModal_Error() {
+
+        self.modifyHeight(height: UIValues.modalErrorHeightSize)
+
+        // -- Icon
+        let image = UIImage(named: "kyc_error", in: Bundle(for: Self.self), with: nil)!
+        let icon = UIImageView(image: image)
+        self.componentContent.addSubview(icon)
+        icon.constraint(attribute: .top,
+                        relatedBy: .equal,
+                        toItem: self.componentContent,
+                        attribute: .topMargin,
+                        constant: UIValues.errorIconMargins.top)
+        icon.constraint(attribute: .leading,
+                        relatedBy: .equal,
+                        toItem: self.componentContent,
+                        attribute: .leading,
+                        constant: UIValues.errorIconMargins.left)
+        icon.constraint(attribute: .width,
+                        relatedBy: .equal,
+                        toItem: nil,
+                        attribute: .notAnAttribute,
+                        constant: UIValues.errorIconSize.width)
+        icon.constraint(attribute: .height,
+                        relatedBy: .equal,
+                        toItem: nil,
+                        attribute: .notAnAttribute,
+                        constant: UIValues.errorIconSize.height)
+
+        // -- Title
+        let title = UILabel()
+        title.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+        title.translatesAutoresizingMaskIntoConstraints = false
+        title.sizeToFit()
+        title.font = UIValues.errorTitleFont
+        title.textColor = UIColor.black
+        title.textAlignment = .left
+        title.setLocalizedText(key: UIStrings.errorTitleText, localizer: localizer)
+        self.componentContent.addSubview(title)
+        title.constraint(attribute: .leading,
+                         relatedBy: .equal,
+                         toItem: icon,
+                         attribute: .trailing,
+                         constant: UIValues.errorTitleMargins.left)
+        title.constraint(attribute: .top,
+                         relatedBy: .equal,
+                         toItem: self.componentContent,
+                         attribute: .topMargin,
+                         constant: UIValues.errorTitleMargins.top)
+        title.constraint(attribute: .trailing,
+                         relatedBy: .equal,
+                         toItem: self.componentContent,
+                         attribute: .trailing,
+                         constant: -UIValues.errorTitleMargins.right)
+        title.constraint(attribute: .height,
+                         relatedBy: .equal,
+                         toItem: nil,
+                         attribute: .notAnAttribute,
+                         constant: UIValues.errorTitleHeight)
+
+        // -- Description
+        let desc = UILabel()
+        desc.font = UIValues.errorDescFont
+        desc.textColor = UIColor.black
+        desc.textAlignment = .left
+        desc.numberOfLines = 0
+        desc.setLocalizedText(key: UIStrings.errorDescText, localizer: localizer)
+        desc.addBelow(toItem: title, height: UIValues.errorDescHeight, margins: UIValues.errorDescMargins)
+
+        // -- Done button
+        let doneButtonText = localizer.localize(with: UIStrings.errorDoneButtonText)
+        let doneButton = CYBButton(title: doneButtonText,
+                                   theme: Cybrid.theme,
+                                   action: {
+            self.dismiss(animated: true)
+        })
+        doneButton.addBelow(toItem: desc, height: 48, margins: UIValues.errorDoneButtonMargins)
+    }
 }
 
 extension TransferModal {
@@ -273,6 +355,7 @@ extension TransferModal {
 
         // -- Sizes
         static let modalHeightSize: CGFloat = 374
+        static let modalErrorHeightSize: CGFloat = 260
         static let loadingTitleHeight: CGFloat = 20
         static let loadingSpinnerHeight: CGFloat = 30
         static let contentTitleHeight: CGFloat = 28
@@ -282,12 +365,17 @@ extension TransferModal {
         static let contentDateValueHeight: CGFloat = 16
         static let contentFromToHeight: CGFloat = 26
         static let contentFromToValueHeight: CGFloat = 16
+        static let errorIconSize = CGSize(width: 24, height: 24)
+        static let errorTitleHeight: CGFloat = 28
+        static let errorDescHeight: CGFloat = 50
 
         // -- Fonts
         static let loadingTitleFont = UIFont.make(ofSize: 17, weight: .bold)
         static let titleFont = UIFont.make(ofSize: 22)
         static let accountTitleFont = UIFont.make(ofSize: 13, weight: .bold)
         static let accountValueFont = UIFont.make(ofSize: 14)
+        static let errorTitleFont = UIFont.make(ofSize: 22, weight: .medium)
+        static let errorDescFont = UIFont.make(ofSize: 16)
 
         // -- Colors
         static let loadingTitleColor = UIColor.black
@@ -306,6 +394,10 @@ extension TransferModal {
         static let contentFromToMargins = UIEdgeInsets(top: 13, left: 24, bottom: 0, right: 24)
         static let contentFromToValueMargins = UIEdgeInsets(top: 5, left: 24, bottom: 0, right: 24)
         static let contentButtonMargins = UIEdgeInsets(top: 30, left: 24, bottom: 26, right: 24)
+        static let errorIconMargins = UIEdgeInsets(top: 30, left: 24, bottom: 0, right: 24)
+        static let errorTitleMargins = UIEdgeInsets(top: 30, left: 10, bottom: 0, right: 24)
+        static let errorDescMargins = UIEdgeInsets(top: 20, left: 24, bottom: 0, right: 24)
+        static let errorDoneButtonMargins = UIEdgeInsets(top: 20, left: 24, bottom: 0, right: 24)
     }
 
     enum UIStrings {
@@ -324,5 +416,9 @@ extension TransferModal {
         static let detailsDepositTitleString = "cybrid.transfer.modal.details.title.deposit.text"
         static let detailsWithdrawTitleString = "cybrid.transfer.modal.details.title.withdraw.text"
         static let detailsButtonString = "cybrid.transfer.modal.details.button.text"
+
+        static let errorTitleText = "cybrid.transfer.modal.error.title.text"
+        static let errorDescText = "cybrid.transfer.modal.error.desc.text"
+        static let errorDoneButtonText = "cybrid.transfer.modal.error.doneButton.text"
     }
 }

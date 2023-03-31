@@ -83,7 +83,13 @@ extension AccountsViewController {
 
         // -- Button
         let transferButton = CYBButton(title: localizer.localize(with: UIStrings.accountsContentTransferButton)) {
-            self.dismiss(animated: true)
+
+            let transferController = TransferViewController()
+            if self.navigationController != nil {
+                self.navigationController?.pushViewController(transferController, animated: true)
+            } else {
+                self.present(transferController, animated: true)
+            }
         }
         transferButton.asLast(parent: self.componentContent,
                               height: UIValues.accountsContentTransferButtonHeight,

@@ -311,7 +311,7 @@ extension CybridJSONDecoder {
         guard let jsonObject = try JSONSerialization.jsonObject(with: data) as? [String: Any] else {
             throw DecodingError.customDecodingError
         }
-        var jsonStringObject: [String: Any] = jsonObject
+        let jsonStringObject: [String: Any] = jsonObject
         guard
             let model = TransferBankModel(json: jsonStringObject)
         else {

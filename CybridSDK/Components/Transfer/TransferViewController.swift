@@ -10,7 +10,7 @@ import UIKit
 public final class TransferViewController: UIViewController {
 
     public enum ViewState { case LOADING, ACCOUNTS, ERROR }
-    public enum ModalViewState { case LOADING, CONFIRM, DETAILS }
+    public enum ModalViewState { case LOADING, CONFIRM, DETAILS, ERROR }
     public enum BalanceViewState { case LOADING, CONTENT }
 
     internal var transferViewModel: TransferViewModel!
