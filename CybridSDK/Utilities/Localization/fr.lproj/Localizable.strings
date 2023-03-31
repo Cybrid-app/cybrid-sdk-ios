@@ -81,16 +81,16 @@
 "cybrid.bank.accounts.detail.confirm.confirm.button" = "Confirmer";
 
 // -- Transfer Component
-"cybrid.transfer.loading.text" = "Loading";
-"cybrid.transfer.error.text" = "Error fetching accounts, try again.";
-"cybrid.transfer.error.button" = "Done";
-"cybrid.transfer.account.title.text" = "Available to Trade";
-"cybrid.transfer.account.deposit.text" = "Deposit";
-"cybrid.transfer.account.withdraw.text" = "Withdraw";
-"cybrid.transfer.account.from.text" = "From Bank Account";
-"cybrid.transfer.account.to.text" = "To Bank Account";
-"cybrid.transfer.account.amount.text" = "Amount";
-"cybrid.transfer.action.button.text" = "Continue";
+"cybrid.transfer.loading.text" = "Chargement";
+"cybrid.transfer.error.text" = "Erreur lors de la récupération des comptes, réessayez.";
+"cybrid.transfer.error.button" = "Fait";
+"cybrid.transfer.account.title.text" = "Disponible pour le commerce";
+"cybrid.transfer.account.deposit.text" = "Dépôt";
+"cybrid.transfer.account.withdraw.text" = "Retirer";
+"cybrid.transfer.account.from.text" = "Du compte bancaire";
+"cybrid.transfer.account.to.text" = "Au compte bancaire";
+"cybrid.transfer.account.amount.text" = "Montant";
+"cybrid.transfer.action.button.text" = "Continuer";
 
 // -- Transfer Modal Component
 "cybrid.transfer.modal.loading.text" = "Chargement";
