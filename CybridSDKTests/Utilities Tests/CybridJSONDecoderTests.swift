@@ -119,6 +119,7 @@ class CybridJSONDecoderTests: XCTestCase {
         XCTAssertNil(result)
     }
 
+    // MARK: TradeBankModel
     func test_TradeBankModel_Decoding() throws {
 
         let tradeData = getJSONData(from: "createTradeResponse")
@@ -783,6 +784,100 @@ class CybridJSONDecoderTests: XCTestCase {
         let decoder = CybridJSONDecoder()
 
         let result = try? decoder.decode(ExternalBankAccountListBankModel.self, from: tradeData!)
+        XCTAssertNil(result)
+    }
+
+    // MARK: TransferBankModel
+    func test_TransferBankModel_Decoding() throws {
+
+        let transferData = getJSONData(from: "createTransferResponse")
+        XCTAssertNotNil(transferData)
+        let decoder = CybridJSONDecoder()
+
+        let result = try? decoder.decode(TransferBankModel.self, from: transferData!)
+        XCTAssertNotNil(result?.guid)
+        XCTAssertNotNil(result?.amount)
+        XCTAssertNotNil(result?.fee)
+    }
+
+    func test_TransferBankModel_withInvalidJSON() throws {
+
+        let transferData = getJSONData(from: "listAssetsResponse")
+        XCTAssertNotNil(transferData)
+        let decoder = CybridJSONDecoder()
+
+        let result = try? decoder.decode(TransferBankModel.self, from: transferData!)
+        XCTAssertNil(result)
+    }
+
+    func test_TransferBankModel_withInvalidArrayOfJSON() throws {
+
+        let transferData = getJSONData(from: "listPricesResponse")
+        XCTAssertNotNil(transferData)
+        let decoder = CybridJSONDecoder()
+
+        let result = try? decoder.decode(TransferBankModel.self, from: transferData!)
+        XCTAssertNil(result)
+    }
+
+    func test_TransferListBankModel_Decoding() throws {
+
+        let transferData = getJSONData(from: "listTransfersResponse")
+        XCTAssertNotNil(transferData)
+        let decoder = CybridJSONDecoder()
+
+        let result = try? decoder.decode(TransferListBankModel.self, from: transferData!)
+        XCTAssertNotNil(result?.total)
+        XCTAssertNotNil(result?.page)
+        XCTAssertNotNil(result?.perPage)
+        XCTAssertNotNil(result?.objects)
+        XCTAssertNotNil(result?.objects[0])
+        XCTAssertNotNil(result?.objects[0].guid)
+        XCTAssertNotNil(result?.objects[0].transferType)
+        XCTAssertNotNil(result?.objects[0].customerGuid)
+        XCTAssertNotNil(result?.objects[0].quoteGuid)
+        XCTAssertNotNil(result?.objects[0].asset)
+        XCTAssertNotNil(result?.objects[0].side)
+        XCTAssertNotNil(result?.objects[0].state)
+        XCTAssertNotNil(result?.objects[0].amount)
+        XCTAssertNotNil(result?.objects[0].fee)
+        XCTAssertNotNil(result?.objects[0].createdAt)
+    }
+
+    func test_TransferListBankModel_Decoding_Incomplete() throws {
+
+        let tradeData = getJSONData(from: "listTransfersResponseIncomplete")
+        XCTAssertNotNil(tradeData)
+
+        let decoder = CybridJSONDecoder()
+
+        let result = try? decoder.decode(TransferListBankModel.self, from: tradeData!)
+        XCTAssertNotNil(result?.total)
+        XCTAssertEqual(result?.total, 0)
+        XCTAssertNotNil(result?.page)
+        XCTAssertEqual(result?.page, 0)
+        XCTAssertNotNil(result?.perPage)
+        XCTAssertEqual(result?.perPage, 0)
+        XCTAssertNotNil(result?.objects)
+    }
+
+    func test_TransferListBankModel_withInvalidJSON() throws {
+
+        let transferData = getJSONData(from: "listPricesResponse")
+        XCTAssertNotNil(transferData)
+        let decoder = CybridJSONDecoder()
+
+        let result = try? decoder.decode(TradeListBankModel.self, from: transferData!)
+        XCTAssertNil(result)
+    }
+
+    func test_TransferListBankModel_withInvalidArrayOfJSON() throws {
+
+        let transferData = getJSONData(from: "listPricesResponse")
+        XCTAssertNotNil(transferData)
+        let decoder = CybridJSONDecoder()
+
+        let result = try? decoder.decode(TransferListBankModel.self, from: transferData!)
         XCTAssertNil(result)
     }
 }

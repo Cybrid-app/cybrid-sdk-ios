@@ -20,8 +20,8 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="cIp-MT-lRL">
                                 <rect key="frame" x="0.0" y="335" width="414" height="240"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5je-8O-oTJ">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="60"/>
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5je-8O-oTJ">
+                                        <rect key="frame" x="0.0" y="-60" width="414" height="60"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="60" id="NnX-MQ-bQb"/>
                                         </constraints>
@@ -29,6 +29,17 @@
                                         <buttonConfiguration key="configuration" style="plain" title="Trade Component"/>
                                         <connections>
                                             <action selector="didTapCryptoListButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="8Mn-iu-9Bk"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="98G-2L-Txb">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="60"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="60" id="nXO-L2-PZX"/>
+                                        </constraints>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Transfer Component"/>
+                                        <connections>
+                                            <action selector="didTapTransfersButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="cv4-aG-1cU"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tlt-Xr-X0q">

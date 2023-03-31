@@ -17,7 +17,8 @@ final class ServiceProviderMock: AssetsRepoProvider,
                                  IdentityVerificationRepoProvider,
                                  WorkflowProvider,
                                  ExternalBankAccountProvider,
-                                 BankProvider {
+                                 BankProvider,
+                                 TransfersRepoProvider {
 
     var apiManager: CybridAPIManager.Type = MockAPIManager.self
 
@@ -32,6 +33,7 @@ final class ServiceProviderMock: AssetsRepoProvider,
     var workflowRepository: WorkflowRepository.Type = WorkflowAPIMock.self
     var externalBankAccountRepository: ExternalBankAccountRepository.Type = ExternalBankAccountAPIMock.self
     var bankRepository: BankRepository.Type = BankAPIMock.self
+    var transfersRepository: TransfersRepository.Type = TransfersAPIMock.self
 
     // MARK: Cache
     var assetsCache: [AssetBankModel]?
@@ -301,5 +303,26 @@ final class ServiceProviderMock: AssetsRepoProvider,
 
         Cybrid.session.setupSession(authToken: "TEST-TOKEN")
         ExternalBankAccountAPIMock.deleteExternalBankAccountError()
+    }
+
+    func didCreateTransferSuccessfully() {
+
+        Cybrid.session.setupSession(authToken: "TEST-TOKEN")
+        TransfersAPIMock.didCreateTransferSuccessfully()
+    }
+
+    func didCreateTransferFailed() {
+        TransfersAPIMock.didCreateTransferFailed()
+    }
+
+    func didFetchTransfersListSuccessfully() {
+
+        Cybrid.session.setupSession(authToken: "TEST-TOKEN")
+        TransfersAPIMock.didFetchTransfersListSuccessfully()
+    }
+
+    func didFetchTransfersListWithError() {
+
+        TransfersAPIMock.didFetchTransfersListWithError()
     }
 }

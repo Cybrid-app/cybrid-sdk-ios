@@ -79,3 +79,33 @@
 "cybrid.bank.accounts.detail.confirm.body.two.text" = ". Les dépôts ne seront plus possibles à partir de ce compte.";
 "cybrid.bank.accounts.detail.confirm.cancel.button" = "Annuler";
 "cybrid.bank.accounts.detail.confirm.confirm.button" = "Confirmer";
+
+// -- Transfer Component
+"cybrid.transfer.loading.text" = "Chargement";
+"cybrid.transfer.error.text" = "Erreur lors de la récupération des comptes, réessayez.";
+"cybrid.transfer.error.button" = "Fait";
+"cybrid.transfer.account.title.text" = "Disponible pour le commerce";
+"cybrid.transfer.account.deposit.text" = "Dépôt";
+"cybrid.transfer.account.withdraw.text" = "Retirer";
+"cybrid.transfer.account.from.text" = "Du compte bancaire";
+"cybrid.transfer.account.to.text" = "Au compte bancaire";
+"cybrid.transfer.account.amount.text" = "Montant";
+"cybrid.transfer.action.button.text" = "Continuer";
+
+// -- Transfer Modal Component
+"cybrid.transfer.modal.loading.text" = "Chargement";
+"cybrid.transfer.modal.content.title.deposit.text" = "Confirmer les détails du dépôt";
+"cybrid.transfer.modal.content.title.withdraw.text" = "Confirmer les détails du retrait";
+"cybrid.transfer.modal.content.amount.text" = "Montant";
+"cybrid.transfer.modal.content.deposit.text" = "Date de dépôt";
+"cybrid.transfer.modal.content.withdraw.text" = "Date de retrait";
+"cybrid.transfer.modal.content.from.text" = "Depuis";
+"cybrid.transfer.modal.content.to.text" = "Pour";
+"cybrid.transfer.modal.content.button.deposit.text" = "Confirmer le dépôt";
+"cybrid.transfer.modal.content.button.withdraw.text" = "Confirmer le retrait";
+"cybrid.transfer.modal.details.title.deposit.text" = "Détails du dépôt";
+"cybrid.transfer.modal.details.title.withdraw.text" = "Détails du retrait";
+"cybrid.transfer.modal.details.button.text" = "Continuer";
+"cybrid.transfer.modal.error.title.text" = "Erreur d'action";
+"cybrid.transfer.modal.error.desc.text" = "Une erreur s'est produite lors de l'accès à votre compte bancaire. Veuillez réessayer ou contacter l'assistance.";
+"cybrid.transfer.modal.error.doneButton.text" = "Fait";

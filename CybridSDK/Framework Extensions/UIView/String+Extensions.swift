@@ -14,8 +14,18 @@ extension String {
         let separator = ","
         var result: String = ""
         var iterator = 1
+        var intValue = self.stringValue
+        var decimalValue = ""
 
-        for character in self.stringValue.reversed() {
+        // Check if has dot
+        if self.contains(".") {
+
+            let parts = self.stringValue.split(separator: ".")
+            intValue = String(parts[0])
+            decimalValue = String(parts[1])
+        }
+
+        for character in intValue.reversed() {
             if iterator < 4 {
                 result = String(character) + result
                 iterator += 1
@@ -24,6 +34,11 @@ extension String {
                 iterator = 2
             }
         }
+
+        if !decimalValue.isEmpty {
+            result = "\(result).\(decimalValue)"
+        }
+
         return result
     }
 
@@ -49,5 +64,25 @@ extension String {
         } else {
             return self.stringValue
         }
+    }
+
+    func removeLeadingZeros() -> String {
+        return self.stringValue.replacingOccurrences(of: "^0+", with: "", options: .regularExpression)
+    }
+
+    func getParts() -> [String] {
+        return self.stringValue.map { String($0) }
+    }
+
+    subscript(_ range: CountableRange<Int>) -> String {
+        let start = index(startIndex, offsetBy: max(0, range.lowerBound))
+        let end = index(start, offsetBy: min(self.count - range.lowerBound,
+                                             range.upperBound - range.lowerBound))
+        return String(self[start..<end])
+    }
+
+    subscript(_ range: CountablePartialRangeFrom<Int>) -> String {
+        let start = index(startIndex, offsetBy: max(0, range.lowerBound))
+        return String(self[start...])
     }
 }
