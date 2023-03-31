@@ -138,7 +138,7 @@ class TransferViewModel: NSObject {
             customerGuid: self.customerGuid,
             asset: Cybrid.fiat.code,
             side: side,
-            deliverAmount: AssetFormatter.forTrade(Cybrid.fiat, amount: amountDecimal)
+            deliverAmount: AssetFormatter.forInput(Cybrid.fiat, amount: amountDecimal)
         )
         self.dataProvider.createQuote(params: postQuoteBankModel, with: nil) { [weak self] quoteResponse in
 

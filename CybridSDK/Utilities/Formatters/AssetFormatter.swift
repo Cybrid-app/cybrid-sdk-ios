@@ -18,7 +18,7 @@ struct AssetFormatter {
     /// Parameters:
     ///  - asset: AssetBankModel to take the decimals and symbol ($)
     ///  - amount: CDecimal object with preloaded amount
-    static func forTrade(_ asset: AssetBankModel, amount: CDecimal) -> String {
+    static func forInput(_ asset: AssetBankModel, amount: CDecimal) -> String {
 
         var intValue = String(amount.intValue)
         var decimalValue = amount.decimalValue
@@ -100,7 +100,7 @@ struct AssetFormatter {
     static func format(_ asset: AssetBankModel, amount: String) -> String {
 
         var amountFormatted = amount.currencyFormat()
-        var code = asset.type == .fiat ? " \(asset.code)" : ""
+        let code = asset.type == .fiat ? " \(asset.code)" : ""
         amountFormatted = "\(asset.symbol)\(amountFormatted)\(code)"
         return amountFormatted
     }

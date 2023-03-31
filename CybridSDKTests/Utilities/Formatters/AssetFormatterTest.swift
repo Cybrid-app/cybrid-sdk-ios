@@ -20,7 +20,7 @@ class AssetFormatterTest: XCTestCase {
         let result = "50"
 
         // -- When
-        let formatted = AssetFormatter.forTrade(asset, amount: fiatAmount)
+        let formatted = AssetFormatter.forInput(asset, amount: fiatAmount)
 
         // -- Then
         XCTAssertEqual(formatted, result)
@@ -34,7 +34,7 @@ class AssetFormatterTest: XCTestCase {
         let result = "100"
 
         // -- When
-        let formatted = AssetFormatter.forTrade(asset, amount: fiatAmount)
+        let formatted = AssetFormatter.forInput(asset, amount: fiatAmount)
 
         // -- Then
         XCTAssertEqual(formatted, result)
@@ -48,7 +48,7 @@ class AssetFormatterTest: XCTestCase {
         let result = "150"
 
         // -- When
-        let formatted = AssetFormatter.forTrade(asset, amount: fiatAmount)
+        let formatted = AssetFormatter.forInput(asset, amount: fiatAmount)
 
         // -- Then
         XCTAssertEqual(formatted, result)
@@ -62,7 +62,7 @@ class AssetFormatterTest: XCTestCase {
         let result = "1000"
 
         // -- When
-        let formatted = AssetFormatter.forTrade(asset, amount: fiatAmount)
+        let formatted = AssetFormatter.forInput(asset, amount: fiatAmount)
 
         // -- Then
         XCTAssertEqual(formatted, result)
@@ -76,7 +76,7 @@ class AssetFormatterTest: XCTestCase {
         let result = "1050"
 
         // -- When
-        let formatted = AssetFormatter.forTrade(asset, amount: fiatAmount)
+        let formatted = AssetFormatter.forInput(asset, amount: fiatAmount)
 
         // -- Then
         XCTAssertEqual(formatted, result)
@@ -90,7 +90,7 @@ class AssetFormatterTest: XCTestCase {
         let result = "12345670"
 
         // -- When
-        let formatted = AssetFormatter.forTrade(asset, amount: fiatAmount)
+        let formatted = AssetFormatter.forInput(asset, amount: fiatAmount)
 
         // -- Then
         XCTAssertEqual(formatted, result)
@@ -176,7 +176,7 @@ class AssetFormatterTest: XCTestCase {
         let result = "64218090000000000"
 
         // -- When
-        let formatted = AssetFormatter.forTrade(asset, amount: fiatAmount)
+        let formatted = AssetFormatter.forInput(asset, amount: fiatAmount)
 
         // -- Then
         XCTAssertEqual(formatted, result)
@@ -190,7 +190,7 @@ class AssetFormatterTest: XCTestCase {
         let result = "64218090000000000"
 
         // -- When
-        let formatted = AssetFormatter.forTrade(asset, amount: fiatAmount)
+        let formatted = AssetFormatter.forInput(asset, amount: fiatAmount)
 
         // -- Then
         XCTAssertEqual(formatted, result)
@@ -204,7 +204,7 @@ class AssetFormatterTest: XCTestCase {
         let result = "64218090000000000"
 
         // -- When
-        let formatted = AssetFormatter.forTrade(asset, amount: fiatAmount)
+        let formatted = AssetFormatter.forInput(asset, amount: fiatAmount)
 
         // -- Then
         XCTAssertEqual(formatted, result)
@@ -218,7 +218,7 @@ class AssetFormatterTest: XCTestCase {
         let result = "642180900000000000"
 
         // -- When
-        let formatted = AssetFormatter.forTrade(asset, amount: fiatAmount)
+        let formatted = AssetFormatter.forInput(asset, amount: fiatAmount)
 
         // -- Then
         XCTAssertEqual(formatted, result)
@@ -232,7 +232,7 @@ class AssetFormatterTest: XCTestCase {
         let result = "6421809000000000000"
 
         // -- When
-        let formatted = AssetFormatter.forTrade(asset, amount: fiatAmount)
+        let formatted = AssetFormatter.forInput(asset, amount: fiatAmount)
 
         // -- Then
         XCTAssertEqual(formatted, result)
@@ -246,7 +246,7 @@ class AssetFormatterTest: XCTestCase {
         let result = "64218090000000000000"
 
         // -- When
-        let formatted = AssetFormatter.forTrade(asset, amount: fiatAmount)
+        let formatted = AssetFormatter.forInput(asset, amount: fiatAmount)
 
         // -- Then
         XCTAssertEqual(formatted, result)
