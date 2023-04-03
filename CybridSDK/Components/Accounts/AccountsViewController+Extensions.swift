@@ -71,7 +71,7 @@ extension AccountsViewController {
         accountsValueTitle.font = UIFont.make(ofSize: UIValues.accountValueTitleSize)
         accountsValueTitle.textColor = UIValues.accountValueTitleColor
         accountsValueTitle.textAlignment = .center
-        accountsValueTitle.text = "... \(accountsViewModel.currentCurrency)"
+        accountsValueTitle.text = "... \(Cybrid.fiat.code)"
         accountsValueTitle.addBelow(toItem: accountsTitle,
                                     height: UIValues.accountValueTitleHeight,
                                     margins: UIValues.accountValueTitleMargin)
