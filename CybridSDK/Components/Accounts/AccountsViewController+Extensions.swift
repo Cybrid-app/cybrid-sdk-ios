@@ -141,15 +141,18 @@ extension AccountsViewController: AccountsViewProvider {
                    didSelectRowAt indexPath: IndexPath,
                    withBalance balance: BalanceUIModel) {
 
-        let accountTradesViewController = AccountTradesViewController(
-            balance: balance,
-            accountsViewModel: accountsViewModel)
+        var controller = UIViewController()
+        if balance.asset?.type == .crypto {
+            controller = AccountTradesViewController(balance: balance, accountsViewModel: accountsViewModel)
+        } else {
+            controller = AccountTransfersViewController(balance: balance)
+        }
 
         if self.navigationController != nil {
-            self.navigationController?.pushViewController(accountTradesViewController, animated: true)
+            self.navigationController?.pushViewController(controller, animated: true)
         } else {
             self.modalPresentationStyle = .fullScreen
-            self.present(accountTradesViewController, animated: true)
+            self.present(controller, animated: true)
         }
     }
 }

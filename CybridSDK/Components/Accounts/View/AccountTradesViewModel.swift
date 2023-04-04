@@ -20,20 +20,17 @@ class AccountTradesViewModel: NSObject {
 
     internal var assets: [AssetBankModel]
     internal var tradesList: [TradeBankModel] = []
-    internal var currentCurrency: String = "USD"
     internal var currentAccountGUID: String = ""
 
     init(cellProvider: AccountTradesViewProvider,
          dataProvider: TradesRepoProvider,
          assets: [AssetBankModel],
-         logger: CybridLogger?,
-         currency: String = "USD") {
+         logger: CybridLogger?) {
 
         self.cellProvider = cellProvider
         self.dataProvider = dataProvider
         self.assets = assets
         self.logger = logger
-        self.currentCurrency = currency
     }
 
     func getTrades(accountGuid: String) {
@@ -109,7 +106,7 @@ extension AccountTradesViewModel: UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        return AccountTradesHeaderCell(currency: self.currentCurrency)
+        return AccountTradesHeaderCell()
     }
 
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

@@ -1,21 +1,22 @@
 //
-//  AccountTradesHeaderCell.swift
+//  AccountTransfersHeaderCell.swift
 //  CybridSDK
 //
-//  Created by Erick Sanchez Perez on 26/08/22.
+//  Created by Erick Sanchez Perez on 03/04/23.
 //
 
 import Foundation
 import UIKit
 
-class AccountTradesHeaderCell: UITableViewHeaderFooterView {
+class AccountTransfersHeaderCell: UITableViewHeaderFooterView {
 
     private let localizer: Localizer
 
     @available(iOS, deprecated: 10, message: "You should never use this init method.")
     required init?(coder: NSCoder) {
-      assertionFailure("init(coder:) should never be used")
-      return nil
+
+        assertionFailure("init(coder:) should never be used")
+        return nil
     }
 
     override init(reuseIdentifier: String? = nil) {
@@ -29,32 +30,21 @@ class AccountTradesHeaderCell: UITableViewHeaderFooterView {
 
         // -- Creating left view
         let asseTitle = createTitleLabel()
-        asseTitle.setLocalizedText(key: UIStrings.recentTransactionTitle, localizer: localizer)
+        asseTitle.setLocalizedText(key: UIStrings.recentTranfersTitle, localizer: localizer)
 
-        let leftSide = createVerticalStackSingle(labelOne: asseTitle)
-
-        // -- Creatin right side
-        let balanceTitle = createTitleLabel()
-        balanceTitle.setLocalizedText(key: UIStrings.amountTitle, localizer: localizer)
-
-        let currecnyTitle = createSubTitleLabel()
-        currecnyTitle.text = Cybrid.fiat.code
-        currecnyTitle.textAlignment = .right
-
-        let rightSide = createVerticalStack(
-            labelOne: balanceTitle,
-            labelTwo: currecnyTitle,
-            withConstraints: true)
+        // -- Creating right side
+        let amountTitle = createSubTitleLabel()
+        amountTitle.setLocalizedText(key: UIStrings.amountTitle, localizer: localizer)
 
         // -- Join
-        let stack = createHorizontalStack(one: leftSide, two: rightSide)
+        let stack = createHorizontalStack(one: asseTitle, two: amountTitle)
         addSubview(stack)
         stack.translatesAutoresizingMaskIntoConstraints = true
         self.setStackToMatchParent(stack: stack)
     }
 }
 
-extension AccountTradesHeaderCell {
+extension AccountTransfersHeaderCell {
 
     private func createTitleLabel() -> UILabel {
 
@@ -82,36 +72,7 @@ extension AccountTradesHeaderCell {
         return label
     }
 
-    private func createVerticalStack(labelOne: UILabel, labelTwo: UILabel, withConstraints: Bool = false) -> UIStackView {
-
-        let stack = UIStackView(arrangedSubviews: [labelOne, labelTwo])
-        if withConstraints {
-            self.setConstraintsInVerticalStacks(view: labelOne, parent: stack)
-            self.setConstraintsInVerticalStacks(view: labelTwo, parent: stack)
-        }
-        self.setVerticalStackValues(stack: stack)
-        return stack
-    }
-
-    private func createVerticalStackSingle(labelOne: UILabel, withConstraints: Bool = false) -> UIStackView {
-
-        let stack = UIStackView(arrangedSubviews: [labelOne])
-        if withConstraints {
-            self.setConstraintsInVerticalStacks(view: labelOne, parent: stack)
-        }
-        self.setVerticalStackValues(stack: stack)
-        return stack
-    }
-
-    private func setVerticalStackValues(stack: UIStackView) {
-
-        stack.axis = .vertical
-        stack.spacing = UIValues.verticalStakSeparation
-        stack.distribution = .equalSpacing
-        stack.alignment = .leading
-    }
-
-    private func createHorizontalStack(one: UIStackView, two: UIStackView) -> UIStackView {
+    private func createHorizontalStack(one: UIView, two: UIView) -> UIStackView {
 
         let stack = UIStackView(arrangedSubviews: [one, two])
         stack.axis = .horizontal
@@ -149,23 +110,9 @@ extension AccountTradesHeaderCell {
                          attribute: .notAnAttribute,
                          constant: UIValues.headerHeight)
     }
-
-    private func setConstraintsInVerticalStacks(view: UIView, parent: UIStackView) {
-
-        view.constraint(attribute: .leading,
-                        relatedBy: .equal,
-                        toItem: parent,
-                        attribute: .leading,
-                        constant: UIConstants.zero)
-        view.constraint(attribute: .trailing,
-                        relatedBy: .equal,
-                        toItem: parent,
-                        attribute: .trailing,
-                        constant: UIConstants.zero)
-    }
 }
 
-extension AccountTradesHeaderCell {
+extension AccountTransfersHeaderCell {
 
     enum UIValues {
 
@@ -182,7 +129,7 @@ extension AccountTradesHeaderCell {
 
     enum UIStrings {
 
-        static let recentTransactionTitle = "cybrid.account.trades.recentTransactionsTitle"
-        static let amountTitle = "cybrid.account.trades.amountTitle"
+        static let recentTranfersTitle = "cybrid.accounts.transfers.recentTransfersTitle"
+        static let amountTitle = "cybrid.accounts.transfers.amount"
     }
 }
