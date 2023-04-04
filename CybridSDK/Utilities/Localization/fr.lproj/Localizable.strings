@@ -59,6 +59,15 @@
 "cybrid.accounts.loading.title" = "Loading accounts";
 "cybrid.accounts.item.fiat.pending" = " pending";
 
+// Accounts - Transfers
+"cybrid.accounts.transfers.subtitle.available" = "Solde disponible";
+"cybrid.accounts.transfers.recentTransfersTitle" = "TRANSFERTS RÉCENTS";
+"cybrid.accounts.transfers.amount" = "MONTANT";
+"cybrid.accounts.transfers.withdraw" = "Retirer";
+"cybrid.accounts.transfers.deposit" = "Dépôt";
+"cybrid.accounts.transfers.pending" = "En attente";
+"cybrid.accounts.transfers.failed" = "Échoué";
+
 // Bank Accounts Component
 "cybrid.bank.content.title.text" = "Comptes bancaires";
 "cybrid.bank.content.noAccounts.text" = "No bank accounts connected.";

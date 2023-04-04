@@ -11,7 +11,7 @@ import Foundation
 class AccountsViewModel: NSObject {
 
     // MARK: Observed properties
-    internal var assets: [AssetBankModel] = []
+    internal var assets = Cybrid.assets
     internal var accounts: [AccountBankModel] = []
     internal var prices: [SymbolPriceBankModel] = []
     internal var balances: Observable<[BalanceUIModel]> = .init([])
@@ -21,7 +21,6 @@ class AccountsViewModel: NSObject {
     private unowned var cellProvider: AccountsViewProvider
     private var dataProvider: PricesRepoProvider & AssetsRepoProvider & AccountsRepoProvider
     private var logger: CybridLogger?
-    var currentCurrency: String = "USD"
 
     // -- MARK: Public properties
     var uiState: Observable<AccountsViewController.ViewState> = .init(.LOADING)
@@ -31,57 +30,28 @@ class AccountsViewModel: NSObject {
 
     init(cellProvider: AccountsViewProvider,
          dataProvider: PricesRepoProvider & AssetsRepoProvider & AccountsRepoProvider,
-         logger: CybridLogger?,
-         currency: String = "USD") {
+         logger: CybridLogger?) {
 
         self.cellProvider = cellProvider
         self.dataProvider = dataProvider
         self.logger = logger
-        self.currentCurrency = currency
-    }
-
-    internal func getAssetsList(_ completion: @escaping (_ assetsReady: Bool) -> Void) {
-
-        if self.assets.isEmpty {
-
-            self.dataProvider.fetchAssetsList { [weak self] assetsResult in
-                switch assetsResult {
-                case .success(let assetsList):
-
-                    self?.logger?.log(.component(.accounts(.assetsDataFetching)))
-                    self?.assets = assetsList
-                    completion(true)
-
-                case .failure:
-
-                    self?.logger?.log(.component(.accounts(.assetsDataError)))
-                    self?.assets = []
-                    completion(true)
-                }
-            }
-        } else {
-            completion(true)
-        }
     }
 
     func getAccounts() {
 
-        self.getAssetsList { [weak self] _ in
+        self.dataProvider.fetchAccounts(customerGuid: Cybrid.customerGUID) { [weak self] accountsResult in
 
-            self?.dataProvider.fetchAccounts(customerGuid: Cybrid.customerGUID) { [weak self] accountsResult in
+            switch accountsResult {
+            case .success(let accountsList):
+                self?.logger?.log(.component(.accounts(.accountsDataFetching)))
+                self?.accounts = accountsList.objects
 
-                switch accountsResult {
-                case .success(let accountsList):
-                    self?.logger?.log(.component(.accounts(.accountsDataFetching)))
-                    self?.accounts = accountsList.objects
-
-                    self?.pricesPolling = Polling { [self] in
-                        self?.getPricesList()
-                    }
-
-                case .failure:
-                    self?.logger?.log(.component(.accounts(.accountsDataError)))
+                self?.pricesPolling = Polling { [self] in
+                    self?.getPricesList()
                 }
+
+            case .failure:
+                self?.logger?.log(.component(.accounts(.accountsDataError)))
             }
         }
     }
@@ -121,30 +91,30 @@ class AccountsViewModel: NSObject {
         }
     }
 
-    internal func buildModelList(
-        assets: [AssetBankModel],
-        accounts: [AccountBankModel],
-        prices: [SymbolPriceBankModel]) -> [BalanceUIModel]? {
+    internal func buildModelList(assets: [AssetBankModel],
+                                 accounts: [AccountBankModel],
+                                 prices: [SymbolPriceBankModel]) -> [BalanceUIModel]? {
 
-      return accounts.compactMap { account in
-
-        let code = account.asset!
-        let symbol = "\(code)-\(currentCurrency)"
-        let asset = assets.first(where: { $0.code == code })
-        let counterAsset = assets.first(where: { $0.code == currentCurrency })
-        let price = prices.first(where: { $0.symbol == symbol })
-        return BalanceUIModel(
-            account: account,
-            asset: asset,
-            counterAsset: counterAsset,
-            price: price)
-      }
+        return accounts.compactMap { account in
+            
+            let fiatCode = Cybrid.fiat.code
+            let code = account.asset!
+            let symbol = "\(code)-\(fiatCode)"
+            let asset = assets.first(where: { $0.code == code })
+            let counterAsset = assets.first(where: { $0.code == fiatCode })
+            let price = prices.first(where: { $0.symbol == symbol })
+            return BalanceUIModel(
+                account: account,
+                asset: asset,
+                counterAsset: counterAsset,
+                price: price)
+        }
     }
 
     internal func calculateTotalBalance() {
 
         if !self.assets.isEmpty && !self.balances.value.isEmpty {
-            if let asset = assets.first(where: { $0.code == currentCurrency.uppercased() }) {
+            if let asset = assets.first(where: { $0.code == Cybrid.fiat.code.uppercased() }) {
 
                 var total = BigDecimal(0).value
                 for balance in self.balances.value {
@@ -161,6 +131,7 @@ class AccountsViewModel: NSObject {
 // MARK: - AccountsViewProvider
 
 protocol AccountsViewProvider: AnyObject {
+
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath, withData dataModel: BalanceUIModel) -> UITableViewCell
 
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath, withBalance balance: BalanceUIModel)
@@ -169,6 +140,7 @@ protocol AccountsViewProvider: AnyObject {
 // MARK: - AccountsViewModel + UITableViewDelegate + UITableViewDataSource
 
 extension AccountsViewModel: UITableViewDelegate, UITableViewDataSource {
+
   public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     balances.value.count
   }
@@ -178,7 +150,7 @@ extension AccountsViewModel: UITableViewDelegate, UITableViewDataSource {
   }
 
   func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-      return AccountsHeaderCell(currency: self.currentCurrency)
+      return AccountsHeaderCell(currency: Cybrid.fiat.code)
   }
 
   public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

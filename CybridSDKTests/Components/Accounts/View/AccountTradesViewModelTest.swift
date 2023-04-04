@@ -19,11 +19,9 @@ class AccountTradesViewModelTests: XCTestCase {
             cellProvider: AccountTradesMockViewProvider(),
             dataProvider: self.dataProvider,
             assets: AssetListBankModel.mock.objects,
-            logger: nil,
-            currency: "USD")
+            logger: nil)
 
         XCTAssertNotNil(viewModel)
-        XCTAssertEqual(viewModel.currentCurrency, "USD")
         XCTAssertNotNil(viewModel.assets)
     }
 
@@ -34,8 +32,7 @@ class AccountTradesViewModelTests: XCTestCase {
             cellProvider: AccountTradesMockViewProvider(),
             dataProvider: self.dataProvider,
             assets: AssetListBankModel.mock.objects,
-            logger: nil,
-            currency: "USD")
+            logger: nil)
 
         // -- When
         viewModel.getTrades(accountGuid: "")
@@ -52,8 +49,7 @@ class AccountTradesViewModelTests: XCTestCase {
             cellProvider: AccountTradesMockViewProvider(),
             dataProvider: self.dataProvider,
             assets: AssetListBankModel.mock.objects,
-            logger: nil,
-            currency: "USD")
+            logger: nil)
 
         // -- When
         viewModel.getTrades(accountGuid: "")
@@ -70,8 +66,7 @@ class AccountTradesViewModelTests: XCTestCase {
             cellProvider: AccountTradesMockViewProvider(),
             dataProvider: self.dataProvider,
             assets: AssetListBankModel.mock.objects,
-            logger: nil,
-            currency: "USD")
+            logger: nil)
 
         // -- When
         viewModel.getTrades(accountGuid: "")
@@ -88,8 +83,7 @@ class AccountTradesViewModelTests: XCTestCase {
             cellProvider: AccountTradesMockViewProvider(),
             dataProvider: self.dataProvider,
             assets: AssetListBankModel.mock.objects,
-            logger: nil,
-            currency: "USD")
+            logger: nil)
 
         // -- When
         viewModel.getTrades(accountGuid: "")
@@ -106,8 +100,7 @@ class AccountTradesViewModelTests: XCTestCase {
             cellProvider: AccountTradesMockViewProvider(),
             dataProvider: self.dataProvider,
             assets: AssetListBankModel.mock.objects,
-            logger: nil,
-            currency: "USD")
+            logger: nil)
 
         // -- When
         viewModel.getTrades(accountGuid: "")
@@ -136,8 +129,7 @@ class AccountTradesViewModelTests: XCTestCase {
         let accountsViewModel = AccountsViewModel(
             cellProvider: AccountsMockViewProvider(),
             dataProvider: self.dataProvider,
-            logger: nil,
-            currency: "USD")
+            logger: nil)
         let controller = AccountTradesViewController(
             balance: balance!,
             accountsViewModel: accountsViewModel)
@@ -146,8 +138,7 @@ class AccountTradesViewModelTests: XCTestCase {
             cellProvider: controller,
             dataProvider: self.dataProvider,
             assets: AssetListBankModel.mock.objects,
-            logger: nil,
-            currency: "USD")
+            logger: nil)
 
         // -- When
         viewModel.getTrades(accountGuid: "")
@@ -169,8 +160,7 @@ class AccountTradesViewModelTests: XCTestCase {
         let accountsViewModel = AccountsViewModel(
             cellProvider: AccountsMockViewProvider(),
             dataProvider: self.dataProvider,
-            logger: nil,
-            currency: "USD")
+            logger: nil)
         let controller = AccountTradesViewController(
             balance: balance!,
             accountsViewModel: accountsViewModel)
@@ -179,8 +169,7 @@ class AccountTradesViewModelTests: XCTestCase {
             cellProvider: controller,
             dataProvider: self.dataProvider,
             assets: AssetListBankModel.mock.objects,
-            logger: nil,
-            currency: "USD")
+            logger: nil)
 
         // -- When
         viewModel.getTrades(accountGuid: "")
@@ -204,8 +193,7 @@ class AccountTradesViewModelTests: XCTestCase {
         let accountsViewModel = AccountsViewModel(
             cellProvider: AccountsMockViewProvider(),
             dataProvider: self.dataProvider,
-            logger: nil,
-            currency: "USD")
+            logger: nil)
         let controller = AccountTradesViewController(
             balance: balance!,
             accountsViewModel: accountsViewModel)
@@ -214,8 +202,7 @@ class AccountTradesViewModelTests: XCTestCase {
             cellProvider: controller,
             dataProvider: self.dataProvider,
             assets: AssetListBankModel.mock.objects,
-            logger: nil,
-            currency: "USD")
+            logger: nil)
         let indexPath = IndexPath(item: 0, section: 0)
 
         // -- When
@@ -239,8 +226,7 @@ class AccountTradesViewModelTests: XCTestCase {
         let accountsViewModel = AccountsViewModel(
             cellProvider: AccountsMockViewProvider(),
             dataProvider: self.dataProvider,
-            logger: nil,
-            currency: "USD")
+            logger: nil)
         let controller = AccountTradesViewController(
             balance: balance!,
             accountsViewModel: accountsViewModel)
@@ -249,8 +235,7 @@ class AccountTradesViewModelTests: XCTestCase {
             cellProvider: controller,
             dataProvider: self.dataProvider,
             assets: AssetListBankModel.mock.objects,
-            logger: nil,
-            currency: "USD")
+            logger: nil)
         let indexPath = IndexPath(item: 0, section: 0)
 
         // -- When

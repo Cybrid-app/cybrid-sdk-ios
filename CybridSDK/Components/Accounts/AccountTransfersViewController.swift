@@ -1,53 +1,52 @@
 //
-//  AccountTradesViewcontroller.swift
+//  AccountTransfersViewController.swift
 //  CybridSDK
 //
-//  Created by Erick Sanchez Perez on 25/08/22.
+//  Created by Erick Sanchez Perez on 03/04/23.
 //
 
 import Foundation
 import UIKit
+import CybridApiBankSwift
 
-public final class AccountTradesViewController: UIViewController {
+public final class AccountTransfersViewController: UIViewController {
 
-    private var balance: BalanceUIModel!
-    private var accountsViewModel: AccountsViewModel!
-    private var tradesViewModel: AccountTradesViewModel!
+    private var transfersViewModel: AccountTransfersViewModel!
 
     private var theme: Theme!
     private var localizer: Localizer!
+    private var balance: BalanceUIModel!
 
     // -- Views
     var balanceAssetIcon: URLImageView!
     var balanceAssetName: UILabel!
     var assetTitleContainer: UIStackView!
     var balanceValueView: UILabel!
-    var balanceFiatValueView: UILabel!
-    let tradesTable = UITableView()
+    var subtitle: UILabel!
+    let transfersTable = UITableView()
 
-    internal init(balance: BalanceUIModel, accountsViewModel: AccountsViewModel) {
+    internal init(balance: BalanceUIModel) {
 
         super.init(nibName: nil, bundle: nil)
         self.balance = balance
-        self.accountsViewModel = accountsViewModel
 
-        self.tradesViewModel = AccountTradesViewModel(
+        self.transfersViewModel = AccountTransfersViewModel(
             cellProvider: self,
             dataProvider: CybridSession.current,
-            assets: accountsViewModel.assets,
             logger: Cybrid.logger)
 
         self.theme = Cybrid.theme
         self.localizer = CybridLocalizer()
 
-        self.tradesViewModel.getTrades(accountGuid: balance.account.guid ?? "")
+        self.transfersViewModel.getTransfers(accountGuid: balance.account.guid!)
         self.setupView()
     }
 
     @available(iOS, deprecated: 10, message: "You should never use this init method.")
     required init?(coder: NSCoder) {
-      assertionFailure("init(coder:) should never be used")
-      return nil
+
+        assertionFailure("init(coder:) should never be used")
+        return nil
     }
 
     func setupView() {
@@ -55,11 +54,11 @@ public final class AccountTradesViewController: UIViewController {
         view.backgroundColor = .white
         self.createAssetTitle()
         self.createBalanceTitles()
-        self.createTradesTable()
+        self.createTransfersTable()
     }
 }
 
-extension AccountTradesViewController {
+extension AccountTransfersViewController {
 
     private func createAssetTitle() {
 
@@ -110,42 +109,37 @@ extension AccountTradesViewController {
             margins: UIValues.balanceValueViewMargin)
 
         // -- Balance Fiat Value
-        balanceFiatValueView = UILabel()
-        balanceFiatValueView.setContentHuggingPriority(.defaultHigh, for: .horizontal)
-        balanceFiatValueView.translatesAutoresizingMaskIntoConstraints = false
-        balanceFiatValueView.sizeToFit()
-        balanceFiatValueView.font = UIValues.balanceFiatValueFont
-        balanceFiatValueView.textColor = UIValues.balanceFiatValueColor
-        balanceFiatValueView.textAlignment = .center
-        balanceFiatValueView.setAttributedText(mainText: balance.accountBalanceInFiatFormatted,
-                                               mainTextFont: UIValues.balanceFiatValueFont,
-                                               mainTextColor: UIValues.balanceFiatValueColor,
-                                               attributedText: balance.asset?.code ?? "",
-                                               attributedTextFont: UIValues.balanceFiatValueCodeFont,
-                                               attributedTextColor: UIValues.balanceFiatValueCodeColor)
-        balanceFiatValueView.addBelow(
+        subtitle = UILabel()
+        subtitle.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+        subtitle.translatesAutoresizingMaskIntoConstraints = false
+        subtitle.sizeToFit()
+        subtitle.font = UIValues.balanceFiatValueFont
+        subtitle.textColor = UIValues.balanceFiatValueColor
+        subtitle.textAlignment = .center
+        subtitle.setLocalizedText(key: UIStrings.transferAvailableSub, localizer: localizer)
+        subtitle.addBelow(
             toItem: balanceValueView,
             height: UIValues.balanceFiatValueViewSize,
             margins: UIValues.balanceFiatValueViewMargins)
     }
 
-    private func createTradesTable() {
+    private func createTransfersTable() {
 
-        self.tradesTable.delegate = self.tradesViewModel
-        self.tradesTable.dataSource = self.tradesViewModel
-        self.tradesTable.register(AccountTradesCell.self, forCellReuseIdentifier: AccountTradesCell.reuseIdentifier)
-        self.tradesTable.rowHeight = UIValues.tradesTableCellHeight
-        self.tradesTable.estimatedRowHeight = UIValues.tradesTableCellHeight
-        self.tradesTable.translatesAutoresizingMaskIntoConstraints = false
+        self.transfersTable.delegate = self.transfersViewModel
+        self.transfersTable.dataSource = self.transfersViewModel
+        self.transfersTable.register(AccountTransfersCell.self, forCellReuseIdentifier: AccountTransfersCell.reuseIdentifier)
+        self.transfersTable.rowHeight = UIValues.tradesTableCellHeight
+        self.transfersTable.estimatedRowHeight = UIValues.tradesTableCellHeight
+        self.transfersTable.translatesAutoresizingMaskIntoConstraints = false
 
-        self.tradesTable.addBelowToBottom(
-            topItem: self.balanceFiatValueView,
+        self.transfersTable.addBelowToBottom(
+            topItem: self.subtitle,
             bottomItem: self.view,
             margins: UIValues.tradesTableMargins)
 
         // -- Live Data
-        tradesViewModel.trades.bind { _ in
-            self.tradesTable.reloadData()
+        transfersViewModel.tranfers.bind { _ in
+            self.transfersTable.reloadData()
         }
     }
 
@@ -165,7 +159,7 @@ extension AccountTradesViewController {
                              relatedBy: .equal,
                              toItem: nil,
                              attribute: .notAnAttribute,
-                             constant: 120)
+                             constant: 200)
         container.constraint(attribute: .height,
                              relatedBy: .equal,
                              toItem: nil,
@@ -174,34 +168,23 @@ extension AccountTradesViewController {
     }
 }
 
-extension AccountTradesViewController: AccountTradesViewProvider {
+extension AccountTransfersViewController: AccountTransfersViewProvider {
 
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath, withData model: TradeUIModel) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath, withData model: TransferBankModel) -> UITableViewCell {
 
         guard
             let cell = tableView.dequeueReusableCell(
-                withIdentifier: AccountTradesCell.reuseIdentifier,
-                for: indexPath) as? AccountTradesCell
+                withIdentifier: AccountTransfersCell.reuseIdentifier,
+                for: indexPath) as? AccountTransfersCell
         else {
             return UITableViewCell()
         }
-        cell.setData(trade: model)
+        cell.setData(transfer: model)
         return cell
-    }
-
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath, with trade: TradeUIModel) {
-
-        let modal = AccountTradeDetailModal(
-                trade: trade,
-                assetURL: balance.accountAssetURL,
-                theme: theme,
-                localizer: localizer,
-                onConfirm: nil)
-        modal.present()
     }
 }
 
-extension AccountTradesViewController {
+extension AccountTransfersViewController {
 
     enum UIValues {
 
@@ -230,5 +213,10 @@ extension AccountTradesViewController {
         static let balanceValueCodeViewColor = UIColor(hex: "#8E8E93")
         static let balanceFiatValueColor = UIColor(hex: "#636366")
         static let balanceFiatValueCodeColor = UIColor(hex: "#757575")
+    }
+
+    enum UIStrings {
+
+        static let transferAvailableSub = "cybrid.accounts.transfers.subtitle.available"
     }
 }
