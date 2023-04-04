@@ -266,7 +266,7 @@ extension AccountTransfersCell {
 
         // -- Setup icon
         self.icon.image = UIImage(
-            named: transfer.side == .withdrawal ? "sellICon" : "buyIcon",
+            named: transfer.side == .withdrawal ? "sellIcon" : "buyIcon",
             in: Bundle(for: Self.self),
             with: nil)
 
