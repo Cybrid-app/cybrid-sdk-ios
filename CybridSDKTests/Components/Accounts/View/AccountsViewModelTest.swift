@@ -18,8 +18,7 @@ class AccountsViewModelTest: XCTestCase {
         return AccountsViewModel(
             cellProvider: AccountsMockViewProvider(),
             dataProvider: self.dataProvider,
-            logger: nil,
-            currency: "USD")
+            logger: nil)
     }
 
     func createBalanceList() -> [BalanceUIModel] {
@@ -38,41 +37,7 @@ class AccountsViewModelTest: XCTestCase {
 
         // -- Then
         XCTAssertNotNil(viewModel)
-        XCTAssertEqual(viewModel.currentCurrency, "USD")
         XCTAssertEqual(viewModel.uiState.value, AccountsViewController.ViewState.LOADING)
-    }
-
-    func test_getAssetsList_Successfully() async {
-
-        // -- Given
-        let viewModel = self.createViewModel()
-
-        // -- When
-        dataProvider.didFetchAssetsSuccessfully()
-        viewModel.getAssetsList { ready in
-            XCTAssertTrue(ready)
-        }
-        dataProvider.didFetchAssetsSuccessfully()
-
-        // -- Then
-        XCTAssertNotEqual(viewModel.assets, [])
-    }
-
-    func test_getAssetsList_PrefIlled_Successfully() async {
-
-        // -- Given
-        let viewModel = self.createViewModel()
-
-        // -- When
-        viewModel.assets = AssetBankModel.cryptoAssets
-        dataProvider.didFetchAssetsSuccessfully()
-        viewModel.getAssetsList { ready in
-            XCTAssertTrue(ready)
-        }
-        dataProvider.didFetchAssetsSuccessfully()
-
-        // -- Then
-        XCTAssertNotEqual(viewModel.assets, [])
     }
 
     func test_getAccounts_Successfully() async {
@@ -155,11 +120,7 @@ class AccountsViewModelTest: XCTestCase {
         // -- Given
         let controller = AccountsViewController()
         let tableView = controller.accountsTable
-        let viewModel = AccountsViewModel(
-            cellProvider: controller,
-            dataProvider: self.dataProvider,
-            logger: nil,
-            currency: "USD")
+        let viewModel = self.createViewModel()
 
         // -- When
         viewModel.assets = AssetBankModel.cryptoAssets
@@ -177,11 +138,7 @@ class AccountsViewModelTest: XCTestCase {
         // -- Given
         let controller = AccountsViewController()
         let tableView = controller.accountsTable
-        let viewModel = AccountsViewModel(
-            cellProvider: controller,
-            dataProvider: self.dataProvider,
-            logger: nil,
-            currency: "USD")
+        let viewModel = self.createViewModel()
 
         // -- When
         viewModel.assets = AssetBankModel.cryptoAssets
@@ -200,11 +157,7 @@ class AccountsViewModelTest: XCTestCase {
         // -- Given
         let controller = AccountsViewController()
         let tableView = controller.accountsTable
-        let viewModel = AccountsViewModel(
-            cellProvider: controller,
-            dataProvider: self.dataProvider,
-            logger: nil,
-            currency: "USD")
+        let viewModel = self.createViewModel()
         let indexPath = IndexPath(item: 0, section: 0)
 
         // -- When
@@ -223,11 +176,7 @@ class AccountsViewModelTest: XCTestCase {
         // -- Given
         let controller = AccountsViewController()
         let tableView = controller.accountsTable
-        let viewModel = AccountsViewModel(
-            cellProvider: controller,
-            dataProvider: self.dataProvider,
-            logger: nil,
-            currency: "USD")
+        let viewModel = self.createViewModel()
         let indexPath = IndexPath(item: 0, section: 0)
         let alertExpectation = XCTestExpectation(description: "testAlertShouldAppear")
 

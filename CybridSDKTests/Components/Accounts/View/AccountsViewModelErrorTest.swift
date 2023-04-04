@@ -18,23 +18,7 @@ class AccountsViewModelErrorTest: XCTestCase {
         return AccountsViewModel(
             cellProvider: AccountsMockViewProvider(),
             dataProvider: self.dataProvider,
-            logger: nil,
-            currency: "USD")
-    }
-
-    func test_getAssetsList_Error() {
-
-        // -- Given
-        let viewModel = self.createViewModel()
-
-        // -- When
-        viewModel.getAssetsList { ready in
-            XCTAssertTrue(ready)
-        }
-        dataProvider.didFetchAssetsWithError()
-
-        // -- Then
-        XCTAssertEqual(viewModel.assets, [])
+            logger: nil)
     }
 
     func test_getAccounts_Error() {

@@ -101,7 +101,7 @@
 "cybrid.kyc.error.text" = "Unable to verify identity.";
 "cybrid.kyc.error.done" = "Done";
 "cybrid.kyc.reviewing.text" = "Identity being reviewed.";
-"cybrid.kyc.reviewing.done" = "Done";/var/folders/0p/zzkl345d55d5bhghmggqz8nh0000gn/T/simulator_screenshot_D590356D-4556-4B1F-B53C-38FCB9F994DE.png
+"cybrid.kyc.reviewing.done" = "Done";
 
 // Bank Accounts Component
 "cybrid.bank.content.title.text" = "Bank Accounts";

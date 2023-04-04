@@ -13,29 +13,27 @@ class AccountTradesViewModelTests: XCTestCase {
 
     lazy var dataProvider = ServiceProviderMock()
 
-    func test_init() {
+    internal func createViewModel() -> AccountTradesViewModel {
 
-        let viewModel = AccountTradesViewModel(
+        return AccountTradesViewModel(
             cellProvider: AccountTradesMockViewProvider(),
             dataProvider: self.dataProvider,
             assets: AssetListBankModel.mock.objects,
-            logger: nil,
-            currency: "USD")
+            logger: nil)
+    }
+
+    func test_init() {
+
+        let viewModel = self.createViewModel()
 
         XCTAssertNotNil(viewModel)
-        XCTAssertEqual(viewModel.currentCurrency, "USD")
         XCTAssertNotNil(viewModel.assets)
     }
 
     func test_getTrades_Successfully() {
 
         // -- Given
-        let viewModel = AccountTradesViewModel(
-            cellProvider: AccountTradesMockViewProvider(),
-            dataProvider: self.dataProvider,
-            assets: AssetListBankModel.mock.objects,
-            logger: nil,
-            currency: "USD")
+        let viewModel = self.createViewModel()
 
         // -- When
         viewModel.getTrades(accountGuid: "")
@@ -48,12 +46,7 @@ class AccountTradesViewModelTests: XCTestCase {
     func test_getTrades_Error() {
 
         // -- Given
-        let viewModel = AccountTradesViewModel(
-            cellProvider: AccountTradesMockViewProvider(),
-            dataProvider: self.dataProvider,
-            assets: AssetListBankModel.mock.objects,
-            logger: nil,
-            currency: "USD")
+        let viewModel = self.createViewModel()
 
         // -- When
         viewModel.getTrades(accountGuid: "")
@@ -66,12 +59,7 @@ class AccountTradesViewModelTests: XCTestCase {
     func test_buildModelList_Successfully() throws {
 
         // -- Given
-        let viewModel = AccountTradesViewModel(
-            cellProvider: AccountTradesMockViewProvider(),
-            dataProvider: self.dataProvider,
-            assets: AssetListBankModel.mock.objects,
-            logger: nil,
-            currency: "USD")
+        let viewModel = self.createViewModel()
 
         // -- When
         viewModel.getTrades(accountGuid: "")
@@ -84,12 +72,7 @@ class AccountTradesViewModelTests: XCTestCase {
     func test_buildModelList_Error() throws {
 
         // -- Given
-        let viewModel = AccountTradesViewModel(
-            cellProvider: AccountTradesMockViewProvider(),
-            dataProvider: self.dataProvider,
-            assets: AssetListBankModel.mock.objects,
-            logger: nil,
-            currency: "USD")
+        let viewModel = self.createViewModel()
 
         // -- When
         viewModel.getTrades(accountGuid: "")
@@ -102,12 +85,7 @@ class AccountTradesViewModelTests: XCTestCase {
     func test_createUIModelList_Nil() throws {
 
         // -- Given
-        let viewModel = AccountTradesViewModel(
-            cellProvider: AccountTradesMockViewProvider(),
-            dataProvider: self.dataProvider,
-            assets: AssetListBankModel.mock.objects,
-            logger: nil,
-            currency: "USD")
+        let viewModel = self.createViewModel()
 
         // -- When
         viewModel.getTrades(accountGuid: "")
@@ -136,18 +114,12 @@ class AccountTradesViewModelTests: XCTestCase {
         let accountsViewModel = AccountsViewModel(
             cellProvider: AccountsMockViewProvider(),
             dataProvider: self.dataProvider,
-            logger: nil,
-            currency: "USD")
+            logger: nil)
         let controller = AccountTradesViewController(
             balance: balance!,
             accountsViewModel: accountsViewModel)
         let tableView = controller.tradesTable
-        let viewModel = AccountTradesViewModel(
-            cellProvider: controller,
-            dataProvider: self.dataProvider,
-            assets: AssetListBankModel.mock.objects,
-            logger: nil,
-            currency: "USD")
+        let viewModel = self.createViewModel()
 
         // -- When
         viewModel.getTrades(accountGuid: "")
@@ -169,18 +141,12 @@ class AccountTradesViewModelTests: XCTestCase {
         let accountsViewModel = AccountsViewModel(
             cellProvider: AccountsMockViewProvider(),
             dataProvider: self.dataProvider,
-            logger: nil,
-            currency: "USD")
+            logger: nil)
         let controller = AccountTradesViewController(
             balance: balance!,
             accountsViewModel: accountsViewModel)
         let tableView = controller.tradesTable
-        let viewModel = AccountTradesViewModel(
-            cellProvider: controller,
-            dataProvider: self.dataProvider,
-            assets: AssetListBankModel.mock.objects,
-            logger: nil,
-            currency: "USD")
+        let viewModel = self.createViewModel()
 
         // -- When
         viewModel.getTrades(accountGuid: "")
@@ -204,18 +170,12 @@ class AccountTradesViewModelTests: XCTestCase {
         let accountsViewModel = AccountsViewModel(
             cellProvider: AccountsMockViewProvider(),
             dataProvider: self.dataProvider,
-            logger: nil,
-            currency: "USD")
+            logger: nil)
         let controller = AccountTradesViewController(
             balance: balance!,
             accountsViewModel: accountsViewModel)
         let tableView = controller.tradesTable
-        let viewModel = AccountTradesViewModel(
-            cellProvider: controller,
-            dataProvider: self.dataProvider,
-            assets: AssetListBankModel.mock.objects,
-            logger: nil,
-            currency: "USD")
+        let viewModel = self.createViewModel()
         let indexPath = IndexPath(item: 0, section: 0)
 
         // -- When
@@ -239,18 +199,12 @@ class AccountTradesViewModelTests: XCTestCase {
         let accountsViewModel = AccountsViewModel(
             cellProvider: AccountsMockViewProvider(),
             dataProvider: self.dataProvider,
-            logger: nil,
-            currency: "USD")
+            logger: nil)
         let controller = AccountTradesViewController(
             balance: balance!,
             accountsViewModel: accountsViewModel)
         let tableView = controller.tradesTable
-        let viewModel = AccountTradesViewModel(
-            cellProvider: controller,
-            dataProvider: self.dataProvider,
-            assets: AssetListBankModel.mock.objects,
-            logger: nil,
-            currency: "USD")
+        let viewModel = self.createViewModel()
         let indexPath = IndexPath(item: 0, section: 0)
 
         // -- When
