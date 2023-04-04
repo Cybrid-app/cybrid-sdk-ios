@@ -141,6 +141,7 @@
 		9224F76729DB640200712D3B /* AccountTransfersCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224F76629DB640200712D3B /* AccountTransfersCell.swift */; };
 		9224F76929DB9B6400712D3B /* AccountTransfersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224F76829DB9B6400712D3B /* AccountTransfersViewModel.swift */; };
 		9224F76B29DB9D6800712D3B /* AccountTransfersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224F76A29DB9D6800712D3B /* AccountTransfersViewController.swift */; };
+		9224F76D29DBC97100712D3B /* AccountTransfersViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224F76C29DBC97100712D3B /* AccountTransfersViewModelTest.swift */; };
 		9257E78D29B7B2E500846E12 /* AccountsFiatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9257E78C29B7B2E500846E12 /* AccountsFiatCell.swift */; };
 		9257E79129B7DE5A00846E12 /* AccountsViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9257E79029B7DE5A00846E12 /* AccountsViewModelTest.swift */; };
 		9257E79329B7E27400846E12 /* AccountsViewModelErrorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9257E79229B7E27400846E12 /* AccountsViewModelErrorTest.swift */; };
@@ -430,6 +431,7 @@
 		9224F76629DB640200712D3B /* AccountTransfersCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTransfersCell.swift; sourceTree = "<group>"; };
 		9224F76829DB9B6400712D3B /* AccountTransfersViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTransfersViewModel.swift; sourceTree = "<group>"; };
 		9224F76A29DB9D6800712D3B /* AccountTransfersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTransfersViewController.swift; sourceTree = "<group>"; };
+		9224F76C29DBC97100712D3B /* AccountTransfersViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTransfersViewModelTest.swift; sourceTree = "<group>"; };
 		9257E78C29B7B2E500846E12 /* AccountsFiatCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsFiatCell.swift; sourceTree = "<group>"; };
 		9257E79029B7DE5A00846E12 /* AccountsViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsViewModelTest.swift; sourceTree = "<group>"; };
 		9257E79229B7E27400846E12 /* AccountsViewModelErrorTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsViewModelErrorTest.swift; sourceTree = "<group>"; };
@@ -1178,7 +1180,6 @@
 				92B68194291B1C3900FD6E99 /* IdentityVerification */,
 				0BD66122286C20BC00F4DA6B /* CryptoPriceViewModelTests.swift */,
 				0B50F35A28A5890C00DDB01E /* TradeViewModelTests.swift */,
-				9201FA0328E3DEDF00C6F186 /* AccountTradesViewModelTest.swift */,
 			);
 			path = "ViewModel Tests";
 			sourceTree = "<group>";
@@ -1272,6 +1273,8 @@
 			children = (
 				9257E79029B7DE5A00846E12 /* AccountsViewModelTest.swift */,
 				9257E79229B7E27400846E12 /* AccountsViewModelErrorTest.swift */,
+				9201FA0328E3DEDF00C6F186 /* AccountTradesViewModelTest.swift */,
+				9224F76C29DBC97100712D3B /* AccountTransfersViewModelTest.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2209,6 +2212,7 @@
 				9201FA0428E3DEDF00C6F186 /* AccountTradesViewModelTest.swift in Sources */,
 				9299104D29D3912B007E9832 /* TransfersAPIMock.swift in Sources */,
 				0B00E0522886F01A00707F26 /* AssetsAPIMock.swift in Sources */,
+				9224F76D29DBC97100712D3B /* AccountTransfersViewModelTest.swift in Sources */,
 				0B289A0028946B52001B3360 /* JSONMockHelper.swift in Sources */,
 				0B303CEC2862F898007BF7FF /* ColorThemeTests.swift in Sources */,
 				0B00E03C287F7BA500707F26 /* CybridSessionTests.swift in Sources */,
