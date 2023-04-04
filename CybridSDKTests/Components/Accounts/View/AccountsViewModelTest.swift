@@ -120,7 +120,10 @@ class AccountsViewModelTest: XCTestCase {
         // -- Given
         let controller = AccountsViewController()
         let tableView = controller.accountsTable
-        let viewModel = self.createViewModel()
+        let viewModel = AccountsViewModel(
+                        cellProvider: controller,
+                        dataProvider: self.dataProvider,
+                        logger: nil)
 
         // -- When
         viewModel.assets = AssetBankModel.cryptoAssets
@@ -138,7 +141,10 @@ class AccountsViewModelTest: XCTestCase {
         // -- Given
         let controller = AccountsViewController()
         let tableView = controller.accountsTable
-        let viewModel = self.createViewModel()
+        let viewModel = AccountsViewModel(
+                        cellProvider: controller,
+                        dataProvider: self.dataProvider,
+                        logger: nil)
 
         // -- When
         viewModel.assets = AssetBankModel.cryptoAssets
@@ -157,7 +163,10 @@ class AccountsViewModelTest: XCTestCase {
         // -- Given
         let controller = AccountsViewController()
         let tableView = controller.accountsTable
-        let viewModel = self.createViewModel()
+        let viewModel = AccountsViewModel(
+                        cellProvider: controller,
+                        dataProvider: self.dataProvider,
+                        logger: nil)
         let indexPath = IndexPath(item: 0, section: 0)
 
         // -- When
@@ -176,7 +185,10 @@ class AccountsViewModelTest: XCTestCase {
         // -- Given
         let controller = AccountsViewController()
         let tableView = controller.accountsTable
-        let viewModel = self.createViewModel()
+        let viewModel = AccountsViewModel(
+                        cellProvider: controller,
+                        dataProvider: self.dataProvider,
+                        logger: nil)
         let indexPath = IndexPath(item: 0, section: 0)
         let alertExpectation = XCTestExpectation(description: "testAlertShouldAppear")
 

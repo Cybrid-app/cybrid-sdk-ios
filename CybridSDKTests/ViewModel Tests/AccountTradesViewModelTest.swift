@@ -13,18 +13,13 @@ class AccountTradesViewModelTests: XCTestCase {
 
     lazy var dataProvider = ServiceProviderMock()
 
-    internal func createViewModel() -> AccountTradesViewModel {
+    func test_init() {
 
-        return AccountTradesViewModel(
+        let viewModel = AccountTradesViewModel(
             cellProvider: AccountTradesMockViewProvider(),
             dataProvider: self.dataProvider,
             assets: AssetListBankModel.mock.objects,
             logger: nil)
-    }
-
-    func test_init() {
-
-        let viewModel = self.createViewModel()
 
         XCTAssertNotNil(viewModel)
         XCTAssertNotNil(viewModel.assets)
@@ -33,7 +28,11 @@ class AccountTradesViewModelTests: XCTestCase {
     func test_getTrades_Successfully() {
 
         // -- Given
-        let viewModel = self.createViewModel()
+        let viewModel = AccountTradesViewModel(
+            cellProvider: AccountTradesMockViewProvider(),
+            dataProvider: self.dataProvider,
+            assets: AssetListBankModel.mock.objects,
+            logger: nil)
 
         // -- When
         viewModel.getTrades(accountGuid: "")
@@ -46,7 +45,11 @@ class AccountTradesViewModelTests: XCTestCase {
     func test_getTrades_Error() {
 
         // -- Given
-        let viewModel = self.createViewModel()
+        let viewModel = AccountTradesViewModel(
+            cellProvider: AccountTradesMockViewProvider(),
+            dataProvider: self.dataProvider,
+            assets: AssetListBankModel.mock.objects,
+            logger: nil)
 
         // -- When
         viewModel.getTrades(accountGuid: "")
@@ -59,7 +62,11 @@ class AccountTradesViewModelTests: XCTestCase {
     func test_buildModelList_Successfully() throws {
 
         // -- Given
-        let viewModel = self.createViewModel()
+        let viewModel = AccountTradesViewModel(
+            cellProvider: AccountTradesMockViewProvider(),
+            dataProvider: self.dataProvider,
+            assets: AssetListBankModel.mock.objects,
+            logger: nil)
 
         // -- When
         viewModel.getTrades(accountGuid: "")
@@ -72,7 +79,11 @@ class AccountTradesViewModelTests: XCTestCase {
     func test_buildModelList_Error() throws {
 
         // -- Given
-        let viewModel = self.createViewModel()
+        let viewModel = AccountTradesViewModel(
+            cellProvider: AccountTradesMockViewProvider(),
+            dataProvider: self.dataProvider,
+            assets: AssetListBankModel.mock.objects,
+            logger: nil)
 
         // -- When
         viewModel.getTrades(accountGuid: "")
@@ -85,7 +96,11 @@ class AccountTradesViewModelTests: XCTestCase {
     func test_createUIModelList_Nil() throws {
 
         // -- Given
-        let viewModel = self.createViewModel()
+        let viewModel = AccountTradesViewModel(
+            cellProvider: AccountTradesMockViewProvider(),
+            dataProvider: self.dataProvider,
+            assets: AssetListBankModel.mock.objects,
+            logger: nil)
 
         // -- When
         viewModel.getTrades(accountGuid: "")
@@ -119,7 +134,11 @@ class AccountTradesViewModelTests: XCTestCase {
             balance: balance!,
             accountsViewModel: accountsViewModel)
         let tableView = controller.tradesTable
-        let viewModel = self.createViewModel()
+        let viewModel = AccountTradesViewModel(
+            cellProvider: controller,
+            dataProvider: self.dataProvider,
+            assets: AssetListBankModel.mock.objects,
+            logger: nil)
 
         // -- When
         viewModel.getTrades(accountGuid: "")
@@ -146,7 +165,11 @@ class AccountTradesViewModelTests: XCTestCase {
             balance: balance!,
             accountsViewModel: accountsViewModel)
         let tableView = controller.tradesTable
-        let viewModel = self.createViewModel()
+        let viewModel = AccountTradesViewModel(
+            cellProvider: controller,
+            dataProvider: self.dataProvider,
+            assets: AssetListBankModel.mock.objects,
+            logger: nil)
 
         // -- When
         viewModel.getTrades(accountGuid: "")
@@ -175,7 +198,11 @@ class AccountTradesViewModelTests: XCTestCase {
             balance: balance!,
             accountsViewModel: accountsViewModel)
         let tableView = controller.tradesTable
-        let viewModel = self.createViewModel()
+        let viewModel = AccountTradesViewModel(
+            cellProvider: controller,
+            dataProvider: self.dataProvider,
+            assets: AssetListBankModel.mock.objects,
+            logger: nil)
         let indexPath = IndexPath(item: 0, section: 0)
 
         // -- When
@@ -204,7 +231,11 @@ class AccountTradesViewModelTests: XCTestCase {
             balance: balance!,
             accountsViewModel: accountsViewModel)
         let tableView = controller.tradesTable
-        let viewModel = self.createViewModel()
+        let viewModel = AccountTradesViewModel(
+            cellProvider: controller,
+            dataProvider: self.dataProvider,
+            assets: AssetListBankModel.mock.objects,
+            logger: nil)
         let indexPath = IndexPath(item: 0, section: 0)
 
         // -- When
