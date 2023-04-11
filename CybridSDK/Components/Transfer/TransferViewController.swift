@@ -82,7 +82,7 @@ extension TransferViewController {
                                          relatedBy: .equal,
                                          toItem: nil,
                                          attribute: .notAnAttribute,
-                                         constant: 20)
+                                         constant: 25)
         self.errorMessageView.isHidden = true
 
         // -- Component Container
