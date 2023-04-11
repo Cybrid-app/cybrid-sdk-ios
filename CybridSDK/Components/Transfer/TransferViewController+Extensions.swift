@@ -146,6 +146,46 @@ extension TransferViewController {
 
     }
 
+    internal func transferView_Warning() {
+
+        // -- Title
+        self.createStateTitle(
+            stringKey: UIStrings.warningText,
+            image: UIImage(named: "kyc_required", in: Bundle(for: Self.self), with: nil)!
+        )
+
+        // -- Buttons
+        let done = CYBButton(title: localizer.localize(with: UIStrings.errorButton)) {
+            if self.navigationController != nil {
+                self.navigationController?.popViewController(animated: true)
+            } else {
+                self.dismiss(animated: true)
+            }
+        }
+
+        self.componentContent.addSubview(done)
+        done.constraint(attribute: .leading,
+                        relatedBy: .equal,
+                        toItem: self.componentContent,
+                        attribute: .leading,
+                        constant: UIValues.actionButtonMargin.left)
+        done.constraint(attribute: .trailing,
+                        relatedBy: .equal,
+                        toItem: self.componentContent,
+                        attribute: .trailing,
+                        constant: UIValues.actionButtonMargin.right)
+        done.constraint(attribute: .bottom,
+                        relatedBy: .equal,
+                        toItem: self.componentContent,
+                        attribute: .bottomMargin,
+                        constant: UIValues.actionButtonMargin.bottom)
+        done.constraint(attribute: .height,
+                        relatedBy: .equal,
+                        toItem: nil,
+                        attribute: .notAnAttribute,
+                        constant: UIValues.actionButtonHeight)
+    }
+
     internal func transferView_Error() {
 
         // -- Title
@@ -156,7 +196,11 @@ extension TransferViewController {
 
         // -- Buttons
         let done = CYBButton(title: localizer.localize(with: UIStrings.errorButton)) {
-            self.dismiss(animated: true)
+            if self.navigationController != nil {
+                self.navigationController?.popViewController(animated: true)
+            } else {
+                self.dismiss(animated: true)
+            }
         }
 
         self.componentContent.addSubview(done)
@@ -218,17 +262,17 @@ extension TransferViewController {
                         relatedBy: .equal,
                         toItem: title,
                         attribute: .leading,
-                        constant: -15)
+                        constant: -5)
         icon.constraint(attribute: .width,
                         relatedBy: .equal,
                         toItem: nil,
                         attribute: .notAnAttribute,
-                        constant: 25)
+                        constant: 20)
         icon.constraint(attribute: .height,
                         relatedBy: .equal,
                         toItem: nil,
                         attribute: .notAnAttribute,
-                        constant: 25)
+                        constant: 20)
     }
 
     func createSubTitleLabel(key: String) -> UILabel {
@@ -250,18 +294,18 @@ extension TransferViewController {
         let spinner = UIActivityIndicatorView(style: .medium)
         loaderContainer.addSubview(spinner)
         spinner.constraint(attribute: .centerY,
-                          relatedBy: .equal,
-                          toItem: loaderContainer,
-                          attribute: .centerY)
+                           relatedBy: .equal,
+                           toItem: loaderContainer,
+                           attribute: .centerY)
         spinner.constraint(attribute: .centerX,
-                          relatedBy: .equal,
-                          toItem: loaderContainer,
-                          attribute: .centerX)
+                           relatedBy: .equal,
+                           toItem: loaderContainer,
+                           attribute: .centerX)
         spinner.constraint(attribute: .width,
-                          relatedBy: .equal,
-                          toItem: nil,
-                          attribute: .notAnAttribute,
-                          constant: UIValues.loadingTitleHeight)
+                           relatedBy: .equal,
+                           toItem: nil,
+                           attribute: .notAnAttribute,
+                           constant: UIValues.loadingTitleHeight)
         spinner.constraint(attribute: .height,
                            relatedBy: .equal,
                            toItem: nil,
@@ -290,11 +334,16 @@ extension TransferViewController {
 
     func setFromFieldData(field: CYBTextField) {
 
-        let account = self.transferViewModel.externalBankAccounts.value.first
+        let account = self.transferViewModel.currentExternalBankAccount.value
         self.transferViewModel.currentExternalBankAccount.value = account
         let name = self.transferViewModel.getAccountNameInFormat(account)
 
-        field.updateIcon(.image("test_bank"))
+        if account?.state == .refreshRequired {
+            field.updateIcon(.image("kyc_error"))
+        } else {
+            field.updateIcon(.image("test_bank"))
+        }
+
         field.text = name
     }
 
@@ -384,7 +433,8 @@ extension TransferViewController {
 
         static let loadingText = "cybrid.transfer.loading.text"
         static let errorText = "cybrid.transfer.error.text"
-        static let errorButton = "cybrid.transfer.error.text"
+        static let warningText = "cybrid.transfer.warning.text"
+        static let errorButton = "cybrid.transfer.error.button"
         static let accountsTitleText = "cybrid.transfer.account.title.text"
         static let accountsDepositText = "cybrid.transfer.account.deposit.text"
         static let accountsWithdrawText = "cybrid.transfer.account.withdraw.text"

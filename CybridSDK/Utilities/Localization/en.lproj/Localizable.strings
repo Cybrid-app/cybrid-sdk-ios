@@ -126,6 +126,7 @@
 
 // -- Transfer Component
 "cybrid.transfer.loading.text" = "Loading";
+"cybrid.transfer.warning.text" = "You need one account to transfer founds.";
 "cybrid.transfer.error.text" = "Error fetching accounts, try again.";
 "cybrid.transfer.error.button" = "Done";
 "cybrid.transfer.account.title.text" = "Available to Trade";
@@ -153,3 +154,4 @@
 "cybrid.transfer.modal.error.title.text" = "Action error";
 "cybrid.transfer.modal.error.desc.text" = "There was an error accessing your bank account. Please try again or contact support.";
 "cybrid.transfer.modal.error.doneButton.text" = "Done";
+"cybrid.transfer.errorMessage.text" = "Some of your accounts have a problem, please reconnect it.";
