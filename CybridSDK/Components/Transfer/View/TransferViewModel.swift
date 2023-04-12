@@ -92,7 +92,6 @@ class TransferViewModel: NSObject {
 
                 self?.logger?.log(.component(.accounts(.accountsDataFetching)))
                 self?.checkExternalBankAccounts(accounts: accountList.objects)
-                // self?.checkExternalBankAccounts(accounts: [])
 
             case .failure:
                 self?.logger?.log(.component(.accounts(.accountsDataError)))

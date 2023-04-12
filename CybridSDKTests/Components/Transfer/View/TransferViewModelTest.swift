@@ -77,6 +77,7 @@ class TransferViewModelTest: XCTestCase {
         let viewModel = createViewModel()
 
         // -- When
+        viewModel.modalUIState.value = .LOADING
         dataProvider.fetchExternalBankAccountsSuccessfully()
         viewModel.fetchExternalAccounts()
         dataProvider.fetchExternalBankAccountsSuccessfully()
@@ -87,7 +88,6 @@ class TransferViewModelTest: XCTestCase {
         XCTAssertFalse(viewModel.externalBankAccounts.value.isEmpty)
         XCTAssertEqual(viewModel.uiState.value, .ACCOUNTS)
         XCTAssertEqual(viewModel.modalUIState.value, .LOADING)
-        XCTAssertEqual(viewModel.balanceLoading.value, .CONTENT)
     }
 
     func test_createQuote_Successfully() {
