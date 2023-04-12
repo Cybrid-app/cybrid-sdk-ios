@@ -83,6 +83,12 @@ final class ExternalBankAccountAPIMock: ExternalBankAccountsAPI {
         return ExternalBankAccountListBankModel.mock
     }
 
+    @discardableResult
+    class func fetchExternalBankAccountsSuccessfully_Empty() -> ExternalBankAccountListBankModel {
+        fetchExternalBankAccountsCompletion?(.success(ExternalBankAccountListBankModel.mockEmpty))
+        return ExternalBankAccountListBankModel.mock
+    }
+
     class func fetchExternalBankAccountsError() {
         fetchExternalBankAccountsCompletion?(.failure(.error(0, nil, nil, CybridError.serviceError)))
     }
@@ -102,6 +108,8 @@ final class ExternalBankAccountAPIMock: ExternalBankAccountsAPI {
 extension ExternalBankAccountListBankModel {
 
     static let mock = ExternalBankAccountListBankModel(total: 1, page: 0, perPage: 1, objects: ExternalBankAccountBankModel.list)
+
+    static let mockEmpty = ExternalBankAccountListBankModel(total: 0, page: 0, perPage: 0, objects: [])
 }
 
 extension ExternalBankAccountBankModel {
