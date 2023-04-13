@@ -146,7 +146,25 @@ extension ExternalBankAccountBankModel {
         state: .completed)
     }
 
+    static func mockRefresh() -> Self {
+        return ExternalBankAccountBankModel(
+        guid: "1234",
+        name: "test",
+        asset: "test",
+        accountKind: .plaid,
+        environment: .sandbox,
+        bankGuid: "1234",
+        customerGuid: "1234",
+        createdAt: Date(),
+        plaidInstitutionId: "1234",
+        plaidAccountMask: "1234",
+        plaidAccountName: "test",
+        state: .refreshRequired)
+    }
+
     static let list = [
         mock()
     ]
+
+    static let listRefresh = [ mockRefresh() ]
 }
