@@ -14,6 +14,7 @@ class BankAccountCell: UITableViewCell {
     static let reuseIdentifier = "bankAccountsCell"
     override var reuseIdentifier: String? { Self.reuseIdentifier }
 
+    private var accountIcon = UIImageView()
     private var accountName = UILabel()
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -35,29 +36,28 @@ class BankAccountCell: UITableViewCell {
     private func setupViews() {
 
         // -- Icon
-        let icon = UIImageView()
-        icon.translatesAutoresizingMaskIntoConstraints = false
-        icon.image = UIImage(named: "test_bank", in: Bundle(for: Self.self), with: nil)!
-        self.addSubview(icon)
-        icon.constraint(attribute: .leading,
-                        relatedBy: .equal,
-                        toItem: self,
-                        attribute: .leading,
-                        constant: 16)
-        icon.constraint(attribute: .centerY,
-                        relatedBy: .equal,
-                        toItem: self,
-                        attribute: .centerY)
-        icon.constraint(attribute: .height,
-                        relatedBy: .equal,
-                        toItem: nil,
-                        attribute: .notAnAttribute,
-                        constant: UIValues.iconSize.width)
-        icon.constraint(attribute: .width,
-                        relatedBy: .equal,
-                        toItem: nil,
-                        attribute: .notAnAttribute,
-                        constant: UIValues.iconSize.height)
+        self.accountIcon.translatesAutoresizingMaskIntoConstraints = false
+        self.accountIcon.image = UIImage(named: "test_bank", in: Bundle(for: Self.self), with: nil)!
+        self.addSubview(self.accountIcon)
+        self.accountIcon.constraint(attribute: .leading,
+                                    relatedBy: .equal,
+                                    toItem: self,
+                                    attribute: .leading,
+                                    constant: 16)
+        self.accountIcon.constraint(attribute: .centerY,
+                                    relatedBy: .equal,
+                                    toItem: self,
+                                    attribute: .centerY)
+        self.accountIcon.constraint(attribute: .height,
+                                    relatedBy: .equal,
+                                    toItem: nil,
+                                    attribute: .notAnAttribute,
+                                    constant: UIValues.iconSize.width)
+        self.accountIcon.constraint(attribute: .width,
+                                    relatedBy: .equal,
+                                    toItem: nil,
+                                    attribute: .notAnAttribute,
+                                    constant: UIValues.iconSize.height)
 
         // -- Account name label
         self.accountName.setContentHuggingPriority(.defaultHigh, for: .horizontal)
@@ -70,7 +70,7 @@ class BankAccountCell: UITableViewCell {
         self.addSubview(self.accountName)
         accountName.constraint(attribute: .leading,
                                relatedBy: .equal,
-                               toItem: icon,
+                               toItem: self.accountIcon,
                                attribute: .trailing,
                                constant: 15)
         accountName.constraint(attribute: .centerY,
@@ -90,6 +90,10 @@ class BankAccountCell: UITableViewCell {
     }
 
     func setData(account: ExternalBankAccountBankModel) {
+
+        if account.state == .refreshRequired {
+            self.accountIcon.image = UIImage(named: "kyc_error", in: Bundle(for: Self.self), with: nil)!
+        }
 
         let accountMask = account.plaidAccountMask ?? ""
         let accountName = account.plaidAccountName ?? ""

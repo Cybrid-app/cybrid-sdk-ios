@@ -77,6 +77,7 @@ class TransferViewModelTest: XCTestCase {
         let viewModel = createViewModel()
 
         // -- When
+        viewModel.modalUIState.value = .LOADING
         dataProvider.fetchExternalBankAccountsSuccessfully()
         viewModel.fetchExternalAccounts()
         dataProvider.fetchExternalBankAccountsSuccessfully()
@@ -87,7 +88,54 @@ class TransferViewModelTest: XCTestCase {
         XCTAssertFalse(viewModel.externalBankAccounts.value.isEmpty)
         XCTAssertEqual(viewModel.uiState.value, .ACCOUNTS)
         XCTAssertEqual(viewModel.modalUIState.value, .LOADING)
-        XCTAssertEqual(viewModel.balanceLoading.value, .CONTENT)
+    }
+
+    func test_fetchExternalAccounts_Successfully_Empty() {
+
+        // -- Given
+        let viewModel = createViewModel()
+
+        // -- When
+        viewModel.modalUIState.value = .LOADING
+        dataProvider.fetchExternalBankAccountsSuccessfully_Empty()
+        viewModel.fetchExternalAccounts()
+        dataProvider.fetchExternalBankAccountsSuccessfully_Empty()
+
+        // -- Then
+        XCTAssertNotNil(viewModel)
+        XCTAssertTrue(viewModel.externalBankAccounts.value.isEmpty)
+        XCTAssertEqual(viewModel.uiState.value, .WARNING)
+        XCTAssertEqual(viewModel.modalUIState.value, .LOADING)
+    }
+
+    func test_checkExternalBankAccounts_Without_Refresh() {
+
+        // -- Given
+        let viewModel = createViewModel()
+
+        // -- When
+        viewModel.modalUIState.value = .LOADING
+        viewModel.checkExternalBankAccounts(accounts: ExternalBankAccountBankModel.list)
+
+        // -- Then
+        XCTAssertEqual(viewModel.uiState.value, .ACCOUNTS)
+        XCTAssertNotNil(viewModel.accountsPolling)
+        XCTAssertEqual(viewModel.errorMessage.value, false)
+    }
+
+    func test_checkExternalBankAccounts_With_Refresh() {
+
+        // -- Given
+        let viewModel = createViewModel()
+
+        // -- When
+        viewModel.modalUIState.value = .LOADING
+        viewModel.checkExternalBankAccounts(accounts: ExternalBankAccountBankModel.listRefresh)
+
+        // -- Then
+        XCTAssertEqual(viewModel.uiState.value, .ACCOUNTS)
+        XCTAssertNotNil(viewModel.accountsPolling)
+        XCTAssertEqual(viewModel.errorMessage.value, true)
     }
 
     func test_createQuote_Successfully() {

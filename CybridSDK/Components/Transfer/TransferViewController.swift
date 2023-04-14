@@ -9,7 +9,7 @@ import UIKit
 
 public final class TransferViewController: UIViewController {
 
-    public enum ViewState { case LOADING, ACCOUNTS, ERROR }
+    public enum ViewState { case LOADING, ACCOUNTS, ERROR, WARNING }
     public enum ModalViewState { case LOADING, CONFIRM, DETAILS, ERROR }
     public enum BalanceViewState { case LOADING, CONTENT }
 
@@ -17,6 +17,7 @@ public final class TransferViewController: UIViewController {
     internal var theme: Theme!
     internal var localizer: Localizer!
 
+    internal var errorMessageView = UILabel()
     internal var componentContent = UIView()
     internal var currentState: Observable<ViewState> = .init(.LOADING)
 
@@ -56,13 +57,41 @@ extension TransferViewController {
 
     private func initComponentContent() {
 
+        // -- Error meesage view
+        self.errorMessageView.backgroundColor = UIColor.red
+        self.errorMessageView.textColor = UIColor.white
+        self.errorMessageView.font = UIFont.systemFont(ofSize: 14)
+        self.errorMessageView.textAlignment = .center
+        self.view.addSubview(self.errorMessageView)
+        self.errorMessageView.constraint(attribute: .top,
+                                         relatedBy: .equal,
+                                         toItem: self.view,
+                                         attribute: .topMargin,
+                                         constant: 0)
+        self.errorMessageView.constraint(attribute: .leading,
+                                         relatedBy: .equal,
+                                         toItem: self.view,
+                                         attribute: .leading,
+                                         constant: 10)
+        self.errorMessageView.constraint(attribute: .trailing,
+                                         relatedBy: .equal,
+                                         toItem: self.view,
+                                         attribute: .trailing,
+                                         constant: -10)
+        self.errorMessageView.constraint(attribute: .height,
+                                         relatedBy: .equal,
+                                         toItem: nil,
+                                         attribute: .notAnAttribute,
+                                         constant: 25)
+        self.errorMessageView.isHidden = true
+
         // -- Component Container
         self.view.addSubview(self.componentContent)
         self.componentContent.constraint(attribute: .top,
                                          relatedBy: .equal,
-                                         toItem: self.view,
-                                         attribute: .topMargin,
-                                         constant: 10)
+                                         toItem: self.errorMessageView,
+                                         attribute: .bottom,
+                                         constant: 0)
         self.componentContent.constraint(attribute: .leading,
                                          relatedBy: .equal,
                                          toItem: self.view,
@@ -82,6 +111,14 @@ extension TransferViewController {
 
     private func manageCurrentStateUI() {
 
+        // -- Await for error message UI
+        self.transferViewModel.errorMessage.bind { error in
+            if error {
+                self.errorMessageView.isHidden = false
+                self.errorMessageView.text = self.localizer.localize(with: "cybrid.transfer.errorMessage.text")
+            }
+        }
+
         // -- Await for UI State changes
         self.currentState.bind { state in
 
@@ -96,6 +133,9 @@ extension TransferViewController {
 
             case .ERROR:
                 self.transferView_Error()
+
+            case .WARNING:
+                self.transferView_Warning()
             }
         }
     }

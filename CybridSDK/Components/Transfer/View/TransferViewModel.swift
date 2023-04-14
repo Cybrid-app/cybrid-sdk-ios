@@ -25,6 +25,8 @@ class TransferViewModel: NSObject {
     internal var currentQuote: Observable<QuoteBankModel?> = .init(nil)
     internal var currentTransfer: Observable<TransferBankModel?> = .init(nil)
 
+    internal var errorMessage: Observable<Bool> = .init(false)
+
     internal var currentExternalBankAccount: Observable<ExternalBankAccountBankModel?> = .init(nil)
     internal var isWithdraw: Observable<Bool> = .init(false)
     internal var amount: String = ""
@@ -89,10 +91,7 @@ class TransferViewModel: NSObject {
             case .success(let accountList):
 
                 self?.logger?.log(.component(.accounts(.accountsDataFetching)))
-                self?.externalBankAccounts.value = accountList.objects
-                self?.calculateFiatBalance()
-                self?.uiState.value = .ACCOUNTS
-                self?.createAccountsPolling()
+                self?.checkExternalBankAccounts(accounts: accountList.objects)
 
             case .failure:
                 self?.logger?.log(.component(.accounts(.accountsDataError)))
@@ -104,6 +103,23 @@ class TransferViewModel: NSObject {
 
         self.accountsPolling = Polling(interval: 8) {
             self.fetchAccountsInPolling()
+        }
+    }
+
+    func checkExternalBankAccounts(accounts: [ExternalBankAccountBankModel]) {
+
+        self.externalBankAccounts.value = accounts
+        if !accounts.isEmpty {
+
+            self.currentExternalBankAccount.value = accounts.first
+            self.calculateFiatBalance()
+            self.uiState.value = .ACCOUNTS
+            self.createAccountsPolling()
+            for account in accounts where account.state == .refreshRequired {
+                self.errorMessage.value = true
+            }
+        } else {
+            self.uiState.value = .WARNING
         }
     }
 

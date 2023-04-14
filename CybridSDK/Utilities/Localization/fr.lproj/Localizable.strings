@@ -118,3 +118,4 @@
 "cybrid.transfer.modal.error.title.text" = "Erreur d'action";
 "cybrid.transfer.modal.error.desc.text" = "Une erreur s'est produite lors de l'accès à votre compte bancaire. Veuillez réessayer ou contacter l'assistance.";
 "cybrid.transfer.modal.error.doneButton.text" = "Fait";
+"cybrid.transfer.errorMessage.text" = "Certains de vos comptes ont un problème, veuillez le reconnecter.";
