@@ -35,12 +35,12 @@ struct AssetFormatter {
 
         // Sanity check in intValue is zero, has to be removed
         if intValue == "0" { intValue = "" }
-        if asset.type == .crypto {
+        /*if asset.type == .crypto {
             decimalValue = decimalValue.removeLeadingZeros()
-        }
+        }*/
 
         // Removing the dot
-        let formatted = "\(intValue)\(decimalValue)"
+        let formatted = "\(intValue)\(decimalValue)".removeLeadingZeros()
         return formatted
     }
 
@@ -104,4 +104,6 @@ struct AssetFormatter {
         amountFormatted = "\(asset.symbol)\(amountFormatted)\(code)"
         return amountFormatted
     }
+    
+    static func 
 }

@@ -18,7 +18,9 @@ class TradeViewModel: NSObject, ListPricesItemDelegate {
     internal var customerGuig = Cybrid.customerGUID
     internal var currentAsset: Observable<AssetBankModel?> = .init(nil)
     internal var currentPairAsset: Observable<AssetBankModel?> = .init(nil)
-    internal var currentAssetToTrade: Observable<AccountAssetUIModel?> = .init(nil)
+    internal var currentAccountToTrade: Observable<AccountAssetUIModel?> = .init(nil)
+    internal var currentAmountInput = "0"
+    internal var currentAmountWithPrice: Observable<String> = .init("0.0")
 
     // MARK: Public properties
     var uiState: Observable<TradeViewController.ViewState> = .init(.PRICES)
@@ -42,19 +44,17 @@ class TradeViewModel: NSObject, ListPricesItemDelegate {
         self.logger = logger
     }
 
-    func initBindingValues() {}
-
-    // MARK: ViewModel Methods
+    // MARK: List Prices select
     func onSelected(asset: AssetBankModel, pairAsset: AssetBankModel) {
 
-        currentAsset.value = asset
-        currentPairAsset.value = pairAsset
-        fetchAccounts()
+        self.currentAsset.value = asset
+        self.currentPairAsset.value = pairAsset
+        self.fetchAccounts()
     }
 
     internal func fetchAccounts() {
 
-        uiState.value = .LOADING
+        self.uiState.value = .LOADING
         dataProvider.fetchAccounts(customerGuid: Cybrid.customerGUID) { [weak self] accountsResult in
 
             switch accountsResult {
@@ -68,7 +68,7 @@ class TradeViewModel: NSObject, ListPricesItemDelegate {
                 self?.accounts = accountsFormatted
                 self?.fiatAccounts = accountsFormatted.filter { $0.account.type == .fiat }
                 self?.tradingAccounts = accountsFormatted.filter { $0.account.type == .trading }
-                self?.currentAssetToTrade.value = self?.tradingAccounts.first(where: {
+                self?.currentAccountToTrade.value = self?.tradingAccounts.first(where: {
                     $0.asset.code == self?.currentAsset.value?.code
                 })
                 self?.uiState.value = .CONTENT
@@ -77,14 +77,6 @@ class TradeViewModel: NSObject, ListPricesItemDelegate {
                 self?.logger?.log(.component(.accounts(.accountsDataError)))
             }
         }
-    }
-
-    // MARK: View Helper Methods
-    @objc
-    func segmentedControlValueChanged(_ sender: UISegmentedControl) {
-
-      guard let selectedIndex = _TradeType(rawValue: sender.selectedSegmentIndex) else { return }
-      self.segmentSelection.value = selectedIndex
     }
 
     internal func buildUIModelList(accounts: [AccountBankModel]) -> [AccountAssetUIModel]? {
@@ -102,6 +94,16 @@ class TradeViewModel: NSObject, ListPricesItemDelegate {
         }
     }
 
+    func initBindingValues() {}
+
+    // MARK: View Helper Methods
+    @objc
+    func segmentedControlValueChanged(_ sender: UISegmentedControl) {
+
+      guard let selectedIndex = _TradeType(rawValue: sender.selectedSegmentIndex) else { return }
+      self.segmentSelection.value = selectedIndex
+    }
+
     @objc
     internal func switchAction(_ sender: UIButton) {
         self.switchActionHandler()
@@ -109,14 +111,28 @@ class TradeViewModel: NSObject, ListPricesItemDelegate {
 
     internal func switchActionHandler() {
 
-        if self.currentAssetToTrade.value?.account.type == .fiat {
-            self.currentAssetToTrade.value = self.tradingAccounts.first(where: {
+        if self.currentAccountToTrade.value?.account.type == .fiat {
+            self.currentAccountToTrade.value = self.tradingAccounts.first(where: {
                 $0.asset.code == self.currentAsset.value?.code
             })
         } else {
-            self.currentAssetToTrade.value = self.fiatAccounts.first(where: {
+            self.currentAccountToTrade.value = self.fiatAccounts.first(where: {
                 $0.asset.code == self.currentPairAsset.value?.code
             })
+        }
+    }
+
+    internal func calculatePreQuote(amount: CDecimal) {
+
+        if amount.newValue == "0.00" {
+            self.currentAmountInput = "0"
+        } else {
+            let asset = self.currentAccountToTrade.value?.asset
+            let assetAmount = AssetFormatter.forInput(asset!, amount: amount)
+            self.currentAmountInput = assetAmount
+            print(assetAmount)
+            
+            //let asset = ""
         }
     }
 }
@@ -156,7 +172,7 @@ extension TradeViewModel: UIPickerViewDelegate, UIPickerViewDataSource {
             currentPairAsset.value = fiatAccounts[row].asset
         } else {
             currentAsset.value = tradingAccounts[row].asset
-            currentAssetToTrade.value = self.tradingAccounts.first(where: {
+            currentAccountToTrade.value = self.tradingAccounts.first(where: {
                 $0.asset.code == self.currentAsset.value?.code
             })
         }
@@ -165,5 +181,25 @@ extension TradeViewModel: UIPickerViewDelegate, UIPickerViewDataSource {
 
 extension TradeViewModel: UITextFieldDelegate {
 
-    func textFieldDidChangeSelection(_ textField: UITextField) {}
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+
+        var amountString = textField.text ?? "0"
+        if amountString.contains(".") {
+
+            let leftSide = "0"
+            let rightSide = "00"
+            let stringParts = amountString.getParts()
+
+            if stringParts[0] == "." {
+                amountString = "\(leftSide)\(amountString)"
+            }
+
+            if stringParts[stringParts.count - 1] == "." {
+                amountString = "\(amountString)\(rightSide)"
+            }
+        }
+        let amount = CDecimal(amountString)
+        print(amount.newValue)
+        self.calculatePreQuote(amount: amount)
+    }
 }

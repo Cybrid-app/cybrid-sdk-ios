@@ -231,7 +231,7 @@ extension TradeViewController {
         let textField = CYBTextField(style: .plain, icon: .text(""), theme: theme)
         textField.placeholder = "0.0"
         textField.keyboardType = .decimalPad
-        // textField.delegate = viewModel
+        textField.delegate = self.tradeViewModel
         textField.rightView = switchButton
         textField.rightViewMode = .always
         textField.accessibilityIdentifier = "amountTextField"
@@ -240,7 +240,7 @@ extension TradeViewController {
 
     func setAmountFieldData() {
 
-        let asset = self.tradeViewModel.currentAssetToTrade.value
+        let asset = self.tradeViewModel.currentAccountToTrade.value
         self.amountTextField.updateIcon(.text(asset?.asset.code ?? ""))
     }
 
@@ -276,9 +276,8 @@ extension TradeViewController {
 
     func setAmountPriceData() {
 
-        let amount = self.amountTextField.text
-        self.flagIcon.setURL(self.tradeViewModel.currentAssetToTrade.value?.assetURL ?? "")
-        self.amountPriceLabel.text = "Hola mundo USD"
+        self.flagIcon.setURL(self.tradeViewModel.currentAccountToTrade.value?.assetURL ?? "")
+        self.amountPriceLabel.text = "0.0"
     }
 
     // -- Binds
@@ -304,7 +303,7 @@ extension TradeViewController {
             self.setAmountPriceData()
         }
 
-        self.tradeViewModel.currentAssetToTrade.bind { [self] _ in
+        self.tradeViewModel.currentAccountToTrade.bind { [self] _ in
 
             self.setAmountFieldData()
             self.setAmountPriceData()

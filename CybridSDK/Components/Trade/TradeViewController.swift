@@ -65,7 +65,6 @@ extension TradeViewController {
 
         // -- Component Container
         self.view.addSubview(self.componentContent)
-        // self.componentContent.backgroundColor = UIColor.red.withAlphaComponent(0.5)
         self.componentContent.constraint(attribute: .top,
                                          relatedBy: .equal,
                                          toItem: self.view,
