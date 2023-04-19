@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import BigInt
 import CybridApiBankSwift
 
 struct AssetFormatter {
@@ -104,6 +105,36 @@ struct AssetFormatter {
         amountFormatted = "\(asset.symbol)\(amountFormatted)\(code)"
         return amountFormatted
     }
-    
-    static func 
+
+    /// Method to trade (convert)
+    /// Only works with base valus
+    /// Example:
+    /// - 1 BTC at 3023700 cUSD --> $10.00 USD
+    /// Parameters:
+    ///  - cryptoAsset: AssetBankModel
+    ///  - fiatAsset: AssetBankModel
+    ///  - price: String in base value (cents of dollar)
+    ///  - side: AccountBankModel.TypeBankModel depends on what value comes form input as fiat or crypto
+    static func trade(amount: String, cryptoAsset: AssetBankModel, price: String, base: AssetBankModel.TypeBankModel) -> String {
+
+        var result = BigInt(0)
+        let unit = AssetFormatter.forInput(cryptoAsset, amount: CDecimal("1"))
+        let unitBigInt = BigInt(unit)!
+        let amountBigInt = BigInt(amount)!
+        let priceBigInt = BigInt(price)!
+
+        if base == .crypto {
+
+            let firstOperation = amountBigInt * priceBigInt
+            let secondOperation = firstOperation / unitBigInt
+            result = secondOperation
+
+        } else {
+
+            let firstOperation = amountBigInt * unitBigInt
+            let secondOperation = firstOperation / priceBigInt
+            result = secondOperation
+        }
+        return "\(result)"
+    }
 }
