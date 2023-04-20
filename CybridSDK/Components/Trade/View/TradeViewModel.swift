@@ -19,6 +19,7 @@ class TradeViewModel: NSObject, ListPricesItemDelegate {
     internal var currentAsset: Observable<AssetBankModel?> = .init(nil)
     internal var currentPairAsset: Observable<AssetBankModel?> = .init(nil)
     internal var currentAccountToTrade: Observable<AccountAssetUIModel?> = .init(nil)
+    internal var currentAccountPairToTrade: Observable<AccountAssetUIModel?> = .init(nil)
     internal var currentAmountInput = "0"
     internal var currentAmountWithPrice: Observable<String> = .init("0.0")
 
@@ -71,6 +72,9 @@ class TradeViewModel: NSObject, ListPricesItemDelegate {
                 self?.currentAccountToTrade.value = self?.tradingAccounts.first(where: {
                     $0.asset.code == self?.currentAsset.value?.code
                 })
+                self?.currentAccountPairToTrade.value = self?.fiatAccounts.first(where: {
+                    $0.asset.code == self?.currentPairAsset.value?.code
+                })
                 self?.uiState.value = .CONTENT
 
             case .failure:
@@ -115,25 +119,51 @@ class TradeViewModel: NSObject, ListPricesItemDelegate {
             self.currentAccountToTrade.value = self.tradingAccounts.first(where: {
                 $0.asset.code == self.currentAsset.value?.code
             })
+            self.currentAccountPairToTrade.value = self.fiatAccounts.first(where: {
+                $0.asset.code == self.currentPairAsset.value?.code
+            })
         } else {
             self.currentAccountToTrade.value = self.fiatAccounts.first(where: {
                 $0.asset.code == self.currentPairAsset.value?.code
             })
+            self.currentAccountPairToTrade.value = self.tradingAccounts.first(where: {
+                $0.asset.code == self.currentAsset.value?.code
+            })
         }
     }
 
-    internal func calculatePreQuote(amount: CDecimal) {
+    internal func calculatePreQuote() {
 
-        if amount.newValue == "0.00" {
-            self.currentAmountInput = "0"
-        } else {
+        let assetCode = currentAsset.value?.code ?? ""
+        let pairAssetCode = currentPairAsset.value?.code ?? ""
+        let symbol = "\(assetCode)-\(pairAssetCode)"
+        let amount = CDecimal(self.currentAmountInput)
+        if amount.newValue != "0.00" {
+
+            let buyPrice = self.getPrice(symbol: symbol).buyPrice ?? "0"
             let asset = self.currentAccountToTrade.value?.asset
-            let assetAmount = AssetFormatter.forInput(asset!, amount: amount)
-            self.currentAmountInput = assetAmount
-            print(assetAmount)
-            
-            //let asset = ""
+            let assetToConvert = self.currentAccountPairToTrade.value?.asset
+            let amountFormatted = AssetFormatter.forInput(asset!, amount: amount)
+            let tradeValue = AssetFormatter.trade(
+                amount: amountFormatted,
+                cryptoAsset: self.currentAsset.value!,
+                price: buyPrice,
+                base: asset?.type ?? .crypto)
+            let tradeValueCDecimal = CDecimal(tradeValue)
+            let tradeBase = AssetFormatter.forBase(assetToConvert!, amount: tradeValueCDecimal)
+            let tradeFormatted = AssetFormatter.format(assetToConvert!, amount: tradeBase)
+            self.currentAmountWithPrice.value = tradeFormatted
+        } else {
+            self.currentAmountWithPrice.value = amount.newValue
         }
+    }
+
+    internal func getPrice(symbol: String) -> SymbolPriceBankModel {
+
+        let price = self.listPricesViewModel?.filteredCryptoPriceList.value.first(where: {
+            $0.originalSymbol.symbol == symbol
+        })
+        return price?.originalSymbol ?? SymbolPriceBankModel()
     }
 }
 
@@ -198,8 +228,7 @@ extension TradeViewModel: UITextFieldDelegate {
                 amountString = "\(amountString)\(rightSide)"
             }
         }
-        let amount = CDecimal(amountString)
-        print(amount.newValue)
-        self.calculatePreQuote(amount: amount)
+        self.currentAmountInput = amountString
+        self.calculatePreQuote()
     }
 }

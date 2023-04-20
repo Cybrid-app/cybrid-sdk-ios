@@ -276,8 +276,8 @@ extension TradeViewController {
 
     func setAmountPriceData() {
 
-        self.flagIcon.setURL(self.tradeViewModel.currentAccountToTrade.value?.assetURL ?? "")
-        self.amountPriceLabel.text = "0.0"
+        self.flagIcon.setURL(self.tradeViewModel.currentAccountPairToTrade.value?.assetURL ?? "")
+        self.amountPriceLabel.text = self.tradeViewModel.currentAmountWithPrice.value
     }
 
     // -- Binds
@@ -307,6 +307,18 @@ extension TradeViewController {
 
             self.setAmountFieldData()
             self.setAmountPriceData()
+            self.tradeViewModel.calculatePreQuote()
+        }
+
+        self.tradeViewModel.currentAccountPairToTrade.bind { [self] _ in
+
+            self.setAmountFieldData()
+            self.setAmountPriceData()
+            self.tradeViewModel.calculatePreQuote()
+        }
+
+        self.tradeViewModel.currentAmountWithPrice.bind { [self] _ in
+            self.amountPriceLabel.text = self.tradeViewModel.currentAmountWithPrice.value
         }
     }
 }
