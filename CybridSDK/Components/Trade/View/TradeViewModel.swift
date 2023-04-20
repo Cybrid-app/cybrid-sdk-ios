@@ -56,6 +56,7 @@ class TradeViewModel: NSObject, ListPricesItemDelegate {
     internal func fetchAccounts() {
 
         self.uiState.value = .LOADING
+        self.initBindingValues()
         dataProvider.fetchAccounts(customerGuid: Cybrid.customerGUID) { [weak self] accountsResult in
 
             switch accountsResult {
@@ -98,7 +99,12 @@ class TradeViewModel: NSObject, ListPricesItemDelegate {
         }
     }
 
-    func initBindingValues() {}
+    func initBindingValues() {
+
+        self.listPricesViewModel?.filteredCryptoPriceList.bind { [self] _ in
+            self.calculatePreQuote()
+        }
+    }
 
     // MARK: View Helper Methods
     @objc
@@ -204,6 +210,9 @@ extension TradeViewModel: UIPickerViewDelegate, UIPickerViewDataSource {
             currentAsset.value = tradingAccounts[row].asset
             currentAccountToTrade.value = self.tradingAccounts.first(where: {
                 $0.asset.code == self.currentAsset.value?.code
+            })
+            currentAccountPairToTrade.value = self.fiatAccounts.first(where: {
+                $0.asset.code == self.currentPairAsset.value?.code
             })
         }
     }
