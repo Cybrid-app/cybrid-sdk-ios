@@ -11,6 +11,7 @@ import UIKit
 public final class TradeViewController: UIViewController {
 
     public enum ViewState { case LOADING, PRICES, CONTENT }
+    public enum ModalViewState { case LOADING, CONTENT, CONFIRM }
 
     internal var tradeViewModel: TradeViewModel!
     internal var theme: Theme!

@@ -15,7 +15,7 @@ open class Polling {
     internal var updateInterval = 4
 
     init(interval: Int = 4, _ runner: @escaping () -> Void) {
-        
+
         self.updateInterval = interval
         self.runner = runner
         self.timer = DispatchSource.makeTimerSource(queue: queue)

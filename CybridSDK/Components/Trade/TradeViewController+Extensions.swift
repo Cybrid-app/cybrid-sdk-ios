@@ -144,7 +144,11 @@ extension TradeViewController {
         self.actionButton = CYBButton(
             title: localizer.localize(with: CybridLocalizationKey.trade(.buy(.cta))),
             action: { [weak self] in
-                print("")
+
+                self?.tradeViewModel.createQuote()
+                let modal = TradeModal(tradeViewModel: (self?.tradeViewModel)!)
+                modal.disableDismiss = true
+                modal.present()
             })
         self.actionButton.addBelow(toItem: self.flagIcon, height: 48, margins: UIMargins.contentActionButton)
 
