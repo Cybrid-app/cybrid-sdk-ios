@@ -54,7 +54,8 @@ extension TradeViewController {
         let listPricesView = ListPricesView()
         let listPricesViewModel = ListPricesViewModel(cellProvider: listPricesView,
                                                       dataProvider: CybridSession.current,
-                                                      logger: Cybrid.logger)
+                                                      logger: Cybrid.logger,
+                                                      taskScheduler: self.pricesScheduler)
 
         listPricesView.setViewModel(listPricesViewModel: listPricesViewModel)
         listPricesView.itemDelegate = tradeViewModel

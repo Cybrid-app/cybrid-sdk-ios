@@ -18,6 +18,8 @@ public final class TradeViewController: UIViewController {
 
     internal var componentContent = UIView()
     internal var currentState: Observable<ViewState> = .init(.LOADING)
+    
+    internal var pricesScheduler = TaskScheduler()
 
     // MARK: Views
     internal var fromTextField: CYBTextField!
@@ -54,8 +56,6 @@ public final class TradeViewController: UIViewController {
         view.backgroundColor = .white
         self.initComponentContent()
         self.manageCurrentStateUI()
-
-        // self.identityVerificationViewModel.getCustomerStatus()
     }
 }
 
