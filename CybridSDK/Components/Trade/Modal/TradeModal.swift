@@ -159,7 +159,7 @@ extension TradeModal {
                                      style: .secondary,
                                      theme: theme
         ) { [weak self] in
-            
+
             self?.tradeViewModel.dismissModal()
             self?.dismiss(animated: true)
         }

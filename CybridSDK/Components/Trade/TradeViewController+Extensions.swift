@@ -325,6 +325,10 @@ extension TradeViewController {
         self.tradeViewModel.currentAmountWithPrice.bind { [self] _ in
             self.amountPriceLabel.text = self.tradeViewModel.currentAmountWithPrice.value
         }
+
+        self.tradeViewModel.segmentSelection.bind { [self] segment in
+            self.actionButton.setTitle(title: localizer.localize(with: segment == .buy ? UIStrings.contentBuyButton : UIStrings.contentSellButton))
+        }
     }
 }
 
@@ -374,5 +378,7 @@ extension TradeViewController {
         static let contentFrom = "cybrid.tradeView.content.subtitle.from"
         static let contentTo = "cybrid.tradeView.content.subtitle.to"
         static let contentAmount = "cybrid.tradeView.content.subtitle.amount"
+        static let contentBuyButton = "cybrid.account.trade.detail.bought"
+        static let contentSellButton = "cybrid.account.trade.detail.sold"
     }
 }

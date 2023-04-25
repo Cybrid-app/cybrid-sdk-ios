@@ -11,7 +11,7 @@ import Foundation
 class CryptoAuthenticator {
 
     private let session: URLSession
-    private let params = "banks:read banks:write accounts:read accounts:execute customers:read customers:write customers:execute prices:read quotes:execute trades:execute trades:read workflows:execute workflows:read external_bank_accounts:execute external_bank_accounts:read transfers:read transfers:execute"
+    private let params = "banks:read banks:write accounts:read accounts:execute customers:read customers:write customers:execute prices:read quotes:execute trades:execute trades:read workflows:execute workflows:read external_bank_accounts:execute external_bank_accounts:read external_bank_accounts:write transfers:read transfers:execute"
     private var clientID: String = ""
     private var clientSecret: String = ""
 

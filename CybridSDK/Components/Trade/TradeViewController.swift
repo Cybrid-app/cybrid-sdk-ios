@@ -19,7 +19,7 @@ public final class TradeViewController: UIViewController {
 
     internal var componentContent = UIView()
     internal var currentState: Observable<ViewState> = .init(.LOADING)
-    
+
     internal var pricesScheduler = TaskScheduler()
 
     // MARK: Views
