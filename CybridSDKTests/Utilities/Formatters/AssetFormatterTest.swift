@@ -415,7 +415,7 @@ class AssetFormatterTest: XCTestCase {
         // -- Given
         let amountToFormat = "90071992.54740991"
         let asset = AssetBankModel.bitcoin
-        let resultToCheck = "₿90,071,992.54740991"
+        let resultToCheck = "90,071,992.54740991 ₿"
 
         // -- When
         let result = AssetFormatter.format(asset, amount: amountToFormat)
@@ -429,7 +429,7 @@ class AssetFormatterTest: XCTestCase {
         // -- Given
         let amountToFormat = "1157920892373161954235709850086879078532699846656405640394575840079131.29639935"
         let asset = AssetBankModel.bitcoin
-        let resultToCheck = "₿1,157,920,892,373,161,954,235,709,850,086,879,078,532,699,846,656,405,640,394,575,840,079,131.29639935"
+        let resultToCheck = "1,157,920,892,373,161,954,235,709,850,086,879,078,532,699,846,656,405,640,394,575,840,079,131.29639935 ₿"
 
         // -- When
         let result = AssetFormatter.format(asset, amount: amountToFormat)
@@ -443,7 +443,7 @@ class AssetFormatterTest: XCTestCase {
         // -- Given
         let amountToFormat = "115792089237316195423570985008687907853269984665640564039457.584007913129639935"
         let asset = AssetBankModel.ethereum
-        let resultToCheck = "Ξ115,792,089,237,316,195,423,570,985,008,687,907,853,269,984,665,640,564,039,457.584007913129639935"
+        let resultToCheck = "115,792,089,237,316,195,423,570,985,008,687,907,853,269,984,665,640,564,039,457.584007913129639935 Ξ"
 
         // -- When
         let result = AssetFormatter.format(asset, amount: amountToFormat)
@@ -548,6 +548,6 @@ class AssetFormatterTest: XCTestCase {
         // -- Then
         XCTAssertEqual(tradeValue, "495076")
         XCTAssertEqual(tradeBase, "0.00495076")
-        XCTAssertEqual(tradeFormatted, "₿0.00495076")
+        XCTAssertEqual(tradeFormatted, "0.00495076 ₿")
     }
 }

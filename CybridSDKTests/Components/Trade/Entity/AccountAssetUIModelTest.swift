@@ -24,7 +24,7 @@ class AccountAssetUIModelTest: XCTestCase {
         // -- Then
         XCTAssertEqual(model.account, account)
         XCTAssertEqual(model.asset, asset)
-        XCTAssertEqual(model.balanceFormatted, "2.0")
+        XCTAssertEqual(model.balanceFormatted, "2")
         XCTAssertEqual(model.assetURL, "https://images.cybrid.xyz/sdk/assets/pdf/color/btc.pdf")
     }
 
@@ -56,7 +56,7 @@ class AccountAssetUIModelTest: XCTestCase {
         // -- Then
         XCTAssertEqual(model.account, account)
         XCTAssertEqual(model.asset, asset)
-        XCTAssertEqual(model.balanceFormatted, "0.0")
+        XCTAssertEqual(model.balanceFormatted, "0")
         XCTAssertEqual(model.assetURL, "https://images.cybrid.xyz/sdk/assets/pdf/color/btc.pdf")
     }
 
@@ -88,7 +88,7 @@ class AccountAssetUIModelTest: XCTestCase {
         // -- Then
         XCTAssertEqual(model.account, account)
         XCTAssertEqual(model.asset, asset)
-        XCTAssertEqual(model.balanceFormatted, "0.0")
+        XCTAssertEqual(model.balanceFormatted, "0")
         XCTAssertEqual(model.assetURL, "https://images.cybrid.xyz/sdk/assets/pdf/color/btc.pdf")
     }
 
