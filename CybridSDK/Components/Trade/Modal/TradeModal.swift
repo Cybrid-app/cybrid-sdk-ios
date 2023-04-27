@@ -249,7 +249,7 @@ extension TradeModal {
         quantityTitle.addBelow(toItem: amountValue, height: UIValues.contentAmountTitleHeight, margins: UIValues.contentAmountTitleMargins)
 
         let quantityValueString = self.tradeViewModel.segmentSelection.value == .buy ? tradeViewModel.currentQuote.value?.receiveAmount : tradeViewModel.currentQuote.value?.deliverAmount
-        let quantityBase = AssetFormatter.forBase(tradeViewModel.currentAsset.value!, amount: CDecimal(quantityValueString!))
+        let quantityBase = AssetFormatter.forBase(tradeViewModel.currentAsset.value!, amount: CDecimal(quantityValueString!)).removeTrailingZeros()
         let quantityBaseFormatted = AssetFormatter.format(tradeViewModel.currentAsset.value!, amount: quantityBase)
         let quantityValue = self.createItemValue(value: quantityBaseFormatted)
         quantityValue.addBelow(toItem: quantityTitle, height: UIValues.contentAmountValueHeight, margins: UIValues.contentAmountValueMargins)
@@ -258,7 +258,10 @@ extension TradeModal {
         let feeTitle = self.createItemTitle(key: UIStrings.contentFeeTitleString)
         feeTitle.addBelow(toItem: quantityValue, height: UIValues.contentAmountTitleHeight, margins: UIValues.contentAmountTitleMargins)
 
-        let feeValue = self.createItemValue(value: tradeViewModel.currentQuote.value?.fee ?? "0.0")
+        let feeValueString = tradeViewModel.currentQuote.value?.fee ?? "0"
+        let feeBase = AssetFormatter.forBase(Cybrid.fiat, amount: CDecimal(feeValueString))
+        let feeBaseFormatted = AssetFormatter.format(Cybrid.fiat, amount: feeBase)
+        let feeValue = self.createItemValue(value: feeBaseFormatted)
         feeValue.addBelow(toItem: feeTitle, height: UIValues.contentAmountValueHeight, margins: UIValues.contentAmountValueMargins)
 
         // -- Buttons

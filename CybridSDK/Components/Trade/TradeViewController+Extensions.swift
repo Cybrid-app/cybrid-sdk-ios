@@ -178,8 +178,8 @@ extension TradeViewController {
         let fromTextField = CYBTextField(style: .rounded, icon: .urlImage(""), theme: theme)
         fromTextField.accessibilityIdentifier = "fiatPickerTextField"
         fromTextField.tintColor = UIColor.clear
-        self.fiatPickerView.delegate = tradeViewModel
-        self.fiatPickerView.dataSource = tradeViewModel
+        self.fiatPickerView.delegate = self
+        self.fiatPickerView.dataSource = self
         self.fiatPickerView.accessibilityIdentifier = "fiatPicker"
         if self.tradeViewModel.fiatAccounts.count > 1 {
             fromTextField.inputView = self.fiatPickerView
@@ -208,8 +208,8 @@ extension TradeViewController {
         let toTextField = CYBTextField(style: .rounded, icon: .urlImage(""), theme: theme)
         toTextField.accessibilityIdentifier = "tradingPickerTextField"
         toTextField.tintColor = UIColor.clear
-        self.tradingPickerView.delegate = tradeViewModel
-        self.tradingPickerView.dataSource = tradeViewModel
+        self.tradingPickerView.delegate = self
+        self.tradingPickerView.dataSource = self
         self.tradingPickerView.accessibilityIdentifier = "tradingPicker"
         toTextField.inputView = self.tradingPickerView
         return toTextField
@@ -223,9 +223,8 @@ extension TradeViewController {
         })
         let assetAccountURL = assetAccount?.assetURL ?? ""
         let name = assetAccount?.asset.name ?? ""
-        let code = assetAccount?.account.asset ?? ""
         let balance = assetAccount?.balanceFormatted ?? ""
-        let assetAccountText = "\(name)(\(code)) - \(balance)"
+        let assetAccountText = "\(name) - \(balance)"
 
         self.toTextField.updateIcon(.urlImage(assetAccountURL))
         self.toTextField.text = assetAccountText
@@ -236,7 +235,7 @@ extension TradeViewController {
         let textField = CYBTextField(style: .plain, icon: .text(""), theme: theme)
         textField.placeholder = "0.0"
         textField.keyboardType = .decimalPad
-        textField.delegate = self.tradeViewModel
+        textField.delegate = self
         textField.rightView = switchButton
         textField.rightViewMode = .always
         textField.accessibilityIdentifier = "amountTextField"
@@ -329,6 +328,75 @@ extension TradeViewController {
         self.tradeViewModel.segmentSelection.bind { [self] segment in
             self.actionButton.setTitle(title: localizer.localize(with: segment == .buy ? UIStrings.contentBuyButton : UIStrings.contentSellButton))
         }
+    }
+}
+
+extension TradeViewController: UIPickerViewDelegate, UIPickerViewDataSource {
+
+    public func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+
+    public func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+
+        if pickerView.accessibilityIdentifier == "fiatPicker" {
+            return self.tradeViewModel.fiatAccounts.count
+        } else {
+            return self.tradeViewModel.tradingAccounts.count
+        }
+    }
+
+    public func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+
+        let account: AccountAssetUIModel!
+        if pickerView.accessibilityIdentifier == "fiatPicker" {
+            account = self.tradeViewModel.fiatAccounts[row]
+        } else {
+            account = self.tradeViewModel.tradingAccounts[row]
+        }
+
+        let name = account.asset.name
+        let asset = account.account.asset ?? ""
+        return "\(name)(\(asset)) - \(account.balanceFormatted)"
+    }
+
+    public func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+
+        if pickerView.accessibilityIdentifier == "fiatPicker" {
+            self.tradeViewModel.currentPairAsset.value = self.tradeViewModel.fiatAccounts[row].asset
+        } else {
+            self.tradeViewModel.currentAsset.value = self.tradeViewModel.tradingAccounts[row].asset
+            self.tradeViewModel.currentAccountToTrade.value = self.tradeViewModel.tradingAccounts.first(where: {
+                $0.asset.code == self.tradeViewModel.currentAsset.value?.code
+            })
+            self.tradeViewModel.currentAccountPairToTrade.value = self.tradeViewModel.fiatAccounts.first(where: {
+                $0.asset.code == self.tradeViewModel.currentPairAsset.value?.code
+            })
+        }
+    }
+}
+
+extension TradeViewController: UITextFieldDelegate {
+
+    public func textFieldDidChangeSelection(_ textField: UITextField) {
+
+        var amountString = textField.text ?? "0"
+        if amountString.contains(".") {
+
+            let leftSide = "0"
+            let rightSide = "00"
+            let stringParts = amountString.getParts()
+
+            if stringParts[0] == "." {
+                amountString = "\(leftSide)\(amountString)"
+            }
+
+            if stringParts[stringParts.count - 1] == "." {
+                amountString = "\(amountString)\(rightSide)"
+            }
+        }
+        self.tradeViewModel.currentAmountInput = amountString
+        self.tradeViewModel.calculatePreQuote()
     }
 }
 

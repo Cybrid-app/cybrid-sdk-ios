@@ -49,7 +49,7 @@ extension String {
 
             let integer = String(parts[0])
             let decimal = String(parts[1])
-            let result = integer + "."
+            let result = integer
             var charactersToRemove = 0
             for character in decimal.reversed() {
                 if character == "0" {
@@ -59,7 +59,7 @@ extension String {
                 }
             }
             var decimals = decimal.dropLast(charactersToRemove)
-            if decimals.isEmpty { decimals = "0" }
+            if decimals.isEmpty { decimals = "" } else { decimals = ".\(decimals)" }
             return result + decimals
         } else {
             return self.stringValue
