@@ -243,6 +243,8 @@ class TradeViewModel: NSObject, ListPricesItemDelegate {
 
                 case .failure:
                     self?.logger?.log(.component(.accounts(.accountsDataError)))
+                    self?.modalState.value = .ERROR
+                    self?.stopQuotePolling()
                 }
             }
         }
@@ -250,15 +252,17 @@ class TradeViewModel: NSObject, ListPricesItemDelegate {
 
     func createTrade() {
 
-        self.uiState.value = .LOADING
+        self.stopQuotePolling()
+        self.modalState.value = .SUBMITING
         self.dataProvider.createTrade(quoteGuid: (self.currentQuote.value?.guid)!) { [weak self] tradeResult in
             switch tradeResult {
             case .success(let quote):
                 self?.currentTrade.value = quote
-                self?.modalState.value = .CONFIRM
+                self?.modalState.value = .SUCCESS
 
             case .failure:
                 self?.logger?.log(.component(.accounts(.accountsDataError)))
+                self?.modalState.value = .ERROR
             }
         }
     }
@@ -266,6 +270,11 @@ class TradeViewModel: NSObject, ListPricesItemDelegate {
     func dismissModal() {
 
         self.modalState.value = .LOADING
+        self.stopQuotePolling()
+    }
+
+    func stopQuotePolling() {
+
         self.quotePolling?.stop()
         self.quotePolling = nil
     }

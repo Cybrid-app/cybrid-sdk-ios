@@ -81,7 +81,8 @@
 "cybrid.account.trade.detail.accountID" = "Account ID";
 "cybrid.account.trade.detail.orderID" = "Order ID";
 "cybrid.account.trade.detail.close" = "Close";
-"cybrid.account.trade.modal.loading.title" = "Loading";
+"cybrid.account.trade.modal.loading.title" = "Quote Pending";
+"cybrid.account.trade.modal.loadingSubmitted.title" = "Submitting Crypto Order";
 "cybrid.account.trade.modal.content.title" = "Order Quote";
 "cybrid.account.trade.modal.content.sub.title" = "Prices are in realtime. Rates automatically refresh.";
 "cybrid.account.trade.modal.content.amount.buy" = "Purchase amount";
@@ -91,6 +92,9 @@
 "cybrid.account.trade.modal.content.fee.title" = "Transaction fee";
 "cybrid.account.trade.modal.content.cancel.button" = "Cancel";
 "cybrid.account.trade.modal.content.confirm.button" = "Confirm";
+"cybrid.account.trade.modal.success.title" = "Order Submitted";
+"cybrid.account.trade.modal.error.title" = "Please try again.";
+"cybrid.account.trade.modal.error.button" = "Confirm";
 
 // Accounts - Transfers
 "cybrid.accounts.transfers.subtitle.available" = "Available balance";

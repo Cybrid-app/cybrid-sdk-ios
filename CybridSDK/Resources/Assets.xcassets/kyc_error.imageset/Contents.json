@@ -5,11 +5,12 @@
       "scale" : "1x"
     },
     {
-      "filename" : "kyc_error.png",
+      "filename" : "error.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
+      "filename" : "error 1.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

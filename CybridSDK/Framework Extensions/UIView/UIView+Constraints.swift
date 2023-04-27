@@ -233,6 +233,22 @@ public extension UIView {
                         constant: height)
     }
 
+    func asFirstInCenter(_ parent: UIView, size: CGSize, margins: UIEdgeInsets) {
+
+        parent.addSubview(self)
+        self.translatesAutoresizingMaskIntoConstraints = false
+        self.constraint(attribute: .top,
+                        relatedBy: .equal,
+                        toItem: parent,
+                        attribute: .topMargin,
+                        constant: margins.top)
+        self.constraint(attribute: .centerX,
+                        relatedBy: .equal,
+                        toItem: parent,
+                        attribute: .centerX)
+        self.setConstraintsSize(size: size)
+    }
+
     func asFirstWithImage(_ parent: UIView, icon: UIImageView, height: CGFloat, margins: UIEdgeInsets) {
 
         parent.addSubview(icon)

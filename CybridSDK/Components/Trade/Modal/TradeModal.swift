@@ -21,7 +21,7 @@ class TradeModal: UIModal {
 
         self.tradeViewModel = tradeViewModel
 
-        super.init(height: UIValues.modalSize)
+        super.init(height: UIValues.modalLoadingSize)
 
         self.localizer = CybridLocalizer()
         self.setupViews()
@@ -78,13 +78,19 @@ extension TradeModal {
             switch state {
 
             case .LOADING:
-                self.tradeModal_Loading()
+                self.tradeModal_Loading(key: UIStrings.loadingTitleString)
+
+            case .SUBMITING:
+                self.tradeModal_Loading(key: UIStrings.loadingSubmittedTitleString)
 
             case .CONTENT:
                 self.tradeModal_Content()
 
-            case .CONFIRM:
-                self.tradeModal_Loading()
+            case .SUCCESS:
+                self.tradeModal_Success()
+
+            case .ERROR:
+                self.tradeModal_Error()
             }
         }
     }
@@ -183,7 +189,7 @@ extension TradeModal {
 
 extension TradeModal {
 
-    internal func tradeModal_Loading() {
+    internal func tradeModal_Loading(key: String) {
 
         let title = UILabel()
         title.setContentHuggingPriority(.defaultHigh, for: .horizontal)
@@ -192,7 +198,7 @@ extension TradeModal {
         title.font = UIValues.loadingTitleFont
         title.textColor = UIValues.loadingTitleColor
         title.textAlignment = .center
-        title.setLocalizedText(key: UIStrings.loadingTitleString, localizer: localizer)
+        title.text = localizer.localize(with: key)
 
         self.componentContent.addSubview(title)
         title.constraint(attribute: .centerY,
@@ -218,11 +224,15 @@ extension TradeModal {
         // -- Spinner
         let spinner = UIActivityIndicatorView(style: .medium)
         spinner.addBelow(toItem: title, height: UIValues.loadingSpinnerHeight, margins: UIValues.loadingSpinnerMargin)
-        spinner.color = UIColor.black
+        spinner.color = UIColor(hex: "#007AFF")
+        let transform = CGAffineTransformMakeScale(1.7, 1.7)
+        spinner.transform = transform
         spinner.startAnimating()
     }
 
     internal func tradeModal_Content() {
+
+        self.modifyHeight(height: UIValues.modalSize)
 
         // -- Title
         let title = self.createTitle(key: UIStrings.contentTitleString)
@@ -266,7 +276,72 @@ extension TradeModal {
 
         // -- Buttons
         let buttons = self.createActionButtons()
-        buttons.addBelow(toItem: feeValue, height: 48, margins: UIValues.contentButtonsMargins)
+        buttons.addBelow(toItem: feeValue, height: UIValues.contentAmountButtonsHeight, margins: UIValues.contentButtonsMargins)
+    }
+
+    internal func tradeModal_Success() {
+
+        self.modifyHeight(height: UIValues.modalErrorSize)
+
+        // -- Icon
+        let image = UIImage(named: "kyc_verified", in: Bundle(for: Self.self), with: nil)
+        let icon = UIImageView(image: image)
+        icon.translatesAutoresizingMaskIntoConstraints = false
+        icon.asFirstInCenter(self.componentContent, size: UIValues.errorIconSize, margins: UIValues.errorIconMargins)
+
+        // -- Title
+        let title = UILabel()
+        title.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+        title.translatesAutoresizingMaskIntoConstraints = false
+        title.font = UIValues.errorTitleFont
+        title.textColor = UIValues.itemTitleColor
+        title.textAlignment = .center
+        title.text = localizer.localize(with: UIStrings.successTitleString)
+        title.addBelow(toItem: icon, height: UIValues.errorTitleHeight, margins: UIValues.errorTitleMargins)
+
+        // -- Button
+        let confirmText = localizer.localize(with: UIStrings.errorButtonConfirmString)
+        let confirmButton = CYBButton(title: confirmText,
+                                      theme: Cybrid.theme,
+                                      action: { [weak self] in
+
+            self?.tradeViewModel.dismissModal()
+            self?.dismiss(animated: true)
+            self?.tradeViewModel.fetchAccounts()
+        })
+        confirmButton.addBelow(toItem: title, height: UIValues.errorConfirmButtonHeight, margins: UIValues.errorConfirmButtonMargins)
+    }
+
+    internal func tradeModal_Error() {
+
+        self.modifyHeight(height: UIValues.modalErrorSize)
+
+        // -- Icon
+        let image = UIImage(named: "kyc_error", in: Bundle(for: Self.self), with: nil)
+        let icon = UIImageView(image: image)
+        icon.translatesAutoresizingMaskIntoConstraints = false
+        icon.asFirstInCenter(self.componentContent, size: UIValues.errorIconSize, margins: UIValues.errorIconMargins)
+
+        // -- Title
+        let title = UILabel()
+        title.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+        title.translatesAutoresizingMaskIntoConstraints = false
+        title.font = UIValues.errorTitleFont
+        title.textColor = UIValues.itemTitleColor
+        title.textAlignment = .center
+        title.text = localizer.localize(with: UIStrings.errorTitleString)
+        title.addBelow(toItem: icon, height: UIValues.errorTitleHeight, margins: UIValues.errorTitleMargins)
+
+        // -- Button
+        let confirmText = localizer.localize(with: UIStrings.errorButtonConfirmString)
+        let confirmButton = CYBButton(title: confirmText,
+                                      theme: Cybrid.theme,
+                                      action: { [weak self] in
+
+            self?.tradeViewModel.dismissModal()
+            self?.dismiss(animated: true)
+        })
+        confirmButton.addBelow(toItem: title, height: UIValues.errorConfirmButtonHeight, margins: UIValues.errorConfirmButtonMargins)
     }
 }
 
@@ -276,12 +351,18 @@ extension TradeModal {
 
         // -- Sizes
         static let modalSize: CGFloat = 380
+        static let modalLoadingSize: CGFloat = 200
+        static let modalErrorSize: CGFloat = 260
         static let loadingTitleHeight: CGFloat = 20
-        static let loadingSpinnerHeight: CGFloat = 30
+        static let loadingSpinnerHeight: CGFloat = 45
         static let contentTitleHeight: CGFloat = 28
         static let contentSubTitleHeight: CGFloat = 26
         static let contentAmountTitleHeight: CGFloat = 26
         static let contentAmountValueHeight: CGFloat = 20
+        static let contentAmountButtonsHeight: CGFloat = 48
+        static let errorIconSize = CGSize(width: 80, height: 80)
+        static let errorTitleHeight: CGFloat = 30
+        static let errorConfirmButtonHeight: CGFloat = 48
 
         // -- Fonts
         static let loadingTitleFont = UIFont.make(ofSize: 17, weight: .bold)
@@ -289,6 +370,7 @@ extension TradeModal {
         static let subTitleFont = UIFont.make(ofSize: 14)
         static let itemTitleFont = UIFont.make(ofSize: 13, weight: .bold)
         static let itemValueFont = UIFont.make(ofSize: 14)
+        static let errorTitleFont = UIFont.make(ofSize: 18)
 
         // -- Colors
         static let loadingTitleColor = UIColor.black
@@ -305,11 +387,15 @@ extension TradeModal {
         static let contentAmountTitleMargins = UIEdgeInsets(top: 15, left: 24, bottom: 0, right: 24)
         static let contentAmountValueMargins = UIEdgeInsets(top: 1, left: 24, bottom: 0, right: 24)
         static let contentButtonsMargins = UIEdgeInsets(top: 15, left: 24, bottom: 0, right: 24)
+        static let errorIconMargins = UIEdgeInsets(top: 15, left: 0, bottom: 0, right: 0)
+        static let errorTitleMargins = UIEdgeInsets(top: 10, left: 24, bottom: 0, right: 24)
+        static let errorConfirmButtonMargins = UIEdgeInsets(top: 20, left: 24, bottom: 0, right: 24)
     }
 
     enum UIStrings {
 
         static let loadingTitleString = "cybrid.account.trade.modal.loading.title"
+        static let loadingSubmittedTitleString = "cybrid.account.trade.modal.loadingSubmitted.title"
         static let contentTitleString = "cybrid.account.trade.modal.content.title"
         static let contentSubTitleString = "cybrid.account.trade.modal.content.sub.title"
         static let contentAmountBuyString = "cybrid.account.trade.modal.content.amount.buy"
@@ -319,5 +405,8 @@ extension TradeModal {
         static let contentFeeTitleString = "cybrid.account.trade.modal.content.fee.title"
         static let contentCancelString = "cybrid.account.trade.modal.content.cancel.button"
         static let contentConfirmString = "cybrid.account.trade.modal.content.confirm.button"
+        static let successTitleString = "cybrid.account.trade.modal.success.title"
+        static let errorTitleString = "cybrid.account.trade.modal.error.title"
+        static let errorButtonConfirmString = "cybrid.account.trade.modal.error.button"
     }
 }
