@@ -25,7 +25,7 @@ abstract_target 'Abstract' do
   target 'CybridSDKTests' do
     quality_pods
   end
-  target 'CybridSDKTestApp' do∫
+  target 'CybridSDKTestApp' do
   end
 end
 
