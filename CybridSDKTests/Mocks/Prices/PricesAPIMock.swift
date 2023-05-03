@@ -13,9 +13,7 @@ final class PricesAPIMock: PricesAPI {
     typealias AssetsListCompletion = (_ result: Result<[SymbolPriceBankModel], ErrorResponse>) -> Void
     private static var listPricesCompletion: AssetsListCompletion?
 
-    override class func listPrices(symbol: String? = nil,
-                                   apiResponseQueue: DispatchQueue = CybridApiBankSwiftAPI.apiResponseQueue,
-                                   completion: @escaping ((Result<[SymbolPriceBankModel], ErrorResponse>) -> Void)) -> RequestTask {
+    override class func listPrices(symbol: String? = nil, bankGuid: String? = nil, apiResponseQueue: DispatchQueue = CybridApiBankSwiftAPI.apiResponseQueue, completion: @escaping ((Result<[SymbolPriceBankModel], ErrorResponse>) -> Void)) -> RequestTask {
         listPricesCompletion = completion
         return listPricesWithRequestBuilder().requestTask
     }
