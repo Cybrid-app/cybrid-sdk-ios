@@ -189,7 +189,7 @@ extension TradeViewController {
 
     func setFromFieldData() {
 
-        let pairAsset = self.tradeViewModel.currentPairAsset.value
+        let pairAsset = self.tradeViewModel.currentCounterAsset.value
         let pairAssetAccount = self.tradeViewModel.fiatAccounts.first(where: {
             $0.asset.code == pairAsset?.code
         })
@@ -280,14 +280,14 @@ extension TradeViewController {
 
     func setAmountPriceData() {
 
-        self.flagIcon.setURL(self.tradeViewModel.currentAccountPairToTrade.value?.assetURL ?? "")
+        self.flagIcon.setURL(self.tradeViewModel.currentAccountCounterToTrade.value?.assetURL ?? "")
         self.amountPriceLabel.text = self.tradeViewModel.currentAmountWithPrice.value
     }
 
     // -- Binds
     func setViewBinds() {
 
-        self.tradeViewModel.currentPairAsset.bind { [self] _ in
+        self.tradeViewModel.currentCounterAsset.bind { [self] _ in
 
             self.fromTextField.resignFirstResponder()
             self.toTextField.resignFirstResponder()
@@ -314,7 +314,7 @@ extension TradeViewController {
             self.tradeViewModel.calculatePreQuote()
         }
 
-        self.tradeViewModel.currentAccountPairToTrade.bind { [self] _ in
+        self.tradeViewModel.currentAccountCounterToTrade.bind { [self] _ in
 
             self.setAmountFieldData()
             self.setAmountPriceData()
@@ -363,14 +363,14 @@ extension TradeViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     public func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
 
         if pickerView.accessibilityIdentifier == "fiatPicker" {
-            self.tradeViewModel.currentPairAsset.value = self.tradeViewModel.fiatAccounts[row].asset
+            self.tradeViewModel.currentCounterAsset.value = self.tradeViewModel.fiatAccounts[row].asset
         } else {
             self.tradeViewModel.currentAsset.value = self.tradeViewModel.tradingAccounts[row].asset
             self.tradeViewModel.currentAccountToTrade.value = self.tradeViewModel.tradingAccounts.first(where: {
                 $0.asset.code == self.tradeViewModel.currentAsset.value?.code
             })
-            self.tradeViewModel.currentAccountPairToTrade.value = self.tradeViewModel.fiatAccounts.first(where: {
-                $0.asset.code == self.tradeViewModel.currentPairAsset.value?.code
+            self.tradeViewModel.currentAccountCounterToTrade.value = self.tradeViewModel.fiatAccounts.first(where: {
+                $0.asset.code == self.tradeViewModel.currentCounterAsset.value?.code
             })
         }
     }

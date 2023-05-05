@@ -17,9 +17,9 @@ class TradeViewModel: NSObject, ListPricesItemDelegate {
     // MARK: Internal properties
     internal var customerGuig = Cybrid.customerGUID
     internal var currentAsset: Observable<AssetBankModel?> = .init(nil)
-    internal var currentPairAsset: Observable<AssetBankModel?> = .init(nil)
+    internal var currentCounterAsset: Observable<AssetBankModel?> = .init(nil)
     internal var currentAccountToTrade: Observable<AccountAssetUIModel?> = .init(nil)
-    internal var currentAccountPairToTrade: Observable<AccountAssetUIModel?> = .init(nil)
+    internal var currentAccountCounterToTrade: Observable<AccountAssetUIModel?> = .init(nil)
     internal var currentAmountInput = "0"
     internal var currentAmountWithPrice: Observable<String> = .init("0.0")
 
@@ -33,7 +33,6 @@ class TradeViewModel: NSObject, ListPricesItemDelegate {
     var fiatAccounts: [AccountAssetUIModel] = []
     var tradingAccounts: [AccountAssetUIModel] = []
 
-    // var assetSwitchTopToBottom: Observable<Bool> = .init(true)
     var quotePolling: Polling?
     var currentQuote: Observable<QuoteBankModel?> = .init(nil)
     var currentTrade: Observable<TradeBankModel?> = .init(nil)
@@ -50,10 +49,10 @@ class TradeViewModel: NSObject, ListPricesItemDelegate {
     }
 
     // MARK: List Prices select
-    func onSelected(asset: AssetBankModel, pairAsset: AssetBankModel) {
+    func onSelected(asset: AssetBankModel, counterAsset: AssetBankModel) {
 
         self.currentAsset.value = asset
-        self.currentPairAsset.value = pairAsset
+        self.currentCounterAsset.value = counterAsset
         self.fetchAccounts()
     }
 
@@ -77,8 +76,8 @@ class TradeViewModel: NSObject, ListPricesItemDelegate {
                 self?.currentAccountToTrade.value = self?.tradingAccounts.first(where: {
                     $0.asset.code == self?.currentAsset.value?.code
                 })
-                self?.currentAccountPairToTrade.value = self?.fiatAccounts.first(where: {
-                    $0.asset.code == self?.currentPairAsset.value?.code
+                self?.currentAccountCounterToTrade.value = self?.fiatAccounts.first(where: {
+                    $0.asset.code == self?.currentCounterAsset.value?.code
                 })
                 self?.uiState.value = .CONTENT
 
@@ -129,14 +128,14 @@ class TradeViewModel: NSObject, ListPricesItemDelegate {
             self.currentAccountToTrade.value = self.tradingAccounts.first(where: {
                 $0.asset.code == self.currentAsset.value?.code
             })
-            self.currentAccountPairToTrade.value = self.fiatAccounts.first(where: {
-                $0.asset.code == self.currentPairAsset.value?.code
+            self.currentAccountCounterToTrade.value = self.fiatAccounts.first(where: {
+                $0.asset.code == self.currentCounterAsset.value?.code
             })
         } else {
             self.currentAccountToTrade.value = self.fiatAccounts.first(where: {
-                $0.asset.code == self.currentPairAsset.value?.code
+                $0.asset.code == self.currentCounterAsset.value?.code
             })
-            self.currentAccountPairToTrade.value = self.tradingAccounts.first(where: {
+            self.currentAccountCounterToTrade.value = self.tradingAccounts.first(where: {
                 $0.asset.code == self.currentAsset.value?.code
             })
         }
@@ -145,14 +144,14 @@ class TradeViewModel: NSObject, ListPricesItemDelegate {
     internal func calculatePreQuote() {
 
         let assetCode = currentAsset.value?.code ?? ""
-        let pairAssetCode = currentPairAsset.value?.code ?? ""
-        let symbol = "\(assetCode)-\(pairAssetCode)"
+        let counterAssetCode = currentCounterAsset.value?.code ?? ""
+        let symbol = "\(assetCode)-\(counterAssetCode)"
         let amount = CDecimal(self.currentAmountInput)
         if amount.newValue != "0.00" {
 
             let buyPrice = self.getPrice(symbol: symbol).buyPrice ?? "0"
             let asset = self.currentAccountToTrade.value?.asset
-            let assetToConvert = self.currentAccountPairToTrade.value?.asset
+            let assetToConvert = self.currentAccountCounterToTrade.value?.asset
             let amountFormatted = AssetFormatter.forInput(asset!, amount: amount)
             let tradeValue = AssetFormatter.trade(
                 amount: amountFormatted,
@@ -179,8 +178,8 @@ class TradeViewModel: NSObject, ListPricesItemDelegate {
     internal func createPostQuote() -> PostQuoteBankModel {
 
         let assetCode = currentAsset.value?.code ?? ""
-        let pairAssetCode = currentPairAsset.value?.code ?? ""
-        let symbol = "\(assetCode)-\(pairAssetCode)"
+        let counterAssetCode = currentCounterAsset.value?.code ?? ""
+        let symbol = "\(assetCode)-\(counterAssetCode)"
         let amount = CDecimal(self.currentAmountInput)
         var postQuote = PostQuoteBankModel(side: .buy)
 
@@ -196,7 +195,7 @@ class TradeViewModel: NSObject, ListPricesItemDelegate {
                     receiveAmount: amountFormatted
                 )
             } else {
-                let amountFormatted = AssetFormatter.forInput(currentPairAsset.value!, amount: amount)
+                let amountFormatted = AssetFormatter.forInput(currentCounterAsset.value!, amount: amount)
                 postQuote = PostQuoteBankModel(
                     productType: .trading,
                     customerGuid: self.customerGuig,
@@ -208,7 +207,7 @@ class TradeViewModel: NSObject, ListPricesItemDelegate {
 
         case .sell:
             if currentAccountToTrade.value?.asset.type == .fiat {
-                let amountFormatted = AssetFormatter.forInput(currentPairAsset.value!, amount: amount)
+                let amountFormatted = AssetFormatter.forInput(currentCounterAsset.value!, amount: amount)
                 postQuote = PostQuoteBankModel(
                     productType: .trading,
                     customerGuid: self.customerGuig,

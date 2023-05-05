@@ -67,7 +67,7 @@ public class ListPricesView: UITableView {
         if itemDelegate != nil {
           itemDelegate?.onSelected(
             asset: (viewModel?.selectedAsset.value)!,
-            pairAsset: asset)
+            counterAsset: asset)
         }
         viewModel?.selectedAsset.value = nil
         viewModel?.selectPairAsset.value = nil
