@@ -54,7 +54,8 @@ extension TradeViewController {
         let listPricesView = ListPricesView()
         let listPricesViewModel = ListPricesViewModel(cellProvider: listPricesView,
                                                       dataProvider: CybridSession.current,
-                                                      logger: Cybrid.logger)
+                                                      logger: Cybrid.logger,
+                                                      taskScheduler: self.pricesScheduler)
 
         listPricesView.setViewModel(listPricesViewModel: listPricesViewModel)
         listPricesView.itemDelegate = tradeViewModel
@@ -139,13 +140,30 @@ extension TradeViewController {
                                      thirdMargins: UIMargins.contentMaxButtonMargin)
         self.setAmountPriceData()
 
-        // -- Action button
+        // -- Action button part 1
         self.actionButton = CYBButton(
             title: localizer.localize(with: CybridLocalizationKey.trade(.buy(.cta))),
             action: { [weak self] in
-                print("")
+
+                self?.tradeViewModel.createQuote()
+                let modal = TradeModal(tradeViewModel: (self?.tradeViewModel)!)
+                modal.disableDismiss = true
+                modal.present()
             })
-        self.actionButton.addBelow(toItem: self.flagIcon, height: 48, margins: UIMargins.contentActionButton)
+
+        // -- Error
+        let errorLabel = createSubTitleLabel(UIStrings.contentErrorLabel)
+        errorLabel.textColor = UIColor(hex: "#E91E26")
+        errorLabel.addBelow(toItem: amountPriceLabel, height: UIValues.errorLabelHeight, margins: UIMargins.contentErrorLabelMargin)
+        errorLabel.isHidden = !self.tradeViewModel.currentAmountWithPriceError.value
+        self.tradeViewModel.currentAmountWithPriceError.bind { value in
+
+            errorLabel.isHidden = !value
+            self.actionButton.isHidden = value
+        }
+
+        // -- Action button part 2
+        self.actionButton.addBelow(toItem: errorLabel, height: 48, margins: UIMargins.contentActionButton)
 
         // -- View Binds
         self.setViewBinds()
@@ -173,8 +191,8 @@ extension TradeViewController {
         let fromTextField = CYBTextField(style: .rounded, icon: .urlImage(""), theme: theme)
         fromTextField.accessibilityIdentifier = "fiatPickerTextField"
         fromTextField.tintColor = UIColor.clear
-        self.fiatPickerView.delegate = tradeViewModel
-        self.fiatPickerView.dataSource = tradeViewModel
+        self.fiatPickerView.delegate = self
+        self.fiatPickerView.dataSource = self
         self.fiatPickerView.accessibilityIdentifier = "fiatPicker"
         if self.tradeViewModel.fiatAccounts.count > 1 {
             fromTextField.inputView = self.fiatPickerView
@@ -184,7 +202,7 @@ extension TradeViewController {
 
     func setFromFieldData() {
 
-        let pairAsset = self.tradeViewModel.currentPairAsset.value
+        let pairAsset = self.tradeViewModel.currentCounterAsset.value
         let pairAssetAccount = self.tradeViewModel.fiatAccounts.first(where: {
             $0.asset.code == pairAsset?.code
         })
@@ -203,8 +221,8 @@ extension TradeViewController {
         let toTextField = CYBTextField(style: .rounded, icon: .urlImage(""), theme: theme)
         toTextField.accessibilityIdentifier = "tradingPickerTextField"
         toTextField.tintColor = UIColor.clear
-        self.tradingPickerView.delegate = tradeViewModel
-        self.tradingPickerView.dataSource = tradeViewModel
+        self.tradingPickerView.delegate = self
+        self.tradingPickerView.dataSource = self
         self.tradingPickerView.accessibilityIdentifier = "tradingPicker"
         toTextField.inputView = self.tradingPickerView
         return toTextField
@@ -218,9 +236,8 @@ extension TradeViewController {
         })
         let assetAccountURL = assetAccount?.assetURL ?? ""
         let name = assetAccount?.asset.name ?? ""
-        let code = assetAccount?.account.asset ?? ""
         let balance = assetAccount?.balanceFormatted ?? ""
-        let assetAccountText = "\(name)(\(code)) - \(balance)"
+        let assetAccountText = "\(name) - \(balance)"
 
         self.toTextField.updateIcon(.urlImage(assetAccountURL))
         self.toTextField.text = assetAccountText
@@ -231,7 +248,7 @@ extension TradeViewController {
         let textField = CYBTextField(style: .plain, icon: .text(""), theme: theme)
         textField.placeholder = "0.0"
         textField.keyboardType = .decimalPad
-        // textField.delegate = viewModel
+        textField.delegate = self
         textField.rightView = switchButton
         textField.rightViewMode = .always
         textField.accessibilityIdentifier = "amountTextField"
@@ -240,7 +257,7 @@ extension TradeViewController {
 
     func setAmountFieldData() {
 
-        let asset = self.tradeViewModel.currentAssetToTrade.value
+        let asset = self.tradeViewModel.currentAccountToTrade.value
         self.amountTextField.updateIcon(.text(asset?.asset.code ?? ""))
     }
 
@@ -276,15 +293,14 @@ extension TradeViewController {
 
     func setAmountPriceData() {
 
-        let amount = self.amountTextField.text
-        self.flagIcon.setURL(self.tradeViewModel.currentAssetToTrade.value?.assetURL ?? "")
-        self.amountPriceLabel.text = "Hola mundo USD"
+        self.flagIcon.setURL(self.tradeViewModel.currentAccountCounterToTrade.value?.assetURL ?? "")
+        self.amountPriceLabel.text = self.tradeViewModel.currentAmountWithPrice.value
     }
 
     // -- Binds
     func setViewBinds() {
 
-        self.tradeViewModel.currentPairAsset.bind { [self] _ in
+        self.tradeViewModel.currentCounterAsset.bind { [self] _ in
 
             self.fromTextField.resignFirstResponder()
             self.toTextField.resignFirstResponder()
@@ -304,11 +320,96 @@ extension TradeViewController {
             self.setAmountPriceData()
         }
 
-        self.tradeViewModel.currentAssetToTrade.bind { [self] _ in
+        self.tradeViewModel.currentAccountToTrade.bind { [self] _ in
 
             self.setAmountFieldData()
             self.setAmountPriceData()
+            self.tradeViewModel.calculatePreQuote()
         }
+
+        self.tradeViewModel.currentAccountCounterToTrade.bind { [self] _ in
+
+            self.setAmountFieldData()
+            self.setAmountPriceData()
+            self.tradeViewModel.calculatePreQuote()
+        }
+
+        self.tradeViewModel.currentAmountWithPrice.bind { [self] _ in
+            self.amountPriceLabel.text = self.tradeViewModel.currentAmountWithPrice.value
+        }
+
+        self.tradeViewModel.segmentSelection.bind { [self] segment in
+            self.actionButton.setTitle(title: localizer.localize(with: segment == .buy ? UIStrings.contentBuyButton : UIStrings.contentSellButton))
+        }
+    }
+}
+
+extension TradeViewController: UIPickerViewDelegate, UIPickerViewDataSource {
+
+    public func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+
+    public func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+
+        if pickerView.accessibilityIdentifier == "fiatPicker" {
+            return self.tradeViewModel.fiatAccounts.count
+        } else {
+            return self.tradeViewModel.tradingAccounts.count
+        }
+    }
+
+    public func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+
+        let account: AccountAssetUIModel!
+        if pickerView.accessibilityIdentifier == "fiatPicker" {
+            account = self.tradeViewModel.fiatAccounts[row]
+        } else {
+            account = self.tradeViewModel.tradingAccounts[row]
+        }
+
+        let name = account.asset.name
+        let asset = account.account.asset ?? ""
+        return "\(name)(\(asset)) - \(account.balanceFormatted)"
+    }
+
+    public func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+
+        if pickerView.accessibilityIdentifier == "fiatPicker" {
+            self.tradeViewModel.currentCounterAsset.value = self.tradeViewModel.fiatAccounts[row].asset
+        } else {
+            self.tradeViewModel.currentAsset.value = self.tradeViewModel.tradingAccounts[row].asset
+            self.tradeViewModel.currentAccountToTrade.value = self.tradeViewModel.tradingAccounts.first(where: {
+                $0.asset.code == self.tradeViewModel.currentAsset.value?.code
+            })
+            self.tradeViewModel.currentAccountCounterToTrade.value = self.tradeViewModel.fiatAccounts.first(where: {
+                $0.asset.code == self.tradeViewModel.currentCounterAsset.value?.code
+            })
+        }
+    }
+}
+
+extension TradeViewController: UITextFieldDelegate {
+
+    public func textFieldDidChangeSelection(_ textField: UITextField) {
+
+        var amountString = textField.text ?? "0"
+        if amountString.contains(".") {
+
+            let leftSide = "0"
+            let rightSide = "00"
+            let stringParts = amountString.getParts()
+
+            if stringParts[0] == "." {
+                amountString = "\(leftSide)\(amountString)"
+            }
+
+            if stringParts[stringParts.count - 1] == "." {
+                amountString = "\(amountString)\(rightSide)"
+            }
+        }
+        self.tradeViewModel.currentAmountInput = amountString
+        self.tradeViewModel.calculatePreQuote()
     }
 }
 
@@ -326,6 +427,7 @@ extension TradeViewController {
         static let loadingSpinnerMargin = UIEdgeInsets(top: 10, left: 10, bottom: 0, right: 10)
         static let componentRequiredButtonsHeight: CGFloat = 50
         static let switchButtonSize = CGSize(width: 14, height: 18)
+        static let errorLabelHeight: CGFloat = 20
 
         // -- Colors
         static let componentTitleColor = UIColor.black
@@ -350,6 +452,7 @@ extension TradeViewController {
         static let contentPriceLabelMargin = UIEdgeInsets(top: 17, left: 6, bottom: 0, right: 5)
         static let contentMaxButtonMargin = UIEdgeInsets(top: 17, left: 0, bottom: 0, right: 14)
         static let contentActionButton = UIEdgeInsets(top: 27, left: 13, bottom: 0, right: 13)
+        static let contentErrorLabelMargin = UIEdgeInsets(top: 0, left: 13, bottom: 0, right: 13)
     }
 
     enum UIStrings {
@@ -358,5 +461,8 @@ extension TradeViewController {
         static let contentFrom = "cybrid.tradeView.content.subtitle.from"
         static let contentTo = "cybrid.tradeView.content.subtitle.to"
         static let contentAmount = "cybrid.tradeView.content.subtitle.amount"
+        static let contentBuyButton = "cybrid.account.trade.detail.bought"
+        static let contentSellButton = "cybrid.account.trade.detail.sold"
+        static let contentErrorLabel = "cybrid.tradeView.content.error"
     }
 }

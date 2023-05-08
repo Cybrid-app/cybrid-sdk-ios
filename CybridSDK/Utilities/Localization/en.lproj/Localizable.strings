@@ -6,29 +6,24 @@
 
 */
 
-// TradeView Component
-"cybrid.tradeView.loading.title" = "Loading";
-"cybrid.tradeView.content.subtitle.from" = "From:";
-"cybrid.tradeView.content.subtitle.to" = "To:";
-"cybrid.tradeView.content.subtitle.amount" = "Amount";
-
 // Crypto Price List
 "cybrid.cryptoPriceList.headerSearchPlaceholder" = "Search";
 "cybrid.cryptoPriceList.headerCurrency" = "Currency";
 "cybrid.cryptoPriceList.headerPrice" = "Price";
 
-// Trade Buy
+// Component: Trade
+"cybrid.tradeView.loading.title" = "Loading";
+"cybrid.tradeView.content.subtitle.from" = "From:";
+"cybrid.tradeView.content.subtitle.to" = "To:";
+"cybrid.tradeView.content.subtitle.amount" = "Amount";
+"cybrid.tradeView.content.error" = "Insufficient funds";
 "cybrid.trade.buy.title" = "BUY";
 "cybrid.trade.buy.currency" = "Currency";
 "cybrid.trade.buy.selectCurrency" = "Select Currency";
 "cybrid.trade.buy.amount" = "Amount";
 "cybrid.trade.buy.cta" = "Buy";
-
-// Trade Sell
 "cybrid.trade.sell.title" = "SELL";
 "cybrid.trade.sell.cta" = "Sell";
-
-// Trade Confirmation Modal
 "cybrid.trade.confirmationModal.title" = "Order Quote";
 "cybrid.trade.confirmationModal.subtitle" = "Prices are in realtime. Rates automatically refresh.";
 "cybrid.trade.confirmationModal.purchaseAmount" = "Purchase amount";
@@ -38,11 +33,7 @@
 "cybrid.trade.confirmationModal.transactionFee" = "Transaction Fee";
 "cybrid.trade.confirmationModal.confirm" = "Confirm";
 "cybrid.trade.confirmationModal.cancel" = "Cancel";
-
-// Trade Loading Modal
 "cybrid.trade.loadingModal.processingMessage" = "Submitting Crypto Order";
-
-// Trade Success Modal
 "cybrid.trade.successModal.title" = "Order submitted";
 "cybrid.trade.successModal.subtitle" = "Your order has been placed";
 "cybrid.trade.successModal.transactionId" = "Transaction ID:";
@@ -81,6 +72,20 @@
 "cybrid.account.trade.detail.accountID" = "Account ID";
 "cybrid.account.trade.detail.orderID" = "Order ID";
 "cybrid.account.trade.detail.close" = "Close";
+"cybrid.account.trade.modal.loading.title" = "Quote Pending";
+"cybrid.account.trade.modal.loadingSubmitted.title" = "Submitting Crypto Order";
+"cybrid.account.trade.modal.content.title" = "Order Quote";
+"cybrid.account.trade.modal.content.sub.title" = "Prices are in realtime. Rates automatically refresh.";
+"cybrid.account.trade.modal.content.amount.buy" = "Purchase amount";
+"cybrid.account.trade.modal.content.amount.sell" = "Sell amount";
+"cybrid.account.trade.modal.content.quantity.buy" = "Purchase quantity";
+"cybrid.account.trade.modal.content.quantity.sell" = "Sell quantity";
+"cybrid.account.trade.modal.content.fee.title" = "Transaction fee";
+"cybrid.account.trade.modal.content.cancel.button" = "Cancel";
+"cybrid.account.trade.modal.content.confirm.button" = "Confirm";
+"cybrid.account.trade.modal.success.title" = "Order Submitted";
+"cybrid.account.trade.modal.error.title" = "Please try again.";
+"cybrid.account.trade.modal.error.button" = "Confirm";
 
 // Accounts - Transfers
 "cybrid.accounts.transfers.subtitle.available" = "Available balance";

@@ -10,5 +10,5 @@ import CybridApiBankSwift
 
 protocol ListPricesItemDelegate: AnyObject {
 
-    func onSelected(asset: AssetBankModel, pairAsset: AssetBankModel)
+    func onSelected(asset: AssetBankModel, counterAsset: AssetBankModel)
 }

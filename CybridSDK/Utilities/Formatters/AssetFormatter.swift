@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import BigInt
 import CybridApiBankSwift
 
 struct AssetFormatter {
@@ -35,12 +36,9 @@ struct AssetFormatter {
 
         // Sanity check in intValue is zero, has to be removed
         if intValue == "0" { intValue = "" }
-        if asset.type == .crypto {
-            decimalValue = decimalValue.removeLeadingZeros()
-        }
 
         // Removing the dot
-        let formatted = "\(intValue)\(decimalValue)"
+        let formatted = "\(intValue)\(decimalValue)".removeLeadingZeros()
         return formatted
     }
 
@@ -100,8 +98,44 @@ struct AssetFormatter {
     static func format(_ asset: AssetBankModel, amount: String) -> String {
 
         var amountFormatted = amount.currencyFormat()
-        let code = asset.type == .fiat ? " \(asset.code)" : ""
-        amountFormatted = "\(asset.symbol)\(amountFormatted)\(code)"
+        if asset.type == .fiat {
+            let code = " \(asset.code)"
+            amountFormatted = "\(asset.symbol)\(amountFormatted)\(code)"
+        } else {
+            amountFormatted = "\(asset.symbol)\(amountFormatted)"
+        }
         return amountFormatted
+    }
+
+    /// Method to trade (convert)
+    /// Only works with base valus
+    /// Example:
+    /// - 1 BTC at 3023700 cUSD --> $10.00 USD
+    /// Parameters:
+    ///  - cryptoAsset: AssetBankModel
+    ///  - fiatAsset: AssetBankModel
+    ///  - price: String in base value (cents of dollar)
+    ///  - side: AccountBankModel.TypeBankModel depends on what value comes form input as fiat or crypto
+    static func trade(amount: String, cryptoAsset: AssetBankModel, price: String, base: AssetBankModel.TypeBankModel) -> String {
+
+        var result = BigInt(0)
+        let unit = AssetFormatter.forInput(cryptoAsset, amount: CDecimal("1"))
+        let unitBigInt = BigInt(unit)!
+        let amountBigInt = BigInt(amount)!
+        let priceBigInt = BigInt(price)!
+
+        if base == .crypto {
+
+            let firstOperation = amountBigInt * priceBigInt
+            let secondOperation = firstOperation / unitBigInt
+            result = secondOperation
+
+        } else {
+
+            let firstOperation = amountBigInt * unitBigInt
+            let secondOperation = firstOperation / priceBigInt
+            result = secondOperation
+        }
+        return "\(result)"
     }
 }

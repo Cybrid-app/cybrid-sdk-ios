@@ -11,17 +11,22 @@ import CybridApiBankSwift
 class TradeViewModel: NSObject, ListPricesItemDelegate {
 
     // MARK: Private properties
-    private var dataProvider: TradesRepoProvider & AccountsRepoProvider
+    private var dataProvider: TradesRepoProvider & AccountsRepoProvider & QuotesRepoProvider
     private var logger: CybridLogger?
 
     // MARK: Internal properties
     internal var customerGuig = Cybrid.customerGUID
     internal var currentAsset: Observable<AssetBankModel?> = .init(nil)
-    internal var currentPairAsset: Observable<AssetBankModel?> = .init(nil)
-    internal var currentAssetToTrade: Observable<AccountAssetUIModel?> = .init(nil)
+    internal var currentCounterAsset: Observable<AssetBankModel?> = .init(nil)
+    internal var currentAccountToTrade: Observable<AccountAssetUIModel?> = .init(nil)
+    internal var currentAccountCounterToTrade: Observable<AccountAssetUIModel?> = .init(nil)
+    internal var currentAmountInput = "0"
+    internal var currentAmountWithPrice: Observable<String> = .init("0.0")
+    internal var currentAmountWithPriceError: Observable<Bool> = .init(false)
 
     // MARK: Public properties
     var uiState: Observable<TradeViewController.ViewState> = .init(.PRICES)
+    var modalState: Observable<TradeViewController.ModalViewState> = .init(.LOADING)
     var listPricesViewModel: ListPricesViewModel?
 
     var accountsOriginal: [AccountBankModel] = []
@@ -29,32 +34,33 @@ class TradeViewModel: NSObject, ListPricesItemDelegate {
     var fiatAccounts: [AccountAssetUIModel] = []
     var tradingAccounts: [AccountAssetUIModel] = []
 
-    var assetSwitchTopToBottom: Observable<Bool> = .init(true)
+    var quotePolling: Polling?
+    var currentQuote: Observable<QuoteBankModel?> = .init(nil)
+    var currentTrade: Observable<TradeBankModel?> = .init(nil)
 
     // MARK: View Values
     internal var segmentSelection: Observable<_TradeType> = Observable(.buy)
 
     // MARK: Constructor
-    init(dataProvider: TradesRepoProvider & AccountsRepoProvider,
+    init(dataProvider: TradesRepoProvider & AccountsRepoProvider & QuotesRepoProvider,
          logger: CybridLogger?) {
 
         self.dataProvider = dataProvider
         self.logger = logger
     }
 
-    func initBindingValues() {}
+    // MARK: List Prices select
+    func onSelected(asset: AssetBankModel, counterAsset: AssetBankModel) {
 
-    // MARK: ViewModel Methods
-    func onSelected(asset: AssetBankModel, pairAsset: AssetBankModel) {
-
-        currentAsset.value = asset
-        currentPairAsset.value = pairAsset
-        fetchAccounts()
+        self.currentAsset.value = asset
+        self.currentCounterAsset.value = counterAsset
+        self.fetchAccounts()
     }
 
     internal func fetchAccounts() {
 
-        uiState.value = .LOADING
+        self.uiState.value = .LOADING
+        self.initBindingValues()
         dataProvider.fetchAccounts(customerGuid: Cybrid.customerGUID) { [weak self] accountsResult in
 
             switch accountsResult {
@@ -68,8 +74,11 @@ class TradeViewModel: NSObject, ListPricesItemDelegate {
                 self?.accounts = accountsFormatted
                 self?.fiatAccounts = accountsFormatted.filter { $0.account.type == .fiat }
                 self?.tradingAccounts = accountsFormatted.filter { $0.account.type == .trading }
-                self?.currentAssetToTrade.value = self?.tradingAccounts.first(where: {
+                self?.currentAccountToTrade.value = self?.tradingAccounts.first(where: {
                     $0.asset.code == self?.currentAsset.value?.code
+                })
+                self?.currentAccountCounterToTrade.value = self?.fiatAccounts.first(where: {
+                    $0.asset.code == self?.currentCounterAsset.value?.code
                 })
                 self?.uiState.value = .CONTENT
 
@@ -77,14 +86,6 @@ class TradeViewModel: NSObject, ListPricesItemDelegate {
                 self?.logger?.log(.component(.accounts(.accountsDataError)))
             }
         }
-    }
-
-    // MARK: View Helper Methods
-    @objc
-    func segmentedControlValueChanged(_ sender: UISegmentedControl) {
-
-      guard let selectedIndex = _TradeType(rawValue: sender.selectedSegmentIndex) else { return }
-      self.segmentSelection.value = selectedIndex
     }
 
     internal func buildUIModelList(accounts: [AccountBankModel]) -> [AccountAssetUIModel]? {
@@ -102,6 +103,21 @@ class TradeViewModel: NSObject, ListPricesItemDelegate {
         }
     }
 
+    func initBindingValues() {
+
+        self.listPricesViewModel?.filteredCryptoPriceList.bind { [self] _ in
+            self.calculatePreQuote()
+        }
+    }
+
+    // MARK: View Helper Methods
+    @objc
+    func segmentedControlValueChanged(_ sender: UISegmentedControl) {
+
+        guard let selectedIndex = _TradeType(rawValue: sender.selectedSegmentIndex) else { return }
+        self.segmentSelection.value = selectedIndex
+    }
+
     @objc
     internal func switchAction(_ sender: UIButton) {
         self.switchActionHandler()
@@ -109,61 +125,176 @@ class TradeViewModel: NSObject, ListPricesItemDelegate {
 
     internal func switchActionHandler() {
 
-        if self.currentAssetToTrade.value?.account.type == .fiat {
-            self.currentAssetToTrade.value = self.tradingAccounts.first(where: {
+        if self.currentAccountToTrade.value?.account.type == .fiat {
+            self.currentAccountToTrade.value = self.tradingAccounts.first(where: {
                 $0.asset.code == self.currentAsset.value?.code
             })
-        } else {
-            self.currentAssetToTrade.value = self.fiatAccounts.first(where: {
-                $0.asset.code == self.currentPairAsset.value?.code
+            self.currentAccountCounterToTrade.value = self.fiatAccounts.first(where: {
+                $0.asset.code == self.currentCounterAsset.value?.code
             })
-        }
-    }
-}
-
-extension TradeViewModel: UIPickerViewDelegate, UIPickerViewDataSource {
-
-    public func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
-    }
-
-    public func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-
-        if pickerView.accessibilityIdentifier == "fiatPicker" {
-            return fiatAccounts.count
         } else {
-            return tradingAccounts.count
-        }
-    }
-
-    public func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-
-        let account: AccountAssetUIModel!
-        if pickerView.accessibilityIdentifier == "fiatPicker" {
-           account = fiatAccounts[row]
-        } else {
-            account = tradingAccounts[row]
-        }
-
-        let name = account.asset.name
-        let asset = account.account.asset ?? ""
-        return "\(name)(\(asset)) - \(account.balanceFormatted)"
-    }
-
-    public func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-
-        if pickerView.accessibilityIdentifier == "fiatPicker" {
-            currentPairAsset.value = fiatAccounts[row].asset
-        } else {
-            currentAsset.value = tradingAccounts[row].asset
-            currentAssetToTrade.value = self.tradingAccounts.first(where: {
+            self.currentAccountToTrade.value = self.fiatAccounts.first(where: {
+                $0.asset.code == self.currentCounterAsset.value?.code
+            })
+            self.currentAccountCounterToTrade.value = self.tradingAccounts.first(where: {
                 $0.asset.code == self.currentAsset.value?.code
             })
         }
     }
-}
 
-extension TradeViewModel: UITextFieldDelegate {
+    internal func calculatePreQuote() {
 
-    func textFieldDidChangeSelection(_ textField: UITextField) {}
+        self.currentAmountWithPriceError.value = false
+        let assetCode = currentAsset.value?.code ?? ""
+        let counterAssetCode = currentCounterAsset.value?.code ?? ""
+        let symbol = "\(assetCode)-\(counterAssetCode)"
+        let amount = CDecimal(self.currentAmountInput)
+        if amount.newValue != "0.00" {
+
+            let buyPrice = self.getPrice(symbol: symbol).buyPrice ?? "0"
+            let asset = self.currentAccountToTrade.value?.asset
+            let assetToConvert = self.currentAccountCounterToTrade.value?.asset
+            let amountFormatted = AssetFormatter.forInput(asset!, amount: amount)
+            let tradeValue = AssetFormatter.trade(
+                amount: amountFormatted,
+                cryptoAsset: self.currentAsset.value!,
+                price: buyPrice,
+                base: asset?.type ?? .crypto)
+            let tradeValueCDecimal = CDecimal(tradeValue)
+
+            if asset?.type == .crypto {
+                if self.segmentSelection.value == .buy {
+                    let accountValue = self.currentAccountCounterToTrade.value?.account.platformBalance
+                    let accountValueCDecimal = CDecimal(accountValue ?? "0")
+                    if tradeValueCDecimal.intValue > accountValueCDecimal.intValue {
+                        self.currentAmountWithPriceError.value = true
+                    }
+                }
+            } else {
+                let amountFormattedCDecimal = CDecimal(amountFormatted)
+                let accountValue = self.currentAccountToTrade.value?.account.platformBalance
+                let accountValueCDecimal = CDecimal(accountValue ?? "0")
+                if amountFormattedCDecimal.intValue > accountValueCDecimal.intValue {
+                    self.currentAmountWithPriceError.value = true
+                }
+            }
+
+            let tradeBase = AssetFormatter.forBase(assetToConvert!, amount: tradeValueCDecimal)
+            let tradeFormatted = AssetFormatter.format(assetToConvert!, amount: tradeBase)
+            self.currentAmountWithPrice.value = tradeFormatted
+        } else {
+            self.currentAmountWithPrice.value = amount.newValue
+        }
+    }
+
+    internal func getPrice(symbol: String) -> SymbolPriceBankModel {
+
+        let price = self.listPricesViewModel?.filteredCryptoPriceList.value.first(where: {
+            $0.originalSymbol.symbol == symbol
+        })
+        return price?.originalSymbol ?? SymbolPriceBankModel()
+    }
+
+    internal func createPostQuote() -> PostQuoteBankModel {
+
+        let assetCode = currentAsset.value?.code ?? ""
+        let counterAssetCode = currentCounterAsset.value?.code ?? ""
+        let symbol = "\(assetCode)-\(counterAssetCode)"
+        let amount = CDecimal(self.currentAmountInput)
+        var postQuote = PostQuoteBankModel(side: .buy)
+
+        switch segmentSelection.value {
+        case .buy:
+            if currentAccountToTrade.value?.asset.type == .crypto {
+                let amountFormatted = AssetFormatter.forInput(currentAsset.value!, amount: amount)
+                postQuote = PostQuoteBankModel(
+                    productType: .trading,
+                    customerGuid: self.customerGuig,
+                    symbol: symbol,
+                    side: .buy,
+                    receiveAmount: amountFormatted
+                )
+            } else {
+                let amountFormatted = AssetFormatter.forInput(currentCounterAsset.value!, amount: amount)
+                postQuote = PostQuoteBankModel(
+                    productType: .trading,
+                    customerGuid: self.customerGuig,
+                    symbol: symbol,
+                    side: .buy,
+                    deliverAmount: amountFormatted
+                )
+            }
+
+        case .sell:
+            if currentAccountToTrade.value?.asset.type == .fiat {
+                let amountFormatted = AssetFormatter.forInput(currentCounterAsset.value!, amount: amount)
+                postQuote = PostQuoteBankModel(
+                    productType: .trading,
+                    customerGuid: self.customerGuig,
+                    symbol: symbol,
+                    side: .sell,
+                    receiveAmount: amountFormatted
+                )
+            } else {
+                let amountFormatted = AssetFormatter.forInput(currentAsset.value!, amount: amount)
+                postQuote = PostQuoteBankModel(
+                    productType: .trading,
+                    customerGuid: self.customerGuig,
+                    symbol: symbol,
+                    side: .sell,
+                    deliverAmount: amountFormatted
+                )
+            }
+        }
+        return postQuote
+    }
+
+    func createQuote() {
+
+        self.modalState.value = .LOADING
+        self.quotePolling = Polling(interval: 8) {
+            let postQuote = self.createPostQuote()
+            self.dataProvider.createQuote(params: postQuote, with: nil) { [weak self] quoteResult in
+                switch quoteResult {
+                case .success(let quote):
+                    self?.currentQuote.value = quote
+                    self?.modalState.value = .CONTENT
+
+                case .failure:
+                    self?.logger?.log(.component(.accounts(.accountsDataError)))
+                    self?.modalState.value = .ERROR
+                    self?.stopQuotePolling()
+                }
+            }
+        }
+    }
+
+    func createTrade() {
+
+        self.stopQuotePolling()
+        self.modalState.value = .SUBMITING
+        self.dataProvider.createTrade(quoteGuid: (self.currentQuote.value?.guid)!) { [weak self] tradeResult in
+            switch tradeResult {
+            case .success(let quote):
+                self?.currentTrade.value = quote
+                self?.modalState.value = .SUCCESS
+
+            case .failure:
+                self?.logger?.log(.component(.accounts(.accountsDataError)))
+                self?.modalState.value = .ERROR
+            }
+        }
+    }
+
+    func dismissModal() {
+
+        self.modalState.value = .LOADING
+        self.stopQuotePolling()
+    }
+
+    func stopQuotePolling() {
+
+        self.quotePolling?.stop()
+        self.quotePolling = nil
+    }
 }

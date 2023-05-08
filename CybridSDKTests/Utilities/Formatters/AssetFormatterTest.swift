@@ -12,7 +12,7 @@ class AssetFormatterTest: XCTestCase {
 
     // MARK: USD Test
 
-    func test_forTrade_0_5_USD_to_50() {
+    func test_forInput_0_5_USD_to_50() {
 
         // -- Given
         let fiatAmount = CDecimal("0.5")
@@ -26,7 +26,7 @@ class AssetFormatterTest: XCTestCase {
         XCTAssertEqual(formatted, result)
     }
 
-    func test_forTrade_1_USD_to_100() {
+    func test_forInput_1_USD_to_100() {
 
         // -- Given
         let fiatAmount = CDecimal("1")
@@ -40,7 +40,7 @@ class AssetFormatterTest: XCTestCase {
         XCTAssertEqual(formatted, result)
     }
 
-    func test_forTrade_1_5_USD_to_150() {
+    func test_forInput_1_5_USD_to_150() {
 
         // -- Given
         let fiatAmount = CDecimal("1.5")
@@ -54,7 +54,7 @@ class AssetFormatterTest: XCTestCase {
         XCTAssertEqual(formatted, result)
     }
 
-    func test_forTrade_10_USD_to_1000() {
+    func test_forInput_10_USD_to_1000() {
 
         // -- Given
         let fiatAmount = CDecimal("10")
@@ -68,7 +68,7 @@ class AssetFormatterTest: XCTestCase {
         XCTAssertEqual(formatted, result)
     }
 
-    func test_forTrade_10_5_USD_to_1050() {
+    func test_forInput_10_5_USD_to_1050() {
 
         // -- Given
         let fiatAmount = CDecimal("10.5")
@@ -82,7 +82,7 @@ class AssetFormatterTest: XCTestCase {
         XCTAssertEqual(formatted, result)
     }
 
-    func test_forTrade_123456_7_USD_to_12345670() {
+    func test_forInput_123456_7_USD_to_12345670() {
 
         // -- Given
         let fiatAmount = CDecimal("123456.7")
@@ -166,9 +166,39 @@ class AssetFormatterTest: XCTestCase {
         XCTAssertEqual(formatted, result)
     }
 
+    // MARK: BTC Test
+
+    func test_forInput_1_to_100000000_BTC() {
+
+        // -- Given
+        let fiatAmount = CDecimal("1.00")
+        let asset = AssetBankModel.bitcoin
+        let result = "100000000"
+
+        // -- When
+        let formatted = AssetFormatter.forInput(asset, amount: fiatAmount)
+
+        // -- Then
+        XCTAssertEqual(formatted, result)
+    }
+
+    func test_forBase_maximunNumber_BTC() {
+
+        // -- Given
+        let amountToConvert = CDecimal("115792089237316195423570985008687907853269984665640564039457584007913129639935")
+        let asset = AssetBankModel.bitcoin
+        let result = "1157920892373161954235709850086879078532699846656405640394575840079131.29639935"
+
+        // -- When
+        let formatted = AssetFormatter.forBase(asset, amount: amountToConvert)
+
+        // -- Then
+        XCTAssertEqual(formatted, result)
+    }
+
     // MARK: ETH Test
 
-    func test_forTrade_0_0642180900000_to_64218090000000000_ETH() {
+    func test_forInput_0_0642180900000_to_64218090000000000_ETH() {
 
         // -- Given
         let fiatAmount = CDecimal("0.0642180900000")
@@ -182,7 +212,7 @@ class AssetFormatterTest: XCTestCase {
         XCTAssertEqual(formatted, result)
     }
 
-    func test_forTrade_0_064218090000000000000000_to_64218090000000000_ETH() {
+    func test_forInput_0_064218090000000000000000_to_64218090000000000_ETH() {
 
         // -- Given
         let fiatAmount = CDecimal("0.064218090000000000000000")
@@ -336,20 +366,6 @@ class AssetFormatterTest: XCTestCase {
         XCTAssertEqual(formatted, result)
     }
 
-    func test_forBase_maximunNumber_BTC() {
-
-        // -- Given
-        let amountToConvert = CDecimal("115792089237316195423570985008687907853269984665640564039457584007913129639935")
-        let asset = AssetBankModel.bitcoin
-        let result = "1157920892373161954235709850086879078532699846656405640394575840079131.29639935"
-
-        // -- When
-        let formatted = AssetFormatter.forBase(asset, amount: amountToConvert)
-
-        // -- Then
-        XCTAssertEqual(formatted, result)
-    }
-
     func test_forBase_maximunNumber_ETH() {
 
         // -- Given
@@ -434,5 +450,104 @@ class AssetFormatterTest: XCTestCase {
 
         // -- Then
         XCTAssertEqual(result, resultToCheck)
+    }
+
+    // MARK: Trade
+
+    func test_trade_0_5_BTC_to_USD() {
+
+        // -- Given
+        let amount = CDecimal("0.5")
+        let amountFormatted = AssetFormatter.forInput(AssetBankModel.bitcoin, amount: amount)
+        let asset = AssetBankModel.bitcoin
+        let price = SymbolPriceBankModel.btcUSD1
+
+        // -- When
+        let tradeValue = AssetFormatter.trade(
+            amount: amountFormatted,
+            cryptoAsset: asset,
+            price: price.buyPrice!,
+            base: .crypto)
+        let tradeValueCDecimal = CDecimal(tradeValue)
+        let tradeBase = AssetFormatter.forBase(AssetBankModel.usd, amount: tradeValueCDecimal)
+        let tradeFormatted = AssetFormatter.format(AssetBankModel.usd, amount: tradeBase)
+
+        // -- Then
+        XCTAssertEqual(tradeValue, "1009945")
+        XCTAssertEqual(tradeBase, "10099.45")
+        XCTAssertEqual(tradeFormatted, "$10,099.45 USD")
+
+    }
+
+    func test_trade_1_BTC_to_USD() {
+
+        // -- Given
+        let amount = CDecimal("1")
+        let amountFormatted = AssetFormatter.forInput(AssetBankModel.bitcoin, amount: amount)
+        let asset = AssetBankModel.bitcoin
+        let price = SymbolPriceBankModel.btcUSD1
+
+        // -- When
+        let tradeValue = AssetFormatter.trade(
+            amount: amountFormatted,
+            cryptoAsset: asset,
+            price: price.buyPrice!,
+            base: .crypto)
+        let tradeValueCDecimal = CDecimal(tradeValue)
+        let tradeBase = AssetFormatter.forBase(AssetBankModel.usd, amount: tradeValueCDecimal)
+        let tradeFormatted = AssetFormatter.format(AssetBankModel.usd, amount: tradeBase)
+
+        // -- Then
+        XCTAssertEqual(tradeValue, "2019891")
+        XCTAssertEqual(tradeBase, "20198.91")
+        XCTAssertEqual(tradeFormatted, "$20,198.91 USD")
+    }
+
+    func test_trade_0_00495076_BTC_to_USD() {
+
+        // -- Given
+        let amount = CDecimal("0.00495076")
+        let amountFormatted = AssetFormatter.forInput(AssetBankModel.bitcoin, amount: amount)
+        let asset = AssetBankModel.bitcoin
+        let price = SymbolPriceBankModel.btcUSD1
+
+        // -- When
+        let tradeValue = AssetFormatter.trade(
+            amount: amountFormatted,
+            cryptoAsset: asset,
+            price: price.buyPrice!,
+            base: .crypto)
+        let tradeValueCDecimal = CDecimal(tradeValue)
+        let tradeBase = AssetFormatter.forBase(AssetBankModel.usd, amount: tradeValueCDecimal)
+        let tradeFormatted = AssetFormatter.format(AssetBankModel.usd, amount: tradeBase)
+
+        // -- Then
+        XCTAssertEqual(tradeValue, "9999")
+        XCTAssertEqual(tradeBase, "99.99")
+        XCTAssertEqual(tradeFormatted, "$99.99 USD")
+    }
+
+    func test_trade_100_USD_to_BTC() {
+
+        // -- Given
+        let amount = CDecimal("100")
+        let amountFormatted = AssetFormatter.forInput(AssetBankModel.usd, amount: amount)
+        let asset = AssetBankModel.bitcoin
+        let price = SymbolPriceBankModel.btcUSD1
+
+        // -- When
+        let tradeValue = AssetFormatter.trade(
+            amount: amountFormatted,
+            cryptoAsset: asset,
+            price: price.buyPrice!,
+            base: .fiat)
+        let tradeValueCDecimal = CDecimal(tradeValue)
+        let tradeBase = AssetFormatter.forBase(AssetBankModel.bitcoin, amount: tradeValueCDecimal)
+        let tradeFormatted = AssetFormatter.format(AssetBankModel.bitcoin, amount: tradeBase)
+
+        // -- Then
+        XCTAssertEqual(tradeValue, "495076")
+        XCTAssertEqual(tradeBase, "0.00495076")
+        XCTAssertEqual(tradeFormatted, "₿0.00495076")
     }
 }

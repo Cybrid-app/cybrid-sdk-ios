@@ -148,6 +148,7 @@
 		9257E79629BB9BCA00846E12 /* BalanceUIModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9257E79529BB9BC900846E12 /* BalanceUIModelTest.swift */; };
 		9257E79929CA037E00846E12 /* TransferViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9257E79829CA037E00846E12 /* TransferViewController+Extensions.swift */; };
 		9257E79C29CADB3F00846E12 /* TransferModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9257E79B29CADB3F00846E12 /* TransferModal.swift */; };
+		925FFDB829F832BD00F7D07A /* TradeModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925FFDB729F832BD00F7D07A /* TradeModal.swift */; };
 		92635470294CEC0400660E0B /* BankAccountsViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9263546F294CEC0400660E0B /* BankAccountsViewController+Extensions.swift */; };
 		92663D09293FACB900842E30 /* IdentityVerificationWithDetailsBankModel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92663D08293FACB900842E30 /* IdentityVerificationWithDetailsBankModel+Extensions.swift */; };
 		92663D0D293FCC9500842E30 /* BankAccountsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92663D0C293FCC9500842E30 /* BankAccountsViewModel.swift */; };
@@ -438,6 +439,7 @@
 		9257E79529BB9BC900846E12 /* BalanceUIModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceUIModelTest.swift; sourceTree = "<group>"; };
 		9257E79829CA037E00846E12 /* TransferViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TransferViewController+Extensions.swift"; sourceTree = "<group>"; };
 		9257E79B29CADB3F00846E12 /* TransferModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferModal.swift; sourceTree = "<group>"; };
+		925FFDB729F832BD00F7D07A /* TradeModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeModal.swift; sourceTree = "<group>"; };
 		9263546F294CEC0400660E0B /* BankAccountsViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BankAccountsViewController+Extensions.swift"; sourceTree = "<group>"; };
 		92663D08293FACB900842E30 /* IdentityVerificationWithDetailsBankModel+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IdentityVerificationWithDetailsBankModel+Extensions.swift"; sourceTree = "<group>"; };
 		92663D0C293FCC9500842E30 /* BankAccountsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankAccountsViewModel.swift; sourceTree = "<group>"; };
@@ -894,7 +896,7 @@
 			children = (
 				92F1204F2994347A0086EE18 /* Entity */,
 				92F707CA298D8057005A93E5 /* View */,
-				0BBD0CCF28ABF8F8001DBC5F /* Modal Views */,
+				0BBD0CCF28ABF8F8001DBC5F /* Modal */,
 				0B557B932899F4DE00632A6D /* _TradeViewController.swift */,
 				0BBD0CCD28AB71B7001DBC5F /* _TradeViewModel.swift */,
 				92F707C1298C204F005A93E5 /* TradeViewController.swift */,
@@ -1056,14 +1058,15 @@
 			name = Resources;
 			sourceTree = "<group>";
 		};
-		0BBD0CCF28ABF8F8001DBC5F /* Modal Views */ = {
+		0BBD0CCF28ABF8F8001DBC5F /* Modal */ = {
 			isa = PBXGroup;
 			children = (
 				0BBD0CD028ABF905001DBC5F /* TradeConfirmationModalView.swift */,
 				0BBD0CD728AC21F1001DBC5F /* TradeSuccessModalView.swift */,
 				0BBD0CD528AC1DDC001DBC5F /* LoadingModalView.swift */,
+				925FFDB729F832BD00F7D07A /* TradeModal.swift */,
 			);
-			path = "Modal Views";
+			path = Modal;
 			sourceTree = "<group>";
 		};
 		0BBD0CD228AC0B54001DBC5F /* Modal */ = {
@@ -2123,6 +2126,7 @@
 				0BD66118286B79C500F4DA6B /* UIView+Constraints.swift in Sources */,
 				92827DAF294322AD00231772 /* BankBankModel+Extensions.swift in Sources */,
 				92C92C8B2911FC6C00B81719 /* CustomerBankModel+Extensions.swift in Sources */,
+				925FFDB829F832BD00F7D07A /* TradeModal.swift in Sources */,
 				927233EA28D244CC0080AAC4 /* AccountTradesHeaderCell.swift in Sources */,
 				0B303CE42862E5D9007BF7FF /* CybridConfig.swift in Sources */,
 				0BD660FD286B763E00F4DA6B /* ConcurrencyInterfaces.swift in Sources */,
@@ -2548,7 +2552,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = 5789WJ9F6P;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CybridSDKTestApp/Info.plist;
@@ -2565,7 +2569,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.7;
+				MARKETING_VERSION = 1.8;
 				PRODUCT_BUNDLE_IDENTIFIER = app.cybrid.CybridSDKTestApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -2581,7 +2585,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = 5789WJ9F6P;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CybridSDKTestApp/Info.plist;
@@ -2598,7 +2602,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.7;
+				MARKETING_VERSION = 1.8;
 				PRODUCT_BUNDLE_IDENTIFIER = app.cybrid.CybridSDKTestApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

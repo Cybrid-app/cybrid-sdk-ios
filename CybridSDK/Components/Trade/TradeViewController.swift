@@ -11,6 +11,7 @@ import UIKit
 public final class TradeViewController: UIViewController {
 
     public enum ViewState { case LOADING, PRICES, CONTENT }
+    public enum ModalViewState { case LOADING, CONTENT, SUBMITING, SUCCESS, ERROR }
 
     internal var tradeViewModel: TradeViewModel!
     internal var theme: Theme!
@@ -18,6 +19,8 @@ public final class TradeViewController: UIViewController {
 
     internal var componentContent = UIView()
     internal var currentState: Observable<ViewState> = .init(.LOADING)
+
+    internal var pricesScheduler = TaskScheduler()
 
     // MARK: Views
     internal var fromTextField: CYBTextField!
@@ -54,8 +57,6 @@ public final class TradeViewController: UIViewController {
         view.backgroundColor = .white
         self.initComponentContent()
         self.manageCurrentStateUI()
-
-        // self.identityVerificationViewModel.getCustomerStatus()
     }
 }
 
@@ -65,7 +66,6 @@ extension TradeViewController {
 
         // -- Component Container
         self.view.addSubview(self.componentContent)
-        // self.componentContent.backgroundColor = UIColor.red.withAlphaComponent(0.5)
         self.componentContent.constraint(attribute: .top,
                                          relatedBy: .equal,
                                          toItem: self.view,
