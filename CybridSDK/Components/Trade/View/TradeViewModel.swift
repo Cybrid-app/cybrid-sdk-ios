@@ -22,6 +22,7 @@ class TradeViewModel: NSObject, ListPricesItemDelegate {
     internal var currentAccountCounterToTrade: Observable<AccountAssetUIModel?> = .init(nil)
     internal var currentAmountInput = "0"
     internal var currentAmountWithPrice: Observable<String> = .init("0.0")
+    internal var currentAmountWithPriceError: Observable<Bool> = .init(false)
 
     // MARK: Public properties
     var uiState: Observable<TradeViewController.ViewState> = .init(.PRICES)
@@ -143,6 +144,7 @@ class TradeViewModel: NSObject, ListPricesItemDelegate {
 
     internal func calculatePreQuote() {
 
+        self.currentAmountWithPriceError.value = false
         let assetCode = currentAsset.value?.code ?? ""
         let counterAssetCode = currentCounterAsset.value?.code ?? ""
         let symbol = "\(assetCode)-\(counterAssetCode)"
@@ -159,6 +161,24 @@ class TradeViewModel: NSObject, ListPricesItemDelegate {
                 price: buyPrice,
                 base: asset?.type ?? .crypto)
             let tradeValueCDecimal = CDecimal(tradeValue)
+
+            if asset?.type == .crypto {
+                if self.segmentSelection.value == .buy {
+                    let accountValue = self.currentAccountCounterToTrade.value?.account.platformBalance
+                    let accountValueCDecimal = CDecimal(accountValue ?? "0")
+                    if tradeValueCDecimal.intValue > accountValueCDecimal.intValue {
+                        self.currentAmountWithPriceError.value = true
+                    }
+                }
+            } else {
+                let amountFormattedCDecimal = CDecimal(amountFormatted)
+                let accountValue = self.currentAccountToTrade.value?.account.platformBalance
+                let accountValueCDecimal = CDecimal(accountValue ?? "0")
+                if amountFormattedCDecimal.intValue > accountValueCDecimal.intValue {
+                    self.currentAmountWithPriceError.value = true
+                }
+            }
+
             let tradeBase = AssetFormatter.forBase(assetToConvert!, amount: tradeValueCDecimal)
             let tradeFormatted = AssetFormatter.format(assetToConvert!, amount: tradeBase)
             self.currentAmountWithPrice.value = tradeFormatted

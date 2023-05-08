@@ -140,7 +140,7 @@ extension TradeViewController {
                                      thirdMargins: UIMargins.contentMaxButtonMargin)
         self.setAmountPriceData()
 
-        // -- Action button
+        // -- Action button part 1
         self.actionButton = CYBButton(
             title: localizer.localize(with: CybridLocalizationKey.trade(.buy(.cta))),
             action: { [weak self] in
@@ -150,7 +150,20 @@ extension TradeViewController {
                 modal.disableDismiss = true
                 modal.present()
             })
-        self.actionButton.addBelow(toItem: self.flagIcon, height: 48, margins: UIMargins.contentActionButton)
+
+        // -- Error
+        let errorLabel = createSubTitleLabel(UIStrings.contentErrorLabel)
+        errorLabel.textColor = UIColor(hex: "#E91E26")
+        errorLabel.addBelow(toItem: amountPriceLabel, height: UIValues.errorLabelHeight, margins: UIMargins.contentErrorLabelMargin)
+        errorLabel.isHidden = !self.tradeViewModel.currentAmountWithPriceError.value
+        self.tradeViewModel.currentAmountWithPriceError.bind { value in
+
+            errorLabel.isHidden = !value
+            self.actionButton.isHidden = value
+        }
+
+        // -- Action button part 2
+        self.actionButton.addBelow(toItem: errorLabel, height: 48, margins: UIMargins.contentActionButton)
 
         // -- View Binds
         self.setViewBinds()
@@ -414,6 +427,7 @@ extension TradeViewController {
         static let loadingSpinnerMargin = UIEdgeInsets(top: 10, left: 10, bottom: 0, right: 10)
         static let componentRequiredButtonsHeight: CGFloat = 50
         static let switchButtonSize = CGSize(width: 14, height: 18)
+        static let errorLabelHeight: CGFloat = 20
 
         // -- Colors
         static let componentTitleColor = UIColor.black
@@ -438,6 +452,7 @@ extension TradeViewController {
         static let contentPriceLabelMargin = UIEdgeInsets(top: 17, left: 6, bottom: 0, right: 5)
         static let contentMaxButtonMargin = UIEdgeInsets(top: 17, left: 0, bottom: 0, right: 14)
         static let contentActionButton = UIEdgeInsets(top: 27, left: 13, bottom: 0, right: 13)
+        static let contentErrorLabelMargin = UIEdgeInsets(top: 0, left: 13, bottom: 0, right: 13)
     }
 
     enum UIStrings {
@@ -448,5 +463,6 @@ extension TradeViewController {
         static let contentAmount = "cybrid.tradeView.content.subtitle.amount"
         static let contentBuyButton = "cybrid.account.trade.detail.bought"
         static let contentSellButton = "cybrid.account.trade.detail.sold"
+        static let contentErrorLabel = "cybrid.tradeView.content.error"
     }
 }
