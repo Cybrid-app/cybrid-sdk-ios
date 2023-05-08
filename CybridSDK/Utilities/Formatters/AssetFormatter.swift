@@ -91,7 +91,7 @@ struct AssetFormatter {
     /// - 10.00 --> $10.00 USD
     /// - 10.50 --> $10.50 USD
     /// - 1000 --> $1,000 USD
-    /// - 90071992.54740991 --> 90,071,992.54740991 ₿
+    /// - 90071992.54740991 --> ₿90,071,992.54740991
     /// Parameters:
     ///  - asset: AssetBankModel to take the decimals and symbol ($)
     ///  - amount: String of the amount to be formatted
