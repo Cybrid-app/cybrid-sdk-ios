@@ -33,11 +33,7 @@
 "cybrid.trade.confirmationModal.transactionFee" = "Transaction Fee";
 "cybrid.trade.confirmationModal.confirm" = "Confirm";
 "cybrid.trade.confirmationModal.cancel" = "Cancel";
-
-// Trade Loading Modal
 "cybrid.trade.loadingModal.processingMessage" = "Submitting Crypto Order";
-
-// Trade Success Modal
 "cybrid.trade.successModal.title" = "Order submitted";
 "cybrid.trade.successModal.subtitle" = "Your order has been placed";
 "cybrid.trade.successModal.transactionId" = "Transaction ID:";

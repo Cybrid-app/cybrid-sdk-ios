@@ -6,29 +6,24 @@
 
 */
 
-// TradeView Component
-"cybrid.tradeView.loading.title" = "Chargement";
-"cybrid.tradeView.content.subtitle.from" = "Depuis:";
-"cybrid.tradeView.content.subtitle.to" = "Pour:";
-"cybrid.tradeView.content.subtitle.amount" = "Montante";
-
 // Crypto Price List
 "cybrid.cryptoPriceList.headerSearchPlaceholder" = "Chercher";
 "cybrid.cryptoPriceList.headerCurrency" = "Devise";
 "cybrid.cryptoPriceList.headerPrice" = "Le prix";
 
-// Trade Buy
+// Component: Trade
+"cybrid.tradeView.loading.title" = "Chargement";
+"cybrid.tradeView.content.subtitle.from" = "Depuis:";
+"cybrid.tradeView.content.subtitle.to" = "Pour:";
+"cybrid.tradeView.content.subtitle.amount" = "Montante";
+"cybrid.tradeView.content.error" = "Fonds insuffisants";
 "cybrid.trade.buy.title" = "ACHETER";
 "cybrid.trade.buy.currency" = "Devise";
 "cybrid.trade.buy.selectCurrency" = "Sélectionnez la Devise";
 "cybrid.trade.buy.amount" = "Montant";
 "cybrid.trade.buy.cta" = "Acheter";
-
-// Trade Sell
 "cybrid.trade.sell.title" = "VENDRE";
 "cybrid.trade.sell.cta" = "Vendre";
-
-// Trade Confirmation Modal
 "cybrid.trade.confirmationModal.title" = "Devis de Commande";
 "cybrid.trade.confirmationModal.subtitle" = "Les prix sont en temps réel. Les tarifs s'actualisent automatiquement.";
 "cybrid.trade.confirmationModal.purchaseAmount" = "Montant des achats";
@@ -38,11 +33,7 @@
 "cybrid.trade.confirmationModal.transactionFee" = "Frais de transaction";
 "cybrid.trade.confirmationModal.confirm" = "Confirmer";
 "cybrid.trade.confirmationModal.cancel" = "Annuler";
-
-// Trade Loading Modal
 "cybrid.trade.loadingModal.processingMessage" = "Soumettre une commande Crypto";
-
-// Trade Success Modal
 "cybrid.trade.successModal.title" = "Commande passée";
 "cybrid.trade.successModal.subtitle" = "Votre commande a été enregistrée";
 "cybrid.trade.successModal.transactionId" = "ID de transaction:";
