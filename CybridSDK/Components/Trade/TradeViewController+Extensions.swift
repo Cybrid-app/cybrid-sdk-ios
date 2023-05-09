@@ -118,10 +118,13 @@ extension TradeViewController {
         amount.addBelow(toItem: toTextField, height: 16, margins: UIMargins.contentAmountMargin)
 
         // -- Amount UITextField
-        let swithButton = self.createSwitchButton()
-        amountTextField = self.createAmountField(switchButton: swithButton)
+        let switchButton = self.createSwitchButton()
+        switchButton.accessibilityIdentifier = "TradeComponent_SWitchButton"
+
+        self.amountTextField = self.createAmountField(switchButton: switchButton)
+        self.amountTextField.accessibilityIdentifier = "TradeComponent_AmountField"
         self.setAmountFieldData()
-        amountTextField.addBelow(toItem: amount, height: 44, margins: UIMargins.contentAmountFieldMargin)
+        self.amountTextField.addBelow(toItem: amount, height: 44, margins: UIMargins.contentAmountFieldMargin)
 
         // -- Flag, Amount calculated and MAX button
         self.amountPriceLabel = createSubTitleLabel()
@@ -150,6 +153,7 @@ extension TradeViewController {
                 modal.disableDismiss = true
                 modal.present()
             })
+        self.actionButton.accessibilityIdentifier = "TradeComponent_ActionButton"
 
         // -- Error
         let errorLabel = createSubTitleLabel(UIStrings.contentErrorLabel)

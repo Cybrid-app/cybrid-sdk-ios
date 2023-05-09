@@ -125,6 +125,7 @@ extension TransferViewController {
 
         // -- Amount Field
         self.amountField = self.createAmountField()
+        self.amountField.accessibilityIdentifier = "TransferComponent_AmountField"
         self.setAmountFieldData(field: self.amountField)
         self.amountField.addBelow(toItem: amount, height: UIValues.accountsAmountFieldHeight, margins: UIValues.accountsAmountFieldMargin)
 
@@ -143,7 +144,6 @@ extension TransferViewController {
                 }
             })
         actionButton.addBelow(toItem: amountField, height: 48, margins: UIValues.accountsActionButtonMargin)
-
     }
 
     internal func transferView_Warning() {
