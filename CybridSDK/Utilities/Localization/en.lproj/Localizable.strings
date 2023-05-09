@@ -160,3 +160,4 @@
 "cybrid.transfer.modal.error.desc.text" = "There was an error accessing your bank account. Please try again or contact support.";
 "cybrid.transfer.modal.error.doneButton.text" = "Done";
 "cybrid.transfer.errorMessage.text" = "Some of your accounts have a problem, please reconnect it.";
+"cybrid.transfer.modal.success.title" = "Transfer submitted";

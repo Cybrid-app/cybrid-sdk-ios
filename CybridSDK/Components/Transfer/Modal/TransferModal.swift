@@ -224,49 +224,47 @@ extension TransferModal {
 
     internal func transferViewModal_Details() {
 
-        // -- Title
-        let titleKey = transferViewModel.isWithdraw.value ? UIStrings.detailsWithdrawTitleString : UIStrings.detailsDepositTitleString
-        let title = self.createTitle(key: titleKey)
-        title.asFirstIn(self.componentContent, height: UIValues.contentTitleHeight, margins: UIValues.contentTitleMargins)
+        self.modifyHeight(height: UIValues.modalSuccessHeightSize)
 
-        // -- Amount name/value
-        let amountTitle = self.createAccountTitle(key: UIStrings.contentAmountString)
-        amountTitle.addBelow(toItem: title, height: UIValues.contentAmountHeight, margins: UIValues.contentAmountMargins)
+        // -- Icon
+        let image = UIImage(named: "kyc_verified", in: Bundle(for: Self.self), with: nil)
+        let icon = UIImageView(image: image)
+        icon.translatesAutoresizingMaskIntoConstraints = false
+        icon.asFirstInCenter(self.componentContent, size: UIValues.successIconSize, margins: UIValues.successIconMargins)
 
+        // -- Value
         let amountValueString = self.transferViewModel.currentTransfer.value?.amount
         let amountBase = AssetFormatter.forBase(Cybrid.fiat, amount: CDecimal(amountValueString!))
         let amountBaseFormatted = AssetFormatter.format(Cybrid.fiat, amount: amountBase)
-        let amountValue = self.createAccountValue(value: amountBaseFormatted)
-        amountValue.addBelow(toItem: amountTitle, height: UIValues.contentAmountValueHeight, margins: UIValues.contentAmountValueMargins)
+        let amountValue = UILabel()
+        amountValue.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+        amountValue.translatesAutoresizingMaskIntoConstraints = false
+        amountValue.font = UIValues.successBigTitleFont
+        amountValue.textColor = UIValues.successTitleColor
+        amountValue.textAlignment = .center
+        amountValue.text = amountBaseFormatted
+        amountValue.addBelow(toItem: icon, height: UIValues.successValueTitleHeight, margins: UIValues.successValueTitleMargins)
 
-        // -- Deposit/Withdraw date value
-        let dateKey = transferViewModel.isWithdraw.value ? UIStrings.contentWithdrawDateString : UIStrings.contentDepositDateString
-        let dateTitle = self.createAccountTitle(key: dateKey)
-        dateTitle.addBelow(toItem: amountValue, height: UIValues.contentDepositDateHeight, margins: UIValues.contentDepositDateMargins)
+        // -- Title
+        let title = UILabel()
+        title.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+        title.translatesAutoresizingMaskIntoConstraints = false
+        title.font = UIValues.successTitleFont
+        title.textColor = UIValues.successTitleColor
+        title.textAlignment = .center
+        title.text = localizer.localize(with: UIStrings.successTitle)
+        title.addBelow(toItem: amountValue, height: UIValues.successTitleHeight, margins: UIValues.successTitleMargins)
 
-        let dateValueString = getFormattedDate(Date(), format: "MMMM dd, YYYY")
-        let dateValue = self.createAccountValue(value: dateValueString)
-        dateValue.addBelow(toItem: dateTitle, height: UIValues.contentDateValueHeight, margins: UIValues.contentDateValueMargins)
-
-        // -- From/To
-        let fromToKey = transferViewModel.isWithdraw.value ? UIStrings.contentToString : UIStrings.contentFromString
-        let fromToTitle = self.createAccountTitle(key: fromToKey)
-        fromToTitle.addBelow(toItem: dateValue, height: UIValues.contentFromToHeight, margins: UIValues.contentFromToMargins)
-
-        let accoutnName = self.transferViewModel.getAccountNameInFormat(self.transferViewModel.currentExternalBankAccount.value)
-        let fromToValue = self.createAccountValue(value: accoutnName)
-        fromToValue.addBelow(toItem: fromToTitle, height: UIValues.contentFromToValueHeight, margins: UIValues.contentFromToValueMargins)
-
-        // -- Continue Button
-        let confirmButtonText = localizer.localize(with: UIStrings.detailsButtonString)
-        let confirmButton = CYBButton(title: confirmButtonText,
+        // -- Button
+        let confirmText = localizer.localize(with: UIStrings.detailsButtonString)
+        let confirmButton = CYBButton(title: confirmText,
                                       theme: Cybrid.theme,
-                                      action: {
+                                      action: { [weak self] in
 
-            self.transferViewModel.fetchAccountsInPolling()
-            self.dismiss(animated: true)
+            self?.transferViewModel.fetchAccountsInPolling()
+            self?.dismiss(animated: true)
         })
-        confirmButton.addBelow(toItem: fromToValue, height: 48, margins: UIValues.contentButtonMargins)
+        confirmButton.addBelow(toItem: title, height: UIValues.successConfirmButtonHeight, margins: UIValues.successConfirmButtonMargins)
     }
 
     internal func transferViewModal_Error() {
@@ -356,6 +354,7 @@ extension TransferModal {
         // -- Sizes
         static let modalHeightSize: CGFloat = 374
         static let modalErrorHeightSize: CGFloat = 260
+        static let modalSuccessHeightSize: CGFloat = 290
         static let loadingTitleHeight: CGFloat = 20
         static let loadingSpinnerHeight: CGFloat = 30
         static let contentTitleHeight: CGFloat = 28
@@ -368,6 +367,10 @@ extension TransferModal {
         static let errorIconSize = CGSize(width: 24, height: 24)
         static let errorTitleHeight: CGFloat = 28
         static let errorDescHeight: CGFloat = 50
+        static let successIconSize = CGSize(width: 80, height: 80)
+        static let successValueTitleHeight: CGFloat = 35
+        static let successTitleHeight: CGFloat = 30
+        static let successConfirmButtonHeight: CGFloat = 48
 
         // -- Fonts
         static let loadingTitleFont = UIFont.make(ofSize: 17, weight: .bold)
@@ -376,12 +379,15 @@ extension TransferModal {
         static let accountValueFont = UIFont.make(ofSize: 14)
         static let errorTitleFont = UIFont.make(ofSize: 22, weight: .medium)
         static let errorDescFont = UIFont.make(ofSize: 16)
+        static let successBigTitleFont = UIFont.make(ofSize: 22)
+        static let successTitleFont = UIFont.make(ofSize: 18)
 
         // -- Colors
         static let loadingTitleColor = UIColor.black
         static let titleColor = UIColor.black
         static let accountTitleColor = UIColor(hex: "#424242")
         static let accountValueColor = UIColor.black
+        static let successTitleColor = UIColor(hex: "#424242")
 
         // -- Margins
         static let loadingTitleMargin = UIEdgeInsets(top: 40, left: 10, bottom: 0, right: 10)
@@ -398,6 +404,10 @@ extension TransferModal {
         static let errorTitleMargins = UIEdgeInsets(top: 30, left: 10, bottom: 0, right: 24)
         static let errorDescMargins = UIEdgeInsets(top: 20, left: 24, bottom: 0, right: 24)
         static let errorDoneButtonMargins = UIEdgeInsets(top: 20, left: 24, bottom: 0, right: 24)
+        static let successIconMargins = UIEdgeInsets(top: 15, left: 0, bottom: 0, right: 0)
+        static let successValueTitleMargins = UIEdgeInsets(top: 10, left: 24, bottom: 0, right: 24)
+        static let successTitleMargins = UIEdgeInsets(top: 5, left: 24, bottom: 0, right: 24)
+        static let successConfirmButtonMargins = UIEdgeInsets(top: 20, left: 24, bottom: 0, right: 24)
     }
 
     enum UIStrings {
@@ -420,5 +430,7 @@ extension TransferModal {
         static let errorTitleText = "cybrid.transfer.modal.error.title.text"
         static let errorDescText = "cybrid.transfer.modal.error.desc.text"
         static let errorDoneButtonText = "cybrid.transfer.modal.error.doneButton.text"
+
+        static let successTitle = "cybrid.transfer.modal.success.title"
     }
 }
