@@ -18,24 +18,34 @@ class RootViewController: UIViewController {
     let viewController = TradeViewController()
     navigationController?.pushViewController(viewController, animated: true)
   }
-  
+
   @IBAction func didTapTransfersButton(_ sender: Any) {
     let viewController = TransferViewController()
     navigationController?.pushViewController(viewController, animated: true)
   }
-  
+
   @IBAction func didTapAccountsButton(_ sender: Any) {
     let viewController = AccountsViewController()
     navigationController?.pushViewController(viewController, animated: true)
   }
-  
+
   @IBAction func didTapKYCButton(_ sender: Any) {
     let viewController = IdentityVerificationViewController()
     navigationController?.pushViewController(viewController, animated: true)
   }
-  
+
   @IBAction func didTapBankAccountsButton(_ sender: Any) {
     let viewController = BankAccountsViewController()
     navigationController?.pushViewController(viewController, animated: true)
+  }
+  
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    navigationController?.setNavigationBarHidden(true, animated: animated)
+  }
+
+  override func viewWillDisappear(_ animated: Bool) {
+    super.viewWillDisappear(animated)
+    navigationController?.setNavigationBarHidden(false, animated: animated)
   }
 }
