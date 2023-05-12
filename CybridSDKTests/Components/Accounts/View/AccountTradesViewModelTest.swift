@@ -131,7 +131,7 @@ class AccountTradesViewModelTests: XCTestCase {
             dataProvider: self.dataProvider,
             logger: nil)
         let controller = AccountTradesViewController(
-            balance: balance!,
+            balance: balance,
             accountsViewModel: accountsViewModel)
         let tableView = controller.tradesTable
         let viewModel = AccountTradesViewModel(
@@ -162,7 +162,7 @@ class AccountTradesViewModelTests: XCTestCase {
             dataProvider: self.dataProvider,
             logger: nil)
         let controller = AccountTradesViewController(
-            balance: balance!,
+            balance: balance,
             accountsViewModel: accountsViewModel)
         let tableView = controller.tradesTable
         let viewModel = AccountTradesViewModel(
@@ -195,7 +195,7 @@ class AccountTradesViewModelTests: XCTestCase {
             dataProvider: self.dataProvider,
             logger: nil)
         let controller = AccountTradesViewController(
-            balance: balance!,
+            balance: balance,
             accountsViewModel: accountsViewModel)
         let tableView = controller.tradesTable
         let viewModel = AccountTradesViewModel(
@@ -228,7 +228,7 @@ class AccountTradesViewModelTests: XCTestCase {
             dataProvider: self.dataProvider,
             logger: nil)
         let controller = AccountTradesViewController(
-            balance: balance!,
+            balance: balance,
             accountsViewModel: accountsViewModel)
         let tableView = controller.tradesTable
         let viewModel = AccountTradesViewModel(

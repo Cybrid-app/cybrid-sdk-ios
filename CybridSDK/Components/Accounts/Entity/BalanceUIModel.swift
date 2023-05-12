@@ -27,7 +27,7 @@ struct BalanceUIModel: Equatable {
     let buyPriceFormatted: String
     let accountAssetURL: String
 
-    init?(
+    init(
         account: AccountBankModel,
         asset: AssetBankModel?, // BTC
         counterAsset: AssetBankModel?, // USD

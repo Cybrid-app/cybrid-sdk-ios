@@ -85,10 +85,42 @@ class AccountsViewModelTest: XCTestCase {
         XCTAssertFalse(viewModel.balances.value.isEmpty)
     }
 
-    func test_buildModelList() {
+    func test_createAccountsFormatted_With_Default_Case() {
 
         // -- Given
         let viewModel = self.createViewModel()
+
+        // -- When
+        viewModel.assets = AssetBankModel.cryptoAssets
+        viewModel.accounts = AccountBankModel.mockWithBackstopped
+        viewModel.prices = .mockPrices
+        viewModel.createAccountsFormatted()
+
+        // -- Then
+        XCTAssertFalse(viewModel.balances.value.isEmpty)
+        XCTAssertTrue(viewModel.balances.value.count == 3)
+    }
+
+    func test_createAccountsFormatted_Order_Trading_Accounts() {
+
+        // -- Given
+        let viewModel = self.createViewModel()
+
+        // -- When
+        viewModel.assets = AssetBankModel.cryptoAssets
+        viewModel.accounts = AccountBankModel.mockWithBackstopped
+        viewModel.prices = .mockPrices
+        viewModel.createAccountsFormatted()
+
+        // -- Then
+        XCTAssertFalse(viewModel.balances.value.isEmpty)
+        XCTAssertTrue(viewModel.balances.value.count == 3)
+        XCTAssertTrue(viewModel.balances.value[0].account.asset == "USD")
+        XCTAssertTrue(viewModel.balances.value[1].account.asset == "BTC")
+        XCTAssertTrue(viewModel.balances.value[2].account.asset == "ETH")
+    }
+
+    func test_buildModelList() {
 
         // -- When
         let balances = self.createBalanceList()
@@ -177,7 +209,7 @@ class AccountsViewModelTest: XCTestCase {
         tableView.reloadData()
 
         // -- Then
-        XCTAssertTrue(viewModel.tableView(tableView, cellForRowAt: indexPath).isKind(of: AccountsCell.self))
+        XCTAssertTrue(viewModel.tableView(tableView, cellForRowAt: indexPath).isKind(of: AccountsFiatCell.self))
     }
 
     func test_TableView_didSelectRowAtIndex() throws {

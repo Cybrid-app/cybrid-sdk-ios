@@ -67,7 +67,7 @@ class AccountTransfersViewModelTest: XCTestCase {
             asset: AssetBankModel.bitcoin,
             counterAsset: AssetBankModel.usd,
             price: SymbolPriceBankModel.btcUSD1)
-        let controller = AccountTransfersViewController(balance: balance!)
+        let controller = AccountTransfersViewController(balance: balance)
         let tableView = controller.transfersTable
         let viewModel = AccountTransfersViewModel(
             cellProvider: controller,
@@ -91,7 +91,7 @@ class AccountTransfersViewModelTest: XCTestCase {
             asset: AssetBankModel.bitcoin,
             counterAsset: AssetBankModel.usd,
             price: SymbolPriceBankModel.btcUSD1)
-        let controller = AccountTransfersViewController(balance: balance!)
+        let controller = AccountTransfersViewController(balance: balance)
         let tableView = controller.transfersTable
         let viewModel = AccountTransfersViewModel(
             cellProvider: controller,
@@ -117,7 +117,7 @@ class AccountTransfersViewModelTest: XCTestCase {
             asset: AssetBankModel.bitcoin,
             counterAsset: AssetBankModel.usd,
             price: SymbolPriceBankModel.btcUSD1)
-        let controller = AccountTransfersViewController(balance: balance!)
+        let controller = AccountTransfersViewController(balance: balance)
         let tableView = controller.transfersTable
         let viewModel = AccountTransfersViewModel(
             cellProvider: controller,
