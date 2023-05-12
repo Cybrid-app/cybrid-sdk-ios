@@ -66,6 +66,7 @@ extension TransferViewController {
         let balance = UILabel()
         balance.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         balance.translatesAutoresizingMaskIntoConstraints = false
+        balance.accessibilityIdentifier = "TrasnferComponent_Balance"
         balance.sizeToFit()
         balance.font = UIValues.accountsBalanceFont
         balance.textColor = UIColor.black

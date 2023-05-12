@@ -162,20 +162,21 @@ class TradeViewModel: NSObject, ListPricesItemDelegate {
                 base: asset?.type ?? .crypto)
             let tradeValueCDecimal = CDecimal(tradeValue)
 
-            if asset?.type == .crypto {
-                if self.segmentSelection.value == .buy {
+            // -- Founds validation
+            if self.segmentSelection.value == .buy {
+                if asset?.type == .crypto {
                     let accountValue = self.currentAccountCounterToTrade.value?.account.platformBalance
                     let accountValueCDecimal = CDecimal(accountValue ?? "0")
                     if tradeValueCDecimal.intValue > accountValueCDecimal.intValue {
                         self.currentAmountWithPriceError.value = true
                     }
-                }
-            } else {
-                let amountFormattedCDecimal = CDecimal(amountFormatted)
-                let accountValue = self.currentAccountToTrade.value?.account.platformBalance
-                let accountValueCDecimal = CDecimal(accountValue ?? "0")
-                if amountFormattedCDecimal.intValue > accountValueCDecimal.intValue {
-                    self.currentAmountWithPriceError.value = true
+                } else {
+                    let amountFormattedCDecimal = CDecimal(amountFormatted)
+                    let accountValue = self.currentAccountToTrade.value?.account.platformBalance
+                    let accountValueCDecimal = CDecimal(accountValue ?? "0")
+                    if amountFormattedCDecimal.intValue > accountValueCDecimal.intValue {
+                        self.currentAmountWithPriceError.value = true
+                    }
                 }
             }
 
