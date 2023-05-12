@@ -43,9 +43,9 @@ class BalanceUIModelTest: XCTestCase {
             price: price)
 
         // -- Then
-        XCTAssertEqual(balance?.accountBalance.value, BigDecimal(0).value)
-        XCTAssertEqual(balance?.accountAvailable.value, BigDecimal(0).value)
-        XCTAssertEqual(balance?.buyPriceFormatted, "₿0.00000000")
+        XCTAssertEqual(balance.accountBalance.value, BigDecimal(0).value)
+        XCTAssertEqual(balance.accountAvailable.value, BigDecimal(0).value)
+        XCTAssertEqual(balance.buyPriceFormatted, "₿0.00000000")
     }
 
     func test_init_with_undefined() {
@@ -80,9 +80,9 @@ class BalanceUIModelTest: XCTestCase {
             price: price)
 
         // -- Then
-        XCTAssertEqual(balance?.accountBalance.value, BigDecimal(0).value)
-        XCTAssertEqual(balance?.accountAvailable.value, BigDecimal(0).value)
-        XCTAssertEqual(balance?.buyPriceFormatted, "₿0.00")
-        XCTAssertEqual(balance?.accountAssetURL, "https://images.cybrid.xyz/sdk/assets/pdf/color/.pdf")
+        XCTAssertEqual(balance.accountBalance.value, BigDecimal(0).value)
+        XCTAssertEqual(balance.accountAvailable.value, BigDecimal(0).value)
+        XCTAssertEqual(balance.buyPriceFormatted, "₿0.00")
+        XCTAssertEqual(balance.accountAssetURL, "https://images.cybrid.xyz/sdk/assets/pdf/color/.pdf")
     }
 }

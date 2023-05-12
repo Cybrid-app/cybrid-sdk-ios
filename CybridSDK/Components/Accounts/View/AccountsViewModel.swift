@@ -45,7 +45,6 @@ class AccountsViewModel: NSObject {
             case .success(let accountsList):
                 self?.logger?.log(.component(.accounts(.accountsDataFetching)))
                 self?.accounts = accountsList.objects
-
                 self?.pricesPolling = Polling { [self] in
                     self?.getPricesList()
                 }
@@ -80,23 +79,42 @@ class AccountsViewModel: NSObject {
 
         if !self.assets.isEmpty && !self.accounts.isEmpty && !self.prices.isEmpty {
 
-            if let list = self.buildModelList(
-                assets: self.assets,
-                accounts: self.accounts,
-                prices: self.prices) {
-
-                self.balances.value = list
-                self.calculateTotalBalance()
+            // Dividing accounts in fiat and trading
+            var fiatAccounts: [AccountBankModel] = []
+            var tradingAccounts: [AccountBankModel] = []
+            for account in self.accounts {
+                switch account.type {
+                case .fiat:
+                    fiatAccounts.append(account)
+                case .trading:
+                    tradingAccounts.append(account)
+                default:
+                    ()
+                }
             }
+            tradingAccounts = tradingAccounts.sorted(by: { $0.asset! < $1.asset! })
+
+            var fiatList: [BalanceUIModel] = self.buildModelList(
+                assets: self.assets,
+                accounts: fiatAccounts,
+                prices: self.prices)
+            let tradingList: [BalanceUIModel] = self.buildModelList(
+                assets: self.assets,
+                accounts: tradingAccounts,
+                prices: self.prices)
+
+            fiatList.append(contentsOf: tradingList)
+            self.balances.value = fiatList
+            self.calculateTotalBalance()
         }
     }
 
     internal func buildModelList(assets: [AssetBankModel],
                                  accounts: [AccountBankModel],
-                                 prices: [SymbolPriceBankModel]) -> [BalanceUIModel]? {
+                                 prices: [SymbolPriceBankModel]) -> [BalanceUIModel] {
 
         return accounts.compactMap { account in
-            
+
             let fiatCode = Cybrid.fiat.code
             let code = account.asset!
             let symbol = "\(code)-\(fiatCode)"

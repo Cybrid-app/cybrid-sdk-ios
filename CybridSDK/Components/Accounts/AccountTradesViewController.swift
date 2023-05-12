@@ -120,7 +120,7 @@ extension AccountTradesViewController {
         balanceFiatValueView.setAttributedText(mainText: balance.accountBalanceInFiatFormatted,
                                                mainTextFont: UIValues.balanceFiatValueFont,
                                                mainTextColor: UIValues.balanceFiatValueColor,
-                                               attributedText: balance.asset?.code ?? "",
+                                               attributedText: balance.counterAsset?.code ?? "",
                                                attributedTextFont: UIValues.balanceFiatValueCodeFont,
                                                attributedTextColor: UIValues.balanceFiatValueCodeColor)
         balanceFiatValueView.addBelow(

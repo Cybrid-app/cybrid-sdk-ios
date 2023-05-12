@@ -57,6 +57,19 @@ extension AccountBankModel {
         state: .created
     )
 
+    static let tradingETH = AccountBankModel(
+        type: .trading,
+        guid: "GUID",
+        createdAt: Date(),
+        asset: "ETH",
+        name: "ETH-USD",
+        bankGuid: "BANK_GUID",
+        customerGuid: "CUSTOMER_GUID",
+        platformBalance: "200000000",
+        platformAvailable: "2000000000",
+        state: .created
+    )
+
     static let tradingBalanceNil = AccountBankModel(
         type: .trading,
         guid: "GUID",
@@ -122,6 +135,19 @@ extension AccountBankModel {
         state: .created
     )
 
+    static let backstopped = AccountBankModel(
+        type: .backstopped,
+        guid: "GUID",
+        createdAt: Date(),
+        asset: "USD",
+        name: "USD",
+        bankGuid: "BANK_GUID",
+        customerGuid: "CUSTOMER_GUID",
+        platformBalance: "200",
+        platformAvailable: "200",
+        state: .created
+    )
+
     static let mock = [
         AccountBankModel.trading,
         AccountBankModel.fiat,
@@ -136,5 +162,12 @@ extension AccountBankModel {
             platformAvailable: "2000000000",
             state: .created
         )
+    ]
+
+    static let mockWithBackstopped = [
+        AccountBankModel.tradingETH,
+        AccountBankModel.trading,
+        AccountBankModel.fiat,
+        AccountBankModel.backstopped
     ]
 }
