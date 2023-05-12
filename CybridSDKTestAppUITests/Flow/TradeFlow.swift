@@ -30,11 +30,11 @@ class TradeFlow: XCTestCase {
         demoMode.tap()
     }
     
-    func depositFounds() {
+    func depositFunds() {
         
         // --
-        let foundsToAdd = "50"
-        let foundsFormatted = "$50.00 USD"
+        let fundsToAdd = "50"
+        let fundsFormatted = "$50.00 USD"
         
         // -- Get Trade Component and tap
         let transferComponent = app.staticTexts["Transfer Component"]
@@ -56,7 +56,7 @@ class TradeFlow: XCTestCase {
         let amountField = app.textFields["TransferComponent_AmountField"]
         if amountField.waitForExistence(timeout: 6) {
             tapElementAndWaitForKeyboardToAppear(amountField)
-            amountField.typeText(foundsToAdd)
+            amountField.typeText(fundsToAdd)
         }
         
         let continueButton = app.buttons["Continue"]
@@ -73,7 +73,7 @@ class TradeFlow: XCTestCase {
         }
         
         // -- Amount
-        let amountTitle = app.staticTexts[foundsFormatted]
+        let amountTitle = app.staticTexts[fundsFormatted]
         if amountTitle.waitForExistence(timeout: 4) {
             XCTAssertTrue(amountTitle.exists)
         }
@@ -86,10 +86,10 @@ class TradeFlow: XCTestCase {
         
         // -- Transfer Modal: Details
         
-        // -- Founds
-        let foundsTitle = app.staticTexts[foundsFormatted]
-        if foundsTitle.waitForExistence(timeout: 6) {
-            XCTAssertTrue(foundsTitle.exists)
+        // -- Funds
+        let fundsTitle = app.staticTexts[fundsFormatted]
+        if fundsTitle.waitForExistence(timeout: 6) {
+            XCTAssertTrue(fundsTitle.exists)
         }
         
         // -- Title
@@ -108,7 +108,7 @@ class TradeFlow: XCTestCase {
         self.returnTap()
     }
     
-    func withdrawFounds() {
+    func withdrawFunds() {
         
         // -- Get Trade Component and tap
         let transferComponent = app.staticTexts["Transfer Component"]
@@ -116,7 +116,7 @@ class TradeFlow: XCTestCase {
             transferComponent.tap()
         }
         
-        // -- Get how many founds in account
+        // -- Get the balance in the account
         let balanceFormatted = app.staticTexts["TrasnferComponent_Balance"].label
         var balance = balanceFormatted.replacingOccurrences(of: "$", with: "")
         balance = balance.replacingOccurrences(of: " USD", with: "")
@@ -186,8 +186,8 @@ class TradeFlow: XCTestCase {
     func trade_buy_BTC() {
         
         // --
-        let foundsToTrade = "50"
-        let foundsToTradeFormatted = "$50.00 USD"
+        let fundsToTrade = "50"
+        let fundsToTradeFormatted = "$50.00 USD"
         
         // -- Get Trade Component and tap
         let transferComponent = app.staticTexts["Trade Component"]
@@ -221,7 +221,7 @@ class TradeFlow: XCTestCase {
         let amountField = app.textFields["TradeComponent_AmountField"]
         if amountField.waitForExistence(timeout: 2) {
             tapElementAndWaitForKeyboardToAppear(amountField)
-            amountField.typeText(foundsToTrade)
+            amountField.typeText(fundsToTrade)
         }
         //dismissKeyboardIfPresent()
         
@@ -240,7 +240,7 @@ class TradeFlow: XCTestCase {
         }
         
         // -- Amount
-        let amountTitle = app.staticTexts[foundsToTradeFormatted]
+        let amountTitle = app.staticTexts[fundsToTradeFormatted]
         if amountTitle.waitForExistence(timeout: 4) {
             XCTAssertTrue(amountTitle.exists)
         }
@@ -271,7 +271,7 @@ class TradeFlow: XCTestCase {
     func trade_sell_BTC() {
         
         // --
-        let foundsToTrade = "50"
+        let fundsToTrade = "50"
         
         // -- Get Trade Component and tap
         let transferComponent = app.staticTexts["Trade Component"]
@@ -307,7 +307,7 @@ class TradeFlow: XCTestCase {
         let amountField = app.textFields["TradeComponent_AmountField"]
         if amountField.waitForExistence(timeout: 2) {
             tapElementAndWaitForKeyboardToAppear(amountField)
-            amountField.typeText(foundsToTrade)
+            amountField.typeText(fundsToTrade)
         }
         
         // -- Trigger action (buy/sell)
@@ -350,8 +350,8 @@ class TradeFlow: XCTestCase {
     func trade_buy_ETH() {
         
         // --
-        let foundsToTrade = "50"
-        let foundsToTradeFormatted = "$50.00 USD"
+        let fundsToTrade = "50"
+        let fundsToTradeFormatted = "$50.00 USD"
         
         // -- Get Trade Component and tap
         let transferComponent = app.staticTexts["Trade Component"]
@@ -385,7 +385,7 @@ class TradeFlow: XCTestCase {
         let amountField = app.textFields["TradeComponent_AmountField"]
         if amountField.waitForExistence(timeout: 2) {
             tapElementAndWaitForKeyboardToAppear(amountField)
-            amountField.typeText(foundsToTrade)
+            amountField.typeText(fundsToTrade)
         }
         //dismissKeyboardIfPresent()
         
@@ -404,7 +404,7 @@ class TradeFlow: XCTestCase {
         }
         
         // -- Amount
-        let amountTitle = app.staticTexts[foundsToTradeFormatted]
+        let amountTitle = app.staticTexts[fundsToTradeFormatted]
         if amountTitle.waitForExistence(timeout: 4) {
             XCTAssertTrue(amountTitle.exists)
         }
@@ -435,7 +435,7 @@ class TradeFlow: XCTestCase {
     func trade_sell_ETH() {
         
         // --
-        let foundsToTrade = "50"
+        let fundsToTrade = "50"
         
         // -- Get Trade Component and tap
         let transferComponent = app.staticTexts["Trade Component"]
@@ -471,7 +471,7 @@ class TradeFlow: XCTestCase {
         let amountField = app.textFields["TradeComponent_AmountField"]
         if amountField.waitForExistence(timeout: 2) {
             tapElementAndWaitForKeyboardToAppear(amountField)
-            amountField.typeText(foundsToTrade)
+            amountField.typeText(fundsToTrade)
         }
         
         // -- Trigger action (buy/sell)
@@ -514,8 +514,8 @@ class TradeFlow: XCTestCase {
     func trade_buy_USDC() {
         
         // --
-        let foundsToTrade = "50"
-        let foundsToTradeFormatted = "$50.00 USD"
+        let fundsToTrade = "50"
+        let fundsToTradeFormatted = "$50.00 USD"
         
         // -- Get Trade Component and tap
         let transferComponent = app.staticTexts["Trade Component"]
@@ -549,7 +549,7 @@ class TradeFlow: XCTestCase {
             let amountField = app.textFields["TradeComponent_AmountField"]
             if amountField.waitForExistence(timeout: 2) {
                 tapElementAndWaitForKeyboardToAppear(amountField)
-                amountField.typeText(foundsToTrade)
+                amountField.typeText(fundsToTrade)
             }
             //dismissKeyboardIfPresent()
             
@@ -568,7 +568,7 @@ class TradeFlow: XCTestCase {
             }
             
             // -- Amount
-            let amountTitle = app.staticTexts[foundsToTradeFormatted]
+            let amountTitle = app.staticTexts[fundsToTradeFormatted]
             if amountTitle.waitForExistence(timeout: 4) {
                 XCTAssertTrue(amountTitle.exists)
             }
@@ -605,8 +605,8 @@ class TradeFlow: XCTestCase {
     func trade_buy_SOL() {
         
         // --
-        let foundsToTrade = "50"
-        let foundsToTradeFormatted = "$50.00 USD"
+        let fundsToTrade = "50"
+        let fundsToTradeFormatted = "$50.00 USD"
         
         // -- Get Trade Component and tap
         let transferComponent = app.staticTexts["Trade Component"]
@@ -640,7 +640,7 @@ class TradeFlow: XCTestCase {
             let amountField = app.textFields["TradeComponent_AmountField"]
             if amountField.waitForExistence(timeout: 2) {
                 tapElementAndWaitForKeyboardToAppear(amountField)
-                amountField.typeText(foundsToTrade)
+                amountField.typeText(fundsToTrade)
             }
             //dismissKeyboardIfPresent()
             
@@ -659,7 +659,7 @@ class TradeFlow: XCTestCase {
             }
             
             // -- Amount
-            let amountTitle = app.staticTexts[foundsToTradeFormatted]
+            let amountTitle = app.staticTexts[fundsToTradeFormatted]
             if amountTitle.waitForExistence(timeout: 4) {
                 XCTAssertTrue(amountTitle.exists)
             }
@@ -750,8 +750,8 @@ class TradeFlow: XCTestCase {
         // -- Login
         self.login()
         
-        // -- Add 50 USD founds
-        self.depositFounds()
+        // -- Add 50 USD funds
+        self.depositFunds()
         
         // -- Trade (buy) 50 USD to BTC
         self.trade_buy_BTC()
@@ -768,8 +768,8 @@ class TradeFlow: XCTestCase {
         // -- Login
         self.login()
         
-        // -- Add 50 USD founds
-        self.depositFounds()
+        // -- Add 50 USD funds
+        self.depositFunds()
         
         // -- Trade 50 USD to BTC
         self.trade_buy_ETH()
@@ -786,8 +786,8 @@ class TradeFlow: XCTestCase {
         // -- Login
         self.login()
         
-        // -- Add 50 USD founds
-        self.depositFounds()
+        // -- Add 50 USD funds
+        self.depositFunds()
         
         // -- Trade 50 USD to BTC
         self.trade_buy_USDC()
@@ -801,8 +801,8 @@ class TradeFlow: XCTestCase {
         // -- Login
         self.login()
         
-        // -- Add 50 USD founds
-        self.depositFounds()
+        // -- Add 50 USD funds
+        self.depositFunds()
         
         // -- Trade 50 USD to BTC
         self.trade_buy_SOL()
