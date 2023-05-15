@@ -23,6 +23,29 @@ class TradeFlow: XCTestCase {
         app.navigationBars.buttons.element(boundBy: 0).tap()
     }
     
+    func getAsset(_ assetCode: String) -> String {
+        
+        var asset = ""
+        switch assetCode {
+            
+        case "BTC":
+            asset = "Bitcoin BTC"
+            
+        case "ETH":
+            asset = "Ethereum ETH"
+            
+        case "USDC":
+            asset = "USDC (ERC-20) USDC"
+            
+        case "SOL":
+            asset = "Solana SOL"
+            
+        default:
+            ()
+        }
+        return asset
+    }
+    
     func login() {
         
         // -- Given
@@ -183,11 +206,12 @@ class TradeFlow: XCTestCase {
         self.returnTap()
     }
     
-    func trade_buy_BTC() {
+    func trade_buy(_ assetCode: String) {
         
         // --
         let fundsToTrade = "50"
         let fundsToTradeFormatted = "$50.00 USD"
+        let asset = self.getAsset(assetCode)
         
         // -- Get Trade Component and tap
         let transferComponent = app.staticTexts["Trade Component"]
@@ -196,82 +220,88 @@ class TradeFlow: XCTestCase {
         }
         
         // -- Enter in BTC
-        let btc = app.staticTexts["Bitcoin BTC"]
-        if btc.waitForExistence(timeout: 4) {
-            XCTAssertTrue(btc.exists)
-            btc.tap()
-        }
-        
-        // -- Check UISegmentedControl
-        let buy = app.buttons["BUY"]
-        if buy.waitForExistence(timeout: 6) {
+        let assetToBuy = app.staticTexts[asset]
+        if assetToBuy.waitForExistence(timeout: 5) {
             
-            XCTAssertTrue(buy.exists)
-            XCTAssertTrue(app.buttons["SELL"].exists)
-            let segmented = app.segmentedControls.element(boundBy: 0)
-            XCTAssertTrue(segmented.buttons.element(boundBy: 0).isSelected)
+            XCTAssertTrue(assetToBuy.exists)
+            assetToBuy.tap()
+            
+            // -- Check UISegmentedControl
+            let buy = app.buttons["BUY"]
+            if buy.waitForExistence(timeout: 6) {
+                
+                XCTAssertTrue(buy.exists)
+                XCTAssertTrue(app.buttons["SELL"].exists)
+                let segmented = app.segmentedControls.element(boundBy: 0)
+                XCTAssertTrue(segmented.buttons.element(boundBy: 0).isSelected)
+            }
+            
+            // -- Set how many USD to trade
+            let switchButton = app.buttons["TradeComponent_SWitchButton"]
+            if switchButton.waitForExistence(timeout: 5) {
+                switchButton.tap()
+            }
+            
+            let amountField = app.textFields["TradeComponent_AmountField"]
+            if amountField.waitForExistence(timeout: 2) {
+                tapElementAndWaitForKeyboardToAppear(amountField)
+                amountField.typeText(fundsToTrade)
+            }
+            
+            // -- Trigger action (buy/sell)
+            let actionButton = app.buttons["TradeComponent_ActionButton"]
+            if actionButton.waitForExistence(timeout: 2) {
+                actionButton.tap()
+            }
+            
+            // Modal: Confirm
+            
+            // -- Title
+            let confirmTitle = app.staticTexts["Order Quote"]
+            if confirmTitle.waitForExistence(timeout: 6) {
+                XCTAssertTrue(confirmTitle.exists)
+            }
+            
+            // -- Amount
+            let amountTitle = app.staticTexts[fundsToTradeFormatted]
+            if amountTitle.waitForExistence(timeout: 4) {
+                XCTAssertTrue(amountTitle.exists)
+            }
+            
+            // -- Confirm deposit
+            let confirmTrade = app.buttons["Confirm"]
+            if confirmTrade.waitForExistence(timeout: 2) {
+                confirmTrade.tap()
+            }
+            
+            // Modal: Confirm
+            
+            // -- Title
+            let detailsTitle = app.staticTexts["Order Submitted"]
+            if detailsTitle.waitForExistence(timeout: 6) {
+                XCTAssertTrue(detailsTitle.exists)
+            }
+            
+            let confirmTrade_2 = app.buttons["TradeComponent_Modal_Success_ConfirmButton"]
+            if confirmTrade_2.waitForExistence(timeout: 2) {
+                confirmTrade_2.tap()
+            }
+            
+            // -- Return main controller
+            self.returnTap()
+            
+        } else {
+            
+            // -- Return main controller
+            self.returnTap()
         }
-        
-        // -- Set how many USD to trade
-        let switchButton = app.buttons["TradeComponent_SWitchButton"]
-        if switchButton.waitForExistence(timeout: 5) {
-            switchButton.tap()
-        }
-        
-        let amountField = app.textFields["TradeComponent_AmountField"]
-        if amountField.waitForExistence(timeout: 2) {
-            tapElementAndWaitForKeyboardToAppear(amountField)
-            amountField.typeText(fundsToTrade)
-        }
-        //dismissKeyboardIfPresent()
-        
-        // -- Trigger action (buy/sell)
-        let actionButton = app.buttons["TradeComponent_ActionButton"]
-        if actionButton.waitForExistence(timeout: 2) {
-            actionButton.tap()
-        }
-        
-        // Modal: Confirm
-        
-        // -- Title
-        let confirmTitle = app.staticTexts["Order Quote"]
-        if confirmTitle.waitForExistence(timeout: 6) {
-            XCTAssertTrue(confirmTitle.exists)
-        }
-        
-        // -- Amount
-        let amountTitle = app.staticTexts[fundsToTradeFormatted]
-        if amountTitle.waitForExistence(timeout: 4) {
-            XCTAssertTrue(amountTitle.exists)
-        }
-        
-        // -- Confirm deposit
-        let confirmTrade = app.buttons["Confirm"]
-        if confirmTrade.waitForExistence(timeout: 2) {
-            confirmTrade.tap()
-        }
-        
-        // Modal: Confirm
-        
-        // -- Title
-        let detailsTitle = app.staticTexts["Order Submitted"]
-        if detailsTitle.waitForExistence(timeout: 6) {
-            XCTAssertTrue(detailsTitle.exists)
-        }
-        
-        let confirmTrade_2 = app.buttons["TradeComponent_Modal_Success_ConfirmButton"]
-        if confirmTrade_2.waitForExistence(timeout: 2) {
-            confirmTrade_2.tap()
-        }
-        
-        // -- Return main controller
-        self.returnTap()
     }
     
-    func trade_sell_BTC() {
+    func trade_sell(_ assetCode: String) {
         
         // --
         let fundsToTrade = "50"
+        let asset = self.getAsset(assetCode)
         
         // -- Get Trade Component and tap
         let transferComponent = app.staticTexts["Trade Component"]
@@ -280,10 +310,10 @@ class TradeFlow: XCTestCase {
         }
         
         // -- Enter in BTC
-        let btc = app.staticTexts["Bitcoin BTC"]
-        if btc.waitForExistence(timeout: 4) {
-            XCTAssertTrue(btc.exists)
-            btc.tap()
+        let assetToBuy = app.staticTexts[asset]
+        if assetToBuy.waitForExistence(timeout: 4) {
+            XCTAssertTrue(assetToBuy.exists)
+            assetToBuy.tap()
         }
         
         // -- Check UISegmentedControl
@@ -345,352 +375,6 @@ class TradeFlow: XCTestCase {
         
         // -- Return main controller
         self.returnTap()
-    }
-    
-    func trade_buy_ETH() {
-        
-        // --
-        let fundsToTrade = "50"
-        let fundsToTradeFormatted = "$50.00 USD"
-        
-        // -- Get Trade Component and tap
-        let transferComponent = app.staticTexts["Trade Component"]
-        if transferComponent.waitForExistence(timeout: 6) {
-            transferComponent.tap()
-        }
-        
-        // -- Enter in BTC
-        let eth = app.staticTexts["Ethereum ETH"]
-        if eth.waitForExistence(timeout: 4) {
-            XCTAssertTrue(eth.exists)
-            eth.tap()
-        }
-        
-        // -- Check UISegmentedControl
-        let buy = app.buttons["BUY"]
-        if buy.waitForExistence(timeout: 6) {
-            
-            XCTAssertTrue(buy.exists)
-            XCTAssertTrue(app.buttons["SELL"].exists)
-            let segmented = app.segmentedControls.element(boundBy: 0)
-            XCTAssertTrue(segmented.buttons.element(boundBy: 0).isSelected)
-        }
-        
-        // -- Set how many USD to trade
-        let switchButton = app.buttons["TradeComponent_SWitchButton"]
-        if switchButton.waitForExistence(timeout: 5) {
-            switchButton.tap()
-        }
-        
-        let amountField = app.textFields["TradeComponent_AmountField"]
-        if amountField.waitForExistence(timeout: 2) {
-            tapElementAndWaitForKeyboardToAppear(amountField)
-            amountField.typeText(fundsToTrade)
-        }
-        //dismissKeyboardIfPresent()
-        
-        // -- Trigger action (buy/sell)
-        let actionButton = app.buttons["TradeComponent_ActionButton"]
-        if actionButton.waitForExistence(timeout: 2) {
-            actionButton.tap()
-        }
-        
-        // Modal: Confirm
-        
-        // -- Title
-        let confirmTitle = app.staticTexts["Order Quote"]
-        if confirmTitle.waitForExistence(timeout: 6) {
-            XCTAssertTrue(confirmTitle.exists)
-        }
-        
-        // -- Amount
-        let amountTitle = app.staticTexts[fundsToTradeFormatted]
-        if amountTitle.waitForExistence(timeout: 4) {
-            XCTAssertTrue(amountTitle.exists)
-        }
-        
-        // -- Confirm deposit
-        let confirmTrade = app.buttons["Confirm"]
-        if confirmTrade.waitForExistence(timeout: 2) {
-            confirmTrade.tap()
-        }
-        
-        // Modal: Confirm
-        
-        // -- Title
-        let detailsTitle = app.staticTexts["Order Submitted"]
-        if detailsTitle.waitForExistence(timeout: 6) {
-            XCTAssertTrue(detailsTitle.exists)
-        }
-        
-        let confirmTrade_2 = app.buttons["TradeComponent_Modal_Success_ConfirmButton"]
-        if confirmTrade_2.waitForExistence(timeout: 2) {
-            confirmTrade_2.tap()
-        }
-        
-        // -- Return main controller
-        self.returnTap()
-    }
-    
-    func trade_sell_ETH() {
-        
-        // --
-        let fundsToTrade = "50"
-        
-        // -- Get Trade Component and tap
-        let transferComponent = app.staticTexts["Trade Component"]
-        if transferComponent.waitForExistence(timeout: 6) {
-            transferComponent.tap()
-        }
-        
-        // -- Enter in BTC
-        let eth = app.staticTexts["Ethereum ETH"]
-        if eth.waitForExistence(timeout: 4) {
-            XCTAssertTrue(eth.exists)
-            eth.tap()
-        }
-        
-        // -- Check UISegmentedControl
-        let sell = app.buttons["SELL"]
-        if sell.waitForExistence(timeout: 6) {
-
-            XCTAssertTrue(app.buttons["BUY"].exists)
-            XCTAssertTrue(sell.exists)
-
-            sell.tap()
-            let segmented = app.segmentedControls.element(boundBy: 0)
-            XCTAssertTrue(segmented.buttons.element(boundBy: 1).isSelected)
-        }
-        
-        // -- Set how many USD to trade
-        let switchButton = app.buttons["TradeComponent_SWitchButton"]
-        if switchButton.waitForExistence(timeout: 5) {
-            switchButton.tap()
-        }
-        
-        let amountField = app.textFields["TradeComponent_AmountField"]
-        if amountField.waitForExistence(timeout: 2) {
-            tapElementAndWaitForKeyboardToAppear(amountField)
-            amountField.typeText(fundsToTrade)
-        }
-        
-        // -- Trigger action (buy/sell)
-        let actionButton = app.buttons["TradeComponent_ActionButton"]
-        if actionButton.waitForExistence(timeout: 2) {
-            actionButton.tap()
-        }
-        
-        // Modal: Confirm
-        
-        // -- Title
-        let confirmTitle = app.staticTexts["Order Quote"]
-        if confirmTitle.waitForExistence(timeout: 6) {
-            XCTAssertTrue(confirmTitle.exists)
-        }
-        
-        // -- Confirm deposit
-        let confirmTrade = app.buttons["Confirm"]
-        if confirmTrade.waitForExistence(timeout: 2) {
-            confirmTrade.tap()
-        }
-        
-        // Modal: Confirm
-        
-        // -- Title
-        let detailsTitle = app.staticTexts["Order Submitted"]
-        if detailsTitle.waitForExistence(timeout: 6) {
-            XCTAssertTrue(detailsTitle.exists)
-        }
-        
-        let confirmTrade_2 = app.buttons["TradeComponent_Modal_Success_ConfirmButton"]
-        if confirmTrade_2.waitForExistence(timeout: 2) {
-            confirmTrade_2.tap()
-        }
-        
-        // -- Return main controller
-        self.returnTap()
-    }
-    
-    func trade_buy_USDC() {
-        
-        // --
-        let fundsToTrade = "50"
-        let fundsToTradeFormatted = "$50.00 USD"
-        
-        // -- Get Trade Component and tap
-        let transferComponent = app.staticTexts["Trade Component"]
-        if transferComponent.waitForExistence(timeout: 6) {
-            transferComponent.tap()
-        }
-        
-        // -- Enter in BTC
-        let usdc = app.staticTexts["USDC (ERC-20) USDC"]
-        if usdc.waitForExistence(timeout: 5) {
-            
-            XCTAssertTrue(usdc.exists)
-            usdc.tap()
-            
-            // -- Check UISegmentedControl
-            let buy = app.buttons["BUY"]
-            if buy.waitForExistence(timeout: 6) {
-                
-                XCTAssertTrue(buy.exists)
-                XCTAssertTrue(app.buttons["SELL"].exists)
-                let segmented = app.segmentedControls.element(boundBy: 0)
-                XCTAssertTrue(segmented.buttons.element(boundBy: 0).isSelected)
-            }
-            
-            // -- Set how many USD to trade
-            let switchButton = app.buttons["TradeComponent_SWitchButton"]
-            if switchButton.waitForExistence(timeout: 5) {
-                switchButton.tap()
-            }
-            
-            let amountField = app.textFields["TradeComponent_AmountField"]
-            if amountField.waitForExistence(timeout: 2) {
-                tapElementAndWaitForKeyboardToAppear(amountField)
-                amountField.typeText(fundsToTrade)
-            }
-            //dismissKeyboardIfPresent()
-            
-            // -- Trigger action (buy/sell)
-            let actionButton = app.buttons["TradeComponent_ActionButton"]
-            if actionButton.waitForExistence(timeout: 2) {
-                actionButton.tap()
-            }
-            
-            // Modal: Confirm
-            
-            // -- Title
-            let confirmTitle = app.staticTexts["Order Quote"]
-            if confirmTitle.waitForExistence(timeout: 6) {
-                XCTAssertTrue(confirmTitle.exists)
-            }
-            
-            // -- Amount
-            let amountTitle = app.staticTexts[fundsToTradeFormatted]
-            if amountTitle.waitForExistence(timeout: 4) {
-                XCTAssertTrue(amountTitle.exists)
-            }
-            
-            // -- Confirm deposit
-            let confirmTrade = app.buttons["Confirm"]
-            if confirmTrade.waitForExistence(timeout: 2) {
-                confirmTrade.tap()
-            }
-            
-            // Modal: Confirm
-            
-            // -- Title
-            let detailsTitle = app.staticTexts["Order Submitted"]
-            if detailsTitle.waitForExistence(timeout: 6) {
-                XCTAssertTrue(detailsTitle.exists)
-            }
-            
-            let confirmTrade_2 = app.buttons["TradeComponent_Modal_Success_ConfirmButton"]
-            if confirmTrade_2.waitForExistence(timeout: 2) {
-                confirmTrade_2.tap()
-            }
-            
-            // -- Return main controller
-            self.returnTap()
-            
-        } else {
-            
-            // -- Return main controller
-            self.returnTap()
-        }
-    }
-    
-    func trade_buy_SOL() {
-        
-        // --
-        let fundsToTrade = "50"
-        let fundsToTradeFormatted = "$50.00 USD"
-        
-        // -- Get Trade Component and tap
-        let transferComponent = app.staticTexts["Trade Component"]
-        if transferComponent.waitForExistence(timeout: 6) {
-            transferComponent.tap()
-        }
-        
-        // -- Enter in BTC
-        let usdc = app.staticTexts["Solana SOL"]
-        if usdc.waitForExistence(timeout: 5) {
-            
-            XCTAssertTrue(usdc.exists)
-            usdc.tap()
-            
-            // -- Check UISegmentedControl
-            let buy = app.buttons["BUY"]
-            if buy.waitForExistence(timeout: 6) {
-                
-                XCTAssertTrue(buy.exists)
-                XCTAssertTrue(app.buttons["SELL"].exists)
-                let segmented = app.segmentedControls.element(boundBy: 0)
-                XCTAssertTrue(segmented.buttons.element(boundBy: 0).isSelected)
-            }
-            
-            // -- Set how many USD to trade
-            let switchButton = app.buttons["TradeComponent_SWitchButton"]
-            if switchButton.waitForExistence(timeout: 5) {
-                switchButton.tap()
-            }
-            
-            let amountField = app.textFields["TradeComponent_AmountField"]
-            if amountField.waitForExistence(timeout: 2) {
-                tapElementAndWaitForKeyboardToAppear(amountField)
-                amountField.typeText(fundsToTrade)
-            }
-            //dismissKeyboardIfPresent()
-            
-            // -- Trigger action (buy/sell)
-            let actionButton = app.buttons["TradeComponent_ActionButton"]
-            if actionButton.waitForExistence(timeout: 2) {
-                actionButton.tap()
-            }
-            
-            // Modal: Confirm
-            
-            // -- Title
-            let confirmTitle = app.staticTexts["Order Quote"]
-            if confirmTitle.waitForExistence(timeout: 6) {
-                XCTAssertTrue(confirmTitle.exists)
-            }
-            
-            // -- Amount
-            let amountTitle = app.staticTexts[fundsToTradeFormatted]
-            if amountTitle.waitForExistence(timeout: 4) {
-                XCTAssertTrue(amountTitle.exists)
-            }
-            
-            // -- Confirm deposit
-            let confirmTrade = app.buttons["Confirm"]
-            if confirmTrade.waitForExistence(timeout: 2) {
-                confirmTrade.tap()
-            }
-            
-            // Modal: Confirm
-            
-            // -- Title
-            let detailsTitle = app.staticTexts["Order Submitted"]
-            if detailsTitle.waitForExistence(timeout: 6) {
-                XCTAssertTrue(detailsTitle.exists)
-            }
-            
-            let confirmTrade_2 = app.buttons["TradeComponent_Modal_Success_ConfirmButton"]
-            if confirmTrade_2.waitForExistence(timeout: 2) {
-                confirmTrade_2.tap()
-            }
-            
-            // -- Return main controller
-            self.returnTap()
-            
-        } else {
-            
-            // -- Return main controller
-            self.returnTap()
-        }
     }
     
     func trade_buy_Error() {
@@ -754,13 +438,13 @@ class TradeFlow: XCTestCase {
         self.depositFunds()
         
         // -- Trade (buy) 50 USD to BTC
-        self.trade_buy_BTC()
+        self.trade_buy("BTC")
         
         // -- Trade (sell) 50 USD of BTC
-        self.trade_sell_BTC()
+        self.trade_sell("BTC")
     }
     
-    func test_flow_buy_ETH() {
+    func test_flow_ETH() {
         
         // -- App launch
         app.launch()
@@ -772,13 +456,13 @@ class TradeFlow: XCTestCase {
         self.depositFunds()
         
         // -- Trade 50 USD to BTC
-        self.trade_buy_ETH()
+        self.self.trade_buy("ETH")
         
         // -- Trade (sell) 50 USD of ETH
-        self.trade_sell_ETH()
+        self.trade_sell("ETH")
     }
     
-    func test_flow_buy_USDC() {
+    func test_flow_USDC() {
         
         // -- App launch
         app.launch()
@@ -790,10 +474,10 @@ class TradeFlow: XCTestCase {
         self.depositFunds()
         
         // -- Trade 50 USD to BTC
-        self.trade_buy_USDC()
+        self.trade_buy("USDC")
     }
     
-    func test_flow_buy_SOL() {
+    func test_flow_SOL() {
         
         // -- App launch
         app.launch()
@@ -805,7 +489,7 @@ class TradeFlow: XCTestCase {
         self.depositFunds()
         
         // -- Trade 50 USD to BTC
-        self.trade_buy_SOL()
+        self.trade_buy("SOL")
     }
     
     func test_flow_buy_Error() {
