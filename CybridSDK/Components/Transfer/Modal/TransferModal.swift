@@ -264,6 +264,7 @@ extension TransferModal {
             self?.transferViewModel.fetchAccountsInPolling()
             self?.dismiss(animated: true)
         })
+        confirmButton.accessibilityIdentifier = "TransferComponent_Modal_Details_Continue"
         confirmButton.addBelow(toItem: title, height: UIValues.successConfirmButtonHeight, margins: UIValues.successConfirmButtonMargins)
     }
 

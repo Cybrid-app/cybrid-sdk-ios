@@ -191,6 +191,7 @@
 		92827DCF2947998C00231772 /* ExternalBankAccountBankModel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92827DCE2947998C00231772 /* ExternalBankAccountBankModel+Extensions.swift */; };
 		92827DD129479D7800231772 /* createExternalBankAccountBankModelResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 92827DD029479D7800231772 /* createExternalBankAccountBankModelResponse.json */; };
 		92827DD529479E4200231772 /* createExternalBankAccountBankModelResponse_Incomplete.json in Resources */ = {isa = PBXBuildFile; fileRef = 92827DD429479E4200231772 /* createExternalBankAccountBankModelResponse_Incomplete.json */; };
+		928A2CDF2A0A9A64005D0E3A /* TradeFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928A2CDE2A0A9A64005D0E3A /* TradeFlow.swift */; };
 		928E236C28EC90D6006AAE1A /* CybridSDKTestAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928E236B28EC90D6006AAE1A /* CybridSDKTestAppUITests.swift */; };
 		928E237628ECA38B006AAE1A /* XCUIElement+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928E237528ECA38B006AAE1A /* XCUIElement+Extensions.swift */; };
 		928E237828ECB80E006AAE1A /* XCTestCase+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928E237728ECB80E006AAE1A /* XCTestCase+Extensions.swift */; };
@@ -482,6 +483,7 @@
 		92827DCE2947998C00231772 /* ExternalBankAccountBankModel+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ExternalBankAccountBankModel+Extensions.swift"; sourceTree = "<group>"; };
 		92827DD029479D7800231772 /* createExternalBankAccountBankModelResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = createExternalBankAccountBankModelResponse.json; sourceTree = "<group>"; };
 		92827DD429479E4200231772 /* createExternalBankAccountBankModelResponse_Incomplete.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = createExternalBankAccountBankModelResponse_Incomplete.json; sourceTree = "<group>"; };
+		928A2CDE2A0A9A64005D0E3A /* TradeFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeFlow.swift; sourceTree = "<group>"; };
 		928E236928EC90D6006AAE1A /* CybridSDKTestAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CybridSDKTestAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		928E236B28EC90D6006AAE1A /* CybridSDKTestAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CybridSDKTestAppUITests.swift; sourceTree = "<group>"; };
 		928E237528ECA38B006AAE1A /* XCUIElement+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCUIElement+Extensions.swift"; sourceTree = "<group>"; };
@@ -1406,9 +1408,18 @@
 			path = ExternalBankAccount;
 			sourceTree = "<group>";
 		};
+		928A2CDD2A0A99E4005D0E3A /* Flow */ = {
+			isa = PBXGroup;
+			children = (
+				928A2CDE2A0A9A64005D0E3A /* TradeFlow.swift */,
+			);
+			path = Flow;
+			sourceTree = "<group>";
+		};
 		928E236A28EC90D6006AAE1A /* CybridSDKTestAppUITests */ = {
 			isa = PBXGroup;
 			children = (
+				928A2CDD2A0A99E4005D0E3A /* Flow */,
 				928E237428ECA373006AAE1A /* Extensions */,
 				928E236B28EC90D6006AAE1A /* CybridSDKTestAppUITests.swift */,
 				928E237E28EE4996006AAE1A /* AccountsComponentTest.swift */,
@@ -2283,6 +2294,7 @@
 				928E237F28EE4996006AAE1A /* AccountsComponentTest.swift in Sources */,
 				92B68193291AB9B900FD6E99 /* KYCComponentTest.swift in Sources */,
 				928E237628ECA38B006AAE1A /* XCUIElement+Extensions.swift in Sources */,
+				928A2CDF2A0A9A64005D0E3A /* TradeFlow.swift in Sources */,
 				928E236C28EC90D6006AAE1A /* CybridSDKTestAppUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

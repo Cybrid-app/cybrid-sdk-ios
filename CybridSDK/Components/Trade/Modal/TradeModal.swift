@@ -309,6 +309,7 @@ extension TradeModal {
             self?.dismiss(animated: true)
             self?.tradeViewModel.fetchAccounts()
         })
+        confirmButton.accessibilityIdentifier = "TradeComponent_Modal_Success_ConfirmButton"
         confirmButton.addBelow(toItem: title, height: UIValues.errorConfirmButtonHeight, margins: UIValues.errorConfirmButtonMargins)
     }
 
