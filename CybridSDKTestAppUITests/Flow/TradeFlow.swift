@@ -14,14 +14,7 @@
 import Foundation
 import XCTest
 
-class TradeFlow: XCTestCase {
-    
-    let app = XCUIApplication()
-    
-    func returnTap() {
-        
-        app.navigationBars.buttons.element(boundBy: 0).tap()
-    }
+class TradeFlow: CybridUITest {
     
     func getAsset(_ assetCode: String) -> String {
         
@@ -44,13 +37,6 @@ class TradeFlow: XCTestCase {
             ()
         }
         return asset
-    }
-    
-    func login() {
-        
-        // -- Given
-        let demoMode = app.buttons["demo_mode"]
-        demoMode.tap()
     }
     
     func depositFunds() {
@@ -473,8 +459,11 @@ class TradeFlow: XCTestCase {
         // -- Add 50 USD funds
         self.depositFunds()
         
-        // -- Trade 50 USD to BTC
+        // -- Trade 50 USD to USDC
         self.trade_buy("USDC")
+        
+        // -- Trade (sell) 50 USD of USDC
+        self.trade_sell("USDC")
     }
     
     func test_flow_SOL() {
@@ -488,8 +477,11 @@ class TradeFlow: XCTestCase {
         // -- Add 50 USD funds
         self.depositFunds()
         
-        // -- Trade 50 USD to BTC
+        // -- Trade 50 USD to SOL
         self.trade_buy("SOL")
+        
+        // -- Trade (sell) 50 USD of SOL
+        self.trade_sell("SOL")
     }
     
     func test_flow_buy_Error() {

@@ -200,6 +200,7 @@ extension TransferModal {
 
         let dateValueString = getFormattedDate(Date(), format: "MMMM dd, YYYY")
         let dateValue = self.createAccountValue(value: dateValueString)
+        dateValue.accessibilityIdentifier = "TransferComponent_Modal_Confirm_DateValue"
         dateValue.addBelow(toItem: dateTitle, height: UIValues.contentDateValueHeight, margins: UIValues.contentDateValueMargins)
 
         // -- From/To
