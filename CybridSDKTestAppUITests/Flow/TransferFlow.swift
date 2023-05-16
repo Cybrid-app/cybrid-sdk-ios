@@ -246,6 +246,7 @@ class TransferFlow: CybridUITest {
         
         // -- Find the first cell in table
         let firstCell = app.tables.cells.element(boundBy: 0)
+        firstCell.tap()
         
         // -- Cell: Type
         let cellType = firstCell.staticTexts[type.rawValue]
