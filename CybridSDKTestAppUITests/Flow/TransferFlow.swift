@@ -36,7 +36,7 @@ class TransferFlow: CybridUITest {
         XCTAssertTrue(fromBankAccountLabel.exists)
 
         // -- Check and get: Account Field
-        let accountField = app.textFields["accountsPickerTextField"]
+        let accountField = app.textFields["TransferComponent_AccountField"]
         XCTAssertTrue(accountField.exists)
         transfer.accountName = accountField.value as! String
         
@@ -46,8 +46,36 @@ class TransferFlow: CybridUITest {
         
         // -- Check, tap and set: Amount Field
         let amountField = app.textFields["TransferComponent_AmountField"]
-        tapElementAndWaitForKeyboardToAppear(amountField)
-        amountField.typeText(String(funds))
+        if amountField.waitForExistence(timeout: 6) {
+            tapElementAndWaitForKeyboardToAppear(amountField)
+            amountField.typeText(String(funds))
+        }
+        
+        // -- Continue button
+        let continueButton = app.buttons["Continue"]
+        XCTAssertTrue(continueButton.exists)
+        continueButton.tap()
+        
+        // -- Transfer Modal: Confirm
+        
+        // -- Title
+        let confirmTitle = app.staticTexts["Confirm Deposit Details"]
+        if confirmTitle.waitForExistence(timeout: 4) {
+            XCTAssertTrue(confirmTitle.exists)
+        }
+        
+        // -- Amount Value
+        let amountValue = app.staticTexts[fundsFormatted]
+        XCTAssertTrue(amountValue.exists)
+        
+        // -- Deposit Date
+        let depositDate = app.staticTexts["Deposit Date"]
+        XCTAssertTrue(depositDate.exists)
+        
+        // -- Deposit Date Value
+        let depositDateValue = app.staticTexts["TransferComponent_Modal_Confirm_DateValue"]
+        XCTAssertTrue(depositDateValue.exists)
+        transfer.accountDate = depositDateValue.label
         
         // -- Return transfer made
         return transfer
@@ -60,6 +88,12 @@ class TransferFlow: CybridUITest {
         
         // -- Set random funds number in format
         let fundsFormatted = "$\(randomFunds).00 USD"
+        
+        // -- App launch
+        app.launch()
+        
+        // -- Login
+        self.login()
         
         // -- Deposit funds and get transfer
         let transfer = self.depositFunds(funds: randomFunds, fundsFormatted: fundsFormatted)

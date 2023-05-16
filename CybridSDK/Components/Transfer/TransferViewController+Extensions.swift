@@ -117,6 +117,7 @@ extension TransferViewController {
 
         // -- From/To Field
         let fromToField = self.createFromField()
+        fromToField.accessibilityIdentifier = "TransferComponent_AccountField"
         self.setFromFieldData(field: fromToField)
         fromToField.addBelow(toItem: fromTo, height: UIValues.accountsFromToFieldHeight, margins: UIValues.accountsFromToFieldMargin)
 
