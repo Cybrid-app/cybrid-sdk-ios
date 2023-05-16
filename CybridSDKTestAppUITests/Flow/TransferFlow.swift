@@ -202,7 +202,7 @@ class TransferFlow: CybridUITest {
         // -- Transfer Modal: Details
         
         // -- Funds
-        /*let fundsTitle = app.staticTexts[fundsFormatted]
+        let fundsTitle = app.staticTexts[transfer.fundsFormatted]
         if fundsTitle.waitForExistence(timeout: 6) {
             XCTAssertTrue(fundsTitle.exists)
         }
@@ -215,7 +215,7 @@ class TransferFlow: CybridUITest {
         
         // -- Continue
         let continueButton_2 = app.buttons["TransferComponent_Modal_Details_Continue"]
-        continueButton_2.tap()*/
+        continueButton_2.tap()
         
         // -- Return main controller
         self.returnTap()
@@ -259,7 +259,8 @@ class TransferFlow: CybridUITest {
         let cellAmount = firstCell.staticTexts[transfer.fundsFormatted]
         XCTAssertTrue(cellAmount.exists)
         
-        // -- Return main controller
+        // -- Tap 2 times to return main controller
+        self.returnTap()
         self.returnTap()
     }
     
@@ -282,6 +283,12 @@ class TransferFlow: CybridUITest {
         
         // -- Check deposit in Accounts
         self.checkDepositOrWithdraw(transfer: transfer, type: .deposit)
+        
+        // -- Withdraw funds
+        self.withdrawFunds(funds: randomFunds, transfer: transfer)
+        
+        // -- Check withdraw in Accounts
+        self.checkDepositOrWithdraw(transfer: transfer, type: .withdraw)
     }
 }
 
