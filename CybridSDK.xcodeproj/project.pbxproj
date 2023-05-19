@@ -194,6 +194,7 @@
 		928A2CDF2A0A9A64005D0E3A /* TradeFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928A2CDE2A0A9A64005D0E3A /* TradeFlow.swift */; };
 		928A2CE12A13DC3C005D0E3A /* TransferFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928A2CE02A13DC3C005D0E3A /* TransferFlow.swift */; };
 		928A2CE42A13DD53005D0E3A /* CybridUITest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928A2CE32A13DD53005D0E3A /* CybridUITest.swift */; };
+		928A2CE62A16749F005D0E3A /* AccountTransferModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928A2CE52A16749F005D0E3A /* AccountTransferModal.swift */; };
 		928E236C28EC90D6006AAE1A /* CybridSDKTestAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928E236B28EC90D6006AAE1A /* CybridSDKTestAppUITests.swift */; };
 		928E237628ECA38B006AAE1A /* XCUIElement+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928E237528ECA38B006AAE1A /* XCUIElement+Extensions.swift */; };
 		928E237828ECB80E006AAE1A /* XCTestCase+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928E237728ECB80E006AAE1A /* XCTestCase+Extensions.swift */; };
@@ -488,6 +489,7 @@
 		928A2CDE2A0A9A64005D0E3A /* TradeFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeFlow.swift; sourceTree = "<group>"; };
 		928A2CE02A13DC3C005D0E3A /* TransferFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferFlow.swift; sourceTree = "<group>"; };
 		928A2CE32A13DD53005D0E3A /* CybridUITest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CybridUITest.swift; sourceTree = "<group>"; };
+		928A2CE52A16749F005D0E3A /* AccountTransferModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTransferModal.swift; sourceTree = "<group>"; };
 		928E236928EC90D6006AAE1A /* CybridSDKTestAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CybridSDKTestAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		928E236B28EC90D6006AAE1A /* CybridSDKTestAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CybridSDKTestAppUITests.swift; sourceTree = "<group>"; };
 		928E237528ECA38B006AAE1A /* XCUIElement+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCUIElement+Extensions.swift"; sourceTree = "<group>"; };
@@ -1351,6 +1353,7 @@
 			isa = PBXGroup;
 			children = (
 				927233D828D243F80080AAC4 /* AccountTradeDetailModal.swift */,
+				928A2CE52A16749F005D0E3A /* AccountTransferModal.swift */,
 			);
 			path = Modal;
 			sourceTree = "<group>";
@@ -2090,6 +2093,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0B2899E0288E4860001B3360 /* AuthenticatedServiceProvider.swift in Sources */,
+				928A2CE62A16749F005D0E3A /* AccountTransferModal.swift in Sources */,
 				92827DAD294320EC00231772 /* BankRepository.swift in Sources */,
 				927233E628D244AC0080AAC4 /* AccountsHeaderCell.swift in Sources */,
 				92F707C2298C204F005A93E5 /* TradeViewController.swift in Sources */,
@@ -2580,7 +2584,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_TEAM = 5789WJ9F6P;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CybridSDKTestApp/Info.plist;
@@ -2597,7 +2601,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.10;
+				MARKETING_VERSION = 1.11;
 				PRODUCT_BUNDLE_IDENTIFIER = app.cybrid.CybridSDKTestApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -2613,7 +2617,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_TEAM = 5789WJ9F6P;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CybridSDKTestApp/Info.plist;
@@ -2630,7 +2634,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.10;
+				MARKETING_VERSION = 1.11;
 				PRODUCT_BUNDLE_IDENTIFIER = app.cybrid.CybridSDKTestApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
