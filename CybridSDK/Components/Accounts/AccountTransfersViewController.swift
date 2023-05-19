@@ -182,6 +182,16 @@ extension AccountTransfersViewController: AccountTransfersViewProvider {
         cell.setData(transfer: model)
         return cell
     }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath, with transfer: TransferBankModel) {
+
+        let modal = AccountTransferModal(
+            transfer: transfer,
+            fiatAsset: Cybrid.fiat,
+            assetURL: balance.accountAssetURL,
+            onConfirm: nil)
+        modal.present()
+    }
 }
 
 extension AccountTransfersViewController {

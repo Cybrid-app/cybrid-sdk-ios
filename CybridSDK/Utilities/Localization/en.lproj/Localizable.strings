@@ -46,23 +46,18 @@
 "cybrid.trade.successModal.buyMore" = "Buy more crypto";
 "cybrid.trade.successModal.sellMore" = "Sell more crypto";
 
-// Accounts
+// Accounts Component
 "cybrid.accounts.loading.title" = "Loading accounts";
 "cybrid.accounts.content.title" = "Account Value";
 "cybrid.accounts.content.transfer.button" = "Transfer Funds";
-
 "cybrid.accounts.assetTitle" = "ASSET";
 "cybrid.accounts.marketPriceTitle" = "Market Price";
 "cybrid.accounts.balanceTitle" = "BALANCE";
 "cybrid.accounts.item.fiat.pending" = " pending";
-
-// Account Trades
 "cybrid.account.trades.recentTransactionsTitle" = "RECENT TRANSACTIONS";
 "cybrid.account.trades.amountTitle" = "AMOUNT";
 "cybrid.account.trades.sellType" = "Sell";
 "cybrid.account.trades.buyType" = "Buy";
-
-// Account Trade Detail - Modal
 "cybrid.account.trade.detail.bought" = "Buy";
 "cybrid.account.trade.detail.sold" = "Sell";
 "cybrid.account.trade.detail.status" = "Status";
@@ -72,6 +67,23 @@
 "cybrid.account.trade.detail.accountID" = "Account ID";
 "cybrid.account.trade.detail.orderID" = "Order ID";
 "cybrid.account.trade.detail.close" = "Close";
+"cybrid.accounts.transfers.subtitle.available" = "Available balance";
+"cybrid.accounts.transfers.recentTransfersTitle" = "RECENT TRANSFERS";
+"cybrid.accounts.transfers.amount" = "AMOUNT";
+"cybrid.accounts.transfers.withdraw" = "Withdraw";
+"cybrid.accounts.transfers.deposit" = "Deposit";
+"cybrid.accounts.transfers.pending" = "Pending";
+"cybrid.accounts.transfers.failed" = "Failed";
+"cybrid.accounts.transfers.detail.deposit" = "Deposit";
+"cybrid.accounts.transfers.detail.withdraw" = "Withdraw";
+"cybrid.accounts.transfers.detail.status.title" = "Status";
+"cybrid.accounts.transfers.detail.transferPlaced.title" = "Transfer Placed";
+"cybrid.accounts.transfers.detail.fee.title" = "Fee";
+"cybrid.accounts.transfers.detail.date.title" = "Trasnfer Date & Time";
+"cybrid.accounts.transfers.detail.id.title" = "Trasnfer ID";
+"cybrid.accounts.transfers.detail.close.button" = "Close";
+
+// Accounts: Deprecieted
 "cybrid.account.trade.modal.loading.title" = "Quote Pending";
 "cybrid.account.trade.modal.loadingSubmitted.title" = "Submitting Crypto Order";
 "cybrid.account.trade.modal.content.title" = "Order Quote";
@@ -86,15 +98,6 @@
 "cybrid.account.trade.modal.success.title" = "Order Submitted";
 "cybrid.account.trade.modal.error.title" = "Please try again.";
 "cybrid.account.trade.modal.error.button" = "Confirm";
-
-// Accounts - Transfers
-"cybrid.accounts.transfers.subtitle.available" = "Available balance";
-"cybrid.accounts.transfers.recentTransfersTitle" = "RECENT TRANSFERS";
-"cybrid.accounts.transfers.amount" = "AMOUNT";
-"cybrid.accounts.transfers.withdraw" = "Withdraw";
-"cybrid.accounts.transfers.deposit" = "Deposit";
-"cybrid.accounts.transfers.pending" = "Pending";
-"cybrid.accounts.transfers.failed" = "Failed";
 
 // KYC - Identity Verification Component
 "cybrid.kyc.loading.text" = "Checking Identity...";
