@@ -46,7 +46,7 @@
 "cybrid.trade.successModal.buyMore" = "Buy more crypto";
 "cybrid.trade.successModal.sellMore" = "Sell more crypto";
 
-// Accounts
+// Accounts Component
 "cybrid.accounts.loading.title" = "Loading accounts";
 "cybrid.accounts.content.title" = "Account Value";
 "cybrid.accounts.content.transfer.button" = "Transfer Funds";
