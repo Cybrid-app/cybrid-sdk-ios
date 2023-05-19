@@ -135,6 +135,28 @@ class AccountTransfersViewModelTest: XCTestCase {
 
     }
 
+    func test_TableView_didSelectRowAtIndex() throws {
+
+        // -- Given
+        let balance = BalanceUIModel(
+            account: AccountListBankModel.mock.objects[1],
+            asset: AssetBankModel.usd,
+            counterAsset: AssetBankModel.usd,
+            price: SymbolPriceBankModel.btcUSD1)
+        let controller = AccountTransfersViewController(balance: balance)
+        let tableView = controller.transfersTable
+        let viewModel = AccountTransfersViewModel(
+            cellProvider: controller,
+            dataProvider: self.dataProvider,
+            logger: nil)
+        let indexPath = IndexPath(item: 0, section: 0)
+
+        // -- When
+        viewModel.getTransfers(accountGuid: "")
+        dataProvider.didFetchTransfersListSuccessfully()
+        tableView.reloadData()
+        viewModel.tableView(tableView, didSelectRowAt: indexPath)
+    }
 }
 
 class AccountTransfersMockViewProvider: AccountTransfersViewProvider {
@@ -142,4 +164,6 @@ class AccountTransfersMockViewProvider: AccountTransfersViewProvider {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath, withData model: TransferBankModel) -> UITableViewCell {
         return UITableViewCell()
     }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath, with transfer: TransferBankModel) {}
 }
