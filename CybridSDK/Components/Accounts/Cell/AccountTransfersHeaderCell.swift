@@ -117,7 +117,7 @@ extension AccountTransfersHeaderCell {
     enum UIValues {
 
         static let cellHorizontalMargin: CGFloat = 6
-        static let headerHeight: CGFloat = 60
+        static let headerHeight: CGFloat = 20
         static let verticalStakSeparation: CGFloat = 5
 
         static let assetTileFont = UIFont.make(ofSize: 12, weight: .medium)

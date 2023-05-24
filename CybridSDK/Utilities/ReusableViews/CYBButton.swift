@@ -40,9 +40,9 @@ final class CYBButton: UIButton {
     }()
 
     init(title: String?,
-        style: ButtonStyle = .primary,
-        theme: Theme = CybridTheme.default,
-        action: @escaping () -> Void) {
+         style: ButtonStyle = .primary,
+         theme: Theme = CybridTheme.default,
+         action: @escaping () -> Void) {
 
         self.action = action
         self.title = title
@@ -117,9 +117,9 @@ final class CYBButton: UIButton {
         }
         layoutSubviews()
     }
-    
+
     func setTitle(title: String) {
-        
+
         self.title = title
         setTitle(self.title, for: .normal)
     }

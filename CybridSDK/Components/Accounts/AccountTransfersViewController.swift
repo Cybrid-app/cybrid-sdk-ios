@@ -23,6 +23,7 @@ public final class AccountTransfersViewController: UIViewController {
     var assetTitleContainer: UIStackView!
     var balanceValueView: UILabel!
     var subtitle: UILabel!
+    var pendingTitle: UILabel!
     let transfersTable = UITableView()
 
     internal init(balance: BalanceUIModel) {
@@ -85,7 +86,7 @@ extension AccountTransfersViewController {
 
     private func createBalanceTitles() {
 
-        // -- Balancr Value
+        // -- Balance Value
         balanceValueView = UILabel()
         balanceValueView.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         balanceValueView.translatesAutoresizingMaskIntoConstraints = false
@@ -93,7 +94,7 @@ extension AccountTransfersViewController {
         balanceValueView.font = UIValues.balanceValueViewFont
         balanceValueView.textColor = UIValues.balanceValueViewColor
         balanceValueView.textAlignment = .center
-        balanceValueView.setAttributedText(mainText: balance.accountBalanceFormatted,
+        balanceValueView.setAttributedText(mainText: balance.accountBalanceInFiatFormatted,
                                            mainTextFont: UIValues.balanceValueViewFont,
                                            mainTextColor: UIValues.balanceValueViewColor,
                                            attributedText: balance.asset?.code ?? "",
@@ -117,6 +118,19 @@ extension AccountTransfersViewController {
             toItem: balanceValueView,
             height: UIValues.balanceFiatValueViewSize,
             margins: UIValues.balanceFiatValueViewMargins)
+
+        // -- Pending Fiat Value
+        let pendignString = CybridLocalizer().localize(with: UIStrings.pendingString)
+        let pendingValue = "\(balance.accountPendingBalanceFormatted)\(pendignString)"
+        pendingTitle = UILabel()
+        pendingTitle.font = UIValues.balancePendingFont
+        pendingTitle.textColor = UIValues.balancePendingColor
+        pendingTitle.textAlignment = .center
+        pendingTitle.text = pendingValue
+        pendingTitle.addBelow(
+            toItem: subtitle,
+            height: UIValues.balanceFiatPendingViewSize,
+            margins: UIValues.balanceFiatPendingMargins)
     }
 
     private func createTransfersTable() {
@@ -127,9 +141,8 @@ extension AccountTransfersViewController {
         self.transfersTable.rowHeight = UIValues.tradesTableCellHeight
         self.transfersTable.estimatedRowHeight = UIValues.tradesTableCellHeight
         self.transfersTable.translatesAutoresizingMaskIntoConstraints = false
-
         self.transfersTable.addBelowToBottom(
-            topItem: self.subtitle,
+            topItem: self.pendingTitle,
             bottomItem: self.view,
             margins: UIValues.tradesTableMargins)
 
@@ -199,8 +212,10 @@ extension AccountTransfersViewController {
         static let balanceValueViewSize: CGFloat = 35
         static let balanceFiatValueViewMargins = UIEdgeInsets(top: 2, left: 10, bottom: 0, right: 10)
         static let balanceFiatValueViewSize: CGFloat = 23
+        static let balanceFiatPendingViewSize: CGFloat = 19
+        static let balanceFiatPendingMargins = UIEdgeInsets(top: 5, left: 15, bottom: 0, right: 15)
         static let tradesTableCellHeight: CGFloat = 62
-        static let tradesTableMargins = UIEdgeInsets(top: 5, left: 15, bottom: 0, right: 15)
+        static let tradesTableMargins = UIEdgeInsets(top: 15, left: 15, bottom: 0, right: 15)
 
         // -- Fonts
         static let balanceAssetNameFont = UIFont.make(ofSize: 16.5, weight: .medium)
@@ -208,6 +223,7 @@ extension AccountTransfersViewController {
         static let balanceValueCodeViewFont = UIFont.make(ofSize: 18)
         static let balanceFiatValueFont = UIFont.make(ofSize: 17)
         static let balanceFiatValueCodeFont = UIFont.make(ofSize: 17)
+        static let balancePendingFont = UIFont.make(ofSize: 15)
 
         // -- Colors
         static let balanceAssetNameColor = UIColor(hex: "#3A3A3C")
@@ -215,10 +231,12 @@ extension AccountTransfersViewController {
         static let balanceValueCodeViewColor = UIColor(hex: "#8E8E93")
         static let balanceFiatValueColor = UIColor(hex: "#636366")
         static let balanceFiatValueCodeColor = UIColor(hex: "#757575")
+        static let balancePendingColor = UIColor(hex: "#007AFF")
     }
 
     enum UIStrings {
 
         static let transferAvailableSub = "cybrid.accounts.transfers.subtitle.available"
+        static let pendingString = "cybrid.accounts.item.fiat.pending"
     }
 }

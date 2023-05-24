@@ -9,7 +9,7 @@ import Foundation
 import CybridApiBankSwift
 
 extension TransferBankModel {
-    
+
     init?(json: [String: Any]) {
         guard
             let createdAt = json[TransferBankModel.CodingKeys.createdAt.rawValue] as? String
@@ -39,10 +39,8 @@ extension TransferBankModel {
 
         var models = [TransferBankModel]()
         for object in objects {
-            let objectData = try? JSONSerialization.data(withJSONObject: object)
-            var objectCopy = object
             // -- Creating the AccountBankModel
-            let model = TransferBankModel(json: objectCopy)
+            let model = TransferBankModel(json: object)
             if let model = model {
                 models.append(model)
             }

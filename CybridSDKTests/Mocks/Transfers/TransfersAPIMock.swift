@@ -51,7 +51,7 @@ final class TransfersAPIMock: TransfersAPI {
 }
 
 extension TransfersAPIMock {
-    
+
     static func mock() -> TransferBankModel {
         return TransferBankModel(
             guid: "1234",
