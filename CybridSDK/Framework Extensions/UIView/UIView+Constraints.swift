@@ -80,6 +80,17 @@ public extension UIView {
         }
     }
 
+    func removeConstraint(attribute: NSLayoutConstraint.Attribute) {
+
+        let currentContraints = constraints
+        currentContraints.forEach { constraint in
+            if constraint.firstAttribute == attribute {
+                constraint.isActive = false
+                removeConstraint(constraint)
+            }
+        }
+    }
+
     func setConstraintsSize(size: CGSize) {
 
         self.constraint(attribute: .height,
