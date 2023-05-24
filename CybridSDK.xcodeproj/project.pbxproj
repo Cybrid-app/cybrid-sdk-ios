@@ -148,6 +148,8 @@
 		9257E79629BB9BCA00846E12 /* BalanceUIModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9257E79529BB9BC900846E12 /* BalanceUIModelTest.swift */; };
 		9257E79929CA037E00846E12 /* TransferViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9257E79829CA037E00846E12 /* TransferViewController+Extensions.swift */; };
 		9257E79C29CADB3F00846E12 /* TransferModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9257E79B29CADB3F00846E12 /* TransferModal.swift */; };
+		925DD9A32A1E59DD006AFEAB /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925DD9A22A1E59DD006AFEAB /* UIView+Extensions.swift */; };
+		925DD9A52A1E5BC6006AFEAB /* UITextField+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925DD9A42A1E5BC6006AFEAB /* UITextField+Extensions.swift */; };
 		925FFDB829F832BD00F7D07A /* TradeModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925FFDB729F832BD00F7D07A /* TradeModal.swift */; };
 		92635470294CEC0400660E0B /* BankAccountsViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9263546F294CEC0400660E0B /* BankAccountsViewController+Extensions.swift */; };
 		92663D09293FACB900842E30 /* IdentityVerificationWithDetailsBankModel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92663D08293FACB900842E30 /* IdentityVerificationWithDetailsBankModel+Extensions.swift */; };
@@ -443,6 +445,8 @@
 		9257E79529BB9BC900846E12 /* BalanceUIModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceUIModelTest.swift; sourceTree = "<group>"; };
 		9257E79829CA037E00846E12 /* TransferViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TransferViewController+Extensions.swift"; sourceTree = "<group>"; };
 		9257E79B29CADB3F00846E12 /* TransferModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferModal.swift; sourceTree = "<group>"; };
+		925DD9A22A1E59DD006AFEAB /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
+		925DD9A42A1E5BC6006AFEAB /* UITextField+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extensions.swift"; sourceTree = "<group>"; };
 		925FFDB729F832BD00F7D07A /* TradeModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeModal.swift; sourceTree = "<group>"; };
 		9263546F294CEC0400660E0B /* BankAccountsViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BankAccountsViewController+Extensions.swift"; sourceTree = "<group>"; };
 		92663D08293FACB900842E30 /* IdentityVerificationWithDetailsBankModel+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IdentityVerificationWithDetailsBankModel+Extensions.swift"; sourceTree = "<group>"; };
@@ -1459,6 +1463,8 @@
 			isa = PBXGroup;
 			children = (
 				928E237C28EE02A6006AAE1A /* UIViewController+Extensions.swift */,
+				925DD9A22A1E59DD006AFEAB /* UIView+Extensions.swift */,
+				925DD9A42A1E5BC6006AFEAB /* UITextField+Extensions.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -2291,8 +2297,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				925DD9A52A1E5BC6006AFEAB /* UITextField+Extensions.swift in Sources */,
 				0BBCF616285C43E000D39C6D /* AppDelegate.swift in Sources */,
 				0BD66114286B76F300F4DA6B /* RootViewController.swift in Sources */,
+				925DD9A32A1E59DD006AFEAB /* UIView+Extensions.swift in Sources */,
 				0BD26F2928A55D7F00ED2A1B /* ClientLogger.swift in Sources */,
 				0BBCF618285C43E000D39C6D /* SceneDelegate.swift in Sources */,
 				92E2133528F86F3300F420F2 /* LoginLoader.swift in Sources */,
