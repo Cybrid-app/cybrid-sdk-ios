@@ -72,6 +72,7 @@ extension AccountsViewController {
         accountsValueTitle.textColor = UIValues.accountValueTitleColor
         accountsValueTitle.textAlignment = .center
         accountsValueTitle.text = "... \(Cybrid.fiat.code)"
+        accountsValueTitle.accessibilityIdentifier = "AccountsAcomponent_Content_Balance_Value_Label"
         accountsValueTitle.addBelow(toItem: accountsTitle,
                                     height: UIValues.accountValueTitleHeight,
                                     margins: UIValues.accountValueTitleMargin)
@@ -98,13 +99,12 @@ extension AccountsViewController {
         // -- Table
         self.accountsTable.delegate = self.accountsViewModel
         self.accountsTable.dataSource = self.accountsViewModel
-
         self.accountsTable.register(AccountsCell.self, forCellReuseIdentifier: AccountsCell.reuseIdentifier)
         self.accountsTable.register(AccountsFiatCell.self, forCellReuseIdentifier: AccountsFiatCell.reuseIdentifier)
-
         self.accountsTable.rowHeight = UIValues.accountsTableRowHeight
         self.accountsTable.estimatedRowHeight = UIValues.accountsTableRowHeight
         self.accountsTable.translatesAutoresizingMaskIntoConstraints = false
+        self.accountsTable.accessibilityIdentifier = "AccountsAcomponent_Content_Table"
         self.accountsTable.addInTheMiddle(topItem: accountsValueTitle,
                                             bottomItem: transferButton,
                                             margins: UIValues.accountsTableMargin)

@@ -1424,6 +1424,7 @@
 			children = (
 				928A2CDE2A0A9A64005D0E3A /* TradeFlow.swift */,
 				928A2CE02A13DC3C005D0E3A /* TransferFlow.swift */,
+				925DD9A02A1E4A91006AFEAB /* AccountsFlow.swift */,
 			);
 			path = Flow;
 			sourceTree = "<group>";
@@ -2320,6 +2321,7 @@
 				928A2CE12A13DC3C005D0E3A /* TransferFlow.swift in Sources */,
 				928E237F28EE4996006AAE1A /* AccountsComponentTest.swift in Sources */,
 				92B68193291AB9B900FD6E99 /* KYCComponentTest.swift in Sources */,
+				925DD9A12A1E4A91006AFEAB /* AccountsFlow.swift in Sources */,
 				928E237628ECA38B006AAE1A /* XCUIElement+Extensions.swift in Sources */,
 				928A2CDF2A0A9A64005D0E3A /* TradeFlow.swift in Sources */,
 				928A2CE42A13DD53005D0E3A /* CybridUITest.swift in Sources */,
