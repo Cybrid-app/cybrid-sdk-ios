@@ -56,6 +56,7 @@ final class CYBTextField: UITextField {
     func updateIcon(_ icon: Icon?) {
 
         self.icon = icon
+        setupConstraints()
         setupIcon()
     }
 
@@ -80,11 +81,19 @@ final class CYBTextField: UITextField {
 
     private func setupConstraints() {
 
+        var widhtConstraint: CGFloat = Constants.IconContainer.minWidth
+        if case .text(let value) = self.icon {
+            if value.count > 3 {
+                widhtConstraint = Constants.IconContainer.maxWidth
+            }
+        }
+
+        iconContainer.removeConstraint(attribute: .width)
         iconContainer.constraint(attribute: .width,
                                  relatedBy: .equal,
                                  toItem: nil,
                                  attribute: .notAnAttribute,
-                                 constant: Constants.IconContainer.minWidth)
+                                 constant: widhtConstraint)
         constraint(attribute: .height,
                    relatedBy: .greaterThanOrEqual,
                    toItem: nil,
@@ -146,12 +155,29 @@ final class CYBTextField: UITextField {
         label.textColor = theme.colorTheme.secondaryTextColor
         label.translatesAutoresizingMaskIntoConstraints = false
         iconContainer.addSubview(label)
+        label.constraint(attribute: .top,
+                         relatedBy: .equal,
+                         toItem: iconContainer,
+                         attribute: .topMargin,
+                         constant: 0
+        )
+        label.constraint(attribute: .bottom,
+                         relatedBy: .equal,
+                         toItem: iconContainer,
+                         attribute: .bottomMargin,
+                         constant: 0
+        )
+        label.constraint(attribute: .leading,
+                         relatedBy: .equal,
+                         toItem: iconContainer,
+                         attribute: .leading,
+                         constant: 0
+        )
+
         let border = UIView()
         border.backgroundColor = theme.colorTheme.separatorColor
         border.translatesAutoresizingMaskIntoConstraints = false
         iconContainer.addSubview(border)
-
-        label.constraintEdges(to: iconContainer)
         border.constraint(attribute: .leading,
                           relatedBy: .equal,
                           toItem: label,
@@ -225,13 +251,14 @@ extension CYBTextField {
 
         enum Divider {
 
-            static let trailing: CGFloat = -7
+            static let trailing: CGFloat = 8
             static let height: CGFloat = 22
         }
 
         enum IconContainer {
 
             static let minWidth: CGFloat = UIConstants.sizeLg
+            static let maxWidth: CGFloat = 62
         }
 
         enum Icon {

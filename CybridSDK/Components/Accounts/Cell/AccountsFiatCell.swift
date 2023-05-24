@@ -101,7 +101,7 @@ extension AccountsFiatCell {
         self.setupBasicLabel(accountBalancePending,
                              side: .right,
                              font: UIFont.make(ofSize: UIValues.accountBalanceFiatSize),
-                             color: UIValues.accountsITemFiatPEndingColor)
+                             color: UIValues.accountsITemFiatPendingColor)
     }
 
     private func createVerticalStackView(top: UIView, bottom: UIView, withConstraints: Bool = false) -> UIStackView {
@@ -236,7 +236,7 @@ extension AccountsFiatCell {
         static let accountBalanceColor = UIColor.black
         static let assetPriceColor = UIColor(hex: "#636366")
         static let accountBalanceFiatColor = UIColor(hex: "#636366")
-        static let accountsITemFiatPEndingColor = UIColor(hex: "#5AC8FA")
+        static let accountsITemFiatPendingColor = UIColor(hex: "#007AFF")
     }
 
     enum UIStrings {

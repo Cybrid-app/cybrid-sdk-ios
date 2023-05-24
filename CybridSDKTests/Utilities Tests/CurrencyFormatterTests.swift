@@ -412,3 +412,4 @@ extension CurrencyFormatterTests {
     XCTAssertEqual(formattedInputWithoutSeparator, "1.23100200")
   }
 }
+// swiftlint:enable identifier_name

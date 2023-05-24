@@ -52,7 +52,7 @@ class AccountTransfersViewModel: NSObject {
 protocol AccountTransfersViewProvider: AnyObject {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath, withData model: TransferBankModel) -> UITableViewCell
-    
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath, with transfer: TransferBankModel)
 }
 
@@ -71,7 +71,7 @@ extension AccountTransfersViewModel: UITableViewDelegate, UITableViewDataSource 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         return AccountTransfersHeaderCell()
     }
-    
+
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         cellProvider.tableView(tableView, didSelectRowAt: indexPath, with: self.tranfers.value[indexPath.row])
     }

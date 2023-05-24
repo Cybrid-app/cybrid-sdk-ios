@@ -24,6 +24,11 @@ class LoginController: UIViewController {
         
         super.viewDidLoad()
         self.hideKeyboardWhenTappedAround()
+        
+        // -- Setup textFields
+        self.setUITexteFildUnderLine(textField: self.clientID)
+        self.setUITexteFildUnderLine(textField: self.clientSecret)
+        self.setUITexteFildUnderLine(textField: self.customerGUID)
     }
     
     @IBAction func demoLogin(_ sender: Any) {
@@ -110,5 +115,39 @@ extension LoginController: UITextFieldDelegate {
             textField.resignFirstResponder();
         }
         return true;
+    }
+}
+
+// MARK: Utitlies
+extension LoginController {
+    
+    func setUITexteFildUnderLine(textField: UITextField?) {
+
+        textField?.backgroundColor = .clear
+        textField?.borderStyle = UITextField.BorderStyle.none
+        textField?.layer.cornerRadius = 0
+        textField?.textColor = UIColor.white
+
+        let underline = UIView()
+        underline.backgroundColor = UIColor.white
+        underline.translatesAutoresizingMaskIntoConstraints = false
+        textField?.addSubview(underline)
+        underline.constraint(attribute: .leading,
+                             relatedBy: .equal,
+                             toItem: textField,
+                             attribute: .leading)
+        underline.constraint(attribute: .trailing,
+                             relatedBy: .equal,
+                             toItem: textField,
+                             attribute: .trailing)
+        underline.constraint(attribute: .top,
+                             relatedBy: .equal,
+                             toItem: textField,
+                             attribute: .bottom)
+        underline.constraint(attribute: .height,
+                             relatedBy: .equal,
+                             toItem: nil,
+                             attribute: .notAnAttribute,
+                             constant: 1)
     }
 }

@@ -69,21 +69,18 @@ extension AccountTradesViewController {
 
         // -- Name
         balanceAssetName = UILabel()
-        balanceAssetName.setContentHuggingPriority(.defaultHigh, for: .horizontal)
-        balanceAssetName.translatesAutoresizingMaskIntoConstraints = false
-        balanceAssetName.sizeToFit()
         balanceAssetName.font = UIValues.balanceAssetNameFont
         balanceAssetName.textColor = UIValues.balanceAssetNameColor
-        balanceAssetName.textAlignment = .center
         balanceAssetName.text = balance.asset?.name ?? ""
 
         // -- AssetTitle Container
         assetTitleContainer = UIStackView(arrangedSubviews: [balanceAssetIcon, balanceAssetName])
         assetTitleContainer.axis = .horizontal
         assetTitleContainer.distribution = .fill
-        assetTitleContainer.alignment = .center
-        assetTitleContainer.spacing = UIConstants.zero
+        assetTitleContainer.alignment = .fill
+        assetTitleContainer.spacing = UIValues.assetTitleStackSpacing
 
+        // -- Adds
         self.view.addSubview(assetTitleContainer)
         self.centerHorizontalView(container: assetTitleContainer)
     }
@@ -161,11 +158,6 @@ extension AccountTradesViewController {
                              relatedBy: .equal,
                              toItem: self.view,
                              attribute: .centerX)
-        container.constraint(attribute: .width,
-                             relatedBy: .equal,
-                             toItem: nil,
-                             attribute: .notAnAttribute,
-                             constant: 120)
         container.constraint(attribute: .height,
                              relatedBy: .equal,
                              toItem: nil,
@@ -208,6 +200,7 @@ extension AccountTradesViewController {
         // -- Sizes
         static let assetTitleViewMargin = UIEdgeInsets(top: 36, left: 0, bottom: 0, right: 0)
         static let assetTitleViewHeight: CGFloat = 25
+        static let assetTitleStackSpacing: CGFloat = 10
         static let balanceAssetIconSize = CGSize(width: assetTitleViewHeight, height: assetTitleViewHeight)
         static let balanceAssetNameMargin = UIEdgeInsets(top: 4, left: 10, bottom: 0, right: 0)
         static let balanceValueViewMargin = UIEdgeInsets(top: 19, left: 10, bottom: 0, right: 10)
