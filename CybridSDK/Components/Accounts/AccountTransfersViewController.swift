@@ -120,8 +120,8 @@ extension AccountTransfersViewController {
             margins: UIValues.balanceFiatValueViewMargins)
 
         // -- Pending Fiat Value
-        let pendignString = CybridLocalizer().localize(with: UIStrings.pendingString)
-        let pendingValue = "\(balance.accountPendingBalanceFormatted)\(pendignString)"
+        let pendingString = CybridLocalizer().localize(with: UIStrings.pendingString)
+        let pendingValue = "\(balance.accountPendingBalanceFormatted)\(pendingString)"
         pendingTitle = UILabel()
         pendingTitle.font = UIValues.balancePendingFont
         pendingTitle.textColor = UIValues.balancePendingColor
