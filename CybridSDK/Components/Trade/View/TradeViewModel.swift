@@ -166,7 +166,8 @@ class TradeViewModel: NSObject, ListPricesItemDelegate {
         }
     }
 
-    @objc func maxButtonClickHandler() {
+    @objc
+    func maxButtonClickHandler() {
 
         let amount = self.getMaxAmountOfAccount()
         self.resetAmountInput(amount: amount)
@@ -341,6 +342,7 @@ class TradeViewModel: NSObject, ListPricesItemDelegate {
             case .success(let quote):
                 self?.currentTrade.value = quote
                 self?.modalState.value = .SUCCESS
+                self?.resetAmountInput()
 
             case .failure:
                 self?.logger?.log(.component(.accounts(.accountsDataError)))
