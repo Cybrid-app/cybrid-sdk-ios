@@ -252,8 +252,8 @@ class TradeViewModel: NSObject, ListPricesItemDelegate {
     internal func getMaxAmountOfAccount() -> String {
 
         let asset = (self.currentAccountToTrade.value?.asset)!
-        let account = self.currentAccountToTrade
-        let accountValue = asset.type == .crypto ? account.value?.account.platformBalance : account.value?.account.platformAvailable
+        let account = self.currentAccountToTrade.value
+        let accountValue = asset.type == .crypto ? account?.account.platformBalance : account?.account.platformAvailable
         let accountValueCDecimal = CDecimal(accountValue ?? "0")
         let valueFormatted = AssetFormatter.forBase(asset, amount: accountValueCDecimal)
         return valueFormatted

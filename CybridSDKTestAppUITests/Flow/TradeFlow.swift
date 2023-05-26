@@ -412,6 +412,106 @@ class TradeFlow: CybridUITest {
         self.returnTap()
     }
     
+    func trade_buy_isolated_views() {
+        
+        // -- Get Trade Component and tap
+        let transferComponent = app.staticTexts["Trade Component"]
+        if transferComponent.waitForExistence(timeout: 6) {
+            transferComponent.tap()
+        }
+        
+        // -- Enter in BTC
+        let btc = app.staticTexts["Bitcoin BTC"]
+        if btc.waitForExistence(timeout: 4) {
+            XCTAssertTrue(btc.exists)
+            btc.tap()
+        }
+        
+        // -- Check UISegmentedControl
+        let buy = app.buttons["BUY"]
+        if buy.waitForExistence(timeout: 6) {
+            
+            XCTAssertTrue(buy.exists)
+            let segmented = app.segmentedControls.element(boundBy: 0)
+            XCTAssertTrue(segmented.buttons.element(boundBy: 0).isSelected)
+        }
+        
+        let sell = app.buttons["SELL"]
+        XCTAssertTrue(sell.exists)
+        
+        // -- Get fiat asset and funds
+        let fromLabel = app.staticTexts["From:"]
+        XCTAssertTrue(fromLabel.exists)
+        
+        let fiatAccountField = app.textFields["fiatPickerTextField"]
+        let fiatAccount: String = fiatAccountField.value as! String
+        if !fiatAccount.isEmpty {
+            
+            // -- Get fiat asset and balance
+            let fiatAccountParts = fiatAccount.components(separatedBy: " - ")
+            let fiatAsset = fiatAccountParts[0]
+            let fiatBalance = fiatAccountParts[1]
+            
+            // --
+            let toLabel = app.staticTexts["To:"]
+            XCTAssertTrue(toLabel.exists)
+            
+            // -- Change the crypto asset to BTC
+            let cryptoField = app.textFields["tradingPickerTextField"]
+            XCTAssertTrue(cryptoField.exists)
+            
+            // -- Test Crypto Picker
+            let cryptoAccount: String = cryptoField.value as! String
+            cryptoField.tap()
+            app.pickerWheels.element.adjust(toPickerWheelValue: cryptoAccount)
+            
+            // -- Get crypto asset balance
+            let cryptoAccountParts = cryptoAccount.components(separatedBy: " - ")
+            let cryptoAsset = cryptoAccountParts[0]
+            let cryptoBalance = cryptoAccountParts[1]
+            
+            // --
+            let amountLabel = app.staticTexts["Amount"]
+            XCTAssertTrue(amountLabel.exists)
+            
+            // -- BalanceField, Code, Switch, Max
+            let amountFieldView = app.textFields["TradeComponent_AmountField"]
+            let codeView = app.staticTexts["CYBTextField_Left_Text"]
+            let switchButton = app.buttons["TradeComponent_SWitchButton"]
+            let maxButton = app.buttons["TradeComponent_Content_MaxButton"]
+            
+            // -- Code and balance value
+            let codeValue: String = codeView.label
+            let amountFieldOriginalValue: String = amountFieldView.value as! String
+            
+            // -- Test SWitch
+            XCTAssertTrue(switchButton.exists)
+            XCTAssertFalse(maxButton.exists)
+            switchButton.tap()
+            XCTAssertNotEqual(codeValue, codeView.label)
+            XCTAssertTrue(maxButton.exists)
+            maxButton.tap()
+            XCTAssertNotEqual(amountFieldOriginalValue, amountFieldView.value as! String)
+            XCTAssertEqual(fiatBalance.replacingOccurrences(of: "$", with: ""), amountFieldView.value as! String)
+            
+            // -- Test Sell
+            sell.tap()
+            XCTAssertFalse(maxButton.exists)
+            XCTAssertEqual(amountFieldView.value as! String, "0.0")
+            switchButton.tap()
+            XCTAssertTrue(maxButton.exists)
+            maxButton.tap()
+            XCTAssertEqual(cryptoBalance, amountFieldView.value as! String)
+            
+            // -- Return main controller
+            self.returnTap()
+        } else {
+            
+            // -- Return main controller
+            self.returnTap()
+        }
+    }
+    
     func test_flow_BTC() {
         
         // -- App launch
@@ -494,5 +594,17 @@ class TradeFlow: CybridUITest {
 
         // -- Trade 50 USD to BTC
         self.trade_buy_Error()
+    }
+    
+    func test_flow_isolated_views() {
+        
+        // -- App launch
+        app.launch()
+        
+        // -- Login
+        self.login()
+        
+        // -- Make the flow
+        self.trade_buy_isolated_views()
     }
 }

@@ -293,6 +293,7 @@ extension TradeViewController {
         button.setTitleColor(UIValues.maxButtonColor, for: .normal)
         button.setTitle(textString, for: .normal)
         button.titleLabel?.font = UIValues.maxButtonFont
+        button.accessibilityIdentifier = "TradeComponent_Content_MaxButton"
         button.isHidden = true
         button.addTarget(self.tradeViewModel, action: #selector(self.tradeViewModel.maxButtonClickHandler), for: .touchUpInside)
         return button
@@ -387,8 +388,7 @@ extension TradeViewController: UIPickerViewDelegate, UIPickerViewDataSource {
         }
 
         let name = account.asset.name
-        let asset = account.account.asset ?? ""
-        return "\(name)(\(asset)) - \(account.balanceFormatted)"
+        return "\(name) - \(account.balanceFormatted)"
     }
 
     public func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
@@ -429,7 +429,7 @@ extension TradeViewController: UITextFieldDelegate {
         self.tradeViewModel.currentAmountInput = amountString
         self.tradeViewModel.calculatePreQuote()
     }
-    
+
     public func textFieldForceUpdate(text: String) {}
 }
 
