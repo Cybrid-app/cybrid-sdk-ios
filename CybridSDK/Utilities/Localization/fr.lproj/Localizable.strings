@@ -24,6 +24,7 @@
 "cybrid.trade.buy.cta" = "Acheter";
 "cybrid.trade.sell.title" = "VENDRE";
 "cybrid.trade.sell.cta" = "Vendre";
+"cybrid.trade.content.maxButton" = "MAX";
 "cybrid.trade.confirmationModal.title" = "Devis de Commande";
 "cybrid.trade.confirmationModal.subtitle" = "Les prix sont en temps réel. Les tarifs s'actualisent automatiquement.";
 "cybrid.trade.confirmationModal.purchaseAmount" = "Montant des achats";
