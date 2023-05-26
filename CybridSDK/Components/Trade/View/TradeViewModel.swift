@@ -151,9 +151,9 @@ class TradeViewModel: NSObject, ListPricesItemDelegate {
         let amount = CDecimal(self.currentAmountInput)
         if amount.newValue != "0.00" {
 
-            let buyPrice = self.getPrice(symbol: symbol).buyPrice ?? "0"
             let asset = self.currentAccountToTrade.value?.asset
             let assetToConvert = self.currentAccountCounterToTrade.value?.asset
+            let buyPrice = self.getPrice(symbol: symbol).buyPrice ?? "0"
             let amountFormatted = AssetFormatter.forInput(asset!, amount: amount)
             let tradeValue = AssetFormatter.trade(
                 amount: amountFormatted,
@@ -164,17 +164,35 @@ class TradeViewModel: NSObject, ListPricesItemDelegate {
 
             // -- Founds validation
             if self.segmentSelection.value == .buy {
+
                 if asset?.type == .crypto {
-                    let accountValue = self.currentAccountCounterToTrade.value?.account.platformBalance
+                    let accountValue = self.currentAccountCounterToTrade.value?.account.platformAvailable
                     let accountValueCDecimal = CDecimal(accountValue ?? "0")
                     if tradeValueCDecimal.intValue > accountValueCDecimal.intValue {
                         self.currentAmountWithPriceError.value = true
                     }
                 } else {
                     let amountFormattedCDecimal = CDecimal(amountFormatted)
-                    let accountValue = self.currentAccountToTrade.value?.account.platformBalance
+                    let accountValue = self.currentAccountToTrade.value?.account.platformAvailable
                     let accountValueCDecimal = CDecimal(accountValue ?? "0")
                     if amountFormattedCDecimal.intValue > accountValueCDecimal.intValue {
+                        self.currentAmountWithPriceError.value = true
+                    }
+                }
+            } else {
+
+                if asset?.type == .crypto {
+                    let amountFormatted = AssetFormatter.forInput(asset!, amount: amount)
+                    let amountFormattedCDecimal = CDecimal(amountFormatted)
+                    let accountCryptoAssetValue = self.currentAccountToTrade.value?.account.platformBalance
+                    let accountCryptoAssetValueCDecimal = CDecimal(accountCryptoAssetValue ?? "0")
+                    if amountFormattedCDecimal.intValue > accountCryptoAssetValueCDecimal.intValue {
+                        self.currentAmountWithPriceError.value = true
+                    }
+                } else {
+                    let accountValue = self.currentAccountCounterToTrade.value?.account.platformBalance
+                    let accountValueCDecimal = CDecimal(accountValue ?? "0")
+                    if tradeValueCDecimal.intValue > accountValueCDecimal.intValue {
                         self.currentAmountWithPriceError.value = true
                     }
                 }
