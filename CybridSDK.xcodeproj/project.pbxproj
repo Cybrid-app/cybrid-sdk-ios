@@ -150,6 +150,7 @@
 		9257E79C29CADB3F00846E12 /* TransferModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9257E79B29CADB3F00846E12 /* TransferModal.swift */; };
 		925DD9A32A1E59DD006AFEAB /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925DD9A22A1E59DD006AFEAB /* UIView+Extensions.swift */; };
 		925DD9A52A1E5BC6006AFEAB /* UITextField+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925DD9A42A1E5BC6006AFEAB /* UITextField+Extensions.swift */; };
+		925DD9A92A250925006AFEAB /* AccountsFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925DD9A82A250925006AFEAB /* AccountsFlow.swift */; };
 		925FFDB829F832BD00F7D07A /* TradeModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925FFDB729F832BD00F7D07A /* TradeModal.swift */; };
 		92635470294CEC0400660E0B /* BankAccountsViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9263546F294CEC0400660E0B /* BankAccountsViewController+Extensions.swift */; };
 		92663D09293FACB900842E30 /* IdentityVerificationWithDetailsBankModel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92663D08293FACB900842E30 /* IdentityVerificationWithDetailsBankModel+Extensions.swift */; };
@@ -447,6 +448,7 @@
 		9257E79B29CADB3F00846E12 /* TransferModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferModal.swift; sourceTree = "<group>"; };
 		925DD9A22A1E59DD006AFEAB /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
 		925DD9A42A1E5BC6006AFEAB /* UITextField+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extensions.swift"; sourceTree = "<group>"; };
+		925DD9A82A250925006AFEAB /* AccountsFlow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AccountsFlow.swift; path = ../../../../../AccountsFlow.swift; sourceTree = "<group>"; };
 		925FFDB729F832BD00F7D07A /* TradeModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeModal.swift; sourceTree = "<group>"; };
 		9263546F294CEC0400660E0B /* BankAccountsViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BankAccountsViewController+Extensions.swift"; sourceTree = "<group>"; };
 		92663D08293FACB900842E30 /* IdentityVerificationWithDetailsBankModel+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IdentityVerificationWithDetailsBankModel+Extensions.swift"; sourceTree = "<group>"; };
@@ -1424,7 +1426,7 @@
 			children = (
 				928A2CDE2A0A9A64005D0E3A /* TradeFlow.swift */,
 				928A2CE02A13DC3C005D0E3A /* TransferFlow.swift */,
-				925DD9A02A1E4A91006AFEAB /* AccountsFlow.swift */,
+				925DD9A82A250925006AFEAB /* AccountsFlow.swift */,
 			);
 			path = Flow;
 			sourceTree = "<group>";
@@ -2321,7 +2323,7 @@
 				928A2CE12A13DC3C005D0E3A /* TransferFlow.swift in Sources */,
 				928E237F28EE4996006AAE1A /* AccountsComponentTest.swift in Sources */,
 				92B68193291AB9B900FD6E99 /* KYCComponentTest.swift in Sources */,
-				925DD9A12A1E4A91006AFEAB /* AccountsFlow.swift in Sources */,
+				925DD9A92A250925006AFEAB /* AccountsFlow.swift in Sources */,
 				928E237628ECA38B006AAE1A /* XCUIElement+Extensions.swift in Sources */,
 				928A2CDF2A0A9A64005D0E3A /* TradeFlow.swift in Sources */,
 				928A2CE42A13DD53005D0E3A /* CybridUITest.swift in Sources */,
