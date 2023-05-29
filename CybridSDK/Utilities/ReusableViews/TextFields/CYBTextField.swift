@@ -153,6 +153,7 @@ final class CYBTextField: UITextField {
         let label = UILabel()
         label.text = content
         label.textColor = theme.colorTheme.secondaryTextColor
+        label.accessibilityIdentifier = "CYBTextField_Left_Text"
         label.translatesAutoresizingMaskIntoConstraints = false
         iconContainer.addSubview(label)
         label.constraint(attribute: .top,

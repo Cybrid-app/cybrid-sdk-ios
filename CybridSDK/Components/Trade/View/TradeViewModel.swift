@@ -21,8 +21,10 @@ class TradeViewModel: NSObject, ListPricesItemDelegate {
     internal var currentAccountToTrade: Observable<AccountAssetUIModel?> = .init(nil)
     internal var currentAccountCounterToTrade: Observable<AccountAssetUIModel?> = .init(nil)
     internal var currentAmountInput = "0"
+    internal var currentAmountObservable: Observable<String> = .init("")
     internal var currentAmountWithPrice: Observable<String> = .init("0.0")
     internal var currentAmountWithPriceError: Observable<Bool> = .init(false)
+    internal var currentMaxButtonHide: Observable<Bool> = .init(true)
 
     // MARK: Public properties
     var uiState: Observable<TradeViewController.ViewState> = .init(.PRICES)
@@ -116,6 +118,8 @@ class TradeViewModel: NSObject, ListPricesItemDelegate {
 
         guard let selectedIndex = _TradeType(rawValue: sender.selectedSegmentIndex) else { return }
         self.segmentSelection.value = selectedIndex
+        self.maxButtonViewStateHandler()
+        self.resetAmountInput()
     }
 
     @objc
@@ -140,6 +144,37 @@ class TradeViewModel: NSObject, ListPricesItemDelegate {
                 $0.asset.code == self.currentAsset.value?.code
             })
         }
+
+        // -- Max button logic
+        self.maxButtonViewStateHandler()
+    }
+
+    internal func maxButtonViewStateHandler() {
+
+        if self.segmentSelection.value == .buy {
+            if self.currentAccountToTrade.value?.account.type == .fiat {
+                self.currentMaxButtonHide.value = false
+            } else {
+                self.currentMaxButtonHide.value = true
+            }
+        } else {
+            if self.currentAccountToTrade.value?.account.type == .fiat {
+                self.currentMaxButtonHide.value = true
+            } else {
+                self.currentMaxButtonHide.value = false
+            }
+        }
+    }
+
+    @objc
+    func maxButtonClickHandler() {
+
+        let amount = self.getMaxAmountOfAccount()
+        self.resetAmountInput(amount: amount)
+    }
+
+    internal func resetAmountInput(amount: String = "") {
+        self.currentAmountObservable.value = amount
     }
 
     internal func calculatePreQuote() {
@@ -151,9 +186,9 @@ class TradeViewModel: NSObject, ListPricesItemDelegate {
         let amount = CDecimal(self.currentAmountInput)
         if amount.newValue != "0.00" {
 
-            let buyPrice = self.getPrice(symbol: symbol).buyPrice ?? "0"
             let asset = self.currentAccountToTrade.value?.asset
             let assetToConvert = self.currentAccountCounterToTrade.value?.asset
+            let buyPrice = self.getPrice(symbol: symbol).buyPrice ?? "0"
             let amountFormatted = AssetFormatter.forInput(asset!, amount: amount)
             let tradeValue = AssetFormatter.trade(
                 amount: amountFormatted,
@@ -164,17 +199,35 @@ class TradeViewModel: NSObject, ListPricesItemDelegate {
 
             // -- Founds validation
             if self.segmentSelection.value == .buy {
+
                 if asset?.type == .crypto {
-                    let accountValue = self.currentAccountCounterToTrade.value?.account.platformBalance
+                    let accountValue = self.currentAccountCounterToTrade.value?.account.platformAvailable
                     let accountValueCDecimal = CDecimal(accountValue ?? "0")
                     if tradeValueCDecimal.intValue > accountValueCDecimal.intValue {
                         self.currentAmountWithPriceError.value = true
                     }
                 } else {
                     let amountFormattedCDecimal = CDecimal(amountFormatted)
-                    let accountValue = self.currentAccountToTrade.value?.account.platformBalance
+                    let accountValue = self.currentAccountToTrade.value?.account.platformAvailable
                     let accountValueCDecimal = CDecimal(accountValue ?? "0")
                     if amountFormattedCDecimal.intValue > accountValueCDecimal.intValue {
+                        self.currentAmountWithPriceError.value = true
+                    }
+                }
+            } else {
+
+                if asset?.type == .crypto {
+                    let amountFormatted = AssetFormatter.forInput(asset!, amount: amount)
+                    let amountFormattedCDecimal = CDecimal(amountFormatted)
+                    let accountCryptoAssetValue = self.currentAccountToTrade.value?.account.platformBalance
+                    let accountCryptoAssetValueCDecimal = CDecimal(accountCryptoAssetValue ?? "0")
+                    if amountFormattedCDecimal.intValue > accountCryptoAssetValueCDecimal.intValue {
+                        self.currentAmountWithPriceError.value = true
+                    }
+                } else {
+                    let accountValue = self.currentAccountCounterToTrade.value?.account.platformBalance
+                    let accountValueCDecimal = CDecimal(accountValue ?? "0")
+                    if tradeValueCDecimal.intValue > accountValueCDecimal.intValue {
                         self.currentAmountWithPriceError.value = true
                     }
                 }
@@ -194,6 +247,16 @@ class TradeViewModel: NSObject, ListPricesItemDelegate {
             $0.originalSymbol.symbol == symbol
         })
         return price?.originalSymbol ?? SymbolPriceBankModel()
+    }
+
+    internal func getMaxAmountOfAccount() -> String {
+
+        let asset = (self.currentAccountToTrade.value?.asset)!
+        let account = self.currentAccountToTrade.value
+        let accountValue = asset.type == .crypto ? account?.account.platformBalance : account?.account.platformAvailable
+        let accountValueCDecimal = CDecimal(accountValue ?? "0")
+        let valueFormatted = AssetFormatter.forBase(asset, amount: accountValueCDecimal)
+        return valueFormatted
     }
 
     internal func createPostQuote() -> PostQuoteBankModel {
@@ -279,6 +342,7 @@ class TradeViewModel: NSObject, ListPricesItemDelegate {
             case .success(let quote):
                 self?.currentTrade.value = quote
                 self?.modalState.value = .SUCCESS
+                self?.resetAmountInput()
 
             case .failure:
                 self?.logger?.log(.component(.accounts(.accountsDataError)))

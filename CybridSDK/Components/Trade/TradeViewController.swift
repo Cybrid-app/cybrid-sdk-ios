@@ -28,6 +28,7 @@ public final class TradeViewController: UIViewController {
     internal var amountTextField: CYBTextField!
     internal var flagIcon = URLImageView(url: nil)
     internal var amountPriceLabel: UILabel!
+    internal var maxButton: UIButton!
     internal var actionButton: CYBButton!
     internal lazy var fiatPickerView = UIPickerView()
     internal lazy var tradingPickerView = UIPickerView()

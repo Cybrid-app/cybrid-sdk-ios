@@ -128,8 +128,7 @@ extension TradeViewController {
 
         // -- Flag, Amount calculated and MAX button
         self.amountPriceLabel = createSubTitleLabel()
-        let maxButton = self.createMaxButton()
-        maxButton.isHidden = true
+        self.maxButton = self.createMaxButton()
         self.flagIcon.addThreeInLine(toItem: self.amountTextField,
                                      width: 28,
                                      height: 24,
@@ -288,10 +287,15 @@ extension TradeViewController {
 
     func createMaxButton() -> UIButton {
 
+        let textString = localizer.localize(with: UIStrings.maxButtonLabel)
         let button = UIButton()
         button.backgroundColor = UIColor.clear
-        button.setTitleColor(UIValues.contentMaxButton, for: .normal)
-        button.setTitle("MAX", for: .normal)
+        button.setTitleColor(UIValues.maxButtonColor, for: .normal)
+        button.setTitle(textString, for: .normal)
+        button.titleLabel?.font = UIValues.maxButtonFont
+        button.accessibilityIdentifier = "TradeComponent_Content_MaxButton"
+        button.isHidden = true
+        button.addTarget(self.tradeViewModel, action: #selector(self.tradeViewModel.maxButtonClickHandler), for: .touchUpInside)
         return button
     }
 
@@ -347,6 +351,15 @@ extension TradeViewController {
             self.tradeViewModel.calculatePreQuote()
             self.actionButton.setTitle(title: localizer.localize(with: segment == .buy ? UIStrings.contentBuyButton : UIStrings.contentSellButton))
         }
+
+        self.tradeViewModel.currentMaxButtonHide.bind { [self] state in
+            self.maxButton.isHidden = state
+        }
+
+        self.tradeViewModel.currentAmountObservable.bind { [self] value in
+            self.amountTextField.text = value
+            self.textFieldDidChangeSelection(self.amountTextField)
+        }
     }
 }
 
@@ -375,8 +388,7 @@ extension TradeViewController: UIPickerViewDelegate, UIPickerViewDataSource {
         }
 
         let name = account.asset.name
-        let asset = account.account.asset ?? ""
-        return "\(name)(\(asset)) - \(account.balanceFormatted)"
+        return "\(name) - \(account.balanceFormatted)"
     }
 
     public func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
@@ -417,6 +429,8 @@ extension TradeViewController: UITextFieldDelegate {
         self.tradeViewModel.currentAmountInput = amountString
         self.tradeViewModel.calculatePreQuote()
     }
+
+    public func textFieldForceUpdate(text: String) {}
 }
 
 extension TradeViewController {
@@ -438,11 +452,12 @@ extension TradeViewController {
         // -- Colors
         static let componentTitleColor = UIColor.black
         static let subTitleColor = UIColor(hex: "#757575")
-        static let contentMaxButton = UIColor(hex: "#007AFF")
+        static let maxButtonColor = UIColor(hex: "#007AFF")
 
         // -- Fonts
         static let componentTitleFont = UIFont.make(ofSize: 17, weight: .bold)
         static let subTitleFont = UIFont.make(ofSize: 13)
+        static let maxButtonFont = UIFont.make(ofSize: 15)
     }
 
     enum UIMargins {
@@ -470,5 +485,6 @@ extension TradeViewController {
         static let contentBuyButton = "cybrid.account.trade.detail.bought"
         static let contentSellButton = "cybrid.account.trade.detail.sold"
         static let contentErrorLabel = "cybrid.tradeView.content.error"
+        static let maxButtonLabel = "cybrid.trade.content.maxButton"
     }
 }
