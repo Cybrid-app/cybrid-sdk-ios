@@ -60,6 +60,9 @@ class AccountsFlow: CybridUITest {
     
     func check_accounts(accountsWrapper: AccountsWrapper) {
         
+        let fiatNames: [String] = ["United States Dollar USD"]
+        
+        var totalBalanceCalculated: Double = 0
         var accountsSize = (accountsWrapper.accounts?.count ?? 0)
         if accountsSize != 0 { accountsSize -= 1 }
         
@@ -68,9 +71,79 @@ class AccountsFlow: CybridUITest {
             
             let accountCell = accountsWrapper.accounts?.element(boundBy: i)
             XCTAssertTrue(((accountCell?.exists) != nil))
-            accountCell?.tap()
-            returnTap()
+            if accountCell?.exists ?? false {
+                
+                // -- Var only for crypto balance
+                var cryptoBalance = ""
+                
+                // -- Logic for balance in fiat and crypto
+                var dynamicAccessibilityIdentifier = ""
+                let cellAssetName = accountCell?.staticTexts["AccountsComponent_Content_Table_Item_Name"].label ?? ""
+                if fiatNames.contains(cellAssetName) {
+                    dynamicAccessibilityIdentifier = "AccountsComponent_Content_Table_Item_Balance"
+                } else {
+                    cryptoBalance = accountCell?.staticTexts["AccountsComponent_Content_Table_Item_Balance"].label ?? ""
+                    dynamicAccessibilityIdentifier = "AccountsComponent_Content_Table_Item_FiatBalance"
+                }
+                
+                // -- Check the balance and add to totalBalance
+                let itemBalance = accountCell?.staticTexts[dynamicAccessibilityIdentifier]
+                let itemBalanceValue = (itemBalance?.label ?? "0.0").replacingOccurrences(of: "$", with: "")
+                let itemBalanceValueDouble = Double(itemBalanceValue) ?? 0
+                totalBalanceCalculated += itemBalanceValueDouble
+                
+                // -- Enter into the account
+                accountCell?.tap()
+                
+                // -- Check items
+                if dynamicAccessibilityIdentifier == "AccountsComponent_Content_Table_Item_Balance" {
+                    
+                    // -- Name
+                    let nameParts = cellAssetName.components(separatedBy: " ")
+                    let name = nameParts[0]
+                    let code = (nameParts.count > 2) ? nameParts[nameParts.count - 1] : nameParts[1]
+                    let detailName = app.staticTexts[name]
+                    if detailName.waitForExistence(timeout: 4) {
+                        XCTAssertTrue(detailName.exists)
+                    }
+                    
+                    // -- Balance
+                    let itemBalanceValueWithCode = "$\(itemBalanceValue) \(code)"
+                    let detailBalance = app.staticTexts[itemBalanceValueWithCode]
+                    XCTAssertTrue(detailBalance.exists)
+                    
+                } else {
+                    
+                    // -- Name
+                    let nameParts = cellAssetName.components(separatedBy: " ")
+                    let name = nameParts[0]
+                    let code = (nameParts.count > 2) ? nameParts[nameParts.count - 1] : nameParts[1]
+                    let detailName = app.staticTexts[name]
+                    if detailName.waitForExistence(timeout: 4) {
+                        XCTAssertTrue(detailName.exists)
+                    }
+                    
+                    // -- Crypto Balance
+                    let itemBalanceValueWithCode = cryptoBalance + " " + code
+                    print(itemBalanceValueWithCode)
+                    let detailCrpytoBalance = app.staticTexts["AccountsComponent_Trades_Balance_Title"]
+                    XCTAssertTrue(detailCrpytoBalance.exists)
+                    XCTAssertEqual(detailCrpytoBalance.label, itemBalanceValueWithCode)
+                    
+                    // -- Fiat Balance
+                    let itemFiatBalanceValueWithCode = "$" + itemBalanceValue + " USD"
+                    let detailFiatBalance = app.staticTexts[itemFiatBalanceValueWithCode]
+                    XCTAssertTrue(detailFiatBalance.exists)
+                }
+                
+                // -- Return
+                returnTap()
+            }
         }
+        
+        // -- Check total balance
+        let totalBalanceString = String(format:"$%.2f USD", totalBalanceCalculated)
+        XCTAssertEqual(totalBalanceString, accountsWrapper.accountsTotalBalance)
     }
     
     func test_flow() {
@@ -94,3 +167,4 @@ struct AccountsWrapper {
     var accountsTotalBalance: String = ""
     var accounts: XCUIElementQuery? = nil
 }
+
