@@ -12,7 +12,8 @@ import CybridApiIdpSwift
 class CryptoAuthenticator {
 
     private let session: URLSession
-    private let params = "banks:read banks:write accounts:read accounts:execute customers:read customers:write customers:execute prices:read quotes:execute trades:execute trades:read workflows:execute workflows:read external_bank_accounts:execute external_bank_accounts:read external_bank_accounts:write transfers:read transfers:execute"
+    private let tokenScopes = "banks:read banks:write accounts:read accounts:execute customers:read customers:write customers:execute prices:read quotes:execute trades:execute trades:read workflows:execute workflows:read external_bank_accounts:execute external_bank_accounts:read external_bank_accounts:write transfers:read transfers:execute"
+    // private let customerTokenScopes: Set<ScopesIdpModel> = 
     private var clientId: String = ""
     private var clientSecret: String = ""
 
