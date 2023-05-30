@@ -13,24 +13,14 @@ class CryptoAuthenticator {
 
     private let session: URLSession
     private let params = "banks:read banks:write accounts:read accounts:execute customers:read customers:write customers:execute prices:read quotes:execute trades:execute trades:read workflows:execute workflows:read external_bank_accounts:execute external_bank_accounts:read external_bank_accounts:write transfers:read transfers:execute"
-    private var clientID: String = ""
+    private var clientId: String = ""
     private var clientSecret: String = ""
 
-    init(session: URLSession, clientId: String = "", clientSecret: String = "") {
+    init(session: URLSession, clientId: String, clientSecret: String) {
 
         self.session = session
-        
-        if id == "" {
-            self.clientID = Bundle.main.object(forInfoDictionaryKey: "CybridClientId") as? String ?? ""
-        } else {
-            self.clientID = id
-        }
-        
-        if secret == "" {
-            self.clientSecret = Bundle.main.object(forInfoDictionaryKey: "CybridClientSecret") as? String ?? ""
-        } else {
-            self.clientSecret = secret
-        }
+        self.clientId = clientId
+        self.clientSecret = clientSecret
     }
 
     func getBearer(env: CybridEnvironment, completion: @escaping (Result<String, Error>) -> Void) {
@@ -43,7 +33,7 @@ class CryptoAuthenticator {
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         let parameters: [String: Any] = [
             "grant_type": "client_credentials",
-            "client_id": self.clientID,
+            "client_id": self.clientId,
             "client_secret": self.clientSecret,
             "scope": self.params
         ]
