@@ -9,6 +9,7 @@ use_frameworks!
 
 def common_pods
   pod 'CybridApiBankSwift'
+  pod 'CybridApiIdpSwift'
   pod 'BigInt'
   pod 'PersonaInquirySDK2'
   pod 'Plaid'
