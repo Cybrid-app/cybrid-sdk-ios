@@ -38,6 +38,7 @@ class AccountsCell: UITableViewCell {
 
     private func setupViews() {
 
+        self.accessibilityIdentifier = "AccountsComponent_Content_Table_Item_Crypto"
         backgroundColor = theme.colorTheme.primaryBackgroundColor
         self.setupIcon()
         self.setupLabels()
@@ -91,12 +92,14 @@ extension AccountsCell {
                              side: .left,
                              font: UIFont.make(ofSize: UIValues.assetNameSize),
                              color: UIValues.assetNameColor)
+        self.assetName.accessibilityIdentifier = "AccountsComponent_Content_Table_Item_Name"
 
         // -- Account balance
         self.setupBasicLabel(accountBalance,
                              side: .right,
                              font: UIFont.make(ofSize: UIValues.accountBalanceSize, weight: .medium),
                              color: UIValues.accountBalanceColor)
+        self.accountBalance.accessibilityIdentifier = "AccountsComponent_Content_Table_Item_Balance"
 
         // -- Asset price
         self.setupBasicLabel(assetPrice,
@@ -109,6 +112,7 @@ extension AccountsCell {
                              side: .right,
                              font: UIFont.make(ofSize: UIValues.accountBalanceFiatSize),
                              color: UIValues.accountBalanceFiatColor)
+        self.accountBalanceFiat.accessibilityIdentifier = "AccountsComponent_Content_Table_Item_FiatBalance"
     }
 
     private func createVerticalStackView(top: UIView, bottom: UIView, withConstraints: Bool = false) -> UIStackView {
