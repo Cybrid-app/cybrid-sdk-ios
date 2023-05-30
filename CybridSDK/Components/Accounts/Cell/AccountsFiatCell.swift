@@ -37,6 +37,7 @@ class AccountsFiatCell: UITableViewCell {
 
     private func setupViews() {
 
+        self.accessibilityIdentifier = "AccountsComponent_Content_Table_Item_Fiat"
         backgroundColor = theme.colorTheme.primaryBackgroundColor
         self.setupIcon()
         self.setupLabels()
@@ -90,12 +91,14 @@ extension AccountsFiatCell {
                              side: .left,
                              font: UIFont.make(ofSize: UIValues.assetNameSize),
                              color: UIValues.assetNameColor)
+        self.assetName.accessibilityIdentifier = "AccountsComponent_Content_Table_Item_Name"
 
         // -- Account balance fiat
         self.setupBasicLabel(accountBalance,
                              side: .right,
                              font: UIFont.make(ofSize: UIValues.accountBalanceSize, weight: .medium),
                              color: UIValues.accountBalanceColor)
+        self.accountBalance.accessibilityIdentifier = "AccountsComponent_Content_Table_Item_Balance"
 
         // -- Account pending balance fiat
         self.setupBasicLabel(accountBalancePending,

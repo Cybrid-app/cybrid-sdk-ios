@@ -105,6 +105,7 @@ extension AccountTradesViewController {
             toItem: assetTitleContainer,
             height: UIValues.balanceValueViewSize,
             margins: UIValues.balanceValueViewMargin)
+        balanceValueView.accessibilityIdentifier = "AccountsComponent_Trades_Balance_Title"
 
         // -- Balance Fiat Value
         balanceFiatValueView = UILabel()
