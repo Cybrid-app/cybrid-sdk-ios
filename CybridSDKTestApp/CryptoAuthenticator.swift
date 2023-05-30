@@ -7,6 +7,7 @@
 
 import CybridSDK
 import Foundation
+import CybridApiIdpSwift
 
 class CryptoAuthenticator {
 
@@ -15,7 +16,7 @@ class CryptoAuthenticator {
     private var clientID: String = ""
     private var clientSecret: String = ""
 
-    init(session: URLSession, id: String = "", secret: String = "") {
+    init(session: URLSession, clientId: String = "", clientSecret: String = "") {
 
         self.session = session
         

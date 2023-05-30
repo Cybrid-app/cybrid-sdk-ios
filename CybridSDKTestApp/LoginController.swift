@@ -11,9 +11,9 @@ import UIKit
 
 class LoginController: UIViewController {
     
-    @IBOutlet var clientID: UITextField?
+    @IBOutlet var clientId: UITextField?
     @IBOutlet var clientSecret: UITextField?
-    @IBOutlet var customerGUID: UITextField?
+    @IBOutlet var customerGuid: UITextField?
     @IBOutlet var errorLabel: UILabel?
     
     private var loader: LoginLooader? = nil
@@ -26,45 +26,58 @@ class LoginController: UIViewController {
         self.hideKeyboardWhenTappedAround()
         
         // -- Setup textFields
-        self.setUITexteFildUnderLine(textField: self.clientID)
+        self.setUITexteFildUnderLine(textField: self.clientId)
         self.setUITexteFildUnderLine(textField: self.clientSecret)
-        self.setUITexteFildUnderLine(textField: self.customerGUID)
+        self.setUITexteFildUnderLine(textField: self.customerGuid)
     }
     
     @IBAction func demoLogin(_ sender: Any) {
 
         self.loader = LoginLooader()
         self.loader?.present()
-        self.getBearer(id: "", secret: "", guid: "")
+
+        // -- Geting clientID and Secret from envs
+        let clientId = Bundle.main.object(forInfoDictionaryKey: "CybridClientId") as? String ?? ""
+        let clientSecret = Bundle.main.object(forInfoDictionaryKey: "CybridClientSecret") as? String ?? ""
+        let customerGuid = Bundle.main.object(forInfoDictionaryKey: "CybridCustomerGUID") as? String ?? ""
+
+        // -- Get bearer
+        self.getLocalBearer(clientId: clientId,
+                            clientSecret: clientSecret,
+                            customerGuid: customerGuid)
     }
     
-    @IBAction func tryToLogin(_ sender: Any) {
+    @IBAction func login(_ sender: Any) {
         
         self.errorLabel?.isHidden = true
-        let clientIDValue = clientID?.text ?? ""
+        let clientIdValue = clientId?.text ?? ""
         let clientSecretValue = clientSecret?.text ?? ""
-        let customerGUIDValue = customerGUID?.text ?? ""
+        let customerGuidValue = customerGuid?.text ?? ""
         
-        if (clientIDValue.isEmpty ||
+        if (clientIdValue.isEmpty ||
             clientSecretValue.isEmpty ||
-            customerGUIDValue.isEmpty) {
+            customerGuidValue.isEmpty) {
 
             self.errorLabel?.isHidden = false
             return
         }
         self.loader = LoginLooader()
         self.loader?.present()
-        self.getBearer(id: clientIDValue, secret: clientSecretValue, guid: customerGUIDValue)
+        self.getLocalBearer(clientId: clientIdValue,
+                            clientSecret: clientSecretValue,
+                            customerGuid: customerGuidValue)
     }
     
-    func getBearer(id: String, secret: String, guid: String) {
+    func getLocalBearer(clientId: String, clientSecret: String, customerGuid: String) {
         
-        let authenticator = CryptoAuthenticator(session: .shared, id: id, secret: secret)
-        authenticator.getBearer(env: env, completion: { [weak self] result in
+        let authenticator = CryptoAuthenticator(session: .shared,
+                                                clientId: clientId,
+                                                clientSecret: clientSecret)
+        authenticator.getBearer(env: self.env, completion: { [weak self] result in
             
             switch result {
             case .success(let bearer):
-                self?.initCybridSDK(guid: guid, bearer: bearer)
+                self?.initCybridSDK(customerGuid: customerGuid, bearer: bearer)
             case .failure(let error):
                 
                 DispatchQueue.main.async {
@@ -77,17 +90,11 @@ class LoginController: UIViewController {
         })
     }
     
-    func initCybridSDK(guid: String, bearer: String) {
+    func initCybridSDK(customerGuid: String, bearer: String) {
         
-        var guidClient = ""
-        if (guid == "") {
-            guidClient = Bundle.main.object(forInfoDictionaryKey: "CybridCustomerGUID") as? String ?? ""
-        } else {
-            guidClient = guid
-        }
         Cybrid.setup(bearer: bearer,
-                     customerGUID: guidClient,
-                     environment: env,
+                     customerGUID: customerGuid,
+                     environment: self.env,
                      logger: ClientLogger()) {
             
             if self.loader != nil {
