@@ -13,7 +13,9 @@ class CryptoAuthenticator {
 
     private let session: URLSession
     private let tokenScopes = "banks:read banks:write accounts:read accounts:execute customers:read customers:write customers:execute prices:read quotes:execute trades:execute trades:read workflows:execute workflows:read external_bank_accounts:execute external_bank_accounts:read external_bank_accounts:write transfers:read transfers:execute"
-    // private let customerTokenScopes: Set<ScopesIdpModel> = 
+    private let customerTokenScopes: Set<PostCustomerTokenIdpModel.ScopesIdpModel> = [
+        .customersRead, .customersWrite, .accountsRead, .accountsExecute, .pricesRead, .quotesRead, .quotesExecute, .tradesRead, .tradesExecute, .transfersRead, .transfersExecute, .externalBankAccountsRead, .externalBankAccountsWrite, .externalBankAccountsExecute, .workflowsRead, .workflowsExecute
+    ]
     private var clientId: String = ""
     private var clientSecret: String = ""
 
@@ -24,9 +26,9 @@ class CryptoAuthenticator {
         self.clientSecret = clientSecret
     }
 
-    func getBearer(env: CybridEnvironment, completion: @escaping (Result<String, Error>) -> Void) {
+    func getBearer(environment: CybridEnvironment, completion: @escaping (Result<String, Error>) -> Void) {
 
-        guard let url = URL(string: "https://id.\(env).cybrid.app/oauth/token") else {
+        guard let url = URL(string: "https://id.\(environment).cybrid.app/oauth/token") else {
             return
         }
         var request = URLRequest(url: url)
@@ -36,7 +38,7 @@ class CryptoAuthenticator {
             "grant_type": "client_credentials",
             "client_id": self.clientId,
             "client_secret": self.clientSecret,
-            "scope": self.params
+            "scope": self.tokenScopes
         ]
         do {
             request.httpBody = try JSONSerialization.data(withJSONObject: parameters, options: .prettyPrinted)
@@ -74,5 +76,14 @@ class CryptoAuthenticator {
                 return
             }
         }.resume()
+    }
+    
+    func getCustomerToken(environment: CybridEnvironment) {
+        
+        // -- Set environment
+        CybridApiIdpSwiftAPI.basePath = environment.baseIdpPath
+        
+        // -- Get customer token
+        // CustomerTokensAPI.createCustomerToken(postCustomerTokenIdpModel: <#T##PostCustomerTokenIdpModel#>, completion: <#T##((Result<CustomerTokenIdpModel, ErrorResponse>) -> Void)##((Result<CustomerTokenIdpModel, ErrorResponse>) -> Void)##(_ result: Result<CustomerTokenIdpModel, ErrorResponse>) -> Void#>)
     }
 }

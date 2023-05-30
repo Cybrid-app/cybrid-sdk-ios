@@ -10,7 +10,9 @@ import Foundation
 
 public final class CybridConfig {
 
-    static let baseUrl: String = "https://bank.%@.cybrid.app"
+    // MARK: Base URL's for API's
+    static let baseBankApiUrl: String = "https://bank.%@.cybrid.app"
+    static let baseIdpApiUrl: String = "https://id.%@.cybrid.app"
 
     // MARK: Internal Static Properties
     internal static var shared = CybridConfig()
@@ -58,7 +60,7 @@ public final class CybridConfig {
         self.dataProvider = CybridSession.current
         self.completion = completion
         self.session.setupSession(authToken: self.bearer)
-        CybridApiBankSwiftAPI.basePath = environment.basePath
+        CybridApiBankSwiftAPI.basePath = environment.baseBankPath
         CodableHelper.jsonDecoder = CybridJSONDecoder()
         self.autoLoad()
     }
@@ -83,7 +85,7 @@ public final class CybridConfig {
         self.dataProvider = dataProvider
         self.completion = completion
         self.session.setupSession(authToken: self.bearer)
-        CybridApiBankSwiftAPI.basePath = environment.basePath
+        CybridApiBankSwiftAPI.basePath = environment.baseBankPath
         CodableHelper.jsonDecoder = CybridJSONDecoder()
         self.autoLoad()
     }

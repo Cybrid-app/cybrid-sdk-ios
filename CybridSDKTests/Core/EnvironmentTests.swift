@@ -12,8 +12,8 @@ class EnvironmentTests: XCTestCase {
 
     func testEnvironmentPaths() {
 
-        XCTAssertEqual(CybridEnvironment.staging.basePath, "https://bank.staging.cybrid.app")
-        XCTAssertEqual(CybridEnvironment.sandbox.basePath, "https://bank.sandbox.cybrid.app")
-        XCTAssertEqual(CybridEnvironment.production.basePath, "https://bank.production.cybrid.app")
+        XCTAssertEqual(CybridEnvironment.staging.baseBankPath, "https://bank.staging.cybrid.app")
+        XCTAssertEqual(CybridEnvironment.sandbox.baseBankPath, "https://bank.sandbox.cybrid.app")
+        XCTAssertEqual(CybridEnvironment.production.baseBankPath, "https://bank.production.cybrid.app")
     }
 }
