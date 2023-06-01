@@ -10,9 +10,9 @@ import Foundation
 // MARK: - CybridError
 
 public enum CybridError: Error {
-  case authenticationError
-  case authenticatorNotFound
-  case componentError
-  case dataError
-  case serviceError
+    case authenticationError
+    case authenticatorNotFound
+    case componentError
+    case dataError
+    case serviceError
 }

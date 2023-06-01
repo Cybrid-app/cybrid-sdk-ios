@@ -151,6 +151,10 @@
 		925DD9A32A1E59DD006AFEAB /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925DD9A22A1E59DD006AFEAB /* UIView+Extensions.swift */; };
 		925DD9A52A1E5BC6006AFEAB /* UITextField+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925DD9A42A1E5BC6006AFEAB /* UITextField+Extensions.swift */; };
 		925DD9AB2A265A88006AFEAB /* AccountsFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925DD9AA2A265A88006AFEAB /* AccountsFlow.swift */; };
+		925DD9AE2A28F5B1006AFEAB /* DemoSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925DD9AD2A28F5B1006AFEAB /* DemoSession.swift */; };
+		925DD9B02A28F657006AFEAB /* AuthenticatedServiceProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925DD9AF2A28F657006AFEAB /* AuthenticatedServiceProvider.swift */; };
+		925DD9B22A28F6BA006AFEAB /* CybridApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925DD9B12A28F6BA006AFEAB /* CybridApiManager.swift */; };
+		925DD9B42A29008B006AFEAB /* PreSdkConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925DD9B32A29008B006AFEAB /* PreSdkConfig.swift */; };
 		925FFDB829F832BD00F7D07A /* TradeModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925FFDB729F832BD00F7D07A /* TradeModal.swift */; };
 		92635470294CEC0400660E0B /* BankAccountsViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9263546F294CEC0400660E0B /* BankAccountsViewController+Extensions.swift */; };
 		92663D09293FACB900842E30 /* IdentityVerificationWithDetailsBankModel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92663D08293FACB900842E30 /* IdentityVerificationWithDetailsBankModel+Extensions.swift */; };
@@ -449,6 +453,10 @@
 		925DD9A22A1E59DD006AFEAB /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
 		925DD9A42A1E5BC6006AFEAB /* UITextField+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extensions.swift"; sourceTree = "<group>"; };
 		925DD9AA2A265A88006AFEAB /* AccountsFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsFlow.swift; sourceTree = "<group>"; };
+		925DD9AD2A28F5B1006AFEAB /* DemoSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoSession.swift; sourceTree = "<group>"; };
+		925DD9AF2A28F657006AFEAB /* AuthenticatedServiceProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticatedServiceProvider.swift; sourceTree = "<group>"; };
+		925DD9B12A28F6BA006AFEAB /* CybridApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CybridApiManager.swift; sourceTree = "<group>"; };
+		925DD9B32A29008B006AFEAB /* PreSdkConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreSdkConfig.swift; sourceTree = "<group>"; };
 		925FFDB729F832BD00F7D07A /* TradeModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeModal.swift; sourceTree = "<group>"; };
 		9263546F294CEC0400660E0B /* BankAccountsViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BankAccountsViewController+Extensions.swift"; sourceTree = "<group>"; };
 		92663D08293FACB900842E30 /* IdentityVerificationWithDetailsBankModel+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IdentityVerificationWithDetailsBankModel+Extensions.swift"; sourceTree = "<group>"; };
@@ -621,6 +629,7 @@
 			isa = PBXGroup;
 			children = (
 				0B00E027287DBA8400707F26 /* CryptoAuthenticator.swift */,
+				925DD9B32A29008B006AFEAB /* PreSdkConfig.swift */,
 			);
 			name = Auth;
 			sourceTree = "<group>";
@@ -1042,6 +1051,7 @@
 		0BBCF614285C43E000D39C6D /* CybridSDKTestApp */ = {
 			isa = PBXGroup;
 			children = (
+				925DD9AC2A28F588006AFEAB /* ServiceLayer */,
 				928E237B28EE0291006AAE1A /* Extensions */,
 				0BD26F2728A55D6000ED2A1B /* Logger */,
 				0B00E026287DBA7300707F26 /* Auth */,
@@ -1310,6 +1320,16 @@
 				9257E79B29CADB3F00846E12 /* TransferModal.swift */,
 			);
 			path = Modal;
+			sourceTree = "<group>";
+		};
+		925DD9AC2A28F588006AFEAB /* ServiceLayer */ = {
+			isa = PBXGroup;
+			children = (
+				925DD9AD2A28F5B1006AFEAB /* DemoSession.swift */,
+				925DD9AF2A28F657006AFEAB /* AuthenticatedServiceProvider.swift */,
+				925DD9B12A28F6BA006AFEAB /* CybridApiManager.swift */,
+			);
+			name = ServiceLayer;
 			sourceTree = "<group>";
 		};
 		92663D03293F240900842E30 /* View */ = {
@@ -2302,15 +2322,19 @@
 			files = (
 				925DD9A52A1E5BC6006AFEAB /* UITextField+Extensions.swift in Sources */,
 				0BBCF616285C43E000D39C6D /* AppDelegate.swift in Sources */,
+				925DD9B42A29008B006AFEAB /* PreSdkConfig.swift in Sources */,
 				0BD66114286B76F300F4DA6B /* RootViewController.swift in Sources */,
 				925DD9A32A1E59DD006AFEAB /* UIView+Extensions.swift in Sources */,
 				0BD26F2928A55D7F00ED2A1B /* ClientLogger.swift in Sources */,
+				925DD9AE2A28F5B1006AFEAB /* DemoSession.swift in Sources */,
 				0BBCF618285C43E000D39C6D /* SceneDelegate.swift in Sources */,
 				92E2133528F86F3300F420F2 /* LoginLoader.swift in Sources */,
 				928E237D28EE02A6006AAE1A /* UIViewController+Extensions.swift in Sources */,
 				0BD66115286B76F300F4DA6B /* CryptoPriceListTestVC.swift in Sources */,
 				0B00E028287DBA8400707F26 /* CryptoAuthenticator.swift in Sources */,
+				925DD9B22A28F6BA006AFEAB /* CybridApiManager.swift in Sources */,
 				928E237A28EE0014006AAE1A /* LoginController.swift in Sources */,
+				925DD9B02A28F657006AFEAB /* AuthenticatedServiceProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

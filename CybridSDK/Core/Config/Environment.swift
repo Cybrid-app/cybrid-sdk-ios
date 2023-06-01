@@ -13,7 +13,7 @@ public enum CybridEnvironment {
     case sandbox
     case production
 
-    var baseBankPath: String {
+    public var baseBankPath: String {
         return String(format: CybridConfig.baseBankApiUrl, "\(self)")
     }
 

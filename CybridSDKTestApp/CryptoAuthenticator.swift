@@ -7,6 +7,7 @@
 
 import CybridSDK
 import Foundation
+import CybridApiBankSwift
 import CybridApiIdpSwift
 
 class CryptoAuthenticator {
@@ -18,15 +19,17 @@ class CryptoAuthenticator {
     ]
     private var clientId: String = ""
     private var clientSecret: String = ""
+    private var customerGuid: String = ""
 
-    init(session: URLSession, clientId: String, clientSecret: String) {
+    init(session: URLSession, clientId: String, clientSecret: String, customerGuid: String) {
 
         self.session = session
         self.clientId = clientId
         self.clientSecret = clientSecret
+        self.customerGuid = customerGuid
     }
 
-    func getBearer(environment: CybridEnvironment, completion: @escaping (Result<String, Error>) -> Void) {
+    func getBearer(environment: CybridEnvironment, completion: @escaping (Result<PreSdkConfig, Error>) -> Void) {
 
         guard let url = URL(string: "https://id.\(environment).cybrid.app/oauth/token") else {
             return
@@ -47,7 +50,7 @@ class CryptoAuthenticator {
             return
         }
 
-        session.dataTask(with: request) { data, response, error in
+        session.dataTask(with: request) { [self] data, response, error in
 
             if let error = error {
                 completion(.failure(error))
@@ -65,8 +68,9 @@ class CryptoAuthenticator {
                 if
                     let jsonResponse = try JSONSerialization.jsonObject(with: responseData) as? [String: Any],
                     let bearer = jsonResponse["access_token"] as? String {
-                        completion(.success(bearer))
-                        return
+                    self.getCustomerToken(environment: environment,
+                                          bearer: bearer,
+                                          completion: completion)
                 } else {
                     completion(.failure(CybridError.serviceError))
                     return
@@ -78,12 +82,47 @@ class CryptoAuthenticator {
         }.resume()
     }
     
-    func getCustomerToken(environment: CybridEnvironment) {
+    func getCustomerToken(environment: CybridEnvironment, bearer: String, completion: @escaping (Result<PreSdkConfig, Error>) -> Void) {
         
-        // -- Set environment
+        // -- Set IDP environment
         CybridApiIdpSwiftAPI.basePath = environment.baseIdpPath
         
+        // -- Set headers
+        CybridApiIdpSwiftAPI.customHeaders = ["Authorization": "Bearer " + bearer]
+        
+        // -- Init PreSdkConfig
+        var config = PreSdkConfig()
+        
         // -- Get customer token
-        // CustomerTokensAPI.createCustomerToken(postCustomerTokenIdpModel: <#T##PostCustomerTokenIdpModel#>, completion: <#T##((Result<CustomerTokenIdpModel, ErrorResponse>) -> Void)##((Result<CustomerTokenIdpModel, ErrorResponse>) -> Void)##(_ result: Result<CustomerTokenIdpModel, ErrorResponse>) -> Void#>)
+        let postCustomerToken = PostCustomerTokenIdpModel(customerGuid: self.customerGuid,
+                                                          scopes: self.customerTokenScopes)
+        CustomerTokensAPI.createCustomerToken(postCustomerTokenIdpModel: postCustomerToken) { [self] result in
+            switch result {
+                
+            case .success(let token):
+
+                config.bearer = token.accessToken ?? ""
+                self.getBank(environment: environment,
+                             bearer: bearer,
+                             config: config,
+                             completion: completion)
+                
+            case.failure(let error):
+                completion(.failure(error))
+                return
+            }
+        }
+    }
+    
+    func getBank(environment: CybridEnvironment, bearer: String, config: PreSdkConfig, completion: @escaping (Result<PreSdkConfig, Error>) -> Void) {
+        
+        // -- Set Bank environment
+        CybridApiBankSwiftAPI.basePath = environment.baseBankPath
+        
+        // -- Set headers
+        CybridApiBankSwiftAPI.customHeaders = ["Authorization": "Bearer " + bearer]
+        
+        // -- Get bank
+        // BanksAPI.
     }
 }

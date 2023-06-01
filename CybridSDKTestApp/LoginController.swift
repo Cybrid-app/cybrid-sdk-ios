@@ -72,7 +72,8 @@ class LoginController: UIViewController {
         
         let authenticator = CryptoAuthenticator(session: .shared,
                                                 clientId: clientId,
-                                                clientSecret: clientSecret)
+                                                clientSecret: clientSecret,
+                                                customerGuid: customerGuid)
         authenticator.getBearer(environment: self.environment, completion: { [weak self] result in
             
             switch result {
