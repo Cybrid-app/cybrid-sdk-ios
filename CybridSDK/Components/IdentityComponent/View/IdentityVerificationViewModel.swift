@@ -18,7 +18,7 @@ class IdentityVerificationViewModel: NSObject {
     // MARK: Internal properties
     internal var customerJob: Polling?
     internal var identityJob: Polling?
-    internal var customerGuid = Cybrid.customerGUID
+    internal var customerGuid = Cybrid.customerGuid
 
     // MARK: Public properties
     var UIState: Observable<IdentityVerificationViewController.KYCViewState> = .init(.LOADING)

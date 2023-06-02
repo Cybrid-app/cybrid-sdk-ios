@@ -320,9 +320,6 @@ extension CryptoPriceViewModelTests {
     dataProvider.didFetchPricesSuccessfully()
     tableView.reloadData()
     viewModel.tableView(tableView, didSelectRowAt: IndexPath(item: 0, section: 0))
-    let expectedCryptoViewModel = _TradeViewModel(selectedCrypto: .bitcoin,
-                                                 dataProvider: dataProvider,
-                                                 logger: nil)
 
     // Then
     XCTAssertNotNil(viewModel.selectedAsset.value)

@@ -39,7 +39,7 @@ class AccountsViewModel: NSObject {
 
     func getAccounts() {
 
-        self.dataProvider.fetchAccounts(customerGuid: Cybrid.customerGUID) { [weak self] accountsResult in
+        self.dataProvider.fetchAccounts(customerGuid: Cybrid.customerGuid) { [weak self] accountsResult in
 
             switch accountsResult {
             case .success(let accountsList):

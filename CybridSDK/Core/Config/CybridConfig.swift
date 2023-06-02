@@ -25,17 +25,17 @@ public final class CybridConfig {
     internal let assetsURL: String = "https://images.cybrid.xyz/sdk/assets/"
 
     // MARK: Interal Properties + Private Set
-    internal private(set) var customerGUID: String = ""
+    internal private(set) var customerGuid: String = ""
     internal private(set) var bearer: String = ""
 
     // MARK: Propertis for Auto Init
     internal var dataProvider: (AssetsRepoProvider)?
-    internal private(set) var completion: (() -> Void)?
     internal private(set) var fiat: AssetBankModel = FiatConfig.usd.defaultAsset
     internal private(set) var customer: CustomerBankModel?
-    internal private(set) var customerLoaded = false
     internal private(set) var bank: BankBankModel?
     internal var assets: [AssetBankModel] = []
+    internal private(set) var autoLoadComplete = false
+    internal private(set) var completion: (() -> Void)?
 
     // MARK: Private Properties
     private var _preferredLocale: Locale?
@@ -50,7 +50,9 @@ public final class CybridConfig {
     ) {
 
         self.bearer = sdkConfig.bearer
-        self.customerGUID = sdkConfig.customerGuid
+        self.customerGuid = sdkConfig.customerGuid
+        self.customer = sdkConfig.customer
+        self.bank = sdkConfig.bank
         self.theme = theme ?? CybridTheme.default
         self.refreshRate = refreshRate
         self._preferredLocale = locale
@@ -68,12 +70,14 @@ public final class CybridConfig {
                         logger: CybridLogger? = nil,
                         refreshRate: TimeInterval = 5,
                         theme: Theme? = nil,
-                        dataProvider: CustomersRepoProvider & BankProvider & AssetsRepoProvider,
+                        dataProvider: AssetsRepoProvider,
                         completion: (() -> Void)?
     ) {
 
         self.bearer = sdkConfig.bearer
-        self.customerGUID = sdkConfig.customerGuid
+        self.customerGuid = sdkConfig.customerGuid
+        self.customer = sdkConfig.customer
+        self.bank = sdkConfig.bank
         self.theme = theme ?? CybridTheme.default
         self.refreshRate = refreshRate
         self._preferredLocale = locale
@@ -105,7 +109,11 @@ extension CybridConfig {
     internal func autoLoad() {
 
         // -- Fetch assets
-        self.fetchAssets { self.completion?() }
+        self.fetchAssets {
+
+            self.autoLoadComplete = true
+            self.completion?()
+        }
     }
 
     internal func fetchAssets(_ completion: @escaping () -> Void) {

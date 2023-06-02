@@ -15,7 +15,7 @@ class TransferViewModel: NSObject {
     private var logger: CybridLogger?
 
     // MARK: Internal properties
-    internal var customerGuid = Cybrid.customerGUID
+    internal var customerGuid = Cybrid.customerGuid
     internal var assets = Cybrid.assets
 
     internal var accounts: Observable<[AccountBankModel]> = .init([])

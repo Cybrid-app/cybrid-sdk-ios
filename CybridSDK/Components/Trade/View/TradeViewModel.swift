@@ -15,7 +15,7 @@ class TradeViewModel: NSObject, ListPricesItemDelegate {
     private var logger: CybridLogger?
 
     // MARK: Internal properties
-    internal var customerGuig = Cybrid.customerGUID
+    internal var customerGuig = Cybrid.customerGuid
     internal var currentAsset: Observable<AssetBankModel?> = .init(nil)
     internal var currentCounterAsset: Observable<AssetBankModel?> = .init(nil)
     internal var currentAccountToTrade: Observable<AccountAssetUIModel?> = .init(nil)
@@ -63,7 +63,7 @@ class TradeViewModel: NSObject, ListPricesItemDelegate {
 
         self.uiState.value = .LOADING
         self.initBindingValues()
-        dataProvider.fetchAccounts(customerGuid: Cybrid.customerGUID) { [weak self] accountsResult in
+        dataProvider.fetchAccounts(customerGuid: Cybrid.customerGuid) { [weak self] accountsResult in
 
             switch accountsResult {
             case .success(let accountsList):

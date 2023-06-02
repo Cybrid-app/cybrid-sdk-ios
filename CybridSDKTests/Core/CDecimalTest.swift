@@ -148,9 +148,9 @@ class CDecimalTest: XCTestCase {
         // -- When
         var decimal = CDecimal(valueToConvert)
         XCTAssertEqual(decimal.originalValue, valueToConvert)
-        XCTAssertEqual(decimal.intValue, BigInt(2))
-        XCTAssertEqual(decimal.decimalValue, "00")
-        XCTAssertEqual(decimal.newValue, "2.00")
+        XCTAssertEqual(decimal.intValue, decimalIntValue)
+        XCTAssertEqual(decimal.decimalValue, decimalDecimalValue)
+        XCTAssertEqual(decimal.newValue, decimalnewValue)
         decimal.changeValue("10.56")
 
         // -- Then
