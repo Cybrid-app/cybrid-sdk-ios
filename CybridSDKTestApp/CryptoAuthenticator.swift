@@ -20,18 +20,24 @@ class CryptoAuthenticator {
     private var clientId: String = ""
     private var clientSecret: String = ""
     private var customerGuid: String = ""
+    private var environment: CybridEnvironment = .sandbox
+    private var _sdkConfig = SDKConfig()
 
-    init(session: URLSession, clientId: String, clientSecret: String, customerGuid: String) {
+    init(session: URLSession, clientId: String, clientSecret: String, customerGuid: String, environment: CybridEnvironment) {
 
         self.session = session
         self.clientId = clientId
         self.clientSecret = clientSecret
         self.customerGuid = customerGuid
+        self.environment = environment
+        self._sdkConfig = SDKConfig(environment: self.environment,
+                                   bearer: "",
+                                   customerGuid: self.customerGuid)
     }
 
-    func getBearer(environment: CybridEnvironment, completion: @escaping (Result<PreSdkConfig, Error>) -> Void) {
+    func getSDKConfig(completion: @escaping (Result<SDKConfig, Error>) -> Void) {
 
-        guard let url = URL(string: "https://id.\(environment).cybrid.app/oauth/token") else {
+        guard let url = URL(string: "https://id.\(self._sdkConfig.environment).cybrid.app/oauth/token") else {
             return
         }
         var request = URLRequest(url: url)
@@ -68,8 +74,8 @@ class CryptoAuthenticator {
                 if
                     let jsonResponse = try JSONSerialization.jsonObject(with: responseData) as? [String: Any],
                     let bearer = jsonResponse["access_token"] as? String {
-                    self.getCustomerToken(environment: environment,
-                                          bearer: bearer,
+                    self.getCustomerToken(sdkConfig: self._sdkConfig,
+                                          bankBearer: bearer,
                                           completion: completion)
                 } else {
                     completion(.failure(CybridError.serviceError))
@@ -82,17 +88,14 @@ class CryptoAuthenticator {
         }.resume()
     }
     
-    func getCustomerToken(environment: CybridEnvironment, bearer: String, completion: @escaping (Result<PreSdkConfig, Error>) -> Void) {
+    func getCustomerToken(sdkConfig: SDKConfig, bankBearer: String, completion: @escaping (Result<SDKConfig, Error>) -> Void) {
         
         // -- Set IDP environment
         CybridApiIdpSwiftAPI.basePath = environment.baseIdpPath
         
         // -- Set headers
-        CybridApiIdpSwiftAPI.customHeaders = ["Authorization": "Bearer " + bearer]
-        
-        // -- Init PreSdkConfig
-        var config = PreSdkConfig()
-        
+        CybridApiIdpSwiftAPI.customHeaders = ["Authorization": "Bearer " + bankBearer]
+
         // -- Get customer token
         let postCustomerToken = PostCustomerTokenIdpModel(customerGuid: self.customerGuid,
                                                           scopes: self.customerTokenScopes)
@@ -101,11 +104,10 @@ class CryptoAuthenticator {
                 
             case .success(let token):
 
-                config.bearer = token.accessToken ?? ""
-                self.getBank(environment: environment,
-                             bearer: bearer,
-                             config: config,
-                             completion: completion)
+                sdkConfig.bearer = token.accessToken ?? ""
+                self.getCustomer(sdkConfig: sdkConfig,
+                                 bankBearer: bankBearer,
+                                 completion: completion)
                 
             case.failure(let error):
                 completion(.failure(error))
@@ -114,15 +116,50 @@ class CryptoAuthenticator {
         }
     }
     
-    func getBank(environment: CybridEnvironment, bearer: String, config: PreSdkConfig, completion: @escaping (Result<PreSdkConfig, Error>) -> Void) {
+    func getCustomer(sdkConfig: SDKConfig, bankBearer: String, completion: @escaping (Result<SDKConfig, Error>) -> Void) {
         
         // -- Set Bank environment
         CybridApiBankSwiftAPI.basePath = environment.baseBankPath
         
         // -- Set headers
-        CybridApiBankSwiftAPI.customHeaders = ["Authorization": "Bearer " + bearer]
+        CybridApiBankSwiftAPI.customHeaders = ["Authorization": "Bearer " + bankBearer]
         
         // -- Get bank
-        // BanksAPI.
+        CustomersAPI.getCustomer(customerGuid: self.customerGuid) { [self] result in
+            switch result {
+            case .success(let customer):
+                sdkConfig.customer = customer
+                self.getBank(sdkConfig: sdkConfig,
+                             bankBearer: bankBearer,
+                             completion: completion)
+            case .failure(let error):
+                completion(.failure(error))
+                return
+            }
+        }
+    }
+    
+    func getBank(sdkConfig: SDKConfig, bankBearer: String, completion: @escaping (Result<SDKConfig, Error>) -> Void) {
+        
+        // -- Set Bank environment
+        CybridApiBankSwiftAPI.basePath = environment.baseBankPath
+        
+        // -- Set headers
+        CybridApiBankSwiftAPI.customHeaders = ["Authorization": "Bearer " + bankBearer]
+        
+        // -- Get bank
+        let bankGuid = sdkConfig.customer?.bankGuid ?? ""
+        BanksAPI.getBank(bankGuid: bankGuid) { result in
+            switch result {
+            case .success(let bank):
+                sdkConfig.bank = bank
+                completion(.success(sdkConfig))
+                return
+
+            case .failure(let error):
+                completion(.failure(error))
+                return
+            }
+        }
     }
 }

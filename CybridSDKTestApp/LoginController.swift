@@ -69,12 +69,13 @@ class LoginController: UIViewController {
     }
     
     func getLocalBearer(clientId: String, clientSecret: String, customerGuid: String) {
-        
+
         let authenticator = CryptoAuthenticator(session: .shared,
                                                 clientId: clientId,
                                                 clientSecret: clientSecret,
-                                                customerGuid: customerGuid)
-        authenticator.getBearer(environment: self.environment, completion: { [weak self] result in
+                                                customerGuid: customerGuid,
+                                                environment: self.environment)
+        authenticator.getSDKConfig { [weak self] result in
             
             switch result {
             case .success(let bearer):
@@ -88,7 +89,7 @@ class LoginController: UIViewController {
                 }
                 print(error)
             }
-        })
+        }
     }
     
     func initCybridSDK(customerGuid: String, bearer: String) {
