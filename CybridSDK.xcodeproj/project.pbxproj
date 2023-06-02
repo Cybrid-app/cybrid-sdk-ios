@@ -1051,7 +1051,6 @@
 		0BBCF614285C43E000D39C6D /* CybridSDKTestApp */ = {
 			isa = PBXGroup;
 			children = (
-				925DD9AC2A28F588006AFEAB /* ServiceLayer */,
 				928E237B28EE0291006AAE1A /* Extensions */,
 				0BD26F2728A55D6000ED2A1B /* Logger */,
 				0B00E026287DBA7300707F26 /* Auth */,
@@ -1320,16 +1319,6 @@
 				9257E79B29CADB3F00846E12 /* TransferModal.swift */,
 			);
 			path = Modal;
-			sourceTree = "<group>";
-		};
-		925DD9AC2A28F588006AFEAB /* ServiceLayer */ = {
-			isa = PBXGroup;
-			children = (
-				925DD9AD2A28F5B1006AFEAB /* DemoSession.swift */,
-				925DD9AF2A28F657006AFEAB /* AuthenticatedServiceProvider.swift */,
-				925DD9B12A28F6BA006AFEAB /* CybridApiManager.swift */,
-			);
-			name = ServiceLayer;
 			sourceTree = "<group>";
 		};
 		92663D03293F240900842E30 /* View */ = {
@@ -2326,15 +2315,12 @@
 				0BD66114286B76F300F4DA6B /* RootViewController.swift in Sources */,
 				925DD9A32A1E59DD006AFEAB /* UIView+Extensions.swift in Sources */,
 				0BD26F2928A55D7F00ED2A1B /* ClientLogger.swift in Sources */,
-				925DD9AE2A28F5B1006AFEAB /* DemoSession.swift in Sources */,
 				0BBCF618285C43E000D39C6D /* SceneDelegate.swift in Sources */,
 				92E2133528F86F3300F420F2 /* LoginLoader.swift in Sources */,
 				928E237D28EE02A6006AAE1A /* UIViewController+Extensions.swift in Sources */,
 				0BD66115286B76F300F4DA6B /* CryptoPriceListTestVC.swift in Sources */,
 				0B00E028287DBA8400707F26 /* CryptoAuthenticator.swift in Sources */,
-				925DD9B22A28F6BA006AFEAB /* CybridApiManager.swift in Sources */,
 				928E237A28EE0014006AAE1A /* LoginController.swift in Sources */,
-				925DD9B02A28F657006AFEAB /* AuthenticatedServiceProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
