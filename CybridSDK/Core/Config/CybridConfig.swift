@@ -103,7 +103,7 @@ extension CybridConfig {
     }
 
     internal func autoLoad() {
-        
+
         // -- Fetch assets
         self.fetchAssets { self.completion?() }
     }

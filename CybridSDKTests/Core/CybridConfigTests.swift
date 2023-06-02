@@ -15,9 +15,12 @@ class CybridConfigTests: XCTestCase {
 
     func test_setup() {
 
+        let sdkConfig = SDKConfig(environment: .staging,
+                                  bearer: "TEST-BEARER",
+                                  customerGuid: "MOCK_GUID")
         let cybridConfig = CybridConfig()
         XCTAssertEqual(cybridConfig.theme.fontTheme, CybridTheme.default.fontTheme)
-
+        
         let testTheme = CybridTheme(
             colorTheme: .default,
             fontTheme: FontTheme(header1: .systemFont(ofSize: 32),
@@ -26,12 +29,9 @@ class CybridConfigTests: XCTestCase {
                                  body2: .systemFont(ofSize: 16),
                                  caption: .systemFont(ofSize: 12))
         )
-        cybridConfig.setup(
-            bearer: "TEST-BEARER",
-            customerGUID: "MOCK_GUID",
-            theme: testTheme,
-            completion: {}
-        )
+        cybridConfig.setup(sdkConfig: sdkConfig,
+                           theme: testTheme,
+                           completion: {})
         XCTAssertEqual(cybridConfig.theme.fontTheme, testTheme.fontTheme)
     }
 
@@ -40,6 +40,9 @@ class CybridConfigTests: XCTestCase {
         let cybridConfig = CybridConfig()
         XCTAssertEqual(cybridConfig.theme.fontTheme, CybridTheme.default.fontTheme)
 
+        let sdkConfig = SDKConfig(environment: .staging,
+                                  bearer: "TEST-BEARER",
+                                  customerGuid: "MOCK_GUID")
         let testTheme = CybridTheme(
             colorTheme: .default,
             fontTheme: FontTheme(header1: .systemFont(ofSize: 32),
@@ -50,12 +53,10 @@ class CybridConfigTests: XCTestCase {
         )
 
         // -- When
-        cybridConfig.setup(
-            bearer: "TEST-BEARER",
-            customerGUID: "MOCK_GUID",
-            theme: testTheme,
-            dataProvider: dataProvider,
-            completion: {}
+        cybridConfig.setup(sdkConfig: sdkConfig,
+                           theme: testTheme,
+                           dataProvider: dataProvider,
+                           completion: {}
         )
 
         // -- Then
@@ -66,9 +67,11 @@ class CybridConfigTests: XCTestCase {
     func testCybrid_configSetup_withoutPassingTheme() {
 
         let cybridConfig = CybridConfig()
+        let sdkConfig = SDKConfig(environment: .staging,
+                                  bearer: "TEST-BEARER",
+                                  customerGuid: "MOCK_GUID")
         cybridConfig.setup(
-            bearer: "TEST-BEARER",
-            customerGUID: "MOCK_GUID",
+            sdkConfig: sdkConfig,
             completion: {}
         )
 
@@ -117,14 +120,15 @@ class CybridConfigTests: XCTestCase {
     func testCybrid_getPreferredLocale_Default() {
 
         // Given
+        let sdkConfig = SDKConfig(environment: .staging,
+                                  bearer: "TEST-BEARER",
+                                  customerGuid: "MOCK_GUID")
         let cybridConfig = CybridConfig()
-        cybridConfig.setup(
-            bearer: "TEST-BEARER",
-            customerGUID: "MOCK_GUID",
-            locale: nil,
-            theme: cybridConfig.theme,
-            completion: {}
-        )
+        cybridConfig.setup(sdkConfig: sdkConfig,
+                           locale: nil,
+                           theme: cybridConfig.theme,
+                           completion: {})
+
         /// Default locale in local Simulator is `en-US`, while in CI it's `en`
         let possiblePreferredLocales = ["en", "en-US", "en-CA"]
 
@@ -138,13 +142,13 @@ class CybridConfigTests: XCTestCase {
     func testCybrid_getPreferredLocale_withoutCustomLocale() {
 
         // Given
+        let sdkConfig = SDKConfig(environment: .staging,
+                                  bearer: "TEST-BEARER",
+                                  customerGuid: "MOCK_GUID")
         let cybridConfig = CybridConfig()
-        cybridConfig.setup(
-            bearer: "TEST-BEARER",
-            customerGUID: "MOCK_GUID",
-            locale: nil,
-            completion: {}
-        )
+        cybridConfig.setup(sdkConfig: sdkConfig,
+                           locale: nil,
+                           completion: {})
         let preferredLanguages = ["en-US", "fr-CA"]
 
         // When
@@ -157,13 +161,13 @@ class CybridConfigTests: XCTestCase {
     func testCybrid_getPreferredLocale_withCustomLocale_Supported() {
 
         // Given
+        let sdkConfig = SDKConfig(environment: .staging,
+                                  bearer: "TEST-BEARER",
+                                  customerGuid: "MOCK_GUID")
         let cybridConfig = CybridConfig()
-        cybridConfig.setup(
-            bearer: "TEST-BEARER",
-            customerGUID: "MOCK_GUID",
-            locale: Locale(identifier: "fr-CA"),
-            completion: {}
-        )
+        cybridConfig.setup(sdkConfig: sdkConfig,
+                           locale: Locale(identifier: "fr-CA"),
+                           completion: {})
         let preferredLanguages = ["en-US", "fr-CA"]
 
         // When
