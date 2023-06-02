@@ -42,9 +42,9 @@ class LoginController: UIViewController {
         let customerGuid = Bundle.main.object(forInfoDictionaryKey: "CybridCustomerGUID") as? String ?? ""
 
         // -- Get bearer
-        self.getLocalBearer(clientId: clientId,
-                            clientSecret: clientSecret,
-                            customerGuid: customerGuid)
+        self.getConfig(clientId: clientId,
+                       clientSecret: clientSecret,
+                       customerGuid: customerGuid)
     }
     
     @IBAction func login(_ sender: Any) {
@@ -63,12 +63,12 @@ class LoginController: UIViewController {
         }
         self.loader = LoginLooader()
         self.loader?.present()
-        self.getLocalBearer(clientId: clientIdValue,
-                            clientSecret: clientSecretValue,
-                            customerGuid: customerGuidValue)
+        self.getConfig(clientId: clientIdValue,
+                       clientSecret: clientSecretValue,
+                       customerGuid: customerGuidValue)
     }
     
-    func getLocalBearer(clientId: String, clientSecret: String, customerGuid: String) {
+    func getConfig(clientId: String, clientSecret: String, customerGuid: String) {
 
         let authenticator = CryptoAuthenticator(session: .shared,
                                                 clientId: clientId,
@@ -78,8 +78,8 @@ class LoginController: UIViewController {
         authenticator.getSDKConfig { [weak self] result in
             
             switch result {
-            case .success(let bearer):
-                self?.initCybridSDK(customerGuid: customerGuid, bearer: bearer)
+            case .success(let sdkConfig):
+                self?.initCybridSDK(sdkConfig: sdkConfig)
             case .failure(let error):
                 
                 DispatchQueue.main.async {
@@ -92,11 +92,9 @@ class LoginController: UIViewController {
         }
     }
     
-    func initCybridSDK(customerGuid: String, bearer: String) {
+    func initCybridSDK(sdkConfig: SDKConfig) {
         
-        Cybrid.setup(bearer: bearer,
-                     customerGUID: customerGuid,
-                     environment: self.environment,
+        Cybrid.setup(sdkConfig: sdkConfig,
                      logger: ClientLogger()) {
             
             if self.loader != nil {
