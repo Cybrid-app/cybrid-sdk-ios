@@ -118,22 +118,18 @@ extension CybridConfig {
 
     internal func fetchAssets(_ completion: @escaping () -> Void) {
 
-        if self.assets.isEmpty {
-            self.dataProvider!.fetchAssetsList { [self] assetsResponse in
-                switch assetsResponse {
-                case .success(let assets):
+        self.dataProvider!.fetchAssetsList { [self] assetsResponse in
+            switch assetsResponse {
+            case .success(let assets):
 
-                    let defaultAssetCode = self.bank?.supportedFiatAccountAssets?.first
-                    self.assets = assets
-                    self.fiat = assets.first(where: { $0.code == defaultAssetCode }) ?? FiatConfig.usd.defaultAsset
-                    completion()
+                let defaultAssetCode = self.bank?.supportedFiatAccountAssets?.first
+                self.assets = assets
+                self.fiat = assets.first(where: { $0.code == defaultAssetCode }) ?? FiatConfig.usd.defaultAsset
+                completion()
 
-                case .failure:
-                    self.logger?.log(.component(.accounts(.pricesDataError)))
-                }
+            case .failure:
+                self.logger?.log(.component(.accounts(.pricesDataError)))
             }
-        } else {
-            completion()
         }
     }
 }
