@@ -762,7 +762,6 @@
 			children = (
 				0B303CE32862E5D9007BF7FF /* CybridConfig.swift */,
 				0B00E023287CD72D00707F26 /* Environment.swift */,
-				925DD9B52A2904F8006AFEAB /* SDKConfig.swift */,
 			);
 			path = Config;
 			sourceTree = "<group>";
@@ -2200,7 +2199,6 @@
 				0BD6610A286B768C00F4DA6B /* ListPricesViewModel.swift in Sources */,
 				9299104829D38C69007E9832 /* CDecimal.swift in Sources */,
 				92F12051299435140086EE18 /* AccountAssetUIModel.swift in Sources */,
-				925DD9B62A2904F8006AFEAB /* SDKConfig.swift in Sources */,
 				0B00E05C2887256B00707F26 /* UIView+Keyboard.swift in Sources */,
 				92F38C4F2924223E00008F58 /* BankAccountsViewController.swift in Sources */,
 				0BBD0CCA28AAC025001DBC5F /* BigDecimalValidator.swift in Sources */,
