@@ -233,6 +233,7 @@
 		92B681A4291C141A00FD6E99 /* listIdentityVerifications_Incomplete.json in Resources */ = {isa = PBXBuildFile; fileRef = 92B681A3291C141A00FD6E99 /* listIdentityVerifications_Incomplete.json */; };
 		92B681A6291C173C00FD6E99 /* createIdentityVerificationModel_Incomplete.json in Resources */ = {isa = PBXBuildFile; fileRef = 92B681A5291C173C00FD6E99 /* createIdentityVerificationModel_Incomplete.json */; };
 		92BAC4662A2E3F0B005CCD2A /* SDKConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92BAC4652A2E3F0B005CCD2A /* SDKConfig.swift */; };
+		92BAC4682A33C1CB005CCD2A /* ScopeConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92BAC4672A33C1CB005CCD2A /* ScopeConstants.swift */; };
 		92C92C892911F2DA00B81719 /* Polling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C92C882911F2DA00B81719 /* Polling.swift */; };
 		92C92C8B2911FC6C00B81719 /* CustomerBankModel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C92C8A2911FC6C00B81719 /* CustomerBankModel+Extensions.swift */; };
 		92C92C8D29123C5F00B81719 /* IdentityVerificationBankModel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C92C8C29123C5F00B81719 /* IdentityVerificationBankModel+Extensions.swift */; };
@@ -533,6 +534,7 @@
 		92B681A3291C141A00FD6E99 /* listIdentityVerifications_Incomplete.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = listIdentityVerifications_Incomplete.json; sourceTree = "<group>"; };
 		92B681A5291C173C00FD6E99 /* createIdentityVerificationModel_Incomplete.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = createIdentityVerificationModel_Incomplete.json; sourceTree = "<group>"; };
 		92BAC4652A2E3F0B005CCD2A /* SDKConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SDKConfig.swift; sourceTree = "<group>"; };
+		92BAC4672A33C1CB005CCD2A /* ScopeConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScopeConstants.swift; sourceTree = "<group>"; };
 		92C92C882911F2DA00B81719 /* Polling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Polling.swift; sourceTree = "<group>"; };
 		92C92C8A2911FC6C00B81719 /* CustomerBankModel+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CustomerBankModel+Extensions.swift"; sourceTree = "<group>"; };
 		92C92C8C29123C5F00B81719 /* IdentityVerificationBankModel+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IdentityVerificationBankModel+Extensions.swift"; sourceTree = "<group>"; };
@@ -623,6 +625,7 @@
 			isa = PBXGroup;
 			children = (
 				0B00E027287DBA8400707F26 /* CryptoAuthenticator.swift */,
+				92BAC4672A33C1CB005CCD2A /* ScopeConstants.swift */,
 			);
 			name = Auth;
 			sourceTree = "<group>";
@@ -2310,6 +2313,7 @@
 				925DD9A32A1E59DD006AFEAB /* UIView+Extensions.swift in Sources */,
 				0BD26F2928A55D7F00ED2A1B /* ClientLogger.swift in Sources */,
 				0BBCF618285C43E000D39C6D /* SceneDelegate.swift in Sources */,
+				92BAC4682A33C1CB005CCD2A /* ScopeConstants.swift in Sources */,
 				92E2133528F86F3300F420F2 /* LoginLoader.swift in Sources */,
 				928E237D28EE02A6006AAE1A /* UIViewController+Extensions.swift in Sources */,
 				0BD66115286B76F300F4DA6B /* CryptoPriceListTestVC.swift in Sources */,

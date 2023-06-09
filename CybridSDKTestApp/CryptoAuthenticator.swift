@@ -13,10 +13,6 @@ import CybridApiIdpSwift
 class CryptoAuthenticator {
 
     private let session: URLSession
-    private let tokenScopes = "banks:read banks:write accounts:read accounts:execute customers:read customers:write customers:execute prices:read quotes:execute trades:execute trades:read workflows:execute workflows:read external_bank_accounts:execute external_bank_accounts:read external_bank_accounts:write transfers:read transfers:execute"
-    private let customerTokenScopes: Set<PostCustomerTokenIdpModel.ScopesIdpModel> = [
-        .customersRead, .customersWrite, .accountsRead, .accountsExecute, .pricesRead, .quotesRead, .quotesExecute, .tradesRead, .tradesExecute, .transfersRead, .transfersExecute, .externalBankAccountsRead, .externalBankAccountsWrite, .externalBankAccountsExecute, .workflowsRead, .workflowsExecute
-    ]
     private var clientId: String = ""
     private var clientSecret: String = ""
     private var customerGuid: String = ""
@@ -47,7 +43,7 @@ class CryptoAuthenticator {
             "grant_type": "client_credentials",
             "client_id": self.clientId,
             "client_secret": self.clientSecret,
-            "scope": self.tokenScopes
+            "scope": ScopeContants.bankTokenScopes
         ]
         do {
             request.httpBody = try JSONSerialization.data(withJSONObject: parameters, options: .prettyPrinted)
@@ -98,7 +94,7 @@ class CryptoAuthenticator {
 
         // -- Get customer token
         let postCustomerToken = PostCustomerTokenIdpModel(customerGuid: self.customerGuid,
-                                                          scopes: self.customerTokenScopes)
+                                                          scopes: ScopeContants.customerTokenScopes)
         CustomerTokensAPI.createCustomerToken(postCustomerTokenIdpModel: postCustomerToken) { [self] result in
             switch result {
                 
