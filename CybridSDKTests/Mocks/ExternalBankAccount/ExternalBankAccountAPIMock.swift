@@ -42,6 +42,7 @@ final class ExternalBankAccountAPIMock: ExternalBankAccountsAPI {
         guid: String? = nil,
         bankGuid: String? = nil,
         customerGuid: String? = nil,
+        state: String? = nil,
         apiResponseQueue: DispatchQueue = CybridApiBankSwiftAPI.apiResponseQueue,
         completion: @escaping ((Result<ExternalBankAccountListBankModel, ErrorResponse>) -> Void)) -> RequestTask {
 
