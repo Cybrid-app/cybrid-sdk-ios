@@ -21,21 +21,21 @@ class IdentityVerificationViewModel: NSObject {
     internal var customerGuid = Cybrid.customerGuid
 
     // MARK: Public properties
-    var UIState: Observable<IdentityVerificationViewController.KYCViewState> = .init(.LOADING)
+    var uiState: Observable<IdentityVerificationViewController.KYCViewState> = .init(.LOADING)
     var latestIdentityVerification: IdentityVerificationWrapper?
 
     // MARK: Constructor
     init(dataProvider: CustomersRepoProvider & IdentityVerificationRepoProvider,
-         UIState: Observable<IdentityVerificationViewController.KYCViewState>,
+         uiState: Observable<IdentityVerificationViewController.KYCViewState>,
          logger: CybridLogger?) {
 
         self.dataProvider = dataProvider
-        self.UIState = UIState
+        self.uiState = uiState
         self.logger = logger
     }
 
     // MARK: ViewModel Methods
-    func createCustomerTest() {
+    internal func createCustomerTest() {
 
         let postCustomerBankModel = PostCustomerBankModel(type: .individual)
         self.dataProvider.createCustomer(postCustomerBankModel: postCustomerBankModel) { [weak self] customerResponse in
@@ -69,50 +69,38 @@ class IdentityVerificationViewModel: NSObject {
         }
     }
 
-    func getIdentityVerificationStatus(identityWrapper: IdentityVerificationWrapper? = nil) {
+    internal func getIdentityVerificationStatus(identityWrapper: IdentityVerificationWrapper? = nil) {
 
         if identityWrapper?.identityVerification == nil {
 
-            self.fetchLastIdentityVerification { [weak self] lastVerification in
-                if lastVerification == nil || lastVerification?.state == .expired {
-                    self?.createIdentityVerification { recordIdentity in
-                        self?.fetchIdentityVerificationWithDetailsStatus(record: recordIdentity)
-                    }
-                } else {
-                    self?.fetchIdentityVerificationWithDetailsStatus(record: lastVerification)
-                }
+            self.getIdentityVerificationStatusWithWrapperNil()
+            return
+        }
+
+        if identityWrapper?.identityVerification?.state == .expired {
+
+            self.createIdentityVerification { [self] recordIdentity in
+                self.fetchIdentityVerificationWithDetailsStatus(record: recordIdentity)
             }
-
         } else {
-            if identityWrapper?.identityVerification?.state == .expired {
+            self.fetchIdentityVerificationWithDetailsStatus(record: identityWrapper?.identityVerification)
+        }
+    }
 
-                self.createIdentityVerification { [weak self] recordIdentity in
-                    self?.fetchIdentityVerificationWithDetailsStatus(record: recordIdentity)
+    internal func getIdentityVerificationStatusWithWrapperNil() {
+
+        self.fetchLastIdentityVerification { [self] lastVerification in
+            if lastVerification == nil || lastVerification?.state == .expired {
+                self.createIdentityVerification { recordIdentity in
+                    self.fetchIdentityVerificationWithDetailsStatus(record: recordIdentity)
                 }
             } else {
-                self.fetchIdentityVerificationWithDetailsStatus(record: identityWrapper?.identityVerification)
+                self.fetchIdentityVerificationWithDetailsStatus(record: lastVerification)
             }
         }
     }
 
-    func fetchIdentityVerificationWithDetailsStatus(record: IdentityVerificationBankModel?) {
-
-        self.dataProvider.getIdentityVerification(guid: record?.guid ?? "") { [weak self] identityResponse in
-
-            switch identityResponse {
-
-            case .success(let recordDetails):
-
-                let wrapper = IdentityVerificationWrapper(identity: record, details: recordDetails)
-                self?.checkIdentityRecordStatus(wrapper: wrapper)
-
-            case .failure:
-                self?.logger?.log(.component(.accounts(.pricesDataError)))
-            }
-        }
-    }
-
-    func fetchLastIdentityVerification(_ completion: @escaping (_ record: IdentityVerificationBankModel?) -> Void) {
+    internal func fetchLastIdentityVerification(_ completion: @escaping (_ record: IdentityVerificationBankModel?) -> Void) {
 
         self.dataProvider.listIdentityVerifications(customerGuid: self.customerGuid) { [weak self] listCustomerResponse in
 
@@ -137,7 +125,7 @@ class IdentityVerificationViewModel: NSObject {
         }
     }
 
-    func createIdentityVerification(_ completion: @escaping (_ record: IdentityVerificationBankModel?) -> Void) {
+    internal func createIdentityVerification(_ completion: @escaping (_ record: IdentityVerificationBankModel?) -> Void) {
 
         let postIdentityVerificationBankModel = PostIdentityVerificationBankModel(
             type: .kyc,
@@ -159,8 +147,25 @@ class IdentityVerificationViewModel: NSObject {
         }
     }
 
+    internal func fetchIdentityVerificationWithDetailsStatus(record: IdentityVerificationBankModel?) {
+
+        self.dataProvider.getIdentityVerification(guid: record?.guid ?? "") { [weak self] identityResponse in
+
+            switch identityResponse {
+
+            case .success(let recordDetails):
+
+                let wrapper = IdentityVerificationWrapper(identity: record, details: recordDetails)
+                self?.checkIdentityRecordStatus(wrapper: wrapper)
+
+            case .failure:
+                self?.logger?.log(.component(.accounts(.pricesDataError)))
+            }
+        }
+    }
+
     // MARK: Checker Funtions
-    func checkCustomerStatus(state: CustomerBankModel.StateBankModel) {
+    internal func checkCustomerStatus(state: CustomerBankModel.StateBankModel) {
 
         switch state {
 
@@ -173,7 +178,7 @@ class IdentityVerificationViewModel: NSObject {
 
             self.customerJob?.stop()
             self.customerJob = nil
-            self.UIState.value = .VERIFIED
+            self.uiState.value = .VERIFIED
 
         case .unverified:
 
@@ -185,7 +190,7 @@ class IdentityVerificationViewModel: NSObject {
 
             self.customerJob?.stop()
             self.customerJob = nil
-            self.UIState.value = .ERROR
+            self.uiState.value = .ERROR
 
         default:
             self.logger?.log(.component(.accounts(.pricesDataError)))
@@ -193,7 +198,7 @@ class IdentityVerificationViewModel: NSObject {
         }
     }
 
-    func checkIdentityRecordStatus(wrapper: IdentityVerificationWrapper?) {
+    internal func checkIdentityRecordStatus(wrapper: IdentityVerificationWrapper?) {
 
         switch wrapper?.identityVerificationDetails?.state {
 
@@ -226,7 +231,7 @@ class IdentityVerificationViewModel: NSObject {
 
             self.identityJob?.stop()
             self.identityJob = nil
-            UIState.value = .VERIFIED
+            uiState.value = .VERIFIED
 
         default:
 
@@ -235,22 +240,22 @@ class IdentityVerificationViewModel: NSObject {
         }
     }
 
-    func checkIdentityPersonaStatus(wrapper: IdentityVerificationWrapper?) {
+    internal func checkIdentityPersonaStatus(wrapper: IdentityVerificationWrapper?) {
 
         self.latestIdentityVerification = wrapper
         switch wrapper?.identityVerificationDetails?.personaState {
 
         case .waiting:
 
-            UIState.value = .REQUIRED
+            uiState.value = .REQUIRED
 
         case .pending:
 
-            UIState.value = .REQUIRED
+            uiState.value = .REQUIRED
 
         case .reviewing:
 
-            UIState.value = .REVIEWING
+            uiState.value = .REVIEWING
 
         case .expired:
 
@@ -258,12 +263,12 @@ class IdentityVerificationViewModel: NSObject {
 
         default:
 
-            UIState.value = .ERROR
+            uiState.value = .ERROR
         }
     }
 }
 
-class IdentityVerificationWrapper {
+internal class IdentityVerificationWrapper {
 
     var identityVerification: IdentityVerificationBankModel?
     var identityVerificationDetails: IdentityVerificationWithDetailsBankModel?

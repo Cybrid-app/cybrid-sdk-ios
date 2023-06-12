@@ -1,5 +1,5 @@
 //
-//  IdentityVerificationViewModelEmptyTest.swift
+//  IdentityVerificationViewModelErrorTest.swift
 //  CybridSDKTests
 //
 //  Created by Erick Sanchez Perez on 08/11/22.
@@ -9,21 +9,51 @@ import CybridApiBankSwift
 @testable import CybridSDK
 import XCTest
 
-class IdentityVerificationViewModelEmptyTest: XCTestCase {
+class IdentityVerificationViewModelErrorTest: XCTestCase {
 
     lazy var dataProvider = ServiceProviderMock()
 
-    func createViewModel(UIState: Observable<IdentityVerificationViewController.KYCViewState>) -> IdentityVerificationViewModel {
+    func createViewModel(uiState: Observable<IdentityVerificationViewController.KYCViewState>) -> IdentityVerificationViewModel {
         return IdentityVerificationViewModel(dataProvider: self.dataProvider,
-                                             UIState: UIState,
+                                             uiState: uiState,
                                              logger: nil)
+    }
+
+    func test_createCustomerTest_Error() {
+
+        // -- Given
+        let uiState: Observable<IdentityVerificationViewController.KYCViewState> = .init(.LOADING)
+        let viewModel = createViewModel(uiState: uiState)
+        let originalCustomerGUID = viewModel.customerGuid
+
+        // -- When
+        viewModel.createCustomerTest()
+        dataProvider.didCreateCustomerFailed()
+
+        // -- Then
+        XCTAssertEqual(originalCustomerGUID, viewModel.customerGuid)
+    }
+
+    func test_getCustomerStatus_Failed() {
+
+        // -- Given
+        let UIState: Observable<IdentityVerificationViewController.KYCViewState> = .init(.LOADING)
+        let viewModel = createViewModel(uiState: UIState)
+        let originalCustomerGUID = viewModel.customerGuid
+
+        // -- When
+        viewModel.getCustomerStatus()
+        dataProvider.didFetchCustomerFailed()
+
+        // -- Then
+        XCTAssertEqual(originalCustomerGUID, viewModel.customerGuid)
     }
 
     func test_getIdentityVerificationStatus_Nil_Last_Nil() {
 
         // -- Given
         let UIState: Observable<IdentityVerificationViewController.KYCViewState> = .init(.LOADING)
-        let viewModel = createViewModel(UIState: UIState)
+        let viewModel = createViewModel(uiState: UIState)
 
         // -- When
         viewModel.getIdentityVerificationStatus(identityWrapper: nil)
@@ -39,7 +69,7 @@ class IdentityVerificationViewModelEmptyTest: XCTestCase {
 
         // -- Given
         let UIState: Observable<IdentityVerificationViewController.KYCViewState> = .init(.LOADING)
-        let viewModel = createViewModel(UIState: UIState)
+        let viewModel = createViewModel(uiState: UIState)
 
         // -- When
         viewModel.getIdentityVerificationStatus(identityWrapper: nil)
@@ -56,7 +86,7 @@ class IdentityVerificationViewModelEmptyTest: XCTestCase {
 
         // -- Given
         let UIState: Observable<IdentityVerificationViewController.KYCViewState> = .init(.LOADING)
-        let viewModel = createViewModel(UIState: UIState)
+        let viewModel = createViewModel(uiState: UIState)
 
         // -- When
         viewModel.getIdentityVerificationStatus(identityWrapper: nil)
@@ -72,7 +102,7 @@ class IdentityVerificationViewModelEmptyTest: XCTestCase {
 
         // -- Given
         let UIState: Observable<IdentityVerificationViewController.KYCViewState> = .init(.LOADING)
-        let viewModel = createViewModel(UIState: UIState)
+        let viewModel = createViewModel(uiState: UIState)
         let record = IdentityVerificationBankModel.getMock()
 
         // -- When
@@ -87,7 +117,7 @@ class IdentityVerificationViewModelEmptyTest: XCTestCase {
 
         // -- Given
         let UIState: Observable<IdentityVerificationViewController.KYCViewState> = .init(.LOADING)
-        let viewModel = createViewModel(UIState: UIState)
+        let viewModel = createViewModel(uiState: UIState)
         self.dataProvider = ServiceProviderMock()
 
         // -- Then
@@ -102,7 +132,7 @@ class IdentityVerificationViewModelEmptyTest: XCTestCase {
 
         // -- Given
         let UIState: Observable<IdentityVerificationViewController.KYCViewState> = .init(.LOADING)
-        let viewModel = createViewModel(UIState: UIState)
+        let viewModel = createViewModel(uiState: UIState)
 
         // -- Then
         viewModel.fetchLastIdentityVerification { identity in
@@ -115,7 +145,7 @@ class IdentityVerificationViewModelEmptyTest: XCTestCase {
 
         // -- Given
         let UIState: Observable<IdentityVerificationViewController.KYCViewState> = .init(.LOADING)
-        let viewModel = createViewModel(UIState: UIState)
+        let viewModel = createViewModel(uiState: UIState)
 
         // -- Then
         viewModel.createIdentityVerification { identity in
