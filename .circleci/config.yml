@@ -68,8 +68,8 @@ workflows:
       - swiftlint
       - pod-spec-lint
       - build-and-test
-      - publish
-#          filters:
-#            branches:
-#              only:
-#                - main
+      - publish:
+          filters:
+            branches:
+              only:
+                - main
