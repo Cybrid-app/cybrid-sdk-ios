@@ -225,13 +225,15 @@
 		92AD743128D418610071F17F /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AD743028D418610071F17F /* String+Extensions.swift */; };
 		92B6819129197DDB00FD6E99 /* IdentityVerificationsAPIMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B6819029197DDB00FD6E99 /* IdentityVerificationsAPIMock.swift */; };
 		92B68193291AB9B900FD6E99 /* KYCComponentTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B68192291AB9B900FD6E99 /* KYCComponentTest.swift */; };
-		92B68196291B1C6300FD6E99 /* IdentityVerificationViewModelEmptyTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B68195291B1C6300FD6E99 /* IdentityVerificationViewModelEmptyTest.swift */; };
+		92B68196291B1C6300FD6E99 /* IdentityVerificationViewModelErrorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B68195291B1C6300FD6E99 /* IdentityVerificationViewModelErrorTest.swift */; };
 		92B68198291C0D8500FD6E99 /* createCustomerBankModel.json in Resources */ = {isa = PBXBuildFile; fileRef = 92B68197291C0D8500FD6E99 /* createCustomerBankModel.json */; };
 		92B6819C291C0F1800FD6E99 /* createIdentityVerificationModel.json in Resources */ = {isa = PBXBuildFile; fileRef = 92B6819B291C0F1800FD6E99 /* createIdentityVerificationModel.json */; };
 		92B681A0291C0F4700FD6E99 /* listIdentityVerifications.json in Resources */ = {isa = PBXBuildFile; fileRef = 92B6819F291C0F4700FD6E99 /* listIdentityVerifications.json */; };
 		92B681A2291C119300FD6E99 /* createCustomerBankModel_Incomplete.json in Resources */ = {isa = PBXBuildFile; fileRef = 92B681A1291C119300FD6E99 /* createCustomerBankModel_Incomplete.json */; };
 		92B681A4291C141A00FD6E99 /* listIdentityVerifications_Incomplete.json in Resources */ = {isa = PBXBuildFile; fileRef = 92B681A3291C141A00FD6E99 /* listIdentityVerifications_Incomplete.json */; };
 		92B681A6291C173C00FD6E99 /* createIdentityVerificationModel_Incomplete.json in Resources */ = {isa = PBXBuildFile; fileRef = 92B681A5291C173C00FD6E99 /* createIdentityVerificationModel_Incomplete.json */; };
+		92BAC4662A2E3F0B005CCD2A /* SDKConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92BAC4652A2E3F0B005CCD2A /* SDKConfig.swift */; };
+		92BAC4682A33C1CB005CCD2A /* ScopeConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92BAC4672A33C1CB005CCD2A /* ScopeConstants.swift */; };
 		92C92C892911F2DA00B81719 /* Polling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C92C882911F2DA00B81719 /* Polling.swift */; };
 		92C92C8B2911FC6C00B81719 /* CustomerBankModel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C92C8A2911FC6C00B81719 /* CustomerBankModel+Extensions.swift */; };
 		92C92C8D29123C5F00B81719 /* IdentityVerificationBankModel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C92C8C29123C5F00B81719 /* IdentityVerificationBankModel+Extensions.swift */; };
@@ -524,13 +526,15 @@
 		92AD743028D418610071F17F /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		92B6819029197DDB00FD6E99 /* IdentityVerificationsAPIMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentityVerificationsAPIMock.swift; sourceTree = "<group>"; };
 		92B68192291AB9B900FD6E99 /* KYCComponentTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KYCComponentTest.swift; sourceTree = "<group>"; };
-		92B68195291B1C6300FD6E99 /* IdentityVerificationViewModelEmptyTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentityVerificationViewModelEmptyTest.swift; sourceTree = "<group>"; };
+		92B68195291B1C6300FD6E99 /* IdentityVerificationViewModelErrorTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentityVerificationViewModelErrorTest.swift; sourceTree = "<group>"; };
 		92B68197291C0D8500FD6E99 /* createCustomerBankModel.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = createCustomerBankModel.json; sourceTree = "<group>"; };
 		92B6819B291C0F1800FD6E99 /* createIdentityVerificationModel.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = createIdentityVerificationModel.json; sourceTree = "<group>"; };
 		92B6819F291C0F4700FD6E99 /* listIdentityVerifications.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = listIdentityVerifications.json; sourceTree = "<group>"; };
 		92B681A1291C119300FD6E99 /* createCustomerBankModel_Incomplete.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = createCustomerBankModel_Incomplete.json; sourceTree = "<group>"; };
 		92B681A3291C141A00FD6E99 /* listIdentityVerifications_Incomplete.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = listIdentityVerifications_Incomplete.json; sourceTree = "<group>"; };
 		92B681A5291C173C00FD6E99 /* createIdentityVerificationModel_Incomplete.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = createIdentityVerificationModel_Incomplete.json; sourceTree = "<group>"; };
+		92BAC4652A2E3F0B005CCD2A /* SDKConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SDKConfig.swift; sourceTree = "<group>"; };
+		92BAC4672A33C1CB005CCD2A /* ScopeConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScopeConstants.swift; sourceTree = "<group>"; };
 		92C92C882911F2DA00B81719 /* Polling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Polling.swift; sourceTree = "<group>"; };
 		92C92C8A2911FC6C00B81719 /* CustomerBankModel+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CustomerBankModel+Extensions.swift"; sourceTree = "<group>"; };
 		92C92C8C29123C5F00B81719 /* IdentityVerificationBankModel+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IdentityVerificationBankModel+Extensions.swift"; sourceTree = "<group>"; };
@@ -621,6 +625,7 @@
 			isa = PBXGroup;
 			children = (
 				0B00E027287DBA8400707F26 /* CryptoAuthenticator.swift */,
+				92BAC4672A33C1CB005CCD2A /* ScopeConstants.swift */,
 			);
 			name = Auth;
 			sourceTree = "<group>";
@@ -754,6 +759,7 @@
 			children = (
 				0B303CE32862E5D9007BF7FF /* CybridConfig.swift */,
 				0B00E023287CD72D00707F26 /* Environment.swift */,
+				92BAC4652A2E3F0B005CCD2A /* SDKConfig.swift */,
 			);
 			path = Config;
 			sourceTree = "<group>";
@@ -1194,7 +1200,6 @@
 		0BD66120286C208600F4DA6B /* ViewModel Tests */ = {
 			isa = PBXGroup;
 			children = (
-				92B68194291B1C3900FD6E99 /* IdentityVerification */,
 				0BD66122286C20BC00F4DA6B /* CryptoPriceViewModelTests.swift */,
 				0B50F35A28A5890C00DDB01E /* TradeViewModelTests.swift */,
 			);
@@ -1397,6 +1402,15 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
+		927746152A33DA9700F2EB9D /* IdentityVerification */ = {
+			isa = PBXGroup;
+			children = (
+				92CB9E402914CAD500357873 /* IdentityVerificationViewModelTest.swift */,
+				92B68195291B1C6300FD6E99 /* IdentityVerificationViewModelErrorTest.swift */,
+			);
+			path = IdentityVerification;
+			sourceTree = "<group>";
+		};
 		92827DB029439B1E00231772 /* Workflow */ = {
 			isa = PBXGroup;
 			children = (
@@ -1554,15 +1568,6 @@
 			path = IdentityVerification;
 			sourceTree = "<group>";
 		};
-		92B68194291B1C3900FD6E99 /* IdentityVerification */ = {
-			isa = PBXGroup;
-			children = (
-				92CB9E402914CAD500357873 /* IdentityVerificationViewModelTest.swift */,
-				92B68195291B1C6300FD6E99 /* IdentityVerificationViewModelEmptyTest.swift */,
-			);
-			path = IdentityVerification;
-			sourceTree = "<group>";
-		};
 		92CB9E3D2914C13200357873 /* Customer */ = {
 			isa = PBXGroup;
 			children = (
@@ -1626,6 +1631,7 @@
 		92F120552996A8890086EE18 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				927746152A33DA9700F2EB9D /* IdentityVerification */,
 				9257E78E29B7DE4700846E12 /* Accounts */,
 				92E13CBC29A6A94A00F0A537 /* BankAccounts */,
 				92F120582996B4B90086EE18 /* ListPrices */,
@@ -2191,6 +2197,7 @@
 				0BD6610A286B768C00F4DA6B /* ListPricesViewModel.swift in Sources */,
 				9299104829D38C69007E9832 /* CDecimal.swift in Sources */,
 				92F12051299435140086EE18 /* AccountAssetUIModel.swift in Sources */,
+				92BAC4662A2E3F0B005CCD2A /* SDKConfig.swift in Sources */,
 				0B00E05C2887256B00707F26 /* UIView+Keyboard.swift in Sources */,
 				92F38C4F2924223E00008F58 /* BankAccountsViewController.swift in Sources */,
 				0BBD0CCA28AAC025001DBC5F /* BigDecimalValidator.swift in Sources */,
@@ -2227,7 +2234,7 @@
 				0BBD0CE128B6BCEE001DBC5F /* QuotesAPIMock.swift in Sources */,
 				0B2899F628904B11001B3360 /* TaskSchedulerTests.swift in Sources */,
 				9217353D28E41C3F00DF58CA /* TradeBankModelTest.swift in Sources */,
-				92B68196291B1C6300FD6E99 /* IdentityVerificationViewModelEmptyTest.swift in Sources */,
+				92B68196291B1C6300FD6E99 /* IdentityVerificationViewModelErrorTest.swift in Sources */,
 				0BD6611D286C1D5B00F4DA6B /* CurrencyFormatterTests.swift in Sources */,
 				0B303CF328636A0D007BF7FF /* CybridConfigTests.swift in Sources */,
 				92F1205B2996B4D60086EE18 /* CryptoPriceModelTest.swift in Sources */,
@@ -2306,6 +2313,7 @@
 				925DD9A32A1E59DD006AFEAB /* UIView+Extensions.swift in Sources */,
 				0BD26F2928A55D7F00ED2A1B /* ClientLogger.swift in Sources */,
 				0BBCF618285C43E000D39C6D /* SceneDelegate.swift in Sources */,
+				92BAC4682A33C1CB005CCD2A /* ScopeConstants.swift in Sources */,
 				92E2133528F86F3300F420F2 /* LoginLoader.swift in Sources */,
 				928E237D28EE02A6006AAE1A /* UIViewController+Extensions.swift in Sources */,
 				0BD66115286B76F300F4DA6B /* CryptoPriceListTestVC.swift in Sources */,
@@ -2596,7 +2604,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 14;
+				CURRENT_PROJECT_VERSION = 15;
 				DEVELOPMENT_TEAM = 5789WJ9F6P;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CybridSDKTestApp/Info.plist;
@@ -2613,7 +2621,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.14;
+				MARKETING_VERSION = 1.15;
 				PRODUCT_BUNDLE_IDENTIFIER = app.cybrid.CybridSDKTestApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -2629,7 +2637,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 14;
+				CURRENT_PROJECT_VERSION = 15;
 				DEVELOPMENT_TEAM = 5789WJ9F6P;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CybridSDKTestApp/Info.plist;
@@ -2646,7 +2654,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.14;
+				MARKETING_VERSION = 1.15;
 				PRODUCT_BUNDLE_IDENTIFIER = app.cybrid.CybridSDKTestApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

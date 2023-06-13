@@ -160,7 +160,7 @@ final class _TradeViewModel: NSObject {
     }
 
     let params = PostQuoteBankModel(
-      customerGuid: Cybrid.customerGUID,
+      customerGuid: Cybrid.customerGuid,
       symbol: symbol,
       side: segmentSelection.value.sideBankModel,
       receiveAmount: receiveAmount,

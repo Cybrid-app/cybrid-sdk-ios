@@ -27,7 +27,7 @@ class AccountsViewModelTest: XCTestCase {
         let assets = AssetBankModel.cryptoAssets
         let accounts = AccountBankModel.mock
         let prices: [SymbolPriceBankModel] = .mockPrices
-        return viewModel.buildModelList(assets: assets, accounts: accounts, prices: prices) ?? []
+        return viewModel.buildModelList(assets: assets, accounts: accounts, prices: prices)
     }
 
     func test_init() {

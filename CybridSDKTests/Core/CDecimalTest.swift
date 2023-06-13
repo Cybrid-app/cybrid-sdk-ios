@@ -17,7 +17,7 @@ class CDecimalTest: XCTestCase {
         let valueToConvert = "2"
         let decimalIntValue = BigInt(2)
         let decimalDecimalValue = "00"
-        let decimalnewValue = "2.00"
+        let decimalNewValue = "2.00"
 
         // -- When
         let decimal = CDecimal(valueToConvert)
@@ -26,7 +26,7 @@ class CDecimalTest: XCTestCase {
         XCTAssertEqual(decimal.originalValue, valueToConvert)
         XCTAssertEqual(decimal.intValue, decimalIntValue)
         XCTAssertEqual(decimal.decimalValue, decimalDecimalValue)
-        XCTAssertEqual(decimal.newValue, decimalnewValue)
+        XCTAssertEqual(decimal.newValue, decimalNewValue)
     }
 
     func test_init_String_2_5() {
@@ -35,7 +35,7 @@ class CDecimalTest: XCTestCase {
         let valueToConvert = "2.5"
         let decimalIntValue = BigInt(2)
         let decimalDecimalValue = "50"
-        let decimalnewValue = "2.50"
+        let decimalNewValue = "2.50"
 
         // -- When
         let decimal = CDecimal(valueToConvert)
@@ -44,7 +44,7 @@ class CDecimalTest: XCTestCase {
         XCTAssertEqual(decimal.originalValue, valueToConvert)
         XCTAssertEqual(decimal.intValue, decimalIntValue)
         XCTAssertEqual(decimal.decimalValue, decimalDecimalValue)
-        XCTAssertEqual(decimal.newValue, decimalnewValue)
+        XCTAssertEqual(decimal.newValue, decimalNewValue)
     }
 
     func test_init_String_3_43() {
@@ -53,7 +53,7 @@ class CDecimalTest: XCTestCase {
         let valueToConvert = "3.43"
         let decimalIntValue = BigInt(3)
         let decimalDecimalValue = "43"
-        let decimalnewValue = "3.43"
+        let decimalNewValue = "3.43"
 
         // -- When
         let decimal = CDecimal(valueToConvert)
@@ -62,7 +62,7 @@ class CDecimalTest: XCTestCase {
         XCTAssertEqual(decimal.originalValue, valueToConvert)
         XCTAssertEqual(decimal.intValue, decimalIntValue)
         XCTAssertEqual(decimal.decimalValue, decimalDecimalValue)
-        XCTAssertEqual(decimal.newValue, decimalnewValue)
+        XCTAssertEqual(decimal.newValue, decimalNewValue)
     }
 
     func test_init_String_123456789_0987654321() {
@@ -71,7 +71,7 @@ class CDecimalTest: XCTestCase {
         let valueToConvert = "123456789.0987654321"
         let decimalIntValue = BigInt(123456789)
         let decimalDecimalValue = "0987654321"
-        let decimalnewValue = "123456789.0987654321"
+        let decimalNewValue = "123456789.0987654321"
 
         // -- When
         let decimal = CDecimal(valueToConvert)
@@ -80,7 +80,7 @@ class CDecimalTest: XCTestCase {
         XCTAssertEqual(decimal.originalValue, valueToConvert)
         XCTAssertEqual(decimal.intValue, decimalIntValue)
         XCTAssertEqual(decimal.decimalValue, decimalDecimalValue)
-        XCTAssertEqual(decimal.newValue, decimalnewValue)
+        XCTAssertEqual(decimal.newValue, decimalNewValue)
     }
 
     func test_init_String_Int_Error_With_Decimal() {
@@ -89,7 +89,7 @@ class CDecimalTest: XCTestCase {
         let valueToConvert = "Hola.12"
         let decimalIntValue = BigInt(0)
         let decimalDecimalValue = "12"
-        let decimalnewValue = "0.12"
+        let decimalNewValue = "0.12"
 
         // -- When
         let decimal = CDecimal(valueToConvert)
@@ -98,7 +98,7 @@ class CDecimalTest: XCTestCase {
         XCTAssertEqual(decimal.originalValue, valueToConvert)
         XCTAssertEqual(decimal.intValue, decimalIntValue)
         XCTAssertEqual(decimal.decimalValue, decimalDecimalValue)
-        XCTAssertEqual(decimal.newValue, decimalnewValue)
+        XCTAssertEqual(decimal.newValue, decimalNewValue)
     }
 
     func test_init_String_Int_Error_Without_Decimal() {
@@ -107,7 +107,7 @@ class CDecimalTest: XCTestCase {
         let valueToConvert = "Hola"
         let decimalIntValue = BigInt(0)
         let decimalDecimalValue = "00"
-        let decimalnewValue = "0.00"
+        let decimalNewValue = "0.00"
 
         // -- When
         let decimal = CDecimal(valueToConvert)
@@ -116,7 +116,7 @@ class CDecimalTest: XCTestCase {
         XCTAssertEqual(decimal.originalValue, valueToConvert)
         XCTAssertEqual(decimal.intValue, decimalIntValue)
         XCTAssertEqual(decimal.decimalValue, decimalDecimalValue)
-        XCTAssertEqual(decimal.newValue, decimalnewValue)
+        XCTAssertEqual(decimal.newValue, decimalNewValue)
     }
 
     func test_init_Int_2() {
@@ -125,7 +125,7 @@ class CDecimalTest: XCTestCase {
         let valueToConvert: Int = 2
         let decimalIntValue = BigInt(2)
         let decimalDecimalValue = "00"
-        let decimalnewValue = "2.00"
+        let decimalNewValue = "2.00"
 
         // -- When
         let decimal = CDecimal(valueToConvert)
@@ -134,7 +134,7 @@ class CDecimalTest: XCTestCase {
         XCTAssertEqual(decimal.originalValue, "2")
         XCTAssertEqual(decimal.intValue, decimalIntValue)
         XCTAssertEqual(decimal.decimalValue, decimalDecimalValue)
-        XCTAssertEqual(decimal.newValue, decimalnewValue)
+        XCTAssertEqual(decimal.newValue, decimalNewValue)
     }
 
     func test_changeValue_String_From_2_to_10() {
@@ -143,14 +143,14 @@ class CDecimalTest: XCTestCase {
         let valueToConvert = "2"
         let decimalIntValue = BigInt(2)
         let decimalDecimalValue = "00"
-        let decimalnewValue = "2.00"
+        let decimalNewValue = "2.00"
 
         // -- When
         var decimal = CDecimal(valueToConvert)
         XCTAssertEqual(decimal.originalValue, valueToConvert)
-        XCTAssertEqual(decimal.intValue, BigInt(2))
-        XCTAssertEqual(decimal.decimalValue, "00")
-        XCTAssertEqual(decimal.newValue, "2.00")
+        XCTAssertEqual(decimal.intValue, decimalIntValue)
+        XCTAssertEqual(decimal.decimalValue, decimalDecimalValue)
+        XCTAssertEqual(decimal.newValue, decimalNewValue)
         decimal.changeValue("10.56")
 
         // -- Then

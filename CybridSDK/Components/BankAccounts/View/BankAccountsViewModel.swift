@@ -22,7 +22,7 @@ class BankAccountsViewModel: NSObject {
     // MARK: Internal properties
     internal var workflowJob: Polling?
     internal var externalBankAccountJob: Polling?
-    internal var customerGuid = Cybrid.customerGUID
+    internal var customerGuid = Cybrid.customerGuid
 
     internal var accounts: [ExternalBankAccountBankModel] = []
 

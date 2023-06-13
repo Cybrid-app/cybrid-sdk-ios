@@ -25,7 +25,7 @@ public final class IdentityVerificationViewController: UIViewController {
         super.init(nibName: nil, bundle: nil)
         self.identityVerificationViewModel = IdentityVerificationViewModel(
             dataProvider: CybridSession.current,
-            UIState: self.currentState,
+            uiState: self.currentState,
             logger: Cybrid.logger)
         self.theme = Cybrid.theme
         self.localizer = CybridLocalizer()

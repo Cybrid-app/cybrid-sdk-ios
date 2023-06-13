@@ -2,7 +2,6 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="h3g-jT-Vru">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -224,7 +223,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="tryToLogin:" destination="u29-vx-Ptb" eventType="touchUpInside" id="RYo-iE-O8m"/>
+                                    <action selector="login:" destination="u29-vx-Ptb" eventType="touchUpInside" id="RYo-iE-O8m"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -259,9 +258,9 @@
                     <navigationItem key="navigationItem" id="05B-D4-DMb"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
-                        <outlet property="clientID" destination="aY6-nz-Ed0" id="1Xb-E0-JHN"/>
+                        <outlet property="clientId" destination="aY6-nz-Ed0" id="1Xb-E0-JHN"/>
                         <outlet property="clientSecret" destination="0Jv-FV-bNS" id="kew-if-TZT"/>
-                        <outlet property="customerGUID" destination="IkL-4M-hYw" id="3Ga-F9-sCD"/>
+                        <outlet property="customerGuid" destination="IkL-4M-hYw" id="3Ga-F9-sCD"/>
                         <outlet property="errorLabel" destination="OO4-iE-FhO" id="CWu-Et-L8I"/>
                         <segue destination="BYZ-38-t0r" kind="show" identifier="goToComponents" id="WOD-eV-VDL"/>
                     </connections>
