@@ -1777,6 +1777,7 @@
 				0B078F0928497B070020B4F7 /* Sources */,
 				0B078F0A28497B070020B4F7 /* Frameworks */,
 				0B078F0B28497B070020B4F7 /* Resources */,
+				92EE91982A3912C900FDF763 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -1999,6 +2000,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "# Run only when not running on CI. CI should run SwiftLint with Fastlane.\nif [ -z \"$CI\"]; then\n  ${PODS_ROOT}/SwiftLint/swiftlint\nfi\n";
+		};
+		92EE91982A3912C900FDF763 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nsource ~/.bash_profile\necho \"Injecting env vars\"\n\nPLIST_FILE_PATH=\"./CybridSDKTestApp/Info.plist\"\nCybrid_Bank_Client_Id=$CybridAPI_ID\nCybrid_Bank_Secret=$CybridAPI_Secret\nCybrid_Bank_Customer_Guid=$CybridAPI_Customer_GUID\n\necho $Cybrid_Bank_Client_Id\necho $Cybrid_Bank_Secret\necho $Cybrid_Bank_Customer_Guid\n\n/usr/libexec/PlistBuddy -c \"Set :CybridClientId $Cybrid_Bank_Client_Id\" $PLIST_FILE_PATH\n/usr/libexec/PlistBuddy -c \"Set :CybridClientSecret $Cybrid_Bank_Secret\" $PLIST_FILE_PATH\n/usr/libexec/PlistBuddy -c \"Set :CybridCustomerGUID $Cybrid_Bank_Customer_Guid\" $PLIST_FILE_PATH\n\necho \"Envs updated\"\n";
 		};
 		A572D48104302B65F0264972 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -2604,8 +2622,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 15;
-				DEVELOPMENT_TEAM = 5789WJ9F6P;
+				CURRENT_PROJECT_VERSION = 16;
+				DEVELOPMENT_TEAM = G4SSQU9SB7;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CybridSDKTestApp/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Cybrid Demo App";
@@ -2621,7 +2639,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.15;
+				MARKETING_VERSION = 1.16;
 				PRODUCT_BUNDLE_IDENTIFIER = app.cybrid.CybridSDKTestApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -2637,8 +2655,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 15;
-				DEVELOPMENT_TEAM = 5789WJ9F6P;
+				CURRENT_PROJECT_VERSION = 16;
+				DEVELOPMENT_TEAM = G4SSQU9SB7;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CybridSDKTestApp/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Cybrid Demo App";
@@ -2654,7 +2672,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.15;
+				MARKETING_VERSION = 1.16;
 				PRODUCT_BUNDLE_IDENTIFIER = app.cybrid.CybridSDKTestApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
