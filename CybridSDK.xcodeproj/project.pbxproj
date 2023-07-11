@@ -259,6 +259,8 @@
 		92F707CC298D806A005A93E5 /* TradeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F707CB298D806A005A93E5 /* TradeViewModel.swift */; };
 		9E3B30420CC77D425A7A1C28 /* Pods_Abstract_CybridSDKTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80DCD8FC666A9176CF28F146 /* Pods_Abstract_CybridSDKTests.framework */; };
 		A2E2059D2A71B23200A3C013 /* CybridConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E2059C2A71B23200A3C013 /* CybridConstants.swift */; };
+		A29AA7C22A5DD85D00B6CC1A /* DepositAddressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29AA7C12A5DD85D00B6CC1A /* DepositAddressView.swift */; };
+		A29AA7C52A5DDBC700B6CC1A /* DepositAddresViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29AA7C42A5DDBC700B6CC1A /* DepositAddresViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -560,6 +562,8 @@
 		92F707C8298D7557005A93E5 /* ListPricesItemDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListPricesItemDelegate.swift; sourceTree = "<group>"; };
 		92F707CB298D806A005A93E5 /* TradeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeViewModel.swift; sourceTree = "<group>"; };
 		A2E2059C2A71B23200A3C013 /* CybridConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CybridConstants.swift; sourceTree = "<group>"; };
+		A29AA7C12A5DD85D00B6CC1A /* DepositAddressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepositAddressView.swift; sourceTree = "<group>"; };
+		A29AA7C42A5DDBC700B6CC1A /* DepositAddresViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepositAddresViewController.swift; sourceTree = "<group>"; };
 		D8168B44D4C796A81CF0902E /* Pods-Abstract-CybridSDKTestApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Abstract-CybridSDKTestApp.debug.xcconfig"; path = "Target Support Files/Pods-Abstract-CybridSDKTestApp/Pods-Abstract-CybridSDKTestApp.debug.xcconfig"; sourceTree = "<group>"; };
 		DA2CB27D937283DE5C4554C6 /* Pods-Abstract-CybridSDKTestApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Abstract-CybridSDKTestApp.release.xcconfig"; path = "Target Support Files/Pods-Abstract-CybridSDKTestApp/Pods-Abstract-CybridSDKTestApp.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -1149,6 +1153,7 @@
 		0BD660FF286B765900F4DA6B /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				A29AA7C02A5DD81200B6CC1A /* DepositAddress */,
 				0BD66106286B768C00F4DA6B /* ListPricesView.swift */,
 				0BD66100286B766B00F4DA6B /* ListPrices */,
 				0B557B902899F4CB00632A6D /* Trade */,
@@ -1746,6 +1751,23 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		A29AA7C02A5DD81200B6CC1A /* DepositAddress */ = {
+			isa = PBXGroup;
+			children = (
+				A29AA7C32A5DD89200B6CC1A /* ViewController */,
+				A29AA7C12A5DD85D00B6CC1A /* DepositAddressView.swift */,
+			);
+			path = DepositAddress;
+			sourceTree = "<group>";
+		};
+		A29AA7C32A5DD89200B6CC1A /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				A29AA7C42A5DDBC700B6CC1A /* DepositAddresViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
 		E757BBB3F769F93B6529F753 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -2144,6 +2166,7 @@
 				92635470294CEC0400660E0B /* BankAccountsViewController+Extensions.swift in Sources */,
 				92663D0F293FD60800842E30 /* WorkflowRepository.swift in Sources */,
 				9257E78D29B7B2E500846E12 /* AccountsFiatCell.swift in Sources */,
+				A29AA7C52A5DDBC700B6CC1A /* DepositAddresViewController.swift in Sources */,
 				9299104629D38853007E9832 /* AssetFormatter.swift in Sources */,
 				92F707C9298D7557005A93E5 /* ListPricesItemDelegate.swift in Sources */,
 				929C087829A535740075BA89 /* BankAccountCell.swift in Sources */,
@@ -2222,6 +2245,7 @@
 				92BAC4662A2E3F0B005CCD2A /* SDKConfig.swift in Sources */,
 				0B00E05C2887256B00707F26 /* UIView+Keyboard.swift in Sources */,
 				92F38C4F2924223E00008F58 /* BankAccountsViewController.swift in Sources */,
+				A29AA7C22A5DD85D00B6CC1A /* DepositAddressView.swift in Sources */,
 				0BBD0CCA28AAC025001DBC5F /* BigDecimalValidator.swift in Sources */,
 				927233D428D243C60080AAC4 /* AccountsViewController.swift in Sources */,
 				927233CB28D23D060080AAC4 /* AccountsRepository.swift in Sources */,

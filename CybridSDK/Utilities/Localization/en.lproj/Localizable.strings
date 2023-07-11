@@ -84,6 +84,9 @@
 "cybrid.accounts.transfers.detail.id.title" = "Trasnfer ID";
 "cybrid.accounts.transfers.detail.close.button" = "Close";
 
+// Deposit Address Component
+"cybrid.deposit.address.in.accounts.trades.create.button" = "Get Deposit Address";
+
 // Accounts: Deprecieted
 "cybrid.account.trade.modal.loading.title" = "Quote Pending";
 "cybrid.account.trade.modal.loadingSubmitted.title" = "Submitting Crypto Order";
