@@ -234,8 +234,8 @@ extension TransferModal {
         icon.asFirstInCenter(self.componentContent, size: UIValues.successIconSize, margins: UIValues.successIconMargins)
 
         // -- Value
-        let amountValueString = self.transferViewModel.currentTransfer.value?.amount
-        let amountBase = AssetFormatter.forBase(Cybrid.fiat, amount: CDecimal(amountValueString!))
+        let amountValueString = self.transferViewModel.currentTransfer.value?.estimatedAmount ?? 0
+        let amountBase = AssetFormatter.forBase(Cybrid.fiat, amount: CDecimal(amountValueString))
         let amountBaseFormatted = AssetFormatter.format(Cybrid.fiat, amount: amountBase)
         let amountValue = UILabel()
         amountValue.setContentHuggingPriority(.defaultHigh, for: .horizontal)
