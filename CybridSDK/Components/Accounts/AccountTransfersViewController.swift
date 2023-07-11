@@ -176,11 +176,17 @@ extension AccountTransfersViewController: AccountTransfersViewProvider {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath, withData model: TransferBankModel) -> UITableViewCell {
 
-        guard
+        /*guard
             let cell = tableView.dequeueReusableCell(
                 withIdentifier: AccountTransfersCell.reuseIdentifier,
                 for: indexPath) as? AccountTransfersCell
         else {
+            return UITableViewCell()
+        }
+        cell.setData(transfer: model)
+        return cell*/
+        
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: AccountTransfersCell.reuseIdentifier, for: indexPath) as? AccountTransfersCell else {
             return UITableViewCell()
         }
         cell.setData(transfer: model)

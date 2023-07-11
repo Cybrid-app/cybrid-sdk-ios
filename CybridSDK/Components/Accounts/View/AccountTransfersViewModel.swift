@@ -45,6 +45,15 @@ class AccountTransfersViewModel: NSObject {
             }
         }
     }
+
+    internal static func getAmountOfTransfer(_ transfer: TransferBankModel) -> String {
+
+        let amount = transfer.state == .completed ? transfer.amount ?? 0 : transfer.estimatedAmount ?? 0
+        let amountValue = CDecimal(amount)
+        var amountFormatted = AssetFormatter.forBase(Cybrid.fiat, amount: amountValue)
+        amountFormatted = AssetFormatter.format(Cybrid.fiat, amount: amountFormatted)
+        return amountFormatted
+    }
 }
 
 // MARK: - AccountTransfersViewProvider
