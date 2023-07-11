@@ -57,6 +57,21 @@ class AccountTransfersViewModelTest: XCTestCase {
         XCTAssertEqual(viewModel.tranfers.value, [])
     }
 
+    func test_getAmountOfTransfer() {
+
+        // -- Given
+        let transferOne = TransferBankModel(guid: "123454", state: .completed, amount: nil)
+        let transferTwo = TransferBankModel(guid: "986432", state: .storing, estimatedAmount: nil)
+
+        // -- When
+        let amountOne = AccountTransfersViewModel.getAmountOfTransfer(transferOne)
+        let amountTwo = AccountTransfersViewModel.getAmountOfTransfer(transferTwo)
+
+        // -- Then
+        XCTAssertEqual(amountOne, "0.00")
+        XCTAssertEqual(amountTwo, "0.00")
+    }
+
     // MARK: TableView Delegation Test
 
     func test_TableViewRows() throws {
