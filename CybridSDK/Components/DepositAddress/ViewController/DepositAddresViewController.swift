@@ -20,7 +20,7 @@ public final class DepositAddresViewController: UIViewController {
 
     @available(iOS, deprecated: 10, message: "You should never use this init method.")
     required init?(coder: NSCoder) {
-        
+
         assertionFailure("init(coder:) should never be used")
         return nil
     }
@@ -33,10 +33,10 @@ public final class DepositAddresViewController: UIViewController {
         self.view.addSubview(self.depositAddressView)
 
         NSLayoutConstraint.activate([
-            depositAddressView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            depositAddressView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            depositAddressView.topAnchor.constraint(equalTo: view.topAnchor),
-            depositAddressView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            depositAddressView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            depositAddressView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            depositAddressView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            depositAddressView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
     }
 }

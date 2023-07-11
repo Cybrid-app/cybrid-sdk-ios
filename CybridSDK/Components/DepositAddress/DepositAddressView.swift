@@ -75,8 +75,7 @@ public final class DepositAddresView: UIView {
             switch state {
 
             case .LOADING:
-                print("")
-                // self.transferView_Loading()
+                self.depositAddressViewLoading()
 
             case .CONTENT:
                 print("")
