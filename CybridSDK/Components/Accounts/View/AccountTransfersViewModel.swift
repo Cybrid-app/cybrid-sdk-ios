@@ -50,9 +50,14 @@ class AccountTransfersViewModel: NSObject {
 
         let amount = transfer.state == .completed ? transfer.amount ?? 0 : transfer.estimatedAmount ?? 0
         let amountValue = CDecimal(amount)
-        var amountFormatted = AssetFormatter.forBase(Cybrid.fiat, amount: amountValue)
-        amountFormatted = AssetFormatter.format(Cybrid.fiat, amount: amountFormatted)
+        let amountFormatted = AssetFormatter.forBase(Cybrid.fiat, amount: amountValue)
         return amountFormatted
+    }
+
+    internal static func getAmountOfTransferInFormat(_ transfer: TransferBankModel, asset: AssetBankModel = Cybrid.fiat) -> String {
+
+        let amountFormatted = AccountTransfersViewModel.getAmountOfTransfer(transfer)
+        return AssetFormatter.format(asset, amount: amountFormatted)
     }
 }
 
