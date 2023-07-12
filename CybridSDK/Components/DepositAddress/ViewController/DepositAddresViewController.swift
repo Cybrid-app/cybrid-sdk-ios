@@ -9,6 +9,7 @@ import UIKit
 
 public final class DepositAddresViewController: UIViewController {
 
+    let componentContainer = UIView()
     var depositAddressView: DepositAddresView!
 
     public init() {
@@ -27,16 +28,34 @@ public final class DepositAddresViewController: UIViewController {
 
     internal func setupViewController() {
 
+        // -- Container
         self.view.backgroundColor = UIColor.white
-        self.depositAddressView = DepositAddresView()
-        self.depositAddressView.translatesAutoresizingMaskIntoConstraints = false
-        self.view.addSubview(self.depositAddressView)
+        self.view.addSubview(self.componentContainer)
+        self.componentContainer.backgroundColor = UIColor.clear
+        self.componentContainer.constraint(attribute: .top,
+                                           relatedBy: .equal,
+                                           toItem: self.view,
+                                           attribute: .topMargin,
+                                           constant: 10)
+        self.componentContainer.constraint(attribute: .leading,
+                                           relatedBy: .equal,
+                                           toItem: self.view,
+                                           attribute: .leading,
+                                           constant: 10)
+        self.componentContainer.constraint(attribute: .trailing,
+                                           relatedBy: .equal,
+                                           toItem: self.view,
+                                           attribute: .trailing,
+                                           constant: -10)
+        self.componentContainer.constraint(attribute: .bottom,
+                                           relatedBy: .equal,
+                                           toItem: self.view,
+                                           attribute: .bottomMargin,
+                                           constant: 10)
 
-        NSLayoutConstraint.activate([
-            depositAddressView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            depositAddressView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            depositAddressView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            depositAddressView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
-        ])
+        // -- Deposit Address Component
+        self.depositAddressView = DepositAddresView()
+        self.depositAddressView.embed(in: self.componentContainer)
+        self.depositAddressView.bindViewModel()
     }
 }

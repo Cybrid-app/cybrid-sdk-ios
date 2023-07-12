@@ -5,65 +5,23 @@
 //  Created by Erick Sanchez on 08/07/23.
 //
 
-import Foundation
 import UIKit
 
-public final class DepositAddresView: UIView {
+public final class DepositAddresView: Component {
 
     public enum State { case LOADING, CONTENT }
 
-    internal var componentContent = UIView()
+    // internal var componentContent = UIView()
     internal var currentState: Observable<State> = .init(.LOADING)
 
-   /* public init() {
-        
-        super.init(frame: .zero)
+    public func bindViewModel() {
         self.setupView()
-    }*/
-
-    override init(frame: CGRect) {
-
-        super.init(frame: frame)
-        setupView()
     }
 
-    required init?(coder aDecoder: NSCoder) {
-
-        super.init(coder: aDecoder)
-        setupView()
-    }
-
-    internal func setupView() {
+    override func setupView() {
 
         self.backgroundColor = UIColor.clear
-        self.initComponentContent()
         self.manageCurrentStateUI()
-    }
-
-    private func initComponentContent() {
-
-        // -- Component Container
-        self.addSubview(self.componentContent)
-        self.componentContent.constraint(attribute: .top,
-                                         relatedBy: .equal,
-                                         toItem: self,
-                                         attribute: .bottom,
-                                         constant: 0)
-        self.componentContent.constraint(attribute: .leading,
-                                         relatedBy: .equal,
-                                         toItem: self,
-                                         attribute: .leading,
-                                         constant: 10)
-        self.componentContent.constraint(attribute: .trailing,
-                                         relatedBy: .equal,
-                                         toItem: self,
-                                         attribute: .trailing,
-                                         constant: -10)
-        self.componentContent.constraint(attribute: .bottom,
-                                         relatedBy: .equal,
-                                         toItem: self,
-                                         attribute: .bottomMargin,
-                                         constant: 10)
     }
 
     private func manageCurrentStateUI() {
@@ -85,8 +43,8 @@ public final class DepositAddresView: UIView {
     }
 
     internal func removeSubViewsFromContent() {
-        
-        for view in self.componentContent.subviews {
+
+        for view in self.subviews {
             view.removeFromSuperview()
         }
     }
@@ -105,19 +63,19 @@ extension DepositAddresView {
         title.textAlignment = .center
         //title.setLocalizedText(key: UIStrings.loadingText, localizer: localizer)
 
-        self.componentContent.addSubview(title)
+        self.addSubview(title)
         title.constraint(attribute: .centerY,
                          relatedBy: .equal,
-                         toItem: self.componentContent,
+                         toItem: self,
                          attribute: .centerY)
         title.constraint(attribute: .leading,
                          relatedBy: .equal,
-                         toItem: self.componentContent,
+                         toItem: self,
                          attribute: .leading,
                          constant: UIValues.loadingTitleMargin.left)
         title.constraint(attribute: .trailing,
                          relatedBy: .equal,
-                         toItem: self.componentContent,
+                         toItem: self,
                          attribute: .trailing,
                          constant: -UIValues.loadingTitleMargin.right)
         title.constraint(attribute: .height,
