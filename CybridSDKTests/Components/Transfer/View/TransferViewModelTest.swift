@@ -278,4 +278,19 @@ class TransferViewModelTest: XCTestCase {
         XCTAssertEqual(sideWithdraw, .withdrawal)
         XCTAssertEqual(sideDeposit, .deposit)
     }
+
+    func test_getAmountOfCurrentTransferFormatted() {
+
+        // -- Given
+        let viewModel = createViewModel()
+        viewModel.assets = AssetBankModel.fiatAssets
+        viewModel.accounts.value = AccountBankModel.mock
+
+        // -- When
+        viewModel.currentTransfer.value = TransferBankModel.mock()
+        let amountOfCurrentTransferFormattedOne = viewModel.getAmountOfCurrentTransferFormatted()
+
+        // -- Then
+        XCTAssertEqual(amountOfCurrentTransferFormattedOne, "$10.00 USD")
+    }
 }

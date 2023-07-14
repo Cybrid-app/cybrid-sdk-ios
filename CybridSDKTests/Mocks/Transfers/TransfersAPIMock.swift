@@ -39,7 +39,7 @@ final class TransfersAPIMock: TransfersAPI {
     }
 
     class func didCreateTransferSuccessfully() {
-        createTransferCompletion?(.success(mock()))
+        createTransferCompletion?(.success(TransferBankModel.mock()))
     }
 
     class func didCreateTransferFailed() {
@@ -49,7 +49,7 @@ final class TransfersAPIMock: TransfersAPI {
     @discardableResult
     class func didFetchTransfersListSuccessfully(_ transfers: TransferListBankModel? = nil) -> TradeListBankModel {
 
-        transfersListCompletition?(.success(transfers ?? TransfersAPIMock.mockList))
+        transfersListCompletition?(.success(transfers ?? TransferBankModel.mockList))
         return TradesAPIMock.mock
     }
 
@@ -58,7 +58,7 @@ final class TransfersAPIMock: TransfersAPI {
     }
 }
 
-extension TransfersAPIMock {
+extension TransferBankModel {
 
     static func mock() -> TransferBankModel {
         return TransferBankModel(
