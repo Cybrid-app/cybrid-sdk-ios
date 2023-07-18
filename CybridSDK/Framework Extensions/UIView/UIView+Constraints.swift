@@ -93,12 +93,12 @@ public extension UIView {
 
     func setConstraintsSize(size: CGSize) {
 
-        self.constraint(attribute: .height,
+        self.constraint(attribute: .width,
                         relatedBy: .equal,
                         toItem: nil,
                         attribute: .notAnAttribute,
                         constant: size.width)
-        self.constraint(attribute: .width,
+        self.constraint(attribute: .height,
                         relatedBy: .equal,
                         toItem: nil,
                         attribute: .notAnAttribute,
@@ -396,5 +396,21 @@ public extension UIView {
                             attribute: .notAnAttribute,
                             constant: secondHeight)
         }
+    }
+
+    func centerHorizontal(parent: UIView) {
+
+        self.constraint(attribute: .centerX,
+                        relatedBy: .equal,
+                        toItem: parent,
+                        attribute: .centerX)
+    }
+
+    func centerVertical(parent: UIView) {
+
+        self.constraint(attribute: .centerY,
+                        relatedBy: .equal,
+                        toItem: parent,
+                        attribute: .centerY)
     }
 }

@@ -133,7 +133,7 @@ extension AccountTradesViewController {
 
         self.depositAddressButton = CYBButton(title: localizer.localize(with: UIStrings.getDepositAddress)) {
 
-            let depositAddressViewController = DepositAddresViewController()
+            let depositAddressViewController = DepositAddresViewController(accountBalance: self.balance)
             if self.navigationController != nil {
                 self.navigationController?.pushViewController(depositAddressViewController, animated: true)
             } else {

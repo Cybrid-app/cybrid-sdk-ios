@@ -12,11 +12,10 @@ public final class DepositAddresViewController: UIViewController {
     let componentContainer = UIView()
     var depositAddressView: DepositAddresView!
 
-    public init() {
+    public init(accountBalance: BalanceUIModel) {
 
         super.init(nibName: nil, bundle: nil)
-        // -- ViewModel init
-        self.setupViewController()
+        self.setupViewController(accountBalance: accountBalance)
     }
 
     @available(iOS, deprecated: 10, message: "You should never use this init method.")
@@ -26,7 +25,7 @@ public final class DepositAddresViewController: UIViewController {
         return nil
     }
 
-    internal func setupViewController() {
+    internal func setupViewController(accountBalance: BalanceUIModel) {
 
         // -- Container
         self.view.backgroundColor = UIColor.white
@@ -56,6 +55,6 @@ public final class DepositAddresViewController: UIViewController {
         // -- Deposit Address Component
         self.depositAddressView = DepositAddresView()
         self.depositAddressView.embed(in: self.componentContainer)
-        self.depositAddressView.bindViewModel()
+        self.depositAddressView.initComponent(accountBalance: accountBalance)
     }
 }
