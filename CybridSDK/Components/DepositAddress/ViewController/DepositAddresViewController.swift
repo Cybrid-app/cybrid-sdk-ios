@@ -52,9 +52,16 @@ public final class DepositAddresViewController: UIViewController {
                                            attribute: .bottomMargin,
                                            constant: 10)
 
+        // -- DepositAddressViewModel
+        let depositAddressViewModel = DepositAddressViewModel(
+            dataProvider: CybridSession.current,
+            logger: Cybrid.logger,
+            accountBalance: accountBalance)
+        depositAddressViewModel.accountBalance = accountBalance
+
         // -- Deposit Address Component
         self.depositAddressView = DepositAddresView()
         self.depositAddressView.embed(in: self.componentContainer)
-        self.depositAddressView.initComponent(accountBalance: accountBalance)
+        self.depositAddressView.initComponent(depositAddressViewModel: depositAddressViewModel)
     }
 }

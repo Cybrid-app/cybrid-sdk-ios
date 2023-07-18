@@ -9,18 +9,18 @@ import UIKit
 
 public final class DepositAddresView: Component {
 
-    public enum State { case LOADING, CONTENT }
-    public enum LoadingLabelState { case VERIFYING, CREATING }
+    public enum State { case LOADING, CONTENT, ERROR }
+    public enum LoadingLabelState { case VERIFYING, GETTING, CREATING }
 
-    // internal var componentContent = UIView()
-    internal var currentState: Observable<State> = .init(.LOADING)
-    internal var currentLoadingLabelState: Observable<LoadingLabelState> = .init(.VERIFYING)
-    internal var accountBalance: BalanceUIModel?
+    internal var localizer: Localizer!
+    internal var depositAddressViewModel: DepositAddressViewModel?
 
-    public func initComponent(accountBalance: BalanceUIModel) {
+    public func initComponent(depositAddressViewModel: DepositAddressViewModel) {
 
-        self.accountBalance = accountBalance
+        self.depositAddressViewModel = depositAddressViewModel
+        self.localizer = CybridLocalizer()
         self.setupView()
+        self.depositAddressViewModel?.fetchDepositAddresses()
     }
 
     override func setupView() {
@@ -32,7 +32,7 @@ public final class DepositAddresView: Component {
     private func manageCurrentStateUI() {
 
         // -- Await for UI State changes
-        self.currentState.bind { state in
+        self.depositAddressViewModel?.uiState.bind { state in
 
             self.removeSubViewsFromContent()
             switch state {
@@ -41,8 +41,10 @@ public final class DepositAddresView: Component {
                 self.depositAddressViewLoading()
 
             case .CONTENT:
-                print("")
-                // self.transferView_Accounts()
+                self.depositAddressViewContent()
+
+            case .ERROR:
+                self.depositAddressView_Error()
             }
         }
     }

@@ -86,6 +86,14 @@
 
 // Deposit Address Component
 "cybrid.deposit.address.in.accounts.trades.create.button" = "Get Deposit Address";
+"cybrid.deposit.address.loading.label.verifying" = "Verifying your deposit addresses";
+"cybrid.deposit.address.loading.label.getting" = "Getting your deposit address";
+"cybrid.deposit.address.loading.label.creating" = "Creating deposit address";
+"cybrid.deposit.address.content.deposit.address.title" = "Deposit Address";
+"cybrid.deposit.address.content.deposit.tag.title" = "Tag";
+"cybrid.deposit.address.content.warning" = "Warning: You can lose all of your coins, bla bla bla bla bla bla bla bla bla bla bla blabla bla bla bla bla blabla bla bla bla bla blabla bla bla bla bla blabla bla bla bla bla blabla bla bla bla bla blabla bla bla bla bla blabla bla bla bla bla blabla bla bla bla bla blabla bla bla bla bla bla";
+"cybrid.deposit.address.error" = "Something happened, please try again.";
+"cybrid.deposit.address.error.button" = "Return";
 
 // Accounts: Deprecieted
 "cybrid.account.trade.modal.loading.title" = "Quote Pending";

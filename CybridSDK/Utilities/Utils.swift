@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 func stringValue(forKey key: String, in jsonData: Data, atIndex index: Int = 0) -> String? {
 
@@ -49,4 +50,10 @@ func getFormattedDate(_ date: Date?, format: String) -> String {
         return dateFormatter.string(from: date)
     }
     return ""
+}
+
+func copyToClipboard(_ string: String) {
+
+    let pasteboard = UIPasteboard.general
+    pasteboard.string = string
 }

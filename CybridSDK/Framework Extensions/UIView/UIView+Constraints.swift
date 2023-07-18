@@ -413,4 +413,13 @@ public extension UIView {
                         toItem: parent,
                         attribute: .centerY)
     }
+
+    func below(to: UIView, top: CGFloat) {
+
+        self.constraint(attribute: .top,
+                        relatedBy: .equal,
+                        toItem: to,
+                        attribute: .bottom,
+                        constant: top)
+    }
 }

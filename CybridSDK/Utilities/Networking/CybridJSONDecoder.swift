@@ -64,6 +64,12 @@ final class CybridJSONDecoder: JSONDecoder {
         case is TransferListBankModel.Type:
             return try decodeTransferList(data: data) as! T
 
+        case is DepositAddressListBankModel.Type:
+            return try decodeDepostAddressList(data: data) as! T
+
+        case is DepositAddressBankModel.Type:
+            return try decodeDepositAddressBankModel(data: data) as! T
+
         default:
             return try super.decode(type, from: data)
         }
@@ -336,6 +342,38 @@ extension CybridJSONDecoder {
             page: jsonStringObject[TransferListBankModel.CodingKeys.page.rawValue] as? Int ?? 0,
             perPage: jsonStringObject[TransferListBankModel.CodingKeys.perPage.rawValue] as? Int ?? 0,
             objects: objects)
+    }
+
+    func decodeDepostAddressList(data: Data) throws -> DepositAddressListBankModel? {
+
+        guard let jsonObject = try JSONSerialization.jsonObject(with: data) as? [String: Any] else {
+            throw DecodingError.customDecodingError
+        }
+        let jsonStringObject: [String: Any] = jsonObject
+        let objectsValue = jsonStringObject[DepositAddressListBankModel.CodingKeys.objects.rawValue] as? [[String: Any]]
+        var objects = [DepositAddressBankModel]()
+        if let objectsValue = objectsValue {
+            objects = DepositAddressBankModel.fromArray(objects: objectsValue)
+        }
+        return DepositAddressListBankModel(
+            total: jsonStringObject[DepositAddressListBankModel.CodingKeys.total.rawValue] as? Int ?? 0,
+            page: jsonStringObject[DepositAddressListBankModel.CodingKeys.page.rawValue] as? Int ?? 0,
+            perPage: jsonStringObject[DepositAddressListBankModel.CodingKeys.perPage.rawValue] as? Int ?? 0,
+            objects: objects)
+    }
+
+    func decodeDepositAddressBankModel(data: Data) throws -> DepositAddressBankModel {
+
+        guard let jsonObject = try JSONSerialization.jsonObject(with: data) as? [String: Any] else {
+            throw DecodingError.customDecodingError
+        }
+        let jsonStringObject: [String: Any] = jsonObject
+        guard
+            let model = DepositAddressBankModel(json: jsonStringObject)
+        else {
+            throw DecodingError.customDecodingError
+        }
+        return model
     }
 }
 
