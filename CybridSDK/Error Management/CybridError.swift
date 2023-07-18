@@ -16,3 +16,7 @@ public enum CybridError: Error {
     case dataError
     case serviceError
 }
+
+struct AssetNotFoundError: Error {
+    let code: String
+}

@@ -59,7 +59,7 @@ class AccountTransferModal: UIModal {
         titleView.text = localizedTitle
 
         // -- Sub Title View
-        let amountCDecimal = CDecimal(transfer.amount ?? 0)
+        // let amountCDecimal = CDecimal(transfer.amount ?? 0)
         let amountFormatted = AccountTransfersViewModel.getAmountOfTransfer(transfer)
         let subTitleView = UILabel.makeBasic(
             font: UIValues.subTitleFont, color: UIValues.subTitleColor, aligment: .left)

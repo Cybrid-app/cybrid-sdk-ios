@@ -50,7 +50,8 @@ class AccountTransfersViewModel: NSObject {
 
         let amount = transfer.state == .completed ? transfer.amount ?? 0 : transfer.estimatedAmount ?? 0
         let amountValue = CDecimal(amount)
-        let amountFormatted = AssetFormatter.forBase(Cybrid.fiat, amount: amountValue)
+        let transferAsset =
+        let amountFormatted = AssetFormatter.forBase(transferAsset!, amount: amountValue)
         return amountFormatted
     }
 
@@ -58,6 +59,14 @@ class AccountTransfersViewModel: NSObject {
 
         let amountFormatted = AccountTransfersViewModel.getAmountOfTransfer(transfer)
         return AssetFormatter.format(asset, amount: amountFormatted)
+    }
+    
+    internal static func findAsset(code: String) {
+        do {
+            let asset = try Cybrid.findAsset(code: code)
+        } catch {
+            
+        }
     }
 }
 
