@@ -23,6 +23,8 @@ open class DepositAddressViewModel: NSObject {
     // MARK: Public properties
     var uiState: Observable<DepositAddresView.State> = .init(.LOADING)
     var loadingLabelUiState: Observable<DepositAddresView.LoadingLabelState> = .init(.VERIFYING)
+    private(set) var currentAmountForDeposit: String = ""
+    private(set) var currentMessageForDeposit: String = ""
 
     // MARK: Constructor
     init(dataProvider: DepositAddressRepoProvider,
@@ -119,5 +121,51 @@ open class DepositAddressViewModel: NSObject {
             self.depositAddressPolling?.stop()
             self.depositAddressPolling = nil
         }
+    }
+
+    internal func setValuesForDeposit(amount: String, message: String) {
+
+        self.currentAmountForDeposit = amount
+        self.currentMessageForDeposit = message
+        self.uiState.value = .CONTENT
+    }
+
+    // MARK: Functions to QRCode
+    internal func generateQRCode(assetCode: String,
+                                 address: String,
+                                 network: String = "",
+                                 amount: String = "",
+                                 message: String = "") -> UIImage? {
+        let addressFormatted = self.getStringAddressForQRCode(assetCode: assetCode,
+                                                              address: address,
+                                                              network: network,
+                                                              amount: amount,
+                                                              message: message)
+        return CybridSDK.generateQRCode(from: addressFormatted)
+    }
+
+    internal func getStringAddressForQRCode(assetCode: String,
+                                            address: String,
+                                            network: String = "",
+                                            amount: String = "",
+                                            message: String = "") -> String {
+        var addressFormatted = ""
+        switch assetCode {
+        case "BTC":
+            addressFormatted += "bitcoin:\(address)"
+            if !amount.isEmpty {
+                addressFormatted += "&amount=\(amount)"
+            }
+            if !message.isEmpty {
+                if let messageEncoded = message.addingPercentEncoding(
+                    withAllowedCharacters: .urlQueryAllowed) {
+                    addressFormatted += "?message=\(messageEncoded)"
+                }
+            }
+        default:
+            addressFormatted += address
+        }
+        print(addressFormatted)
+        return addressFormatted
     }
 }

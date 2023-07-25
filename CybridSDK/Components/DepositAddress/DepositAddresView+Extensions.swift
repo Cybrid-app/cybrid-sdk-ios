@@ -11,76 +11,16 @@ extension DepositAddresView {
 
     internal func depositAddressViewLoading() {
 
-        let assetContainer = UIView()
-        self.addSubview(assetContainer)
-        assetContainer.centerHorizontal(parent: self)
-        assetContainer.constraint(attribute: .top,
-                                  relatedBy: .equal,
-                                  toItem: self,
-                                  attribute: .topMargin,
-                                  constant: UIValues.loadingAssetContainerTopMargin)
-        assetContainer.setConstraintsSize(size: UIValues.loadingAssetContainerSize)
-
-        // -- Icon
-        let assetIconURL = self.depositAddressViewModel?.accountBalance.accountAssetURL ?? ""
-        let assetIcon = URLImageView(url: nil)
-        assetIcon.setURL(assetIconURL)
-        assetContainer.addSubview(assetIcon)
-        assetIcon.centerHorizontal(parent: assetContainer)
-        assetIcon.constraint(attribute: .top,
-                             relatedBy: .equal,
-                             toItem: assetContainer,
-                             attribute: .top,
-                             constant: 0)
-        assetIcon.setConstraintsSize(size: UIValues.loadingAssetIconSize)
-
-        // -- Name
-        let assetName = UILabel()
-        assetName.font = UIValues.loadingAssetNameFont
-        assetName.textColor = UIValues.loadingAssetNameColor
-        assetName.textAlignment = .center
-        assetName.text = self.depositAddressViewModel?.accountBalance.asset?.name ?? ""
-        assetContainer.addSubview(assetName)
-        assetName.constraint(attribute: .top,
-                             relatedBy: .equal,
-                             toItem: assetIcon,
-                             attribute: .bottom,
-                             constant: UIValues.loadingAssetNameTopMargin)
-        assetName.constraint(attribute: .leading,
-                             relatedBy: .equal,
-                             toItem: assetContainer,
-                             attribute: .leading,
-                             constant: 0)
-        assetName.constraint(attribute: .trailing,
-                             relatedBy: .equal,
-                             toItem: assetContainer,
-                             attribute: .trailing,
-                             constant: 0)
-        assetName.constraint(attribute: .height,
-                             relatedBy: .equal,
-                             toItem: nil,
-                             attribute: .notAnAttribute,
-                             constant: UIValues.loadingAssetNameSize.height)
-
         // -- Loading Label Container
         let loadingLabelContainer = UIView()
         self.addSubview(loadingLabelContainer)
         loadingLabelContainer.centerVertical(parent: self)
-        loadingLabelContainer.constraint(attribute: .leading,
-                             relatedBy: .equal,
-                             toItem: assetContainer,
-                             attribute: .leading,
-                             constant: 0)
-        loadingLabelContainer.constraint(attribute: .trailing,
-                             relatedBy: .equal,
-                             toItem: assetContainer,
-                             attribute: .trailing,
-                             constant: 0)
+        loadingLabelContainer.centerHorizontal(parent: self)
         loadingLabelContainer.constraint(attribute: .height,
-                             relatedBy: .equal,
-                             toItem: nil,
-                             attribute: .notAnAttribute,
-                             constant: UIValues.loadingLoadingLabelContainer.height)
+                                         relatedBy: .equal,
+                                         toItem: nil,
+                                         attribute: .notAnAttribute,
+                                         constant: UIValues.loadingLoadingLabelContainer.height)
 
         // -- Label
         let loadingLabel = UILabel()
@@ -137,158 +77,273 @@ extension DepositAddresView {
 
     internal func depositAddressViewContent() {
 
-        // -- Icon
-        let assetIconURL = self.depositAddressViewModel?.accountBalance.accountAssetURL ?? ""
-        let assetIcon = URLImageView(url: nil)
-        assetIcon.setURL(assetIconURL)
-        self.addSubview(assetIcon)
-        assetIcon.centerHorizontal(parent: self)
-        assetIcon.constraint(attribute: .top,
-                             relatedBy: .equal,
-                             toItem: self,
-                             attribute: .topMargin,
-                             constant: UIValues.loadingAssetContainerTopMargin)
-        assetIcon.setConstraintsSize(size: UIValues.loadingAssetIconSize)
+        // -- Setup screen and scroll
+        let contentView = self.setupScrollView()
 
-        // -- Name
-        let assetName = UILabel()
-        assetName.font = UIValues.loadingAssetNameFont
-        assetName.textColor = UIValues.loadingAssetNameColor
-        assetName.textAlignment = .center
-        assetName.text = self.depositAddressViewModel?.accountBalance.asset?.name ?? ""
-        self.addSubview(assetName)
-        assetName.constraint(attribute: .top,
-                             relatedBy: .equal,
-                             toItem: assetIcon,
-                             attribute: .bottom,
-                             constant: UIValues.loadingAssetNameTopMargin)
-        assetName.constraint(attribute: .leading,
-                             relatedBy: .equal,
-                             toItem: self,
-                             attribute: .leading,
-                             constant: 0)
-        assetName.constraint(attribute: .trailing,
-                             relatedBy: .equal,
-                             toItem: self,
-                             attribute: .trailing,
-                             constant: 0)
-        assetName.constraint(attribute: .height,
-                             relatedBy: .equal,
-                             toItem: nil,
-                             attribute: .notAnAttribute,
-                             constant: UIValues.loadingAssetNameSize.height)
+        // -- Title
+        let assetCode = depositAddressViewModel?.accountBalance.asset?.code ?? ""
+        let depositTitle = UILabel()
+        depositTitle.font = UIFont.systemFont(ofSize: 22, weight: .semibold)
+        depositTitle.textAlignment = .left
+        depositTitle.textColor = UIColor.black
+        depositTitle.text = "Deposit \(assetCode)"
+        contentView.addSubview(depositTitle)
+        depositTitle.constraintSafeTop(contentView, margin: 0)
+        depositTitle.constraintLeft(contentView, margin: 10)
+        depositTitle.constraintRight(contentView, margin: 10)
+        depositTitle.constraintHeight(25)
 
         // -- QR Code
+        let accountAddress = depositAddressViewModel?.currentDepositAddress?.address ?? ""
         let qrCodeImageView = UIImageView()
-        let qrCodeImage = generateQRCode(from: self.depositAddressViewModel?.currentDepositAddress?.address ?? "")
-        self.addSubview(qrCodeImageView)
-        qrCodeImageView.below(to: assetName, top: UIValues.contentQRCodeImageTopMargin)
-        qrCodeImageView.centerHorizontal(parent: self)
-        qrCodeImageView.setConstraintsSize(size: UIValues.contentQRCodeImageSize)
+        let qrCodeImage = depositAddressViewModel?.generateQRCode(
+            assetCode: assetCode,
+            address: accountAddress,
+            amount: depositAddressViewModel?.currentAmountForDeposit ?? "",
+            message: depositAddressViewModel?.currentMessageForDeposit ?? "")
+        contentView.addSubview(qrCodeImageView)
+        qrCodeImageView.below(depositTitle, top: 35)
+        qrCodeImageView.centerHorizontal(parent: contentView)
+        qrCodeImageView.constraintHeight(180)
+        qrCodeImageView.constraintWidth(180)
         if let qrCodeImage {
             qrCodeImageView.image = qrCodeImage
         }
 
-        // -- Deposit Address Title Container
-        let depositAddressTitleContainer = UIView()
-        self.addSubview(depositAddressTitleContainer)
-        depositAddressTitleContainer.below(to: qrCodeImageView, top: UIValues.contentDepositAddressContainerTopMargin)
-        depositAddressTitleContainer.centerHorizontal(parent: self)
-        depositAddressTitleContainer.setConstraintsSize(size: UIValues.contentDepositAddressContainerSize)
+        // -- QR Code Warning
+        let qrCodeWarning = UILabel()
+        qrCodeWarning.font = UIFont.systemFont(ofSize: 12, weight: .light)
+        qrCodeWarning.textAlignment = .center
+        qrCodeWarning.textColor = UIColor(hex: "#818181")
+        qrCodeWarning.text = "Send only \(assetCode) to this deposit address."
+        contentView.addSubview(qrCodeWarning)
+        qrCodeWarning.below(qrCodeImageView, top: 5)
+        qrCodeWarning.centerHorizontal(parent: contentView)
+        qrCodeWarning.constraintHeight(14)
 
-        // -- Title
-        let depositAddressTitle = self.depositAddressViewContentTitle(key: UIStrings.contentDepositAddressTitle)
-        depositAddressTitleContainer.addSubview(depositAddressTitle)
-        depositAddressTitle.constraint(attribute: .leading,
-                                       relatedBy: .equal,
-                                       toItem: depositAddressTitleContainer,
-                                       attribute: .leading,
-                                       constant: 0)
-        depositAddressTitle.constraint(attribute: .top,
-                                       relatedBy: .equal,
-                                       toItem: depositAddressTitleContainer,
-                                       attribute: .top,
-                                       constant: 0)
-        depositAddressTitle.constraint(attribute: .bottom,
-                                       relatedBy: .equal,
-                                       toItem: depositAddressTitleContainer,
-                                       attribute: .bottom,
-                                       constant: 0)
-        depositAddressTitle.constraint(attribute: .width,
-                                       relatedBy: .equal,
-                                       toItem: nil,
-                                       attribute: .notAnAttribute,
-                                       constant: UIValues.contentDepositAddressTitleWidth)
+        // -- Network Title
+        let networkTitle = UILabel()
+        networkTitle.font = UIFont.systemFont(ofSize: 13, weight: .light)
+        networkTitle.textAlignment = .left
+        networkTitle.textColor = UIColor(hex: "#818181")
+        networkTitle.text = "Network"
+        contentView.addSubview(networkTitle)
+        networkTitle.below(qrCodeWarning, top: 35)
+        networkTitle.constraintLeft(contentView, margin: 10)
+        networkTitle.constraintRight(contentView, margin: 10)
+        networkTitle.constraintHeight(14)
 
-        // -- Title Icon
-        let depositAddressTitleIcon = UIImageView(image: UIImage(
+        // -- Network value
+        let assetName = depositAddressViewModel?.accountBalance.asset?.name ?? ""
+        let networkValue = UILabel()
+        networkValue.font = UIFont.systemFont(ofSize: 15, weight: .medium)
+        networkValue.textAlignment = .left
+        networkValue.textColor = UIColor.black
+        networkValue.text = assetName.capitalized
+        contentView.addSubview(networkValue)
+        networkValue.below(networkTitle, top: 5)
+        networkValue.constraintLeft(contentView, margin: 10)
+        networkValue.constraintRight(contentView, margin: 10)
+        networkValue.constraintHeight(16)
+
+        // -- Deposit Address - Copy Icon
+        let depositAddressCopyIcon = UIImageView(image: UIImage(
             named: "ic_copy", in: Bundle(for: Self.self), with: nil))
-        depositAddressTitleContainer.addSubview(depositAddressTitleIcon)
-        depositAddressTitleIcon.centerVertical(parent: depositAddressTitleContainer)
-        depositAddressTitleIcon.constraint(attribute: .trailing,
-                                           relatedBy: .equal,
-                                           toItem: depositAddressTitleContainer,
-                                           attribute: .trailing,
-                                           constant: 0)
-        depositAddressTitleIcon.setConstraintsSize(size: UIValues.contentDepositAddressIconSize)
-        depositAddressTitleIcon.isUserInteractionEnabled = true
+        contentView.addSubview(depositAddressCopyIcon)
+        depositAddressCopyIcon.constraintTop(networkValue, margin: 62)
+        depositAddressCopyIcon.constraintRight(contentView, margin: 12)
+        depositAddressCopyIcon.constraintWidth(20)
+        depositAddressCopyIcon.constraintHeight(20)
+        depositAddressCopyIcon.isUserInteractionEnabled = true
         let gesture = UITapGestureRecognizer(target: self, action: #selector(copyDepositAddressToClipboard(_:)))
-        depositAddressTitleIcon.addGestureRecognizer(gesture)
+        depositAddressCopyIcon.addGestureRecognizer(gesture)
 
-        // -- Address Label/Value
-        let depositAddressValue = self.depositAddressViewContentSubTitle(text: self.depositAddressViewModel?.currentDepositAddress?.address ?? "")
-        depositAddressValue.addBelow(toItem: depositAddressTitleContainer,
-                                     height: UIValues.contentDepositAddressValueHeight,
-                                     margins: UIValues.contentDepositAddressValueMargins)
+        // -- Address Title
+        let addressTitle = UILabel()
+        addressTitle.font = UIFont.systemFont(ofSize: 13, weight: .light)
+        addressTitle.textAlignment = .left
+        addressTitle.textColor = UIColor(hex: "#818181")
+        addressTitle.text = "\(assetCode) Deposit Address"
+        contentView.addSubview(addressTitle)
+        addressTitle.below(networkValue, top: 30)
+        addressTitle.constraintLeft(contentView, margin: 10)
+        addressTitle.constraint(attribute: .trailing,
+                                relatedBy: .equal,
+                                toItem: depositAddressCopyIcon,
+                                attribute: .leading,
+                                constant: -10)
+        addressTitle.constraintHeight(14)
+
+        // -- Network value
+        let addressValue = UILabel()
+        addressValue.font = UIFont.systemFont(ofSize: 15, weight: .medium)
+        addressValue.textAlignment = .left
+        addressValue.textColor = UIColor.black
+        addressValue.numberOfLines = 0
+        addressValue.isUserInteractionEnabled = true
+        addressValue.text = accountAddress
+        contentView.addSubview(addressValue)
+        addressValue.below(networkValue, top: 50)
+        addressValue.constraintLeft(contentView, margin: 10)
+        addressValue.constraint(attribute: .trailing,
+                                relatedBy: .equal,
+                                toItem: depositAddressCopyIcon,
+                                attribute: .leading,
+                                constant: -10)
+        addressValue.constraintHeight(38)
 
         // -- Tag Title
-        let tagTitle = self.depositAddressViewContentTitle(key: UIStrings.contentDepositAddressTagTitle)
-        tagTitle.addBelow(toItem: depositAddressValue,
-                          height: UIValues.contentDepositAddressTagTitleHeight,
-                          margins: UIValues.contentDepositAddressTagTitleMargins)
+        let accountTag = depositAddressViewModel?.currentDepositAddress?.tag ?? ""
+        let tagTitle = UILabel()
+        tagTitle.font = UIFont.systemFont(ofSize: 13, weight: .light)
+        tagTitle.textAlignment = .left
+        tagTitle.textColor = UIColor(hex: "#818181")
+        tagTitle.text = "Tag"
+        contentView.addSubview(tagTitle)
+        tagTitle.below(addressValue, top: 30)
+        tagTitle.constraintLeft(contentView, margin: 10)
+        tagTitle.constraintRight(contentView, margin: 10)
+        tagTitle.constraintHeight(14)
 
         // -- Tag Value
-        var tagValueString = self.depositAddressViewModel?.currentDepositAddress?.tag ?? "--"
-        if tagValueString.isEmpty { tagValueString = "--" }
-        let tagValue = self.depositAddressViewContentSubTitle(text: tagValueString)
-        tagValue.addBelow(toItem: tagTitle,
-                          height: UIValues.contentDepositAddressTagValueHeight,
-                          margins: UIValues.contentDepositAddressTagValueMargins)
+        let tagValue = UILabel()
+        tagValue.font = UIFont.systemFont(ofSize: 15, weight: .medium)
+        tagValue.textAlignment = .left
+        tagValue.textColor = UIColor.black
+        tagValue.numberOfLines = 0
+        tagValue.text = accountTag
+        contentView.addSubview(tagValue)
+        tagValue.below(tagTitle, top: 5)
+        tagValue.constraintLeft(contentView, margin: 10)
+        tagValue.constraintRight(contentView, margin: 10)
+        tagValue.constraintHeight(38)
+
+        if accountTag.isEmpty {
+            self.hideView(tagTitle)
+            self.hideView(tagValue)
+            tagTitle.below(addressValue, top: 0)
+            tagValue.below(tagTitle, top: 5)
+        }
+
+        // -- Amount Title
+        let amountTitle = UILabel()
+        amountTitle.font = UIFont.systemFont(ofSize: 13, weight: .light)
+        amountTitle.textAlignment = .left
+        amountTitle.textColor = UIColor(hex: "#818181")
+        amountTitle.text = "Amount"
+        contentView.addSubview(amountTitle)
+        amountTitle.below(tagValue, top: 30)
+        amountTitle.constraintLeft(contentView, margin: 10)
+        amountTitle.constraintRight(contentView, margin: 10)
+        amountTitle.constraintHeight(14)
+
+        // -- Amount Value
+        let amountString = depositAddressViewModel?.currentAmountForDeposit ?? ""
+        let amountValue = UILabel()
+        amountValue.font = UIFont.systemFont(ofSize: 15, weight: .medium)
+        amountValue.textAlignment = .left
+        amountValue.textColor = UIColor.black
+        amountValue.numberOfLines = 0
+        amountValue.text = "\(amountString) \(assetCode)"
+        contentView.addSubview(amountValue)
+        amountValue.below(amountTitle, top: 5)
+        amountValue.constraintLeft(contentView, margin: 10)
+        amountValue.constraintRight(contentView, margin: 10)
+        amountValue.constraintHeight(38)
+
+        if amountString.isEmpty {
+            self.hideView(amountTitle)
+            self.hideView(amountValue)
+            amountTitle.below(tagValue, top: 0)
+            amountValue.below(amountTitle, top: 0)
+        }
+
+        // -- Message Title
+        let messageTitle = UILabel()
+        messageTitle.font = UIFont.systemFont(ofSize: 13, weight: .light)
+        messageTitle.textAlignment = .left
+        messageTitle.textColor = UIColor(hex: "#818181")
+        messageTitle.text = "Message"
+        contentView.addSubview(messageTitle)
+        messageTitle.below(amountValue, top: 30)
+        messageTitle.constraintLeft(contentView, margin: 10)
+        messageTitle.constraintRight(contentView, margin: 10)
+        messageTitle.constraintHeight(14)
+
+        // -- Amount Value
+        let messageString = depositAddressViewModel?.currentMessageForDeposit ?? ""
+        let messageValue = UILabel()
+        messageValue.font = UIFont.systemFont(ofSize: 15, weight: .medium)
+        messageValue.textAlignment = .left
+        messageValue.textColor = UIColor.black
+        messageValue.numberOfLines = 0
+        messageValue.text = messageString
+        contentView.addSubview(messageValue)
+        messageValue.below(messageTitle, top: 5)
+        messageValue.constraintLeft(contentView, margin: 10)
+        messageValue.constraintRight(contentView, margin: 10)
+        messageValue.constraintHeight(38)
+
+        if messageString.isEmpty {
+            self.hideView(messageTitle)
+            self.hideView(messageValue)
+            messageTitle.below(amountValue, top: 0)
+            messageValue.below(messageTitle, top: 0)
+        }
 
         // -- Warning
-        let warning = self.depositAddressViewWarningLabel()
-        warning.addBelowToBottom(topItem: tagValue, bottomItem: self, margins: UIValues.contentDepositAddressWarningMargins)
-    }
+        let warningContainer = UIView()
+        warningContainer.backgroundColor = UIColor(hex: "#efb90b").withAlphaComponent(0.20)
+        warningContainer.layer.cornerRadius = 6
+        contentView.addSubview(warningContainer)
+        warningContainer.below(messageValue, top: 15)
+        warningContainer.constraintLeft(contentView, margin: 10)
+        warningContainer.constraintRight(contentView, margin: 10)
+        warningContainer.constraintHeight(80)
 
-    internal func depositAddressViewContentTitle(key: String) -> UILabel {
+        // -- Warning Icon
+        let warningIcon = UIImageView(image: UIImage(
+            named: "ic_warning", in: Bundle(for: Self.self), with: nil))
+        warningContainer.addSubview(warningIcon)
+        warningIcon.constraintTop(warningContainer, margin: 10)
+        warningIcon.constraintLeft(warningContainer, margin: 8)
+        warningIcon.constraintWidth(14)
+        warningIcon.constraintHeight(14)
 
-        let title = UILabel()
-        title.font = UIValues.contentDepositAddressTitleFont
-        title.textColor = UIValues.contentDepositAddressColor
-        title.textAlignment = .center
-        title.setLocalizedText(key: key, localizer: localizer)
-        return title
-    }
+        // -- Warning Label
+        let warningLabel = UILabel()
+        warningLabel.font = UIFont.systemFont(ofSize: 14)
+        warningLabel.textAlignment = .justified
+        warningLabel.textColor = UIColor(hex: "#f1b90a")
+        warningLabel.numberOfLines = 0
+        warningLabel.text = localizer.localize(with: UIStrings.contentWarning)
+        warningContainer.addSubview(warningLabel)
+        warningLabel.constraintTop(warningContainer, margin: 7)
+        warningLabel.constraint(attribute: .leading,
+                                relatedBy: .equal,
+                                toItem: warningIcon,
+                                attribute: .trailing,
+                                constant: 5)
+        warningLabel.constraintRight(warningContainer, margin: 15)
+        warningLabel.constraintHeight(68)
 
-    internal func depositAddressViewContentSubTitle(text: String) -> UILabel {
-
-        let title = UILabel()
-        title.font = UIValues.contentDepositAddressSubTitleFont
-        title.textColor = UIColor.black
-        title.textAlignment = .center
-        title.text = text
-        return title
-    }
-
-    internal func depositAddressViewWarningLabel() -> UILabel {
-
-        let title = UILabel()
-        title.font = UIValues.contentDepositAddressWarningFont
-        title.textColor = UIValues.contentDepositAddressWarningColor
-        title.textAlignment = .center
-        title.numberOfLines = 0
-        title.setLocalizedText(key: UIStrings.contentWarning, localizer: localizer)
-        return title
+        // -- Payment Button
+        if depositAddressViewModel!.currentAmountForDeposit.isEmpty {
+            let createPaymentButton = CYBButton(
+                title: "Generate payment code",
+                action: { [self] in
+                    let paymentDetailsModal = PaymentModal(accountBalance: (self.depositAddressViewModel?.accountBalance)!) { amount, messsage in
+                        self.depositAddressViewModel?.setValuesForDeposit(amount: amount, message: messsage)
+                    }
+                    paymentDetailsModal.present()
+                }
+            )
+            contentView.addSubview(createPaymentButton)
+            createPaymentButton.constraintLeft(contentView, margin: 10)
+            createPaymentButton.constraintRight(contentView, margin: 10)
+            createPaymentButton.constraintBottom(contentView, margin: 10)
+            createPaymentButton.constraintHeight(45)
+        }
     }
 
     internal func depositAddressView_Error() {
@@ -390,8 +445,50 @@ extension DepositAddresView {
         done.isHidden = true
     }
 
+    // -- MARK: Helpers
+    internal func setupScrollView() -> UIView {
+
+        let contentView = UIView()
+        let scrollView = UIScrollView()
+        self.addSubview(scrollView)
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            scrollView.topAnchor.constraint(equalTo: topAnchor),
+            scrollView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: trailingAnchor)
+        ])
+
+        scrollView.addSubview(contentView)
+        contentView.translatesAutoresizingMaskIntoConstraints = false
+        let heightConstraint = contentView.heightAnchor.constraint(equalTo: scrollView.heightAnchor)
+        heightConstraint.priority = UILayoutPriority(250)
+        NSLayoutConstraint.activate([
+            contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
+            contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
+            contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
+            contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
+            contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
+            heightConstraint
+        ])
+        return contentView
+    }
+
+    internal func hideView(_ view: UIView) {
+
+        view.removeConstraint(attribute: .height)
+        view.constraintHeight(0)
+        view.removeConstraint(attribute: .top)
+    }
+
     @objc func copyDepositAddressToClipboard(_ sender: UITapGestureRecognizer) {
+
         copyToClipboard(self.depositAddressViewModel?.currentDepositAddress?.address ?? "")
+        if self.parentView != nil {
+            if let viewController = self.parentView?.parentViewController {
+                showToast(controller: viewController, message: "Copied", seconds: 1.0)
+            }
+        }
     }
 }
 
@@ -400,19 +497,9 @@ extension DepositAddresView {
     enum UIValues {
 
         // -- Size
-        static let loadingAssetContainerSize = CGSize(width: 350, height: 110)
-        static let loadingAssetIconSize = CGSize(width: 64, height: 64)
-        static let loadingAssetNameSize = CGSize(width: 0, height: 23)
         static let loadingLoadingLabelContainer = CGSize(width: 0, height: 80)
         static let loadingLabelSize = CGSize(width: 0, height: 28)
         static let loadingSpinnerSize = CGSize(width: 43, height: 43)
-        static let contentQRCodeImageSize = CGSize(width: 250, height: 250)
-        static let contentDepositAddressContainerSize = CGSize(width: 135, height: 18)
-        static let contentDepositAddressTitleWidth: CGFloat = 113
-        static let contentDepositAddressIconSize = CGSize(width: 16, height: 16)
-        static let contentDepositAddressValueHeight: CGFloat = 17
-        static let contentDepositAddressTagTitleHeight: CGFloat = 17
-        static let contentDepositAddressTagValueHeight: CGFloat = 17
         static let errorContainerHeight: CGFloat = 100
         static let errorContainerIconSize = CGSize(width: 40, height: 40)
 
@@ -420,12 +507,6 @@ extension DepositAddresView {
         static let loadingAssetContainerTopMargin: CGFloat = 30
         static let loadingAssetNameTopMargin: CGFloat = 12
         static let loadingSpinnerTopMargin: CGFloat = 15
-        static let contentQRCodeImageTopMargin: CGFloat = 20
-        static let contentDepositAddressContainerTopMargin: CGFloat = 10
-        static let contentDepositAddressValueMargins = UIEdgeInsets(top: 18, left: 20, bottom: 0, right: 20)
-        static let contentDepositAddressTagTitleMargins = UIEdgeInsets(top: 18, left: 20, bottom: 0, right: 20)
-        static let contentDepositAddressTagValueMargins = UIEdgeInsets(top: 18, left: 20, bottom: 0, right: 20)
-        static let contentDepositAddressWarningMargins = UIEdgeInsets(top: 18, left: 10, bottom: 0, right: 10)
         static let errorContainerHorizontalMargin: CGFloat = 20
         static let errorContainerIconTopMargin: CGFloat = 15
         static let errorContainerTitleMargins = UIEdgeInsets(top: 5, left: 10, bottom: 0, right: 10)
@@ -433,13 +514,10 @@ extension DepositAddresView {
 
         // -- Font
         static let loadingAssetNameFont = UIFont.make(ofSize: 24)
-        static let contentDepositAddressTitleFont = UIFont.make(ofSize: 14)
         static let contentDepositAddressSubTitleFont = UIFont.make(ofSize: 13)
-        static let contentDepositAddressWarningFont = UIFont.make(ofSize: 16)
 
         // -- Color
         static let loadingAssetNameColor = UIColor.init(hex: "#3A3A3C")
-        static let contentDepositAddressColor = UIColor.init(hex: "#818181")
         static let contentDepositAddressWarningColor = UIColor.init(hex: "#636366")
     }
 

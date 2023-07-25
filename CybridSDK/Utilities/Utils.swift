@@ -57,3 +57,21 @@ func copyToClipboard(_ string: String) {
     let pasteboard = UIPasteboard.general
     pasteboard.string = string
 }
+
+func showToast(controller: UIViewController, message: String, seconds: Double) {
+
+    let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
+    alert.view.backgroundColor = UIColor.black
+    alert.view.alpha = 0.4
+    alert.view.layer.cornerRadius = 15
+    if let popoverController = alert.popoverPresentationController {
+        popoverController.sourceView = controller.view
+        popoverController.sourceRect = CGRect(x: 0, y: controller.view.bounds.height, width: controller.view.bounds.width, height: 0)
+        popoverController.permittedArrowDirections = []
+    }
+
+    controller.present(alert, animated: true)
+    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + seconds) {
+        alert.dismiss(animated: true)
+    }
+}

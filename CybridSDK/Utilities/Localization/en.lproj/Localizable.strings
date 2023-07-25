@@ -91,7 +91,7 @@
 "cybrid.deposit.address.loading.label.creating" = "Creating deposit address";
 "cybrid.deposit.address.content.deposit.address.title" = "Deposit Address";
 "cybrid.deposit.address.content.deposit.tag.title" = "Tag";
-"cybrid.deposit.address.content.warning" = "Warning: You can lose all of your coins, bla bla bla bla bla bla bla bla bla bla bla blabla bla bla bla bla blabla bla bla bla bla blabla bla bla bla bla blabla bla bla bla bla blabla bla bla bla bla blabla bla bla bla bla blabla bla bla bla bla blabla bla bla bla bla blabla bla bla bla bla bla";
+"cybrid.deposit.address.content.warning" = "Warning: You can lose all of your coins, bla bla bla bla bla bla bla bla bla bla bla blabla bla bla bla bla blabla bla bla bla bla blabla bla bla bla bla blabla bla bla bla bla blabla bla bla bla";
 "cybrid.deposit.address.error" = "Something happened, please try again.";
 "cybrid.deposit.address.error.button" = "Return";
 

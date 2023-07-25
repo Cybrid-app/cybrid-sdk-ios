@@ -264,6 +264,8 @@
 		A24B35952A66D0A700EF20C5 /* DepositAddressRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24B35942A66D0A700EF20C5 /* DepositAddressRepository.swift */; };
 		A24B35972A66DCFE00EF20C5 /* ImageUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24B35962A66DCFE00EF20C5 /* ImageUtils.swift */; };
 		A24B35992A67099C00EF20C5 /* DepositAddressBankModel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24B35982A67099C00EF20C5 /* DepositAddressBankModel+Extensions.swift */; };
+		A24B359B2A67207D00EF20C5 /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24B359A2A67207D00EF20C5 /* UIView+Extensions.swift */; };
+		A24B359E2A6EE6EE00EF20C5 /* PaymentModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24B359D2A6EE6EE00EF20C5 /* PaymentModal.swift */; };
 		A29AA7C22A5DD85D00B6CC1A /* DepositAddressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29AA7C12A5DD85D00B6CC1A /* DepositAddressView.swift */; };
 		A29AA7C52A5DDBC700B6CC1A /* DepositAddresViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29AA7C42A5DDBC700B6CC1A /* DepositAddresViewController.swift */; };
 		A29AA7C72A5E1BC000B6CC1A /* Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29AA7C62A5E1BC000B6CC1A /* Component.swift */; };
@@ -573,6 +575,8 @@
 		A24B35942A66D0A700EF20C5 /* DepositAddressRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepositAddressRepository.swift; sourceTree = "<group>"; };
 		A24B35962A66DCFE00EF20C5 /* ImageUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageUtils.swift; sourceTree = "<group>"; };
 		A24B35982A67099C00EF20C5 /* DepositAddressBankModel+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DepositAddressBankModel+Extensions.swift"; sourceTree = "<group>"; };
+		A24B359A2A67207D00EF20C5 /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
+		A24B359D2A6EE6EE00EF20C5 /* PaymentModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentModal.swift; sourceTree = "<group>"; };
 		A29AA7C12A5DD85D00B6CC1A /* DepositAddressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepositAddressView.swift; sourceTree = "<group>"; };
 		A29AA7C42A5DDBC700B6CC1A /* DepositAddresViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepositAddresViewController.swift; sourceTree = "<group>"; };
 		A29AA7C62A5E1BC000B6CC1A /* Component.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Component.swift; sourceTree = "<group>"; };
@@ -883,6 +887,7 @@
 				0B2B2A862862906E002F0EC1 /* UILabel+Extensions.swift */,
 				0B00E0032877DF7F00707F26 /* Bundle+Extensions.swift */,
 				927233BA28D12FD10080AAC4 /* UIFont+Extensions.swift */,
+				A24B359A2A67207D00EF20C5 /* UIView+Extensions.swift */,
 			);
 			path = "Framework Extensions";
 			sourceTree = "<group>";
@@ -1775,9 +1780,18 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		A24B359C2A6EE5A000EF20C5 /* Modal */ = {
+			isa = PBXGroup;
+			children = (
+				A24B359D2A6EE6EE00EF20C5 /* PaymentModal.swift */,
+			);
+			path = Modal;
+			sourceTree = "<group>";
+		};
 		A29AA7C02A5DD81200B6CC1A /* DepositAddress */ = {
 			isa = PBXGroup;
 			children = (
+				A24B359C2A6EE5A000EF20C5 /* Modal */,
 				A24B35912A66D03F00EF20C5 /* View */,
 				A29AA7C32A5DD89200B6CC1A /* ViewController */,
 				A29AA7C12A5DD85D00B6CC1A /* DepositAddressView.swift */,
@@ -2239,6 +2253,7 @@
 				0B6175D4288B7853004E4F5B /* TaskScheduler.swift in Sources */,
 				0B00E0222878D23100707F26 /* CybridSession.swift in Sources */,
 				0B2899E9288F3E1F001B3360 /* Cybrid.swift in Sources */,
+				A24B359E2A6EE6EE00EF20C5 /* PaymentModal.swift in Sources */,
 				927233BB28D12FD10080AAC4 /* UIFont+Extensions.swift in Sources */,
 				0BD66118286B79C500F4DA6B /* UIView+Constraints.swift in Sources */,
 				92827DAF294322AD00231772 /* BankBankModel+Extensions.swift in Sources */,
@@ -2279,6 +2294,7 @@
 				A29AA7C22A5DD85D00B6CC1A /* DepositAddressView.swift in Sources */,
 				0BBD0CCA28AAC025001DBC5F /* BigDecimalValidator.swift in Sources */,
 				927233D428D243C60080AAC4 /* AccountsViewController.swift in Sources */,
+				A24B359B2A67207D00EF20C5 /* UIView+Extensions.swift in Sources */,
 				927233CB28D23D060080AAC4 /* AccountsRepository.swift in Sources */,
 				92A90A8D2911940600CA0E08 /* IdentityVerificationViewModel.swift in Sources */,
 				92827DAB294319AD00231772 /* ExternalBankAccountRepository.swift in Sources */,

@@ -9,6 +9,8 @@ import UIKit
 
 public class Component: UIView, ComponentProtocol {
 
+    internal var parentView: UIView?
+    
     override init(frame: CGRect) {
 
         super.init(frame: frame)
@@ -27,6 +29,7 @@ public class Component: UIView, ComponentProtocol {
 
     func embed(in view: UIView) {
 
+        self.parentView = view
         willMove(toSuperview: view)
         view.addSubview(self)
         self.constraint(attribute: .top,
@@ -53,7 +56,8 @@ public class Component: UIView, ComponentProtocol {
     }
 
     internal func embed(in viewController: UIViewController) {
-
+        
+        self.parentView = viewController.view
         willMove(toSuperview: viewController.view)
         viewController.view.addSubview(self)
         NSLayoutConstraint.activate([

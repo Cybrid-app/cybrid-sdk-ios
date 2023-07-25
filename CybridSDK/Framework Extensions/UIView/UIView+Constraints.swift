@@ -91,6 +91,18 @@ public extension UIView {
         }
     }
 
+    func updateConstraint(attribute: NSLayoutConstraint.Attribute, constant: CGFloat) {
+
+        let currentContraints = constraints
+        currentContraints.forEach { constraint in
+            let lala = constraint.firstAttribute
+            let lalala = constraint.relation
+            if constraint.firstAttribute == attribute && constraint.relation == .equal {
+                constraint.constant = constant
+            }
+        }
+    }
+
     func setConstraintsSize(size: CGSize) {
 
         self.constraint(attribute: .width,
@@ -398,8 +410,82 @@ public extension UIView {
         }
     }
 
+    // -- Super Magic cosntraints
+
+    func constraintSafeTop(_ view: UIView, margin: CGFloat) {
+
+        self.translatesAutoresizingMaskIntoConstraints = false
+        self.constraint(attribute: .top,
+                        relatedBy: .equal,
+                        toItem: view,
+                        attribute: .topMargin,
+                        constant: margin)
+    }
+
+    func constraintTop(_ view: UIView, margin: CGFloat) {
+
+        self.translatesAutoresizingMaskIntoConstraints = false
+        self.constraint(attribute: .top,
+                        relatedBy: .equal,
+                        toItem: view,
+                        attribute: .top,
+                        constant: margin)
+    }
+
+    func constraintLeft(_ view: UIView, margin: CGFloat) {
+
+        self.translatesAutoresizingMaskIntoConstraints = false
+        self.constraint(attribute: .leading,
+                        relatedBy: .equal,
+                        toItem: view,
+                        attribute: .leading,
+                        constant: margin)
+    }
+
+    func constraintRight(_ view: UIView, margin: CGFloat) {
+
+        self.translatesAutoresizingMaskIntoConstraints = false
+        self.constraint(attribute: .trailing,
+                        relatedBy: .equal,
+                        toItem: view,
+                        attribute: .trailing,
+                        constant: -margin)
+    }
+
+    func constraintBottom(_ view: UIView, margin: CGFloat) {
+
+        self.translatesAutoresizingMaskIntoConstraints = false
+        self.constraint(attribute: .bottom,
+                        relatedBy: .equal,
+                        toItem: view,
+                        attribute: .bottom,
+                        constant: -margin)
+    }
+
+    func constraintSafeBottom(_ view: UIView, margin: CGFloat) {
+
+        self.translatesAutoresizingMaskIntoConstraints = false
+        self.constraint(attribute: .bottom,
+                        relatedBy: .equal,
+                        toItem: view,
+                        attribute: .bottomMargin,
+                        constant: -margin)
+    }
+
+    // swiftlint:disable:next identifier_name
+    func below(_ to: UIView, top: CGFloat) {
+
+        self.translatesAutoresizingMaskIntoConstraints = false
+        self.constraint(attribute: .top,
+                        relatedBy: .equal,
+                        toItem: to,
+                        attribute: .bottom,
+                        constant: top)
+    }
+
     func centerHorizontal(parent: UIView) {
 
+        self.translatesAutoresizingMaskIntoConstraints = false
         self.constraint(attribute: .centerX,
                         relatedBy: .equal,
                         toItem: parent,
@@ -408,18 +494,30 @@ public extension UIView {
 
     func centerVertical(parent: UIView) {
 
+        self.translatesAutoresizingMaskIntoConstraints = false
         self.constraint(attribute: .centerY,
                         relatedBy: .equal,
                         toItem: parent,
                         attribute: .centerY)
     }
 
-    func below(to: UIView, top: CGFloat) {
+    func constraintHeight(_ value: CGFloat) {
 
-        self.constraint(attribute: .top,
+        self.translatesAutoresizingMaskIntoConstraints = false
+        self.constraint(attribute: .height,
                         relatedBy: .equal,
-                        toItem: to,
-                        attribute: .bottom,
-                        constant: top)
+                        toItem: nil,
+                        attribute: .notAnAttribute,
+                        constant: value)
+    }
+
+    func constraintWidth(_ value: CGFloat) {
+
+        self.translatesAutoresizingMaskIntoConstraints = false
+        self.constraint(attribute: .width,
+                        relatedBy: .equal,
+                        toItem: nil,
+                        attribute: .notAnAttribute,
+                        constant: value)
     }
 }
