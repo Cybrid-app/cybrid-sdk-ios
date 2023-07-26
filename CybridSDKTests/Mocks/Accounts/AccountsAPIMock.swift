@@ -15,6 +15,7 @@ final class AccountsAPIMock: AccountsAPI {
 
     override class func listAccounts(page: Int? = nil,
                                      perPage: Int? = nil,
+                                     owner: ListRequestOwnerBankModel? = nil,
                                      guid: String? = nil,
                                      type: String? = nil,
                                      bankGuid: String? = nil,
