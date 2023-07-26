@@ -32,7 +32,7 @@ class TransferViewModelTest: XCTestCase {
         XCTAssertEqual(viewModel.uiState.value, uiState.value)
         XCTAssertEqual(viewModel.modalUIState.value, modalUIState.value)
         XCTAssertEqual(viewModel.balanceLoading.value, balanceLoading.value)
-        XCTAssertTrue(viewModel.assets.isEmpty)
+        XCTAssertFalse(viewModel.assets.isEmpty)
         XCTAssertTrue(viewModel.accounts.value.isEmpty)
         XCTAssertTrue(viewModel.externalBankAccounts.value.isEmpty)
         XCTAssertTrue(viewModel.fiatBalance.value.isEmpty)
@@ -193,6 +193,7 @@ class TransferViewModelTest: XCTestCase {
 
         // -- Given
         let viewModel = createViewModel()
+        viewModel.assets = []
 
         // -- When
         viewModel.calculateFiatBalance()
@@ -206,6 +207,7 @@ class TransferViewModelTest: XCTestCase {
 
         // -- Given
         let viewModel = createViewModel()
+        viewModel.assets = []
 
         // -- When
         viewModel.calculateFiatBalance()
