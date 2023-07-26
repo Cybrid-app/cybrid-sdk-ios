@@ -63,13 +63,12 @@ class AccountTransfersViewModel: NSObject {
 
     internal static func getAmountOfTransferInFormat(_ transfer: TransferBankModel) -> String {
         let amountFormatted = AccountTransfersViewModel.getAmountOfTransfer(transfer)
-        if amountFormatted != CybridConstants.transferAssetError {
-            // swiftlint:disable:next force_try
-            let asset = try! Cybrid.findAsset(code: transfer.asset!)
-            return AssetFormatter.format(asset, amount: amountFormatted)
-        } else {
+        if amountFormatted == CybridConstants.transferAssetError {
             return CybridConstants.transferAssetError
         }
+        // swiftlint:disable:next force_try
+        let asset = try! Cybrid.findAsset(code: transfer.asset!)
+        return AssetFormatter.format(asset, amount: amountFormatted)
     }
 }
 
