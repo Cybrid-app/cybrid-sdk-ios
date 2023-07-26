@@ -220,9 +220,16 @@ class TransferViewModel: NSObject {
     }
 
     func getAmountOfCurrentTransferFormatted() -> String {
-
-        let amountValueString = self.currentTransfer.value?.amount
-        let amountBase = AssetFormatter.forBase(Cybrid.fiat, amount: CDecimal(amountValueString!))
-        return AssetFormatter.format(Cybrid.fiat, amount: amountBase)
+        do {
+            let amountValueString = self.currentTransfer.value?.amount
+            guard let transferAssetCode = self.currentTransfer.value?.asset else {
+                return CybridConstants.transferAssetError
+            }
+            let asset = try Cybrid.findAsset(code: transferAssetCode)
+            let amountBase = AssetFormatter.forBase(asset, amount: CDecimal(amountValueString!))
+            return AssetFormatter.format(asset, amount: amountBase)
+        } catch {
+            return CybridConstants.transferAssetError
+        }
     }
 }

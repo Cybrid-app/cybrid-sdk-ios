@@ -10,9 +10,6 @@ import CybridApiBankSwift
 
 class AccountTransfersViewModel: NSObject {
 
-    // MARK: Static Final Vars
-    static let assetNotFound = "error"
-
     // MARK: Observed properties
     internal var tranfers: Observable<[TransferBankModel]> = .init([])
 
@@ -52,7 +49,7 @@ class AccountTransfersViewModel: NSObject {
     internal static func getAmountOfTransfer(_ transfer: TransferBankModel) -> String {
         do {
             guard let transferAsset = transfer.asset else {
-                return assetNotFound
+                return CybridConstants.transferAssetError
             }
             let asset = try Cybrid.findAsset(code: transferAsset)
             let amount = transfer.state == .completed ? transfer.amount ?? 0 : transfer.estimatedAmount ?? 0
@@ -60,18 +57,18 @@ class AccountTransfersViewModel: NSObject {
             let amountFormatted = AssetFormatter.forBase(asset, amount: amountValue)
             return amountFormatted
         } catch {
-            return assetNotFound
+            return CybridConstants.transferAssetError
         }
     }
 
     internal static func getAmountOfTransferInFormat(_ transfer: TransferBankModel) -> String {
         let amountFormatted = AccountTransfersViewModel.getAmountOfTransfer(transfer)
-        if amountFormatted != assetNotFound {
+        if amountFormatted != CybridConstants.transferAssetError {
             // swiftlint:disable:next force_try
             let asset = try! Cybrid.findAsset(code: transfer.asset!)
             return AssetFormatter.format(asset, amount: amountFormatted)
         } else {
-            return assetNotFound
+            return CybridConstants.transferAssetError
         }
     }
 }

@@ -72,7 +72,7 @@ class AccountTransfersViewModelTest: XCTestCase {
         let amount = AccountTransfersViewModel.getAmountOfTransfer(transfer)
 
         // -- Then
-        XCTAssertEqual(amount, "error")
+        XCTAssertEqual(amount, CybridConstants.transferAssetError)
     }
 
     func test_getAmountOfTransfer_Asset_Nil() {
@@ -90,7 +90,7 @@ class AccountTransfersViewModelTest: XCTestCase {
         let amount = AccountTransfersViewModel.getAmountOfTransfer(transfer)
 
         // -- Then
-        XCTAssertEqual(amount, "error")
+        XCTAssertEqual(amount, CybridConstants.transferAssetError)
     }
 
     func test_getAmountOfTransfer_Success() {
@@ -152,7 +152,7 @@ class AccountTransfersViewModelTest: XCTestCase {
         let amountFormatted = AccountTransfersViewModel.getAmountOfTransferInFormat(transfer)
 
         // -- Then
-        XCTAssertEqual(amountFormatted, "error")
+        XCTAssertEqual(amountFormatted, CybridConstants.transferAssetError)
     }
 
     func test_getAmountOfTransferInFormat_Success() {
@@ -173,21 +173,6 @@ class AccountTransfersViewModelTest: XCTestCase {
         // -- Then
         XCTAssertEqual(amountFormatted, "$10.00 USD")
     }
-
-    /*func test_getAmountOfTransfer() {
-
-        // -- Given
-        let transferOne = TransferBankModel(guid: "123454", asset: "USD", state: .completed, amount: nil)
-        let transferTwo = TransferBankModel(guid: "986432", asset: "USD", state: .storing, estimatedAmount: nil)
-
-        // -- When
-        let amountOne = AccountTransfersViewModel.getAmountOfTransfer(transferOne)
-        let amountTwo = AccountTransfersViewModel.getAmountOfTransfer(transferTwo)
-
-        // -- Then
-        XCTAssertEqual(amountOne, "0.00")
-        XCTAssertEqual(amountTwo, "0.00")
-    }*/
 
     // MARK: TableView Delegation Test
 
