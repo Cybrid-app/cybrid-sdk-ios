@@ -132,8 +132,8 @@ extension CybridConfig {
             }
         }
     }
-    
-    func findAsset(code: String) throws -> AssetBankModel? {
+
+    func findAsset(code: String) throws -> AssetBankModel {
         guard let asset = self.assets.first(where: { $0.code == code }) else {
             throw AssetNotFoundError(code: code)
         }

@@ -9,6 +9,9 @@ import Foundation
 import CybridApiBankSwift
 
 class AccountTransfersViewModel: NSObject {
+    
+    // MARK: Static Final Vars
+    static let assetNotFound = "error"
 
     // MARK: Observed properties
     internal var tranfers: Observable<[TransferBankModel]> = .init([])
@@ -47,25 +50,28 @@ class AccountTransfersViewModel: NSObject {
     }
 
     internal static func getAmountOfTransfer(_ transfer: TransferBankModel) -> String {
-
-        let amount = transfer.state == .completed ? transfer.amount ?? 0 : transfer.estimatedAmount ?? 0
-        let amountValue = CDecimal(amount)
-        let transferAsset =
-        let amountFormatted = AssetFormatter.forBase(transferAsset!, amount: amountValue)
-        return amountFormatted
-    }
-
-    internal static func getAmountOfTransferInFormat(_ transfer: TransferBankModel, asset: AssetBankModel = Cybrid.fiat) -> String {
-
-        let amountFormatted = AccountTransfersViewModel.getAmountOfTransfer(transfer)
-        return AssetFormatter.format(asset, amount: amountFormatted)
-    }
-    
-    internal static func findAsset(code: String) {
         do {
-            let asset = try Cybrid.findAsset(code: code)
+            let asset = try Cybrid.findAsset(code: transfer.asset!)
+            let amount = transfer.state == .completed ? transfer.amount ?? 0 : transfer.estimatedAmount ?? 0
+            let amountValue = CDecimal(amount)
+            let amountFormatted = AssetFormatter.forBase(asset, amount: amountValue)
+            return amountFormatted
         } catch {
-            
+            return assetNotFound
+        }
+    }
+
+    internal static func getAmountOfTransferInFormat(_ transfer: TransferBankModel) -> String {
+        do {
+            let amountFormatted = AccountTransfersViewModel.getAmountOfTransfer(transfer)
+            if amountFormatted != assetNotFound {
+                let asset = try Cybrid.findAsset(code: transfer.asset!)
+                return AssetFormatter.format(asset, amount: amountFormatted)
+            } else {
+                return assetNotFound
+            }
+        } catch {
+            return assetNotFound
         }
     }
 }

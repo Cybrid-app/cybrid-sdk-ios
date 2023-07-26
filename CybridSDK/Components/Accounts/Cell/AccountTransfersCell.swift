@@ -278,7 +278,7 @@ extension AccountTransfersCell {
         self.transferDate.text = getFormattedDate(transfer.createdAt, format: "MMM dd, YYYY")
 
         // -- Transfer Amount
-        var amountValue = AccountTransfersViewModel.getAmountOfTransferInFormat(transfer)
+        let amountValue = AccountTransfersViewModel.getAmountOfTransferInFormat(transfer)
         self.amount.text = amountValue
 
         // -- Status chip
