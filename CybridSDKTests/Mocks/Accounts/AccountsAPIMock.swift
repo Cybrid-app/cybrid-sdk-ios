@@ -15,12 +15,13 @@ final class AccountsAPIMock: AccountsAPI {
 
     override class func listAccounts(page: Int? = nil,
                                      perPage: Int? = nil,
+                                     owner: ListRequestOwnerBankModel? = nil,
                                      guid: String? = nil,
+                                     type: String? = nil,
                                      bankGuid: String? = nil,
                                      customerGuid: String? = nil,
                                      apiResponseQueue: DispatchQueue = CybridApiBankSwiftAPI.apiResponseQueue,
                                      completion: @escaping ((Result<AccountListBankModel, ErrorResponse>) -> Void)) -> RequestTask {
-
         accountsCompletion = completion
         return listAccountsWithRequestBuilder().requestTask
     }

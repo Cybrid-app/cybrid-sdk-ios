@@ -218,4 +218,18 @@ class TransferViewModel: NSObject {
         let side: PostQuoteBankModel.SideBankModel = self.isWithdraw.value ? .withdrawal : .deposit
         return side
     }
+
+    func getAmountOfCurrentTransferFormatted() -> String {
+        do {
+            let amountValueString = self.currentTransfer.value?.amount
+            guard let transferAssetCode = self.currentTransfer.value?.asset else {
+                return CybridConstants.transferAssetError
+            }
+            let asset = try Cybrid.findAsset(code: transferAssetCode)
+            let amountBase = AssetFormatter.forBase(asset, amount: CDecimal(amountValueString!))
+            return AssetFormatter.format(asset, amount: amountBase)
+        } catch {
+            return CybridConstants.transferAssetError
+        }
+    }
 }

@@ -278,22 +278,22 @@ extension AccountTransfersCell {
         self.transferDate.text = getFormattedDate(transfer.createdAt, format: "MMM dd, YYYY")
 
         // -- Transfer Amount
-        let amountValue = CDecimal(transfer.amount ?? 0)
-        var amountFormatted = AssetFormatter.forBase(Cybrid.fiat, amount: amountValue)
-        amountFormatted = AssetFormatter.format(Cybrid.fiat, amount: amountFormatted)
-        self.amount.text = amountFormatted
+        let amountValue = AccountTransfersViewModel.getAmountOfTransferInFormat(transfer)
+        self.amount.text = amountValue
 
         // -- Status chip
         let localizer = CybridLocalizer()
         switch transfer.state {
         case .initiating, .storing, .pending:
 
+            self.statusChip.isHidden = false
             self.statusChip.textColor = UIColor.black
             self.statusChip.backgroundColor = UIValues.transferPending
             self.statusChip.setLocalizedText(key: UIString.transferPending, localizer: localizer)
 
         case .failed:
 
+            self.statusChip.isHidden = false
             self.statusChip.textColor = UIColor.white
             self.statusChip.backgroundColor = UIValues.transferFailed
             self.statusChip.setLocalizedText(key: UIString.transferFailed, localizer: localizer)

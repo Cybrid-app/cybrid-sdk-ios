@@ -45,6 +45,31 @@ class AccountTransfersViewModel: NSObject {
             }
         }
     }
+
+    internal static func getAmountOfTransfer(_ transfer: TransferBankModel) -> String {
+        do {
+            guard let transferAsset = transfer.asset else {
+                return CybridConstants.transferAssetError
+            }
+            let asset = try Cybrid.findAsset(code: transferAsset)
+            let amount = transfer.state == .completed ? transfer.amount ?? 0 : transfer.estimatedAmount ?? 0
+            let amountValue = CDecimal(amount)
+            let amountFormatted = AssetFormatter.forBase(asset, amount: amountValue)
+            return amountFormatted
+        } catch {
+            return CybridConstants.transferAssetError
+        }
+    }
+
+    internal static func getAmountOfTransferInFormat(_ transfer: TransferBankModel) -> String {
+        let amountFormatted = AccountTransfersViewModel.getAmountOfTransfer(transfer)
+        if amountFormatted == CybridConstants.transferAssetError {
+            return CybridConstants.transferAssetError
+        }
+        // swiftlint:disable:next force_try
+        let asset = try! Cybrid.findAsset(code: transfer.asset!)
+        return AssetFormatter.format(asset, amount: amountFormatted)
+    }
 }
 
 // MARK: - AccountTransfersViewProvider

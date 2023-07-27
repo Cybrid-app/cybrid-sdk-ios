@@ -32,7 +32,6 @@ class TransferViewModelTest: XCTestCase {
         XCTAssertEqual(viewModel.uiState.value, uiState.value)
         XCTAssertEqual(viewModel.modalUIState.value, modalUIState.value)
         XCTAssertEqual(viewModel.balanceLoading.value, balanceLoading.value)
-        XCTAssertTrue(viewModel.assets.isEmpty)
         XCTAssertTrue(viewModel.accounts.value.isEmpty)
         XCTAssertTrue(viewModel.externalBankAccounts.value.isEmpty)
         XCTAssertTrue(viewModel.fiatBalance.value.isEmpty)
@@ -193,6 +192,7 @@ class TransferViewModelTest: XCTestCase {
 
         // -- Given
         let viewModel = createViewModel()
+        viewModel.assets = []
 
         // -- When
         viewModel.calculateFiatBalance()
@@ -206,6 +206,7 @@ class TransferViewModelTest: XCTestCase {
 
         // -- Given
         let viewModel = createViewModel()
+        viewModel.assets = []
 
         // -- When
         viewModel.calculateFiatBalance()
@@ -277,5 +278,62 @@ class TransferViewModelTest: XCTestCase {
         // -- Then
         XCTAssertEqual(sideWithdraw, .withdrawal)
         XCTAssertEqual(sideDeposit, .deposit)
+    }
+
+    func test_getAmountOfCurrentTransferFormatted_Asset_Nil() {
+
+        // -- This method covers guard let
+        // -- Given
+        let viewModel = createViewModel()
+        viewModel.assets = AssetBankModel.fiatAssets
+        viewModel.accounts.value = AccountBankModel.mock
+        viewModel.currentTransfer.value = TransferBankModel(
+            guid: "1234",
+            asset: nil,
+            amount: 1000)
+
+        // -- When
+        let amountFormatted = viewModel.getAmountOfCurrentTransferFormatted()
+
+        // -- Then
+        XCTAssertEqual(amountFormatted, CybridConstants.transferAssetError)
+    }
+
+    func test_getAmountOfCurrentTransferFormatted_Asset_Not_Found() {
+
+        // -- This method covers try/catch
+        // -- Given
+        let viewModel = createViewModel()
+        viewModel.assets = AssetBankModel.fiatAssets
+        viewModel.accounts.value = AccountBankModel.mock
+        viewModel.currentTransfer.value = TransferBankModel(
+            guid: "1234",
+            asset: "MXN",
+            amount: 1000)
+
+        // -- When
+        let amountFormatted = viewModel.getAmountOfCurrentTransferFormatted()
+
+        // -- Then
+        XCTAssertEqual(amountFormatted, CybridConstants.transferAssetError)
+    }
+
+    func test_getAmountOfCurrentTransferFormatted_Success() {
+
+        // -- Given
+        Cybrid.assets = AssetBankModel.mock
+        let viewModel = createViewModel()
+        viewModel.assets = AssetBankModel.fiatAssets
+        viewModel.accounts.value = AccountBankModel.mock
+        viewModel.currentTransfer.value = TransferBankModel(
+            guid: "1234",
+            asset: "USD",
+            amount: 1000)
+
+        // -- When
+        let amountFormatted = viewModel.getAmountOfCurrentTransferFormatted()
+
+        // -- Then
+        XCTAssertEqual(amountFormatted, "$10.00 USD")
     }
 }

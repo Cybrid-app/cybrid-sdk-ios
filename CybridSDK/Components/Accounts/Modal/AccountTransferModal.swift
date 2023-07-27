@@ -31,7 +31,6 @@ class AccountTransferModal: UIModal {
         self.currentAssetURL = assetURL
         self.onConfirm = onConfirm
         super.init(height: UIValues.modalSize)
-
         setupViews()
     }
 
@@ -60,8 +59,7 @@ class AccountTransferModal: UIModal {
         titleView.text = localizedTitle
 
         // -- Sub Title View
-        let amountCDecimal = CDecimal(transfer.amount ?? 0)
-        let amountFormatted = AssetFormatter.forBase(asset, amount: amountCDecimal)
+        let amountFormatted = AccountTransfersViewModel.getAmountOfTransfer(transfer)
         let subTitleView = UILabel.makeBasic(
             font: UIValues.subTitleFont, color: UIValues.subTitleColor, aligment: .left)
         subTitleView.addBelow(

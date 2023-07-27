@@ -62,6 +62,7 @@ extension TransferViewController {
         self.errorMessageView.textColor = UIColor.white
         self.errorMessageView.font = UIFont.systemFont(ofSize: 14)
         self.errorMessageView.textAlignment = .center
+        self.errorMessageView.numberOfLines = 0
         self.view.addSubview(self.errorMessageView)
         self.errorMessageView.constraint(attribute: .top,
                                          relatedBy: .equal,
@@ -82,7 +83,7 @@ extension TransferViewController {
                                          relatedBy: .equal,
                                          toItem: nil,
                                          attribute: .notAnAttribute,
-                                         constant: 25)
+                                         constant: 28)
         self.errorMessageView.isHidden = true
 
         // -- Component Container

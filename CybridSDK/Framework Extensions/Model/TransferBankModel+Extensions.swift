@@ -31,6 +31,7 @@ extension TransferBankModel {
             side: (TransferBankModel.SideBankModel(rawValue: side) ?? .deposit) as SideBankModel,
             state: (TransferBankModel.StateBankModel(rawValue: state) ?? .storing) as StateBankModel,
             amount: json[codingKeys.amount.rawValue] as? Int ?? 0,
+            estimatedAmount: json[codingKeys.estimatedAmount.rawValue] as? Int ?? 0,
             fee: json[codingKeys.fee.rawValue] as? Int ?? 0,
             createdAt: createdAtDate)
     }

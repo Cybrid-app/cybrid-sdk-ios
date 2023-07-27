@@ -433,4 +433,49 @@ class CybridConfigTests: XCTestCase {
         }
         self.dataProvider.didFetchAssetsWithError()
     }
+
+    func test_findAsset() {
+
+        // -- Given
+        let bank = BankBankModel.mock()
+        let sdkConfig = SDKConfig(environment: .staging,
+                                  bearer: "TEST-BEARER",
+                                  customerGuid: "MOCK_GUID",
+                                  bank: bank)
+        let cybridConfig = CybridConfig()
+        cybridConfig.setup(sdkConfig: sdkConfig,
+                           dataProvider: dataProvider,
+                           completion: {})
+        let codeToFind = "USD"
+        cybridConfig.assets = AssetBankModel.mock
+
+        // -- When/Then
+        do {
+            let foundAsset = try cybridConfig.findAsset(code: codeToFind)
+            XCTAssertEqual(foundAsset.code, codeToFind)
+        } catch {
+            XCTFail("Shouldn't have error: \(error)")
+        }
+    }
+
+    func test_findAsset_Throw() {
+
+        // -- Given
+        let bank = BankBankModel.mock()
+        let sdkConfig = SDKConfig(environment: .staging,
+                                  bearer: "TEST-BEARER",
+                                  customerGuid: "MOCK_GUID",
+                                  bank: bank)
+        let cybridConfig = CybridConfig()
+        cybridConfig.setup(sdkConfig: sdkConfig,
+                           dataProvider: dataProvider,
+                           completion: {})
+        let codeToFind = "MXN"
+        cybridConfig.assets = AssetBankModel.mock
+
+        // -- When/Then
+        XCTAssertThrowsError(try cybridConfig.findAsset(code: codeToFind)) { error in
+            XCTAssertTrue(error is AssetNotFoundError, "The error type should be AssetNotFoundError")
+        }
+    }
 }
