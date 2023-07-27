@@ -58,7 +58,7 @@ open class DepositAddressViewModel: NSObject {
 
         self.uiState.value = .LOADING
         self.loadingLabelUiState.value = .GETTING
-        dataProvider.fetchDepositAddress(depositAddressGuid: depositAddress.guid) { [weak self] response in
+        dataProvider.fetchDepositAddress(depositAddressGuid: depositAddress.guid!) { [weak self] response in
             switch response {
             case.success(let depositAddressBankModel):
                 self?.logger?.log(.component(.accounts(.accountsDataFetching)))
