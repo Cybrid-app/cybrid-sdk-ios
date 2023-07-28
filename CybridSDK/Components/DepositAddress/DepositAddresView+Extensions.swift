@@ -482,13 +482,9 @@ extension DepositAddresView {
     }
 
     @objc func copyDepositAddressToClipboard(_ sender: UITapGestureRecognizer) {
-
-        copyToClipboard(self.depositAddressViewModel?.currentDepositAddress?.address ?? "")
-        if self.parentView != nil {
-            if let viewController = self.parentView?.parentViewController {
-                showToast(controller: viewController, message: "Copied", seconds: 1.0)
-            }
-        }
+        
+        let address = self.depositAddressViewModel?.currentDepositAddress?.address ?? ""
+        UIPasteboard.general.string = address
     }
 }
 

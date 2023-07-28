@@ -80,4 +80,17 @@ class UtilTest: XCTestCase {
         XCTAssertEqual(formatted1, "")
         XCTAssertEqual(formatted2, "20, 2022")
     }
+
+    /*func test_copyToClipboard() {
+
+        // -- Given
+        let testString = "This is a test string to copy."
+
+        // -- When
+        copyToClipboard(testString)
+
+        // -- Then
+        let pasteboard = UIPasteboard.general
+        XCTAssertEqual(pasteboard.string, testString)
+    }*/
 }

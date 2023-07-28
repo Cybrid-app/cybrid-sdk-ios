@@ -25,6 +25,7 @@ ignore:
   - "CybridSDK/Components/AccountsComponent/Entity/AccountAssetPriceModel.swift"
   - "CybridSDK/Framework Extensions/Model/*"
   - "CybridSDK/Framework Extensions/UIView/*"
+  - "CybridSDK/Utilities/ImageUtils.swift"
   - "CybridSDK/Utilities/ReusableViews/*"
   - "CybridSDK/Utilities/ReusableViews/**/*"
   - "CybridSDK/Utilities/Formatters/BigDecimalValidator"

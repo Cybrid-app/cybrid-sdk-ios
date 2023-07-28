@@ -51,28 +51,6 @@ class CybridSessionTests: XCTestCase {
         XCTAssertFalse(session.isAuthenticated)
     }
 
-    /*func test_session_bearerEmpty() {
-
-        // -- Given
-        let session = createSession()
-        var didFail = false
-
-        // -- When
-        Cybrid.bearer = ""
-        session.setupSession(authToken: "")
-        session.authenticate { result in
-            switch result {
-            case .failure:
-                didFail = true
-            case .success:
-                didFail = false
-            }
-        }
-
-        // -- Then
-        XCTAssertTrue(didFail)
-    }*/
-
     func testSession_authenticateFirstTime() {
         // Given
         let session = createSession()
