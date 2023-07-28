@@ -237,10 +237,29 @@ class DepositAddressViewModelTest: XCTestCase {
         let viewModel = self.createViewModel(balance: balance)
 
         // -- When
-        let qrImage = viewModel.getStringAddressForQRCode(assetCode: "BTC", address: "12345")
+        let qrImage = viewModel.generateQRCode(assetCode: "BTC", address: "12345")
+        let qrImageContent = self.readQRCode(from: qrImage)
 
         // -- Then
         XCTAssertNotNil(qrImage)
+        XCTAssertEqual("bitcoin:12345", qrImageContent ?? "")
+    }
+
+    func readQRCode(from image: UIImage?) -> String? {
+
+        guard let image = image else { return nil }
+        guard let ciImage = CIImage(image: image) else {
+            return nil
+        }
+        let detector = CIDetector(ofType: CIDetectorTypeQRCode,
+                                  context: nil,
+                                  options: [CIDetectorAccuracy: CIDetectorAccuracyHigh])
+
+        let features = detector?.features(in: ciImage)
+        if let feature = features?.first as? CIQRCodeFeature {
+            return feature.messageString
+        }
+        return nil
     }
 
     func test_getStringAddressForQRCode_BTC() {

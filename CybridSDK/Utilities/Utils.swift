@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import UIKit
 
 func stringValue(forKey key: String, in jsonData: Data, atIndex index: Int = 0) -> String? {
 
