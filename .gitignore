@@ -95,3 +95,6 @@ iOSInjectionProject/
 .DS_Store
 .Trashes
 *.swp
+
+# Demo App plist
+CybridSDKTestApp/Info.plist
