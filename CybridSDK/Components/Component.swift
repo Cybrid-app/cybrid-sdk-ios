@@ -10,7 +10,7 @@ import UIKit
 public class Component: UIView, ComponentProtocol {
 
     internal var parentView: UIView?
-    
+
     override init(frame: CGRect) {
 
         super.init(frame: frame)
@@ -56,7 +56,7 @@ public class Component: UIView, ComponentProtocol {
     }
 
     internal func embed(in viewController: UIViewController) {
-        
+
         self.parentView = viewController.view
         willMove(toSuperview: viewController.view)
         viewController.view.addSubview(self)

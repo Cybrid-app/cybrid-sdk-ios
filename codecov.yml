@@ -18,6 +18,8 @@ ignore:
   - "**/*Cell.swift"
   - "**/*View.swift"
   - "**/*Modal.swift"
+  - "CybridSDK/Components/Component.swift"
+  - "CybridSDK/Components/**/*View+Extensions.swift"
   - "**/*ViewController.swift"
   - "**/*ViewController+Extensions.swift"
   - "CybridSDK/Components/Trade/View/TradeViewModel.swift"
