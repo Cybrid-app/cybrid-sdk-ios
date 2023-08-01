@@ -18,7 +18,8 @@ final class ServiceProviderMock: AssetsRepoProvider,
                                  WorkflowProvider,
                                  ExternalBankAccountProvider,
                                  BankProvider,
-                                 TransfersRepoProvider {
+                                 TransfersRepoProvider,
+                                 DepositAddressRepoProvider {
 
     var apiManager: CybridAPIManager.Type = MockAPIManager.self
 
@@ -34,6 +35,7 @@ final class ServiceProviderMock: AssetsRepoProvider,
     var externalBankAccountRepository: ExternalBankAccountRepository.Type = ExternalBankAccountAPIMock.self
     var bankRepository: BankRepository.Type = BankAPIMock.self
     var transfersRepository: TransfersRepository.Type = TransfersAPIMock.self
+    var depositAddressRepository: DepositAddressRepository.Type = DepositAddressAPIMock.self
 
     // MARK: Cache
     var assetsCache: [AssetBankModel]?
@@ -330,5 +332,36 @@ final class ServiceProviderMock: AssetsRepoProvider,
     func didFetchTransfersListWithError() {
 
         TransfersAPIMock.didFetchTransfersListWithError()
+    }
+
+    // MARK: Deposit Address
+    func didFetchListDepositAddressSuccessfully() {
+        Cybrid.session.setupSession(authToken: "TEST-TOKEN")
+        DepositAddressAPIMock.didFetchListDepositAddressSuccessfully()
+    }
+
+    func didFetchListDepositAddressFailed() {
+        Cybrid.session.setupSession(authToken: "TEST-TOKEN")
+        DepositAddressAPIMock.didFetchListDepositAddressFailed()
+    }
+
+    func didFetchDepositAddressSuccessfully() {
+        Cybrid.session.setupSession(authToken: "TEST-TOKEN")
+        DepositAddressAPIMock.didFetchDepositAddressSuccessfully()
+    }
+
+    func didFetchDepositAddressFailed() {
+        Cybrid.session.setupSession(authToken: "TEST-TOKEN")
+        DepositAddressAPIMock.didFetchDepositAddressFailed()
+    }
+
+    func didCreateDepositAddressSuccessfully() {
+        Cybrid.session.setupSession(authToken: "TEST-TOKEN")
+        DepositAddressAPIMock.didCreateDepositAddressSuccessfully()
+    }
+
+    func didCreateDepositAddressFailed() {
+        Cybrid.session.setupSession(authToken: "TEST-TOKEN")
+        DepositAddressAPIMock.didCreateDepositAddressFailed()
     }
 }

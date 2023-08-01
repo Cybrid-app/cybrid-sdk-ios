@@ -880,4 +880,105 @@ class CybridJSONDecoderTests: XCTestCase {
         let result = try? decoder.decode(TransferListBankModel.self, from: transferData!)
         XCTAssertNil(result)
     }
+
+    // MARK: DepositAddressBankModel
+    func test_DepositAddressBankModel_Decoding() throws {
+
+        let depositAddressData = getJSONData(from: "createDepositAddressResponse")
+        XCTAssertNotNil(depositAddressData)
+        let decoder = CybridJSONDecoder()
+
+        let result = try? decoder.decode(DepositAddressBankModel.self, from: depositAddressData!)
+        XCTAssertNotNil(result?.guid)
+        XCTAssertNotNil(result?.bankGuid)
+        XCTAssertNotNil(result?.customerGuid)
+        XCTAssertNotNil(result?.accountGuid)
+        XCTAssertNotNil(result?.createdAt)
+        XCTAssertNotNil(result?.asset)
+        XCTAssertNotNil(result?.state)
+        XCTAssertNotNil(result?.address)
+        XCTAssertNotNil(result?.format)
+        XCTAssertNotNil(result?.tag)
+    }
+
+    func test_DepositAddressBankModel_withInvalidJSON() throws {
+
+        let depositAddressData = getJSONData(from: "listAssetsResponse")
+        XCTAssertNotNil(depositAddressData)
+        let decoder = CybridJSONDecoder()
+
+        let result = try? decoder.decode(DepositAddressBankModel.self, from: depositAddressData!)
+        XCTAssertNil(result)
+    }
+
+    func test_DepositAddressBankModel_withInvalidArrayOfJSON() throws {
+
+        let depositAddressData = getJSONData(from: "listPricesResponse")
+        XCTAssertNotNil(depositAddressData)
+        let decoder = CybridJSONDecoder()
+
+        let result = try? decoder.decode(DepositAddressBankModel.self, from: depositAddressData!)
+        XCTAssertNil(result)
+    }
+
+    func test_DepositAddressListBankModel_Decoding() throws {
+
+        let tdepositAddressData = getJSONData(from: "listDepositAddressResponse")
+        XCTAssertNotNil(tdepositAddressData)
+        let decoder = CybridJSONDecoder()
+
+        let result = try? decoder.decode(DepositAddressListBankModel.self, from: tdepositAddressData!)
+        XCTAssertNotNil(result?.total)
+        XCTAssertNotNil(result?.page)
+        XCTAssertNotNil(result?.perPage)
+        XCTAssertNotNil(result?.objects)
+        XCTAssertNotNil(result?.objects[0])
+        XCTAssertNotNil(result?.objects[0].guid)
+        XCTAssertNotNil(result?.objects[0].bankGuid)
+        XCTAssertNotNil(result?.objects[0].customerGuid)
+        XCTAssertNotNil(result?.objects[0].accountGuid)
+        XCTAssertNotNil(result?.objects[0].createdAt)
+        XCTAssertNotNil(result?.objects[0].asset)
+        XCTAssertNotNil(result?.objects[0].state)
+        XCTAssertNotNil(result?.objects[0].address)
+        XCTAssertNotNil(result?.objects[0].format)
+        XCTAssertNotNil(result?.objects[0].tag)
+    }
+
+    func test_DepositAddressListBankModel_Decoding_Incomplete() throws {
+
+        let depositAddressData = getJSONData(from: "listDepositAddressResponseIncomplete")
+        XCTAssertNotNil(depositAddressData)
+
+        let decoder = CybridJSONDecoder()
+
+        let result = try? decoder.decode(DepositAddressListBankModel.self, from: depositAddressData!)
+        XCTAssertNotNil(result?.total)
+        XCTAssertEqual(result?.total, 0)
+        XCTAssertNotNil(result?.page)
+        XCTAssertEqual(result?.page, 0)
+        XCTAssertNotNil(result?.perPage)
+        XCTAssertEqual(result?.perPage, 0)
+        XCTAssertNotNil(result?.objects)
+    }
+
+    func test_DepositAddressListBankModel_withInvalidJSON() throws {
+
+        let depositAddressData = getJSONData(from: "listPricesResponse")
+        XCTAssertNotNil(depositAddressData)
+        let decoder = CybridJSONDecoder()
+
+        let result = try? decoder.decode(DepositAddressListBankModel.self, from: depositAddressData!)
+        XCTAssertNil(result)
+    }
+
+    func test_DepositAddressListBankModel_withInvalidArrayOfJSON() throws {
+
+        let depositAddressData = getJSONData(from: "listPricesResponse")
+        XCTAssertNotNil(depositAddressData)
+        let decoder = CybridJSONDecoder()
+
+        let result = try? decoder.decode(DepositAddressListBankModel.self, from: depositAddressData!)
+        XCTAssertNil(result)
+    }
 }

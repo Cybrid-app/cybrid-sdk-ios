@@ -51,6 +51,9 @@ final class CybridSession: AuthenticatedServiceProvider {
     // Transfer Repository
     internal var transfersRepository: TransfersRepository.Type
 
+    // Deposit Address Repository
+    internal var depositAddressRepository: DepositAddressRepository.Type
+
     // Schedulers
     internal var taskSchedulers: Set<TaskScheduler> = []
 
@@ -76,6 +79,7 @@ final class CybridSession: AuthenticatedServiceProvider {
         self.externalBankAccountRepository = ExternalBankAccountsAPI.self
         self.bankRepository = BanksAPI.self
         self.transfersRepository = TransfersAPI.self
+        self.depositAddressRepository = DepositAddressesAPI.self
 
         setupEventListeners()
     }

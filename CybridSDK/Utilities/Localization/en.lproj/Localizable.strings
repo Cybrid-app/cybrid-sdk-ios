@@ -84,6 +84,29 @@
 "cybrid.accounts.transfers.detail.id.title" = "Trasnfer ID";
 "cybrid.accounts.transfers.detail.close.button" = "Close";
 
+// Deposit Address Component
+"cybrid.deposit.address.in.accounts.trades.create.button" = "Get Deposit Address";
+"cybrid.deposit.address.loading.label.verifying" = "Verifying your deposit addresses";
+"cybrid.deposit.address.loading.label.getting" = "Getting your deposit address";
+"cybrid.deposit.address.loading.label.creating" = "Creating deposit address";
+"cybrid.deposit.address.content.deposit.address.title" = "Deposit ";
+"cybrid.deposit.address.content.qr.warning.1" = "Send only ";
+"cybrid.deposit.address.content.qr.warning.2" = " to this deposit address.";
+"cybrid.deposit.address.content.deposit.network.title" = "Network";
+"cybrid.deposit.address.content.deposit.address.address.title" = "Deposit Address";
+"cybrid.deposit.address.content.deposit.tag.title" = "Tag";
+"cybrid.deposit.address.content.deposit.amount.title" = "Amount";
+"cybrid.deposit.address.content.deposit.message.title" = "Message";
+"cybrid.deposit.address.content.warning" = "Warning: You can lose all of your coins";
+"cybrid.deposit.address.content.button" = "Generate payment code";
+"cybrid.deposit.address.modal.title" = "Deposit details for";
+"cybrid.deposit.address.modal.amount.title" = "Amount of";
+"cybrid.deposit.address.modal.message.title" = "Message for transaction";
+"cybrid.deposit.address.modal.message.placeholder" = "Optional message";
+"cybrid.deposit.address.modal.button" = "Generate";
+"cybrid.deposit.address.error" = "An error occurred, please try again.";
+"cybrid.deposit.address.error.button" = "Return";
+
 // Accounts: Deprecieted
 "cybrid.account.trade.modal.loading.title" = "Quote Pending";
 "cybrid.account.trade.modal.loadingSubmitted.title" = "Submitting Crypto Order";

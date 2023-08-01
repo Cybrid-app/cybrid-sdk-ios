@@ -24,6 +24,7 @@ public final class AccountTradesViewController: UIViewController {
     var balanceValueView: UILabel!
     var balanceFiatValueView: UILabel!
     let tradesTable = UITableView()
+    var depositAddressButton: CYBButton!
 
     internal init(balance: BalanceUIModel, accountsViewModel: AccountsViewModel) {
 
@@ -55,6 +56,7 @@ public final class AccountTradesViewController: UIViewController {
         view.backgroundColor = .white
         self.createAssetTitle()
         self.createBalanceTitles()
+        self.createDepositAddressButton()
         self.createTradesTable()
     }
 }
@@ -127,6 +129,22 @@ extension AccountTradesViewController {
             margins: UIValues.balanceFiatValueViewMargins)
     }
 
+    private func createDepositAddressButton() {
+
+        self.depositAddressButton = CYBButton(title: localizer.localize(with: UIStrings.getDepositAddress)) {
+
+            let depositAddressViewController = DepositAddresViewController(accountBalance: self.balance)
+            if self.navigationController != nil {
+                self.navigationController?.pushViewController(depositAddressViewController, animated: true)
+            } else {
+                self.present(depositAddressViewController, animated: true)
+            }
+        }
+        self.depositAddressButton.asLast(parent: self.view,
+                                         height: 50,
+                                         margins: UIEdgeInsets(top: 0, left: 20, bottom: 25, right: 20))
+    }
+
     private func createTradesTable() {
 
         self.tradesTable.delegate = self.tradesViewModel
@@ -136,9 +154,9 @@ extension AccountTradesViewController {
         self.tradesTable.estimatedRowHeight = UIValues.tradesTableCellHeight
         self.tradesTable.translatesAutoresizingMaskIntoConstraints = false
 
-        self.tradesTable.addBelowToBottom(
+        self.tradesTable.addInTheMiddle(
             topItem: self.balanceFiatValueView,
-            bottomItem: self.view,
+            bottomItem: self.depositAddressButton,
             margins: UIValues.tradesTableMargins)
 
         // -- Live Data
@@ -209,7 +227,7 @@ extension AccountTradesViewController {
         static let balanceFiatValueViewMargins = UIEdgeInsets(top: 2, left: 10, bottom: 0, right: 10)
         static let balanceFiatValueViewSize: CGFloat = 23
         static let tradesTableCellHeight: CGFloat = 62
-        static let tradesTableMargins = UIEdgeInsets(top: 5, left: 15, bottom: 0, right: 15)
+        static let tradesTableMargins = UIEdgeInsets(top: 5, left: 15, bottom: 10, right: 15)
 
         // -- Fonts
         static let balanceAssetNameFont = UIFont.make(ofSize: 16.5, weight: .medium)
@@ -224,5 +242,10 @@ extension AccountTradesViewController {
         static let balanceValueCodeViewColor = UIColor(hex: "#8E8E93")
         static let balanceFiatValueColor = UIColor(hex: "#636366")
         static let balanceFiatValueCodeColor = UIColor(hex: "#757575")
+    }
+
+    enum UIStrings {
+
+        static let getDepositAddress = "cybrid.deposit.address.in.accounts.trades.create.button"
     }
 }

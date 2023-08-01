@@ -136,16 +136,29 @@ extension AccountBankModel {
         state: .created
     )
 
-    static let backstopped = AccountBankModel(
-        type: .backstopped,
+    static let fee = AccountBankModel(
+        type: .fee,
         guid: "GUID",
         createdAt: Date(),
-        asset: "USD",
-        name: "USD",
+        asset: "ETH",
+        name: "ETH",
         bankGuid: "BANK_GUID",
         customerGuid: "CUSTOMER_GUID",
-        platformBalance: "200",
-        platformAvailable: "200",
+        platformBalance: "200000000",
+        platformAvailable: "2000000000",
+        state: .created
+    )
+
+    static let gas = AccountBankModel(
+        type: .gas,
+        guid: "GUID",
+        createdAt: Date(),
+        asset: "ETH",
+        name: "ETH",
+        bankGuid: "BANK_GUID",
+        customerGuid: "CUSTOMER_GUID",
+        platformBalance: "200000000",
+        platformAvailable: "2000000000",
         state: .created
     )
 
@@ -169,6 +182,7 @@ extension AccountBankModel {
         AccountBankModel.tradingETH,
         AccountBankModel.trading,
         AccountBankModel.fiat,
-        AccountBankModel.backstopped
+        AccountBankModel.fee,
+        AccountBankModel.gas
     ]
 }

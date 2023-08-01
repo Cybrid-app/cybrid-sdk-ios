@@ -6,7 +6,6 @@
 //
 
 import CybridApiBankSwift
-import Foundation
 import UIKit
 
 class AccountTransferModal: UIModal {

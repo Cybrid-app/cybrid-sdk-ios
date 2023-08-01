@@ -140,7 +140,7 @@ extension AccountsCell {
 
       let contentStackView = UIStackView(arrangedSubviews: [left, center, right])
       contentStackView.axis = .horizontal
-        contentStackView.spacing = UIValues.margin
+      contentStackView.spacing = UIValues.margin
       contentStackView.distribution = .fill
       contentStackView.alignment = .center
       addSubview(contentStackView)
