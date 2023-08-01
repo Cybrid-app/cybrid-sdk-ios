@@ -284,7 +284,7 @@ extension AccountTransfersCell {
         // -- Status chip
         let localizer = CybridLocalizer()
         switch transfer.state {
-        case .initiating, .storing, .pending:
+        case .storing, .pending:
 
             self.statusChip.isHidden = false
             self.statusChip.textColor = UIColor.black
