@@ -34,12 +34,13 @@ class PaymentModal: UIModal {
     private func setupViews() {
 
         // -- Title
+        let depositTitleString = localizer.localize(with: UIStrings.depositAddressTitle)
         let assetCode = self.accountBalance.asset?.code ?? ""
         let depositTitle = UILabel()
         depositTitle.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
         depositTitle.textAlignment = .left
         depositTitle.textColor = UIColor.black
-        depositTitle.text = "Deposit details for \(assetCode)"
+        depositTitle.text = "\(depositTitleString) \(assetCode)"
         containerView.addSubview(depositTitle)
         depositTitle.constraintSafeTop(containerView, margin: 10)
         depositTitle.constraintLeft(containerView, margin: 20)
@@ -47,11 +48,12 @@ class PaymentModal: UIModal {
         depositTitle.constraintHeight(23)
 
         // -- Amount Title
+        let amountTitleString = localizer.localize(with: UIStrings.depositAddressAmountTitle)
         let amountTitle = UILabel()
         amountTitle.font = UIFont.systemFont(ofSize: 13, weight: .light)
         amountTitle.textAlignment = .left
         amountTitle.textColor = UIColor(hex: "#818181")
-        amountTitle.text = "Amount of \(assetCode)"
+        amountTitle.text = "\(amountTitleString) \(assetCode)"
         containerView.addSubview(amountTitle)
         amountTitle.below(depositTitle, top: 25)
         amountTitle.constraintLeft(containerView, margin: 20)
@@ -74,18 +76,18 @@ class PaymentModal: UIModal {
         messageTitle.font = UIFont.systemFont(ofSize: 13, weight: .light)
         messageTitle.textAlignment = .left
         messageTitle.textColor = UIColor(hex: "#818181")
-        messageTitle.text = "Message for transaction"
+        messageTitle.text = localizer.localize(with: UIStrings.depositAddressMessageTitle)
         containerView.addSubview(messageTitle)
         messageTitle.below(amountInput, top: 25)
         messageTitle.constraintLeft(containerView, margin: 20)
         messageTitle.constraintRight(containerView, margin: 20)
         messageTitle.constraintHeight(14)
 
-        // -- Amount Input
+        // -- Message Input
         messageInput.font = UIFont.systemFont(ofSize: 15, weight: .medium)
         messageInput.textAlignment = .left
         messageInput.textColor = UIColor.black
-        messageInput.placeholder = "Optional message"
+        messageInput.placeholder = localizer.localize(with: UIStrings.depositAddressMessagePlaceholder)
         containerView.addSubview(messageInput)
         messageInput.below(messageTitle, top: 10)
         messageInput.constraintLeft(containerView, margin: 20)
@@ -94,7 +96,7 @@ class PaymentModal: UIModal {
 
         // -- Payment Button
         let generateNewQRButton = CYBButton(
-            title: "Generate",
+            title: localizer.localize(with: UIStrings.depositAddressButton),
             action: { [self] in
                 let amount = self.amountInput.text!
                 let message = self.messageInput.text!
@@ -122,5 +124,14 @@ extension PaymentModal {
 
         // -- Size
         static let modalSize: CGFloat = 285
+    }
+
+    enum UIStrings {
+
+        static let depositAddressTitle = "cybrid.deposit.address.modal.title"
+        static let depositAddressAmountTitle = "cybrid.deposit.address.modal.amount.title"
+        static let depositAddressMessageTitle = "cybrid.deposit.address.modal.message.title"
+        static let depositAddressMessagePlaceholder = "cybrid.deposit.address.modal.message.placeholder"
+        static let depositAddressButton = "cybrid.deposit.address.modal.button"
     }
 }

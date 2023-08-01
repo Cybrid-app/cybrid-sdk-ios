@@ -85,10 +85,27 @@
 "cybrid.accounts.transfers.detail.close.button" = "Fermer";
 
 // Deposit Address Component
-"cybrid.deposit.address.in.accounts.trades.create.button" = "Get Deposit Address";
-"cybrid.deposit.address.loading.label.verifying" = "Verifying your deposit addresses";
-"cybrid.deposit.address.loading.label.getting" = "Getting your deposit address";
-"cybrid.deposit.address.loading.label.creating" = "Creating deposit address";
+"cybrid.deposit.address.in.accounts.trades.create.button" = "Obtenir l'adresse de dépôt";
+"cybrid.deposit.address.loading.label.verifying" = "Vérification de vos adresses de dépôt";
+"cybrid.deposit.address.loading.label.getting" = "Obtenir votre adresse de dépôt";
+"cybrid.deposit.address.loading.label.creating" = "Création d'une adresse de dépôt";
+"cybrid.deposit.address.content.deposit.address.title" = "Dépôt ";
+"cybrid.deposit.address.content.qr.warning.1" = "Envoyer seulement ";
+"cybrid.deposit.address.content.qr.warning.2" = " à cette adresse de dépôt.";
+"cybrid.deposit.address.content.deposit.network.title" = "Réseau";
+"cybrid.deposit.address.content.deposit.address.address.title" = "Adresse de dépôt";
+"cybrid.deposit.address.content.deposit.tag.title" = "Étiqueter";
+"cybrid.deposit.address.content.deposit.amount.title" = "Montant";
+"cybrid.deposit.address.content.deposit.message.title" = "Message";
+"cybrid.deposit.address.content.warning" = "Attention : vous pouvez perdre toutes vos pièces";
+"cybrid.deposit.address.content.button" = "Générer le code de paiement";
+"cybrid.deposit.address.modal.title" = "Détails du dépôt pour";
+"cybrid.deposit.address.modal.amount.title" = "Quantité de";
+"cybrid.deposit.address.modal.message.title" = "Message pour la transaction";
+"cybrid.deposit.address.modal.message.placeholder" = "Message facultatif";
+"cybrid.deposit.address.modal.button" = "Générer";
+"cybrid.deposit.address.error" = "Quelque chose s'est produit, veuillez réessayer.";
+"cybrid.deposit.address.error.button" = "Retour";
 
 // Accounts: Deprecieted
 "cybrid.account.trade.modal.loading.title" = "Quote Pending";

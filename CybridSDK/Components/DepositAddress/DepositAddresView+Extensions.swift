@@ -81,12 +81,13 @@ extension DepositAddresView {
         let contentView = self.setupScrollView()
 
         // -- Title
+        let depositTitleString = localizer.localize(with: UIStrings.contentDepositAddressTitle)
         let assetCode = depositAddressViewModel?.accountBalance.asset?.code ?? ""
         let depositTitle = UILabel()
         depositTitle.font = UIFont.systemFont(ofSize: 22, weight: .semibold)
         depositTitle.textAlignment = .left
         depositTitle.textColor = UIColor.black
-        depositTitle.text = "Deposit \(assetCode)"
+        depositTitle.text = depositTitleString + assetCode
         contentView.addSubview(depositTitle)
         depositTitle.constraintSafeTop(contentView, margin: 0)
         depositTitle.constraintLeft(contentView, margin: 10)
@@ -111,11 +112,14 @@ extension DepositAddresView {
         }
 
         // -- QR Code Warning
+        let qrWarningLocalized1 = localizer.localize(with: UIStrings.contentDepositAddressQRWarningOne)
+        let qrWarningLocalized2 = localizer.localize(with: UIStrings.contentDepositAddressQRWarningTwo)
+        let qrWarningString = "\(qrWarningLocalized1)\(assetCode)\(qrWarningLocalized2)"
         let qrCodeWarning = UILabel()
         qrCodeWarning.font = UIFont.systemFont(ofSize: 12, weight: .light)
         qrCodeWarning.textAlignment = .center
         qrCodeWarning.textColor = UIColor(hex: "#818181")
-        qrCodeWarning.text = "Send only \(assetCode) to this deposit address."
+        qrCodeWarning.text = qrWarningString
         contentView.addSubview(qrCodeWarning)
         qrCodeWarning.below(qrCodeImageView, top: 5)
         qrCodeWarning.centerHorizontal(parent: contentView)
@@ -126,7 +130,7 @@ extension DepositAddresView {
         networkTitle.font = UIFont.systemFont(ofSize: 13, weight: .light)
         networkTitle.textAlignment = .left
         networkTitle.textColor = UIColor(hex: "#818181")
-        networkTitle.text = "Network"
+        networkTitle.text = localizer.localize(with: UIStrings.contentDepositAddressNetworkTitle)
         contentView.addSubview(networkTitle)
         networkTitle.below(qrCodeWarning, top: 35)
         networkTitle.constraintLeft(contentView, margin: 10)
@@ -159,11 +163,12 @@ extension DepositAddresView {
         depositAddressCopyIcon.addGestureRecognizer(gesture)
 
         // -- Address Title
+        let addressString = localizer.localize(with: UIStrings.contentDepositAddressAddressTitle)
         let addressTitle = UILabel()
         addressTitle.font = UIFont.systemFont(ofSize: 13, weight: .light)
         addressTitle.textAlignment = .left
         addressTitle.textColor = UIColor(hex: "#818181")
-        addressTitle.text = "\(assetCode) Deposit Address"
+        addressTitle.text = "\(assetCode) \(addressString)"
         contentView.addSubview(addressTitle)
         addressTitle.below(networkValue, top: 30)
         addressTitle.constraintLeft(contentView, margin: 10)
@@ -174,7 +179,7 @@ extension DepositAddresView {
                                 constant: -10)
         addressTitle.constraintHeight(14)
 
-        // -- Network value
+        // -- Address value
         let addressValue = UILabel()
         addressValue.font = UIFont.systemFont(ofSize: 15, weight: .medium)
         addressValue.textAlignment = .left
@@ -198,7 +203,7 @@ extension DepositAddresView {
         tagTitle.font = UIFont.systemFont(ofSize: 13, weight: .light)
         tagTitle.textAlignment = .left
         tagTitle.textColor = UIColor(hex: "#818181")
-        tagTitle.text = "Tag"
+        tagTitle.text = localizer.localize(with: UIStrings.contentDepositAddressTagTitle)
         contentView.addSubview(tagTitle)
         tagTitle.below(addressValue, top: 30)
         tagTitle.constraintLeft(contentView, margin: 10)
@@ -222,7 +227,7 @@ extension DepositAddresView {
             self.hideView(tagTitle)
             self.hideView(tagValue)
             tagTitle.below(addressValue, top: 0)
-            tagValue.below(tagTitle, top: 5)
+            tagValue.below(tagTitle, top: 0)
         }
 
         // -- Amount Title
@@ -230,9 +235,9 @@ extension DepositAddresView {
         amountTitle.font = UIFont.systemFont(ofSize: 13, weight: .light)
         amountTitle.textAlignment = .left
         amountTitle.textColor = UIColor(hex: "#818181")
-        amountTitle.text = "Amount"
+        amountTitle.text = localizer.localize(with: UIStrings.contentDepositAddressAmountTitle)
         contentView.addSubview(amountTitle)
-        amountTitle.below(tagValue, top: 30)
+        amountTitle.below(tagValue, top: 25)
         amountTitle.constraintLeft(contentView, margin: 10)
         amountTitle.constraintRight(contentView, margin: 10)
         amountTitle.constraintHeight(14)
@@ -246,7 +251,7 @@ extension DepositAddresView {
         amountValue.numberOfLines = 0
         amountValue.text = "\(amountString) \(assetCode)"
         contentView.addSubview(amountValue)
-        amountValue.below(amountTitle, top: 5)
+        amountValue.below(amountTitle, top: 3.5)
         amountValue.constraintLeft(contentView, margin: 10)
         amountValue.constraintRight(contentView, margin: 10)
         amountValue.constraintHeight(38)
@@ -263,14 +268,14 @@ extension DepositAddresView {
         messageTitle.font = UIFont.systemFont(ofSize: 13, weight: .light)
         messageTitle.textAlignment = .left
         messageTitle.textColor = UIColor(hex: "#818181")
-        messageTitle.text = "Message"
+        messageTitle.text = localizer.localize(with: UIStrings.contentDepositAddressMessageTitle)
         contentView.addSubview(messageTitle)
-        messageTitle.below(amountValue, top: 30)
+        messageTitle.below(amountValue, top: 20)
         messageTitle.constraintLeft(contentView, margin: 10)
         messageTitle.constraintRight(contentView, margin: 10)
         messageTitle.constraintHeight(14)
 
-        // -- Amount Value
+        // -- Message Value
         let messageString = depositAddressViewModel?.currentMessageForDeposit ?? ""
         let messageValue = UILabel()
         messageValue.font = UIFont.systemFont(ofSize: 15, weight: .medium)
@@ -279,7 +284,7 @@ extension DepositAddresView {
         messageValue.numberOfLines = 0
         messageValue.text = messageString
         contentView.addSubview(messageValue)
-        messageValue.below(messageTitle, top: 5)
+        messageValue.below(messageTitle, top: 3.5)
         messageValue.constraintLeft(contentView, margin: 10)
         messageValue.constraintRight(contentView, margin: 10)
         messageValue.constraintHeight(38)
@@ -326,11 +331,12 @@ extension DepositAddresView {
                                 constant: 5)
         warningLabel.constraintRight(warningContainer, margin: 15)
         warningLabel.constraintHeight(68)
+        warningContainer.isHidden = true
 
         // -- Payment Button
         if depositAddressViewModel!.currentAmountForDeposit.isEmpty {
             let createPaymentButton = CYBButton(
-                title: "Generate payment code",
+                title: localizer.localize(with: UIStrings.contentDepositAddressButton),
                 action: { [self] in
                     let paymentDetailsModal = PaymentModal(accountBalance: (self.depositAddressViewModel?.accountBalance)!) { amount, messsage in
                         self.depositAddressViewModel?.setValuesForDeposit(amount: amount, message: messsage)
@@ -482,7 +488,6 @@ extension DepositAddresView {
     }
 
     @objc func copyDepositAddressToClipboard(_ sender: UITapGestureRecognizer) {
-        
         let address = self.depositAddressViewModel?.currentDepositAddress?.address ?? ""
         UIPasteboard.general.string = address
     }
@@ -523,8 +528,15 @@ extension DepositAddresView {
         static let loadingLabelGetting = "cybrid.deposit.address.loading.label.getting"
         static let loadingLabelCreating = "cybrid.deposit.address.loading.label.creating"
         static let contentDepositAddressTitle = "cybrid.deposit.address.content.deposit.address.title"
+        static let contentDepositAddressQRWarningOne = "cybrid.deposit.address.content.qr.warning.1"
+        static let contentDepositAddressQRWarningTwo = "cybrid.deposit.address.content.qr.warning.2"
+        static let contentDepositAddressNetworkTitle = "cybrid.deposit.address.content.deposit.network.title"
+        static let contentDepositAddressAddressTitle = "cybrid.deposit.address.content.deposit.address.address.title"
         static let contentDepositAddressTagTitle = "cybrid.deposit.address.content.deposit.tag.title"
+        static let contentDepositAddressAmountTitle = "cybrid.deposit.address.content.deposit.amount.title"
+        static let contentDepositAddressMessageTitle = "cybrid.deposit.address.content.deposit.message.title"
         static let contentWarning = "cybrid.deposit.address.content.warning"
+        static let contentDepositAddressButton = "cybrid.deposit.address.content.button"
         static let error = "cybrid.deposit.address.error"
         static let errorButton = "cybrid.deposit.address.error.button"
     }
