@@ -104,7 +104,7 @@
 "cybrid.deposit.address.modal.message.title" = "Message pour la transaction";
 "cybrid.deposit.address.modal.message.placeholder" = "Message facultatif";
 "cybrid.deposit.address.modal.button" = "Générer";
-"cybrid.deposit.address.error" = "Quelque chose s'est produit, veuillez réessayer.";
+"cybrid.deposit.address.error" = "Une erreur s'est produite, veuillez réessayer.";
 "cybrid.deposit.address.error.button" = "Retour";
 
 // Accounts: Deprecieted
