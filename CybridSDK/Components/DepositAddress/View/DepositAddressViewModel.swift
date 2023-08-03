@@ -148,20 +148,36 @@ open class DepositAddressViewModel: NSObject {
                                             address: String,
                                             network: String = "",
                                             amount: String = "",
-                                            message: String = "") -> String {
+                                            message: String = "",
+                                            gas: String = "") -> String {
         var addressFormatted = ""
         switch assetCode {
         case "BTC":
             addressFormatted += "bitcoin:\(address)"
             if !amount.isEmpty {
-                addressFormatted += "&amount=\(amount)"
+                addressFormatted += "?amount=\(amount)"
             }
             if !message.isEmpty {
                 if let messageEncoded = message.addingPercentEncoding(
                     withAllowedCharacters: .urlQueryAllowed) {
-                    addressFormatted += "?message=\(messageEncoded)"
+                    addressFormatted += "&message=\(messageEncoded)"
                 }
             }
+        case "ETH":
+            addressFormatted += "ethereum:\(address)"
+            if !amount.isEmpty {
+                addressFormatted += "?value=\(amount)"
+            }
+            if !gas.isEmpty {
+                addressFormatted += "&gas=\(gas)"
+            }
+            if !message.isEmpty {
+                if let messageEncoded = message.addingPercentEncoding(
+                    withAllowedCharacters: .urlQueryAllowed) {
+                    addressFormatted += "&data=\(messageEncoded)"
+                }
+            }
+
         default:
             addressFormatted += address
         }

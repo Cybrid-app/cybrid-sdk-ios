@@ -14,13 +14,17 @@ class PaymentModal: UIModal {
     private var onConfirm: ((String, String) -> Void)?
 
     let amountInput = UITextField()
+    let gasInput = UITextField()
     let messageInput = UITextField()
 
     init(accountBalance: BalanceUIModel, onConfirm: ((String, String) -> Void)?) {
 
         self.accountBalance = accountBalance
         self.onConfirm = onConfirm
-        super.init(height: UIValues.modalSize)
+        let assetCode = self.accountBalance.asset?.code ?? ""
+        let modalSize = (assetCode == "BTC") ? UIValues.modalBTCSize : UIValues.modalETHSize
+
+        super.init(height: modalSize)
         setupViews()
     }
 
@@ -33,9 +37,10 @@ class PaymentModal: UIModal {
 
     private func setupViews() {
 
+        let assetCode = self.accountBalance.asset?.code ?? ""
+
         // -- Title
         let depositTitleString = localizer.localize(with: UIStrings.depositAddressTitle)
-        let assetCode = self.accountBalance.asset?.code ?? ""
         let depositTitle = UILabel()
         depositTitle.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
         depositTitle.textAlignment = .left
@@ -71,14 +76,41 @@ class PaymentModal: UIModal {
         amountInput.constraintRight(containerView, margin: 20)
         amountInput.constraintHeight(16)
 
+        // -- Gas Title & Input
+        if assetCode == "ETH" {
+
+            let gasTitle = UILabel()
+            gasTitle.font = UIFont.systemFont(ofSize: 13, weight: .light)
+            gasTitle.textAlignment = .left
+            gasTitle.textColor = UIColor(hex: "#818181")
+            gasTitle.text = "Gas Fee"
+            // gasTitle.text = localizer.localize(with: UIStrings.depositAddressMessageTitle)
+            containerView.addSubview(gasTitle)
+            gasTitle.below(amountInput, top: 25)
+            gasTitle.constraintLeft(containerView, margin: 20)
+            gasTitle.constraintRight(containerView, margin: 20)
+            gasTitle.constraintHeight(14)
+
+            gasInput.font = UIFont.systemFont(ofSize: 15, weight: .medium)
+            gasInput.textAlignment = .left
+            gasInput.textColor = UIColor.black
+            gasInput.placeholder = "0.0"
+            containerView.addSubview(gasInput)
+            gasInput.below(gasTitle, top: 10)
+            gasInput.constraintLeft(containerView, margin: 20)
+            gasInput.constraintRight(containerView, margin: 20)
+            gasInput.constraintHeight(16)
+        }
+
         // -- Message Title
+        let messageTitleTopView = (assetCode == "ETH") ? gasInput : amountInput
         let messageTitle = UILabel()
         messageTitle.font = UIFont.systemFont(ofSize: 13, weight: .light)
         messageTitle.textAlignment = .left
         messageTitle.textColor = UIColor(hex: "#818181")
         messageTitle.text = localizer.localize(with: UIStrings.depositAddressMessageTitle)
         containerView.addSubview(messageTitle)
-        messageTitle.below(amountInput, top: 25)
+        messageTitle.below(messageTitleTopView, top: 25)
         messageTitle.constraintLeft(containerView, margin: 20)
         messageTitle.constraintRight(containerView, margin: 20)
         messageTitle.constraintHeight(14)
@@ -123,7 +155,8 @@ extension PaymentModal {
     enum UIValues {
 
         // -- Size
-        static let modalSize: CGFloat = 285
+        static let modalBTCSize: CGFloat = 285
+        static let modalETHSize: CGFloat = 350
     }
 
     enum UIStrings {

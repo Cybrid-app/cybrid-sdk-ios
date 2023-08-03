@@ -275,8 +275,27 @@ class DepositAddressViewModelTest: XCTestCase {
 
         // -- Then
         XCTAssertEqual(btcOne, "bitcoin:12345")
-        XCTAssertEqual(btcTwo, "bitcoin:12345&amount=2")
-        XCTAssertEqual(btcThree, "bitcoin:12345&amount=2?message=Hello%20world")
+        XCTAssertEqual(btcTwo, "bitcoin:12345?amount=2")
+        XCTAssertEqual(btcThree, "bitcoin:12345?amount=2&message=Hello%20world")
+    }
+
+    func test_getStringAddressForQRCode_ETH() {
+
+        // -- Given
+        let balance = self.createBalance()
+        let viewModel = self.createViewModel(balance: balance)
+
+        // -- When
+        let ethOne = viewModel.getStringAddressForQRCode(assetCode: "ETH", address: "12345")
+        let ethTwo = viewModel.getStringAddressForQRCode(assetCode: "ETH", address: "12345", amount: "2")
+        let ethThree = viewModel.getStringAddressForQRCode(assetCode: "ETH", address: "12345", amount: "2", gas: "1")
+        let ethFour = viewModel.getStringAddressForQRCode(assetCode: "ETH", address: "12345", amount: "2", message: "Hello world", gas: "1")
+
+        // -- Then
+        XCTAssertEqual(ethOne, "ethereum:12345")
+        XCTAssertEqual(ethTwo, "ethereum:12345?value=2")
+        XCTAssertEqual(ethThree, "ethereum:12345?value=2&gas=1")
+        XCTAssertEqual(ethFour, "ethereum:12345?value=2&gas=1&data=Hello%20world")
     }
 
     func test_getStringAddressForQRCode_Default() {
