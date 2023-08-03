@@ -83,8 +83,7 @@ class PaymentModal: UIModal {
             gasTitle.font = UIFont.systemFont(ofSize: 13, weight: .light)
             gasTitle.textAlignment = .left
             gasTitle.textColor = UIColor(hex: "#818181")
-            gasTitle.text = "Gas Fee"
-            // gasTitle.text = localizer.localize(with: UIStrings.depositAddressMessageTitle)
+            gasTitle.text = localizer.localize(with: UIStrings.depositAddressGasTitle)
             containerView.addSubview(gasTitle)
             gasTitle.below(amountInput, top: 25)
             gasTitle.constraintLeft(containerView, margin: 20)
@@ -163,6 +162,7 @@ extension PaymentModal {
 
         static let depositAddressTitle = "cybrid.deposit.address.modal.title"
         static let depositAddressAmountTitle = "cybrid.deposit.address.modal.amount.title"
+        static let depositAddressGasTitle = "cybrid.deposit.address.modal.gas.title"
         static let depositAddressMessageTitle = "cybrid.deposit.address.modal.message.title"
         static let depositAddressMessagePlaceholder = "cybrid.deposit.address.modal.message.placeholder"
         static let depositAddressButton = "cybrid.deposit.address.modal.button"
