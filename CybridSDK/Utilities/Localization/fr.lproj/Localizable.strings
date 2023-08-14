@@ -144,6 +144,11 @@
 "cybrid.bank.accounts.detail.confirm.cancel.button" = "Annuler";
 "cybrid.bank.accounts.detail.confirm.confirm.button" = "Confirmer";
 
+"cybrid.bank.accounts.auth.title" = "Autorisation de compte bancaire";
+"cybrid.bank.accounts.auth.warning" = "Pour continuer à connecter un compte bancaire, vous devez accepter l'autorisation de compte suivante.";
+"cybrid.bank.accounts.auth.message" = "J'autorise par la présente Cybrid Inc. (la \"Plateforme\") à initier des débits électroniques uniques, sur tous les comptes que j'ai connectés à la Plateforme, lorsque je demande de le faire via la Plateforme. \n\nJe comprends que mon autorisation restera en vigueur jusqu'à ce que je supprime mon compte autorisé de la Plateforme. \n\nPour continuer, veuillez cliquer sur le bouton d'autorisation pour continuer.";
+"cybrid.bank.accounts.auth.button" = "Autoriser";
+
 // -- Transfer Component
 "cybrid.transfer.loading.text" = "Chargement";
 "cybrid.transfer.error.text" = "Erreur lors de la récupération des comptes, réessayez.";

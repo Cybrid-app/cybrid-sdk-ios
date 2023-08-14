@@ -28,6 +28,7 @@ ignore:
   - "CybridSDK/Framework Extensions/Model/*"
   - "CybridSDK/Framework Extensions/UIView/*"
   - "CybridSDK/Utilities/ImageUtils.swift"
+  - "CybridSDK/Utilities/ViewUtils.swift"
   - "CybridSDK/Utilities/ReusableViews/*"
   - "CybridSDK/Utilities/ReusableViews/**/*"
   - "CybridSDK/Utilities/Formatters/BigDecimalValidator"

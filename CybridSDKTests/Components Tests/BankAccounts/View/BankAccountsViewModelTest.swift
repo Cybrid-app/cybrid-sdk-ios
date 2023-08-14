@@ -262,7 +262,18 @@ class BankAccountsViewModelTest: XCTestCase {
         viewModel.checkExternalBankAccountState(externalBankAccount: ExternalBankAccountBankModel.mockCompleted())
         XCTAssertNil(viewModel.externalBankAccountJob)
         XCTAssertEqual(viewModel.uiState.value, .DONE)
+    }
 
+    func test_openBankAuthorization() {
+
+        // -- Given
+        let viewModel = createViewModel()
+
+        // -- When
+        viewModel.openBankAuthorization()
+
+        // -- Then
+        XCTAssertEqual(viewModel.uiState.value, .AUTH)
     }
 
     // MARK: TableView Delegation Test

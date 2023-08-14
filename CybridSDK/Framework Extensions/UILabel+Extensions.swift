@@ -80,6 +80,11 @@ extension UILabel {
       self.text = text
     }
 
+    func setParagraphText(_ text: String, _ paragraphStyle: NSMutableParagraphStyle) {
+
+        self.attributedText = NSMutableAttributedString(string: text, attributes: [NSAttributedString.Key.paragraphStyle: paragraphStyle])
+    }
+
     static func makeBasic(font: UIFont, color: UIColor, aligment: NSTextAlignment) -> UILabel {
 
       let label = UILabel()
