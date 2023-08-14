@@ -97,8 +97,7 @@ extension BankAccountsViewController {
                 self.bankAccountsView_Loading()
 
             case .CONTENT:
-                self.bankAccountsView_Required()
-                //self.bankAccountsView_Content()
+                self.bankAccountsView_Content()
 
             case .REQUIRED:
                 self.bankAccountsView_Required()
