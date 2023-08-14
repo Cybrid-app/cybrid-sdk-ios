@@ -11,7 +11,7 @@ import LinkKit
 
 public final class BankAccountsViewController: UIViewController {
 
-    public enum BankAccountsViewState { case LOADING, CONTENT, REQUIRED, DONE, ERROR }
+    public enum BankAccountsViewState { case LOADING, CONTENT, REQUIRED, DONE, ERROR, AUTH }
     public enum BankAccountsModalViewState { case CONTENT, CONFIRM }
 
     internal var bankAccountsViewModel: BankAccountsViewModel!
@@ -107,6 +107,9 @@ extension BankAccountsViewController {
 
             case .ERROR:
                 self.bankAccountsView_Error()
+
+            case.AUTH:
+                self.bankAccountsView_Authorization()
             }
         }
     }

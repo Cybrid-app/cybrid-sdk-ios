@@ -245,6 +245,10 @@ class BankAccountsViewModel: NSObject {
             }
         }
     }
+
+    func openBankAuthorization() {
+        self.uiState.value = .AUTH
+    }
 }
 
 // MARK: - AccountsViewProvider

@@ -20,7 +20,7 @@ jobs:
   pod-spec-lint:
     description: Runs podspec lint
     macos:
-      xcode: "13.3.1"
+      xcode: "14.0.1"
     steps:
       - checkout
       - run:

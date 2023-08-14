@@ -25,13 +25,15 @@ final class CustomersAPIMock: CustomersAPI {
         return createCustomerWithRequestBuilder(postCustomerBankModel: postCustomerBankModel).requestTask
     }
 
+    // swiftlint:disable discouraged_optional_boolean
     override class func getCustomer(customerGuid: String,
+                                    includePii: Bool? = nil,
                                     apiResponseQueue: DispatchQueue = CybridApiBankSwiftAPI.apiResponseQueue,
                                     completion: @escaping ((Result<CustomerBankModel, ErrorResponse>) -> Void)) -> RequestTask {
-
         fetchCustomerCompletion = completion
         return getCustomerWithRequestBuilder(customerGuid: customerGuid).requestTask
     }
+    // swiftlint:enable discouraged_optional_boolean
 
     class func didCreateCustomerSuccessfully() {
 

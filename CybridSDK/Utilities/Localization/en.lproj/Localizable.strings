@@ -156,6 +156,11 @@
 "cybrid.bank.accounts.detail.confirm.cancel.button" = "Cancel";
 "cybrid.bank.accounts.detail.confirm.confirm.button" = "Confirm";
 
+"cybrid.bank.accounts.auth.title" = "Bank Account Authorization";
+"cybrid.bank.accounts.auth.warning" = "To continue connecting a bank account, you must agree to the following account authorization.";
+"cybrid.bank.accounts.auth.message" = "I hereby authorize Cybrid Inc. (the \“Platform\”) to initiate single electronic debits, to any accounts I have connected to the Platform, when I instruct to do so through the Platform. \n\nI understand that my authorization will remain in effect until I remove my authorized account from the Platform. \n\nTo continue, please click the authorize button to proceed.";
+"cybrid.bank.accounts.auth.button" = "Authorize";
+
 // -- Transfer Component
 "cybrid.transfer.loading.text" = "Loading";
 "cybrid.transfer.warning.text" = "You need one account to transfer founds.";

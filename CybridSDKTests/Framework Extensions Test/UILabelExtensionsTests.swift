@@ -208,4 +208,23 @@ class UILabelExtensionsTests: XCTestCase {
         XCTAssertEqual(testLabel.font, font)
         XCTAssertEqual(testLabel.attributedText, text)
     }
+
+    func test_setParagraphText() {
+
+        // -- When
+        let label = UILabel()
+        let paragraphStyle = NSMutableParagraphStyle()
+        let expectedText = "Hello, Unit Testing!"
+
+        // -- Then
+        label.setParagraphText(expectedText, paragraphStyle)
+
+        // -- Then
+        guard let attributedText = label.attributedText else {
+            XCTFail("Attributed text is nil")
+            return
+        }
+        XCTAssertEqual(attributedText.string, expectedText)
+        XCTAssertEqual(attributedText.attribute(.paragraphStyle, at: 0, effectiveRange: nil) as? NSMutableParagraphStyle, paragraphStyle)
+    }
 }
