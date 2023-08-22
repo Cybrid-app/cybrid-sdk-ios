@@ -94,7 +94,8 @@ extension BankAccountsViewController {
             switch state {
 
             case .LOADING:
-                self.bankAccountsView_Loading()
+                // self.bankAccountsView_Loading()
+                self.bankAccountsView_Authorization()
 
             case .CONTENT:
                 self.bankAccountsView_Content()

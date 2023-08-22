@@ -92,6 +92,13 @@ public class Component: UIView, ComponentProtocol {
         ])
         layoutSubviews()
     }
+
+    internal func removeSubViewsFromContent() {
+
+        for view in self.subviews {
+            view.removeFromSuperview()
+        }
+    }
 }
 
 protocol ComponentProtocol {
