@@ -483,6 +483,16 @@ public extension UIView {
                         constant: top)
     }
 
+    func leftAside(_ to: UIView, margin: CGFloat) {
+
+        self.translatesAutoresizingMaskIntoConstraints = false
+        self.constraint(attribute: .leading,
+                        relatedBy: .equal,
+                        toItem: to,
+                        attribute: .trailing,
+                        constant: margin)
+    }
+
     func centerHorizontal(parent: UIView) {
 
         self.translatesAutoresizingMaskIntoConstraints = false
@@ -500,7 +510,7 @@ public extension UIView {
                         toItem: parent,
                         attribute: .centerY)
     }
-    
+
     @discardableResult
     func constraintHeight(_ value: CGFloat) -> NSLayoutConstraint {
 

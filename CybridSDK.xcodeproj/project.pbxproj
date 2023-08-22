@@ -266,6 +266,8 @@
 		A23FC5F12A94951600129CE2 /* ExternalWalletRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23FC5F02A94951600129CE2 /* ExternalWalletRepository.swift */; };
 		A23FC5F32A94B17400129CE2 /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23FC5F22A94B17400129CE2 /* TextField.swift */; };
 		A23FC5F52A94B6C600129CE2 /* TextFieldRightIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23FC5F42A94B6C600129CE2 /* TextFieldRightIcon.swift */; };
+		A23FC5F82A95109D00129CE2 /* AssetPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23FC5F72A95109D00129CE2 /* AssetPicker.swift */; };
+		A23FC5FB2A951D1E00129CE2 /* AssetPickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23FC5FA2A951D1E00129CE2 /* AssetPickerCell.swift */; };
 		A24B35902A66567F00EF20C5 /* DepositAddresView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24B358F2A66567F00EF20C5 /* DepositAddresView+Extensions.swift */; };
 		A24B35932A66D05200EF20C5 /* DepositAddressViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24B35922A66D05200EF20C5 /* DepositAddressViewModel.swift */; };
 		A24B35952A66D0A700EF20C5 /* DepositAddressRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24B35942A66D0A700EF20C5 /* DepositAddressRepository.swift */; };
@@ -594,6 +596,8 @@
 		A23FC5F02A94951600129CE2 /* ExternalWalletRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExternalWalletRepository.swift; sourceTree = "<group>"; };
 		A23FC5F22A94B17400129CE2 /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
 		A23FC5F42A94B6C600129CE2 /* TextFieldRightIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldRightIcon.swift; sourceTree = "<group>"; };
+		A23FC5F72A95109D00129CE2 /* AssetPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetPicker.swift; sourceTree = "<group>"; };
+		A23FC5FA2A951D1E00129CE2 /* AssetPickerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetPickerCell.swift; sourceTree = "<group>"; };
 		A24B358F2A66567F00EF20C5 /* DepositAddresView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DepositAddresView+Extensions.swift"; sourceTree = "<group>"; };
 		A24B35922A66D05200EF20C5 /* DepositAddressViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepositAddressViewModel.swift; sourceTree = "<group>"; };
 		A24B35942A66D0A700EF20C5 /* DepositAddressRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepositAddressRepository.swift; sourceTree = "<group>"; };
@@ -1251,6 +1255,7 @@
 		0BD6610E286B76AA00F4DA6B /* ReusableViews */ = {
 			isa = PBXGroup;
 			children = (
+				A23FC5F62A95108A00129CE2 /* AssetPicker */,
 				0BBD0CD228AC0B54001DBC5F /* Modal */,
 				0B289A08289E3325001B3360 /* TextFields */,
 				0BD6610F286B76CF00F4DA6B /* URLImageView */,
@@ -1826,6 +1831,23 @@
 			path = ViewController;
 			sourceTree = "<group>";
 		};
+		A23FC5F62A95108A00129CE2 /* AssetPicker */ = {
+			isa = PBXGroup;
+			children = (
+				A23FC5F92A951D1300129CE2 /* Cell */,
+				A23FC5F72A95109D00129CE2 /* AssetPicker.swift */,
+			);
+			path = AssetPicker;
+			sourceTree = "<group>";
+		};
+		A23FC5F92A951D1300129CE2 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				A23FC5FA2A951D1E00129CE2 /* AssetPickerCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		A24B35912A66D03F00EF20C5 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -2300,6 +2322,7 @@
 				92A2FD8429AE837200146D1E /* AccountsViewController+Extensions.swift in Sources */,
 				92635470294CEC0400660E0B /* BankAccountsViewController+Extensions.swift in Sources */,
 				92663D0F293FD60800842E30 /* WorkflowRepository.swift in Sources */,
+				A23FC5F82A95109D00129CE2 /* AssetPicker.swift in Sources */,
 				9257E78D29B7B2E500846E12 /* AccountsFiatCell.swift in Sources */,
 				A29AA7C52A5DDBC700B6CC1A /* DepositAddresViewController.swift in Sources */,
 				9299104629D38853007E9832 /* AssetFormatter.swift in Sources */,
@@ -2419,6 +2442,7 @@
 				92A90A8729118C0C00CA0E08 /* CustomersRepository.swift in Sources */,
 				92C92C892911F2DA00B81719 /* Polling.swift in Sources */,
 				0B303CDF2862DD2C007BF7FF /* UIConstants.swift in Sources */,
+				A23FC5FB2A951D1E00129CE2 /* AssetPickerCell.swift in Sources */,
 				0B00E040287F81A500707F26 /* CybridAPIManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

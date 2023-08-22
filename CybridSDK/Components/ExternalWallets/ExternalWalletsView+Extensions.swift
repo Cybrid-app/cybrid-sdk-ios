@@ -59,14 +59,11 @@ extension ExternalWalletsView {
         assetTitle.constraintRight(self, margin: 10)
 
         // -- Asset picker
-        let assetPicker = UIView()
-        assetPicker.backgroundColor = UIColor(hex: "#F5F5F5")
-        assetPicker.layer.cornerRadius = 8
+        let assetPicker = AssetPicker(assets: Cybrid.assets)
         self.addSubview(assetPicker)
         assetPicker.below(assetTitle, top: 10)
         assetPicker.constraintLeft(self, margin: 10)
         assetPicker.constraintRight(self, margin: 10)
-        assetPicker.constraintHeight(52)
 
         // -- Name title
         let nameTitle = self.label(
