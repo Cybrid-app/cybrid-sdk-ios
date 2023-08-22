@@ -38,7 +38,12 @@ class RootViewController: UIViewController {
     let viewController = BankAccountsViewController()
     navigationController?.pushViewController(viewController, animated: true)
   }
-  
+
+  @IBAction func didTapExternalWalletsButton(_ sender: Any) {
+    let viewController = ExternalWalletsViewController()
+    navigationController?.pushViewController(viewController, animated: true)
+  }
+
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     navigationController?.setNavigationBarHidden(true, animated: animated)
