@@ -99,6 +99,39 @@ public class Component: UIView, ComponentProtocol {
             view.removeFromSuperview()
         }
     }
+
+    internal func createLoaderScreen() {
+
+        // -- Loading Label Container
+        let loadingLabelContainer = UIView()
+        self.addSubview(loadingLabelContainer)
+        loadingLabelContainer.centerVertical(parent: self)
+        loadingLabelContainer.constraintLeft(self, margin: 10)
+        loadingLabelContainer.constraintRight(self, margin: 10)
+        loadingLabelContainer.constraintHeight(100)
+
+        // -- Loading label
+        let loadingLabel = UILabel()
+        loadingLabel.font = UIFont.make(ofSize: 22)
+        loadingLabel.textColor = UIColor.init(hex: "#3A3A3C")
+        let paragraphStyle = getParagraphStyle(1.05)
+        paragraphStyle.alignment = .center
+        loadingLabel.setParagraphText("Loading your wallets", paragraphStyle)
+        loadingLabelContainer.addSubview(loadingLabel)
+        loadingLabel.constraintTop(loadingLabelContainer, margin: 0)
+        loadingLabel.constraintLeft(loadingLabelContainer, margin: 0)
+        loadingLabel.constraintRight(loadingLabelContainer, margin: 0)
+
+        // -- Spinner
+        let spinner = UIActivityIndicatorView(style: .medium)
+        spinner.color = UIColor.init(hex: "#007AFF")
+        spinner.startAnimating()
+        loadingLabelContainer.addSubview(spinner)
+        spinner.below(loadingLabel, top: 25)
+        spinner.centerHorizontal(parent: loadingLabelContainer)
+        spinner.setConstraintsSize(size: CGSize(width: 43, height: 43))
+        spinner.transform = CGAffineTransform(scaleX: 2.0, y: 2.0)
+    }
 }
 
 protocol ComponentProtocol {

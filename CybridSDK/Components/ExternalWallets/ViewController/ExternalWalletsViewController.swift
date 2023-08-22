@@ -36,7 +36,7 @@ public final class ExternalWalletsViewController: UIViewController {
                                            relatedBy: .equal,
                                            toItem: self.view,
                                            attribute: .topMargin,
-                                           constant: 10)
+                                           constant: 0)
         self.componentContainer.constraint(attribute: .leading,
                                            relatedBy: .equal,
                                            toItem: self.view,
@@ -51,14 +51,14 @@ public final class ExternalWalletsViewController: UIViewController {
                                            relatedBy: .equal,
                                            toItem: self.view,
                                            attribute: .bottomMargin,
-                                           constant: 10)
+                                           constant: 5)
 
         // -- ExternalWallets View Model
-        let externalWalletsViewModel = ExternalWalletsViewModel()
+        let externalWalletsViewModel = ExternalWalletsViewModel(logger: Cybrid.logger)
 
         // -- ExternalWallets View
         self.externalWalletsView = ExternalWalletsView()
         self.externalWalletsView.embed(in: self.componentContainer)
-        self.externalWalletsView.initComponent()
+        self.externalWalletsView.initComponent(externalWalletsViewModel: externalWalletsViewModel)
     }
 }

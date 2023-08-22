@@ -3,11 +3,11 @@
 <plist version="1.0">
 <dict>
 	<key>CybridClientId</key>
-	<string>PgDKI1v06EowGQjORz0wtE6Pvecvr73COHRt0MPBj90</string>
+	<string></string>
 	<key>CybridClientSecret</key>
-	<string>FnxbaFdU8UZyFgLRHr_y238T-hXIaQGhXsd0hXJkNsc</string>
+	<string></string>
 	<key>CybridCustomerGUID</key>
-	<string>16d6aa37d74951c65c4510460cfac71c</string>
+	<string></string>
 	<key>NSCameraUsageDescription</key>
 	<string>Camera permission to Identity Verification</string>
 	<key>NSPhotoLibraryUsageDescription</key>

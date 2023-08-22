@@ -12,11 +12,11 @@ public final class ExternalWalletsView: Component {
     public enum State { case LOADING, WALLETS, ERROR }
 
     internal var localizer: Localizer!
-    // internal var depositAddressViewModel: DepositAddressViewModel?
+    internal var externalWalletsViewModel: ExternalWalletsViewModel?
 
-    public func initComponent() {
+    public func initComponent(externalWalletsViewModel: ExternalWalletsViewModel) {
 
-        // self.depositAddressViewModel = depositAddressViewModel
+        self.externalWalletsViewModel = externalWalletsViewModel
         self.localizer = CybridLocalizer()
         self.setupView()
         // self.depositAddressViewModel?.fetchDepositAddresses()
@@ -31,20 +31,20 @@ public final class ExternalWalletsView: Component {
     private func manageCurrentStateUI() {
 
         // -- Await for UI State changes
-        /*self.depositAddressViewModel?.uiState.bind { state in
-            
+        self.externalWalletsViewModel?.uiState.bind { state in
+
             self.removeSubViewsFromContent()
             switch state {
-                
+
             case .LOADING:
-                self.depositAddressViewLoading()
-                
-            case .CONTENT:
-                self.depositAddressViewContent()
-                
+                self.externalWalletsView_Loading()
+
+            case .WALLETS:
+                self.externalWalletsView_Loading()
+
             case .ERROR:
-                self.depositAddressView_Error()
+                self.externalWalletsView_Loading()
             }
-        }*/
+        }
     }
 }
