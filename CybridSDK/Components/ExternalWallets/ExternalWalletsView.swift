@@ -9,7 +9,7 @@ import UIKit
 
 public final class ExternalWalletsView: Component {
 
-    public enum State { case LOADING, WALLETS, ERROR }
+    public enum State { case LOADING, WALLETS, WALLET, ERROR }
 
     internal var localizer: Localizer!
     internal var externalWalletsViewModel: ExternalWalletsViewModel?
@@ -19,7 +19,7 @@ public final class ExternalWalletsView: Component {
         self.externalWalletsViewModel = externalWalletsViewModel
         self.localizer = CybridLocalizer()
         self.setupView()
-        // self.depositAddressViewModel?.fetchDepositAddresses()
+        self.externalWalletsViewModel?.fetchExternalWallets()
     }
 
     override func setupView() {
@@ -40,7 +40,10 @@ public final class ExternalWalletsView: Component {
                 self.externalWalletsView_Loading()
 
             case .WALLETS:
-                self.externalWalletsView_Loading()
+                self.externalWalletsView_Wallets()
+
+            case .WALLET:
+                self.externalWalletsView_Wallet()
 
             case .ERROR:
                 self.externalWalletsView_Loading()

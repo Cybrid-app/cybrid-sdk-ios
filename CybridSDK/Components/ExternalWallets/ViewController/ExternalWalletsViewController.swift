@@ -54,7 +54,10 @@ public final class ExternalWalletsViewController: UIViewController {
                                            constant: 5)
 
         // -- ExternalWallets View Model
-        let externalWalletsViewModel = ExternalWalletsViewModel(logger: Cybrid.logger)
+        let externalWalletsViewModel = ExternalWalletsViewModel(
+            dataProvider: CybridSession.current,
+            logger: Cybrid.logger
+        )
 
         // -- ExternalWallets View
         self.externalWalletsView = ExternalWalletsView()

@@ -132,6 +132,54 @@ public class Component: UIView, ComponentProtocol {
         spinner.setConstraintsSize(size: CGSize(width: 43, height: 43))
         spinner.transform = CGAffineTransform(scaleX: 2.0, y: 2.0)
     }
+
+    internal func createEmptySection() -> UIView {
+
+        // -- Loading Label Container
+        let emptyContainer = UIView()
+        self.addSubview(emptyContainer)
+        emptyContainer.centerVertical(parent: self)
+        emptyContainer.constraintLeft(self, margin: 10)
+        emptyContainer.constraintRight(self, margin: 10)
+        emptyContainer.constraintHeight(105)
+
+        // -- Image
+        let imageEmpty = UIImageView(image: getImage("ic_empty", aClass: Self.self))
+        emptyContainer.addSubview(imageEmpty)
+        imageEmpty.constraintTop(emptyContainer, margin: 0)
+        imageEmpty.centerHorizontal(parent: emptyContainer)
+        imageEmpty.setConstraintsSize(size: CGSize(width: 60, height: 60))
+
+        // -- Loading label
+        let paragraphStyle = getParagraphStyle(1.05)
+        paragraphStyle.alignment = .center
+        let emptyLabel = UILabel()
+        emptyLabel.font = UIFont.make(ofSize: 20)
+        emptyLabel.textColor = UIColor.init(hex: "#3A3A3C")
+        emptyLabel.setParagraphText("No wallets have been added.", paragraphStyle)
+        emptyContainer.addSubview(emptyLabel)
+        emptyLabel.below(imageEmpty, top: 20)
+        emptyLabel.constraintLeft(emptyContainer, margin: 0)
+        emptyLabel.constraintRight(emptyContainer, margin: 0)
+
+        // -- Return
+        return emptyContainer
+    }
+
+    internal func label(font: UIFont,
+                        color: UIColor,
+                        text: String,
+                        lineHeight: CGFloat,
+                        aligment: NSTextAlignment = .center) -> UILabel {
+
+        let paragraphStyle = getParagraphStyle(lineHeight)
+        paragraphStyle.alignment = aligment
+        let label = UILabel()
+        label.font = font
+        label.textColor = color
+        label.setParagraphText(text, paragraphStyle)
+        return label
+    }
 }
 
 protocol ComponentProtocol {

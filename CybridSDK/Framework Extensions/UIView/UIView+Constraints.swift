@@ -500,15 +500,17 @@ public extension UIView {
                         toItem: parent,
                         attribute: .centerY)
     }
-
-    func constraintHeight(_ value: CGFloat) {
+    
+    @discardableResult
+    func constraintHeight(_ value: CGFloat) -> NSLayoutConstraint {
 
         self.translatesAutoresizingMaskIntoConstraints = false
-        self.constraint(attribute: .height,
-                        relatedBy: .equal,
-                        toItem: nil,
-                        attribute: .notAnAttribute,
-                        constant: value)
+        let heightConstraint = self.constraint(attribute: .height,
+                                               relatedBy: .equal,
+                                               toItem: nil,
+                                               attribute: .notAnAttribute,
+                                               constant: value)
+        return heightConstraint
     }
 
     func constraintWidth(_ value: CGFloat) {
