@@ -133,6 +133,7 @@ public class Component: UIView, ComponentProtocol {
         spinner.transform = CGAffineTransform(scaleX: 2.0, y: 2.0)
     }
 
+    @discardableResult
     internal func createEmptySection() -> UIView {
 
         // -- Loading Label Container

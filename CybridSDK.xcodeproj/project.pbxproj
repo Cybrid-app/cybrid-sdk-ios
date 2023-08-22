@@ -268,6 +268,7 @@
 		A23FC5F52A94B6C600129CE2 /* TextFieldRightIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23FC5F42A94B6C600129CE2 /* TextFieldRightIcon.swift */; };
 		A23FC5F82A95109D00129CE2 /* AssetPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23FC5F72A95109D00129CE2 /* AssetPicker.swift */; };
 		A23FC5FB2A951D1E00129CE2 /* AssetPickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23FC5FA2A951D1E00129CE2 /* AssetPickerCell.swift */; };
+		A23FC5FE2A952E6200129CE2 /* ExternalWalletCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23FC5FD2A952E6200129CE2 /* ExternalWalletCell.swift */; };
 		A24B35902A66567F00EF20C5 /* DepositAddresView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24B358F2A66567F00EF20C5 /* DepositAddresView+Extensions.swift */; };
 		A24B35932A66D05200EF20C5 /* DepositAddressViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24B35922A66D05200EF20C5 /* DepositAddressViewModel.swift */; };
 		A24B35952A66D0A700EF20C5 /* DepositAddressRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24B35942A66D0A700EF20C5 /* DepositAddressRepository.swift */; };
@@ -598,6 +599,7 @@
 		A23FC5F42A94B6C600129CE2 /* TextFieldRightIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldRightIcon.swift; sourceTree = "<group>"; };
 		A23FC5F72A95109D00129CE2 /* AssetPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetPicker.swift; sourceTree = "<group>"; };
 		A23FC5FA2A951D1E00129CE2 /* AssetPickerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetPickerCell.swift; sourceTree = "<group>"; };
+		A23FC5FD2A952E6200129CE2 /* ExternalWalletCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExternalWalletCell.swift; sourceTree = "<group>"; };
 		A24B358F2A66567F00EF20C5 /* DepositAddresView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DepositAddresView+Extensions.swift"; sourceTree = "<group>"; };
 		A24B35922A66D05200EF20C5 /* DepositAddressViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepositAddressViewModel.swift; sourceTree = "<group>"; };
 		A24B35942A66D0A700EF20C5 /* DepositAddressRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepositAddressRepository.swift; sourceTree = "<group>"; };
@@ -1848,6 +1850,14 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
+		A23FC5FC2A952E5100129CE2 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				A23FC5FD2A952E6200129CE2 /* ExternalWalletCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		A24B35912A66D03F00EF20C5 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -1867,6 +1877,7 @@
 		A24CB43F2A8BDD7E004FCC7A /* ExternalWallets */ = {
 			isa = PBXGroup;
 			children = (
+				A23FC5FC2A952E5100129CE2 /* Cell */,
 				A23FC5E72A94093C00129CE2 /* ViewController */,
 				A23FC5E62A94093200129CE2 /* View */,
 				A24CB4402A8BDDF3004FCC7A /* ExternalWalletsView.swift */,
@@ -2385,6 +2396,7 @@
 				0B303CE42862E5D9007BF7FF /* CybridConfig.swift in Sources */,
 				0BD660FD286B763E00F4DA6B /* ConcurrencyInterfaces.swift in Sources */,
 				0BD66109286B768C00F4DA6B /* ListPricesView.swift in Sources */,
+				A23FC5FE2A952E6200129CE2 /* ExternalWalletCell.swift in Sources */,
 				927233D128D243830080AAC4 /* UIModal.swift in Sources */,
 				0BD660FC286B763E00F4DA6B /* URLImageOperation.swift in Sources */,
 				A29AA7C72A5E1BC000B6CC1A /* Component.swift in Sources */,

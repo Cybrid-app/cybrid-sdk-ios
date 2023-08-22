@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CybridApiBankSwift
 
 extension ExternalWalletsView {
 
@@ -17,7 +18,7 @@ extension ExternalWalletsView {
 
         // -- Add button
         let addButton = CYBButton(title: "Add wallet") {
-            self.externalWalletsViewModel?.uiState.value = .WALLET
+            self.externalWalletsViewModel?.uiState.value = .CREATE
         }
         self.addSubview(addButton)
         addButton.constraintLeft(self, margin: 10)
@@ -27,12 +28,221 @@ extension ExternalWalletsView {
 
         // -- Check for empty state with empty externalWallets
         if self.externalWalletsViewModel!.externalWallets.isEmpty {
-            let emptySection = self.createEmptySection()
+            self.createEmptySection()
         } else {
+
+            // -- Title
+            let title = self.label(
+                font: UIFont.make(ofSize: 23, weight: .bold),
+                color: UIColor.init(hex: "#3A3A3C"),
+                text: "My wallets",
+                lineHeight: 1.15,
+                aligment: .left)
+            self.addSubview(title)
+            title.constraintTop(self, margin: 10)
+            title.constraintLeft(self, margin: 10)
+            title.constraintRight(self, margin: 10)
+
+            // -- Wallets table
+            let walletTable = UITableView()
+            walletTable.delegate = self
+            walletTable.dataSource = self
+            walletTable.register(ExternalWalletCell.self, forCellReuseIdentifier: ExternalWalletCell.reuseIdentifier)
+            self.addSubview(walletTable)
+            walletTable.below(title, top: 30)
+            walletTable.constraintLeft(self, margin: 0)
+            walletTable.constraintRight(self, margin: 0)
+            walletTable.above(addButton, bottom: 15)
         }
     }
 
     internal func externalWalletsView_Wallet() {
+
+        // --
+        let wallet = self.externalWalletsViewModel?.currentWallet
+        let asset = try? Cybrid.findAsset(code: (self.externalWalletsViewModel?.currentWallet?.asset)!)
+        let assetName = asset?.name ?? ""
+        let assetCode = asset?.code ?? ""
+
+        // -- Status chip
+        let statusChip = UILabel()
+        statusChip.layer.masksToBounds = true
+        statusChip.layer.cornerRadius = CGFloat(10)
+        statusChip.setContentHuggingPriority(.required, for: .horizontal)
+        statusChip.translatesAutoresizingMaskIntoConstraints = false
+        statusChip.font = UIFont.make(ofSize: 12)
+        statusChip.textAlignment = .center
+        self.addSubview(statusChip)
+        statusChip.constraintTop(self, margin: 15)
+        statusChip.constraintRight(self, margin: 10)
+        statusChip.setConstraintsSize(size: CGSize(width: 80, height: 24))
+        switch wallet?.state ?? .storing {
+        case .storing, .pending:
+
+            statusChip.isHidden = false
+            statusChip.textColor = UIColor.black
+            statusChip.backgroundColor = UIColor(hex: "#FCDA66")
+            statusChip.text = "Pending"
+            // self.statusChip.setLocalizedText(key: UIString.transferPending, localizer: localizer)
+
+        case .failed:
+
+            statusChip.isHidden = false
+            statusChip.textColor = UIColor.white
+            statusChip.backgroundColor = UIColor(hex: "#D45736")
+            statusChip.text = "Failed"
+            // self.statusChip.setLocalizedText(key: UIString.transferFailed, localizer: localizer)
+
+        case .completed:
+            statusChip.isHidden = false
+            statusChip.textColor = UIColor.white
+            statusChip.backgroundColor = UIColor(hex: "#4dae51")
+            statusChip.text = "Approved"
+
+        default:
+            statusChip.isHidden = true
+        }
+
+        // -- Title
+        let title = self.label(
+            font: UIFont.make(ofSize: 23, weight: .bold),
+            color: UIColor.init(hex: "#3A3A3C"),
+            text: "My \(assetCode) wallet",
+            lineHeight: 1.15,
+            aligment: .left)
+        self.addSubview(title)
+        title.constraintTop(self, margin: 10)
+        title.constraintLeft(self, margin: 10)
+        title.constraintRight(self, margin: 10)
+
+        // -- Asset
+        let assetTitle = self.label(
+            font: UIFont.make(ofSize: 14, weight: .light),
+            color: UIColor(hex: "#818181"),
+            text: "Asset",
+            lineHeight: 1.05,
+            aligment: .left)
+        self.addSubview(assetTitle)
+        assetTitle.below(title, top: 35)
+        assetTitle.constraintLeft(self, margin: 10)
+        assetTitle.constraintRight(self, margin: 10)
+
+        // -- Asset Container
+        let assetContainer = UIView()
+        assetContainer.backgroundColor = UIColor(hex: "#F5F5F5")
+        assetContainer.layer.cornerRadius = 8
+        self.addSubview(assetContainer)
+        assetContainer.below(assetTitle, top: 10)
+        assetContainer.constraintLeft(self, margin: 0)
+        assetContainer.constraintRight(self, margin: 0)
+        assetContainer.constraintHeight(52)
+
+        // -- Asset Icon
+        let iconUrl = Cybrid.getAssetURL(with: assetCode)
+        let icon = URLImageView(urlString: iconUrl)
+        assetContainer.addSubview(icon!)
+        icon?.constraintLeft(assetContainer, margin: 10)
+        icon?.centerVertical(parent: assetContainer)
+        icon?.setConstraintsSize(size: CGSize(width: 28, height: 28))
+
+        // -- Asset Name
+        let paragraphStyle = getParagraphStyle(1.15)
+        paragraphStyle.alignment = .left
+        let assetNameLabel = UILabel()
+        assetNameLabel.font = UIFont.make(ofSize: 17)
+        assetNameLabel.textColor = UIColor.black
+        assetNameLabel.setParagraphText(assetName.capitalized, paragraphStyle)
+        assetContainer.addSubview(assetNameLabel)
+        assetNameLabel.leftAside(icon!, margin: 15)
+        assetNameLabel.constraintRight(assetContainer, margin: 10)
+        assetNameLabel.centerVertical(parent: assetContainer)
+
+        // -- Name title
+        let nameTitle = self.label(
+            font: UIFont.make(ofSize: 14, weight: .regular),
+            color: UIColor(hex: "#818181"),
+            text: "Name",
+            lineHeight: 1.05,
+            aligment: .left)
+        self.addSubview(nameTitle)
+        nameTitle.below(assetContainer, top: 25)
+        nameTitle.constraintLeft(self, margin: 10)
+        nameTitle.rightAside(statusChip, margin: 10)
+
+        // -- Name value
+        let walletName = self.label(
+            font: UIFont.make(ofSize: 17),
+            color: UIColor.black,
+            text: wallet?.name ?? "",
+            lineHeight: 1.15,
+            aligment: .left)
+        self.addSubview(walletName)
+        walletName.below(nameTitle, top: 10)
+        walletName.constraintLeft(self, margin: 10)
+        walletName.constraintRight(self, margin: 10)
+
+        // -- Address title
+        let addressTitle = self.label(
+            font: UIFont.make(ofSize: 14, weight: .regular),
+            color: UIColor(hex: "#818181"),
+            text: "Address",
+            lineHeight: 1.05,
+            aligment: .left)
+        self.addSubview(addressTitle)
+        addressTitle.below(walletName, top: 25)
+        addressTitle.constraintLeft(self, margin: 10)
+        addressTitle.constraintRight(self, margin: 10)
+
+        // -- Address value
+        let addressValue = self.label(
+            font: UIFont.make(ofSize: 17),
+            color: UIColor.black,
+            text: wallet?.address ?? "",
+            lineHeight: 1.15,
+            aligment: .left)
+        addressValue.numberOfLines = 0
+        self.addSubview(addressValue)
+        addressValue.below(addressTitle, top: 10)
+        addressValue.constraintLeft(self, margin: 10)
+        addressValue.constraintRight(self, margin: 10)
+
+        // -- Tag title
+        let tagTitle = self.label(
+            font: UIFont.make(ofSize: 14, weight: .regular),
+            color: UIColor(hex: "#818181"),
+            text: "Tag",
+            lineHeight: 1.05,
+            aligment: .left)
+        self.addSubview(tagTitle)
+        tagTitle.below(addressValue, top: 25)
+        tagTitle.constraintLeft(self, margin: 10)
+        tagTitle.constraintRight(self, margin: 10)
+
+        // -- Tag value
+        let tagValue = self.label(
+            font: UIFont.make(ofSize: 17),
+            color: UIColor.black,
+            text: wallet?.tag ?? "",
+            lineHeight: 1.15,
+            aligment: .left)
+        self.addSubview(tagValue)
+        tagValue.below(tagTitle, top: 10)
+        tagValue.constraintLeft(self, margin: 10)
+        tagValue.constraintRight(self, margin: 10)
+
+        // -- Delete button
+        let deleteButton = CYBButton(title: "Delete") {
+            self.externalWalletsViewModel?.deleteExternalWallet()
+        }
+        deleteButton.backgroundColor = UIColor.red
+        self.addSubview(deleteButton)
+        deleteButton.below(tagValue, top: 30)
+        deleteButton.constraintLeft(self, margin: 10)
+        deleteButton.constraintRight(self, margin: 10)
+        deleteButton.constraintHeight(48)
+    }
+
+    internal func externalWalletsView_CreateWallet() {
 
         // -- Title
         let title = self.label(
@@ -182,12 +392,107 @@ extension ExternalWalletsView {
         // warningLabel.constraintHeight(68)
 
         // -- Save button
-        let saveButton = CYBButton(title: "Save") {}
+        let saveButton = CYBButton(title: "Save") {
+
+            // -- Sanity check
+            let asset = assetPicker.assetSelected?.code ?? ""
+            let name = nameInput.text ?? ""
+            let address = addressInput.text ?? ""
+            let tag = tagInput.text ?? ""
+            guard
+                let postExternalWalletBankModel = self.getPostExternalWallet(
+                    asset: asset,
+                    name: name,
+                    address: address,
+                    tag: tag)
+            else {
+                return
+            }
+
+            // -- Creating the wallet
+            self.externalWalletsViewModel?.createExternlaWallet(postExternalWalletBankModel: postExternalWalletBankModel)
+        }
         self.addSubview(saveButton)
         saveButton.below(warningContainer, top: 25)
         saveButton.constraintLeft(self, margin: 10)
         saveButton.constraintRight(self, margin: 10)
-        // saveButton.constraintBottom(self, margin: 15)
+
+        // -- Error
+        self.errorLabel = self.label(
+            font: UIFont.make(ofSize: 14),
+            color: UIColor.red,
+            text: "",
+            lineHeight: 1.05)
+        self.addSubview(errorLabel)
+        errorLabel.below(saveButton, top: 5)
+        errorLabel.constraintLeft(self, margin: 10)
+        errorLabel.constraintRight(self, margin: 10)
+        errorLabel.isHidden = true
+    }
+
+    internal func getPostExternalWallet(asset: String, name: String, address: String, tag: String) -> PostExternalWalletBankModel? {
+
+        if asset.isEmpty {
+
+            errorLabel.text = "Select an asset for the wallet"
+            errorLabel.isHidden = false
+            return nil
+        }
+
+        if name.isEmpty {
+
+            errorLabel.text = "Enter a wallet name"
+            errorLabel.isHidden = false
+            return nil
+        }
+
+        if address.isEmpty {
+
+            errorLabel.text = "Enter a wallet address"
+            errorLabel.isHidden = false
+            return nil
+        }
+
+        // --
+        let postExternalWalletBankModel = PostExternalWalletBankModel(
+            name: name,
+            asset: asset,
+            address: address,
+            tag: tag
+        )
+        return postExternalWalletBankModel
+    }
+}
+
+extension ExternalWalletsView: UITableViewDelegate, UITableViewDataSource {
+
+    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.externalWalletsViewModel?.externalWallets.count ?? 0
+    }
+
+    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+
+        let wallet = (self.externalWalletsViewModel?.externalWallets[indexPath.row])!
+        guard
+            let cell = tableView.dequeueReusableCell(
+                withIdentifier: ExternalWalletCell.reuseIdentifier,
+                for: indexPath) as? ExternalWalletCell
+        else {
+            return UITableViewCell()
+        }
+        cell.setData(wallet: wallet)
+        return cell
+    }
+
+    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+
+        let wallet = self.externalWalletsViewModel?.externalWallets[indexPath.row]
+        self.externalWalletsViewModel?.currentWallet = wallet
+        self.externalWalletsViewModel?.uiState.value = .WALLET
+    }
+
+    public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 52
     }
 }
 
@@ -213,21 +518,7 @@ extension ExternalWalletsView {
     }
 
     enum UIStrings {
-        
-        static let loadingLabelVerifying = "cybrid.deposit.address.loading.label.verifying"
-        static let loadingLabelGetting = "cybrid.deposit.address.loading.label.getting"
-        static let loadingLabelCreating = "cybrid.deposit.address.loading.label.creating"
-        static let contentDepositAddressTitle = "cybrid.deposit.address.content.deposit.address.title"
-        static let contentDepositAddressQRWarningOne = "cybrid.deposit.address.content.qr.warning.1"
-        static let contentDepositAddressQRWarningTwo = "cybrid.deposit.address.content.qr.warning.2"
-        static let contentDepositAddressNetworkTitle = "cybrid.deposit.address.content.deposit.network.title"
-        static let contentDepositAddressAddressTitle = "cybrid.deposit.address.content.deposit.address.address.title"
-        static let contentDepositAddressTagTitle = "cybrid.deposit.address.content.deposit.tag.title"
-        static let contentDepositAddressAmountTitle = "cybrid.deposit.address.content.deposit.amount.title"
-        static let contentDepositAddressMessageTitle = "cybrid.deposit.address.content.deposit.message.title"
+
         static let contentWarning = "cybrid.deposit.address.content.warning"
-        static let contentDepositAddressButton = "cybrid.deposit.address.content.button"
-        static let error = "cybrid.deposit.address.error"
-        static let errorButton = "cybrid.deposit.address.error.button"
     }
 }

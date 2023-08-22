@@ -9,10 +9,12 @@ import UIKit
 
 public final class ExternalWalletsView: Component {
 
-    public enum State { case LOADING, WALLETS, WALLET, ERROR }
+    public enum State { case LOADING, WALLETS, WALLET, CREATE, ERROR }
 
     internal var localizer: Localizer!
     internal var externalWalletsViewModel: ExternalWalletsViewModel?
+
+    internal var errorLabel = UILabel()
 
     public func initComponent(externalWalletsViewModel: ExternalWalletsViewModel) {
 
@@ -44,6 +46,9 @@ public final class ExternalWalletsView: Component {
 
             case .WALLET:
                 self.externalWalletsView_Wallet()
+
+            case .CREATE:
+                self.externalWalletsView_CreateWallet()
 
             case .ERROR:
                 self.externalWalletsView_Loading()
