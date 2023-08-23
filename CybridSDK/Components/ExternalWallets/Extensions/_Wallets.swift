@@ -23,7 +23,13 @@ extension ExternalWalletsView {
 
         // -- Check for empty state with empty externalWalletsActive
         if self.externalWalletsViewModel!.externalWalletsActive.isEmpty {
-            self.createEmptySection()
+
+            let emptySection = self.createEmptySection(text: "No wallets have been added.")
+            self.addSubview(emptySection)
+            emptySection.centerVertical(parent: self)
+            emptySection.constraintLeft(self, margin: 10)
+            emptySection.constraintRight(self, margin: 10)
+
         } else {
 
             // -- Title
@@ -39,15 +45,16 @@ extension ExternalWalletsView {
             title.constraintRight(self, margin: 10)
 
             // -- Wallets table
-            let walletTable = UITableView()
-            walletTable.delegate = self
-            walletTable.dataSource = self
-            walletTable.register(ExternalWalletCell.self, forCellReuseIdentifier: ExternalWalletCell.reuseIdentifier)
-            self.addSubview(walletTable)
-            walletTable.below(title, top: 30)
-            walletTable.constraintLeft(self, margin: 0)
-            walletTable.constraintRight(self, margin: 0)
-            walletTable.above(addButton, bottom: 15)
+            let walletsTable = UITableView()
+            walletsTable.delegate = self
+            walletsTable.dataSource = self
+            walletsTable.register(ExternalWalletCell.self, forCellReuseIdentifier: ExternalWalletCell.reuseIdentifier)
+            walletsTable.accessibilityIdentifier = "walletsTable"
+            self.addSubview(walletsTable)
+            walletsTable.below(title, top: 30)
+            walletsTable.constraintLeft(self, margin: 0)
+            walletsTable.constraintRight(self, margin: 0)
+            walletsTable.above(addButton, bottom: 15)
         }
     }
 }

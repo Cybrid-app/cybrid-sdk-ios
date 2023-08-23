@@ -134,14 +134,10 @@ public class Component: UIView, ComponentProtocol {
     }
 
     @discardableResult
-    internal func createEmptySection() -> UIView {
+    internal func createEmptySection(text: String, font: UIFont = UIFont.make(ofSize: 20)) -> UIView {
 
         // -- Loading Label Container
         let emptyContainer = UIView()
-        self.addSubview(emptyContainer)
-        emptyContainer.centerVertical(parent: self)
-        emptyContainer.constraintLeft(self, margin: 10)
-        emptyContainer.constraintRight(self, margin: 10)
         emptyContainer.constraintHeight(105)
 
         // -- Image
@@ -155,9 +151,9 @@ public class Component: UIView, ComponentProtocol {
         let paragraphStyle = getParagraphStyle(1.05)
         paragraphStyle.alignment = .center
         let emptyLabel = UILabel()
-        emptyLabel.font = UIFont.make(ofSize: 20)
+        emptyLabel.font = font
         emptyLabel.textColor = UIColor.init(hex: "#3A3A3C")
-        emptyLabel.setParagraphText("No wallets have been added.", paragraphStyle)
+        emptyLabel.setParagraphText(text, paragraphStyle)
         emptyContainer.addSubview(emptyLabel)
         emptyLabel.below(imageEmpty, top: 20)
         emptyLabel.constraintLeft(emptyContainer, margin: 0)

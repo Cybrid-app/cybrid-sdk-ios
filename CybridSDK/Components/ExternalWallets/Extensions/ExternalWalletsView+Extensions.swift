@@ -17,7 +17,12 @@ extension ExternalWalletsView {
 extension ExternalWalletsView: UITableViewDelegate, UITableViewDataSource {
 
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.externalWalletsViewModel?.externalWalletsActive.count ?? 0
+
+        if tableView.accessibilityIdentifier == "walletsTable" {
+            return self.externalWalletsViewModel?.externalWalletsActive.count ?? 0
+        } else {
+            return 0
+        }
     }
 
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -37,8 +42,7 @@ extension ExternalWalletsView: UITableViewDelegate, UITableViewDataSource {
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
         let wallet = self.externalWalletsViewModel?.externalWalletsActive[indexPath.row]
-        self.externalWalletsViewModel?.currentWallet = wallet
-        self.externalWalletsViewModel?.uiState.value = .WALLET
+        self.externalWalletsViewModel?.goToWalletDetail(wallet!)
     }
 
     public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

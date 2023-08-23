@@ -10,6 +10,7 @@ import UIKit
 public final class ExternalWalletsView: Component {
 
     public enum State { case LOADING, WALLETS, WALLET, CREATE, ERROR }
+    public enum TransfersState { case LOADING, TRANSFERS, EMPTY }
 
     internal var localizer: Localizer!
     internal var externalWalletsViewModel: ExternalWalletsViewModel?

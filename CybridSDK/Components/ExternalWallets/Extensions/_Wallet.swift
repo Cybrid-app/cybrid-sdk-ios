@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CybridApiBankSwift
 
 extension ExternalWalletsView {
 
@@ -13,9 +14,14 @@ extension ExternalWalletsView {
 
         // --
         let wallet = self.externalWalletsViewModel?.currentWallet
+        let walletState = wallet?.state ?? .storing
+
         let asset = try? Cybrid.findAsset(code: (self.externalWalletsViewModel?.currentWallet?.asset)!)
         let assetName = asset?.name ?? ""
         let assetCode = asset?.code ?? ""
+
+        // -- Fetch transfers
+        self.externalWalletsViewModel?.fetchTransfers()
 
         // -- Status chip
         let statusChip = UILabel()
@@ -23,38 +29,13 @@ extension ExternalWalletsView {
         statusChip.layer.cornerRadius = CGFloat(10)
         statusChip.setContentHuggingPriority(.required, for: .horizontal)
         statusChip.translatesAutoresizingMaskIntoConstraints = false
-        statusChip.font = UIFont.make(ofSize: 12)
+        statusChip.font = UIFont.make(ofSize: 14)
         statusChip.textAlignment = .center
         self.addSubview(statusChip)
         statusChip.constraintTop(self, margin: 15)
         statusChip.constraintRight(self, margin: 10)
-        statusChip.setConstraintsSize(size: CGSize(width: 80, height: 24))
-        switch wallet?.state ?? .storing {
-        case .storing, .pending:
-
-            statusChip.isHidden = false
-            statusChip.textColor = UIColor.black
-            statusChip.backgroundColor = UIColor(hex: "#FCDA66")
-            statusChip.text = "Pending"
-            // self.statusChip.setLocalizedText(key: UIString.transferPending, localizer: localizer)
-
-        case .failed:
-
-            statusChip.isHidden = false
-            statusChip.textColor = UIColor.white
-            statusChip.backgroundColor = UIColor(hex: "#D45736")
-            statusChip.text = "Failed"
-            // self.statusChip.setLocalizedText(key: UIString.transferFailed, localizer: localizer)
-
-        case .completed:
-            statusChip.isHidden = false
-            statusChip.textColor = UIColor.white
-            statusChip.backgroundColor = UIColor(hex: "#4dae51")
-            statusChip.text = "Approved"
-
-        default:
-            statusChip.isHidden = true
-        }
+        statusChip.setConstraintsSize(size: CGSize(width: 90, height: 26))
+        self.externalWalletsView_Wallet_statusChip(statusChip, wallet: wallet)
 
         // -- Title
         let title = self.label(
@@ -183,15 +164,130 @@ extension ExternalWalletsView {
         tagValue.constraintLeft(self, margin: 10)
         tagValue.constraintRight(self, margin: 10)
 
+        // -- Recent transfers title
+        let recentTransfersTitle = self.label(
+            font: UIFont.make(ofSize: 14, weight: .regular),
+            color: UIColor(hex: "#818181"),
+            text: "Recent transfers",
+            lineHeight: 1.05,
+            aligment: .left)
+        self.addSubview(recentTransfersTitle)
+        recentTransfersTitle.below(tagValue, top: 25)
+        recentTransfersTitle.constraintLeft(self, margin: 10)
+        recentTransfersTitle.constraintRight(self, margin: 10)
+
+        // -- Transfers views
+        let container = UIView()
+        self.addSubview(container)
+        let containerHeight = container.constraintHeight(50)
+        container.below(recentTransfersTitle, top: 20)
+        container.constraintLeft(self, margin: 10)
+        container.constraintRight(self, margin: 10)
+        self.externalWalletsView_Wallet_transfers(container: container, height: containerHeight)
+
         // -- Delete button
         let deleteButton = CYBButton(title: "Delete") {
             self.externalWalletsViewModel?.deleteExternalWallet()
         }
         deleteButton.backgroundColor = UIColor.red
         self.addSubview(deleteButton)
-        deleteButton.below(tagValue, top: 30)
+        deleteButton.below(container, top: 30)
         deleteButton.constraintLeft(self, margin: 10)
         deleteButton.constraintRight(self, margin: 10)
         deleteButton.constraintHeight(48)
+        deleteButton.isHidden = true
+
+        // -- Check status for show delete button
+        if walletState == .completed || walletState == .failed {
+            deleteButton.isHidden = false
+        }
+    }
+
+    internal func externalWalletsView_Wallet_statusChip(_ statusChip: UILabel, wallet: ExternalWalletBankModel?) {
+
+        switch wallet?.state ?? .storing {
+        case .storing, .pending:
+
+            statusChip.isHidden = false
+            statusChip.textColor = UIColor.black
+            statusChip.backgroundColor = UIColor(hex: "#FCDA66")
+            statusChip.text = "Pending"
+            // self.statusChip.setLocalizedText(key: UIString.transferPending, localizer: localizer)
+
+        case .failed:
+
+            statusChip.isHidden = false
+            statusChip.textColor = UIColor.white
+            statusChip.backgroundColor = UIColor(hex: "#D45736")
+            statusChip.text = "Failed"
+            // self.statusChip.setLocalizedText(key: UIString.transferFailed, localizer: localizer)
+
+        case .completed:
+            statusChip.isHidden = false
+            statusChip.textColor = UIColor.white
+            statusChip.backgroundColor = UIColor(hex: "#4dae51")
+            statusChip.text = "Approved"
+
+        default:
+            statusChip.isHidden = true
+        }
+    }
+
+    internal func externalWalletsView_Wallet_transfers(container: UIView, height: NSLayoutConstraint) {
+
+        self.externalWalletsViewModel?.transfersUiState.bind { state in
+
+            // -- Remove prev views from container
+            for view in container.subviews {
+                view.removeFromSuperview()
+            }
+
+            // -- Bind transfers state
+            switch state {
+            case .LOADING:
+
+                // -- Contianer
+                height.constant = 50
+
+                // -- Spinner
+                let spinner = UIActivityIndicatorView(style: .medium)
+                spinner.color = UIColor.init(hex: "#007AFF")
+                spinner.startAnimating()
+                container.addSubview(spinner)
+                spinner.centerVertical(parent: container)
+                spinner.centerHorizontal(parent: container)
+                spinner.setConstraintsSize(size: CGSize(width: 43, height: 43))
+                spinner.transform = CGAffineTransform(scaleX: 2.0, y: 2.0)
+
+            case .TRANSFERS:
+
+                // -- Contianer
+                height.constant = 110
+
+                // -- Transfers table
+                let transfersTable = UITableView()
+                transfersTable.delegate = self
+                transfersTable.dataSource = self
+                transfersTable.accessibilityIdentifier = "wallets_transfersTable"
+                container.addSubview(transfersTable)
+                height.constant = transfersTable.contentSize.height
+                transfersTable.constraintTop(container, margin: 0)
+                transfersTable.constraintLeft(container, margin: 10)
+                transfersTable.constraintRight(container, margin: 10)
+                transfersTable.constraintHeight(transfersTable.contentSize.height)
+
+            case .EMPTY:
+
+                // -- Container
+                height.constant = 130
+
+                // -- Empty view
+                let emptyView = self.createEmptySection(text: "No transfers have been executed.", font: UIFont.make(ofSize: 16))
+                container.addSubview(emptyView)
+                emptyView.centerVertical(parent: container)
+                emptyView.constraintLeft(container, margin: 0)
+                emptyView.constraintRight(container, margin: 0)
+            }
+        }
     }
 }

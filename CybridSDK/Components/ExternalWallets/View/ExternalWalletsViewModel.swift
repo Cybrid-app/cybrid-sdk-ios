@@ -10,20 +10,22 @@ import CybridApiBankSwift
 open class ExternalWalletsViewModel: NSObject {
 
     // MARK: Private properties
-    private var dataProvider: ExternalWalletRepoProvider
+    private var dataProvider: ExternalWalletRepoProvider & TransfersRepoProvider
     private var logger: CybridLogger?
 
     // MARK: Internal properties
     internal var customerGuig = Cybrid.customerGuid
     internal var externalWallets: [ExternalWalletBankModel] = []
     internal var externalWalletsActive: [ExternalWalletBankModel] = []
+    internal var transfers: [TransferBankModel] = []
 
     // MARK: Public properties
     var uiState: Observable<ExternalWalletsView.State> = .init(.LOADING)
+    var transfersUiState: Observable<ExternalWalletsView.TransfersState> = .init(.LOADING)
     var currentWallet: ExternalWalletBankModel?
 
     // MARK: Constructor
-    init(dataProvider: ExternalWalletRepoProvider,
+    init(dataProvider: ExternalWalletRepoProvider & TransfersRepoProvider,
          logger: CybridLogger?) {
 
         self.dataProvider = dataProvider
@@ -77,5 +79,34 @@ open class ExternalWalletsViewModel: NSObject {
             }
         }
         self.currentWallet = nil
+    }
+
+    internal func goToWalletDetail(_ wallet: ExternalWalletBankModel) {
+
+        self.currentWallet = wallet
+        self.uiState.value = .WALLET
+        self.transfers = []
+    }
+
+    internal func fetchTransfers() {
+
+        self.transfersUiState.value = .LOADING
+        dataProvider.fetchTransfers(customerGuid: customerGuig) { [self] transfersResponse in
+            switch transfersResponse {
+            case .success(let list):
+                self.logger?.log(.component(.accounts(.accountsDataFetching)))
+                self.transfers = list.objects
+                self.transfers = self.transfers.filter { $0.externalBankAccountGuid == self.currentWallet?.guid }
+                if self.transfers.isEmpty {
+                    self.transfersUiState.value = .EMPTY
+                } else {
+                    self.transfersUiState.value = .TRANSFERS
+                }
+
+            case .failure:
+                self.logger?.log(.component(.accounts(.accountsDataError)))
+                self.transfersUiState.value = .EMPTY
+            }
+        }
     }
 }
