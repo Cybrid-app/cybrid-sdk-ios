@@ -1,0 +1,13 @@
+{
+    "guid": "stringstringstringstringstringst",
+    "name": "string",
+    "asset": "string",
+    "environment": "sandbox",
+    "bank_guid": "stringstringstringstringstringst",
+    "customer_guid": "stringstringstringstringstringst",
+    "address": "string",
+    "tag": "string",
+    "created_at": "2023-08-23T19:03:19.874Z",
+    "state": "storing",
+    "failure_code": "string"
+}

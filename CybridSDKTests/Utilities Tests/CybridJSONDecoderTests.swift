@@ -981,4 +981,108 @@ class CybridJSONDecoderTests: XCTestCase {
         let result = try? decoder.decode(DepositAddressListBankModel.self, from: depositAddressData!)
         XCTAssertNil(result)
     }
+
+    // MARK: ExternalWalletListBankModel & ExternalWalletBankModel
+    func test_ExternalWalletBankModel_Decoding() throws {
+
+        let externalWalletData = getJSONData(from: "createExternalWalletResponse")
+        XCTAssertNotNil(externalWalletData)
+        let decoder = CybridJSONDecoder()
+
+        let result = try? decoder.decode(ExternalWalletBankModel.self, from: externalWalletData!)
+        XCTAssertNotNil(result?.guid)
+        XCTAssertNotNil(result?.name)
+        XCTAssertNotNil(result?.asset)
+        XCTAssertNotNil(result?.environment)
+        XCTAssertNotNil(result?.bankGuid)
+        XCTAssertNotNil(result?.customerGuid)
+        XCTAssertNotNil(result?.address)
+        XCTAssertNotNil(result?.tag)
+        XCTAssertNotNil(result?.createdAt)
+        XCTAssertNotNil(result?.state)
+        XCTAssertNotNil(result?.failureCode)
+    }
+
+    func test_ExternalWalletBankModel_withInvalidJSON() throws {
+
+        let externalWalletData = getJSONData(from: "listAssetsResponse")
+        XCTAssertNotNil(externalWalletData)
+        let decoder = CybridJSONDecoder()
+
+        let result = try? decoder.decode(ExternalWalletBankModel
+            .self, from: externalWalletData!)
+        XCTAssertNil(result)
+    }
+
+    func test_ExternalWalletBankModel_withInvalidArrayOfJSON() throws {
+
+        let externalWalletData = getJSONData(from: "listPricesResponse")
+        XCTAssertNotNil(externalWalletData)
+        let decoder = CybridJSONDecoder()
+
+        let result = try? decoder.decode(ExternalWalletBankModel.self, from: externalWalletData!)
+        XCTAssertNil(result)
+    }
+
+    func test_ExternalWalletListBankModel_Decoding() throws {
+
+        let externalWalletListData = getJSONData(from: "listExternalWalletResponse")
+        XCTAssertNotNil(externalWalletListData)
+        let decoder = CybridJSONDecoder()
+
+        let result = try? decoder.decode(ExternalWalletListBankModel.self, from: externalWalletListData!)
+        XCTAssertNotNil(result?.total)
+        XCTAssertNotNil(result?.page)
+        XCTAssertNotNil(result?.perPage)
+        XCTAssertNotNil(result?.objects)
+        XCTAssertNotNil(result?.objects[0])
+        XCTAssertNotNil(result?.objects[0].guid)
+        XCTAssertNotNil(result?.objects[0].name)
+        XCTAssertNotNil(result?.objects[0].asset)
+        XCTAssertNotNil(result?.objects[0].environment)
+        XCTAssertNotNil(result?.objects[0].bankGuid)
+        XCTAssertNotNil(result?.objects[0].customerGuid)
+        XCTAssertNotNil(result?.objects[0].address)
+        XCTAssertNotNil(result?.objects[0].tag)
+        XCTAssertNotNil(result?.objects[0].createdAt)
+        XCTAssertNotNil(result?.objects[0].state)
+        XCTAssertNotNil(result?.objects[0].failureCode)
+    }
+
+    func test_ExternalWalletListBankModel_Decoding_Incomplete() throws {
+
+        let listExternalWalletData = getJSONData(from: "listExternalWalletResponseIncomplete")
+        XCTAssertNotNil(listExternalWalletData)
+
+        let decoder = CybridJSONDecoder()
+
+        let result = try? decoder.decode(ExternalWalletListBankModel.self, from: listExternalWalletData!)
+        XCTAssertNotNil(result?.total)
+        XCTAssertEqual(result?.total, 0)
+        XCTAssertNotNil(result?.page)
+        XCTAssertEqual(result?.page, 0)
+        XCTAssertNotNil(result?.perPage)
+        XCTAssertEqual(result?.perPage, 0)
+        XCTAssertNotNil(result?.objects)
+    }
+
+    func test_ExternalWalletListBankModel_withInvalidJSON() throws {
+
+        let listExternalWalletData = getJSONData(from: "listPricesResponse")
+        XCTAssertNotNil(listExternalWalletData)
+        let decoder = CybridJSONDecoder()
+
+        let result = try? decoder.decode(ExternalWalletListBankModel.self, from: listExternalWalletData!)
+        XCTAssertNil(result)
+    }
+
+    func test_ExternalWalletListBankModel_withInvalidArrayOfJSON() throws {
+
+        let listExternalWalletData = getJSONData(from: "listPricesResponse")
+        XCTAssertNotNil(listExternalWalletData)
+        let decoder = CybridJSONDecoder()
+
+        let result = try? decoder.decode(ExternalWalletListBankModel.self, from: listExternalWalletData!)
+        XCTAssertNil(result)
+    }
 }

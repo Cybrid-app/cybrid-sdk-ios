@@ -289,6 +289,9 @@
 		A29AA7C22A5DD85D00B6CC1A /* DepositAddressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29AA7C12A5DD85D00B6CC1A /* DepositAddressView.swift */; };
 		A29AA7C52A5DDBC700B6CC1A /* DepositAddresViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29AA7C42A5DDBC700B6CC1A /* DepositAddresViewController.swift */; };
 		A29AA7C72A5E1BC000B6CC1A /* Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29AA7C62A5E1BC000B6CC1A /* Component.swift */; };
+		A2A29EE32A968F690075C889 /* createExternalWalletResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = A2A29EE22A968F690075C889 /* createExternalWalletResponse.json */; };
+		A2A29EE52A9690620075C889 /* listExternalWalletResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = A2A29EE42A9690620075C889 /* listExternalWalletResponse.json */; };
+		A2A29EE72A9690C80075C889 /* listExternalWalletResponseIncomplete.json in Resources */ = {isa = PBXBuildFile; fileRef = A2A29EE62A9690C80075C889 /* listExternalWalletResponseIncomplete.json */; };
 		A2C2EACD2A7419CB0039C441 /* DepositAddressViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2C2EACC2A7419CB0039C441 /* DepositAddressViewModelTest.swift */; };
 		A2C2EACF2A741D020039C441 /* DepositAddressViewModelErrorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2C2EACE2A741D020039C441 /* DepositAddressViewModelErrorTest.swift */; };
 		A2E2059D2A71B23200A3C013 /* CybridConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E2059C2A71B23200A3C013 /* CybridConstants.swift */; };
@@ -623,6 +626,9 @@
 		A29AA7C12A5DD85D00B6CC1A /* DepositAddressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepositAddressView.swift; sourceTree = "<group>"; };
 		A29AA7C42A5DDBC700B6CC1A /* DepositAddresViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepositAddresViewController.swift; sourceTree = "<group>"; };
 		A29AA7C62A5E1BC000B6CC1A /* Component.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Component.swift; sourceTree = "<group>"; };
+		A2A29EE22A968F690075C889 /* createExternalWalletResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = createExternalWalletResponse.json; sourceTree = "<group>"; };
+		A2A29EE42A9690620075C889 /* listExternalWalletResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = listExternalWalletResponse.json; sourceTree = "<group>"; };
+		A2A29EE62A9690C80075C889 /* listExternalWalletResponseIncomplete.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = listExternalWalletResponseIncomplete.json; sourceTree = "<group>"; };
 		A2C2EACC2A7419CB0039C441 /* DepositAddressViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepositAddressViewModelTest.swift; sourceTree = "<group>"; };
 		A2C2EACE2A741D020039C441 /* DepositAddressViewModelErrorTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepositAddressViewModelErrorTest.swift; sourceTree = "<group>"; };
 		A2E2059C2A71B23200A3C013 /* CybridConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CybridConstants.swift; sourceTree = "<group>"; };
@@ -895,6 +901,9 @@
 				A28964012A739D1C00151A36 /* createDepositAddressResponse.json */,
 				A28964032A739E8200151A36 /* listDepositAddressResponse.json */,
 				A28964052A739F4E00151A36 /* listDepositAddressResponseIncomplete.json */,
+				A2A29EE22A968F690075C889 /* createExternalWalletResponse.json */,
+				A2A29EE42A9690620075C889 /* listExternalWalletResponse.json */,
+				A2A29EE62A9690C80075C889 /* listExternalWalletResponseIncomplete.json */,
 			);
 			path = JSON;
 			sourceTree = "<group>";
@@ -2121,6 +2130,7 @@
 				92B681A0291C0F4700FD6E99 /* listIdentityVerifications.json in Resources */,
 				92827DB429439BCC00231772 /* fetchWorkflowResponse.json in Resources */,
 				9205B8B628E3A52A00883279 /* listTradesResponseIncomplete.json in Resources */,
+				A2A29EE72A9690C80075C889 /* listExternalWalletResponseIncomplete.json in Resources */,
 				0BBD0CEA28B7E7EE001DBC5F /* createQuoteResponse.json in Resources */,
 				9299105529D6020C007E9832 /* createTransferResponse.json in Resources */,
 				92827DBE2943A37200231772 /* fetchWorkflow_Incomplete.json in Resources */,
@@ -2136,8 +2146,10 @@
 				92B68198291C0D8500FD6E99 /* createCustomerBankModel.json in Resources */,
 				92827DD529479E4200231772 /* createExternalBankAccountBankModelResponse_Incomplete.json in Resources */,
 				0B96601E285AF03700584692 /* TestAssets.xcassets in Resources */,
+				A2A29EE32A968F690075C889 /* createExternalWalletResponse.json in Resources */,
 				92E08021295B922200372460 /* externalBankAccountListBankModel_Response_Incomplete.json in Resources */,
 				92827DCB2947979C00231772 /* fetchBankResponse.json in Resources */,
+				A2A29EE52A9690620075C889 /* listExternalWalletResponse.json in Resources */,
 				A28964042A739E8200151A36 /* listDepositAddressResponse.json in Resources */,
 				92F5EC7328E24150009DC3F4 /* listTradesResponse.json in Resources */,
 				92827DD129479D7800231772 /* createExternalBankAccountBankModelResponse.json in Resources */,
