@@ -269,6 +269,9 @@
 		A23FC5F82A95109D00129CE2 /* AssetPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23FC5F72A95109D00129CE2 /* AssetPicker.swift */; };
 		A23FC5FB2A951D1E00129CE2 /* AssetPickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23FC5FA2A951D1E00129CE2 /* AssetPickerCell.swift */; };
 		A23FC5FE2A952E6200129CE2 /* ExternalWalletCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23FC5FD2A952E6200129CE2 /* ExternalWalletCell.swift */; };
+		A23FC6032A95895D00129CE2 /* _CreateWallet.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23FC6022A95895D00129CE2 /* _CreateWallet.swift */; };
+		A23FC6052A958A2000129CE2 /* _Wallets.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23FC6042A958A2000129CE2 /* _Wallets.swift */; };
+		A23FC6072A958A5900129CE2 /* _Wallet.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23FC6062A958A5900129CE2 /* _Wallet.swift */; };
 		A24B35902A66567F00EF20C5 /* DepositAddresView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24B358F2A66567F00EF20C5 /* DepositAddresView+Extensions.swift */; };
 		A24B35932A66D05200EF20C5 /* DepositAddressViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24B35922A66D05200EF20C5 /* DepositAddressViewModel.swift */; };
 		A24B35952A66D0A700EF20C5 /* DepositAddressRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24B35942A66D0A700EF20C5 /* DepositAddressRepository.swift */; };
@@ -600,6 +603,9 @@
 		A23FC5F72A95109D00129CE2 /* AssetPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetPicker.swift; sourceTree = "<group>"; };
 		A23FC5FA2A951D1E00129CE2 /* AssetPickerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetPickerCell.swift; sourceTree = "<group>"; };
 		A23FC5FD2A952E6200129CE2 /* ExternalWalletCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExternalWalletCell.swift; sourceTree = "<group>"; };
+		A23FC6022A95895D00129CE2 /* _CreateWallet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = _CreateWallet.swift; sourceTree = "<group>"; };
+		A23FC6042A958A2000129CE2 /* _Wallets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = _Wallets.swift; sourceTree = "<group>"; };
+		A23FC6062A958A5900129CE2 /* _Wallet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = _Wallet.swift; sourceTree = "<group>"; };
 		A24B358F2A66567F00EF20C5 /* DepositAddresView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DepositAddresView+Extensions.swift"; sourceTree = "<group>"; };
 		A24B35922A66D05200EF20C5 /* DepositAddressViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepositAddressViewModel.swift; sourceTree = "<group>"; };
 		A24B35942A66D0A700EF20C5 /* DepositAddressRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepositAddressRepository.swift; sourceTree = "<group>"; };
@@ -1858,6 +1864,17 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
+		A23FC5FF2A95847D00129CE2 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				A23FC5EC2A94588600129CE2 /* ExternalWalletsView+Extensions.swift */,
+				A23FC6042A958A2000129CE2 /* _Wallets.swift */,
+				A23FC6062A958A5900129CE2 /* _Wallet.swift */,
+				A23FC6022A95895D00129CE2 /* _CreateWallet.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		A24B35912A66D03F00EF20C5 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -1880,8 +1897,8 @@
 				A23FC5FC2A952E5100129CE2 /* Cell */,
 				A23FC5E72A94093C00129CE2 /* ViewController */,
 				A23FC5E62A94093200129CE2 /* View */,
+				A23FC5FF2A95847D00129CE2 /* Extensions */,
 				A24CB4402A8BDDF3004FCC7A /* ExternalWalletsView.swift */,
-				A23FC5EC2A94588600129CE2 /* ExternalWalletsView+Extensions.swift */,
 			);
 			path = ExternalWallets;
 			sourceTree = "<group>";
@@ -2344,6 +2361,7 @@
 				A21E047C2A86BB4D0046CCBA /* ViewUtils.swift in Sources */,
 				92663D09293FACB900842E30 /* IdentityVerificationWithDetailsBankModel+Extensions.swift in Sources */,
 				92663D0D293FCC9500842E30 /* BankAccountsViewModel.swift in Sources */,
+				A23FC6032A95895D00129CE2 /* _CreateWallet.swift in Sources */,
 				92827DA92943182B00231772 /* WorkflowWithDetailsBankModel+Extensions.swift in Sources */,
 				A24B35932A66D05200EF20C5 /* DepositAddressViewModel.swift in Sources */,
 				0BD6613A2872BC0B00F4DA6B /* CybridCurrencyFormatter.swift in Sources */,
@@ -2402,6 +2420,7 @@
 				A29AA7C72A5E1BC000B6CC1A /* Component.swift in Sources */,
 				0B00E024287CD72D00707F26 /* Environment.swift in Sources */,
 				0B078F1228497B070020B4F7 /* CybridSDK.docc in Sources */,
+				A23FC6072A958A5900129CE2 /* _Wallet.swift in Sources */,
 				9224F76B29DB9D6800712D3B /* AccountTransfersViewController.swift in Sources */,
 				0BD66125286D7C0400F4DA6B /* Localizer.swift in Sources */,
 				0BD66111286B76DC00F4DA6B /* URLImageView.swift in Sources */,
@@ -2419,6 +2438,7 @@
 				927233E328D2448F0080AAC4 /* AccountTradesViewModel.swift in Sources */,
 				929C087B29A5461E0075BA89 /* BankAccountDetailModal.swift in Sources */,
 				0BD6610A286B768C00F4DA6B /* ListPricesViewModel.swift in Sources */,
+				A23FC6052A958A2000129CE2 /* _Wallets.swift in Sources */,
 				9299104829D38C69007E9832 /* CDecimal.swift in Sources */,
 				92F12051299435140086EE18 /* AccountAssetUIModel.swift in Sources */,
 				92BAC4662A2E3F0B005CCD2A /* SDKConfig.swift in Sources */,

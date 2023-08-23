@@ -16,6 +16,7 @@ open class ExternalWalletsViewModel: NSObject {
     // MARK: Internal properties
     internal var customerGuig = Cybrid.customerGuid
     internal var externalWallets: [ExternalWalletBankModel] = []
+    internal var externalWalletsActive: [ExternalWalletBankModel] = []
 
     // MARK: Public properties
     var uiState: Observable<ExternalWalletsView.State> = .init(.LOADING)
@@ -33,20 +34,21 @@ open class ExternalWalletsViewModel: NSObject {
     internal func fetchExternalWallets() {
 
         self.uiState.value = .LOADING
-        dataProvider.fetchListExternalWallet { [weak self] externalWalletsListResponse in
+        dataProvider.fetchListExternalWallet { [self] externalWalletsListResponse in
             switch externalWalletsListResponse {
             case.success(let list):
-                self?.logger?.log(.component(.accounts(.accountsDataFetching)))
-                self?.externalWallets = list.objects
-                self?.uiState.value = .WALLETS
+                self.logger?.log(.component(.accounts(.accountsDataFetching)))
+                self.externalWallets = list.objects
+                self.externalWalletsActive = self.externalWallets.filter { $0.state != .deleting && $0.state != .deleted }
+                self.uiState.value = .WALLETS
             case .failure:
-                self?.logger?.log(.component(.accounts(.accountsDataError)))
-                self?.uiState.value = .ERROR
+                self.logger?.log(.component(.accounts(.accountsDataError)))
+                self.uiState.value = .ERROR
             }
         }
     }
 
-    internal func createExternlaWallet(postExternalWalletBankModel: PostExternalWalletBankModel) {
+    internal func createExternalWallet(postExternalWalletBankModel: PostExternalWalletBankModel) {
 
         self.uiState.value = .LOADING
         dataProvider.createExternalWallet(postExternalWalletBankModel: postExternalWalletBankModel) { [weak self] externalWalletResponse in
