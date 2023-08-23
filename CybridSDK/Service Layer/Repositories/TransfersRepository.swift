@@ -27,7 +27,7 @@ extension TransfersRepoProvider {
 
         authenticatedRequest(transfersRepository.fetchTransfers, parameters: accountGuid, completion: completion)
     }
-    
+
     func fetchTransfers(customerGuid: String, _ completion: @escaping FetchTransfersCompletition) {
         authenticatedRequest(transfersRepository.fetchTransfersByCustomer, parameters: customerGuid, completion: completion)
     }
@@ -56,7 +56,7 @@ extension TransfersAPI: TransfersRepository {
     static func fetchTransfers(accountGuid: String, _ completion: @escaping FetchTransfersCompletition) {
         listTransfers(perPage: 40, accountGuid: accountGuid, completion: completion)
     }
-    
+
     static func fetchTransfersByCustomer(guid: String, _ completiton: @escaping FetchTransfersCompletition) {
         listTransfers(perPage: 40, customerGuid: guid, completion: completiton)
     }

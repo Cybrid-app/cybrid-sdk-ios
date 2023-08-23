@@ -324,6 +324,10 @@ function_body_length:
   warning: 300
   error: 350
 
+identifier_name:
+  warning: 50
+  error: 70
+
 function_parameter_count:
   warning: 15
   error: 20

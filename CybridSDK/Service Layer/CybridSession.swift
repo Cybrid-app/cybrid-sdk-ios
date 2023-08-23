@@ -53,7 +53,7 @@ final class CybridSession: AuthenticatedServiceProvider {
 
     // Deposit Address Repository
     internal var depositAddressRepository: DepositAddressRepository.Type
-    
+
     // External Wallet Repository
     internal var externalWalletRepository: ExternalWalletRepository.Type
 

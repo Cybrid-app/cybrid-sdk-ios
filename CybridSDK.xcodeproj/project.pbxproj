@@ -294,6 +294,7 @@
 		A2A29EE72A9690C80075C889 /* listExternalWalletResponseIncomplete.json in Resources */ = {isa = PBXBuildFile; fileRef = A2A29EE62A9690C80075C889 /* listExternalWalletResponseIncomplete.json */; };
 		A2A29EEA2A969FFC0075C889 /* ExternalWalletAPIMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A29EE92A969FFC0075C889 /* ExternalWalletAPIMock.swift */; };
 		A2A29EEC2A96A0440075C889 /* ExternalWalletMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A29EEB2A96A0440075C889 /* ExternalWalletMock.swift */; };
+		A2A29EF02A96B8370075C889 /* ExternalWalletViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A29EEF2A96B8370075C889 /* ExternalWalletViewModelTest.swift */; };
 		A2C2EACD2A7419CB0039C441 /* DepositAddressViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2C2EACC2A7419CB0039C441 /* DepositAddressViewModelTest.swift */; };
 		A2C2EACF2A741D020039C441 /* DepositAddressViewModelErrorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2C2EACE2A741D020039C441 /* DepositAddressViewModelErrorTest.swift */; };
 		A2E2059D2A71B23200A3C013 /* CybridConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E2059C2A71B23200A3C013 /* CybridConstants.swift */; };
@@ -633,6 +634,7 @@
 		A2A29EE62A9690C80075C889 /* listExternalWalletResponseIncomplete.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = listExternalWalletResponseIncomplete.json; sourceTree = "<group>"; };
 		A2A29EE92A969FFC0075C889 /* ExternalWalletAPIMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExternalWalletAPIMock.swift; sourceTree = "<group>"; };
 		A2A29EEB2A96A0440075C889 /* ExternalWalletMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExternalWalletMock.swift; sourceTree = "<group>"; };
+		A2A29EEF2A96B8370075C889 /* ExternalWalletViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExternalWalletViewModelTest.swift; sourceTree = "<group>"; };
 		A2C2EACC2A7419CB0039C441 /* DepositAddressViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepositAddressViewModelTest.swift; sourceTree = "<group>"; };
 		A2C2EACE2A741D020039C441 /* DepositAddressViewModelErrorTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepositAddressViewModelErrorTest.swift; sourceTree = "<group>"; };
 		A2E2059C2A71B23200A3C013 /* CybridConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CybridConstants.swift; sourceTree = "<group>"; };
@@ -1723,6 +1725,7 @@
 		92F120552996A8890086EE18 /* Components Tests */ = {
 			isa = PBXGroup;
 			children = (
+				A2A29EED2A96A8500075C889 /* ExternalWallet */,
 				A2C2EACA2A7419900039C441 /* DepositAddress */,
 				927746152A33DA9700F2EB9D /* IdentityVerification */,
 				9257E78E29B7DE4700846E12 /* Accounts */,
@@ -1953,6 +1956,22 @@
 				A2A29EEB2A96A0440075C889 /* ExternalWalletMock.swift */,
 			);
 			path = ExternalWallet;
+			sourceTree = "<group>";
+		};
+		A2A29EED2A96A8500075C889 /* ExternalWallet */ = {
+			isa = PBXGroup;
+			children = (
+				A2A29EEE2A96B8270075C889 /* View */,
+			);
+			path = ExternalWallet;
+			sourceTree = "<group>";
+		};
+		A2A29EEE2A96B8270075C889 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				A2A29EEF2A96B8370075C889 /* ExternalWalletViewModelTest.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		A2C2EACA2A7419900039C441 /* DepositAddress */ = {
@@ -2521,6 +2540,7 @@
 				92F1205B2996B4D60086EE18 /* CryptoPriceModelTest.swift in Sources */,
 				9257E79329B7E27400846E12 /* AccountsViewModelErrorTest.swift in Sources */,
 				92F222D92914359C00137B11 /* PollingTest.swift in Sources */,
+				A2A29EF02A96B8370075C889 /* ExternalWalletViewModelTest.swift in Sources */,
 				92B6819129197DDB00FD6E99 /* IdentityVerificationsAPIMock.swift in Sources */,
 				0BBCF640285C52D700D39C6D /* MockError.swift in Sources */,
 				0BD6613E2874AFAA00F4DA6B /* MockNumberFormatter.swift in Sources */,
