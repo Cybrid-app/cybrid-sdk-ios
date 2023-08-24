@@ -8,7 +8,7 @@
 import CybridApiBankSwift
 
 extension ExternalWalletBankModel {
-    
+
     static let mock = ExternalWalletBankModel(
         guid: "1234",
         name: "BTC",

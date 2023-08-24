@@ -259,7 +259,7 @@
 		92F707CC298D806A005A93E5 /* TradeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F707CB298D806A005A93E5 /* TradeViewModel.swift */; };
 		9E3B30420CC77D425A7A1C28 /* Pods_Abstract_CybridSDKTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80DCD8FC666A9176CF28F146 /* Pods_Abstract_CybridSDKTests.framework */; };
 		A21E047C2A86BB4D0046CCBA /* ViewUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = A21E047B2A86BB4D0046CCBA /* ViewUtils.swift */; };
-		A23FC5E92A944F5900129CE2 /* ExternalWalletsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23FC5E82A944F5900129CE2 /* ExternalWalletsViewModel.swift */; };
+		A23FC5E92A944F5900129CE2 /* ExternalWalletViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23FC5E82A944F5900129CE2 /* ExternalWalletViewModel.swift */; };
 		A23FC5EB2A94508C00129CE2 /* ExternalWalletsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23FC5EA2A94508C00129CE2 /* ExternalWalletsViewController.swift */; };
 		A23FC5ED2A94588600129CE2 /* ExternalWalletsView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23FC5EC2A94588600129CE2 /* ExternalWalletsView+Extensions.swift */; };
 		A23FC5EF2A9490BC00129CE2 /* ExternalWalletBankModel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23FC5EE2A9490BC00129CE2 /* ExternalWalletBankModel+Extensions.swift */; };
@@ -295,6 +295,8 @@
 		A2A29EEA2A969FFC0075C889 /* ExternalWalletAPIMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A29EE92A969FFC0075C889 /* ExternalWalletAPIMock.swift */; };
 		A2A29EEC2A96A0440075C889 /* ExternalWalletMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A29EEB2A96A0440075C889 /* ExternalWalletMock.swift */; };
 		A2A29EF02A96B8370075C889 /* ExternalWalletViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A29EEF2A96B8370075C889 /* ExternalWalletViewModelTest.swift */; };
+		A2A29EF22A96CCE70075C889 /* ExternalWalletViewModelErrorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A29EF12A96CCE70075C889 /* ExternalWalletViewModelErrorTest.swift */; };
+		A2A29EF42A96CD160075C889 /* ExternalWalletTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A29EF32A96CD160075C889 /* ExternalWalletTest.swift */; };
 		A2C2EACD2A7419CB0039C441 /* DepositAddressViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2C2EACC2A7419CB0039C441 /* DepositAddressViewModelTest.swift */; };
 		A2C2EACF2A741D020039C441 /* DepositAddressViewModelErrorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2C2EACE2A741D020039C441 /* DepositAddressViewModelErrorTest.swift */; };
 		A2E2059D2A71B23200A3C013 /* CybridConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E2059C2A71B23200A3C013 /* CybridConstants.swift */; };
@@ -599,7 +601,7 @@
 		92F707C8298D7557005A93E5 /* ListPricesItemDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListPricesItemDelegate.swift; sourceTree = "<group>"; };
 		92F707CB298D806A005A93E5 /* TradeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeViewModel.swift; sourceTree = "<group>"; };
 		A21E047B2A86BB4D0046CCBA /* ViewUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewUtils.swift; sourceTree = "<group>"; };
-		A23FC5E82A944F5900129CE2 /* ExternalWalletsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExternalWalletsViewModel.swift; sourceTree = "<group>"; };
+		A23FC5E82A944F5900129CE2 /* ExternalWalletViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExternalWalletViewModel.swift; sourceTree = "<group>"; };
 		A23FC5EA2A94508C00129CE2 /* ExternalWalletsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExternalWalletsViewController.swift; sourceTree = "<group>"; };
 		A23FC5EC2A94588600129CE2 /* ExternalWalletsView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ExternalWalletsView+Extensions.swift"; sourceTree = "<group>"; };
 		A23FC5EE2A9490BC00129CE2 /* ExternalWalletBankModel+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ExternalWalletBankModel+Extensions.swift"; sourceTree = "<group>"; };
@@ -635,6 +637,8 @@
 		A2A29EE92A969FFC0075C889 /* ExternalWalletAPIMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExternalWalletAPIMock.swift; sourceTree = "<group>"; };
 		A2A29EEB2A96A0440075C889 /* ExternalWalletMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExternalWalletMock.swift; sourceTree = "<group>"; };
 		A2A29EEF2A96B8370075C889 /* ExternalWalletViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExternalWalletViewModelTest.swift; sourceTree = "<group>"; };
+		A2A29EF12A96CCE70075C889 /* ExternalWalletViewModelErrorTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExternalWalletViewModelErrorTest.swift; sourceTree = "<group>"; };
+		A2A29EF32A96CD160075C889 /* ExternalWalletTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExternalWalletTest.swift; sourceTree = "<group>"; };
 		A2C2EACC2A7419CB0039C441 /* DepositAddressViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepositAddressViewModelTest.swift; sourceTree = "<group>"; };
 		A2C2EACE2A741D020039C441 /* DepositAddressViewModelErrorTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepositAddressViewModelErrorTest.swift; sourceTree = "<group>"; };
 		A2E2059C2A71B23200A3C013 /* CybridConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CybridConstants.swift; sourceTree = "<group>"; };
@@ -1843,7 +1847,7 @@
 		A23FC5E62A94093200129CE2 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				A23FC5E82A944F5900129CE2 /* ExternalWalletsViewModel.swift */,
+				A23FC5E82A944F5900129CE2 /* ExternalWalletViewModel.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1970,6 +1974,8 @@
 			isa = PBXGroup;
 			children = (
 				A2A29EEF2A96B8370075C889 /* ExternalWalletViewModelTest.swift */,
+				A2A29EF12A96CCE70075C889 /* ExternalWalletViewModelErrorTest.swift */,
+				A2A29EF32A96CD160075C889 /* ExternalWalletTest.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2391,7 +2397,7 @@
 				92A90A8A2911939400CA0E08 /* IdentityVerificationViewController.swift in Sources */,
 				927233D628D243DC0080AAC4 /* AccountTradesViewController.swift in Sources */,
 				927233CD28D2419B0080AAC4 /* QuoteBankModel+Extensions.swift in Sources */,
-				A23FC5E92A944F5900129CE2 /* ExternalWalletsViewModel.swift in Sources */,
+				A23FC5E92A944F5900129CE2 /* ExternalWalletViewModel.swift in Sources */,
 				92A2FD8429AE837200146D1E /* AccountsViewController+Extensions.swift in Sources */,
 				92635470294CEC0400660E0B /* BankAccountsViewController+Extensions.swift in Sources */,
 				92663D0F293FD60800842E30 /* WorkflowRepository.swift in Sources */,
@@ -2575,6 +2581,7 @@
 				9299104A29D38F3C007E9832 /* CDecimalTest.swift in Sources */,
 				0B2899ED288F4BE5001B3360 /* TaskSchedulerMock.swift in Sources */,
 				0B966011285AA24300584692 /* AssertionFailureOverrideTests.swift in Sources */,
+				A2A29EF42A96CD160075C889 /* ExternalWalletTest.swift in Sources */,
 				92CB9E3F2914C15000357873 /* CustomersAPIMock.swift in Sources */,
 				0B00E01F2878A16800707F26 /* BigDecimalTests.swift in Sources */,
 				92827DB629439BF700231772 /* WorkflowAPIMock.swift in Sources */,
@@ -2588,6 +2595,7 @@
 				92827DC62943E7A100231772 /* BankAPIMock.swift in Sources */,
 				0BD6611B286C197B00F4DA6B /* UIViewConstraintsTests.swift in Sources */,
 				92E0801D295B6D9A00372460 /* TransferViewModelErrorTest.swift in Sources */,
+				A2A29EF22A96CCE70075C889 /* ExternalWalletViewModelErrorTest.swift in Sources */,
 				9257E79129B7DE5A00846E12 /* AccountsViewModelTest.swift in Sources */,
 				92F1205E2996BC080086EE18 /* AccountAssetUIModelTest.swift in Sources */,
 				0B00E0572886F25F00707F26 /* PricesAPIMock.swift in Sources */,

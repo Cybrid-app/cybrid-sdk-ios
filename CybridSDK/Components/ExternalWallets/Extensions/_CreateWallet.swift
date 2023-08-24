@@ -178,7 +178,7 @@ extension ExternalWalletsView {
             }
 
             // -- Creating the wallet
-            self.externalWalletsViewModel?.createExternalWallet(postExternalWalletBankModel: postExternalWalletBankModel)
+            self.externalWalletViewModel?.createExternalWallet(postExternalWalletBankModel: postExternalWalletBankModel)
         }
         self.addSubview(saveButton)
         saveButton.below(warningContainer, top: 25)

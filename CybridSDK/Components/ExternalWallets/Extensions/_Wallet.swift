@@ -13,15 +13,15 @@ extension ExternalWalletsView {
     internal func externalWalletsView_Wallet() {
 
         // --
-        let wallet = self.externalWalletsViewModel?.currentWallet
+        let wallet = self.externalWalletViewModel?.currentWallet
         let walletState = wallet?.state ?? .storing
 
-        let asset = try? Cybrid.findAsset(code: (self.externalWalletsViewModel?.currentWallet?.asset)!)
+        let asset = try? Cybrid.findAsset(code: (self.externalWalletViewModel?.currentWallet?.asset)!)
         let assetName = asset?.name ?? ""
         let assetCode = asset?.code ?? ""
 
         // -- Fetch transfers
-        self.externalWalletsViewModel?.fetchTransfers()
+        self.externalWalletViewModel?.fetchTransfers()
 
         // -- Status chip
         let statusChip = UILabel()
@@ -187,7 +187,7 @@ extension ExternalWalletsView {
 
         // -- Delete button
         let deleteButton = CYBButton(title: "Delete") {
-            self.externalWalletsViewModel?.deleteExternalWallet()
+            self.externalWalletViewModel?.deleteExternalWallet()
         }
         deleteButton.backgroundColor = UIColor.red
         self.addSubview(deleteButton)
@@ -235,7 +235,7 @@ extension ExternalWalletsView {
 
     internal func externalWalletsView_Wallet_transfers(container: UIView, height: NSLayoutConstraint) {
 
-        self.externalWalletsViewModel?.transfersUiState.bind { state in
+        self.externalWalletViewModel?.transfersUiState.bind { state in
 
             // -- Remove prev views from container
             for view in container.subviews {

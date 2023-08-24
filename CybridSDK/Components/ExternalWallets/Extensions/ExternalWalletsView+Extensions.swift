@@ -19,7 +19,7 @@ extension ExternalWalletsView: UITableViewDelegate, UITableViewDataSource {
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
         if tableView.accessibilityIdentifier == "walletsTable" {
-            return self.externalWalletsViewModel?.externalWalletsActive.count ?? 0
+            return self.externalWalletViewModel?.externalWalletsActive.count ?? 0
         } else {
             return 0
         }
@@ -27,7 +27,7 @@ extension ExternalWalletsView: UITableViewDelegate, UITableViewDataSource {
 
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-        let wallet = (self.externalWalletsViewModel?.externalWalletsActive[indexPath.row])!
+        let wallet = (self.externalWalletViewModel?.externalWalletsActive[indexPath.row])!
         guard
             let cell = tableView.dequeueReusableCell(
                 withIdentifier: ExternalWalletCell.reuseIdentifier,
@@ -41,8 +41,8 @@ extension ExternalWalletsView: UITableViewDelegate, UITableViewDataSource {
 
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
-        let wallet = self.externalWalletsViewModel?.externalWalletsActive[indexPath.row]
-        self.externalWalletsViewModel?.goToWalletDetail(wallet!)
+        let wallet = self.externalWalletViewModel?.externalWalletsActive[indexPath.row]
+        self.externalWalletViewModel?.goToWalletDetail(wallet!)
     }
 
     public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

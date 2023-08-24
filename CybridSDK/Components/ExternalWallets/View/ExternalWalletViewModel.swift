@@ -7,7 +7,7 @@
 
 import CybridApiBankSwift
 
-open class ExternalWalletsViewModel: NSObject {
+open class ExternalWalletViewModel: NSObject {
 
     // MARK: Private properties
     private var dataProvider: ExternalWalletRepoProvider & TransfersRepoProvider
@@ -68,17 +68,17 @@ open class ExternalWalletsViewModel: NSObject {
     internal func deleteExternalWallet() {
 
         self.uiState.value = .LOADING
-        dataProvider.deleteExternalWallet(guid: self.currentWallet?.guid ?? "") { [weak self] response in
+        dataProvider.deleteExternalWallet(guid: self.currentWallet!.guid!) { [weak self] response in
             switch response {
             case .success:
                 self?.logger?.log(.component(.accounts(.accountsDataFetching)))
                 self?.fetchExternalWallets()
+                self?.currentWallet = nil
             case .failure:
                 self?.logger?.log(.component(.accounts(.accountsDataError)))
                 self?.uiState.value = .ERROR
             }
         }
-        self.currentWallet = nil
     }
 
     internal func goToWalletDetail(_ wallet: ExternalWalletBankModel) {
@@ -96,12 +96,7 @@ open class ExternalWalletsViewModel: NSObject {
             case .success(let list):
                 self.logger?.log(.component(.accounts(.accountsDataFetching)))
                 self.transfers = list.objects
-                self.transfers = self.transfers.filter { $0.externalBankAccountGuid == self.currentWallet?.guid }
-                if self.transfers.isEmpty {
-                    self.transfersUiState.value = .EMPTY
-                } else {
-                    self.transfersUiState.value = .TRANSFERS
-                }
+                self.transfersUiState.value = .EMPTY
 
             case .failure:
                 self.logger?.log(.component(.accounts(.accountsDataError)))

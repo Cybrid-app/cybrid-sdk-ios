@@ -13,16 +13,16 @@ public final class ExternalWalletsView: Component {
     public enum TransfersState { case LOADING, TRANSFERS, EMPTY }
 
     internal var localizer: Localizer!
-    internal var externalWalletsViewModel: ExternalWalletsViewModel?
+    internal var externalWalletViewModel: ExternalWalletViewModel?
 
     internal var errorLabel = UILabel()
 
-    public func initComponent(externalWalletsViewModel: ExternalWalletsViewModel) {
+    public func initComponent(externalWalletsViewModel: ExternalWalletViewModel) {
 
-        self.externalWalletsViewModel = externalWalletsViewModel
+        self.externalWalletViewModel = externalWalletsViewModel
         self.localizer = CybridLocalizer()
         self.setupView()
-        self.externalWalletsViewModel?.fetchExternalWallets()
+        self.externalWalletViewModel?.fetchExternalWallets()
     }
 
     override func setupView() {
@@ -34,7 +34,7 @@ public final class ExternalWalletsView: Component {
     private func manageCurrentStateUI() {
 
         // -- Await for UI State changes
-        self.externalWalletsViewModel?.uiState.bind { state in
+        self.externalWalletViewModel?.uiState.bind { state in
 
             self.removeSubViewsFromContent()
             switch state {

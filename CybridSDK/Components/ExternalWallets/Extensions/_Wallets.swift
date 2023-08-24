@@ -13,7 +13,7 @@ extension ExternalWalletsView {
 
         // -- Add button
         let addButton = CYBButton(title: "Add wallet") {
-            self.externalWalletsViewModel?.uiState.value = .CREATE
+            self.externalWalletViewModel?.uiState.value = .CREATE
         }
         self.addSubview(addButton)
         addButton.constraintLeft(self, margin: 10)
@@ -22,7 +22,7 @@ extension ExternalWalletsView {
         addButton.constraintHeight(48)
 
         // -- Check for empty state with empty externalWalletsActive
-        if self.externalWalletsViewModel!.externalWalletsActive.isEmpty {
+        if self.externalWalletViewModel!.externalWalletsActive.isEmpty {
 
             let emptySection = self.createEmptySection(text: "No wallets have been added.")
             self.addSubview(emptySection)
