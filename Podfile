@@ -8,8 +8,8 @@ project 'CybridSDK'
 use_frameworks!
 
 def common_pods
-  pod 'CybridApiBankSwift', '~> 0.84.2'
-  pod 'CybridApiIdpSwift', '~> 0.84.2'
+  pod 'CybridApiBankSwift'
+  pod 'CybridApiIdpSwift'
   pod 'BigInt'
   pod 'PersonaInquirySDK2'
   pod 'Plaid'
