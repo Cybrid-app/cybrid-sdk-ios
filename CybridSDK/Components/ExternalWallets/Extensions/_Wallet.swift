@@ -67,8 +67,8 @@ extension ExternalWalletsView {
         assetContainer.layer.cornerRadius = 8
         self.addSubview(assetContainer)
         assetContainer.below(assetTitle, top: 10)
-        assetContainer.constraintLeft(self, margin: 0)
-        assetContainer.constraintRight(self, margin: 0)
+        assetContainer.constraintLeft(self, margin: 10)
+        assetContainer.constraintRight(self, margin: 10)
         assetContainer.constraintHeight(52)
 
         // -- Asset Icon

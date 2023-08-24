@@ -58,7 +58,7 @@ class LoginLooader: UIModal {
                         constant: 40)
         
         let loader = UIActivityIndicatorView()
-        loader.color = UIColor.blue
+        loader.color = UIColor.init(hex: "#007AFF")
         loader.transform = CGAffineTransform(scaleX: 1.8, y: 1.8)
         self.containerView.addSubview(loader)
         loader.startAnimating()
