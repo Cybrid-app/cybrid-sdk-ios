@@ -15,13 +15,13 @@ final class ExternalWalletAPIMock: ExternalWalletsAPI {
     typealias CreateExternalWalletBankModelCompletion = (_ result: Result<ExternalWalletBankModel, ErrorResponse>) -> Void
     typealias DeleteExternalWalletBankModelCompletion = (_ result: Result<ExternalWalletBankModel, ErrorResponse>) -> Void
 
+    // swiftlint:disable:next identifier_name
     private static var fetchExternalWalletListBankModelCompletion: FetchExternalWalletListBankModelCompletion?
     private static var fetchExternalWalletBankModelCompletion: FetchExternalWalletBankModelCompletion?
     private static var createExternalWalletBankModelCompletion: CreateExternalWalletBankModelCompletion?
     private static var deleteExternalWalletBankModelCompletion: DeleteExternalWalletBankModelCompletion?
 
-    @discardableResult
-    override class func listExternalWallets(page: Int? = nil, perPage: Int? = nil, guid: String? = nil, bankGuid: String? = nil, customerGuid: String? = nil, state: String? = nil, apiResponseQueue: DispatchQueue = CybridApiBankSwiftAPI.apiResponseQueue, completion: @escaping ((Result<ExternalWalletListBankModel, ErrorResponse>) -> Void)) -> RequestTask {
+    override class func listExternalWallets(page: Int? = nil, perPage: Int? = nil, owner: ListRequestOwnerBankModel? = nil, guid: String? = nil, bankGuid: String? = nil, customerGuid: String? = nil, state: String? = nil, apiResponseQueue: DispatchQueue = CybridApiBankSwiftAPI.apiResponseQueue, completion: @escaping ((Result<ExternalWalletListBankModel, ErrorResponse>) -> Void)) -> RequestTask {
         fetchExternalWalletListBankModelCompletion = completion
         return listExternalWalletsWithRequestBuilder().requestTask
     }
