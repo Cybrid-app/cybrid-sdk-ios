@@ -56,13 +56,10 @@ class IdentityVerificationViewModelErrorTest: XCTestCase {
         let viewModel = createViewModel(uiState: UIState)
 
         // -- When
-        // dataProvider.didFetchListIdentityVerificationFailed()
         viewModel.getIdentityVerificationStatus(identityWrapper: nil)
         dataProvider.didFetchListIdentityVerificationFailed()
-        // dataProvider.didCreateCustomerSuccessfully()
 
         // -- Then
-        // XCTAssertEqual(viewModel.customerGuid, "")
         XCTAssertNil(viewModel.identityJob)
     }
 
@@ -73,14 +70,11 @@ class IdentityVerificationViewModelErrorTest: XCTestCase {
         let viewModel = createViewModel(uiState: UIState)
 
         // -- When
-        // dataProvider.didFetchListExpiredIdentityVerificationSuccessfully()
         viewModel.getIdentityVerificationStatus(identityWrapper: nil)
         dataProvider.didFetchListExpiredIdentityVerificationSuccessfully()
-        // dataProvider.didCreateCustomerSuccessfully()
         dataProvider.didFetchIdentityVerificationSuccessfully()
 
         // -- Then
-        // XCTAssertEqual(viewModel.customerGuid, "")
         XCTAssertNil(viewModel.identityJob)
     }
 
@@ -91,13 +85,11 @@ class IdentityVerificationViewModelErrorTest: XCTestCase {
         let viewModel = createViewModel(uiState: UIState)
 
         // -- When
-        // dataProvider.didFetchListPersonaExpiredIdentityVerificationSuccessfully()
+        dataProvider.didFetchListPersonaExpiredIdentityVerificationSuccessfully()
         viewModel.getIdentityVerificationStatus(identityWrapper: nil)
         dataProvider.didFetchListPersonaExpiredIdentityVerificationSuccessfully()
-        // dataProvider.didCreateCustomerSuccessfully()
 
         // -- Then
-        // XCTAssertEqual(viewModel.customerGuid, "")
         XCTAssertNil(viewModel.identityJob)
     }
 
@@ -124,8 +116,8 @@ class IdentityVerificationViewModelErrorTest: XCTestCase {
         self.dataProvider = ServiceProviderMock()
 
         // -- Then
+        dataProvider.didFetchListEmptyIdentityVerificationSuccessfully()
         viewModel.fetchLastIdentityVerification { record in
-
             XCTAssertNil(record)
         }
         dataProvider.didFetchListEmptyIdentityVerificationSuccessfully()

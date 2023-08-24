@@ -10,7 +10,9 @@ import UIKit
 extension ExternalWalletsView {
 
     internal func externalWalletsView_Loading() {
-        self.createLoaderScreen()
+
+        let loadingString = localizer.localize(with: UIStrings.loadingText)
+        self.createLoaderScreen(text: loadingString)
     }
 }
 
@@ -73,6 +75,33 @@ extension ExternalWalletsView {
 
     enum UIStrings {
 
-        static let contentWarning = "cybrid.deposit.address.content.warning"
+        static let loadingText = "cybrid.external.wallets.loading.title"
+        static let walletsAddButton = "cybrid.external.wallets.wallets.add.button"
+        static let walletsEmptyTitle = "cybrid.external.wallets.wallets.empty.title"
+        static let walletsTitle = "cybrid.external.wallets.wallets.title"
+        static let walletTitle = "cybrid.external.wallets.wallet.title"
+        static let walletAssetTitle = "cybrid.external.wallets.wallet.asset.title"
+        static let walletNameTitle = "cybrid.external.wallets.wallet.name.title"
+        static let walletAddressTitle = "cybrid.external.wallets.wallet.address.title"
+        static let walletTagTitle = "cybrid.external.wallets.wallet.tag.title"
+        static let walletRecentTransfersTitle = "cybrid.external.wallets.wallet.recentTransfers.title"
+        static let walletDeleteButton = "cybrid.external.wallets.wallet.delete.button"
+        static let walletStatePending = "cybrid.external.wallets.wallet.state.pending"
+        static let walletStateFailed = "cybrid.external.wallets.wallet.state.failed"
+        static let walletStateApproved = "cybrid.external.wallets.wallet.state.approved"
+        static let walletTransfersEmptyTitle = "cybrid.external.wallets.wallet.transfers.empty.title"
+        static let createWalletTitle = "cybrid.external.wallets.createWallet.title"
+        static let createWalletAssetTitle = "cybrid.external.wallets.createWallet.asset.title"
+        static let createWalletNameTitle = "cybrid.external.wallets.createWallet.name.title"
+        static let createWalletNamePlaceholder = "cybrid.external.wallets.createWallet.name.placeholder"
+        static let createWalletAddressTitle = "cybrid.external.wallets.createWallet.address.title"
+        static let createWalletAddressPlaceholder = "cybrid.external.wallets.createWallet.address.placeholder"
+        static let createWalletTagTitle = "cybrid.external.wallets.createWallet.tag.title"
+        static let createWalletTagPlaceholder = "cybrid.external.wallets.createWallet.tag.placeholder"
+        static let createWalletWarningTitle = "cybrid.deposit.address.content.warning"
+        static let createWalletSaveButton = "cybrid.external.wallets.createWallet.save.button"
+        static let createWalletAssetError = "cybrid.external.wallets.createWallet.asset.error"
+        static let createWalletNameError = "cybrid.external.wallets.createWallet.name.error"
+        static let createWalletAddressError = "cybrid.external.wallets.createWallet.address.error"
     }
 }

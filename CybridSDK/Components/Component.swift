@@ -100,7 +100,7 @@ public class Component: UIView, ComponentProtocol {
         }
     }
 
-    internal func createLoaderScreen() {
+    internal func createLoaderScreen(text: String) {
 
         // -- Loading Label Container
         let loadingLabelContainer = UIView()
@@ -116,7 +116,7 @@ public class Component: UIView, ComponentProtocol {
         loadingLabel.textColor = UIColor.init(hex: "#3A3A3C")
         let paragraphStyle = getParagraphStyle(1.05)
         paragraphStyle.alignment = .center
-        loadingLabel.setParagraphText("Loading your wallets", paragraphStyle)
+        loadingLabel.setParagraphText(text, paragraphStyle)
         loadingLabelContainer.addSubview(loadingLabel)
         loadingLabel.constraintTop(loadingLabelContainer, margin: 0)
         loadingLabel.constraintLeft(loadingLabelContainer, margin: 0)

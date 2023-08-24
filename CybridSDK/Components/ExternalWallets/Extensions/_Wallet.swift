@@ -38,10 +38,11 @@ extension ExternalWalletsView {
         self.externalWalletsView_Wallet_statusChip(statusChip, wallet: wallet)
 
         // -- Title
+        let titleString = localizer.localize(with: UIStrings.walletTitle)
         let title = self.label(
             font: UIFont.make(ofSize: 23, weight: .bold),
             color: UIColor.init(hex: "#3A3A3C"),
-            text: "My \(assetCode) wallet",
+            text: titleString,
             lineHeight: 1.15,
             aligment: .left)
         self.addSubview(title)
@@ -50,6 +51,7 @@ extension ExternalWalletsView {
         title.constraintRight(self, margin: 10)
 
         // -- Asset
+        let assetTitleString = localizer.localize(with: UIStrings.walletAssetTitle)
         let assetTitle = self.label(
             font: UIFont.make(ofSize: 14, weight: .light),
             color: UIColor(hex: "#818181"),
@@ -92,10 +94,11 @@ extension ExternalWalletsView {
         assetNameLabel.centerVertical(parent: assetContainer)
 
         // -- Name title
+        let nameTitleString = localizer.localize(with: UIStrings.walletNameTitle)
         let nameTitle = self.label(
             font: UIFont.make(ofSize: 14, weight: .regular),
             color: UIColor(hex: "#818181"),
-            text: "Name",
+            text: nameTitleString,
             lineHeight: 1.05,
             aligment: .left)
         self.addSubview(nameTitle)
@@ -116,10 +119,11 @@ extension ExternalWalletsView {
         walletName.constraintRight(self, margin: 10)
 
         // -- Address title
+        let addressTitleString = localizer.localize(with: UIStrings.walletAddressTitle)
         let addressTitle = self.label(
             font: UIFont.make(ofSize: 14, weight: .regular),
             color: UIColor(hex: "#818181"),
-            text: "Address",
+            text: addressTitleString,
             lineHeight: 1.05,
             aligment: .left)
         self.addSubview(addressTitle)
@@ -141,10 +145,11 @@ extension ExternalWalletsView {
         addressValue.constraintRight(self, margin: 10)
 
         // -- Tag title
+        let tagTitleString = localizer.localize(with: UIStrings.walletTagTitle)
         let tagTitle = self.label(
             font: UIFont.make(ofSize: 14, weight: .regular),
             color: UIColor(hex: "#818181"),
-            text: "Tag",
+            text: tagTitleString,
             lineHeight: 1.05,
             aligment: .left)
         self.addSubview(tagTitle)
@@ -165,10 +170,11 @@ extension ExternalWalletsView {
         tagValue.constraintRight(self, margin: 10)
 
         // -- Recent transfers title
+        let recentTransfersTitleString = localizer.localize(with: UIStrings.walletRecentTransfersTitle)
         let recentTransfersTitle = self.label(
             font: UIFont.make(ofSize: 14, weight: .regular),
             color: UIColor(hex: "#818181"),
-            text: "Recent transfers",
+            text: recentTransfersTitleString,
             lineHeight: 1.05,
             aligment: .left)
         self.addSubview(recentTransfersTitle)
@@ -186,7 +192,8 @@ extension ExternalWalletsView {
         self.externalWalletsView_Wallet_transfers(container: container, height: containerHeight)
 
         // -- Delete button
-        let deleteButton = CYBButton(title: "Delete") {
+        let deleteButtonString = localizer.localize(with: UIStrings.walletDeleteButton)
+        let deleteButton = CYBButton(title: deleteButtonString) {
             self.externalWalletViewModel?.deleteExternalWallet()
         }
         deleteButton.backgroundColor = UIColor.red
@@ -211,22 +218,20 @@ extension ExternalWalletsView {
             statusChip.isHidden = false
             statusChip.textColor = UIColor.black
             statusChip.backgroundColor = UIColor(hex: "#FCDA66")
-            statusChip.text = "Pending"
-            // self.statusChip.setLocalizedText(key: UIString.transferPending, localizer: localizer)
+            statusChip.setLocalizedText(key: UIStrings.walletStatePending, localizer: localizer)
 
         case .failed:
 
             statusChip.isHidden = false
             statusChip.textColor = UIColor.white
             statusChip.backgroundColor = UIColor(hex: "#D45736")
-            statusChip.text = "Failed"
-            // self.statusChip.setLocalizedText(key: UIString.transferFailed, localizer: localizer)
+            statusChip.setLocalizedText(key: UIStrings.walletStateFailed, localizer: localizer)
 
         case .completed:
             statusChip.isHidden = false
             statusChip.textColor = UIColor.white
             statusChip.backgroundColor = UIColor(hex: "#4dae51")
-            statusChip.text = "Approved"
+            statusChip.setLocalizedText(key: UIStrings.walletStateApproved, localizer: localizer)
 
         default:
             statusChip.isHidden = true
@@ -235,12 +240,10 @@ extension ExternalWalletsView {
 
     internal func externalWalletsView_Wallet_transfers(container: UIView, height: NSLayoutConstraint) {
 
-        self.externalWalletViewModel?.transfersUiState.bind { state in
+        self.externalWalletViewModel?.transfersUiState.bind { [self] state in
 
             // -- Remove prev views from container
-            for view in container.subviews {
-                view.removeFromSuperview()
-            }
+            container.removeChilds()
 
             // -- Bind transfers state
             switch state {
@@ -282,7 +285,8 @@ extension ExternalWalletsView {
                 height.constant = 130
 
                 // -- Empty view
-                let emptyView = self.createEmptySection(text: "No transfers have been executed.", font: UIFont.make(ofSize: 16))
+                let emptyViewString = self.localizer.localize(with: UIStrings.walletTransfersEmptyTitle)
+                let emptyView = self.createEmptySection(text: emptyViewString, font: UIFont.make(ofSize: 16))
                 container.addSubview(emptyView)
                 emptyView.centerVertical(parent: container)
                 emptyView.constraintLeft(container, margin: 0)

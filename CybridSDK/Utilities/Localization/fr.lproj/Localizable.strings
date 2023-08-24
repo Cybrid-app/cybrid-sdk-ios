@@ -180,3 +180,32 @@
 "cybrid.transfer.modal.error.doneButton.text" = "Fait";
 "cybrid.transfer.errorMessage.text" = "Certains de vos comptes ont un problème, veuillez le reconnecter.";
 "cybrid.transfer.modal.success.title" = "Transfert soumis";
+
+// -- External Wallets Component
+"cybrid.external.wallets.loading.title" = "Charger vos portefeuilles";
+"cybrid.external.wallets.wallets.add.button" = "Ajouter un portefeuille";
+"cybrid.external.wallets.wallets.empty.title" = "Aucun portefeuille n'a été ajouté.";
+"cybrid.external.wallets.wallets.title" = "Mes portefeuilles";
+"cybrid.external.wallets.wallet.title" = "Mon portefeuille";
+"cybrid.external.wallets.wallet.asset.title" = "Actif";
+"cybrid.external.wallets.wallet.name.title" = "Nom";
+"cybrid.external.wallets.wallet.address.title" = "Adresse";
+"cybrid.external.wallets.wallet.tag.title" = "Étiqueter";
+"cybrid.external.wallets.wallet.recentTransfers.title" = "Transferts récents";
+"cybrid.external.wallets.wallet.delete.button" = "Supprimer";
+"cybrid.external.wallets.wallet.state.pending" = "En attente";
+"cybrid.external.wallets.wallet.state.failed" = "Échoué";
+"cybrid.external.wallets.wallet.state.approved" = "Approuvée";
+"cybrid.external.wallets.wallet.transfers.empty.title" = "Aucun transfert n'a été exécuté.";
+"cybrid.external.wallets.createWallet.title" = "Ajouter un nouveau portefeuille";
+"cybrid.external.wallets.createWallet.asset.title" = "Actif";
+"cybrid.external.wallets.createWallet.name.title" = "Nom";
+"cybrid.external.wallets.createWallet.name.placeholder" = "Entrez le nom du portefeuille";
+"cybrid.external.wallets.createWallet.address.title" = "Adresse";
+"cybrid.external.wallets.createWallet.address.placeholder" = "Entrez l'adresse du portefeuille";
+"cybrid.external.wallets.createWallet.tag.title" = "Étiqueter";
+"cybrid.external.wallets.createWallet.tag.placeholder" = "Saisir la balise";
+"cybrid.external.wallets.createWallet.save.button" = "Sauvegarder";
+"cybrid.external.wallets.createWallet.asset.error" = "Sélectionnez un actif pour le portefeuille";
+"cybrid.external.wallets.createWallet.name.error" = "Entrez un nom de portefeuille";
+"cybrid.external.wallets.createWallet.address.error" = "Entrez une adresse de portefeuille";

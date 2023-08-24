@@ -193,3 +193,32 @@
 "cybrid.transfer.modal.error.doneButton.text" = "Done";
 "cybrid.transfer.errorMessage.text" = "Some of your accounts have a problem, please reconnect it.";
 "cybrid.transfer.modal.success.title" = "Transfer submitted";
+
+// -- External Wallets Component
+"cybrid.external.wallets.loading.title" = "Loading your wallets";
+"cybrid.external.wallets.wallets.add.button" = "Add wallet";
+"cybrid.external.wallets.wallets.empty.title" = "No wallets have been added.";
+"cybrid.external.wallets.wallets.title" = "My wallets";
+"cybrid.external.wallets.wallet.title" = "My wallet";
+"cybrid.external.wallets.wallet.asset.title" = "Asset";
+"cybrid.external.wallets.wallet.name.title" = "Name";
+"cybrid.external.wallets.wallet.address.title" = "Address";
+"cybrid.external.wallets.wallet.tag.title" = "Tag";
+"cybrid.external.wallets.wallet.recentTransfers.title" = "Recent transfers";
+"cybrid.external.wallets.wallet.delete.button" = "Delete";
+"cybrid.external.wallets.wallet.state.pending" = "Pending";
+"cybrid.external.wallets.wallet.state.failed" = "Failed";
+"cybrid.external.wallets.wallet.state.approved" = "Approved";
+"cybrid.external.wallets.wallet.transfers.empty.title" = "No transfers have been executed.";
+"cybrid.external.wallets.createWallet.title" = "Add new wallet";
+"cybrid.external.wallets.createWallet.asset.title" = "Asset";
+"cybrid.external.wallets.createWallet.name.title" = "Name";
+"cybrid.external.wallets.createWallet.name.placeholder" = "Enter wallet name";
+"cybrid.external.wallets.createWallet.address.title" = "Address";
+"cybrid.external.wallets.createWallet.address.placeholder" = "Enter wallet address";
+"cybrid.external.wallets.createWallet.tag.title" = "Tag";
+"cybrid.external.wallets.createWallet.tag.placeholder" = "Enter tag";
+"cybrid.external.wallets.createWallet.save.button" = "Save";
+"cybrid.external.wallets.createWallet.asset.error" = "Select an asset for the wallet";
+"cybrid.external.wallets.createWallet.name.error" = "Enter a wallet name";
+"cybrid.external.wallets.createWallet.address.error" = "Enter a wallet address";

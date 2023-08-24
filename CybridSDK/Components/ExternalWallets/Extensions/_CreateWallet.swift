@@ -13,10 +13,11 @@ extension ExternalWalletsView {
     internal func externalWalletsView_CreateWallet() {
 
         // -- Title
+        let titleString = localizer.localize(with: UIStrings.createWalletTitle)
         let title = self.label(
             font: UIFont.make(ofSize: 23, weight: .bold),
             color: UIColor.init(hex: "#3A3A3C"),
-            text: "Add new wallet",
+            text: titleString,
             lineHeight: 1.15,
             aligment: .left)
         self.addSubview(title)
@@ -25,10 +26,11 @@ extension ExternalWalletsView {
         title.constraintRight(self, margin: 10)
 
         // -- Asset title
+        let assetTitleString = localizer.localize(with: UIStrings.createWalletAssetTitle)
         let assetTitle = self.label(
             font: UIFont.make(ofSize: 14, weight: .regular),
             color: UIColor(hex: "#818181"),
-            text: "Asset",
+            text: assetTitleString,
             lineHeight: 1.05,
             aligment: .left)
         self.addSubview(assetTitle)
@@ -44,10 +46,11 @@ extension ExternalWalletsView {
         assetPicker.constraintRight(self, margin: 10)
 
         // -- Name title
+        let nameTitleString = localizer.localize(with: UIStrings.createWalletNameTitle)
         let nameTitle = self.label(
             font: UIFont.make(ofSize: 14, weight: .regular),
             color: UIColor(hex: "#818181"),
-            text: "Name",
+            text: nameTitleString,
             lineHeight: 1.05,
             aligment: .left)
         self.addSubview(nameTitle)
@@ -56,10 +59,11 @@ extension ExternalWalletsView {
         nameTitle.constraintRight(self, margin: 10)
 
         // -- Name input
+        let namePlaceholder = localizer.localize(with: UIStrings.createWalletNamePlaceholder)
         let nameInput = TextField()
         nameInput.backgroundColor = UIColor(hex: "#F5F5F5")
         nameInput.layer.cornerRadius = 8
-        nameInput.placeholder = "Enter wallet name"
+        nameInput.placeholder = namePlaceholder
         self.addSubview(nameInput)
         nameInput.below(nameTitle, top: 10)
         nameInput.constraintLeft(self, margin: 10)
@@ -67,10 +71,11 @@ extension ExternalWalletsView {
         nameInput.constraintHeight(52)
 
         // -- Address title
+        let addressTitleString = localizer.localize(with: UIStrings.createWalletAddressTitle)
         let addressTitle = self.label(
             font: UIFont.make(ofSize: 14, weight: .regular),
             color: UIColor(hex: "#818181"),
-            text: "Address",
+            text: addressTitleString,
             lineHeight: 1.05,
             aligment: .left)
         self.addSubview(addressTitle)
@@ -88,10 +93,11 @@ extension ExternalWalletsView {
         addressIcon.setConstraintsSize(size: CGSize(width: 20, height: 20))
 
         // -- Address input
+        let addressInputPlaceholder = localizer.localize(with: UIStrings.createWalletAddressPlaceholder)
         let addressInput = TextFieldRightIcon()
         addressInput.backgroundColor = UIColor(hex: "#F5F5F5")
         addressInput.layer.cornerRadius = 8
-        addressInput.placeholder = "Enter wallet address"
+        addressInput.placeholder = addressInputPlaceholder
         addressInput.rightViewMode = .always
         addressInput.rightView = addressIconContainer
         self.addSubview(addressInput)
@@ -101,10 +107,11 @@ extension ExternalWalletsView {
         addressInput.constraintHeight(52)
 
         // -- Tag title
+        let tagTitleString = localizer.localize(with: UIStrings.createWalletTagTitle)
         let tagTitle = self.label(
             font: UIFont.make(ofSize: 14, weight: .regular),
             color: UIColor(hex: "#818181"),
-            text: "Tag",
+            text: tagTitleString,
             lineHeight: 1.05,
             aligment: .left)
         self.addSubview(tagTitle)
@@ -113,10 +120,11 @@ extension ExternalWalletsView {
         tagTitle.constraintRight(self, margin: 10)
 
         // -- Name input
+        let tagInputPlaceholder = localizer.localize(with: UIStrings.createWalletTagPlaceholder)
         let tagInput = TextField()
         tagInput.backgroundColor = UIColor(hex: "#F5F5F5")
         tagInput.layer.cornerRadius = 8
-        tagInput.placeholder = "Enter tag"
+        tagInput.placeholder = tagInputPlaceholder
         self.addSubview(tagInput)
         tagInput.below(tagTitle, top: 10)
         tagInput.constraintLeft(self, margin: 10)
@@ -148,7 +156,7 @@ extension ExternalWalletsView {
         // warningLabel.textAlignment = .justified
         warningLabel.textColor = UIColor(hex: "#f1b90a")
         warningLabel.numberOfLines = 0
-        warningLabel.text = localizer.localize(with: UIStrings.contentWarning)
+        warningLabel.text = localizer.localize(with: UIStrings.createWalletWarningTitle)
         warningContainer.addSubview(warningLabel)
         warningLabel.constraintTop(warningContainer, margin: 10)
         warningLabel.constraint(attribute: .leading,
@@ -157,10 +165,10 @@ extension ExternalWalletsView {
                                 attribute: .trailing,
                                 constant: 5)
         warningLabel.constraintRight(warningContainer, margin: 15)
-        // warningLabel.constraintHeight(68)
 
         // -- Save button
-        let saveButton = CYBButton(title: "Save") {
+        let saveButtonString = localizer.localize(with: UIStrings.createWalletSaveButton)
+        let saveButton = CYBButton(title: saveButtonString) {
 
             // -- Sanity check
             let asset = assetPicker.assetSelected?.code ?? ""
@@ -202,21 +210,24 @@ extension ExternalWalletsView {
 
         if asset.isEmpty {
 
-            errorLabel.text = "Select an asset for the wallet"
+            let assetError = localizer.localize(with: UIStrings.createWalletAssetError)
+            errorLabel.text = assetError
             errorLabel.isHidden = false
             return nil
         }
 
         if name.isEmpty {
 
-            errorLabel.text = "Enter a wallet name"
+            let nameError = localizer.localize(with: UIStrings.createWalletNameError)
+            errorLabel.text = nameError
             errorLabel.isHidden = false
             return nil
         }
 
         if address.isEmpty {
 
-            errorLabel.text = "Enter a wallet address"
+            let addressError = localizer.localize(with: UIStrings.createWalletAddressError)
+            errorLabel.text = addressError
             errorLabel.isHidden = false
             return nil
         }

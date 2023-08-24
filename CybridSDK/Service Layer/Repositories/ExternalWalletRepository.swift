@@ -8,15 +8,12 @@
 import CybridApiBankSwift
 
 typealias FetchListExternalWalletCompletion = (Result<ExternalWalletListBankModel, ErrorResponse>) -> Void
-typealias FetchExternalWalletCompletion = (Result<ExternalWalletBankModel, ErrorResponse>) -> Void
 typealias CreateExternalWalletCompletion = (Result<ExternalWalletBankModel, ErrorResponse>) -> Void
 typealias DeleteExternalWalletAccount = (Result<ExternalWalletBankModel, ErrorResponse>) -> Void
 
 protocol ExternalWalletRepository {
 
     static func fetchListExternalWallet(_ completion: @escaping FetchListExternalWalletCompletion)
-
-    static func fetchExternalWallet(guid: String, _ completion: @escaping FetchExternalWalletCompletion)
 
     static func createExternalWallet(postExternalWalletBankModel: PostExternalWalletBankModel, _ completion: @escaping CreateExternalWalletCompletion)
 
@@ -34,10 +31,6 @@ extension ExternalWalletRepoProvider {
         authenticatedRequest(externalWalletRepository.fetchListExternalWallet, completion: completion)
     }
 
-    func fetchExternalWallet(guid: String, _ completion: @escaping FetchExternalWalletCompletion) {
-        authenticatedRequest(externalWalletRepository.fetchExternalWallet, parameters: guid, completion: completion)
-    }
-
     func createExternalWallet(postExternalWalletBankModel: PostExternalWalletBankModel, _ completion: @escaping CreateExternalWalletCompletion) {
         authenticatedRequest(externalWalletRepository.createExternalWallet, parameters: postExternalWalletBankModel, completion: completion)
     }
@@ -53,10 +46,6 @@ extension ExternalWalletsAPI: ExternalWalletRepository {
 
     static func fetchListExternalWallet(_ completion: @escaping FetchListExternalWalletCompletion) {
         listExternalWallets(completion: completion)
-    }
-
-    static func fetchExternalWallet(guid: String, _ completion: @escaping FetchExternalWalletCompletion) {
-        getExternalWallet(externalWalletGuid: guid, completion: completion)
     }
 
     static func createExternalWallet(postExternalWalletBankModel: PostExternalWalletBankModel, _ completion: @escaping CreateExternalWalletCompletion) {

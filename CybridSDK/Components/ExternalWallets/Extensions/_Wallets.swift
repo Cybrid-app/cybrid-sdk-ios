@@ -12,7 +12,8 @@ extension ExternalWalletsView {
     internal func externalWalletsView_Wallets() {
 
         // -- Add button
-        let addButton = CYBButton(title: "Add wallet") {
+        let addButtonString = localizer.localize(with: UIStrings.walletsAddButton)
+        let addButton = CYBButton(title: addButtonString) {
             self.externalWalletViewModel?.uiState.value = .CREATE
         }
         self.addSubview(addButton)
@@ -24,7 +25,8 @@ extension ExternalWalletsView {
         // -- Check for empty state with empty externalWalletsActive
         if self.externalWalletViewModel!.externalWalletsActive.isEmpty {
 
-            let emptySection = self.createEmptySection(text: "No wallets have been added.")
+            let emptyString = localizer.localize(with: UIStrings.walletsEmptyTitle)
+            let emptySection = self.createEmptySection(text: emptyString)
             self.addSubview(emptySection)
             emptySection.centerVertical(parent: self)
             emptySection.constraintLeft(self, margin: 10)
@@ -33,10 +35,11 @@ extension ExternalWalletsView {
         } else {
 
             // -- Title
+            let titleString = localizer.localize(with: UIStrings.walletsTitle)
             let title = self.label(
                 font: UIFont.make(ofSize: 23, weight: .bold),
                 color: UIColor.init(hex: "#3A3A3C"),
-                text: "My wallets",
+                text: titleString,
                 lineHeight: 1.15,
                 aligment: .left)
             self.addSubview(title)
