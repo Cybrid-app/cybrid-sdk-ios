@@ -117,17 +117,15 @@ open class ExternalWalletViewModel: NSObject {
         var codeValue = code
         if code.contains(":") {
             let codeParts = code.components(separatedBy: ":")
-            if !codeParts.isEmpty {
-                let data = String(codeParts[1])
-                let dataComponents = data.components(separatedBy: "&")
-                if !dataComponents.isEmpty {
-                    let address = dataComponents[0]
-                    let components = dataComponents[1]
-                    codeValue = address
-                    self.findTagInQRData(components)
-                } else {
-                    codeValue = data
-                }
+            let data = String(codeParts[1])
+            let dataComponents = data.components(separatedBy: "&")
+            if dataComponents.count > 1 {
+                let address = dataComponents[0]
+                let components = dataComponents[1]
+                codeValue = address
+                self.findTagInQRData(components)
+            } else {
+                codeValue = data
             }
         }
         self.addressScannedValue.value = codeValue
@@ -155,7 +153,7 @@ open class ExternalWalletViewModel: NSObject {
     internal func handleError(_ error: ErrorResponse) {
 
         if case let ErrorResponse.error(_, data, _, _) = error {
-            
+
             // -- Check the data if it's not nil
             guard let data = data
             else {
@@ -163,7 +161,7 @@ open class ExternalWalletViewModel: NSObject {
                 self.uiState.value = .ERROR
                 return
             }
-            
+
             // -- Check if data could be serialized as josn
             guard let errorResult = try? JSONSerialization.jsonObject(with: data) as? [String: Any]
             else {
@@ -171,7 +169,7 @@ open class ExternalWalletViewModel: NSObject {
                 self.uiState.value = .ERROR
                 return
             }
-            
+
             // -- Working with value json
             let messageCode = errorResult["message_code"] as! String
             let errorMessage = errorResult["error_message"] as! String

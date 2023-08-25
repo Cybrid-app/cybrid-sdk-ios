@@ -115,4 +115,77 @@ class ExternalWalletViewModelTest: ExternalWalletTest {
         XCTAssertFalse(viewModel.transfers.isEmpty)
         XCTAssertEqual(viewModel.transfersUiState.value, .EMPTY)
     }
+
+    func test_handleQRScanned_Without_Dots() {
+
+        // -- Given
+        let viewModel = self.createViewModel()
+        let code = "123456"
+
+        // -- When
+        viewModel.handleQRScanned(code: code)
+
+        // -- Then
+        XCTAssertEqual(viewModel.addressScannedValue.value, code)
+    }
+
+    func test_handleQRScanned_With_Dots() {
+
+        // -- Given
+        let viewModel = self.createViewModel()
+        let codeOne = "bitcoin:123456"
+        let codeTwo = "bitcoin:98765&tag=234"
+
+        // -- When Case 1
+        viewModel.handleQRScanned(code: codeOne)
+        XCTAssertEqual(viewModel.addressScannedValue.value, "123456")
+
+        // -- When Case 2
+        viewModel.handleQRScanned(code: codeTwo)
+        XCTAssertEqual(viewModel.addressScannedValue.value, "98765")
+        XCTAssertEqual(viewModel.tagScannedValue.value, "234")
+    }
+
+    func test_handleError_WithData_nil() {
+
+        // -- Given
+        let viewModel = self.createViewModel()
+        let error = ErrorResponse.error(1, nil, nil, CybridError.serviceError)
+
+        // -- When
+        viewModel.handleError(error)
+
+        // -- Then
+        XCTAssertEqual(viewModel.serverError, "")
+        XCTAssertEqual(viewModel.uiState.value, .ERROR)
+    }
+
+    func test_handleError_WithData_No_Json() {
+
+        // -- Given
+        let viewModel = self.createViewModel()
+        let data = "Cybrid".data(using: .utf8)
+        let error = ErrorResponse.error(1, data, nil, CybridError.serviceError)
+
+        // -- When
+        viewModel.handleError(error)
+
+        // -- Then
+        XCTAssertEqual(viewModel.serverError, "")
+        XCTAssertEqual(viewModel.uiState.value, .ERROR)
+    }
+
+    func test_handleError() {
+
+        // -- Given
+        let viewModel = self.createViewModel()
+        let data = "{\"status\":400,\"error_message\":\"tag must not be empty\",\"message_code\":\"invalid_parameter\"}".data(using: .utf8)
+        let error = ErrorResponse.error(1, data, nil, CybridError.serviceError)
+
+        // -- When
+        viewModel.handleError(error)
+
+        // -- Then
+        XCTAssertEqual(viewModel.serverError, "Tag must not be empty")
+    }
 }
