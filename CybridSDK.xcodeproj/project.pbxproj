@@ -286,6 +286,7 @@
 		A28964022A739D1C00151A36 /* createDepositAddressResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = A28964012A739D1C00151A36 /* createDepositAddressResponse.json */; };
 		A28964042A739E8200151A36 /* listDepositAddressResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = A28964032A739E8200151A36 /* listDepositAddressResponse.json */; };
 		A28964062A739F4E00151A36 /* listDepositAddressResponseIncomplete.json in Resources */ = {isa = PBXBuildFile; fileRef = A28964052A739F4E00151A36 /* listDepositAddressResponseIncomplete.json */; };
+		A298F6B72A990D3000D45954 /* CybridServerErrorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A298F6B62A990D3000D45954 /* CybridServerErrorTest.swift */; };
 		A29AA7C22A5DD85D00B6CC1A /* DepositAddressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29AA7C12A5DD85D00B6CC1A /* DepositAddressView.swift */; };
 		A29AA7C52A5DDBC700B6CC1A /* DepositAddresViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29AA7C42A5DDBC700B6CC1A /* DepositAddresViewController.swift */; };
 		A29AA7C72A5E1BC000B6CC1A /* Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29AA7C62A5E1BC000B6CC1A /* Component.swift */; };
@@ -632,6 +633,7 @@
 		A28964012A739D1C00151A36 /* createDepositAddressResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = createDepositAddressResponse.json; sourceTree = "<group>"; };
 		A28964032A739E8200151A36 /* listDepositAddressResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = listDepositAddressResponse.json; sourceTree = "<group>"; };
 		A28964052A739F4E00151A36 /* listDepositAddressResponseIncomplete.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = listDepositAddressResponseIncomplete.json; sourceTree = "<group>"; };
+		A298F6B62A990D3000D45954 /* CybridServerErrorTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CybridServerErrorTest.swift; sourceTree = "<group>"; };
 		A29AA7C12A5DD85D00B6CC1A /* DepositAddressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepositAddressView.swift; sourceTree = "<group>"; };
 		A29AA7C42A5DDBC700B6CC1A /* DepositAddresViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepositAddresViewController.swift; sourceTree = "<group>"; };
 		A29AA7C62A5E1BC000B6CC1A /* Component.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Component.swift; sourceTree = "<group>"; };
@@ -722,13 +724,13 @@
 			name = Auth;
 			sourceTree = "<group>";
 		};
-		0B00E02C287F6ABD00707F26 /* Error Management */ = {
+		0B00E02C287F6ABD00707F26 /* Error */ = {
 			isa = PBXGroup;
 			children = (
 				0B00E02D287F6AE500707F26 /* CybridError.swift */,
 				A2A29F012A985ED40075C889 /* CybridServerError.swift */,
 			);
-			path = "Error Management";
+			path = Error;
 			sourceTree = "<group>";
 		};
 		0B00E03A287F7B5D00707F26 /* Services Tests */ = {
@@ -805,7 +807,7 @@
 		0B078F0F28497B070020B4F7 /* CybridSDK */ = {
 			isa = PBXGroup;
 			children = (
-				0B00E02C287F6ABD00707F26 /* Error Management */,
+				0B00E02C287F6ABD00707F26 /* Error */,
 				0B2B2A832862901A002F0EC1 /* Framework Extensions */,
 				0B303CE22862E5C5007BF7FF /* Core */,
 				0B289A0B28A2C79E001B3360 /* Resources */,
@@ -820,6 +822,7 @@
 		0B078F1B28497B070020B4F7 /* CybridSDKTests */ = {
 			isa = PBXGroup;
 			children = (
+				A298F6B52A990D1700D45954 /* Error Tests */,
 				92F120552996A8890086EE18 /* Components Tests */,
 				92F5EC7428E24716009DC3F4 /* Framework Extensions Test */,
 				0B96601A285AEB9100584692 /* Resources */,
@@ -1945,6 +1948,14 @@
 			path = DepositAddress;
 			sourceTree = "<group>";
 		};
+		A298F6B52A990D1700D45954 /* Error Tests */ = {
+			isa = PBXGroup;
+			children = (
+				A298F6B62A990D3000D45954 /* CybridServerErrorTest.swift */,
+			);
+			path = "Error Tests";
+			sourceTree = "<group>";
+		};
 		A29AA7C02A5DD81200B6CC1A /* DepositAddress */ = {
 			isa = PBXGroup;
 			children = (
@@ -2596,6 +2607,7 @@
 				0BBD0CE828B6C730001DBC5F /* TradeMock.swift in Sources */,
 				9299104A29D38F3C007E9832 /* CDecimalTest.swift in Sources */,
 				0B2899ED288F4BE5001B3360 /* TaskSchedulerMock.swift in Sources */,
+				A298F6B72A990D3000D45954 /* CybridServerErrorTest.swift in Sources */,
 				0B966011285AA24300584692 /* AssertionFailureOverrideTests.swift in Sources */,
 				A2A29EF42A96CD160075C889 /* ExternalWalletTest.swift in Sources */,
 				92CB9E3F2914C15000357873 /* CustomersAPIMock.swift in Sources */,

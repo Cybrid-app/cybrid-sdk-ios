@@ -13,7 +13,7 @@ struct CybridServerErrorResponse {
     var inputName: String
 }
 
-class CybridServerError {
+internal class CybridServerError {
 
     var localizer: CybridLocalizer
 
