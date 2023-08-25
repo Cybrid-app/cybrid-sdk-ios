@@ -103,5 +103,6 @@ extension ExternalWalletsView {
         static let createWalletAssetError = "cybrid.external.wallets.createWallet.asset.error"
         static let createWalletNameError = "cybrid.external.wallets.createWallet.name.error"
         static let createWalletAddressError = "cybrid.external.wallets.createWallet.address.error"
+        static let errorButton = "cybrid.external.wallets.error.button"
     }
 }

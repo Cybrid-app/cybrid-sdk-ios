@@ -197,10 +197,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bDR-4B-oyo">
-                                <rect key="frame" x="30" y="552" width="354" height="30"/>
+                                <rect key="frame" x="30" y="554.5" width="354" height="48"/>
                                 <accessibility key="accessibilityConfiguration" identifier="demo_mode"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="YYU-Z4-lah"/>
+                                    <constraint firstAttribute="height" constant="48" id="YYU-Z4-lah"/>
                                 </constraints>
                                 <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="Button"/>
@@ -245,7 +245,7 @@
                             <constraint firstItem="VTZ-QI-HOt" firstAttribute="trailing" secondItem="rWa-BH-Roz" secondAttribute="trailing" constant="30" id="KzP-0S-FeX"/>
                             <constraint firstItem="VTZ-QI-HOt" firstAttribute="trailing" secondItem="OO4-iE-FhO" secondAttribute="trailing" constant="30" id="LcB-hR-SOm"/>
                             <constraint firstItem="IkL-4M-hYw" firstAttribute="leading" secondItem="VTZ-QI-HOt" secondAttribute="leading" constant="40" id="NY2-tZ-ay6"/>
-                            <constraint firstItem="bDR-4B-oyo" firstAttribute="top" secondItem="CXa-0i-KzW" secondAttribute="bottom" constant="5" id="Nj5-Dk-p1q"/>
+                            <constraint firstItem="bDR-4B-oyo" firstAttribute="top" secondItem="CXa-0i-KzW" secondAttribute="bottom" constant="7.5" id="Nj5-Dk-p1q"/>
                             <constraint firstItem="CXa-0i-KzW" firstAttribute="top" secondItem="OO4-iE-FhO" secondAttribute="bottom" constant="5" id="TYF-Zu-jym"/>
                             <constraint firstItem="0Jv-FV-bNS" firstAttribute="leading" secondItem="VTZ-QI-HOt" secondAttribute="leading" constant="40" id="TiS-OU-pZ5"/>
                             <constraint firstItem="VTZ-QI-HOt" firstAttribute="trailing" secondItem="CXa-0i-KzW" secondAttribute="trailing" constant="40" id="bQ6-dO-JIw"/>

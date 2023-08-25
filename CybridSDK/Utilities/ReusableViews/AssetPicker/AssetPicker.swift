@@ -112,6 +112,7 @@ public class AssetPicker: UIView {
         listItems.alwaysBounceVertical = true
         listItems.flashScrollIndicators()
         listItems.register(AssetPickerCell.self, forCellReuseIdentifier: AssetPickerCell.reuseIdentifier)
+        listItems.backgroundColor = UIColor.white
         self.addSubview(listItems)
         listItems.below(self.fieldContainer, top: 7) // h:60
         listItems.constraintLeft(self, margin: 0)

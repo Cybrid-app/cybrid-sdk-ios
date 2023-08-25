@@ -53,6 +53,7 @@ extension ExternalWalletsView {
             walletsTable.dataSource = self
             walletsTable.register(ExternalWalletCell.self, forCellReuseIdentifier: ExternalWalletCell.reuseIdentifier)
             walletsTable.accessibilityIdentifier = "walletsTable"
+            walletsTable.backgroundColor = UIColor.white
             self.addSubview(walletsTable)
             walletsTable.below(title, top: 30)
             walletsTable.constraintLeft(self, margin: 0)

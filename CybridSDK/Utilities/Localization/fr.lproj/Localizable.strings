@@ -209,3 +209,8 @@
 "cybrid.external.wallets.createWallet.asset.error" = "Sélectionnez un actif pour le portefeuille";
 "cybrid.external.wallets.createWallet.name.error" = "Entrez un nom de portefeuille";
 "cybrid.external.wallets.createWallet.address.error" = "Entrez une adresse de portefeuille";
+
+// -- Errors
+"cybrid.server.error.generic" = "Erreur de serveur, réessayez.";
+"cybrid.server.error.wallets.view.error.invalid_parameter.tag" = "La balise ne doit pas être vide";
+"cybrid.server.error.wallets.view.error.data_exists" = "L'adresse existe déjà.";

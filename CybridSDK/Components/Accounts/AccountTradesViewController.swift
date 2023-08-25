@@ -54,6 +54,7 @@ public final class AccountTradesViewController: UIViewController {
     func setupView() {
 
         view.backgroundColor = .white
+        self.view.overrideUserInterfaceStyle = .light
         self.createAssetTitle()
         self.createBalanceTitles()
         self.createDepositAddressButton()

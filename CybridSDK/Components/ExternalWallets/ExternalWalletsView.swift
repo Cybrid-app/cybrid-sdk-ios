@@ -27,7 +27,8 @@ public final class ExternalWalletsView: Component {
 
     override func setupView() {
 
-        self.backgroundColor = UIColor.clear
+        self.backgroundColor = UIColor.white
+        self.overrideUserInterfaceStyle = .light
         self.manageCurrentStateUI()
     }
 
@@ -52,7 +53,7 @@ public final class ExternalWalletsView: Component {
                 self.externalWalletsView_CreateWallet()
 
             case .ERROR:
-                self.externalWalletsView_Loading()
+                self.externalWalletsView_Error(message: self.externalWalletViewModel?.serverError ?? "")
             }
         }
     }

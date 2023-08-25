@@ -83,9 +83,14 @@ extension ExternalWalletsView {
         addressTitle.constraintLeft(self, margin: 10)
         addressTitle.constraintRight(self, margin: 10)
 
-        // -- Address icon
+        // -- Address icon container
         let addressIconContainer = UIView()
         addressIconContainer.setConstraintsSize(size: CGSize(width: 40, height: 50))
+        addressIconContainer.isUserInteractionEnabled = true
+        let addressIconGesture = UITapGestureRecognizer(target: self, action: #selector(openQRScanner(_:)))
+        addressIconContainer.addGestureRecognizer(addressIconGesture)
+
+        // -- Addres icon
         let addressIcon = UIImageView(image: getImage("ic_scan", aClass: Self.self))
         addressIconContainer.addSubview(addressIcon)
         addressIcon.centerVertical(parent: addressIconContainer)
@@ -105,6 +110,9 @@ extension ExternalWalletsView {
         addressInput.constraintLeft(self, margin: 10)
         addressInput.constraintRight(self, margin: 10)
         addressInput.constraintHeight(52)
+        externalWalletViewModel?.addressScannedValue.bind { value in
+            addressInput.text = value
+        }
 
         // -- Tag title
         let tagTitleString = localizer.localize(with: UIStrings.createWalletTagTitle)
@@ -119,7 +127,7 @@ extension ExternalWalletsView {
         tagTitle.constraintLeft(self, margin: 10)
         tagTitle.constraintRight(self, margin: 10)
 
-        // -- Name input
+        // -- Tag input
         let tagInputPlaceholder = localizer.localize(with: UIStrings.createWalletTagPlaceholder)
         let tagInput = TextField()
         tagInput.backgroundColor = UIColor(hex: "#F5F5F5")
@@ -130,6 +138,9 @@ extension ExternalWalletsView {
         tagInput.constraintLeft(self, margin: 10)
         tagInput.constraintRight(self, margin: 10)
         tagInput.constraintHeight(52)
+        externalWalletViewModel?.tagScannedValue.bind { value in
+            tagInput.text = value
+        }
 
         // -- Warning
         let warningContainer = UIView()
@@ -237,8 +248,23 @@ extension ExternalWalletsView {
             name: name,
             asset: asset,
             address: address,
-            tag: tag
+            tag: tag.isEmpty ? nil : tag
         )
         return postExternalWalletBankModel
+    }
+
+    @objc func openQRScanner(_ sender: UITapGestureRecognizer) {
+
+        let qrScannerController = QRScannerViewController()
+        qrScannerController.modalPresentationStyle = .fullScreen
+        qrScannerController.delegate = self
+        self.parentViewController?.present(qrScannerController, animated: true)
+    }
+}
+
+extension ExternalWalletsView: QRScannerDelegate {
+
+    func onQRFound(code: String) {
+        self.externalWalletViewModel?.handleQRScanned(code: code)
     }
 }

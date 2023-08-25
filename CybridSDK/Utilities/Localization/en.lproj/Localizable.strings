@@ -222,3 +222,9 @@
 "cybrid.external.wallets.createWallet.asset.error" = "Select an asset for the wallet";
 "cybrid.external.wallets.createWallet.name.error" = "Enter a wallet name";
 "cybrid.external.wallets.createWallet.address.error" = "Enter a wallet address";
+"cybrid.external.wallets.error.button" = "Return";
+
+// -- Errors
+"cybrid.server.error.generic" = "Server error, try again.";
+"cybrid.server.error.wallets.view.error.invalid_parameter.tag" = "Tag must not be empty";
+"cybrid.server.error.wallets.view.error.data_exists" = "Address already exists.";

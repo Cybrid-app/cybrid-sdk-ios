@@ -29,7 +29,7 @@ public final class CybridConfig {
     internal private(set) var bearer: String = ""
 
     // MARK: Propertis for Auto Init
-    internal var dataProvider: (AssetsRepoProvider)?
+    internal var dataProvider: (AssetsRepoProvider & ExternalWalletRepoProvider)?
     internal private(set) var fiat: AssetBankModel = FiatConfig.usd.defaultAsset
     internal private(set) var customer: CustomerBankModel?
     internal private(set) var bank: BankBankModel?
@@ -61,6 +61,7 @@ public final class CybridConfig {
         self.completion = completion
         self.session.setupSession(authToken: self.bearer)
         CybridApiBankSwiftAPI.basePath = sdkConfig.environment.baseBankPath
+        // CybridApiBankSwiftAPI.requestBuilderFactory = CybridRequestBuilderFactory()
         CodableHelper.jsonDecoder = CybridJSONDecoder()
         self.autoLoad()
     }
@@ -70,7 +71,7 @@ public final class CybridConfig {
                         logger: CybridLogger? = nil,
                         refreshRate: TimeInterval = 5,
                         theme: Theme? = nil,
-                        dataProvider: AssetsRepoProvider,
+                        dataProvider: AssetsRepoProvider & ExternalWalletRepoProvider,
                         completion: (() -> Void)?
     ) {
 
@@ -107,10 +108,7 @@ extension CybridConfig {
     }
 
     internal func autoLoad() {
-
-        // -- Fetch assets
         self.fetchAssets {
-
             self.autoLoadComplete = true
             self.completion?()
         }

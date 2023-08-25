@@ -22,7 +22,11 @@ open class ExternalWalletViewModel: NSObject {
     // MARK: Public properties
     var uiState: Observable<ExternalWalletsView.State> = .init(.LOADING)
     var transfersUiState: Observable<ExternalWalletsView.TransfersState> = .init(.LOADING)
+    var addressScannedValue: Observable<String> = .init("")
+    var tagScannedValue: Observable<String> = .init("")
     var currentWallet: ExternalWalletBankModel?
+    var lastUiState: ExternalWalletsView.State = .LOADING
+    var serverError = ""
 
     // MARK: Constructor
     init(dataProvider: ExternalWalletRepoProvider & TransfersRepoProvider,
@@ -52,14 +56,16 @@ open class ExternalWalletViewModel: NSObject {
 
     internal func createExternalWallet(postExternalWalletBankModel: PostExternalWalletBankModel) {
 
+        self.lastUiState = self.uiState.value
         self.uiState.value = .LOADING
         dataProvider.createExternalWallet(postExternalWalletBankModel: postExternalWalletBankModel) { [weak self] externalWalletResponse in
             switch externalWalletResponse {
             case .success:
                 self?.logger?.log(.component(.accounts(.accountsDataFetching)))
                 self?.fetchExternalWallets()
-            case .failure:
+            case .failure(let error):
                 self?.logger?.log(.component(.accounts(.accountsDataError)))
+                self?.handleError(error)
                 self?.uiState.value = .ERROR
             }
         }
@@ -102,6 +108,66 @@ open class ExternalWalletViewModel: NSObject {
                 self.logger?.log(.component(.accounts(.accountsDataError)))
                 self.transfersUiState.value = .EMPTY
             }
+        }
+    }
+
+    internal func handleQRScanned(code: String) {
+
+        print(code)
+        var codeValue = code
+        if code.contains(":") {
+            let codeParts = code.components(separatedBy: ":")
+            if !codeParts.isEmpty {
+                let data = String(codeParts[1])
+                let dataComponents = data.components(separatedBy: "&")
+                if !dataComponents.isEmpty {
+                    let address = dataComponents[0]
+                    let components = dataComponents[1]
+                    codeValue = address
+                    self.findTagInQRData(components)
+                } else {
+                    codeValue = data
+                }
+            }
+        }
+        self.addressScannedValue.value = codeValue
+    }
+
+    internal func findTagInQRData(_ components: String) {
+
+        var tagValue = ""
+        let componnetsParts = components.components(separatedBy: "?")
+        if !componnetsParts.isEmpty {
+            for component in componnetsParts {
+                let componentParts = component.components(separatedBy: "=")
+                if componentParts.count == 2 {
+                    let itemName = componentParts[0]
+                    let itemValue = componentParts[1]
+                    if itemName == "tag" {
+                        tagValue = itemValue
+                    }
+                }
+            }
+        }
+        self.tagScannedValue.value = tagValue
+    }
+
+    internal func handleError(_ error: ErrorResponse) {
+
+        if case let ErrorResponse.error(_, data, _, _) = error {
+            guard let errorResult = try? JSONSerialization.jsonObject(with: data!) as? [String: Any]
+            else {
+                self.serverError = ""
+                self.uiState.value = .ERROR
+                return
+            }
+            let messageCode = errorResult["message_code"] as! String
+            let errorMessage = errorResult["error_message"] as! String
+            let handledError = CybridServerError().handle(
+                component: .walletsComponent,
+                messageCode: messageCode,
+                errorMessage: errorMessage)
+            self.serverError = handledError.message
         }
     }
 }

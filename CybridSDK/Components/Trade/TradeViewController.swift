@@ -56,6 +56,7 @@ public final class TradeViewController: UIViewController {
     func setupView() {
 
         view.backgroundColor = .white
+        self.view.overrideUserInterfaceStyle = .light
         self.initComponentContent()
         self.manageCurrentStateUI()
     }

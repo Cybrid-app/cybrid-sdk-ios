@@ -297,6 +297,10 @@
 		A2A29EF02A96B8370075C889 /* ExternalWalletViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A29EEF2A96B8370075C889 /* ExternalWalletViewModelTest.swift */; };
 		A2A29EF22A96CCE70075C889 /* ExternalWalletViewModelErrorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A29EF12A96CCE70075C889 /* ExternalWalletViewModelErrorTest.swift */; };
 		A2A29EF42A96CD160075C889 /* ExternalWalletTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A29EF32A96CD160075C889 /* ExternalWalletTest.swift */; };
+		A2A29EF62A97DE050075C889 /* _Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A29EF52A97DE050075C889 /* _Error.swift */; };
+		A2A29F022A985ED40075C889 /* CybridServerError.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A29F012A985ED40075C889 /* CybridServerError.swift */; };
+		A2A29F042A9865220075C889 /* ComponentEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A29F032A9865220075C889 /* ComponentEnum.swift */; };
+		A2A29F062A98697B0075C889 /* QRScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A29F052A98697B0075C889 /* QRScannerViewController.swift */; };
 		A2C2EACD2A7419CB0039C441 /* DepositAddressViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2C2EACC2A7419CB0039C441 /* DepositAddressViewModelTest.swift */; };
 		A2C2EACF2A741D020039C441 /* DepositAddressViewModelErrorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2C2EACE2A741D020039C441 /* DepositAddressViewModelErrorTest.swift */; };
 		A2E2059D2A71B23200A3C013 /* CybridConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E2059C2A71B23200A3C013 /* CybridConstants.swift */; };
@@ -639,6 +643,10 @@
 		A2A29EEF2A96B8370075C889 /* ExternalWalletViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExternalWalletViewModelTest.swift; sourceTree = "<group>"; };
 		A2A29EF12A96CCE70075C889 /* ExternalWalletViewModelErrorTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExternalWalletViewModelErrorTest.swift; sourceTree = "<group>"; };
 		A2A29EF32A96CD160075C889 /* ExternalWalletTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExternalWalletTest.swift; sourceTree = "<group>"; };
+		A2A29EF52A97DE050075C889 /* _Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = _Error.swift; sourceTree = "<group>"; };
+		A2A29F012A985ED40075C889 /* CybridServerError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CybridServerError.swift; sourceTree = "<group>"; };
+		A2A29F032A9865220075C889 /* ComponentEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentEnum.swift; sourceTree = "<group>"; };
+		A2A29F052A98697B0075C889 /* QRScannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRScannerViewController.swift; sourceTree = "<group>"; };
 		A2C2EACC2A7419CB0039C441 /* DepositAddressViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepositAddressViewModelTest.swift; sourceTree = "<group>"; };
 		A2C2EACE2A741D020039C441 /* DepositAddressViewModelErrorTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepositAddressViewModelErrorTest.swift; sourceTree = "<group>"; };
 		A2E2059C2A71B23200A3C013 /* CybridConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CybridConstants.swift; sourceTree = "<group>"; };
@@ -718,6 +726,7 @@
 			isa = PBXGroup;
 			children = (
 				0B00E02D287F6AE500707F26 /* CybridError.swift */,
+				A2A29F012A985ED40075C889 /* CybridServerError.swift */,
 			);
 			path = "Error Management";
 			sourceTree = "<group>";
@@ -970,6 +979,7 @@
 				0B2899E8288F3E1F001B3360 /* Cybrid.swift */,
 				0B00E01C28789ADA00707F26 /* BigDecimal.swift */,
 				9299104729D38C69007E9832 /* CDecimal.swift */,
+				A2A29F032A9865220075C889 /* ComponentEnum.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -1856,6 +1866,7 @@
 			isa = PBXGroup;
 			children = (
 				A23FC5EA2A94508C00129CE2 /* ExternalWalletsViewController.swift */,
+				A2A29F052A98697B0075C889 /* QRScannerViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -1892,6 +1903,7 @@
 				A23FC6042A958A2000129CE2 /* _Wallets.swift */,
 				A23FC6062A958A5900129CE2 /* _Wallet.swift */,
 				A23FC6022A95895D00129CE2 /* _CreateWallet.swift */,
+				A2A29EF52A97DE050075C889 /* _Error.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -2391,6 +2403,7 @@
 				927233E628D244AC0080AAC4 /* AccountsHeaderCell.swift in Sources */,
 				92F707C2298C204F005A93E5 /* TradeViewController.swift in Sources */,
 				9257E79929CA037E00846E12 /* TransferViewController+Extensions.swift in Sources */,
+				A2A29F062A98697B0075C889 /* QRScannerViewController.swift in Sources */,
 				927233C228D1AAA20080AAC4 /* SymbolPriceBankModel+Extensions.swift in Sources */,
 				0BD6612A286DE86A00F4DA6B /* CybridLocalizationKey.swift in Sources */,
 				0B00E02E287F6AE500707F26 /* CybridError.swift in Sources */,
@@ -2433,6 +2446,7 @@
 				0B00E01D28789ADA00707F26 /* BigDecimal.swift in Sources */,
 				0BBD0CD428AC0B60001DBC5F /* CybridModalViewController.swift in Sources */,
 				A24B35952A66D0A700EF20C5 /* DepositAddressRepository.swift in Sources */,
+				A2A29F022A985ED40075C889 /* CybridServerError.swift in Sources */,
 				92AD743128D418610071F17F /* String+Extensions.swift in Sources */,
 				927233C028D1AA7E0080AAC4 /* TradeBankModel+Extensions.swift in Sources */,
 				927233E128D2447F0080AAC4 /* AccountsViewModel.swift in Sources */,
@@ -2456,6 +2470,7 @@
 				0B2899E9288F3E1F001B3360 /* Cybrid.swift in Sources */,
 				A24B359E2A6EE6EE00EF20C5 /* PaymentModal.swift in Sources */,
 				927233BB28D12FD10080AAC4 /* UIFont+Extensions.swift in Sources */,
+				A2A29F042A9865220075C889 /* ComponentEnum.swift in Sources */,
 				0BD66118286B79C500F4DA6B /* UIView+Constraints.swift in Sources */,
 				92827DAF294322AD00231772 /* BankBankModel+Extensions.swift in Sources */,
 				A24B35992A67099C00EF20C5 /* DepositAddressBankModel+Extensions.swift in Sources */,
@@ -2465,6 +2480,7 @@
 				0B303CE42862E5D9007BF7FF /* CybridConfig.swift in Sources */,
 				0BD660FD286B763E00F4DA6B /* ConcurrencyInterfaces.swift in Sources */,
 				0BD66109286B768C00F4DA6B /* ListPricesView.swift in Sources */,
+				A2A29EF62A97DE050075C889 /* _Error.swift in Sources */,
 				A23FC5FE2A952E6200129CE2 /* ExternalWalletCell.swift in Sources */,
 				927233D128D243830080AAC4 /* UIModal.swift in Sources */,
 				0BD660FC286B763E00F4DA6B /* URLImageOperation.swift in Sources */,
@@ -2919,7 +2935,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 20;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = KG8S48C83K;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CybridSDKTestApp/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Cybrid Demo App";
@@ -2936,7 +2952,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.20;
-				PRODUCT_BUNDLE_IDENTIFIER = app.cybrid.CybridSDKTestApp;
+				PRODUCT_BUNDLE_IDENTIFIER = "app.cybrid.-CybridSDKTestApp";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -2952,7 +2968,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 20;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = KG8S48C83K;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CybridSDKTestApp/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Cybrid Demo App";
@@ -2969,7 +2985,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.20;
-				PRODUCT_BUNDLE_IDENTIFIER = app.cybrid.CybridSDKTestApp;
+				PRODUCT_BUNDLE_IDENTIFIER = "app.cybrid.-CybridSDKTestApp";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

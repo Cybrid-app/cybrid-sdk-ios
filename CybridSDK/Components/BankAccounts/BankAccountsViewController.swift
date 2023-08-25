@@ -50,6 +50,7 @@ public final class BankAccountsViewController: UIViewController {
     func setupView() {
 
         view.backgroundColor = .white
+        self.view.overrideUserInterfaceStyle = .light
         self.initComponentContent()
         self.manageCurrentStateUI()
         self.accountsTable.register(BankAccountCell.self, forCellReuseIdentifier: BankAccountCell.reuseIdentifier)
@@ -94,8 +95,7 @@ extension BankAccountsViewController {
             switch state {
 
             case .LOADING:
-                // self.bankAccountsView_Loading()
-                self.bankAccountsView_Authorization()
+                self.bankAccountsView_Loading()
 
             case .CONTENT:
                 self.bankAccountsView_Content()
