@@ -155,12 +155,24 @@ open class ExternalWalletViewModel: NSObject {
     internal func handleError(_ error: ErrorResponse) {
 
         if case let ErrorResponse.error(_, data, _, _) = error {
-            guard let errorResult = try? JSONSerialization.jsonObject(with: data!) as? [String: Any]
+            
+            // -- Check the data if it's not nil
+            guard let data = data
             else {
                 self.serverError = ""
                 self.uiState.value = .ERROR
                 return
             }
+            
+            // -- Check if data could be serialized as josn
+            guard let errorResult = try? JSONSerialization.jsonObject(with: data) as? [String: Any]
+            else {
+                self.serverError = ""
+                self.uiState.value = .ERROR
+                return
+            }
+            
+            // -- Working with value json
             let messageCode = errorResult["message_code"] as! String
             let errorMessage = errorResult["error_message"] as! String
             let handledError = CybridServerError().handle(
