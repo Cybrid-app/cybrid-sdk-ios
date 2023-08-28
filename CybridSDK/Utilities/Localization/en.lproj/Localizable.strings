@@ -223,6 +223,9 @@
 "cybrid.external.wallets.createWallet.name.error" = "Enter a wallet name";
 "cybrid.external.wallets.createWallet.address.error" = "Enter a wallet address";
 "cybrid.external.wallets.error.button" = "Return";
+"cybrid.external.wallets.qr.scanner.controller.error.title" = "Scanning not supported";
+"cybrid.external.wallets.qr.scanner.controller.error.message" = "Your device does not support scanning a code from an item. Please use a device with a camera.";
+"cybrid.external.wallets.qr.scanner.controller.error.button" = "OK";
 
 // -- Errors
 "cybrid.server.error.generic" = "Server error, try again.";

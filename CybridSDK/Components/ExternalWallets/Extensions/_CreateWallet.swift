@@ -164,7 +164,6 @@ extension ExternalWalletsView {
         // -- Warning Label
         let warningLabel = UILabel()
         warningLabel.font = UIFont.systemFont(ofSize: 14)
-        // warningLabel.textAlignment = .justified
         warningLabel.textColor = UIColor(hex: "#f1b90a")
         warningLabel.numberOfLines = 0
         warningLabel.text = localizer.localize(with: UIStrings.createWalletWarningTitle)

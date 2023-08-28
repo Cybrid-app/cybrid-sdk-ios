@@ -11,6 +11,7 @@ import AVFoundation
 internal class QRScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
 
     weak var delegate: QRScannerDelegate!
+    var localizer: CybridLocalizer!
     var captureSession: AVCaptureSession!
     var previewLayer: AVCaptureVideoPreviewLayer!
     var qrCodeFrameView: UIView!
@@ -19,6 +20,7 @@ internal class QRScannerViewController: UIViewController, AVCaptureMetadataOutpu
 
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.black
+        self.localizer = CybridLocalizer()
         self.captureSession = AVCaptureSession()
 
         guard let videoCaptureDevice = AVCaptureDevice.default(for: .video)
@@ -52,7 +54,7 @@ internal class QRScannerViewController: UIViewController, AVCaptureMetadataOutpu
         previewLayer.frame = view.layer.bounds
         previewLayer.videoGravity = .resizeAspectFill
         self.view.layer.addSublayer(previewLayer)
-        
+
         // -- Create exit button
         self.createExitButton()
 
@@ -114,9 +116,13 @@ internal class QRScannerViewController: UIViewController, AVCaptureMetadataOutpu
     }
 
     func failed() {
-
-        let alert = UIAlertController(title: "Scanning not supported", message: "Your device does not support scanning a code from an item. Please use a device with a camera.", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        
+        let alertTitleString = localizer.localize(with: "cybrid.external.wallets.qr.scanner.controller.error.title")
+        let alertMessageString = localizer.localize(with: "cybrid.external.wallets.qr.scanner.controller.error.message")
+        let allertButtonString = localizer.localize(with: "cybrid.external.wallets.qr.scanner.controller.error.button")
+        
+        let alert = UIAlertController(title: alertTitleString, message: alertMessageString, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: allertButtonString, style: .default))
         present(alert, animated: true)
         self.captureSession = nil
     }
@@ -147,7 +153,7 @@ internal class QRScannerViewController: UIViewController, AVCaptureMetadataOutpu
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         return .portrait
     }
-    
+
     @objc
     func xButtonTapped() {
         DispatchQueue.main.async {
