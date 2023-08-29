@@ -259,6 +259,19 @@
 		92F707CC298D806A005A93E5 /* TradeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F707CB298D806A005A93E5 /* TradeViewModel.swift */; };
 		9E3B30420CC77D425A7A1C28 /* Pods_Abstract_CybridSDKTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80DCD8FC666A9176CF28F146 /* Pods_Abstract_CybridSDKTests.framework */; };
 		A21E047C2A86BB4D0046CCBA /* ViewUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = A21E047B2A86BB4D0046CCBA /* ViewUtils.swift */; };
+		A23FC5E92A944F5900129CE2 /* ExternalWalletViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23FC5E82A944F5900129CE2 /* ExternalWalletViewModel.swift */; };
+		A23FC5EB2A94508C00129CE2 /* ExternalWalletsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23FC5EA2A94508C00129CE2 /* ExternalWalletsViewController.swift */; };
+		A23FC5ED2A94588600129CE2 /* ExternalWalletsView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23FC5EC2A94588600129CE2 /* ExternalWalletsView+Extensions.swift */; };
+		A23FC5EF2A9490BC00129CE2 /* ExternalWalletBankModel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23FC5EE2A9490BC00129CE2 /* ExternalWalletBankModel+Extensions.swift */; };
+		A23FC5F12A94951600129CE2 /* ExternalWalletRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23FC5F02A94951600129CE2 /* ExternalWalletRepository.swift */; };
+		A23FC5F32A94B17400129CE2 /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23FC5F22A94B17400129CE2 /* TextField.swift */; };
+		A23FC5F52A94B6C600129CE2 /* TextFieldRightIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23FC5F42A94B6C600129CE2 /* TextFieldRightIcon.swift */; };
+		A23FC5F82A95109D00129CE2 /* AssetPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23FC5F72A95109D00129CE2 /* AssetPicker.swift */; };
+		A23FC5FB2A951D1E00129CE2 /* AssetPickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23FC5FA2A951D1E00129CE2 /* AssetPickerCell.swift */; };
+		A23FC5FE2A952E6200129CE2 /* ExternalWalletCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23FC5FD2A952E6200129CE2 /* ExternalWalletCell.swift */; };
+		A23FC6032A95895D00129CE2 /* _CreateWallet.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23FC6022A95895D00129CE2 /* _CreateWallet.swift */; };
+		A23FC6052A958A2000129CE2 /* _Wallets.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23FC6042A958A2000129CE2 /* _Wallets.swift */; };
+		A23FC6072A958A5900129CE2 /* _Wallet.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23FC6062A958A5900129CE2 /* _Wallet.swift */; };
 		A24B35902A66567F00EF20C5 /* DepositAddresView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24B358F2A66567F00EF20C5 /* DepositAddresView+Extensions.swift */; };
 		A24B35932A66D05200EF20C5 /* DepositAddressViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24B35922A66D05200EF20C5 /* DepositAddressViewModel.swift */; };
 		A24B35952A66D0A700EF20C5 /* DepositAddressRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24B35942A66D0A700EF20C5 /* DepositAddressRepository.swift */; };
@@ -266,15 +279,29 @@
 		A24B35992A67099C00EF20C5 /* DepositAddressBankModel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24B35982A67099C00EF20C5 /* DepositAddressBankModel+Extensions.swift */; };
 		A24B359B2A67207D00EF20C5 /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24B359A2A67207D00EF20C5 /* UIView+Extensions.swift */; };
 		A24B359E2A6EE6EE00EF20C5 /* PaymentModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24B359D2A6EE6EE00EF20C5 /* PaymentModal.swift */; };
+		A24CB4412A8BDDF3004FCC7A /* ExternalWalletsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24CB4402A8BDDF3004FCC7A /* ExternalWalletsView.swift */; };
 		A28963FB2A731DFB00151A36 /* UIView+ExtensionsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28963FA2A731DFB00151A36 /* UIView+ExtensionsTest.swift */; };
 		A28963FE2A73317D00151A36 /* DepositAddressAPIMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28963FD2A73317D00151A36 /* DepositAddressAPIMock.swift */; };
 		A28964002A73336900151A36 /* DepositAddressMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28963FF2A73336900151A36 /* DepositAddressMock.swift */; };
 		A28964022A739D1C00151A36 /* createDepositAddressResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = A28964012A739D1C00151A36 /* createDepositAddressResponse.json */; };
 		A28964042A739E8200151A36 /* listDepositAddressResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = A28964032A739E8200151A36 /* listDepositAddressResponse.json */; };
 		A28964062A739F4E00151A36 /* listDepositAddressResponseIncomplete.json in Resources */ = {isa = PBXBuildFile; fileRef = A28964052A739F4E00151A36 /* listDepositAddressResponseIncomplete.json */; };
+		A298F6B72A990D3000D45954 /* CybridServerErrorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A298F6B62A990D3000D45954 /* CybridServerErrorTest.swift */; };
 		A29AA7C22A5DD85D00B6CC1A /* DepositAddressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29AA7C12A5DD85D00B6CC1A /* DepositAddressView.swift */; };
 		A29AA7C52A5DDBC700B6CC1A /* DepositAddresViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29AA7C42A5DDBC700B6CC1A /* DepositAddresViewController.swift */; };
 		A29AA7C72A5E1BC000B6CC1A /* Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29AA7C62A5E1BC000B6CC1A /* Component.swift */; };
+		A2A29EE32A968F690075C889 /* createExternalWalletResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = A2A29EE22A968F690075C889 /* createExternalWalletResponse.json */; };
+		A2A29EE52A9690620075C889 /* listExternalWalletResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = A2A29EE42A9690620075C889 /* listExternalWalletResponse.json */; };
+		A2A29EE72A9690C80075C889 /* listExternalWalletResponseIncomplete.json in Resources */ = {isa = PBXBuildFile; fileRef = A2A29EE62A9690C80075C889 /* listExternalWalletResponseIncomplete.json */; };
+		A2A29EEA2A969FFC0075C889 /* ExternalWalletAPIMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A29EE92A969FFC0075C889 /* ExternalWalletAPIMock.swift */; };
+		A2A29EEC2A96A0440075C889 /* ExternalWalletMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A29EEB2A96A0440075C889 /* ExternalWalletMock.swift */; };
+		A2A29EF02A96B8370075C889 /* ExternalWalletViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A29EEF2A96B8370075C889 /* ExternalWalletViewModelTest.swift */; };
+		A2A29EF22A96CCE70075C889 /* ExternalWalletViewModelErrorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A29EF12A96CCE70075C889 /* ExternalWalletViewModelErrorTest.swift */; };
+		A2A29EF42A96CD160075C889 /* ExternalWalletTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A29EF32A96CD160075C889 /* ExternalWalletTest.swift */; };
+		A2A29EF62A97DE050075C889 /* _Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A29EF52A97DE050075C889 /* _Error.swift */; };
+		A2A29F022A985ED40075C889 /* CybridServerError.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A29F012A985ED40075C889 /* CybridServerError.swift */; };
+		A2A29F042A9865220075C889 /* ComponentEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A29F032A9865220075C889 /* ComponentEnum.swift */; };
+		A2A29F062A98697B0075C889 /* QRScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A29F052A98697B0075C889 /* QRScannerViewController.swift */; };
 		A2C2EACD2A7419CB0039C441 /* DepositAddressViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2C2EACC2A7419CB0039C441 /* DepositAddressViewModelTest.swift */; };
 		A2C2EACF2A741D020039C441 /* DepositAddressViewModelErrorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2C2EACE2A741D020039C441 /* DepositAddressViewModelErrorTest.swift */; };
 		A2E2059D2A71B23200A3C013 /* CybridConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E2059C2A71B23200A3C013 /* CybridConstants.swift */; };
@@ -579,6 +606,19 @@
 		92F707C8298D7557005A93E5 /* ListPricesItemDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListPricesItemDelegate.swift; sourceTree = "<group>"; };
 		92F707CB298D806A005A93E5 /* TradeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeViewModel.swift; sourceTree = "<group>"; };
 		A21E047B2A86BB4D0046CCBA /* ViewUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewUtils.swift; sourceTree = "<group>"; };
+		A23FC5E82A944F5900129CE2 /* ExternalWalletViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExternalWalletViewModel.swift; sourceTree = "<group>"; };
+		A23FC5EA2A94508C00129CE2 /* ExternalWalletsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExternalWalletsViewController.swift; sourceTree = "<group>"; };
+		A23FC5EC2A94588600129CE2 /* ExternalWalletsView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ExternalWalletsView+Extensions.swift"; sourceTree = "<group>"; };
+		A23FC5EE2A9490BC00129CE2 /* ExternalWalletBankModel+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ExternalWalletBankModel+Extensions.swift"; sourceTree = "<group>"; };
+		A23FC5F02A94951600129CE2 /* ExternalWalletRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExternalWalletRepository.swift; sourceTree = "<group>"; };
+		A23FC5F22A94B17400129CE2 /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
+		A23FC5F42A94B6C600129CE2 /* TextFieldRightIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldRightIcon.swift; sourceTree = "<group>"; };
+		A23FC5F72A95109D00129CE2 /* AssetPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetPicker.swift; sourceTree = "<group>"; };
+		A23FC5FA2A951D1E00129CE2 /* AssetPickerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetPickerCell.swift; sourceTree = "<group>"; };
+		A23FC5FD2A952E6200129CE2 /* ExternalWalletCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExternalWalletCell.swift; sourceTree = "<group>"; };
+		A23FC6022A95895D00129CE2 /* _CreateWallet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = _CreateWallet.swift; sourceTree = "<group>"; };
+		A23FC6042A958A2000129CE2 /* _Wallets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = _Wallets.swift; sourceTree = "<group>"; };
+		A23FC6062A958A5900129CE2 /* _Wallet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = _Wallet.swift; sourceTree = "<group>"; };
 		A24B358F2A66567F00EF20C5 /* DepositAddresView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DepositAddresView+Extensions.swift"; sourceTree = "<group>"; };
 		A24B35922A66D05200EF20C5 /* DepositAddressViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepositAddressViewModel.swift; sourceTree = "<group>"; };
 		A24B35942A66D0A700EF20C5 /* DepositAddressRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepositAddressRepository.swift; sourceTree = "<group>"; };
@@ -586,15 +626,29 @@
 		A24B35982A67099C00EF20C5 /* DepositAddressBankModel+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DepositAddressBankModel+Extensions.swift"; sourceTree = "<group>"; };
 		A24B359A2A67207D00EF20C5 /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
 		A24B359D2A6EE6EE00EF20C5 /* PaymentModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentModal.swift; sourceTree = "<group>"; };
+		A24CB4402A8BDDF3004FCC7A /* ExternalWalletsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExternalWalletsView.swift; sourceTree = "<group>"; };
 		A28963FA2A731DFB00151A36 /* UIView+ExtensionsTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+ExtensionsTest.swift"; sourceTree = "<group>"; };
 		A28963FD2A73317D00151A36 /* DepositAddressAPIMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepositAddressAPIMock.swift; sourceTree = "<group>"; };
 		A28963FF2A73336900151A36 /* DepositAddressMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepositAddressMock.swift; sourceTree = "<group>"; };
 		A28964012A739D1C00151A36 /* createDepositAddressResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = createDepositAddressResponse.json; sourceTree = "<group>"; };
 		A28964032A739E8200151A36 /* listDepositAddressResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = listDepositAddressResponse.json; sourceTree = "<group>"; };
 		A28964052A739F4E00151A36 /* listDepositAddressResponseIncomplete.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = listDepositAddressResponseIncomplete.json; sourceTree = "<group>"; };
+		A298F6B62A990D3000D45954 /* CybridServerErrorTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CybridServerErrorTest.swift; sourceTree = "<group>"; };
 		A29AA7C12A5DD85D00B6CC1A /* DepositAddressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepositAddressView.swift; sourceTree = "<group>"; };
 		A29AA7C42A5DDBC700B6CC1A /* DepositAddresViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepositAddresViewController.swift; sourceTree = "<group>"; };
 		A29AA7C62A5E1BC000B6CC1A /* Component.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Component.swift; sourceTree = "<group>"; };
+		A2A29EE22A968F690075C889 /* createExternalWalletResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = createExternalWalletResponse.json; sourceTree = "<group>"; };
+		A2A29EE42A9690620075C889 /* listExternalWalletResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = listExternalWalletResponse.json; sourceTree = "<group>"; };
+		A2A29EE62A9690C80075C889 /* listExternalWalletResponseIncomplete.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = listExternalWalletResponseIncomplete.json; sourceTree = "<group>"; };
+		A2A29EE92A969FFC0075C889 /* ExternalWalletAPIMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExternalWalletAPIMock.swift; sourceTree = "<group>"; };
+		A2A29EEB2A96A0440075C889 /* ExternalWalletMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExternalWalletMock.swift; sourceTree = "<group>"; };
+		A2A29EEF2A96B8370075C889 /* ExternalWalletViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExternalWalletViewModelTest.swift; sourceTree = "<group>"; };
+		A2A29EF12A96CCE70075C889 /* ExternalWalletViewModelErrorTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExternalWalletViewModelErrorTest.swift; sourceTree = "<group>"; };
+		A2A29EF32A96CD160075C889 /* ExternalWalletTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExternalWalletTest.swift; sourceTree = "<group>"; };
+		A2A29EF52A97DE050075C889 /* _Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = _Error.swift; sourceTree = "<group>"; };
+		A2A29F012A985ED40075C889 /* CybridServerError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CybridServerError.swift; sourceTree = "<group>"; };
+		A2A29F032A9865220075C889 /* ComponentEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentEnum.swift; sourceTree = "<group>"; };
+		A2A29F052A98697B0075C889 /* QRScannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRScannerViewController.swift; sourceTree = "<group>"; };
 		A2C2EACC2A7419CB0039C441 /* DepositAddressViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepositAddressViewModelTest.swift; sourceTree = "<group>"; };
 		A2C2EACE2A741D020039C441 /* DepositAddressViewModelErrorTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepositAddressViewModelErrorTest.swift; sourceTree = "<group>"; };
 		A2E2059C2A71B23200A3C013 /* CybridConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CybridConstants.swift; sourceTree = "<group>"; };
@@ -670,12 +724,13 @@
 			name = Auth;
 			sourceTree = "<group>";
 		};
-		0B00E02C287F6ABD00707F26 /* Error Management */ = {
+		0B00E02C287F6ABD00707F26 /* Error */ = {
 			isa = PBXGroup;
 			children = (
 				0B00E02D287F6AE500707F26 /* CybridError.swift */,
+				A2A29F012A985ED40075C889 /* CybridServerError.swift */,
 			);
-			path = "Error Management";
+			path = Error;
 			sourceTree = "<group>";
 		};
 		0B00E03A287F7B5D00707F26 /* Services Tests */ = {
@@ -752,7 +807,7 @@
 		0B078F0F28497B070020B4F7 /* CybridSDK */ = {
 			isa = PBXGroup;
 			children = (
-				0B00E02C287F6ABD00707F26 /* Error Management */,
+				0B00E02C287F6ABD00707F26 /* Error */,
 				0B2B2A832862901A002F0EC1 /* Framework Extensions */,
 				0B303CE22862E5C5007BF7FF /* Core */,
 				0B289A0B28A2C79E001B3360 /* Resources */,
@@ -767,6 +822,7 @@
 		0B078F1B28497B070020B4F7 /* CybridSDKTests */ = {
 			isa = PBXGroup;
 			children = (
+				A298F6B52A990D1700D45954 /* Error Tests */,
 				92F120552996A8890086EE18 /* Components Tests */,
 				92F5EC7428E24716009DC3F4 /* Framework Extensions Test */,
 				0B96601A285AEB9100584692 /* Resources */,
@@ -867,6 +923,9 @@
 				A28964012A739D1C00151A36 /* createDepositAddressResponse.json */,
 				A28964032A739E8200151A36 /* listDepositAddressResponse.json */,
 				A28964052A739F4E00151A36 /* listDepositAddressResponseIncomplete.json */,
+				A2A29EE22A968F690075C889 /* createExternalWalletResponse.json */,
+				A2A29EE42A9690620075C889 /* listExternalWalletResponse.json */,
+				A2A29EE62A9690C80075C889 /* listExternalWalletResponseIncomplete.json */,
 			);
 			path = JSON;
 			sourceTree = "<group>";
@@ -875,6 +934,8 @@
 			isa = PBXGroup;
 			children = (
 				0B289A09289E333C001B3360 /* CYBTextField.swift */,
+				A23FC5F22A94B17400129CE2 /* TextField.swift */,
+				A23FC5F42A94B6C600129CE2 /* TextFieldRightIcon.swift */,
 			);
 			path = TextFields;
 			sourceTree = "<group>";
@@ -921,6 +982,7 @@
 				0B2899E8288F3E1F001B3360 /* Cybrid.swift */,
 				0B00E01C28789ADA00707F26 /* BigDecimal.swift */,
 				9299104729D38C69007E9832 /* CDecimal.swift */,
+				A2A29F032A9865220075C889 /* ComponentEnum.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -983,6 +1045,7 @@
 				92827DAC294320EC00231772 /* BankRepository.swift */,
 				9299104129D350DB007E9832 /* TransfersRepository.swift */,
 				A24B35942A66D0A700EF20C5 /* DepositAddressRepository.swift */,
+				A23FC5F02A94951600129CE2 /* ExternalWalletRepository.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -1062,6 +1125,7 @@
 		0B96600B285A9A1A00584692 /* Mocks */ = {
 			isa = PBXGroup;
 			children = (
+				A2A29EE82A969FCC0075C889 /* ExternalWallet */,
 				A28963FC2A73315100151A36 /* DepositAddress */,
 				9299104B29D39108007E9832 /* Transfers */,
 				92827DC7294733D600231772 /* ExternalBankAccount */,
@@ -1204,6 +1268,7 @@
 				92A90A882911935400CA0E08 /* IdentityComponent */,
 				92F38C4D2924220B00008F58 /* BankAccounts */,
 				A29AA7C02A5DD81200B6CC1A /* DepositAddress */,
+				A24CB43F2A8BDD7E004FCC7A /* ExternalWallets */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -1231,6 +1296,7 @@
 		0BD6610E286B76AA00F4DA6B /* ReusableViews */ = {
 			isa = PBXGroup;
 			children = (
+				A23FC5F62A95108A00129CE2 /* AssetPicker */,
 				0BBD0CD228AC0B54001DBC5F /* Modal */,
 				0B289A08289E3325001B3360 /* TextFields */,
 				0BD6610F286B76CF00F4DA6B /* URLImageView */,
@@ -1393,6 +1459,7 @@
 				92827DCE2947998C00231772 /* ExternalBankAccountBankModel+Extensions.swift */,
 				9299104329D35642007E9832 /* TransferBankModel+Extensions.swift */,
 				A24B35982A67099C00EF20C5 /* DepositAddressBankModel+Extensions.swift */,
+				A23FC5EE2A9490BC00129CE2 /* ExternalWalletBankModel+Extensions.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1675,6 +1742,7 @@
 		92F120552996A8890086EE18 /* Components Tests */ = {
 			isa = PBXGroup;
 			children = (
+				A2A29EED2A96A8500075C889 /* ExternalWallet */,
 				A2C2EACA2A7419900039C441 /* DepositAddress */,
 				927746152A33DA9700F2EB9D /* IdentityVerification */,
 				9257E78E29B7DE4700846E12 /* Accounts */,
@@ -1789,6 +1857,60 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		A23FC5E62A94093200129CE2 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				A23FC5E82A944F5900129CE2 /* ExternalWalletViewModel.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		A23FC5E72A94093C00129CE2 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				A23FC5EA2A94508C00129CE2 /* ExternalWalletsViewController.swift */,
+				A2A29F052A98697B0075C889 /* QRScannerViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		A23FC5F62A95108A00129CE2 /* AssetPicker */ = {
+			isa = PBXGroup;
+			children = (
+				A23FC5F92A951D1300129CE2 /* Cell */,
+				A23FC5F72A95109D00129CE2 /* AssetPicker.swift */,
+			);
+			path = AssetPicker;
+			sourceTree = "<group>";
+		};
+		A23FC5F92A951D1300129CE2 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				A23FC5FA2A951D1E00129CE2 /* AssetPickerCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		A23FC5FC2A952E5100129CE2 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				A23FC5FD2A952E6200129CE2 /* ExternalWalletCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		A23FC5FF2A95847D00129CE2 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				A23FC5EC2A94588600129CE2 /* ExternalWalletsView+Extensions.swift */,
+				A23FC6042A958A2000129CE2 /* _Wallets.swift */,
+				A23FC6062A958A5900129CE2 /* _Wallet.swift */,
+				A23FC6022A95895D00129CE2 /* _CreateWallet.swift */,
+				A2A29EF52A97DE050075C889 /* _Error.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		A24B35912A66D03F00EF20C5 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -1805,6 +1927,18 @@
 			path = Modal;
 			sourceTree = "<group>";
 		};
+		A24CB43F2A8BDD7E004FCC7A /* ExternalWallets */ = {
+			isa = PBXGroup;
+			children = (
+				A23FC5FC2A952E5100129CE2 /* Cell */,
+				A23FC5E72A94093C00129CE2 /* ViewController */,
+				A23FC5E62A94093200129CE2 /* View */,
+				A23FC5FF2A95847D00129CE2 /* Extensions */,
+				A24CB4402A8BDDF3004FCC7A /* ExternalWalletsView.swift */,
+			);
+			path = ExternalWallets;
+			sourceTree = "<group>";
+		};
 		A28963FC2A73315100151A36 /* DepositAddress */ = {
 			isa = PBXGroup;
 			children = (
@@ -1812,6 +1946,14 @@
 				A28963FF2A73336900151A36 /* DepositAddressMock.swift */,
 			);
 			path = DepositAddress;
+			sourceTree = "<group>";
+		};
+		A298F6B52A990D1700D45954 /* Error Tests */ = {
+			isa = PBXGroup;
+			children = (
+				A298F6B62A990D3000D45954 /* CybridServerErrorTest.swift */,
+			);
+			path = "Error Tests";
 			sourceTree = "<group>";
 		};
 		A29AA7C02A5DD81200B6CC1A /* DepositAddress */ = {
@@ -1832,6 +1974,33 @@
 				A29AA7C42A5DDBC700B6CC1A /* DepositAddresViewController.swift */,
 			);
 			path = ViewController;
+			sourceTree = "<group>";
+		};
+		A2A29EE82A969FCC0075C889 /* ExternalWallet */ = {
+			isa = PBXGroup;
+			children = (
+				A2A29EE92A969FFC0075C889 /* ExternalWalletAPIMock.swift */,
+				A2A29EEB2A96A0440075C889 /* ExternalWalletMock.swift */,
+			);
+			path = ExternalWallet;
+			sourceTree = "<group>";
+		};
+		A2A29EED2A96A8500075C889 /* ExternalWallet */ = {
+			isa = PBXGroup;
+			children = (
+				A2A29EEE2A96B8270075C889 /* View */,
+			);
+			path = ExternalWallet;
+			sourceTree = "<group>";
+		};
+		A2A29EEE2A96B8270075C889 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				A2A29EEF2A96B8370075C889 /* ExternalWalletViewModelTest.swift */,
+				A2A29EF12A96CCE70075C889 /* ExternalWalletViewModelErrorTest.swift */,
+				A2A29EF32A96CD160075C889 /* ExternalWalletTest.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		A2C2EACA2A7419900039C441 /* DepositAddress */ = {
@@ -2023,6 +2192,7 @@
 				92B681A0291C0F4700FD6E99 /* listIdentityVerifications.json in Resources */,
 				92827DB429439BCC00231772 /* fetchWorkflowResponse.json in Resources */,
 				9205B8B628E3A52A00883279 /* listTradesResponseIncomplete.json in Resources */,
+				A2A29EE72A9690C80075C889 /* listExternalWalletResponseIncomplete.json in Resources */,
 				0BBD0CEA28B7E7EE001DBC5F /* createQuoteResponse.json in Resources */,
 				9299105529D6020C007E9832 /* createTransferResponse.json in Resources */,
 				92827DBE2943A37200231772 /* fetchWorkflow_Incomplete.json in Resources */,
@@ -2038,8 +2208,10 @@
 				92B68198291C0D8500FD6E99 /* createCustomerBankModel.json in Resources */,
 				92827DD529479E4200231772 /* createExternalBankAccountBankModelResponse_Incomplete.json in Resources */,
 				0B96601E285AF03700584692 /* TestAssets.xcassets in Resources */,
+				A2A29EE32A968F690075C889 /* createExternalWalletResponse.json in Resources */,
 				92E08021295B922200372460 /* externalBankAccountListBankModel_Response_Incomplete.json in Resources */,
 				92827DCB2947979C00231772 /* fetchBankResponse.json in Resources */,
+				A2A29EE52A9690620075C889 /* listExternalWalletResponse.json in Resources */,
 				A28964042A739E8200151A36 /* listDepositAddressResponse.json in Resources */,
 				92F5EC7328E24150009DC3F4 /* listTradesResponse.json in Resources */,
 				92827DD129479D7800231772 /* createExternalBankAccountBankModelResponse.json in Resources */,
@@ -2242,15 +2414,18 @@
 				927233E628D244AC0080AAC4 /* AccountsHeaderCell.swift in Sources */,
 				92F707C2298C204F005A93E5 /* TradeViewController.swift in Sources */,
 				9257E79929CA037E00846E12 /* TransferViewController+Extensions.swift in Sources */,
+				A2A29F062A98697B0075C889 /* QRScannerViewController.swift in Sources */,
 				927233C228D1AAA20080AAC4 /* SymbolPriceBankModel+Extensions.swift in Sources */,
 				0BD6612A286DE86A00F4DA6B /* CybridLocalizationKey.swift in Sources */,
 				0B00E02E287F6AE500707F26 /* CybridError.swift in Sources */,
 				92A90A8A2911939400CA0E08 /* IdentityVerificationViewController.swift in Sources */,
 				927233D628D243DC0080AAC4 /* AccountTradesViewController.swift in Sources */,
 				927233CD28D2419B0080AAC4 /* QuoteBankModel+Extensions.swift in Sources */,
+				A23FC5E92A944F5900129CE2 /* ExternalWalletViewModel.swift in Sources */,
 				92A2FD8429AE837200146D1E /* AccountsViewController+Extensions.swift in Sources */,
 				92635470294CEC0400660E0B /* BankAccountsViewController+Extensions.swift in Sources */,
 				92663D0F293FD60800842E30 /* WorkflowRepository.swift in Sources */,
+				A23FC5F82A95109D00129CE2 /* AssetPicker.swift in Sources */,
 				9257E78D29B7B2E500846E12 /* AccountsFiatCell.swift in Sources */,
 				A29AA7C52A5DDBC700B6CC1A /* DepositAddresViewController.swift in Sources */,
 				9299104629D38853007E9832 /* AssetFormatter.swift in Sources */,
@@ -2261,6 +2436,7 @@
 				A21E047C2A86BB4D0046CCBA /* ViewUtils.swift in Sources */,
 				92663D09293FACB900842E30 /* IdentityVerificationWithDetailsBankModel+Extensions.swift in Sources */,
 				92663D0D293FCC9500842E30 /* BankAccountsViewModel.swift in Sources */,
+				A23FC6032A95895D00129CE2 /* _CreateWallet.swift in Sources */,
 				92827DA92943182B00231772 /* WorkflowWithDetailsBankModel+Extensions.swift in Sources */,
 				A24B35932A66D05200EF20C5 /* DepositAddressViewModel.swift in Sources */,
 				0BD6613A2872BC0B00F4DA6B /* CybridCurrencyFormatter.swift in Sources */,
@@ -2281,6 +2457,7 @@
 				0B00E01D28789ADA00707F26 /* BigDecimal.swift in Sources */,
 				0BBD0CD428AC0B60001DBC5F /* CybridModalViewController.swift in Sources */,
 				A24B35952A66D0A700EF20C5 /* DepositAddressRepository.swift in Sources */,
+				A2A29F022A985ED40075C889 /* CybridServerError.swift in Sources */,
 				92AD743128D418610071F17F /* String+Extensions.swift in Sources */,
 				927233C028D1AA7E0080AAC4 /* TradeBankModel+Extensions.swift in Sources */,
 				927233E128D2447F0080AAC4 /* AccountsViewModel.swift in Sources */,
@@ -2291,7 +2468,9 @@
 				0B2B2A8528629031002F0EC1 /* UIColor+Extensions.swift in Sources */,
 				0B2B2A872862906E002F0EC1 /* UILabel+Extensions.swift in Sources */,
 				9224F76529DB61E000712D3B /* AccountTransfersHeaderCell.swift in Sources */,
+				A23FC5ED2A94588600129CE2 /* ExternalWalletsView+Extensions.swift in Sources */,
 				0B2B2A6D28621D5C002F0EC1 /* ColorTheme.swift in Sources */,
+				A23FC5EF2A9490BC00129CE2 /* ExternalWalletBankModel+Extensions.swift in Sources */,
 				0B00E04C2885AD8D00707F26 /* PricesRepository.swift in Sources */,
 				927233DC28D244210080AAC4 /* BalanceUIModel.swift in Sources */,
 				0BBD0CDC28B5D6F7001DBC5F /* TradesRepository.swift in Sources */,
@@ -2302,6 +2481,7 @@
 				0B2899E9288F3E1F001B3360 /* Cybrid.swift in Sources */,
 				A24B359E2A6EE6EE00EF20C5 /* PaymentModal.swift in Sources */,
 				927233BB28D12FD10080AAC4 /* UIFont+Extensions.swift in Sources */,
+				A2A29F042A9865220075C889 /* ComponentEnum.swift in Sources */,
 				0BD66118286B79C500F4DA6B /* UIView+Constraints.swift in Sources */,
 				92827DAF294322AD00231772 /* BankBankModel+Extensions.swift in Sources */,
 				A24B35992A67099C00EF20C5 /* DepositAddressBankModel+Extensions.swift in Sources */,
@@ -2311,11 +2491,14 @@
 				0B303CE42862E5D9007BF7FF /* CybridConfig.swift in Sources */,
 				0BD660FD286B763E00F4DA6B /* ConcurrencyInterfaces.swift in Sources */,
 				0BD66109286B768C00F4DA6B /* ListPricesView.swift in Sources */,
+				A2A29EF62A97DE050075C889 /* _Error.swift in Sources */,
+				A23FC5FE2A952E6200129CE2 /* ExternalWalletCell.swift in Sources */,
 				927233D128D243830080AAC4 /* UIModal.swift in Sources */,
 				0BD660FC286B763E00F4DA6B /* URLImageOperation.swift in Sources */,
 				A29AA7C72A5E1BC000B6CC1A /* Component.swift in Sources */,
 				0B00E024287CD72D00707F26 /* Environment.swift in Sources */,
 				0B078F1228497B070020B4F7 /* CybridSDK.docc in Sources */,
+				A23FC6072A958A5900129CE2 /* _Wallet.swift in Sources */,
 				9224F76B29DB9D6800712D3B /* AccountTransfersViewController.swift in Sources */,
 				0BD66125286D7C0400F4DA6B /* Localizer.swift in Sources */,
 				0BD66111286B76DC00F4DA6B /* URLImageView.swift in Sources */,
@@ -2333,12 +2516,15 @@
 				927233E328D2448F0080AAC4 /* AccountTradesViewModel.swift in Sources */,
 				929C087B29A5461E0075BA89 /* BankAccountDetailModal.swift in Sources */,
 				0BD6610A286B768C00F4DA6B /* ListPricesViewModel.swift in Sources */,
+				A23FC6052A958A2000129CE2 /* _Wallets.swift in Sources */,
 				9299104829D38C69007E9832 /* CDecimal.swift in Sources */,
 				92F12051299435140086EE18 /* AccountAssetUIModel.swift in Sources */,
 				92BAC4662A2E3F0B005CCD2A /* SDKConfig.swift in Sources */,
+				A23FC5F12A94951600129CE2 /* ExternalWalletRepository.swift in Sources */,
 				0B00E05C2887256B00707F26 /* UIView+Keyboard.swift in Sources */,
 				92F38C4F2924223E00008F58 /* BankAccountsViewController.swift in Sources */,
 				A29AA7C22A5DD85D00B6CC1A /* DepositAddressView.swift in Sources */,
+				A23FC5F52A94B6C600129CE2 /* TextFieldRightIcon.swift in Sources */,
 				0BBD0CCA28AAC025001DBC5F /* BigDecimalValidator.swift in Sources */,
 				927233D428D243C60080AAC4 /* AccountsViewController.swift in Sources */,
 				A24B359B2A67207D00EF20C5 /* UIView+Extensions.swift in Sources */,
@@ -2348,11 +2534,14 @@
 				0B2B2A8928629324002F0EC1 /* Theme.swift in Sources */,
 				0B289A07289E29D4001B3360 /* AssetBankModel+Extensions.swift in Sources */,
 				927233E828D244BD0080AAC4 /* AccountsCell.swift in Sources */,
+				A23FC5EB2A94508C00129CE2 /* ExternalWalletsViewController.swift in Sources */,
 				0BBD0CCE28AB71B7001DBC5F /* _TradeViewModel.swift in Sources */,
+				A24CB4412A8BDDF3004FCC7A /* ExternalWalletsView.swift in Sources */,
 				9299104229D350DB007E9832 /* TransfersRepository.swift in Sources */,
 				0B289A0A289E333C001B3360 /* CYBTextField.swift in Sources */,
 				A24B35972A66DCFE00EF20C5 /* ImageUtils.swift in Sources */,
 				0B303CE12862E062007BF7FF /* FormatStyle.swift in Sources */,
+				A23FC5F32A94B17400129CE2 /* TextField.swift in Sources */,
 				0B2899F828942C54001B3360 /* CybridJSONDecoder.swift in Sources */,
 				92F707C4298C235F005A93E5 /* TradeViewController+Extensions.swift in Sources */,
 				0BD66105286B768300F4DA6B /* CryptoPriceTableViewCell.swift in Sources */,
@@ -2363,6 +2552,7 @@
 				92A90A8729118C0C00CA0E08 /* CustomersRepository.swift in Sources */,
 				92C92C892911F2DA00B81719 /* Polling.swift in Sources */,
 				0B303CDF2862DD2C007BF7FF /* UIConstants.swift in Sources */,
+				A23FC5FB2A951D1E00129CE2 /* AssetPickerCell.swift in Sources */,
 				0B00E040287F81A500707F26 /* CybridAPIManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2383,6 +2573,7 @@
 				92F1205B2996B4D60086EE18 /* CryptoPriceModelTest.swift in Sources */,
 				9257E79329B7E27400846E12 /* AccountsViewModelErrorTest.swift in Sources */,
 				92F222D92914359C00137B11 /* PollingTest.swift in Sources */,
+				A2A29EF02A96B8370075C889 /* ExternalWalletViewModelTest.swift in Sources */,
 				92B6819129197DDB00FD6E99 /* IdentityVerificationsAPIMock.swift in Sources */,
 				0BBCF640285C52D700D39C6D /* MockError.swift in Sources */,
 				0BD6613E2874AFAA00F4DA6B /* MockNumberFormatter.swift in Sources */,
@@ -2405,6 +2596,7 @@
 				9299104D29D3912B007E9832 /* TransfersAPIMock.swift in Sources */,
 				0B00E0522886F01A00707F26 /* AssetsAPIMock.swift in Sources */,
 				9224F76D29DBC97100712D3B /* AccountTransfersViewModelTest.swift in Sources */,
+				A2A29EEA2A969FFC0075C889 /* ExternalWalletAPIMock.swift in Sources */,
 				0B289A0028946B52001B3360 /* JSONMockHelper.swift in Sources */,
 				0B303CEC2862F898007BF7FF /* ColorThemeTests.swift in Sources */,
 				0B00E03C287F7BA500707F26 /* CybridSessionTests.swift in Sources */,
@@ -2415,7 +2607,9 @@
 				0BBD0CE828B6C730001DBC5F /* TradeMock.swift in Sources */,
 				9299104A29D38F3C007E9832 /* CDecimalTest.swift in Sources */,
 				0B2899ED288F4BE5001B3360 /* TaskSchedulerMock.swift in Sources */,
+				A298F6B72A990D3000D45954 /* CybridServerErrorTest.swift in Sources */,
 				0B966011285AA24300584692 /* AssertionFailureOverrideTests.swift in Sources */,
+				A2A29EF42A96CD160075C889 /* ExternalWalletTest.swift in Sources */,
 				92CB9E3F2914C15000357873 /* CustomersAPIMock.swift in Sources */,
 				0B00E01F2878A16800707F26 /* BigDecimalTests.swift in Sources */,
 				92827DB629439BF700231772 /* WorkflowAPIMock.swift in Sources */,
@@ -2429,9 +2623,11 @@
 				92827DC62943E7A100231772 /* BankAPIMock.swift in Sources */,
 				0BD6611B286C197B00F4DA6B /* UIViewConstraintsTests.swift in Sources */,
 				92E0801D295B6D9A00372460 /* TransferViewModelErrorTest.swift in Sources */,
+				A2A29EF22A96CCE70075C889 /* ExternalWalletViewModelErrorTest.swift in Sources */,
 				9257E79129B7DE5A00846E12 /* AccountsViewModelTest.swift in Sources */,
 				92F1205E2996BC080086EE18 /* AccountAssetUIModelTest.swift in Sources */,
 				0B00E0572886F25F00707F26 /* PricesAPIMock.swift in Sources */,
+				A2A29EEC2A96A0440075C889 /* ExternalWalletMock.swift in Sources */,
 				0B966013285AA2EB00584692 /* URLImageViewTests.swift in Sources */,
 				0B50F35928A5885400DDB01E /* CybridEventTests.swift in Sources */,
 				9217353B28E3FF7500DF58CA /* AccountBankModelTest.swift in Sources */,
@@ -2750,8 +2946,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 19;
-				DEVELOPMENT_TEAM = "";
+				CURRENT_PROJECT_VERSION = 20;
+				DEVELOPMENT_TEAM = KG8S48C83K;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CybridSDKTestApp/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Cybrid Demo App";
@@ -2767,8 +2963,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.19;
-				PRODUCT_BUNDLE_IDENTIFIER = app.cybrid.CybridSDKTestApp;
+				MARKETING_VERSION = 1.20;
+				PRODUCT_BUNDLE_IDENTIFIER = "app.cybrid.-CybridSDKTestApp";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -2783,8 +2979,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 19;
-				DEVELOPMENT_TEAM = "";
+				CURRENT_PROJECT_VERSION = 20;
+				DEVELOPMENT_TEAM = KG8S48C83K;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CybridSDKTestApp/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Cybrid Demo App";
@@ -2800,8 +2996,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.19;
-				PRODUCT_BUNDLE_IDENTIFIER = app.cybrid.CybridSDKTestApp;
+				MARKETING_VERSION = 1.20;
+				PRODUCT_BUNDLE_IDENTIFIER = "app.cybrid.-CybridSDKTestApp";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

@@ -441,7 +441,7 @@ extension BankAccountsViewController {
         static let doneButtonText = "cybrid.bank.accounts.done.button.text"
         static let errorText = "cybrid.bank.accounts.error.text"
         static let errorButtonText = "cybrid.bank.accounts.error.button.text"
-        
+
         static let authMessageTitle = "cybrid.bank.accounts.auth.title"
         static let authWarningMessage = "cybrid.bank.accounts.auth.warning"
         static let authMessageString = "cybrid.bank.accounts.auth.message"

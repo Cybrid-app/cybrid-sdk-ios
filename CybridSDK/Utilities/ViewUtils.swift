@@ -42,5 +42,5 @@ func setupScrollView(_ scroll: UIScrollView, parent: UIView) -> UIView {
 
 func getImage(_ named: String, aClass: AnyClass) -> UIImage {
 
-    return UIImage(named: "bankAuthorizationImage", in: Bundle(for: aClass), with: nil)!
+    return UIImage(named: named, in: Bundle(for: aClass), with: nil)!
 }

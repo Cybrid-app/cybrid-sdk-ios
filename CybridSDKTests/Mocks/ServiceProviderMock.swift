@@ -19,7 +19,8 @@ final class ServiceProviderMock: AssetsRepoProvider,
                                  ExternalBankAccountProvider,
                                  BankProvider,
                                  TransfersRepoProvider,
-                                 DepositAddressRepoProvider {
+                                 DepositAddressRepoProvider,
+                                 ExternalWalletRepoProvider {
 
     var apiManager: CybridAPIManager.Type = MockAPIManager.self
 
@@ -36,6 +37,7 @@ final class ServiceProviderMock: AssetsRepoProvider,
     var bankRepository: BankRepository.Type = BankAPIMock.self
     var transfersRepository: TransfersRepository.Type = TransfersAPIMock.self
     var depositAddressRepository: DepositAddressRepository.Type = DepositAddressAPIMock.self
+    var externalWalletRepository: ExternalWalletRepository.Type = ExternalWalletAPIMock.self
 
     // MARK: Cache
     var assetsCache: [AssetBankModel]?
@@ -363,5 +365,46 @@ final class ServiceProviderMock: AssetsRepoProvider,
     func didCreateDepositAddressFailed() {
         Cybrid.session.setupSession(authToken: "TEST-TOKEN")
         DepositAddressAPIMock.didCreateDepositAddressFailed()
+    }
+
+    // MARK: External Wallet
+    func didFetchListExternalWalletsSuccessfully() {
+        Cybrid.session.setupSession(authToken: "TEST-TOKEN")
+        ExternalWalletAPIMock.didFetchListExternalWalletsSuccessfully()
+    }
+
+    func didFetchListExternalWalletsFailed() {
+        Cybrid.session.setupSession(authToken: "TEST-TOKEN")
+        ExternalWalletAPIMock.didFetchListExternalWalletsFailed()
+    }
+
+    func didFetchExternalWalletSuccessfully() {
+        Cybrid.session.setupSession(authToken: "TEST-TOKEN")
+        ExternalWalletAPIMock.didFetchExternalWalletSuccessfully()
+    }
+
+    func didFetchExternalWalletFailed() {
+        Cybrid.session.setupSession(authToken: "TEST-TOKEN")
+        ExternalWalletAPIMock.didFetchExternalWalletFailed()
+    }
+
+    func didCreateExternalWalletSuccessfully() {
+        Cybrid.session.setupSession(authToken: "TEST-TOKEN")
+        ExternalWalletAPIMock.didCreateExternalWalletSuccessfully()
+    }
+
+    func didCreateExternalWalletFailed() {
+        Cybrid.session.setupSession(authToken: "TEST-TOKEN")
+        ExternalWalletAPIMock.didCreateExternalWalletFailed()
+    }
+
+    func didDeleteExternalWalletSuccessfully() {
+        Cybrid.session.setupSession(authToken: "TEST-TOKEN")
+        ExternalWalletAPIMock.didDeleteExternalWalletSuccessfully()
+    }
+
+    func didDeleteExternalWalletFailed() {
+        Cybrid.session.setupSession(authToken: "TEST-TOKEN")
+        ExternalWalletAPIMock.didDeleteExternalWalletFailed()
     }
 }

@@ -38,4 +38,17 @@ class UIViewExtensionTests: XCTestCase {
         // -- Then
         XCTAssertNil(foundViewController)
     }
+
+    func test_removeChilds() {
+
+        let view = UIView()
+        let subview1 = UIView()
+        let subview2 = UIView()
+        view.addSubview(subview1)
+        view.addSubview(subview2)
+
+        XCTAssertEqual(view.subviews.count, 2)
+        view.removeChilds()
+        XCTAssertEqual(view.subviews.count, 0)
+    }
 }

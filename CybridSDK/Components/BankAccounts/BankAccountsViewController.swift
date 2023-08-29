@@ -50,6 +50,7 @@ public final class BankAccountsViewController: UIViewController {
     func setupView() {
 
         view.backgroundColor = .white
+        self.view.overrideUserInterfaceStyle = .light
         self.initComponentContent()
         self.manageCurrentStateUI()
         self.accountsTable.register(BankAccountCell.self, forCellReuseIdentifier: BankAccountCell.reuseIdentifier)

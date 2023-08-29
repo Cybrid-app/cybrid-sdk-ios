@@ -19,4 +19,11 @@ extension UIView {
         }
         return nil
     }
+
+    func removeChilds() {
+
+        for view in self.subviews {
+            view.removeFromSuperview()
+        }
+    }
 }

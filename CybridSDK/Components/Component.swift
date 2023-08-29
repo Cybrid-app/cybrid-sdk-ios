@@ -92,6 +92,122 @@ public class Component: UIView, ComponentProtocol {
         ])
         layoutSubviews()
     }
+
+    internal func removeSubViewsFromContent() {
+
+        for view in self.subviews {
+            view.removeFromSuperview()
+        }
+    }
+
+    internal func createLoaderScreen(text: String) {
+
+        // -- Loading Label Container
+        let loadingLabelContainer = UIView()
+        self.addSubview(loadingLabelContainer)
+        loadingLabelContainer.centerVertical(parent: self)
+        loadingLabelContainer.constraintLeft(self, margin: 10)
+        loadingLabelContainer.constraintRight(self, margin: 10)
+        loadingLabelContainer.constraintHeight(100)
+
+        // -- Loading label
+        let loadingLabel = UILabel()
+        loadingLabel.font = UIFont.make(ofSize: 22)
+        loadingLabel.textColor = UIColor.init(hex: "#3A3A3C")
+        let paragraphStyle = getParagraphStyle(1.05)
+        paragraphStyle.alignment = .center
+        loadingLabel.setParagraphText(text, paragraphStyle)
+        loadingLabelContainer.addSubview(loadingLabel)
+        loadingLabel.constraintTop(loadingLabelContainer, margin: 0)
+        loadingLabel.constraintLeft(loadingLabelContainer, margin: 0)
+        loadingLabel.constraintRight(loadingLabelContainer, margin: 0)
+
+        // -- Spinner
+        let spinner = UIActivityIndicatorView(style: .medium)
+        spinner.color = UIColor.init(hex: "#007AFF")
+        spinner.startAnimating()
+        loadingLabelContainer.addSubview(spinner)
+        spinner.below(loadingLabel, top: 25)
+        spinner.centerHorizontal(parent: loadingLabelContainer)
+        spinner.setConstraintsSize(size: CGSize(width: 43, height: 43))
+        spinner.transform = CGAffineTransform(scaleX: 2.0, y: 2.0)
+    }
+
+    @discardableResult
+    internal func createEmptySection(text: String, font: UIFont = UIFont.make(ofSize: 20)) -> UIView {
+
+        // -- Loading Label Container
+        let emptyContainer = UIView()
+        emptyContainer.constraintHeight(105)
+
+        // -- Image
+        let imageEmpty = UIImageView(image: getImage("ic_empty", aClass: Self.self))
+        emptyContainer.addSubview(imageEmpty)
+        imageEmpty.constraintTop(emptyContainer, margin: 0)
+        imageEmpty.centerHorizontal(parent: emptyContainer)
+        imageEmpty.setConstraintsSize(size: CGSize(width: 60, height: 60))
+
+        // -- Loading label
+        let paragraphStyle = getParagraphStyle(1.05)
+        paragraphStyle.alignment = .center
+        let emptyLabel = UILabel()
+        emptyLabel.font = font
+        emptyLabel.textColor = UIColor.init(hex: "#3A3A3C")
+        emptyLabel.setParagraphText(text, paragraphStyle)
+        emptyContainer.addSubview(emptyLabel)
+        emptyLabel.below(imageEmpty, top: 20)
+        emptyLabel.constraintLeft(emptyContainer, margin: 0)
+        emptyLabel.constraintRight(emptyContainer, margin: 0)
+
+        // -- Return
+        return emptyContainer
+    }
+
+    @discardableResult
+    internal func createError(message: String,
+                              font: UIFont = UIFont.make(ofSize: 20)) -> UIView {
+
+        // -- Error container
+        let errorContainer = UIView()
+        errorContainer.constraintHeight(105)
+
+        // -- Error Image
+        let errorImage = UIImageView(image: getImage("kyc_error", aClass: Self.self))
+        errorContainer.addSubview(errorImage)
+        errorImage.constraintTop(errorContainer, margin: 0)
+        errorImage.centerHorizontal(parent: errorContainer)
+        errorImage.setConstraintsSize(size: CGSize(width: 60, height: 60))
+
+        // -- Error message
+        let paragraphStyle = getParagraphStyle(1.05)
+        paragraphStyle.alignment = .center
+        let errorMessage = UILabel()
+        errorMessage.font = font
+        errorMessage.textColor = UIColor.init(hex: "#3A3A3C")
+        errorMessage.setParagraphText(message, paragraphStyle)
+        errorContainer.addSubview(errorMessage)
+        errorMessage.below(errorImage, top: 20)
+        errorMessage.constraintLeft(errorContainer, margin: 0)
+        errorMessage.constraintRight(errorContainer, margin: 0)
+
+        // -- Return
+        return errorContainer
+    }
+
+    internal func label(font: UIFont,
+                        color: UIColor,
+                        text: String,
+                        lineHeight: CGFloat,
+                        aligment: NSTextAlignment = .center) -> UILabel {
+
+        let paragraphStyle = getParagraphStyle(lineHeight)
+        paragraphStyle.alignment = aligment
+        let label = UILabel()
+        label.font = font
+        label.textColor = color
+        label.setParagraphText(text, paragraphStyle)
+        return label
+    }
 }
 
 protocol ComponentProtocol {

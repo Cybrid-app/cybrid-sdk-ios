@@ -26,6 +26,7 @@ public final class DepositAddresView: Component {
     override func setupView() {
 
         self.backgroundColor = UIColor.clear
+        self.overrideUserInterfaceStyle = .light
         self.manageCurrentStateUI()
     }
 
@@ -46,13 +47,6 @@ public final class DepositAddresView: Component {
             case .ERROR:
                 self.depositAddressView_Error()
             }
-        }
-    }
-
-    internal func removeSubViewsFromContent() {
-
-        for view in self.subviews {
-            view.removeFromSuperview()
         }
     }
 }

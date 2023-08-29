@@ -70,6 +70,12 @@ final class CybridJSONDecoder: JSONDecoder {
         case is DepositAddressBankModel.Type:
             return try decodeDepositAddressBankModel(data: data) as! T
 
+        case is ExternalWalletListBankModel.Type:
+            return try decodeExternalWalletList(data: data) as! T
+
+        case is ExternalWalletBankModel.Type:
+            return try decodeExternalWalletBankModel(data: data) as! T
+
         default:
             return try super.decode(type, from: data)
         }
@@ -370,6 +376,38 @@ extension CybridJSONDecoder {
         let jsonStringObject: [String: Any] = jsonObject
         guard
             let model = DepositAddressBankModel(json: jsonStringObject)
+        else {
+            throw DecodingError.customDecodingError
+        }
+        return model
+    }
+
+    func decodeExternalWalletList(data: Data) throws -> ExternalWalletListBankModel? {
+
+        guard let jsonObject = try JSONSerialization.jsonObject(with: data) as? [String: Any] else {
+            throw DecodingError.customDecodingError
+        }
+        let jsonStringObject: [String: Any] = jsonObject
+        let objectsValue = jsonStringObject[ExternalWalletListBankModel.CodingKeys.objects.rawValue] as? [[String: Any]]
+        var objects = [ExternalWalletBankModel]()
+        if let objectsValue = objectsValue {
+            objects = ExternalWalletBankModel.fromArray(objects: objectsValue)
+        }
+        return ExternalWalletListBankModel(
+            total: jsonStringObject[ExternalWalletListBankModel.CodingKeys.total.rawValue] as? Int ?? 0,
+            page: jsonStringObject[ExternalWalletListBankModel.CodingKeys.page.rawValue] as? Int ?? 0,
+            perPage: jsonStringObject[ExternalWalletListBankModel.CodingKeys.perPage.rawValue] as? Int ?? 0,
+            objects: objects)
+    }
+
+    func decodeExternalWalletBankModel(data: Data) throws -> ExternalWalletBankModel {
+
+        guard let jsonObject = try JSONSerialization.jsonObject(with: data) as? [String: Any] else {
+            throw DecodingError.customDecodingError
+        }
+        let jsonStringObject: [String: Any] = jsonObject
+        guard
+            let model = ExternalWalletBankModel(json: jsonStringObject)
         else {
             throw DecodingError.customDecodingError
         }

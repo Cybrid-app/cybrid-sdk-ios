@@ -91,18 +91,6 @@ public extension UIView {
         }
     }
 
-    func updateConstraint(attribute: NSLayoutConstraint.Attribute, constant: CGFloat) {
-
-        let currentContraints = constraints
-        currentContraints.forEach { constraint in
-            let lala = constraint.firstAttribute
-            let lalala = constraint.relation
-            if constraint.firstAttribute == attribute && constraint.relation == .equal {
-                constraint.constant = constant
-            }
-        }
-    }
-
     func setConstraintsSize(size: CGSize) {
 
         self.constraint(attribute: .width,
@@ -483,6 +471,39 @@ public extension UIView {
                         constant: top)
     }
 
+    // swiftlint:disable:next identifier_name
+    func above(_ to: UIView, bottom: CGFloat) {
+
+        self.translatesAutoresizingMaskIntoConstraints = false
+        self.constraint(attribute: .bottom,
+                        relatedBy: .equal,
+                        toItem: to,
+                        attribute: .top,
+                        constant: -bottom)
+    }
+
+    // swiftlint:disable:next identifier_name
+    func leftAside(_ to: UIView, margin: CGFloat) {
+
+        self.translatesAutoresizingMaskIntoConstraints = false
+        self.constraint(attribute: .leading,
+                        relatedBy: .equal,
+                        toItem: to,
+                        attribute: .trailing,
+                        constant: margin)
+    }
+
+    // swiftlint:disable:next identifier_name
+    func rightAside(_ to: UIView, margin: CGFloat) {
+
+        self.translatesAutoresizingMaskIntoConstraints = false
+        self.constraint(attribute: .trailing,
+                        relatedBy: .equal,
+                        toItem: to,
+                        attribute: .leading,
+                        constant: -margin)
+    }
+
     func centerHorizontal(parent: UIView) {
 
         self.translatesAutoresizingMaskIntoConstraints = false
@@ -501,14 +522,16 @@ public extension UIView {
                         attribute: .centerY)
     }
 
-    func constraintHeight(_ value: CGFloat) {
+    @discardableResult
+    func constraintHeight(_ value: CGFloat) -> NSLayoutConstraint {
 
         self.translatesAutoresizingMaskIntoConstraints = false
-        self.constraint(attribute: .height,
-                        relatedBy: .equal,
-                        toItem: nil,
-                        attribute: .notAnAttribute,
-                        constant: value)
+        let heightConstraint = self.constraint(attribute: .height,
+                                               relatedBy: .equal,
+                                               toItem: nil,
+                                               attribute: .notAnAttribute,
+                                               constant: value)
+        return heightConstraint
     }
 
     func constraintWidth(_ value: CGFloat) {

@@ -54,6 +54,8 @@ public class ListPricesView: UITableView {
     estimatedRowHeight = Constants.rowHeight
     translatesAutoresizingMaskIntoConstraints = false
     allowsSelection = true
+    self.backgroundColor = UIColor.white
+    self.overrideUserInterfaceStyle = .light
   }
 
   private func startLiveUpdates() {

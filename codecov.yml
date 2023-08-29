@@ -32,6 +32,7 @@ ignore:
   - "CybridSDK/Utilities/ReusableViews/*"
   - "CybridSDK/Utilities/ReusableViews/**/*"
   - "CybridSDK/Utilities/Formatters/BigDecimalValidator"
+  - "CybridSDK/Components/**/Extensions/*"
 
 parsers:
   gcov:

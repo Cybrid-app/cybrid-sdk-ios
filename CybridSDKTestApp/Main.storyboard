@@ -2,7 +2,8 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="h3g-jT-Vru">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -17,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="cIp-MT-lRL">
-                                <rect key="frame" x="0.0" y="305" width="414" height="300"/>
+                                <rect key="frame" x="0.0" y="275" width="414" height="360"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5je-8O-oTJ">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="60"/>
@@ -72,6 +73,17 @@
                                         <buttonConfiguration key="configuration" style="plain" title="Bank Accounts Component"/>
                                         <connections>
                                             <action selector="didTapBankAccountsButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Cau-ln-rhh"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8tg-jU-Tip">
+                                        <rect key="frame" x="0.0" y="300" width="414" height="60"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="60" id="klH-tc-War"/>
+                                        </constraints>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="External Wallets Component"/>
+                                        <connections>
+                                            <action selector="didTapExternalWalletsButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="qzp-xT-zsx"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -185,10 +197,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bDR-4B-oyo">
-                                <rect key="frame" x="30" y="552" width="354" height="30"/>
+                                <rect key="frame" x="30" y="554.5" width="354" height="48"/>
                                 <accessibility key="accessibilityConfiguration" identifier="demo_mode"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="YYU-Z4-lah"/>
+                                    <constraint firstAttribute="height" constant="48" id="YYU-Z4-lah"/>
                                 </constraints>
                                 <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="Button"/>
@@ -214,14 +226,6 @@
                                     <color key="baseForegroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="baseBackgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </buttonConfiguration>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="textColor">
-                                        <color key="value" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="titleColorForNormal">
-                                        <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="login:" destination="u29-vx-Ptb" eventType="touchUpInside" id="RYo-iE-O8m"/>
                                 </connections>
@@ -241,7 +245,7 @@
                             <constraint firstItem="VTZ-QI-HOt" firstAttribute="trailing" secondItem="rWa-BH-Roz" secondAttribute="trailing" constant="30" id="KzP-0S-FeX"/>
                             <constraint firstItem="VTZ-QI-HOt" firstAttribute="trailing" secondItem="OO4-iE-FhO" secondAttribute="trailing" constant="30" id="LcB-hR-SOm"/>
                             <constraint firstItem="IkL-4M-hYw" firstAttribute="leading" secondItem="VTZ-QI-HOt" secondAttribute="leading" constant="40" id="NY2-tZ-ay6"/>
-                            <constraint firstItem="bDR-4B-oyo" firstAttribute="top" secondItem="CXa-0i-KzW" secondAttribute="bottom" constant="5" id="Nj5-Dk-p1q"/>
+                            <constraint firstItem="bDR-4B-oyo" firstAttribute="top" secondItem="CXa-0i-KzW" secondAttribute="bottom" constant="7.5" id="Nj5-Dk-p1q"/>
                             <constraint firstItem="CXa-0i-KzW" firstAttribute="top" secondItem="OO4-iE-FhO" secondAttribute="bottom" constant="5" id="TYF-Zu-jym"/>
                             <constraint firstItem="0Jv-FV-bNS" firstAttribute="leading" secondItem="VTZ-QI-HOt" secondAttribute="leading" constant="40" id="TiS-OU-pZ5"/>
                             <constraint firstItem="VTZ-QI-HOt" firstAttribute="trailing" secondItem="CXa-0i-KzW" secondAttribute="trailing" constant="40" id="bQ6-dO-JIw"/>

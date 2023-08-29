@@ -295,8 +295,8 @@ yoda_condition:
   severity: error
 
 file_length:
-  warning: 1000
-  error: 1200
+  warning: 4000
+  error: 4200
 
 large_tuple:
   warning: 3
@@ -323,6 +323,10 @@ type_body_length:
 function_body_length:
   warning: 300
   error: 350
+
+identifier_name:
+  warning: 50
+  error: 70
 
 function_parameter_count:
   warning: 15

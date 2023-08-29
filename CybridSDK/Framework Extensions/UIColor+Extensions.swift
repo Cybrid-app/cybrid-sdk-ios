@@ -27,7 +27,7 @@ extension UIColor {
         }
     }
 
-    convenience init(hex: String, alpha: CGFloat = 1.0) {
+    public convenience init(hex: String, alpha: CGFloat = 1.0) {
 
         let chars = Array(hex.dropFirst())
         self.init(red: .init(strtoul(String(chars[0...1]), nil, 16)) / 255,
