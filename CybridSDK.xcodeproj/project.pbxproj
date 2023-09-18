@@ -310,6 +310,8 @@
 		A2C2EACD2A7419CB0039C441 /* DepositAddressViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2C2EACC2A7419CB0039C441 /* DepositAddressViewModelTest.swift */; };
 		A2C2EACF2A741D020039C441 /* DepositAddressViewModelErrorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2C2EACE2A741D020039C441 /* DepositAddressViewModelErrorTest.swift */; };
 		A2E2059D2A71B23200A3C013 /* CybridConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E2059C2A71B23200A3C013 /* CybridConstants.swift */; };
+		A2EA1FA42AB8A8AC008EF698 /* CryptoTransferViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2EA1FA32AB8A8AC008EF698 /* CryptoTransferViewModel.swift */; };
+		A2EA1FA62AB8AB30008EF698 /* CryptoTransferView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2EA1FA52AB8AB30008EF698 /* CryptoTransferView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -663,6 +665,8 @@
 		A2C2EACC2A7419CB0039C441 /* DepositAddressViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepositAddressViewModelTest.swift; sourceTree = "<group>"; };
 		A2C2EACE2A741D020039C441 /* DepositAddressViewModelErrorTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepositAddressViewModelErrorTest.swift; sourceTree = "<group>"; };
 		A2E2059C2A71B23200A3C013 /* CybridConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CybridConstants.swift; sourceTree = "<group>"; };
+		A2EA1FA32AB8A8AC008EF698 /* CryptoTransferViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoTransferViewModel.swift; sourceTree = "<group>"; };
+		A2EA1FA52AB8AB30008EF698 /* CryptoTransferView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoTransferView.swift; sourceTree = "<group>"; };
 		D8168B44D4C796A81CF0902E /* Pods-Abstract-CybridSDKTestApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Abstract-CybridSDKTestApp.debug.xcconfig"; path = "Target Support Files/Pods-Abstract-CybridSDKTestApp/Pods-Abstract-CybridSDKTestApp.debug.xcconfig"; sourceTree = "<group>"; };
 		DA2CB27D937283DE5C4554C6 /* Pods-Abstract-CybridSDKTestApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Abstract-CybridSDKTestApp.release.xcconfig"; path = "Target Support Files/Pods-Abstract-CybridSDKTestApp/Pods-Abstract-CybridSDKTestApp.release.xcconfig"; sourceTree = "<group>"; };
 		EA20C56A815A7DDA14049904 /* Pods_Abstract_CybridSDKTestAppUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Abstract_CybridSDKTestAppUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1274,6 +1278,7 @@
 		0BD660FF286B765900F4DA6B /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				A2EA1FA12AB4B523008EF698 /* CryptoTransfer */,
 				A29AA7C62A5E1BC000B6CC1A /* Component.swift */,
 				0BD66106286B768C00F4DA6B /* ListPricesView.swift */,
 				0BD66100286B766B00F4DA6B /* ListPrices */,
@@ -2047,6 +2052,23 @@
 			name = View;
 			sourceTree = "<group>";
 		};
+		A2EA1FA12AB4B523008EF698 /* CryptoTransfer */ = {
+			isa = PBXGroup;
+			children = (
+				A2EA1FA22AB8A894008EF698 /* View */,
+				A2EA1FA52AB8AB30008EF698 /* CryptoTransferView.swift */,
+			);
+			path = CryptoTransfer;
+			sourceTree = "<group>";
+		};
+		A2EA1FA22AB8A894008EF698 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				A2EA1FA32AB8A8AC008EF698 /* CryptoTransferViewModel.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		E757BBB3F769F93B6529F753 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -2485,6 +2507,7 @@
 				9257E79929CA037E00846E12 /* TransferViewController+Extensions.swift in Sources */,
 				A2A29F062A98697B0075C889 /* QRScannerViewController.swift in Sources */,
 				927233C228D1AAA20080AAC4 /* SymbolPriceBankModel+Extensions.swift in Sources */,
+				A2EA1FA62AB8AB30008EF698 /* CryptoTransferView.swift in Sources */,
 				0BD6612A286DE86A00F4DA6B /* CybridLocalizationKey.swift in Sources */,
 				0B00E02E287F6AE500707F26 /* CybridError.swift in Sources */,
 				92A90A8A2911939400CA0E08 /* IdentityVerificationViewController.swift in Sources */,
@@ -2566,6 +2589,7 @@
 				927233D128D243830080AAC4 /* UIModal.swift in Sources */,
 				0BD660FC286B763E00F4DA6B /* URLImageOperation.swift in Sources */,
 				A29AA7C72A5E1BC000B6CC1A /* Component.swift in Sources */,
+				A2EA1FA42AB8A8AC008EF698 /* CryptoTransferViewModel.swift in Sources */,
 				0B00E024287CD72D00707F26 /* Environment.swift in Sources */,
 				0B078F1228497B070020B4F7 /* CybridSDK.docc in Sources */,
 				A23FC6072A958A5900129CE2 /* _Wallet.swift in Sources */,
