@@ -20,6 +20,7 @@ public final class CryptoTransferView: Component {
         self.cryptoTransferViewModel = cryptoTransferViewModel
         self.localizer = CybridLocalizer()
         self.setupView()
+        self.cryptoTransferViewModel?.initComponent()
     }
 
     override func setupView() {
@@ -39,6 +40,9 @@ public final class CryptoTransferView: Component {
 
             case .LOADING:
                 self.cryptoTransferView_Loading()
+
+            case .CONTENT:
+                self.cryptoTransferView_Content()
 
             default:
                 print("")

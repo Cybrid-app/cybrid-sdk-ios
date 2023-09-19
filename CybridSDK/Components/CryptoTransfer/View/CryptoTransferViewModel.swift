@@ -25,9 +25,12 @@ open class CryptoTransferViewModel: NSObject {
     internal var externalWallets: [ExternalWalletBankModel] = []
     internal var prices: Observable<[SymbolPriceBankModel]> = .init([])
 
+    internal var currentAccount: Observable<AccountBankModel?> = .init(nil)
     internal var currentExternalWallet: ExternalWalletBankModel?
     internal var currentQuote: Observable<QuoteBankModel?> = .init(nil)
     internal var currentTransfer: Observable<TransferBankModel?> = .init(nil)
+
+    internal var isTransferInFiat: Observable<Bool> = .init(false)
 
     internal var pricesPolling: Polling?
 
@@ -139,5 +142,11 @@ open class CryptoTransferViewModel: NSObject {
                 self?.logger?.log(.component(.accounts(.accountsDataError)))
             }
         }
+    }
+
+    // MARK: ViewActions
+    @objc
+    internal func switchActionHandler(_ sender: UIButton) {
+        self.isTransferInFiat.value = !self.isTransferInFiat.value
     }
 }
