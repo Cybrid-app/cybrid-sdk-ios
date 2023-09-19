@@ -10,88 +10,132 @@ import CybridApiBankSwift
 
 open class CryptoTransferViewModel: NSObject {
 
+    typealias DataProvider = AccountsRepoProvider & ExternalWalletRepoProvider & PricesRepoProvider & QuotesRepoProvider & TransfersRepoProvider
+
     // MARK: Private properties
-    private var dataProvider: ExternalWalletRepoProvider & QuotesRepoProvider & TransfersRepoProvider & AccountsRepoProvider
+    private var dataProvider: DataProvider
     private var logger: CybridLogger?
 
     // MARK: Internal properties
     internal var customerGuid = Cybrid.customerGuid
     internal var assets = Cybrid.assets
+    internal var fiat = Cybrid.fiat
 
-    internal var externalWallets: [ExternalWalletBankModel] = []
     internal var accounts: [AccountBankModel] = []
+    internal var externalWallets: [ExternalWalletBankModel] = []
+    internal var prices: Observable<[SymbolPriceBankModel]> = .init([])
+
+    internal var currentExternalWallet: ExternalWalletBankModel?
+    internal var currentQuote: Observable<QuoteBankModel?> = .init(nil)
+    internal var currentTransfer: Observable<TransferBankModel?> = .init(nil)
+
+    internal var pricesPolling: Polling?
 
     // MARK: Public properties
     var uiState: Observable<CryptoTransferView.State> = .init(.LOADING)
+    var modalUiState: Observable<CryptoTransferView.ModalState> = .init(.LOADING)
 
     // MARK: Constructor
-    init(dataProvider: ExternalWalletRepoProvider & QuotesRepoProvider & TransfersRepoProvider & AccountsRepoProvider,
+    init(dataProvider: DataProvider,
          logger: CybridLogger?) {
 
         self.dataProvider = dataProvider
         self.logger = logger
     }
-    
+
+    func initComponent() {
+
+        self.fetchAccounts()
+        self.pricesPolling = Polling { self.fetchPrices() }
+    }
+
     // MARK: Internal server methods
-    internal func fetchExternalWallets() {
-        
+    internal func fetchAccounts() {
+
         self.uiState.value = .LOADING
+        dataProvider.fetchAccounts(customerGuid: customerGuid) { [self] accountsResponse in
+            switch accountsResponse {
+            case .success(let accountList):
+                self.logger?.log(.component(.accounts(.accountsDataFetching)))
+                self.accounts = accountList.objects
+                self.fetchExternalWallets()
+            case .failure:
+                self.logger?.log(.component(.accounts(.accountsDataError)))
+                self.uiState.value = .ERROR
+            }
+        }
+    }
+
+    internal func fetchExternalWallets() {
+
         dataProvider.fetchListExternalWallet { [self] externalWalletsListResponse in
             switch externalWalletsListResponse {
             case.success(let list):
                 self.logger?.log(.component(.accounts(.accountsDataFetching)))
                 let wallets = list.objects
-                self.externalWallets = wallets.filter { $0.state != .deleting && $0.state != .deleted }
-                //self.uiState.value = .WALLETS
+                self.externalWallets = wallets.filter {
+                    $0.state != .deleting && $0.state != .deleted
+                }
+                self.uiState.value = .CONTENT
             case .failure:
                 self.logger?.log(.component(.accounts(.accountsDataError)))
-                //self.uiState.value = .ERROR
+                self.uiState.value = .ERROR
             }
         }
     }
-    
-    internal func fetchAccounts() {
-        
-        dataProvider.fetchAccounts(customerGuid: customerGuid) { [ self] accountsResponse in
-            switch accountsResponse {
-            case .success(let accountList):
-                
+
+    internal func fetchPrices() {
+        self.dataProvider.fetchPriceList { [self] pricesResponse in
+            switch pricesResponse {
+            case .success(let prices):
                 self.logger?.log(.component(.accounts(.accountsDataFetching)))
-                self.accounts = accountList.objects
-                //self.fetchExternalAccounts()
-                
+                self.prices.value = prices
             case .failure:
                 self.logger?.log(.component(.accounts(.accountsDataError)))
             }
         }
     }
-    
-    func createQuote(amount: String) {
-        
-        //self.modalUIState.value = .LOADING
+
+    internal func createQuote(amount: String) {
+
+        self.modalUiState.value = .LOADING
         let amountDecimal = CDecimal(amount)
         let side = PostQuoteBankModel.SideBankModel.withdrawal
-        
         let postQuoteBankModel = PostQuoteBankModel(
-            productType: .funding,
+            productType: .cryptoTransfer,
             customerGuid: self.customerGuid,
-            asset: Cybrid.fiat.code,
+            asset: Cybrid.fiat.code, /* Right code */
             side: side,
             deliverAmount: AssetFormatter.forInput(Cybrid.fiat, amount: amountDecimal)
         )
         self.dataProvider.createQuote(params: postQuoteBankModel, with: nil) { [weak self] quoteResponse in
-            
             switch quoteResponse {
-                
             case .success(let quote):
-                
                 self?.logger?.log(.component(.accounts(.accountsDataFetching)))
                 self?.currentQuote.value = quote
-                self?.modalUIState.value = .CONFIRM
-                
+                self?.modalUiState.value = .QUOTE
             case .failure:
-                
-                self?.modalUIState.value = .ERROR
+                self?.modalUiState.value = .ERROR
+                self?.logger?.log(.component(.accounts(.accountsDataError)))
+            }
+        }
+    }
+
+    internal func createTransfer() {
+
+        self.modalUiState.value = .LOADING
+        let postTransferBankModel = PostTransferBankModel(
+            quoteGuid: currentQuote.value!.guid!,
+            transferType: .crypto,
+            externalWalletGuid: currentExternalWallet?.guid ?? ""
+        )
+        self.dataProvider.createTransfer(postTransferBankModel: postTransferBankModel) { [weak self] transferResponse in
+            switch transferResponse {
+            case .success(let transfer):
+                self?.currentTransfer.value = transfer
+                self?.modalUiState.value = .TRANSFER
+            case .failure:
+                self?.modalUiState.value = .ERROR
                 self?.logger?.log(.component(.accounts(.accountsDataError)))
             }
         }
