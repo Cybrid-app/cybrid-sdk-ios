@@ -38,7 +38,7 @@ public final class CryptoTransferView: Component {
             switch state {
 
             case .LOADING:
-                print("")
+                self.cryptoTransferView_Loading()
 
             default:
                 print("")

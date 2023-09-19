@@ -312,6 +312,8 @@
 		A2E2059D2A71B23200A3C013 /* CybridConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E2059C2A71B23200A3C013 /* CybridConstants.swift */; };
 		A2EA1FA42AB8A8AC008EF698 /* CryptoTransferViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2EA1FA32AB8A8AC008EF698 /* CryptoTransferViewModel.swift */; };
 		A2EA1FA62AB8AB30008EF698 /* CryptoTransferView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2EA1FA52AB8AB30008EF698 /* CryptoTransferView.swift */; };
+		A2EA1FA92AB98EE5008EF698 /* CryptoTransferView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2EA1FA82AB98EE5008EF698 /* CryptoTransferView+Extensions.swift */; };
+		A2EA1FAC2AB98FFF008EF698 /* CryptoTransferViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2EA1FAB2AB98FFF008EF698 /* CryptoTransferViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -667,6 +669,8 @@
 		A2E2059C2A71B23200A3C013 /* CybridConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CybridConstants.swift; sourceTree = "<group>"; };
 		A2EA1FA32AB8A8AC008EF698 /* CryptoTransferViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoTransferViewModel.swift; sourceTree = "<group>"; };
 		A2EA1FA52AB8AB30008EF698 /* CryptoTransferView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoTransferView.swift; sourceTree = "<group>"; };
+		A2EA1FA82AB98EE5008EF698 /* CryptoTransferView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CryptoTransferView+Extensions.swift"; sourceTree = "<group>"; };
+		A2EA1FAB2AB98FFF008EF698 /* CryptoTransferViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoTransferViewController.swift; sourceTree = "<group>"; };
 		D8168B44D4C796A81CF0902E /* Pods-Abstract-CybridSDKTestApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Abstract-CybridSDKTestApp.debug.xcconfig"; path = "Target Support Files/Pods-Abstract-CybridSDKTestApp/Pods-Abstract-CybridSDKTestApp.debug.xcconfig"; sourceTree = "<group>"; };
 		DA2CB27D937283DE5C4554C6 /* Pods-Abstract-CybridSDKTestApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Abstract-CybridSDKTestApp.release.xcconfig"; path = "Target Support Files/Pods-Abstract-CybridSDKTestApp/Pods-Abstract-CybridSDKTestApp.release.xcconfig"; sourceTree = "<group>"; };
 		EA20C56A815A7DDA14049904 /* Pods_Abstract_CybridSDKTestAppUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Abstract_CybridSDKTestAppUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1278,7 +1282,6 @@
 		0BD660FF286B765900F4DA6B /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				A2EA1FA12AB4B523008EF698 /* CryptoTransfer */,
 				A29AA7C62A5E1BC000B6CC1A /* Component.swift */,
 				0BD66106286B768C00F4DA6B /* ListPricesView.swift */,
 				0BD66100286B766B00F4DA6B /* ListPrices */,
@@ -1289,6 +1292,7 @@
 				92F38C4D2924220B00008F58 /* BankAccounts */,
 				A29AA7C02A5DD81200B6CC1A /* DepositAddress */,
 				A24CB43F2A8BDD7E004FCC7A /* ExternalWallets */,
+				A2EA1FA12AB4B523008EF698 /* CryptoTransfer */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -2055,7 +2059,9 @@
 		A2EA1FA12AB4B523008EF698 /* CryptoTransfer */ = {
 			isa = PBXGroup;
 			children = (
+				A2EA1FAA2AB98FD1008EF698 /* ViewController */,
 				A2EA1FA22AB8A894008EF698 /* View */,
+				A2EA1FA72AB98EC9008EF698 /* Extensions */,
 				A2EA1FA52AB8AB30008EF698 /* CryptoTransferView.swift */,
 			);
 			path = CryptoTransfer;
@@ -2067,6 +2073,22 @@
 				A2EA1FA32AB8A8AC008EF698 /* CryptoTransferViewModel.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		A2EA1FA72AB98EC9008EF698 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				A2EA1FA82AB98EE5008EF698 /* CryptoTransferView+Extensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		A2EA1FAA2AB98FD1008EF698 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				A2EA1FAB2AB98FFF008EF698 /* CryptoTransferViewController.swift */,
+			);
+			path = ViewController;
 			sourceTree = "<group>";
 		};
 		E757BBB3F769F93B6529F753 /* Frameworks */ = {
@@ -2505,6 +2527,7 @@
 				927233E628D244AC0080AAC4 /* AccountsHeaderCell.swift in Sources */,
 				92F707C2298C204F005A93E5 /* TradeViewController.swift in Sources */,
 				9257E79929CA037E00846E12 /* TransferViewController+Extensions.swift in Sources */,
+				A2EA1FAC2AB98FFF008EF698 /* CryptoTransferViewController.swift in Sources */,
 				A2A29F062A98697B0075C889 /* QRScannerViewController.swift in Sources */,
 				927233C228D1AAA20080AAC4 /* SymbolPriceBankModel+Extensions.swift in Sources */,
 				A2EA1FA62AB8AB30008EF698 /* CryptoTransferView.swift in Sources */,
@@ -2546,6 +2569,7 @@
 				0BBD0CD828AC21F1001DBC5F /* TradeSuccessModalView.swift in Sources */,
 				0BD661372872BB0A00F4DA6B /* AssetPathBuilder.swift in Sources */,
 				0BBD0CD128ABF905001DBC5F /* TradeConfirmationModalView.swift in Sources */,
+				A2EA1FA92AB98EE5008EF698 /* CryptoTransferView+Extensions.swift in Sources */,
 				0BD660F7286B761200F4DA6B /* NetworkingInterfaces.swift in Sources */,
 				0B00E01D28789ADA00707F26 /* BigDecimal.swift in Sources */,
 				0BBD0CD428AC0B60001DBC5F /* CybridModalViewController.swift in Sources */,

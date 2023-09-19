@@ -43,6 +43,11 @@ class RootViewController: UIViewController {
     let viewController = ExternalWalletsViewController()
     navigationController?.pushViewController(viewController, animated: true)
   }
+  
+  @IBAction func didTapCryptoTrasnferButton(_ sender: Any) {
+    let viewController = CryptoTransferViewController()
+    navigationController?.pushViewController(viewController, animated: true)
+  }
 
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)

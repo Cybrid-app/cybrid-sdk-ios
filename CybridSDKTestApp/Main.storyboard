@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="cIp-MT-lRL">
-                                <rect key="frame" x="0.0" y="275" width="414" height="360"/>
+                                <rect key="frame" x="0.0" y="245" width="414" height="420"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5je-8O-oTJ">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="60"/>
@@ -84,6 +84,17 @@
                                         <buttonConfiguration key="configuration" style="plain" title="External Wallets Component"/>
                                         <connections>
                                             <action selector="didTapExternalWalletsButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="qzp-xT-zsx"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eqm-kW-H6X">
+                                        <rect key="frame" x="0.0" y="360" width="414" height="60"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="60" id="kwH-fY-8gW"/>
+                                        </constraints>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Crypto Transfer Component"/>
+                                        <connections>
+                                            <action selector="didTapCryptoTrasnferButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="abK-ea-r8S"/>
                                         </connections>
                                     </button>
                                 </subviews>
