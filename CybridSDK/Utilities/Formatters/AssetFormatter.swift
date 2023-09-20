@@ -112,11 +112,18 @@ struct AssetFormatter {
     /// Example:
     /// - 1 BTC at 3023700 cUSD --> $10.00 USD
     /// Parameters:
-    ///  - cryptoAsset: AssetBankModel
-    ///  - fiatAsset: AssetBankModel
-    ///  - price: String in base value (cents of dollar)
-    ///  - side: AccountBankModel.TypeBankModel depends on what value comes form input as fiat or crypto
-    static func trade(amount: String, cryptoAsset: AssetBankModel, price: String, base: AssetBankModel.TypeBankModel) -> String {
+    ///  - amount: Amount that comes form input by some field, HAS to be pre-transformet by method `forInput`
+    ///  - cryptoAsset: AssetBankModel (Only takes Crypto assets)
+    ///  - price: String in base value (ej. cents of dollar of satoshis). Always has to be a plain number withput dots(.)
+    ///  - base: AccountBankModel.TypeBankModel depends on what value comes form input as fiat or crypto to return:
+    ///         - crypto: Return what is the price of the crypto asset * the input
+    ///         - fiat: Return how many unit of crypto you can buy with fiat amount filled
+    ///
+    static func trade(
+        amount: String,
+        cryptoAsset: AssetBankModel,
+        price: String,
+        base: AssetBankModel.TypeBankModel) -> String {
 
         var result = BigInt(0)
         let unit = AssetFormatter.forInput(cryptoAsset, amount: CDecimal("1"))

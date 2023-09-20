@@ -26,11 +26,16 @@ open class CryptoTransferViewModel: NSObject {
     internal var prices: Observable<[SymbolPriceBankModel]> = .init([])
 
     internal var currentAccount: Observable<AccountBankModel?> = .init(nil)
+    internal var currentAsset: AssetBankModel?
     internal var currentExternalWallet: ExternalWalletBankModel?
+    internal var currentAmountInput = "0"
     internal var currentQuote: Observable<QuoteBankModel?> = .init(nil)
     internal var currentTransfer: Observable<TransferBankModel?> = .init(nil)
 
     internal var isTransferInFiat: Observable<Bool> = .init(false)
+    internal var amountInputObservable: Observable<String> = .init("")
+    internal var amountWithPriceObservable: Observable<String> = .init("0.0")
+    internal var amountWithPriceErrorObservable: Observable<Bool> = .init(false)
 
     internal var pricesPolling: Polling?
 
@@ -50,6 +55,17 @@ open class CryptoTransferViewModel: NSObject {
 
         self.fetchAccounts()
         self.pricesPolling = Polling { self.fetchPrices() }
+        self.initBinds()
+    }
+
+    func initBinds() {
+
+        self.currentAccount.bind { account in
+
+            let assetCode = account?.asset ?? ""
+            let asset = try? Cybrid.findAsset(code: assetCode)
+            self.currentAsset = asset!
+        }
     }
 
     // MARK: Internal server methods
@@ -148,5 +164,90 @@ open class CryptoTransferViewModel: NSObject {
     @objc
     internal func switchActionHandler(_ sender: UIButton) {
         self.isTransferInFiat.value = !self.isTransferInFiat.value
+    }
+
+    @objc
+    func maxButtonClickHandler() {
+
+        let amount = self.getMaxAmountOfAccount()
+        self.resetAmountInput(amount: amount)
+    }
+
+    // MARK: Functions for Accounts
+    internal func getMaxAmountOfAccount() -> String {
+
+        var valueFormatted = "0"
+        let assetCode = self.currentAccount.value?.asset ?? ""
+        let asset = try? Cybrid.findAsset(code: assetCode)
+        if let asset {
+
+            let account = self.currentAccount.value
+            let accountValue = account?.platformBalance
+            let accountValueCDecimal = CDecimal(accountValue ?? "0")
+            valueFormatted = AssetFormatter.forBase(asset, amount: accountValueCDecimal)
+        }
+        return valueFormatted
+    }
+
+    internal func resetAmountInput(amount: String = "") {
+        self.amountInputObservable.value = amount
+    }
+
+    // MARK: Functions for Prices
+    internal func getPrice(symbol: String) -> SymbolPriceBankModel {
+
+        let price = self.prices.value.first(where: {
+            $0.symbol == symbol
+        })
+        return price ?? SymbolPriceBankModel()
+    }
+
+    // MARK: Functions for Quotes
+    internal func calculatePreQuote() {
+
+        self.amountWithPriceErrorObservable.value = false
+        let assetCode = self.currentAccount.value?.asset ?? ""
+        let counterAssetCode = self.fiat.code
+        let symbol = "\(assetCode)-\(counterAssetCode)"
+        let amount = CDecimal(self.currentAmountInput)
+        if amount.newValue != "0.00" {
+
+            let asset = try? Cybrid.findAsset(code: assetCode)
+            let assetToConvert = self.fiat
+            let buyPrice = self.getPrice(symbol: symbol).buyPrice ?? "0"
+            let amountFormatted = AssetFormatter.forInput(asset!, amount: amount)
+            let tradeValue = AssetFormatter.trade(
+                amount: amountFormatted,
+                cryptoAsset: asset!,
+                price: buyPrice,
+                base: .crypto
+            )
+            let tradeValueCDecimal = CDecimal(tradeValue)
+
+            // --
+            if !self.isTransferInFiat.value {
+                let amountFormatted = AssetFormatter.forInput(asset!, amount: amount)
+                let amountFormattedCDecimal = CDecimal(amountFormatted)
+                let accountCryptoAssetValue = self.currentAccount.value?.platformBalance
+                let accountCryptoAssetValueCDecimal = CDecimal(accountCryptoAssetValue ?? "0")
+                if amountFormattedCDecimal.intValue > accountCryptoAssetValueCDecimal.intValue {
+                    // self.currentAmountWithPriceError.value = true
+                }
+            } else {
+                let accountValue = self.currentAccount.value?.platformBalance
+                let accountValueCDecimal = CDecimal(accountValue ?? "0")
+                if tradeValueCDecimal.intValue > accountValueCDecimal.intValue {
+                    // self.currentAmountWithPriceError.value = true
+                }
+            }
+
+            // --
+            let tradeBase = AssetFormatter.forBase(assetToConvert, amount: tradeValueCDecimal)
+            let tradeFormatted = AssetFormatter.format(assetToConvert, amount: tradeBase)
+            self.amountWithPriceObservable.value = tradeFormatted
+
+        } else {
+            self.amountWithPriceObservable.value = amount.newValue
+        }
     }
 }
