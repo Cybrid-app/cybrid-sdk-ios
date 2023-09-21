@@ -62,9 +62,11 @@ open class CryptoTransferViewModel: NSObject {
 
         self.currentAccount.bind { account in
 
-            let assetCode = account?.asset ?? ""
-            let asset = try? Cybrid.findAsset(code: assetCode)
-            self.currentAsset = asset!
+            if let account {
+                let assetCode = account.asset ?? ""
+                let asset = try? Cybrid.findAsset(code: assetCode)
+                self.currentAsset = asset!
+            }
         }
     }
 
@@ -212,32 +214,31 @@ open class CryptoTransferViewModel: NSObject {
         let amount = CDecimal(self.currentAmountInput)
         if amount.newValue != "0.00" {
 
-            let asset = try? Cybrid.findAsset(code: assetCode)
-            let assetToConvert = self.fiat
+            let assetToUse = isTransferInFiat.value ? self.fiat : self.currentAsset!
+            let assetToConvert = isTransferInFiat.value ? self.currentAsset! : self.fiat
             let buyPrice = self.getPrice(symbol: symbol).buyPrice ?? "0"
-            let amountFormatted = AssetFormatter.forInput(asset!, amount: amount)
+            let amountFromInput = AssetFormatter.forInput(
+                assetToUse,
+                amount: amount
+            )
             let tradeValue = AssetFormatter.trade(
-                amount: amountFormatted,
-                cryptoAsset: asset!,
+                amount: amountFromInput,
+                cryptoAsset: self.currentAsset!,
                 price: buyPrice,
-                base: .crypto
+                base: isTransferInFiat.value ? .fiat : .crypto
             )
             let tradeValueCDecimal = CDecimal(tradeValue)
+            let platformBalance = CDecimal(self.currentAccount.value?.platformBalance ?? "0")
 
             // --
-            if !self.isTransferInFiat.value {
-                let amountFormatted = AssetFormatter.forInput(asset!, amount: amount)
-                let amountFormattedCDecimal = CDecimal(amountFormatted)
-                let accountCryptoAssetValue = self.currentAccount.value?.platformBalance
-                let accountCryptoAssetValueCDecimal = CDecimal(accountCryptoAssetValue ?? "0")
-                if amountFormattedCDecimal.intValue > accountCryptoAssetValueCDecimal.intValue {
-                    // self.currentAmountWithPriceError.value = true
+            if self.isTransferInFiat.value {
+                if tradeValueCDecimal.intValue > platformBalance.intValue {
+                    self.amountWithPriceErrorObservable.value = true
                 }
             } else {
-                let accountValue = self.currentAccount.value?.platformBalance
-                let accountValueCDecimal = CDecimal(accountValue ?? "0")
-                if tradeValueCDecimal.intValue > accountValueCDecimal.intValue {
-                    // self.currentAmountWithPriceError.value = true
+                let amountFromInputCD = CDecimal(amountFromInput)
+                if amountFromInputCD.intValue > platformBalance.intValue {
+                    self.amountWithPriceErrorObservable.value = true
                 }
             }
 

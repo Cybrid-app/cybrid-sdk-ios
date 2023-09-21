@@ -24,9 +24,9 @@ extension CryptoTransferView {
         // -- Size
         static let contentSwitchButtonSize = CGSize(width: 14, height: 18)
     }
-    
+
     enum Strings {
-        
+
         static let contentTitle = "cybrid.crypto.transfer.cotent.title"
     }
 }

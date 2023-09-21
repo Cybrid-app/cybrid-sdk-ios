@@ -117,10 +117,24 @@ extension CryptoTransferView {
             maxButton: maxButton
         )
 
+        // -- Error
+        let errorLabel = self.label(
+            font: UIFont.make(ofSize: 13, weight: .regular),
+            color: UIColor(hex: "#E91E26"),
+            text: "Insufficient Funds",
+            lineHeight: 1.53,
+            aligment: .left)
+        self.addSubview(errorLabel)
+        errorLabel.below(flagIcon, top: 5)
+        errorLabel.constraintLeft(self, margin: 10)
+        errorLabel.constraintRight(self, margin: 10)
+        errorLabel.isHidden = !cryptoTransferViewModel!.amountWithPriceErrorObservable.value
+
         // -- Continue button
         // let continueButtonString = localizer.localize(with: UIStrings.createWalletSaveButton)
         let continueButtonString = "Continue"
         let continueButton = CYBButton(title: continueButtonString) {}
+        continueButton.isEnabled = !cryptoTransferViewModel!.amountWithPriceErrorObservable.value
         self.addSubview(continueButton)
         continueButton.constraintLeft(self, margin: 10)
         continueButton.constraintRight(self, margin: 10)
@@ -130,6 +144,7 @@ extension CryptoTransferView {
         self.cryptoTransferViewModel?.currentAccount.bind { account in
             if let account {
                 walletPicker.getWalletsByAsset(asset: account.asset!)
+                self.cryptoTransferViewModel?.calculatePreQuote()
             }
         }
 
@@ -156,15 +171,20 @@ extension CryptoTransferView {
             self.cryptoTransferViewModel?.calculatePreQuote()
         }
 
-        self.cryptoTransferViewModel?.amountWithPriceObservable.bind { amount in
-            realTimePriceLabel.text = amount
-        }
-
         self.cryptoTransferViewModel?.amountInputObservable.bind { [self] amount in
 
             amountTextField.text = amount
             self.cryptoTransferViewModel?.currentAmountInput = amount
             self.cryptoTransferViewModel?.calculatePreQuote()
+        }
+
+        self.cryptoTransferViewModel?.amountWithPriceObservable.bind { amount in
+            realTimePriceLabel.text = amount
+        }
+
+        self.cryptoTransferViewModel?.amountWithPriceErrorObservable.bind { state in
+            errorLabel.isHidden = !state
+            continueButton.customState = !state ? .normal : .disabled
         }
     }
 
@@ -212,8 +232,8 @@ extension CryptoTransferView {
 
         // -- Real Time Price Label
         self.addSubview(realTimeLabel)
-        realTimeLabel.leftAside(icon, margin: 5)
-        realTimeLabel.below(topView, top: marginTop)
+        realTimeLabel.leftAside(icon, margin: 7.5)
+        realTimeLabel.below(topView, top: marginTop * 1.5)
 
         // -- Max Button
         // let maxButtonString = localizer.localize(with: UIStrings.maxButtonLabel)
