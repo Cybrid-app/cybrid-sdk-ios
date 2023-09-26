@@ -29,6 +29,15 @@ internal class CybridServerError {
             response = self.handleWalletsComponent(messageCode: messageCode, errorMessage: errorMessage)
         case .depositAddressComponent:
             response = self.handleDepositAddressComponent(messageCode: messageCode, errorMessage: errorMessage)
+        case .cryptoTransferComponent:
+            switch messageCode {
+            case "invalid_parameter":
+                if errorMessage == "deliver_amount is empty" {
+                    response.message = "Amount is empty"
+                }
+            default:
+                response.message = "Please, try again."
+            }
         }
         return response
     }

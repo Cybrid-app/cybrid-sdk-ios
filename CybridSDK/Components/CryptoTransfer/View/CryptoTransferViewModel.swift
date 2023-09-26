@@ -42,6 +42,7 @@ open class CryptoTransferViewModel: NSObject {
     // MARK: Public properties
     var uiState: Observable<CryptoTransferView.State> = .init(.LOADING)
     var modalUiState: Observable<CryptoTransferView.ModalState> = .init(.LOADING)
+    var serverError = ""
 
     // MARK: Constructor
     init(dataProvider: DataProvider,
@@ -107,20 +108,27 @@ open class CryptoTransferViewModel: NSObject {
     internal func createQuote(amount: String) {
 
         self.modalUiState.value = .LOADING
-        guard let asset = self.currentAccount.value?.asset
+        guard let assetCode = self.currentAccount.value?.asset
+        else {
+            self.modalUiState.value = .ERROR
+            return
+        }
+        guard let asset = try? Cybrid.findAsset(code: assetCode)
         else {
             self.modalUiState.value = .ERROR
             return
         }
 
         let amountDecimal = CDecimal(amount)
+        let amountReady = AssetFormatter.forInput(asset, amount: amountDecimal)
+
         let side = PostQuoteBankModel.SideBankModel.withdrawal
         let postQuoteBankModel = PostQuoteBankModel(
             productType: .cryptoTransfer,
             customerGuid: self.customerGuid,
-            asset: asset,
+            asset: asset.code,
             side: side,
-            deliverAmount: AssetFormatter.forInput(Cybrid.fiat, amount: amountDecimal)
+            deliverAmount: amountReady
         )
         self.dataProvider.createQuote(params: postQuoteBankModel, with: nil) { [weak self] quoteResponse in
             switch quoteResponse {
@@ -128,7 +136,8 @@ open class CryptoTransferViewModel: NSObject {
                 self?.logger?.log(.component(.accounts(.accountsDataFetching)))
                 self?.currentQuote.value = quote
                 self?.modalUiState.value = .QUOTE
-            case .failure:
+            case .failure(let error):
+                self?.handleError(error)
                 self?.modalUiState.value = .ERROR
                 self?.logger?.log(.component(.accounts(.accountsDataError)))
             }
@@ -147,7 +156,8 @@ open class CryptoTransferViewModel: NSObject {
             switch transferResponse {
             case .success(let transfer):
                 self?.currentTransfer.value = transfer
-                self?.modalUiState.value = .TRANSFER
+                self?.modalUiState.value = .DONE
+                self?.fetchAccounts()
             case .failure:
                 self?.modalUiState.value = .ERROR
                 self?.logger?.log(.component(.accounts(.accountsDataError)))
@@ -251,6 +261,38 @@ open class CryptoTransferViewModel: NSObject {
 
         } else {
             self.amountWithPriceObservable.value = amount.newValue
+        }
+    }
+
+    // MARK: Error Handling
+    internal func handleError(_ error: ErrorResponse) {
+
+        if case let ErrorResponse.error(_, data, _, _) = error {
+
+            // -- Check the data if it's not nil
+            guard let data = data
+            else {
+                self.serverError = ""
+                self.uiState.value = .ERROR
+                return
+            }
+
+            // -- Check if data could be serialized as josn
+            guard let errorResult = try? JSONSerialization.jsonObject(with: data) as? [String: Any]
+            else {
+                self.serverError = ""
+                self.uiState.value = .ERROR
+                return
+            }
+
+            // -- Working with value json
+            let messageCode = errorResult["message_code"] as! String
+            let errorMessage = errorResult["error_message"] as! String
+            let handledError = CybridServerError().handle(
+                component: .cryptoTransferComponent,
+                messageCode: messageCode,
+                errorMessage: errorMessage)
+            self.serverError = handledError.message
         }
     }
 }

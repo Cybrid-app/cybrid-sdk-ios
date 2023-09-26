@@ -10,7 +10,7 @@ import UIKit
 public final class CryptoTransferView: Component {
 
     public enum State { case LOADING, CONTENT, ERROR }
-    public enum ModalState { case LOADING, QUOTE, TRANSFER, ERROR }
+    public enum ModalState { case LOADING, QUOTE, DONE, ERROR }
 
     internal var localizer: Localizer!
     internal var cryptoTransferViewModel: CryptoTransferViewModel?

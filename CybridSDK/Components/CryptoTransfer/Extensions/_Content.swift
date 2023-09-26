@@ -74,6 +74,7 @@ extension CryptoTransferView {
         walletPicker.below(walletTitle, top: 10)
         walletPicker.constraintLeft(self, margin: 10)
         walletPicker.constraintRight(self, margin: 10)
+        self.cryptoTransferViewModel?.currentExternalWallet = walletPicker.walletSelected
 
         // -- Amount title
         // let accountTitleString = localizer.localize(with: UIStrings.createWalletAssetTitle)

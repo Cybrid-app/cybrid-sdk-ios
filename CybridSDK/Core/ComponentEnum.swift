@@ -11,4 +11,5 @@ public enum ComponentEnum {
 
     case walletsComponent
     case depositAddressComponent
+    case cryptoTransferComponent
 }

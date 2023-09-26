@@ -73,13 +73,22 @@ extension CryptoTransferModal {
             switch state {
 
             case .LOADING:
-                self.cryptoTransferModal_Loading()
+                self.createLoadingScreen(
+                    content: self.componentContent,
+                    text: "Loading")
 
             case .QUOTE:
                 self.cryptoTransferModal_Quote()
 
-            default:
-                print("")
+            case .DONE:
+                self.createDoneScreen(
+                    content: self.componentContent,
+                    message: "Transfer done")
+
+            case .ERROR:
+                self.createErrorScreen(
+                    content: self.componentContent,
+                    message: self.cryptoTransferViewModel.serverError)
             }
         }
     }
@@ -97,7 +106,7 @@ extension CryptoTransferModal {
     enum UIValues {
 
         // -- Sizes
-        static let modalSize: CGFloat = 411
+        static let modalSize: CGFloat = 440
         static let modalCofirmSize: CGFloat = 300
     }
 
