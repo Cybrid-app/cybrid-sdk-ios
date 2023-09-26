@@ -67,7 +67,8 @@ extension CryptoTransferView {
         // -- Wallet Picker
         let walletPicker = WalletPicker(
             wallets: cryptoTransferViewModel?.externalWallets ?? [],
-            asset: accountPicker.accountSelected?.asset ?? ""
+            asset: accountPicker.accountSelected?.asset ?? "",
+            delegate: self
         )
         self.addSubview(walletPicker)
         walletPicker.below(walletTitle, top: 10)
@@ -133,7 +134,12 @@ extension CryptoTransferView {
         // -- Continue button
         // let continueButtonString = localizer.localize(with: UIStrings.createWalletSaveButton)
         let continueButtonString = "Continue"
-        let continueButton = CYBButton(title: continueButtonString) {}
+        let continueButton = CYBButton(title: continueButtonString) { [self] in
+            let modal = CryptoTransferModal(
+                cryptoTransferViewModel: self.cryptoTransferViewModel!)
+            modal.present()
+            cryptoTransferViewModel?.createQuote(amount: amountTextField.text?.stringValue ?? "0")
+        }
         continueButton.isEnabled = !cryptoTransferViewModel!.amountWithPriceErrorObservable.value
         self.addSubview(continueButton)
         continueButton.constraintLeft(self, margin: 10)
@@ -185,6 +191,10 @@ extension CryptoTransferView {
         self.cryptoTransferViewModel?.amountWithPriceErrorObservable.bind { state in
             errorLabel.isHidden = !state
             continueButton.customState = !state ? .normal : .disabled
+        }
+
+        self.cryptoTransferViewModel?.currentAccount.bind { [self] account in
+            self.cryptoTransferViewModel?.changeCurrentAccount(account)
         }
     }
 
@@ -260,6 +270,12 @@ extension CryptoTransferView: AccountPickerDelegate {
     public func onAccountSelected(account: AccountBankModel) {
         self.cryptoTransferViewModel?.currentAccount.value = account
         self.cryptoTransferViewModel?.isTransferInFiat.value = false
+    }
+}
+
+extension CryptoTransferView: WalletPickerDelegate {
+    public func onWalletSelected(wallet: ExternalWalletBankModel) {
+        self.cryptoTransferViewModel?.currentExternalWallet = wallet
     }
 }
 

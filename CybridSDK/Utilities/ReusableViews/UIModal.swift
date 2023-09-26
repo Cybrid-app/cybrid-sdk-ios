@@ -96,6 +96,22 @@ open class UIModal: UIViewController {
             dismiss(animated: true)
         }
     }
+
+    // MARK: UI Helpers
+    internal func label(font: UIFont,
+                        color: UIColor,
+                        text: String,
+                        lineHeight: CGFloat,
+                        aligment: NSTextAlignment = .center) -> UILabel {
+
+        let paragraphStyle = getParagraphStyle(lineHeight)
+        paragraphStyle.alignment = aligment
+        let label = UILabel()
+        label.font = font
+        label.textColor = color
+        label.setParagraphText(text, paragraphStyle)
+        return label
+    }
 }
 
 // MARK: - Constants

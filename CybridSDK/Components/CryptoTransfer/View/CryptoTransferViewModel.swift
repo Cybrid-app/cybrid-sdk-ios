@@ -55,19 +55,6 @@ open class CryptoTransferViewModel: NSObject {
 
         self.fetchAccounts()
         self.pricesPolling = Polling { self.fetchPrices() }
-        self.initBinds()
-    }
-
-    func initBinds() {
-
-        self.currentAccount.bind { account in
-
-            if let account {
-                let assetCode = account.asset ?? ""
-                let asset = try? Cybrid.findAsset(code: assetCode)
-                self.currentAsset = asset!
-            }
-        }
     }
 
     // MARK: Internal server methods
@@ -120,12 +107,18 @@ open class CryptoTransferViewModel: NSObject {
     internal func createQuote(amount: String) {
 
         self.modalUiState.value = .LOADING
+        guard let asset = self.currentAccount.value?.asset
+        else {
+            self.modalUiState.value = .ERROR
+            return
+        }
+
         let amountDecimal = CDecimal(amount)
         let side = PostQuoteBankModel.SideBankModel.withdrawal
         let postQuoteBankModel = PostQuoteBankModel(
             productType: .cryptoTransfer,
             customerGuid: self.customerGuid,
-            asset: Cybrid.fiat.code, /* Right code */
+            asset: asset,
             side: side,
             deliverAmount: AssetFormatter.forInput(Cybrid.fiat, amount: amountDecimal)
         )
@@ -193,6 +186,15 @@ open class CryptoTransferViewModel: NSObject {
 
     internal func resetAmountInput(amount: String = "") {
         self.amountInputObservable.value = amount
+    }
+
+    internal func changeCurrentAccount(_ account: AccountBankModel?) {
+
+        if let account {
+            let assetCode = account.asset ?? ""
+            let asset = try? Cybrid.findAsset(code: assetCode)
+            self.currentAsset = asset!
+        }
     }
 
     // MARK: Functions for Prices
