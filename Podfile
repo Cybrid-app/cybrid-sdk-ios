@@ -23,7 +23,8 @@ abstract_target 'Abstract' do
   common_pods
 
   target 'CybridSDK'
-  target 'CybridSDKTests' do
+  target 'CybridSDKTests'
+  target 'CybridSDKTestAppUITests' do
     quality_pods
   end
   target 'CybridSDKTestApp' do

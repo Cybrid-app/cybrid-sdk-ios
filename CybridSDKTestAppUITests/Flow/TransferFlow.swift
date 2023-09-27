@@ -50,21 +50,20 @@ class TransferFlow: CybridUITest {
             tapElementAndWaitForKeyboardToAppear(amountField)
             amountField.typeText(String(funds))
         }
-        
+
         // -- Continue button
         let continueButton = app.buttons["Continue"]
         XCTAssertTrue(continueButton.exists)
         continueButton.tap()
-        
-        
+
         // -- Transfer Modal: Confirm
-        
+
         // -- Title
         let confirmTitle = app.staticTexts["Confirm Deposit Details"]
         if confirmTitle.waitForExistence(timeout: 4) {
             XCTAssertTrue(confirmTitle.exists)
         }
-        
+
         // -- Amount Value
         let amountValue = app.staticTexts[fundsFormatted]
         XCTAssertTrue(amountValue.exists)
@@ -81,35 +80,34 @@ class TransferFlow: CybridUITest {
         // -- From
         let from = app.staticTexts["From"]
         XCTAssertTrue(from.exists)
-        
+
         // -- From Value
         let fromValue = app.staticTexts[transfer.accountName]
         XCTAssertTrue(fromValue.exists)
-        
+
         // -- Confirm deposit
         let confirmDeposit = app.buttons["Confirm Deposit"]
         if confirmDeposit.waitForExistence(timeout: 2) {
             confirmDeposit.tap()
         }
-        
-        
+
         // -- Transfer Modal: Details
-        
+
         // -- Funds
         let fundsTitle = app.staticTexts[fundsFormatted]
         if fundsTitle.waitForExistence(timeout: 6) {
             XCTAssertTrue(fundsTitle.exists)
         }
-        
+
         // -- Title
         let detailsTitle = app.staticTexts["Transfer submitted"]
         if detailsTitle.waitForExistence(timeout: 6) {
             XCTAssertTrue(detailsTitle.exists)
         }
-        
+
         // -- Continue
-        let continueButton_2 = app.buttons["TransferComponent_Modal_Details_Continue"]
-        continueButton_2.tap()
+        let continueButton2 = app.buttons["TransferComponent_Modal_Details_Continue"]
+        continueButton2.tap()
         
         // -- Return main controller
         transfer.fundsFormatted = fundsFormatted
@@ -157,29 +155,28 @@ class TransferFlow: CybridUITest {
             tapElementAndWaitForKeyboardToAppear(amountField)
             amountField.typeText(String(funds))
         }
-        
+
         // -- Continue button
         let continueButton = app.buttons["Continue"]
         XCTAssertTrue(continueButton.exists)
         continueButton.tap()
-        
-        
+
         // -- Transfer Modal: Confirm
-        
+
         // -- Title
         let confirmTitle = app.staticTexts["Confirm Withdraw Details"]
         if confirmTitle.waitForExistence(timeout: 4) {
             XCTAssertTrue(confirmTitle.exists)
         }
-        
+
         // -- Amount Value
         let amountValue = app.staticTexts[transfer.fundsFormatted]
         XCTAssertTrue(amountValue.exists)
-        
+
         // -- Withdraw Date
         let depositDate = app.staticTexts["Withdraw Date"]
         XCTAssertTrue(depositDate.exists)
-        
+
         // -- Withdraw Date Value
         let depositDateValue = app.staticTexts["TransferComponent_Modal_Confirm_DateValue"]
         XCTAssertTrue(depositDateValue.exists)
@@ -187,42 +184,41 @@ class TransferFlow: CybridUITest {
         // -- To
         let to = app.staticTexts["To"]
         XCTAssertTrue(to.exists)
-        
+
         // -- To Value
         let toValue = app.staticTexts[transfer.accountName]
         XCTAssertTrue(toValue.exists)
-        
+
         // -- Confirm Withdraw
         let confirmWithdraw = app.buttons["Confirm Withdraw"]
         if confirmWithdraw.waitForExistence(timeout: 2) {
             confirmWithdraw.tap()
         }
-        
-        
+
         // -- Transfer Modal: Details
-        
+
         // -- Funds
         let fundsTitle = app.staticTexts[transfer.fundsFormatted]
         if fundsTitle.waitForExistence(timeout: 6) {
             XCTAssertTrue(fundsTitle.exists)
         }
-        
+
         // -- Title
         let detailsTitle = app.staticTexts["Transfer submitted"]
         if detailsTitle.waitForExistence(timeout: 6) {
             XCTAssertTrue(detailsTitle.exists)
         }
-        
+
         // -- Continue
-        let continueButton_2 = app.buttons["TransferComponent_Modal_Details_Continue"]
-        continueButton_2.tap()
-        
+        let continueButton2 = app.buttons["TransferComponent_Modal_Details_Continue"]
+        continueButton2.tap()
+
         // -- Return main controller
         self.returnTap()
     }
-    
+
     func checkDepositOrWithdraw(transfer: TransferMade, type: TransferFlowType) {
-        
+
         // -- Check and tap Accounts Component
         let accountsComponent = app.staticTexts["Accounts Component"]
         if accountsComponent.waitForExistence(timeout: 6) {

@@ -9,14 +9,14 @@ import Foundation
 import XCTest
 
 class KYCComponentTest: XCTestCase {
-    
+
     let app = XCUIApplication()
     let clientIDText = "Test ClientID"
     let clientSecretText = "Test ClientSecret"
     let customerGUIDText = "Test customerGUID"
-        
+
     func login() {
-            
+
         // -- Given
         let clientID = app.textFields["clientID"]
         let clientSecret = app.textFields["clientSecret"]
@@ -47,87 +47,87 @@ class KYCComponentTest: XCTestCase {
         XCTAssertTrue(demoMode.exists)
         demoMode.tap()
     }
-    
+
     func test_flow() throws {
-        
+
         app.launch()
         login()
-        
+
         // -- KYC
         let kyc = app.staticTexts["KYC Component"]
         if kyc.waitForExistence(timeout: 6) {
             kyc.tap()
         }
-        
+
         // -- Begin
-        let kyc_begin = app.buttons["Begin"]
-        if kyc_begin.waitForExistence(timeout: 12) {
-            kyc_begin.tap()
+        let kycBegin = app.buttons["Begin"]
+        if kycBegin.waitForExistence(timeout: 12) {
+            kycBegin.tap()
         }
-        
+
         // -- Begin Verifiying
-        let kyc_begin_verifying = app.buttons["Begin verifying"]
-        if kyc_begin_verifying.waitForExistence(timeout: 5) {
-            kyc_begin_verifying.tap()
+        let kycBeginVerifying = app.buttons["Begin verifying"]
+        if kycBeginVerifying.waitForExistence(timeout: 5) {
+            kycBeginVerifying.tap()
         }
-        
+
         // -- Visa
-        let kyc_visa = app.staticTexts["Visa"]
-        if kyc_visa.waitForExistence(timeout: 4) {
-            kyc_visa.tap()
+        let kycVisa = app.staticTexts["Visa"]
+        if kycVisa.waitForExistence(timeout: 4) {
+            kycVisa.tap()
         }
-        
+
         // -- Allow cmera permissions
-        let camera_perms = app.staticTexts["Allow"]
-        if camera_perms.waitForExistence(timeout: 3) {
-            camera_perms.tap()
+        let cameraPerms = app.staticTexts["Allow"]
+        if cameraPerms.waitForExistence(timeout: 3) {
+            cameraPerms.tap()
         }
-        
-        let torch_button = app.buttons["torch-button"]
-        if torch_button.waitForExistence(timeout: 8) {
-            torch_button.tap()
+
+        let torchButton = app.buttons["torch-button"]
+        if torchButton.waitForExistence(timeout: 8) {
+            torchButton.tap()
         }
-        
-        let shutter_button = app.buttons["shutter-button"]
-        if shutter_button.waitForExistence(timeout: 8) {
-            shutter_button.tap()
+
+        let shutterButton = app.buttons["shutter-button"]
+        if shutterButton.waitForExistence(timeout: 8) {
+            shutterButton.tap()
         }
-        
-        let use_this_photo = app.buttons["Use this photo"]
-        if use_this_photo.waitForExistence(timeout: 3) {
-            use_this_photo.tap()
+
+        let useThisPhoto = app.buttons["Use this photo"]
+        if useThisPhoto.waitForExistence(timeout: 3) {
+            useThisPhoto.tap()
         }
-        
+
         let basicTitle = app.textViews["Just the basics"]
         if basicTitle.waitForExistence(timeout: 10) {
             basicTitle.tap()
         }
-        
+
         let continueButton = app.buttons["button_submit"]
         if continueButton.waitForExistence(timeout: 3) {
             continueButton.tap()
         }
-        
+
         let getStarted = app.buttons["Get started"]
         if getStarted.waitForExistence(timeout: 5) {
             getStarted.tap()
         }
-        
-        let shutter_button_2 = app.buttons["shutter-button"]
-        if shutter_button_2.waitForExistence(timeout: 8) {
-            shutter_button_2.tap()
+
+        let shutterButton2 = app.buttons["shutter-button"]
+        if shutterButton2.waitForExistence(timeout: 8) {
+            shutterButton2.tap()
         }
-        
-        let shutter_button_3 = app.buttons["shutter-button"]
-        if shutter_button_3.waitForExistence(timeout: 8) {
-            shutter_button_3.tap()
+
+        let shutterButton3 = app.buttons["shutter-button"]
+        if shutterButton3.waitForExistence(timeout: 8) {
+            shutterButton3.tap()
         }
-        
-        let shutter_button_4 = app.buttons["shutter-button"]
-        if shutter_button_4.waitForExistence(timeout: 8) {
-            shutter_button_4.tap()
+
+        let shutterButton4 = app.buttons["shutter-button"]
+        if shutterButton4.waitForExistence(timeout: 8) {
+            shutterButton4.tap()
         }
-        
+
         let done = app.buttons["Done"]
         if done.waitForExistence(timeout: 10) {
             done.tap()

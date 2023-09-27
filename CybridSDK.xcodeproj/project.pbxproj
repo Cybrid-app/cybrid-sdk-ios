@@ -129,6 +129,7 @@
 		0BFF8755289628EB00E44C74 /* listAssetsResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 0BFF87542896267C00E44C74 /* listAssetsResponse.json */; };
 		1F495DE1AAFBD94E36164435 /* Pods_Abstract_CybridSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 700DC16CEF5D9FBA00A3E597 /* Pods_Abstract_CybridSDK.framework */; };
 		37D3599E5CCE0BC3F9008FE9 /* Pods_Abstract_CybridSDKTestApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E8CA3228CBC00531723CD56 /* Pods_Abstract_CybridSDKTestApp.framework */; };
+		739C562B218F3E4EF47B5E36 /* Pods_Abstract_CybridSDKTestAppUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA20C56A815A7DDA14049904 /* Pods_Abstract_CybridSDKTestAppUITests.framework */; };
 		9201FA0428E3DEDF00C6F186 /* AccountTradesViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9201FA0328E3DEDF00C6F186 /* AccountTradesViewModelTest.swift */; };
 		9205B8B228E3811800883279 /* UtilsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9205B8B128E3811800883279 /* UtilsTest.swift */; };
 		9205B8B428E3A43700883279 /* accountResponseIncomplete.json in Resources */ = {isa = PBXBuildFile; fileRef = 9205B8B328E3A43600883279 /* accountResponseIncomplete.json */; };
@@ -472,10 +473,12 @@
 		0E8CA3228CBC00531723CD56 /* Pods_Abstract_CybridSDKTestApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Abstract_CybridSDKTestApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		156E2AC0BBCD56534580F226 /* Pods-Abstract-CybridSDKTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Abstract-CybridSDKTests.debug.xcconfig"; path = "Target Support Files/Pods-Abstract-CybridSDKTests/Pods-Abstract-CybridSDKTests.debug.xcconfig"; sourceTree = "<group>"; };
 		304BBE8FCEA6609F15FE451E /* Pods-Abstract-CybridSDK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Abstract-CybridSDK.release.xcconfig"; path = "Target Support Files/Pods-Abstract-CybridSDK/Pods-Abstract-CybridSDK.release.xcconfig"; sourceTree = "<group>"; };
+		4534629BD6A9AFE1CEB0B287 /* Pods-Abstract-CybridSDKTestAppUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Abstract-CybridSDKTestAppUITests.release.xcconfig"; path = "Target Support Files/Pods-Abstract-CybridSDKTestAppUITests/Pods-Abstract-CybridSDKTestAppUITests.release.xcconfig"; sourceTree = "<group>"; };
 		4A0BAAD494D2ACB2E58731D9 /* Pods-Abstract-CybridSDK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Abstract-CybridSDK.debug.xcconfig"; path = "Target Support Files/Pods-Abstract-CybridSDK/Pods-Abstract-CybridSDK.debug.xcconfig"; sourceTree = "<group>"; };
 		700DC16CEF5D9FBA00A3E597 /* Pods_Abstract_CybridSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Abstract_CybridSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7DF434D101E8F203F76846C4 /* Pods-Abstract-CybridSDKTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Abstract-CybridSDKTests.release.xcconfig"; path = "Target Support Files/Pods-Abstract-CybridSDKTests/Pods-Abstract-CybridSDKTests.release.xcconfig"; sourceTree = "<group>"; };
 		80DCD8FC666A9176CF28F146 /* Pods_Abstract_CybridSDKTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Abstract_CybridSDKTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		840D75C5990CF5F5FE6CFB08 /* Pods-Abstract-CybridSDKTestAppUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Abstract-CybridSDKTestAppUITests.debug.xcconfig"; path = "Target Support Files/Pods-Abstract-CybridSDKTestAppUITests/Pods-Abstract-CybridSDKTestAppUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		9201FA0328E3DEDF00C6F186 /* AccountTradesViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTradesViewModelTest.swift; sourceTree = "<group>"; };
 		9205B8B128E3811800883279 /* UtilsTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilsTest.swift; sourceTree = "<group>"; };
 		9205B8B328E3A43600883279 /* accountResponseIncomplete.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = accountResponseIncomplete.json; sourceTree = "<group>"; };
@@ -654,6 +657,7 @@
 		A2E2059C2A71B23200A3C013 /* CybridConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CybridConstants.swift; sourceTree = "<group>"; };
 		D8168B44D4C796A81CF0902E /* Pods-Abstract-CybridSDKTestApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Abstract-CybridSDKTestApp.debug.xcconfig"; path = "Target Support Files/Pods-Abstract-CybridSDKTestApp/Pods-Abstract-CybridSDKTestApp.debug.xcconfig"; sourceTree = "<group>"; };
 		DA2CB27D937283DE5C4554C6 /* Pods-Abstract-CybridSDKTestApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Abstract-CybridSDKTestApp.release.xcconfig"; path = "Target Support Files/Pods-Abstract-CybridSDKTestApp/Pods-Abstract-CybridSDKTestApp.release.xcconfig"; sourceTree = "<group>"; };
+		EA20C56A815A7DDA14049904 /* Pods_Abstract_CybridSDKTestAppUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Abstract_CybridSDKTestAppUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -687,6 +691,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				739C562B218F3E4EF47B5E36 /* Pods_Abstract_CybridSDKTestAppUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1369,6 +1374,8 @@
 				DA2CB27D937283DE5C4554C6 /* Pods-Abstract-CybridSDKTestApp.release.xcconfig */,
 				156E2AC0BBCD56534580F226 /* Pods-Abstract-CybridSDKTests.debug.xcconfig */,
 				7DF434D101E8F203F76846C4 /* Pods-Abstract-CybridSDKTests.release.xcconfig */,
+				840D75C5990CF5F5FE6CFB08 /* Pods-Abstract-CybridSDKTestAppUITests.debug.xcconfig */,
+				4534629BD6A9AFE1CEB0B287 /* Pods-Abstract-CybridSDKTestAppUITests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -2026,6 +2033,7 @@
 				700DC16CEF5D9FBA00A3E597 /* Pods_Abstract_CybridSDK.framework */,
 				0E8CA3228CBC00531723CD56 /* Pods_Abstract_CybridSDKTestApp.framework */,
 				80DCD8FC666A9176CF28F146 /* Pods_Abstract_CybridSDKTests.framework */,
+				EA20C56A815A7DDA14049904 /* Pods_Abstract_CybridSDKTestAppUITests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -2111,9 +2119,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 928E237328EC90D6006AAE1A /* Build configuration list for PBXNativeTarget "CybridSDKTestAppUITests" */;
 			buildPhases = (
+				E77F3E92E039DCF08E54E0B4 /* [CP] Check Pods Manifest.lock */,
 				928E236528EC90D6006AAE1A /* Sources */,
 				928E236628EC90D6006AAE1A /* Frameworks */,
 				928E236728EC90D6006AAE1A /* Resources */,
+				5C5B239B6CD6FFEBFD0538E3 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -2284,6 +2294,23 @@
 			shellPath = /bin/sh;
 			shellScript = "# Run only when not running on CI. CI should run SwiftLint with Fastlane.\nif [ -z \"$CI\"]; then\n  ${PODS_ROOT}/SwiftLint/swiftlint\nfi\n";
 		};
+		5C5B239B6CD6FFEBFD0538E3 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Abstract-CybridSDKTestAppUITests/Pods-Abstract-CybridSDKTestAppUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Abstract-CybridSDKTestAppUITests/Pods-Abstract-CybridSDKTestAppUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Abstract-CybridSDKTestAppUITests/Pods-Abstract-CybridSDKTestAppUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		92EE91982A3912C900FDF763 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -2360,6 +2387,28 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Abstract-CybridSDKTests/Pods-Abstract-CybridSDKTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E77F3E92E039DCF08E54E0B4 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Abstract-CybridSDKTestAppUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		EA37BFF0935AB552D7BAAD44 /* [CP] Embed Pods Frameworks */ = {
@@ -3007,6 +3056,7 @@
 		};
 		928E237128EC90D6006AAE1A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 840D75C5990CF5F5FE6CFB08 /* Pods-Abstract-CybridSDKTestAppUITests.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -3024,6 +3074,7 @@
 		};
 		928E237228EC90D6006AAE1A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4534629BD6A9AFE1CEB0B287 /* Pods-Abstract-CybridSDKTestAppUITests.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;

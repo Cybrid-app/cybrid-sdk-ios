@@ -9,21 +9,21 @@ import Foundation
 import XCTest
 
 extension XCTestCase {
-    
+
     func tapElementAndWaitForKeyboardToAppear(_ element: XCUIElement) {
-        
+
         let keyboard = XCUIApplication().keyboards.element
-        while (true) {
+        while true {
             element.tap()
             if keyboard.exists {
-                break;
+                break
             }
             RunLoop.current.run(until: Date(timeIntervalSinceNow: 0.5))
         }
     }
-    
+
     func dismissKeyboardIfPresent() {
-        
+
         let app = XCUIApplication()
         if app.keys.element(boundBy: 0).exists {
             app.typeText("\n")
