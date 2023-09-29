@@ -132,6 +132,8 @@ extension AccountTradesViewController {
 
     private func createDepositAddressButton() {
 
+        let isAvailable = Cybrid.assetsForDepositAddress.first(where: { $0 == self.balance.account.asset })
+        let buttonHeight: CGFloat = isAvailable == nil ? 0 : 50
         self.depositAddressButton = CYBButton(title: localizer.localize(with: UIStrings.getDepositAddress)) {
 
             let depositAddressViewController = DepositAddresViewController(accountBalance: self.balance)
@@ -141,9 +143,11 @@ extension AccountTradesViewController {
                 self.present(depositAddressViewController, animated: true)
             }
         }
-        self.depositAddressButton.asLast(parent: self.view,
-                                         height: 50,
-                                         margins: UIEdgeInsets(top: 0, left: 20, bottom: 25, right: 20))
+        self.view.addSubview(self.depositAddressButton)
+        self.depositAddressButton.constraintLeft(self.view, margin: 20)
+        self.depositAddressButton.constraintRight(self.view, margin: 20)
+        self.depositAddressButton.constraintBottom(self.view, margin: 25)
+        self.depositAddressButton.constraintHeight(buttonHeight)
     }
 
     private func createTradesTable() {

@@ -34,6 +34,7 @@ public final class CybridConfig {
     internal private(set) var customer: CustomerBankModel?
     internal private(set) var bank: BankBankModel?
     internal var assets: [AssetBankModel] = []
+    internal var assetsForDepositAddress: [String] = []
     internal private(set) var autoLoadComplete = false
     internal private(set) var completion: (() -> Void)?
 
@@ -53,6 +54,7 @@ public final class CybridConfig {
         self.customerGuid = sdkConfig.customerGuid
         self.customer = sdkConfig.customer
         self.bank = sdkConfig.bank
+        self.assetsForDepositAddress = sdkConfig.assetsForCreateDepositAddres
         self.theme = theme ?? CybridTheme.default
         self.refreshRate = refreshRate
         self._preferredLocale = locale
@@ -79,6 +81,7 @@ public final class CybridConfig {
         self.customerGuid = sdkConfig.customerGuid
         self.customer = sdkConfig.customer
         self.bank = sdkConfig.bank
+        self.assetsForDepositAddress = sdkConfig.assetsForCreateDepositAddres
         self.theme = theme ?? CybridTheme.default
         self.refreshRate = refreshRate
         self._preferredLocale = locale
