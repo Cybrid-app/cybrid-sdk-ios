@@ -7,7 +7,7 @@
 
 import CybridApiBankSwift
 
-open class DepositAddressViewModel: NSObject {
+open class DepositAddressViewModel: BaseViewModel {
 
     // MARK: Private properties
     private var dataProvider: DepositAddressRepoProvider
@@ -30,10 +30,12 @@ open class DepositAddressViewModel: NSObject {
     init(dataProvider: DepositAddressRepoProvider,
          logger: CybridLogger?,
          accountBalance: BalanceUIModel) {
-
         self.dataProvider = dataProvider
         self.logger = logger
         self.accountBalance = accountBalance
+
+        super.init()
+        self.componentEnum = .depositAddressComponent
     }
 
     // MARK: Internal server methods
@@ -79,8 +81,9 @@ open class DepositAddressViewModel: NSObject {
             switch response {
             case .success(let depositAddress):
                 self?.checkDepositAddressValue(depositAddress: depositAddress)
-            case .failure:
+            case .failure(let error):
                 self?.logger?.log(.component(.accounts(.accountsDataError)))
+                self?.handleError(error)
                 self?.uiState.value = .ERROR
             }
         }

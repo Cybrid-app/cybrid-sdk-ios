@@ -231,3 +231,4 @@
 "cybrid.server.error.generic" = "Server error, try again.";
 "cybrid.server.error.wallets.view.error.invalid_parameter.tag" = "Tag must not be empty";
 "cybrid.server.error.wallets.view.error.data_exists" = "Address already exists.";
+"cybrid.server.error.deposit.address.create.error.unverified_customer" = "Customer has not been verified";

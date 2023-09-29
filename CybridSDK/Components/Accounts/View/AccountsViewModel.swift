@@ -16,6 +16,7 @@ class AccountsViewModel: NSObject {
     internal var prices: [SymbolPriceBankModel] = []
     internal var balances: Observable<[BalanceUIModel]> = .init([])
     internal var accountTotalBalance: Observable<String> = .init("")
+    internal var customerGuid = Cybrid.customerGuid
 
     // MARK: Private properties
     private unowned var cellProvider: AccountsViewProvider
@@ -39,7 +40,7 @@ class AccountsViewModel: NSObject {
 
     func getAccounts() {
 
-        self.dataProvider.fetchAccounts(customerGuid: Cybrid.customerGuid) { [weak self] accountsResult in
+        self.dataProvider.fetchAccounts(customerGuid: self.customerGuid) { [weak self] accountsResult in
 
             switch accountsResult {
             case .success(let accountsList):

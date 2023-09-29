@@ -10,6 +10,7 @@ import UIKit
 public class Component: UIView, ComponentProtocol {
 
     internal var parentView: UIView?
+    internal var parentController: UIViewController?
 
     override init(frame: CGRect) {
 
@@ -26,9 +27,11 @@ public class Component: UIView, ComponentProtocol {
     func setupView() {
         print("SDK Component - Setup View")
     }
+    
+    // MARK: Embeddings Helpers
+    func embed(in view: UIView, parent: UIViewController? = nil) {
 
-    func embed(in view: UIView) {
-
+        self.parentController = parent
         self.parentView = view
         willMove(toSuperview: view)
         view.addSubview(self)
@@ -93,13 +96,15 @@ public class Component: UIView, ComponentProtocol {
         layoutSubviews()
     }
 
+    // MARK: UI Component Helper
     internal func removeSubViewsFromContent() {
 
         for view in self.subviews {
             view.removeFromSuperview()
         }
     }
-
+    
+    // MARK: UI Helper Functions
     internal func createLoaderScreen(text: String) {
 
         // -- Loading Label Container
@@ -207,6 +212,15 @@ public class Component: UIView, ComponentProtocol {
         label.textColor = color
         label.setParagraphText(text, paragraphStyle)
         return label
+    }
+
+    // MARK: Controller Helper
+    internal func back() {
+        if self.parentController?.navigationController != nil {
+            self.parentController?.navigationController?.popViewController(animated: true)
+        } else {
+            self.parentController?.dismiss(animated: true)
+        }
     }
 }
 
