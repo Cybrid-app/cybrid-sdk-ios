@@ -34,11 +34,35 @@ class CybridServerErrorTest: XCTestCase {
         XCTAssertEqual(error.message, "Address already exists.")
     }
 
-    func test_handle_wallets_dafault() {
+    func test_handle_wallets_component_dafault() {
 
         // -- Given
         let error = CybridServerError().handle(
             component: .walletsComponent,
+            messageCode: "error",
+            errorMessage: "")
+
+        // -- Then
+        XCTAssertEqual(error.message, "")
+    }
+
+    func test_handle_depositAddress_component_unverifiedCustomer() {
+
+        // -- Given
+        let error = CybridServerError().handle(
+            component: .depositAddressComponent,
+            messageCode: "unverified_customer",
+            errorMessage: "")
+
+        // -- Then
+        XCTAssertEqual(error.message, "Customer has not been verified")
+    }
+
+    func test_handle_depositAddress_component_dafault() {
+
+        // -- Given
+        let error = CybridServerError().handle(
+            component: .depositAddressComponent,
             messageCode: "error",
             errorMessage: "")
 
