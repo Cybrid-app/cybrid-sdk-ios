@@ -333,6 +333,47 @@ class CybridConfigTests: XCTestCase {
         XCTAssertEqual(bank, cybridConfig.bank)
     }
 
+    func test_setAssetsForCreateDepositAddres() {
+
+        // -- Given
+        let sdkConfig = SDKConfig(environment: .staging,
+                                  bearer: "TEST-BEARER",
+                                  customerGuid: "MOCK_GUID")
+        let cybridConfig = CybridConfig()
+
+        // -- When
+        cybridConfig.setup(sdkConfig: sdkConfig,
+                           dataProvider: dataProvider,
+                           completion: {})
+
+        // -- Then
+        XCTAssertFalse(cybridConfig.assetsForDepositAddress.isEmpty)
+        XCTAssertEqual(cybridConfig.assetsForDepositAddress.count, 7)
+        XCTAssertTrue(cybridConfig.assetsForDepositAddress.contains("BTC"))
+        XCTAssertTrue(cybridConfig.assetsForDepositAddress.contains("USDC"))
+    }
+
+    func test_setAssetsForCreateDepositAddre_Empty() {
+
+        // -- Given
+        let sdkConfig = SDKConfig(environment: .staging,
+                                  bearer: "TEST-BEARER",
+                                  customerGuid: "MOCK_GUID")
+        let cybridConfig = CybridConfig()
+
+        // -- When
+        cybridConfig.setup(sdkConfig: sdkConfig,
+                           dataProvider: dataProvider,
+                           completion: {})
+
+        // -- Then
+        XCTAssertFalse(cybridConfig.assetsForDepositAddress.isEmpty)
+        XCTAssertEqual(cybridConfig.assetsForDepositAddress.count, 7)
+        XCTAssertTrue(cybridConfig.assetsForDepositAddress.contains("BTC"))
+        XCTAssertTrue(cybridConfig.assetsForDepositAddress.contains("ETH"))
+        XCTAssertTrue(cybridConfig.assetsForDepositAddress.contains("USDC"))
+    }
+
     func test_fetchAssets() {
 
         // -- Given

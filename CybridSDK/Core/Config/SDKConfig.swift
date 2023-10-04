@@ -16,7 +16,13 @@ public final class SDKConfig {
     public var customer: CustomerBankModel?
     public var bank: BankBankModel?
 
-    public init(environment: CybridEnvironment = .sandbox, bearer: String = "", customerGuid: String = "", customer: CustomerBankModel? = nil, bank: BankBankModel? = nil) {
+    public init(
+        environment: CybridEnvironment = .sandbox,
+        bearer: String = "",
+        customerGuid: String = "",
+        customer: CustomerBankModel? = nil,
+        bank: BankBankModel? = nil
+    ) {
 
         self.environment = environment
         self.bearer = bearer

@@ -61,7 +61,7 @@ public final class DepositAddresViewController: UIViewController {
 
         // -- Deposit Address Component
         self.depositAddressView = DepositAddresView()
-        self.depositAddressView.embed(in: self.componentContainer)
+        self.depositAddressView.embed(in: self.componentContainer, parent: self)
         self.depositAddressView.initComponent(depositAddressViewModel: depositAddressViewModel)
     }
 }
