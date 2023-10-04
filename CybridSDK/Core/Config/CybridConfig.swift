@@ -9,6 +9,9 @@ import CybridApiBankSwift
 import Foundation
 
 public final class CybridConfig {
+    
+    // MARK: Statics assets for create deposit address
+    private static let defaultAssets = ["BTC", "ETH", "BCH", "LTC", "USDC", "USDC_POL", "USDC_STE"]
 
     // MARK: Base URL's for API's
     static let baseBankApiUrl: String = "https://bank.%@.cybrid.app"
@@ -54,7 +57,7 @@ public final class CybridConfig {
         self.customerGuid = sdkConfig.customerGuid
         self.customer = sdkConfig.customer
         self.bank = sdkConfig.bank
-        self.assetsForDepositAddress = sdkConfig.assetsForCreateDepositAddres
+        self.assetsForDepositAddress = CybridConfig.defaultAssets
         self.theme = theme ?? CybridTheme.default
         self.refreshRate = refreshRate
         self._preferredLocale = locale
@@ -81,7 +84,7 @@ public final class CybridConfig {
         self.customerGuid = sdkConfig.customerGuid
         self.customer = sdkConfig.customer
         self.bank = sdkConfig.bank
-        self.assetsForDepositAddress = sdkConfig.assetsForCreateDepositAddres
+        self.assetsForDepositAddress = CybridConfig.defaultAssets
         self.theme = theme ?? CybridTheme.default
         self.refreshRate = refreshRate
         self._preferredLocale = locale
@@ -139,6 +142,10 @@ extension CybridConfig {
             throw AssetNotFoundError(code: code)
         }
         return asset
+    }
+
+    func canCreateDepositAddressFor(_ asset: String) -> Bool {
+        return self.assetsForDepositAddress.contains(asset)
     }
 }
 

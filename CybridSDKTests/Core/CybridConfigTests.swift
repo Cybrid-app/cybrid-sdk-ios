@@ -336,11 +336,9 @@ class CybridConfigTests: XCTestCase {
     func test_setAssetsForCreateDepositAddres() {
 
         // -- Given
-        let assetsForCreateDepositAddres = ["BTC", "USDC"]
         let sdkConfig = SDKConfig(environment: .staging,
                                   bearer: "TEST-BEARER",
-                                  customerGuid: "MOCK_GUID",
-                                  assetsForCreateDepositAddres: assetsForCreateDepositAddres)
+                                  customerGuid: "MOCK_GUID")
         let cybridConfig = CybridConfig()
 
         // -- When
@@ -350,7 +348,7 @@ class CybridConfigTests: XCTestCase {
 
         // -- Then
         XCTAssertFalse(cybridConfig.assetsForDepositAddress.isEmpty)
-        XCTAssertEqual(cybridConfig.assetsForDepositAddress.count, 2)
+        XCTAssertEqual(cybridConfig.assetsForDepositAddress.count, 7)
         XCTAssertTrue(cybridConfig.assetsForDepositAddress.contains("BTC"))
         XCTAssertTrue(cybridConfig.assetsForDepositAddress.contains("USDC"))
     }
@@ -370,10 +368,9 @@ class CybridConfigTests: XCTestCase {
 
         // -- Then
         XCTAssertFalse(cybridConfig.assetsForDepositAddress.isEmpty)
-        XCTAssertEqual(cybridConfig.assetsForDepositAddress.count, 4)
+        XCTAssertEqual(cybridConfig.assetsForDepositAddress.count, 7)
         XCTAssertTrue(cybridConfig.assetsForDepositAddress.contains("BTC"))
         XCTAssertTrue(cybridConfig.assetsForDepositAddress.contains("ETH"))
-        XCTAssertTrue(cybridConfig.assetsForDepositAddress.contains("SOL"))
         XCTAssertTrue(cybridConfig.assetsForDepositAddress.contains("USDC"))
     }
 

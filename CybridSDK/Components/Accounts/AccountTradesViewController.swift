@@ -132,8 +132,8 @@ extension AccountTradesViewController {
 
     private func createDepositAddressButton() {
 
-        let isAvailable = Cybrid.assetsForDepositAddress.first(where: { $0 == self.balance.account.asset })
-        let buttonHeight: CGFloat = isAvailable == nil ? 0 : 50
+        let canCreate = Cybrid.canCreateDepositAddressFor(self.balance.account.asset ?? "")
+        let buttonHeight: CGFloat = !canCreate ? 0 : 50
         self.depositAddressButton = CYBButton(title: localizer.localize(with: UIStrings.getDepositAddress)) {
 
             let depositAddressViewController = DepositAddresViewController(accountBalance: self.balance)
