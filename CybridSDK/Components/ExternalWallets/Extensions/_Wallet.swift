@@ -264,20 +264,18 @@ extension ExternalWalletsView {
 
             case .TRANSFERS:
 
-                // -- Contianer
-                height.constant = 110
-
                 // -- Transfers table
-                let transfersTable = UITableView()
+                let transfersTable = ContentSizedTableView()
                 transfersTable.delegate = self
                 transfersTable.dataSource = self
+                transfersTable.register(TransferCell.self, forCellReuseIdentifier: TransferCell.reuseIdentifier)
                 transfersTable.accessibilityIdentifier = "wallets_transfersTable"
                 container.addSubview(transfersTable)
-                height.constant = transfersTable.contentSize.height
+                transfersTable.constraintLeft(container, margin: 0)
                 transfersTable.constraintTop(container, margin: 0)
-                transfersTable.constraintLeft(container, margin: 10)
-                transfersTable.constraintRight(container, margin: 10)
-                transfersTable.constraintHeight(transfersTable.contentSize.height)
+                transfersTable.constraintRight(container, margin: 0)
+                transfersTable.constraintBottom(container, margin: 0)
+                height.constant = CGFloat((externalWalletViewModel?.transfers.count ?? 0) * 62)
 
             case .EMPTY:
 

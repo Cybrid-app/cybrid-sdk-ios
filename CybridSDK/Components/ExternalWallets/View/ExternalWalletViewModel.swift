@@ -7,7 +7,7 @@
 
 import CybridApiBankSwift
 
-open class ExternalWalletViewModel: NSObject {
+open class ExternalWalletViewModel: BaseViewModel {
 
     // MARK: Private properties
     private var dataProvider: ExternalWalletRepoProvider & TransfersRepoProvider
@@ -26,7 +26,6 @@ open class ExternalWalletViewModel: NSObject {
     var tagScannedValue: Observable<String> = .init("")
     var currentWallet: ExternalWalletBankModel?
     var lastUiState: ExternalWalletsView.State = .LOADING
-    var serverError = ""
 
     // MARK: Constructor
     init(dataProvider: ExternalWalletRepoProvider & TransfersRepoProvider,
@@ -101,9 +100,7 @@ open class ExternalWalletViewModel: NSObject {
             switch transfersResponse {
             case .success(let list):
                 self.logger?.log(.component(.accounts(.accountsDataFetching)))
-                self.transfers = list.objects
-                self.transfersUiState.value = .EMPTY
-
+                self.getTransfersOfTheWallet(list.objects)
             case .failure:
                 self.logger?.log(.component(.accounts(.accountsDataError)))
                 self.transfersUiState.value = .EMPTY
@@ -111,6 +108,29 @@ open class ExternalWalletViewModel: NSObject {
         }
     }
 
+    // MARK: Transfers Functions
+    internal func getTransfersOfTheWallet(_ transfers: [TransferBankModel]) {
+
+        guard let wallet = self.currentWallet
+        else {
+            self.transfers = []
+            return
+        }
+
+        var filteredTransfers = transfers.filter { $0.transferType == .crypto }
+        filteredTransfers = filteredTransfers.filter {
+            $0.destinationAccount?.type == .externalWallet &&
+            $0.destinationAccount?.guid == wallet.guid
+        }
+        self.transfers = filteredTransfers
+        if self.transfers.isEmpty {
+            self.transfersUiState.value = .EMPTY
+        } else {
+            self.transfersUiState.value = .TRANSFERS
+        }
+    }
+
+    // MARK: QR Code Functions
     internal func handleQRScanned(code: String) {
 
         print(code)
@@ -148,36 +168,5 @@ open class ExternalWalletViewModel: NSObject {
             }
         }
         self.tagScannedValue.value = tagValue
-    }
-
-    internal func handleError(_ error: ErrorResponse) {
-
-        if case let ErrorResponse.error(_, data, _, _) = error {
-
-            // -- Check the data if it's not nil
-            guard let data = data
-            else {
-                self.serverError = ""
-                self.uiState.value = .ERROR
-                return
-            }
-
-            // -- Check if data could be serialized as josn
-            guard let errorResult = try? JSONSerialization.jsonObject(with: data) as? [String: Any]
-            else {
-                self.serverError = ""
-                self.uiState.value = .ERROR
-                return
-            }
-
-            // -- Working with value json
-            let messageCode = errorResult["message_code"] as! String
-            let errorMessage = errorResult["error_message"] as! String
-            let handledError = CybridServerError().handle(
-                component: .walletsComponent,
-                messageCode: messageCode,
-                errorMessage: errorMessage)
-            self.serverError = handledError.message
-        }
     }
 }

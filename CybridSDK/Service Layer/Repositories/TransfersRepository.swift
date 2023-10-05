@@ -58,6 +58,6 @@ extension TransfersAPI: TransfersRepository {
     }
 
     static func fetchTransfersByCustomer(guid: String, _ completiton: @escaping FetchTransfersCompletition) {
-        listTransfers(perPage: 40, customerGuid: guid, completion: completiton)
+        listTransfers(perPage: 80, customerGuid: guid, completion: completiton)
     }
 }

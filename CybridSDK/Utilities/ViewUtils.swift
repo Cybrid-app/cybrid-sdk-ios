@@ -10,7 +10,7 @@ import UIKit
 func getParagraphStyle(_ lineHeight: CGFloat) -> NSMutableParagraphStyle {
 
     let paragraphStyle = NSMutableParagraphStyle()
-    paragraphStyle.lineHeightMultiple = 1.1
+    paragraphStyle.lineHeightMultiple = lineHeight
     return paragraphStyle
 }
 

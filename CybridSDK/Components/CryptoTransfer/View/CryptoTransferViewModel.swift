@@ -8,7 +8,7 @@
 import Foundation
 import CybridApiBankSwift
 
-open class CryptoTransferViewModel: NSObject {
+open class CryptoTransferViewModel: BaseViewModel {
 
     typealias DataProvider = AccountsRepoProvider & ExternalWalletRepoProvider & PricesRepoProvider & QuotesRepoProvider & TransfersRepoProvider
 
@@ -42,7 +42,6 @@ open class CryptoTransferViewModel: NSObject {
     // MARK: Public properties
     var uiState: Observable<CryptoTransferView.State> = .init(.LOADING)
     var modalUiState: Observable<CryptoTransferView.ModalState> = .init(.LOADING)
-    var serverError = ""
 
     // MARK: Constructor
     init(dataProvider: DataProvider,
@@ -261,38 +260,6 @@ open class CryptoTransferViewModel: NSObject {
 
         } else {
             self.amountWithPriceObservable.value = amount.newValue
-        }
-    }
-
-    // MARK: Error Handling
-    internal func handleError(_ error: ErrorResponse) {
-
-        if case let ErrorResponse.error(_, data, _, _) = error {
-
-            // -- Check the data if it's not nil
-            guard let data = data
-            else {
-                self.serverError = ""
-                self.uiState.value = .ERROR
-                return
-            }
-
-            // -- Check if data could be serialized as josn
-            guard let errorResult = try? JSONSerialization.jsonObject(with: data) as? [String: Any]
-            else {
-                self.serverError = ""
-                self.uiState.value = .ERROR
-                return
-            }
-
-            // -- Working with value json
-            let messageCode = errorResult["message_code"] as! String
-            let errorMessage = errorResult["error_message"] as! String
-            let handledError = CybridServerError().handle(
-                component: .cryptoTransferComponent,
-                messageCode: messageCode,
-                errorMessage: errorMessage)
-            self.serverError = handledError.message
         }
     }
 }
