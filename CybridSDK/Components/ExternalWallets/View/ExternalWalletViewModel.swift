@@ -114,6 +114,7 @@ open class ExternalWalletViewModel: BaseViewModel {
         guard let wallet = self.currentWallet
         else {
             self.transfers = []
+            self.transfersUiState.value = .EMPTY
             return
         }
 

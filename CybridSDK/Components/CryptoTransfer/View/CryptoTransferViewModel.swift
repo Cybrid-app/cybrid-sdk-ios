@@ -146,8 +146,14 @@ open class CryptoTransferViewModel: BaseViewModel {
     internal func createTransfer() {
 
         self.modalUiState.value = .LOADING
+        guard let currentQuote = self.currentQuote.value
+        else {
+            self.modalUiState.value = .ERROR
+            return
+        }
+
         let postTransferBankModel = PostTransferBankModel(
-            quoteGuid: currentQuote.value!.guid!,
+            quoteGuid: currentQuote.guid!,
             transferType: .crypto,
             externalWalletGuid: currentExternalWallet?.guid ?? ""
         )
@@ -182,14 +188,17 @@ open class CryptoTransferViewModel: BaseViewModel {
 
         var valueFormatted = "0"
         let assetCode = self.currentAccount.value?.asset ?? ""
-        let asset = try? Cybrid.findAsset(code: assetCode)
-        if let asset {
 
-            let account = self.currentAccount.value
-            let accountValue = account?.platformBalance
-            let accountValueCDecimal = CDecimal(accountValue ?? "0")
-            valueFormatted = AssetFormatter.forBase(asset, amount: accountValueCDecimal)
+        guard let asset = try? Cybrid.findAsset(code: assetCode)
+        else { return valueFormatted }
+
+        let account = self.currentAccount.value
+        let accountValue = account?.platformBalance
+        let accountValueCDecimal = CDecimal(accountValue!)
+        if accountValueCDecimal.newValue == "0.00" {
+            return valueFormatted
         }
+        valueFormatted = AssetFormatter.forBase(asset, amount: accountValueCDecimal)
         return valueFormatted
     }
 
@@ -200,8 +209,8 @@ open class CryptoTransferViewModel: BaseViewModel {
     internal func changeCurrentAccount(_ account: AccountBankModel?) {
 
         if let account {
-            let assetCode = account.asset ?? ""
-            let asset = try? Cybrid.findAsset(code: assetCode)
+            let assetCode = account.asset
+            let asset = try? Cybrid.findAsset(code: assetCode!)
             self.currentAsset = asset!
         }
     }
@@ -219,15 +228,21 @@ open class CryptoTransferViewModel: BaseViewModel {
     internal func calculatePreQuote() {
 
         self.amountWithPriceErrorObservable.value = false
-        let assetCode = self.currentAccount.value?.asset ?? ""
+        let assetCode = self.currentAccount.value?.asset
         let counterAssetCode = self.fiat.code
-        let symbol = "\(assetCode)-\(counterAssetCode)"
+        let symbol = "\(assetCode!)-\(counterAssetCode)"
         let amount = CDecimal(self.currentAmountInput)
         if amount.newValue != "0.00" {
 
             let assetToUse = isTransferInFiat.value ? self.fiat : self.currentAsset!
             let assetToConvert = isTransferInFiat.value ? self.currentAsset! : self.fiat
-            let buyPrice = self.getPrice(symbol: symbol).buyPrice ?? "0"
+
+            guard let buyPrice = self.getPrice(symbol: symbol).buyPrice
+            else {
+                self.amountWithPriceObservable.value = "0"
+                return
+            }
+
             let amountFromInput = AssetFormatter.forInput(
                 assetToUse,
                 amount: amount
