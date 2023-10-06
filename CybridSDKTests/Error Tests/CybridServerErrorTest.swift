@@ -69,4 +69,28 @@ class CybridServerErrorTest: XCTestCase {
         // -- Then
         XCTAssertEqual(error.message, "")
     }
+
+    func test_handleCryptoTransferComponent_invalidParameter() {
+
+        // -- Given
+        let error = CybridServerError().handle(
+            component: .cryptoTransferComponent,
+            messageCode: "invalid_parameter",
+            errorMessage: "deliver_amount is empty")
+
+        // -- Then
+        XCTAssertEqual(error.message, "Amount is empty")
+    }
+
+    func test_handleCryptoTransferComponent_dafault() {
+
+        // -- Given
+        let error = CybridServerError().handle(
+            component: .cryptoTransferComponent,
+            messageCode: "error",
+            errorMessage: "")
+
+        // -- Then
+        XCTAssertEqual(error.message, "Server error, try again.")
+    }
 }

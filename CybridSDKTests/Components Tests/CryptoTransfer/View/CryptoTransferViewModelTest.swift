@@ -40,6 +40,18 @@ class CryptoTransferViewModelTest: CryptoTransferTest {
         XCTAssertEqual(viewModel.modalUiState.value, .LOADING)
     }
 
+    func test_initComponent() {
+
+        // -- Given
+        let viewModel = self.createViewModel()
+
+        // -- When
+        viewModel.initComponent()
+
+        // -- Then
+        XCTAssertNotNil(viewModel.pricesPolling)
+    }
+
     func test_fetchAccounts() {
 
         // -- Given

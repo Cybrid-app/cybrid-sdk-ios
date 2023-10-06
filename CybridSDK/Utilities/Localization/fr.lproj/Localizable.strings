@@ -218,3 +218,4 @@
 "cybrid.server.error.wallets.view.error.invalid_parameter.tag" = "La balise ne doit pas être vide";
 "cybrid.server.error.wallets.view.error.data_exists" = "L'adresse existe déjà.";
 "cybrid.server.error.deposit.address.create.error.unverified_customer" = "Le client n'a pas été vérifié";
+"cybrid.server.error.ctryptoTransfer.error.deliver_amount" = "Le montant est vide";

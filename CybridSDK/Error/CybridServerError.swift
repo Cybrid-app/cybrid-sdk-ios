@@ -30,14 +30,7 @@ internal class CybridServerError {
         case .depositAddressComponent:
             response = self.handleDepositAddressComponent(messageCode: messageCode, errorMessage: errorMessage)
         case .cryptoTransferComponent:
-            switch messageCode {
-            case "invalid_parameter":
-                if errorMessage == "deliver_amount is empty" {
-                    response.message = "Amount is empty"
-                }
-            default:
-                response.message = "Please, try again."
-            }
+            response = self.handleCryptoTransferComponent(messageCode: messageCode, errorMessage: errorMessage)
         }
         return response
     }
@@ -71,14 +64,30 @@ internal class CybridServerError {
         }
         return response
     }
+
+    internal func handleCryptoTransferComponent(messageCode: String, errorMessage: String) -> CybridServerErrorResponse {
+
+        var response = CybridServerErrorResponse(message: "", inputName: "")
+        switch messageCode {
+        case "invalid_parameter":
+            if errorMessage == "deliver_amount is empty" {
+                response.message = self.localizer.localize(with: UIStrings.cryptoTransferErrorDeliverAmount)
+            }
+        default:
+            response.message = self.localizer.localize(with: UIStrings.genericError)
+        }
+        return response
+    }
 }
 
 extension CybridServerError {
 
     enum UIStrings {
 
+        static let genericError = "cybrid.server.error.generic"
         static let walletsCreateErrorInvalidadTag = "cybrid.server.error.wallets.view.error.invalid_parameter.tag"
         static let walletsCreateErrorDataExists = "cybrid.server.error.wallets.view.error.data_exists"
         static let depositAddressErrorUnverifiedCustomer = "cybrid.server.error.deposit.address.create.error.unverified_customer"
+        static let cryptoTransferErrorDeliverAmount = "cybrid.server.error.ctryptoTransfer.error.deliver_amount"
     }
 }
