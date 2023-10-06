@@ -228,7 +228,8 @@
 "cybrid.external.wallets.qr.scanner.controller.error.button" = "OK";
 
 // -- Crypto Trasnfer Component
-"cybrid.crypto.transfer.cotent.title" = "Crypto Transfer";
+"cybrid.crypto.transfer.loading.title" = "Loading accounts and wallets";
+"cybrid.crypto.transfer.content.title" = "Crypto Transfer";
 
 // -- Errors
 "cybrid.server.error.generic" = "Server error, try again.";

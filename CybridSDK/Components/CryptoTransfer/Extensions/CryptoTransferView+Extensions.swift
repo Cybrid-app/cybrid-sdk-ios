@@ -10,9 +10,7 @@ import UIKit
 extension CryptoTransferView {
 
     internal func cryptoTransferView_Loading() {
-
-        // let loadingString = localizer.localize(with: UIStrings.loadingText)
-        let loadingString = "Loading accounts and wallets"
+        let loadingString = self.localizer.localize(with: Strings.loadingTitle)
         self.createLoaderScreen(text: loadingString)
     }
 }
@@ -27,6 +25,7 @@ extension CryptoTransferView {
 
     enum Strings {
 
-        static let contentTitle = "cybrid.crypto.transfer.cotent.title"
+        static let loadingTitle = "cybrid.crypto.transfer.loading.title"
+        static let contentTitle = "cybrid.crypto.transfer.content.title"
     }
 }

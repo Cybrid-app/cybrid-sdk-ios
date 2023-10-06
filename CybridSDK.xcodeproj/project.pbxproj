@@ -259,13 +259,10 @@
 		92F707C9298D7557005A93E5 /* ListPricesItemDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F707C8298D7557005A93E5 /* ListPricesItemDelegate.swift */; };
 		92F707CC298D806A005A93E5 /* TradeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F707CB298D806A005A93E5 /* TradeViewModel.swift */; };
 		9E3B30420CC77D425A7A1C28 /* Pods_Abstract_CybridSDKTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80DCD8FC666A9176CF28F146 /* Pods_Abstract_CybridSDKTests.framework */; };
-		A206291C2ABA024C00B71A5B /* Content.swift in Sources */ = {isa = PBXBuildFile; fileRef = A206291B2ABA024C00B71A5B /* Content.swift */; };
 		A206291F2ABA037200B71A5B /* AccountPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = A206291E2ABA037200B71A5B /* AccountPicker.swift */; };
 		A20629222ABA076900B71A5B /* AccountPickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20629212ABA076900B71A5B /* AccountPickerCell.swift */; };
 		A20629252ABA108400B71A5B /* WalletPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20629242ABA108400B71A5B /* WalletPicker.swift */; };
 		A20629282ABA11F600B71A5B /* WalletPickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20629272ABA11F600B71A5B /* WalletPickerCell.swift */; };
-		A20F320C2AC2B1C90049854D /* CryptoTransferModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20F320B2AC2B1C90049854D /* CryptoTransferModal.swift */; };
-		A20F32122AC337110049854D /* _Quote.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20F32112AC337110049854D /* _Quote.swift */; };
 		A21E047C2A86BB4D0046CCBA /* ViewUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = A21E047B2A86BB4D0046CCBA /* ViewUtils.swift */; };
 		A23FC5E92A944F5900129CE2 /* ExternalWalletViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23FC5E82A944F5900129CE2 /* ExternalWalletViewModel.swift */; };
 		A23FC5EB2A94508C00129CE2 /* ExternalWalletsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23FC5EA2A94508C00129CE2 /* ExternalWalletsViewController.swift */; };
@@ -628,13 +625,10 @@
 		92F707C3298C235F005A93E5 /* TradeViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TradeViewController+Extensions.swift"; sourceTree = "<group>"; };
 		92F707C8298D7557005A93E5 /* ListPricesItemDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListPricesItemDelegate.swift; sourceTree = "<group>"; };
 		92F707CB298D806A005A93E5 /* TradeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeViewModel.swift; sourceTree = "<group>"; };
-		A206291B2ABA024C00B71A5B /* Content.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Content.swift; sourceTree = "<group>"; };
 		A206291E2ABA037200B71A5B /* AccountPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountPicker.swift; sourceTree = "<group>"; };
 		A20629212ABA076900B71A5B /* AccountPickerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountPickerCell.swift; sourceTree = "<group>"; };
 		A20629242ABA108400B71A5B /* WalletPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletPicker.swift; sourceTree = "<group>"; };
 		A20629272ABA11F600B71A5B /* WalletPickerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletPickerCell.swift; sourceTree = "<group>"; };
-		A20F320B2AC2B1C90049854D /* CryptoTransferModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoTransferModal.swift; sourceTree = "<group>"; };
-		A20F32112AC337110049854D /* _Quote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = _Quote.swift; sourceTree = "<group>"; };
 		A21E047B2A86BB4D0046CCBA /* ViewUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewUtils.swift; sourceTree = "<group>"; };
 		A23FC5E82A944F5900129CE2 /* ExternalWalletViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExternalWalletViewModel.swift; sourceTree = "<group>"; };
 		A23FC5EA2A94508C00129CE2 /* ExternalWalletsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExternalWalletsViewController.swift; sourceTree = "<group>"; };
@@ -1945,23 +1939,6 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
-		A20F320A2AC2B18F0049854D /* Modal */ = {
-			isa = PBXGroup;
-			children = (
-				A20F320E2AC3319D0049854D /* Extensions */,
-				A20F320B2AC2B1C90049854D /* CryptoTransferModal.swift */,
-			);
-			path = Modal;
-			sourceTree = "<group>";
-		};
-		A20F320E2AC3319D0049854D /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				A20F32112AC337110049854D /* _Quote.swift */,
-			);
-			path = Extensions;
-			sourceTree = "<group>";
-		};
 		A23FC5E62A94093200129CE2 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -2157,7 +2134,6 @@
 		A2EA1FA12AB4B523008EF698 /* CryptoTransfer */ = {
 			isa = PBXGroup;
 			children = (
-				A20F320A2AC2B18F0049854D /* Modal */,
 				A2EA1FAA2AB98FD1008EF698 /* ViewController */,
 				A2EA1FA22AB8A894008EF698 /* View */,
 				A2EA1FA72AB98EC9008EF698 /* Extensions */,
@@ -2178,7 +2154,6 @@
 			isa = PBXGroup;
 			children = (
 				A2EA1FA82AB98EE5008EF698 /* CryptoTransferView+Extensions.swift */,
-				A206291B2ABA024C00B71A5B /* Content.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -2622,7 +2597,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				0B2899E0288E4860001B3360 /* AuthenticatedServiceProvider.swift in Sources */,
-				A206291C2ABA024C00B71A5B /* Content.swift in Sources */,
 				928A2CE62A16749F005D0E3A /* AccountTransferModal.swift in Sources */,
 				92827DAD294320EC00231772 /* BankRepository.swift in Sources */,
 				927233E628D244AC0080AAC4 /* AccountsHeaderCell.swift in Sources */,
@@ -2691,7 +2665,6 @@
 				A23FC5ED2A94588600129CE2 /* ExternalWalletsView+Extensions.swift in Sources */,
 				0B2B2A6D28621D5C002F0EC1 /* ColorTheme.swift in Sources */,
 				A2E5CE2F2ACD743F00D59535 /* ContentSizedTableView.swift in Sources */,
-				A20F32122AC337110049854D /* _Quote.swift in Sources */,
 				A23FC5EF2A9490BC00129CE2 /* ExternalWalletBankModel+Extensions.swift in Sources */,
 				0B00E04C2885AD8D00707F26 /* PricesRepository.swift in Sources */,
 				927233DC28D244210080AAC4 /* BalanceUIModel.swift in Sources */,
@@ -2708,7 +2681,6 @@
 				0BD66118286B79C500F4DA6B /* UIView+Constraints.swift in Sources */,
 				92827DAF294322AD00231772 /* BankBankModel+Extensions.swift in Sources */,
 				A24B35992A67099C00EF20C5 /* DepositAddressBankModel+Extensions.swift in Sources */,
-				A20F320C2AC2B1C90049854D /* CryptoTransferModal.swift in Sources */,
 				92C92C8B2911FC6C00B81719 /* CustomerBankModel+Extensions.swift in Sources */,
 				925FFDB829F832BD00F7D07A /* TradeModal.swift in Sources */,
 				927233EA28D244CC0080AAC4 /* AccountTradesHeaderCell.swift in Sources */,

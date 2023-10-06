@@ -42,10 +42,10 @@ public final class CryptoTransferView: Component {
                 self.cryptoTransferView_Loading()
 
             case .CONTENT:
-                self.cryptoTransferView_Content()
+                self.cryptoTransferView_Loading()
 
             default:
-                print("")
+                self.cryptoTransferView_Loading()
             }
         }
     }
