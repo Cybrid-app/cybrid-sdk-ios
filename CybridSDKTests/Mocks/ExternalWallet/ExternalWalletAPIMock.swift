@@ -26,8 +26,8 @@ final class ExternalWalletAPIMock: ExternalWalletsAPI {
         return listExternalWalletsWithRequestBuilder().requestTask
     }
 
-    class func didFetchListExternalWalletsSuccessfully() {
-        fetchExternalWalletListBankModelCompletion?(.success(ExternalWalletListBankModel.mock))
+    class func didFetchListExternalWalletsSuccessfully(mock: ExternalWalletListBankModel) {
+        fetchExternalWalletListBankModelCompletion?(.success(mock))
     }
 
     class func didFetchListExternalWalletsFailed() {

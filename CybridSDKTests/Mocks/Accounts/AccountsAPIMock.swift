@@ -162,6 +162,31 @@ extension AccountBankModel {
         state: .created
     )
 
+    static let mockWithNoAsset = AccountBankModel(
+        type: .gas,
+        guid: "GUID",
+        createdAt: Date(),
+        asset: "",
+        name: "ETH",
+        bankGuid: "BANK_GUID",
+        customerGuid: "CUSTOMER_GUID",
+        platformBalance: "200000000",
+        platformAvailable: "2000000000",
+        state: .created
+    )
+
+    static let mockWithNilAsset = AccountBankModel(
+        type: .gas,
+        guid: "GUID",
+        createdAt: Date(),
+        name: "ETH",
+        bankGuid: "BANK_GUID",
+        customerGuid: "CUSTOMER_GUID",
+        platformBalance: "200000000",
+        platformAvailable: "2000000000",
+        state: .created
+    )
+
     static let mock = [
         AccountBankModel.trading,
         AccountBankModel.fiat,
