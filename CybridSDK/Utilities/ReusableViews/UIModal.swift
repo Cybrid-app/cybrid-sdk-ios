@@ -208,7 +208,8 @@ open class UIModal: UIViewController {
 
         // -- Close button
         let closeButton = CYBButton(
-            title: "Continue"
+            title: CybridLocalizer().localize(
+                with: "cybrid.modal.continue.button")
         ) {
             self.cancel()
         }

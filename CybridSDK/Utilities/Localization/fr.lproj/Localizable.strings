@@ -6,6 +6,9 @@
 
 */
 
+// UI -- Modal
+"cybrid.modal.continue.button" = "Continuer";
+
 // Crypto Price List
 "cybrid.cryptoPriceList.headerSearchPlaceholder" = "Chercher";
 "cybrid.cryptoPriceList.headerCurrency" = "Devise";
