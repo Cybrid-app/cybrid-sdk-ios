@@ -20,35 +20,62 @@ extension ExternalWalletsView: UITableViewDelegate, UITableViewDataSource {
 
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
-        if tableView.accessibilityIdentifier == "walletsTable" {
+        switch tableView.accessibilityIdentifier {
+        case "walletsTable":
             return self.externalWalletViewModel?.externalWalletsActive.count ?? 0
-        } else {
+        case "wallets_transfersTable":
+            return self.externalWalletViewModel?.transfers.count ?? 0
+        default:
             return 0
         }
     }
 
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-        let wallet = (self.externalWalletViewModel?.externalWalletsActive[indexPath.row])!
-        guard
-            let cell = tableView.dequeueReusableCell(
-                withIdentifier: ExternalWalletCell.reuseIdentifier,
-                for: indexPath) as? ExternalWalletCell
-        else {
+        switch tableView.accessibilityIdentifier {
+        case "walletsTable":
+            let wallet = self.externalWalletViewModel!.externalWalletsActive[indexPath.row]
+            guard let cell = tableView.dequeueReusableCell(
+                    withIdentifier: ExternalWalletCell.reuseIdentifier,
+                    for: indexPath) as? ExternalWalletCell
+            else {
+                return UITableViewCell()
+            }
+            cell.setData(wallet: wallet)
+            return cell
+        case "wallets_transfersTable":
+            let transfer = self.externalWalletViewModel!.transfers[indexPath.row]
+            guard let cell = tableView.dequeueReusableCell(
+                withIdentifier: TransferCell.reuseIdentifier,
+                for: indexPath) as? TransferCell
+            else {
+                return UITableViewCell()
+            }
+            cell.setData(transfer)
+            return cell
+        default:
             return UITableViewCell()
         }
-        cell.setData(wallet: wallet)
-        return cell
     }
 
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
-        let wallet = self.externalWalletViewModel?.externalWalletsActive[indexPath.row]
-        self.externalWalletViewModel?.goToWalletDetail(wallet!)
+        if tableView.accessibilityIdentifier == "walletsTable" {
+            let wallet = self.externalWalletViewModel?.externalWalletsActive[indexPath.row]
+            self.externalWalletViewModel?.goToWalletDetail(wallet!)
+        }
     }
 
     public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 52
+
+        switch tableView.accessibilityIdentifier {
+        case "walletsTable":
+            return 52
+        case "wallets_transfersTable":
+            return 62
+        default:
+            return 0
+        }
     }
 }
 

@@ -25,13 +25,7 @@ final class IdentityVerificationsAPIMock: IdentityVerificationsAPI {
         return getIdentityVerificationWithRequestBuilder(identityVerificationGuid: identityVerificationGuid).requestTask
     }
 
-    override class func listIdentityVerifications(page: Int? = nil,
-                                                  perPage: Int? = nil,
-                                                  guid: String? = nil,
-                                                  bankGuid: String? = nil,
-                                                  customerGuid: String? = nil,
-                                                  apiResponseQueue: DispatchQueue = CybridApiBankSwiftAPI.apiResponseQueue,
-                                                  completion: @escaping ((Result<IdentityVerificationListBankModel, ErrorResponse>) -> Void)) -> RequestTask {
+    override class func listIdentityVerifications(page: Int? = nil, perPage: Int? = nil, guid: String? = nil, bankGuid: String? = nil, customerGuid: String? = nil, state: String? = nil, apiResponseQueue: DispatchQueue = CybridApiBankSwiftAPI.apiResponseQueue, completion: @escaping ((Result<IdentityVerificationListBankModel, ErrorResponse>) -> Void)) -> RequestTask {
         fetchIdentityListCompletion = completion
         return listIdentityVerificationsWithRequestBuilder().requestTask
     }

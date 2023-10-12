@@ -112,8 +112,42 @@ class ExternalWalletViewModelTest: ExternalWalletTest {
         dataProvider.didFetchTransfersListSuccessfully()
 
         // -- Then
-        XCTAssertFalse(viewModel.transfers.isEmpty)
+        XCTAssertTrue(viewModel.transfers.isEmpty)
         XCTAssertEqual(viewModel.transfersUiState.value, .EMPTY)
+    }
+
+    func test_getTransfersOfTheWallet_Without_Current_Wallet() {
+
+        // -- Given
+        let viewModel = self.createViewModel()
+        viewModel.currentWallet = nil
+        let transfers = TransferBankModel.mockTransfers()
+
+        // - When
+        viewModel.getTransfersOfTheWallet(transfers)
+
+        // -- Then
+        XCTAssertTrue(viewModel.transfers.isEmpty)
+        XCTAssertEqual(viewModel.transfersUiState.value, .EMPTY)
+    }
+
+    func test_getTransfersOfTheWallet_With_Transfer_Without_WalletGuid() {
+
+        // -- Given
+        let viewModel = self.createViewModel()
+        viewModel.currentWallet = ExternalWalletBankModel(guid: "wallet_guid")
+
+        // -- When/Then Case 1 - Transfers without WalletGuid
+        let transfersWithoutWalletGuid = TransferBankModel.mockTransfers()
+        viewModel.getTransfersOfTheWallet(transfersWithoutWalletGuid)
+        XCTAssertTrue(viewModel.transfers.isEmpty)
+        XCTAssertEqual(viewModel.transfersUiState.value, .EMPTY)
+
+        // -- When/Then Case 2 - Transfers with WalletGuid
+        let transfersWithWalletGuid = TransferBankModel.mockTransfersWithWalletGuid()
+        viewModel.getTransfersOfTheWallet(transfersWithWalletGuid)
+        XCTAssertFalse(viewModel.transfers.isEmpty)
+        XCTAssertEqual(viewModel.transfersUiState.value, .TRANSFERS)
     }
 
     func test_handleQRScanned_Without_Dots() {
@@ -144,48 +178,5 @@ class ExternalWalletViewModelTest: ExternalWalletTest {
         viewModel.handleQRScanned(code: codeTwo)
         XCTAssertEqual(viewModel.addressScannedValue.value, "98765")
         XCTAssertEqual(viewModel.tagScannedValue.value, "234")
-    }
-
-    func test_handleError_WithData_nil() {
-
-        // -- Given
-        let viewModel = self.createViewModel()
-        let error = ErrorResponse.error(1, nil, nil, CybridError.serviceError)
-
-        // -- When
-        viewModel.handleError(error)
-
-        // -- Then
-        XCTAssertEqual(viewModel.serverError, "")
-        XCTAssertEqual(viewModel.uiState.value, .ERROR)
-    }
-
-    func test_handleError_WithData_No_Json() {
-
-        // -- Given
-        let viewModel = self.createViewModel()
-        let data = "Cybrid".data(using: .utf8)
-        let error = ErrorResponse.error(1, data, nil, CybridError.serviceError)
-
-        // -- When
-        viewModel.handleError(error)
-
-        // -- Then
-        XCTAssertEqual(viewModel.serverError, "")
-        XCTAssertEqual(viewModel.uiState.value, .ERROR)
-    }
-
-    func test_handleError() {
-
-        // -- Given
-        let viewModel = self.createViewModel()
-        let data = "{\"status\":400,\"error_message\":\"tag must not be empty\",\"message_code\":\"invalid_parameter\"}".data(using: .utf8)
-        let error = ErrorResponse.error(1, data, nil, CybridError.serviceError)
-
-        // -- When
-        viewModel.handleError(error)
-
-        // -- Then
-        XCTAssertEqual(viewModel.serverError, "Tag must not be empty")
     }
 }

@@ -368,9 +368,9 @@ final class ServiceProviderMock: AssetsRepoProvider,
     }
 
     // MARK: External Wallet
-    func didFetchListExternalWalletsSuccessfully() {
+    func didFetchListExternalWalletsSuccessfully(mock: ExternalWalletListBankModel = ExternalWalletListBankModel.mock) {
         Cybrid.session.setupSession(authToken: "TEST-TOKEN")
-        ExternalWalletAPIMock.didFetchListExternalWalletsSuccessfully()
+        ExternalWalletAPIMock.didFetchListExternalWalletsSuccessfully(mock: mock)
     }
 
     func didFetchListExternalWalletsFailed() {

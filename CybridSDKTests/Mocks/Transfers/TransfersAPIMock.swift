@@ -24,16 +24,18 @@ final class TransfersAPIMock: TransfersAPI {
         return createTransferWithRequestBuilder(postTransferBankModel: postTransferBankModel).requestTask
     }
 
-    override class func listTransfers(page: Int? = nil,
-                                      perPage: Int? = nil,
-                                      guid: String? = nil,
-                                      transferType: String? = nil,
-                                      bankGuid: String? = nil,
-                                      customerGuid: String? = nil,
-                                      accountGuid: String? = nil,
-                                      state: String? = nil,
-                                      apiResponseQueue: DispatchQueue = CybridApiBankSwiftAPI.apiResponseQueue,
-                                      completion: @escaping ((Result<TransferListBankModel, ErrorResponse>) -> Void)) -> RequestTask {
+    override class func listTransfers(
+        page: Int? = nil,
+        perPage: Int? = nil,
+        guid: String? = nil,
+        transferType: String? = nil,
+        bankGuid: String? = nil,
+        customerGuid: String? = nil,
+        accountGuid: String? = nil,
+        state: String? = nil,
+        label: String? = nil,
+        apiResponseQueue: DispatchQueue = CybridApiBankSwiftAPI.apiResponseQueue,
+        completion: @escaping ((Result<TransferListBankModel, ErrorResponse>) -> Void)) -> RequestTask {
         transfersListCompletition = completion
         return listTransfersWithRequestBuilder().requestTask
     }
@@ -75,8 +77,31 @@ extension TransferBankModel {
         )
     }
 
+    static func mockWithWAlletGuid() -> Self {
+        return TransferBankModel(
+            guid: "1234",
+            transferType: .crypto,
+            customerGuid: "12345",
+            quoteGuid: "12345",
+            asset: "BTC",
+            side: .withdrawal,
+            state: .completed,
+            amount: 200000,
+            fee: 0,
+            destinationAccount: TransferDestinationAccountBankModel(
+                guid: "wallet_guid",
+                type: .externalWallet
+            ),
+            createdAt: Date()
+        )
+    }
+
     static func mockTransfers() -> [TransferBankModel] {
         return [mock()]
+    }
+
+    static func mockTransfersWithWalletGuid() -> [Self] {
+        return [mockWithWAlletGuid()]
     }
 
     static let mockList = TransferListBankModel(total: 1, page: 1, perPage: 1, objects: mockTransfers())

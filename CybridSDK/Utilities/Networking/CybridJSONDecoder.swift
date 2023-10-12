@@ -111,9 +111,11 @@ extension CybridJSONDecoder {
         let deliverAmountKey = QuoteBankModel.CodingKeys.deliverAmount.rawValue
         let receiveAmountKey = QuoteBankModel.CodingKeys.receiveAmount.rawValue
         let feeAmountKey = QuoteBankModel.CodingKeys.fee.rawValue
+        let networkFeeAmountKey = QuoteBankModel.CodingKeys.networkFee.rawValue
         jsonStringObject[deliverAmountKey] = stringValue(forKey: deliverAmountKey, in: data, atIndex: 0)
         jsonStringObject[receiveAmountKey] = stringValue(forKey: receiveAmountKey, in: data, atIndex: 0)
         jsonStringObject[feeAmountKey] = stringValue(forKey: feeAmountKey, in: data, atIndex: 0)
+        jsonStringObject[networkFeeAmountKey] = stringValue(forKey: networkFeeAmountKey, in: data, atIndex: 0)
 
         let model = QuoteBankModel(json: jsonStringObject)
         return model

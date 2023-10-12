@@ -6,6 +6,9 @@
 
 */
 
+// UI -- Modal
+"cybrid.modal.continue.button" = "Continue";
+
 // Crypto Price List
 "cybrid.cryptoPriceList.headerSearchPlaceholder" = "Search";
 "cybrid.cryptoPriceList.headerCurrency" = "Currency";
@@ -227,8 +230,13 @@
 "cybrid.external.wallets.qr.scanner.controller.error.message" = "Your device does not support scanning a code from an item. Please use a device with a camera.";
 "cybrid.external.wallets.qr.scanner.controller.error.button" = "OK";
 
+// -- Crypto Trasnfer Component
+"cybrid.crypto.transfer.loading.title" = "Loading accounts and wallets";
+"cybrid.crypto.transfer.content.title" = "Crypto Transfer";
+
 // -- Errors
 "cybrid.server.error.generic" = "Server error, try again.";
 "cybrid.server.error.wallets.view.error.invalid_parameter.tag" = "Tag must not be empty";
 "cybrid.server.error.wallets.view.error.data_exists" = "Address already exists.";
 "cybrid.server.error.deposit.address.create.error.unverified_customer" = "Customer has not been verified";
+"cybrid.server.error.ctryptoTransfer.error.deliver_amount" = "Amount is empty";
