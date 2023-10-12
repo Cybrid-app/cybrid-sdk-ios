@@ -212,6 +212,7 @@ open class CryptoTransferViewModel: BaseViewModel {
             let assetCode = account.asset
             let asset = try? Cybrid.findAsset(code: assetCode!)
             self.currentAsset = asset!
+            self.currentAccount.value = account
         }
     }
 
