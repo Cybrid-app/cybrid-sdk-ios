@@ -19,7 +19,7 @@ final class DepositAddressAPIMock: DepositAddressesAPI {
     private static var createDepositAddressCompletion: CreateDepositAddressCompletion?
 
     @discardableResult
-    override class func listDepositAddresses(page: Int? = nil, perPage: Int? = nil, guid: String? = nil, bankGuid: String? = nil, customerGuid: String? = nil, apiResponseQueue: DispatchQueue = CybridApiBankSwiftAPI.apiResponseQueue, completion: @escaping ((Result<DepositAddressListBankModel, ErrorResponse>) -> Void)) -> RequestTask {
+    override class func listDepositAddresses(page: Int? = nil, perPage: Int? = nil, guid: String? = nil, bankGuid: String? = nil, customerGuid: String? = nil, label: String? = nil, apiResponseQueue: DispatchQueue = CybridApiBankSwiftAPI.apiResponseQueue, completion: @escaping ((Result<DepositAddressListBankModel, ErrorResponse>) -> Void)) -> RequestTask {
         fetchListDepositAddressCompletion = completion
         return listDepositAddressesWithRequestBuilder().requestTask
     }

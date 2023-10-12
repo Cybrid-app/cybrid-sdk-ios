@@ -24,16 +24,18 @@ final class TransfersAPIMock: TransfersAPI {
         return createTransferWithRequestBuilder(postTransferBankModel: postTransferBankModel).requestTask
     }
 
-    override class func listTransfers(page: Int? = nil,
-                                      perPage: Int? = nil,
-                                      guid: String? = nil,
-                                      transferType: String? = nil,
-                                      bankGuid: String? = nil,
-                                      customerGuid: String? = nil,
-                                      accountGuid: String? = nil,
-                                      state: String? = nil,
-                                      apiResponseQueue: DispatchQueue = CybridApiBankSwiftAPI.apiResponseQueue,
-                                      completion: @escaping ((Result<TransferListBankModel, ErrorResponse>) -> Void)) -> RequestTask {
+    override class func listTransfers(
+        page: Int? = nil,
+        perPage: Int? = nil,
+        guid: String? = nil,
+        transferType: String? = nil,
+        bankGuid: String? = nil,
+        customerGuid: String? = nil,
+        accountGuid: String? = nil,
+        state: String? = nil,
+        label: String? = nil,
+        apiResponseQueue: DispatchQueue = CybridApiBankSwiftAPI.apiResponseQueue,
+        completion: @escaping ((Result<TransferListBankModel, ErrorResponse>) -> Void)) -> RequestTask {
         transfersListCompletition = completion
         return listTransfersWithRequestBuilder().requestTask
     }

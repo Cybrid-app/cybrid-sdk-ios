@@ -24,15 +24,7 @@ final class TradesAPIMock: TradesAPI {
         return createTradeWithRequestBuilder(postTradeBankModel: postTradeBankModel).requestTask
     }
 
-    override class func listTrades(page: Int? = nil,
-                                   perPage: Int? = nil,
-                                   guid: String? = nil,
-                                   bankGuid: String? = nil,
-                                   customerGuid: String? = nil,
-                                   accountGuid: String? = nil,
-                                   state: String? = nil,
-                                   apiResponseQueue: DispatchQueue = CybridApiBankSwiftAPI.apiResponseQueue,
-                                   completion: @escaping ((Result<TradeListBankModel, ErrorResponse>) -> Void)) -> RequestTask {
+    override class func listTrades(page: Int? = nil, perPage: Int? = nil, guid: String? = nil, bankGuid: String? = nil, customerGuid: String? = nil, accountGuid: String? = nil, state: String? = nil, label: String? = nil, apiResponseQueue: DispatchQueue = CybridApiBankSwiftAPI.apiResponseQueue, completion: @escaping ((Result<TradeListBankModel, ErrorResponse>) -> Void)) -> RequestTask {
         tradesListCompletition = completion
         return listTradesWithRequestBuilder().requestTask
     }

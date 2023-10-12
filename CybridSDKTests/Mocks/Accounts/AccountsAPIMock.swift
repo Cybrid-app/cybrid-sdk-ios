@@ -20,6 +20,7 @@ final class AccountsAPIMock: AccountsAPI {
                                      type: String? = nil,
                                      bankGuid: String? = nil,
                                      customerGuid: String? = nil,
+                                     label: String? = nil,
                                      apiResponseQueue: DispatchQueue = CybridApiBankSwiftAPI.apiResponseQueue,
                                      completion: @escaping ((Result<AccountListBankModel, ErrorResponse>) -> Void)) -> RequestTask {
         accountsCompletion = completion
