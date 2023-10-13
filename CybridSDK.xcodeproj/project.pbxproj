@@ -277,6 +277,9 @@
 		A23FC6032A95895D00129CE2 /* _CreateWallet.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23FC6022A95895D00129CE2 /* _CreateWallet.swift */; };
 		A23FC6052A958A2000129CE2 /* _Wallets.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23FC6042A958A2000129CE2 /* _Wallets.swift */; };
 		A23FC6072A958A5900129CE2 /* _Wallet.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23FC6062A958A5900129CE2 /* _Wallet.swift */; };
+		A24823D72AD998050064FA73 /* CryptoTransferModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24823D62AD998050064FA73 /* CryptoTransferModal.swift */; };
+		A24823D92AD998640064FA73 /* Quote.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24823D82AD998640064FA73 /* Quote.swift */; };
+		A24823DB2AD998EB0064FA73 /* Content.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24823DA2AD998EB0064FA73 /* Content.swift */; };
 		A24B35902A66567F00EF20C5 /* DepositAddresView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24B358F2A66567F00EF20C5 /* DepositAddresView+Extensions.swift */; };
 		A24B35932A66D05200EF20C5 /* DepositAddressViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24B35922A66D05200EF20C5 /* DepositAddressViewModel.swift */; };
 		A24B35952A66D0A700EF20C5 /* DepositAddressRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24B35942A66D0A700EF20C5 /* DepositAddressRepository.swift */; };
@@ -643,6 +646,9 @@
 		A23FC6022A95895D00129CE2 /* _CreateWallet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = _CreateWallet.swift; sourceTree = "<group>"; };
 		A23FC6042A958A2000129CE2 /* _Wallets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = _Wallets.swift; sourceTree = "<group>"; };
 		A23FC6062A958A5900129CE2 /* _Wallet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = _Wallet.swift; sourceTree = "<group>"; };
+		A24823D62AD998050064FA73 /* CryptoTransferModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoTransferModal.swift; sourceTree = "<group>"; };
+		A24823D82AD998640064FA73 /* Quote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quote.swift; sourceTree = "<group>"; };
+		A24823DA2AD998EB0064FA73 /* Content.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Content.swift; sourceTree = "<group>"; };
 		A24B358F2A66567F00EF20C5 /* DepositAddresView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DepositAddresView+Extensions.swift"; sourceTree = "<group>"; };
 		A24B35922A66D05200EF20C5 /* DepositAddressViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepositAddressViewModel.swift; sourceTree = "<group>"; };
 		A24B35942A66D0A700EF20C5 /* DepositAddressRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepositAddressRepository.swift; sourceTree = "<group>"; };
@@ -1994,6 +2000,23 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		A24823D42AD9977F0064FA73 /* Modal */ = {
+			isa = PBXGroup;
+			children = (
+				A24823D52AD997870064FA73 /* Extensions */,
+				A24823D62AD998050064FA73 /* CryptoTransferModal.swift */,
+			);
+			path = Modal;
+			sourceTree = "<group>";
+		};
+		A24823D52AD997870064FA73 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				A24823D82AD998640064FA73 /* Quote.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		A24B35912A66D03F00EF20C5 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -2134,6 +2157,7 @@
 		A2EA1FA12AB4B523008EF698 /* CryptoTransfer */ = {
 			isa = PBXGroup;
 			children = (
+				A24823D42AD9977F0064FA73 /* Modal */,
 				A2EA1FAA2AB98FD1008EF698 /* ViewController */,
 				A2EA1FA22AB8A894008EF698 /* View */,
 				A2EA1FA72AB98EC9008EF698 /* Extensions */,
@@ -2154,6 +2178,7 @@
 			isa = PBXGroup;
 			children = (
 				A2EA1FA82AB98EE5008EF698 /* CryptoTransferView+Extensions.swift */,
+				A24823DA2AD998EB0064FA73 /* Content.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -2617,6 +2642,7 @@
 				92635470294CEC0400660E0B /* BankAccountsViewController+Extensions.swift in Sources */,
 				92663D0F293FD60800842E30 /* WorkflowRepository.swift in Sources */,
 				A23FC5F82A95109D00129CE2 /* AssetPicker.swift in Sources */,
+				A24823D92AD998640064FA73 /* Quote.swift in Sources */,
 				9257E78D29B7B2E500846E12 /* AccountsFiatCell.swift in Sources */,
 				A29AA7C52A5DDBC700B6CC1A /* DepositAddresViewController.swift in Sources */,
 				9299104629D38853007E9832 /* AssetFormatter.swift in Sources */,
@@ -2708,6 +2734,7 @@
 				927233D928D243F80080AAC4 /* AccountTradeDetailModal.swift in Sources */,
 				9224F76729DB640200712D3B /* AccountTransfersCell.swift in Sources */,
 				0BD26F2428A55D4800ED2A1B /* CybridEvent.swift in Sources */,
+				A24823DB2AD998EB0064FA73 /* Content.swift in Sources */,
 				92F707CC298D806A005A93E5 /* TradeViewModel.swift in Sources */,
 				A24B35902A66567F00EF20C5 /* DepositAddresView+Extensions.swift in Sources */,
 				0BD26F2528A55D4800ED2A1B /* CybridLogger.swift in Sources */,
@@ -2749,6 +2776,7 @@
 				0BBD0CD628AC1DDC001DBC5F /* LoadingModalView.swift in Sources */,
 				0BD660FE286B763E00F4DA6B /* AsyncOperation.swift in Sources */,
 				9257E79C29CADB3F00846E12 /* TransferModal.swift in Sources */,
+				A24823D72AD998050064FA73 /* CryptoTransferModal.swift in Sources */,
 				0B2899E5288EE764001B3360 /* TimerType.swift in Sources */,
 				92A90A8729118C0C00CA0E08 /* CustomersRepository.swift in Sources */,
 				92C92C892911F2DA00B81719 /* Polling.swift in Sources */,
