@@ -15,7 +15,7 @@ extension CryptoTransferModal {
         let title = self.label(
             font: UIFont.make(ofSize: 22),
             color: UIColor.black,
-            text: "Confirm withdraw",
+            text: localizer.localize(with: Strings.titleString),
             lineHeight: 1.05,
             aligment: .left)
         self.componentContent.addSubview(title)
@@ -27,7 +27,7 @@ extension CryptoTransferModal {
         let sub = self.label(
             font: UIFont.make(ofSize: 13),
             color: UIColor(hex: "#636366"),
-            text: "Please confirm the withdrawal details are correct.",
+            text: localizer.localize(with: Strings.subTitleString),
             lineHeight: 1.14,
             aligment: .left)
         self.componentContent.addSubview(sub)
@@ -39,7 +39,7 @@ extension CryptoTransferModal {
         let fromTitle = self.label(
             font: UIFont.make(ofSize: 12),
             color: UIColor(hex: "#424242"),
-            text: "From my account",
+            text: localizer.localize(with: Strings.from),
             lineHeight: 1.65,
             aligment: .left)
         self.componentContent.addSubview(fromTitle)
@@ -66,7 +66,7 @@ extension CryptoTransferModal {
         let amountTitle = self.label(
             font: UIFont.make(ofSize: 12),
             color: UIColor(hex: "#424242"),
-            text: "Amount",
+            text: localizer.localize(with: Strings.amount),
             lineHeight: 1.65,
             aligment: .left)
         self.componentContent.addSubview(amountTitle)
@@ -93,7 +93,7 @@ extension CryptoTransferModal {
         let feeTitle = self.label(
             font: UIFont.make(ofSize: 12),
             color: UIColor(hex: "#424242"),
-            text: "Transacion Fee",
+            text: localizer.localize(with: Strings.transactionFee),
             lineHeight: 1.65,
             aligment: .left)
         self.componentContent.addSubview(feeTitle)
@@ -120,7 +120,7 @@ extension CryptoTransferModal {
         let networkFeeTitle = self.label(
             font: UIFont.make(ofSize: 12),
             color: UIColor(hex: "#424242"),
-            text: "Network Fee",
+            text: localizer.localize(with: Strings.networkFee),
             lineHeight: 1.65,
             aligment: .left)
         self.componentContent.addSubview(networkFeeTitle)
@@ -146,7 +146,7 @@ extension CryptoTransferModal {
 
         // -- Continue Button
         let continueButton = CYBButton(
-            title: "Confirm"
+            title: localizer.localize(with: Strings.confirmButton)
         ) {
             self.cryptoTransferViewModel.createTransfer()
         }

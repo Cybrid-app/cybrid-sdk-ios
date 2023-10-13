@@ -112,6 +112,12 @@ extension CryptoTransferModal {
 
     enum Strings {
 
-        static let titleString = "cybrid.bank.accounts.detail.title.text"
+        static let titleString = "cybird.crypto.transfer.modal.quote.title"
+        static let subTitleString = "cybird.crypto.transfer.modal.quote.subTitle"
+        static let from = "cybird.crypto.transfer.modal.quote.from"
+        static let amount = "cybird.crypto.transfer.modal.quote.amount"
+        static let transactionFee = "cybird.crypto.transfer.modal.quote.transactionFee"
+        static let networkFee = "cybird.crypto.transfer.modal.quote.networkFee"
+        static let confirmButton = "cybird.crypto.transfer.modal.quote.confirm.button"
     }
 }

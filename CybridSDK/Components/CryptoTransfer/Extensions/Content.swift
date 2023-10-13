@@ -13,11 +13,10 @@ extension CryptoTransferView {
     internal func cryptoTransferView_Content() {
 
         // -- Title
-        let titleString = localizer.localize(with: Strings.contentTitle)
         let title = self.label(
             font: UIFont.make(ofSize: 23, weight: .bold),
             color: UIColor.init(hex: "#3A3A3C"),
-            text: titleString,
+            text: localizer.localize(with: Strings.contentTitle),
             lineHeight: 1.15,
             aligment: .left)
         self.addSubview(title)
@@ -26,12 +25,10 @@ extension CryptoTransferView {
         title.constraintRight(self, margin: 10)
 
         // -- Account title
-        // let accountTitleString = localizer.localize(with: UIStrings.createWalletAssetTitle)
-        let accountTitleString = "From Account"
         let accountTitle = self.label(
             font: UIFont.make(ofSize: 14, weight: .regular),
             color: UIColor(hex: "#818181"),
-            text: accountTitleString,
+            text: localizer.localize(with: Strings.contentFrom),
             lineHeight: 1.05,
             aligment: .left)
         self.addSubview(accountTitle)
@@ -51,12 +48,10 @@ extension CryptoTransferView {
         self.cryptoTransferViewModel?.currentAccount.value = accountPicker.accountSelected
 
         // -- Wallet title
-        // let accountTitleString = localizer.localize(with: UIStrings.createWalletAssetTitle)
-        let walletTitleString = "To Wallet"
         let walletTitle = self.label(
             font: UIFont.make(ofSize: 14, weight: .regular),
             color: UIColor(hex: "#818181"),
-            text: walletTitleString,
+            text: localizer.localize(with: Strings.contentTo),
             lineHeight: 1.05,
             aligment: .left)
         self.addSubview(walletTitle)
@@ -77,12 +72,10 @@ extension CryptoTransferView {
         self.cryptoTransferViewModel?.currentExternalWallet = walletPicker.walletSelected
 
         // -- Amount title
-        // let accountTitleString = localizer.localize(with: UIStrings.createWalletAssetTitle)
-        let amountTitleString = "Amount"
         let amountTitle = self.label(
             font: UIFont.make(ofSize: 14, weight: .regular),
             color: UIColor(hex: "#818181"),
-            text: amountTitleString,
+            text: localizer.localize(with: Strings.contentAmount),
             lineHeight: 1.05,
             aligment: .left)
         self.addSubview(amountTitle)
@@ -123,7 +116,7 @@ extension CryptoTransferView {
         let errorLabel = self.label(
             font: UIFont.make(ofSize: 13, weight: .regular),
             color: UIColor(hex: "#E91E26"),
-            text: "Insufficient Funds",
+            text: localizer.localize(with: Strings.contentErrorInsufficient),
             lineHeight: 1.53,
             aligment: .left)
         self.addSubview(errorLabel)
@@ -133,8 +126,7 @@ extension CryptoTransferView {
         errorLabel.isHidden = !cryptoTransferViewModel!.amountWithPriceErrorObservable.value
 
         // -- Continue button
-        // let continueButtonString = localizer.localize(with: UIStrings.createWalletSaveButton)
-        let continueButtonString = "Continue"
+        let continueButtonString = localizer.localize(with: Strings.contentButtonContinue)
         let continueButton = CYBButton(title: continueButtonString) { [self] in
             let modal = CryptoTransferModal(
                 cryptoTransferViewModel: self.cryptoTransferViewModel!)
@@ -247,8 +239,7 @@ extension CryptoTransferView {
         realTimeLabel.below(topView, top: marginTop * 1.5)
 
         // -- Max Button
-        // let maxButtonString = localizer.localize(with: UIStrings.maxButtonLabel)
-        let maxButtonString = "MAX"
+        let maxButtonString = localizer.localize(with: Strings.contentButtonMax)
         maxButton.backgroundColor = UIColor.clear
         maxButton.setTitleColor(UIColor(hex: "#2F54EB"), for: .normal)
         maxButton.setTitle(maxButtonString, for: .normal)
