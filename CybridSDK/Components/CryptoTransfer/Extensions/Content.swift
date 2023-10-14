@@ -274,24 +274,7 @@ extension CryptoTransferView: WalletPickerDelegate {
 extension CryptoTransferView: UITextFieldDelegate {
 
     public func textFieldDidChangeSelection(_ textField: UITextField) {
-
-        var amountString = textField.text ?? "0"
-        if amountString.contains(".") {
-
-            let leftSide = "0"
-            let rightSide = "00"
-            let stringParts = amountString.getParts()
-
-            if stringParts[0] == "." {
-                amountString = "\(leftSide)\(amountString)"
-            }
-
-            if stringParts[stringParts.count - 1] == "." {
-                amountString = "\(amountString)\(rightSide)"
-            }
-        }
-        self.cryptoTransferViewModel?.currentAmountInput = amountString
-        self.cryptoTransferViewModel?.calculatePreQuote()
+        self.cryptoTransferViewModel?.textFieldDidChangeSelection(textField.text)
     }
 
     public func textFieldForceUpdate(text: String) {}

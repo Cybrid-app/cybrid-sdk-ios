@@ -173,6 +173,7 @@ class CryptoTransferViewModelTest: CryptoTransferTest {
         XCTAssertEqual(viewModel.modalUiState.value, .DONE)
     }
 
+    // -- MARK: View Functions
     func test_switchActionHandler() {
 
         // -- Given
@@ -199,6 +200,59 @@ class CryptoTransferViewModelTest: CryptoTransferTest {
         XCTAssertEqual(viewModel.amountInputObservable.value.removeTrailingZeros(), "2")
     }
 
+    func test_textFieldDidChangeSelection() {
+
+        // -- Given
+        let viewModel = self.createViewModel()
+        viewModel.currentAccount.value = AccountBankModel.trading
+        viewModel.isTransferInFiat.value = true
+        viewModel.currentAsset = AssetBankModel.bitcoin
+        viewModel.prices.value = .mockPrices
+
+        // -- Case: Input text change equl to nul
+        viewModel.textFieldDidChangeSelection(nil)
+        XCTAssertEqual(viewModel.currentAmountInput, "0")
+        XCTAssertEqual(viewModel.amountWithPriceObservable.value, "0.00")
+        XCTAssertFalse(viewModel.amountWithPriceErrorObservable.value)
+
+        // -- Case: Input text change equl to ""
+        viewModel.textFieldDidChangeSelection("")
+                XCTAssertEqual(viewModel.currentAmountInput, "")
+        XCTAssertEqual(viewModel.amountWithPriceObservable.value, "0.00")
+        XCTAssertFalse(viewModel.amountWithPriceErrorObservable.value)
+
+        // -- Case: Input text change equl to "Hello"
+        viewModel.textFieldDidChangeSelection("Hello")
+        XCTAssertEqual(viewModel.currentAmountInput, "Hello")
+        XCTAssertEqual(viewModel.amountWithPriceObservable.value, "0.00")
+        XCTAssertFalse(viewModel.amountWithPriceErrorObservable.value)
+
+        // -- Case: Input text change equl to "2"
+        viewModel.textFieldDidChangeSelection("2")
+        XCTAssertEqual(viewModel.currentAmountInput, "2")
+        XCTAssertEqual(viewModel.amountWithPriceObservable.value, "₿0.00009901")
+        XCTAssertFalse(viewModel.amountWithPriceErrorObservable.value)
+
+        // -- Case: Input text change equl to "3.5"
+        viewModel.textFieldDidChangeSelection("3.5")
+        XCTAssertEqual(viewModel.currentAmountInput, "3.5")
+        XCTAssertEqual(viewModel.amountWithPriceObservable.value, "₿0.00017327")
+        XCTAssertFalse(viewModel.amountWithPriceErrorObservable.value)
+
+        // -- Case: Input text change equl to "0.5"
+        viewModel.textFieldDidChangeSelection(".5")
+        XCTAssertEqual(viewModel.currentAmountInput, "0.5")
+        XCTAssertEqual(viewModel.amountWithPriceObservable.value, "₿0.00002475")
+        XCTAssertFalse(viewModel.amountWithPriceErrorObservable.value)
+
+        // -- Case: Input text change equl to "1."
+        viewModel.textFieldDidChangeSelection("1.")
+        XCTAssertEqual(viewModel.currentAmountInput, "1.00")
+        XCTAssertEqual(viewModel.amountWithPriceObservable.value, "₿0.00004950")
+        XCTAssertFalse(viewModel.amountWithPriceErrorObservable.value)
+    }
+
+    // -- MARK: Accounts Functions
     func test_getMaxAmountOfAccount_CurrentAssetAccount_Nil() {
 
         // -- Given

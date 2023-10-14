@@ -183,6 +183,27 @@ open class CryptoTransferViewModel: BaseViewModel {
         self.resetAmountInput(amount: amount)
     }
 
+    func textFieldDidChangeSelection(_ text: String?) {
+
+        var amountString = text ?? "0"
+        if amountString.contains(".") {
+
+            let leftSide = "0"
+            let rightSide = "00"
+            let stringParts = amountString.getParts()
+
+            if stringParts[0] == "." {
+                amountString = "\(leftSide)\(amountString)"
+            }
+
+            if stringParts[stringParts.count - 1] == "." {
+                amountString = "\(amountString)\(rightSide)"
+            }
+        }
+        self.currentAmountInput = amountString
+        self.calculatePreQuote()
+    }
+
     // MARK: Functions for Accounts
     internal func getMaxAmountOfAccount() -> String {
 
