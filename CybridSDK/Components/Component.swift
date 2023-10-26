@@ -103,7 +103,7 @@ public class Component: UIView, ComponentProtocol {
             view.removeFromSuperview()
         }
     }
-    
+
     // MARK: UI Helper Functions
     internal func createLoaderScreen(text: String) {
 

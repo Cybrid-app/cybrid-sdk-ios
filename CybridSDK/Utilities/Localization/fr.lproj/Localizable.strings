@@ -216,9 +216,23 @@
 "cybrid.external.wallets.qr.scanner.controller.error.message" = "Votre appareil ne prend pas en charge la numérisation d'un code à partir d'un article. Veuillez utiliser un appareil doté d'un appareil photo.";
 "cybrid.external.wallets.qr.scanner.controller.error.button" = "OK";
 
-// -- Crypto Trasnfer Component
+// -- Crypto Transfer Component
 "cybrid.crypto.transfer.loading.title" = "Chargement de comptes et de portefeuilles";
 "cybrid.crypto.transfer.content.title" = "Transfert cryptographique";
+"cybrid.crypto.transfer.content.from" = "Du compte";
+"cybrid.crypto.transfer.content.to" = "Vers le portefeuille";
+"cybrid.crypto.transfer.content.amount" = "Montante";
+"cybrid.crypto.transfer.content.button.max" = "MAX";
+"cybrid.crypto.transfer.content.error.insufficient" = "Fonds insuffisants";
+"cybrid.crypto.transfer.content.button.continue" = "Continuer";
+"cybrid.crypto.transfer.error.button" = "Retour";
+"cybird.crypto.transfer.modal.quote.title" = "Confirmer le retrait";
+"cybird.crypto.transfer.modal.quote.subTitle" = "Veuillez confirmer que les détails du retrait sont corrects.";
+"cybird.crypto.transfer.modal.quote.from" = "Depuis mon compte";
+"cybird.crypto.transfer.modal.quote.amount" = "Montante";
+"cybird.crypto.transfer.modal.quote.transactionFee" = "Frais de transaction";
+"cybird.crypto.transfer.modal.quote.networkFee" = "Frais de réseau";
+"cybird.crypto.transfer.modal.quote.confirm.button" = "Confirmer";
 
 // -- Errors
 "cybrid.server.error.generic" = "Erreur de serveur, réessayez.";

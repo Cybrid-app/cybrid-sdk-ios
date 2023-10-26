@@ -42,10 +42,10 @@ public final class CryptoTransferView: Component {
                 self.cryptoTransferView_Loading()
 
             case .CONTENT:
-                self.cryptoTransferView_Loading()
+                self.cryptoTransferView_Content()
 
-            default:
-                self.cryptoTransferView_Loading()
+            case .ERROR:
+                self.cryptoTransferView_Error(message: self.cryptoTransferViewModel?.serverError ?? "")
             }
         }
     }

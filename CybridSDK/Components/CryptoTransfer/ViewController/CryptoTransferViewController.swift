@@ -62,6 +62,7 @@ public final class CryptoTransferViewController: UIViewController {
         // -- ExternalWallets View
         self.cryptoTransferView = CryptoTransferView()
         self.cryptoTransferView.embed(in: self.componentContainer)
+        self.cryptoTransferView.parentController = self
         self.cryptoTransferView.initComponent(cryptoTransferViewModel: cryptoTransferViewModel)
     }
 }
