@@ -190,7 +190,7 @@ extension CryptoTransferView {
             self.cryptoTransferViewModel?.changeCurrentAccount(account)
         }
     }
-    
+
     func createSwitchButton() -> UIButton {
 
         let image = UIImage(named: "switchIcon", in: Bundle(for: Self.self), with: nil)

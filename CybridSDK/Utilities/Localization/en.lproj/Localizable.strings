@@ -243,6 +243,7 @@
 "cybird.crypto.transfer.modal.quote.title" = "Confirm withdraw";
 "cybird.crypto.transfer.modal.quote.subTitle" = "Please confirm the withdrawal details are correct.";
 "cybird.crypto.transfer.modal.quote.from" = "From my account";
+"cybird.crypto.transfer.modal.quote.to" = "To my wallet";
 "cybird.crypto.transfer.modal.quote.amount" = "Amount";
 "cybird.crypto.transfer.modal.quote.transactionFee" = "Transacion Fee";
 "cybird.crypto.transfer.modal.quote.networkFee" = "Network Fee";
