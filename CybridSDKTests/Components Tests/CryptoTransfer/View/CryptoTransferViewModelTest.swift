@@ -22,20 +22,21 @@ class CryptoTransferViewModelTest: CryptoTransferTest {
         XCTAssertFalse(viewModel.assets.isEmpty)
         XCTAssertEqual(viewModel.fiat, Cybrid.fiat)
         XCTAssertTrue(viewModel.accounts.isEmpty)
-        XCTAssertTrue(viewModel.externalWallets.isEmpty)
-        XCTAssertTrue(viewModel.externalWallets.isEmpty)
+        XCTAssertTrue(viewModel.wallets.isEmpty)
         XCTAssertTrue(viewModel.prices.value.isEmpty)
+        XCTAssertNil(viewModel.pricesPolling)
         XCTAssertNil(viewModel.currentAccount.value)
-        XCTAssertNil(viewModel.currentAsset)
-        XCTAssertNil(viewModel.currentExternalWallet)
+        XCTAssertTrue(viewModel.currentWallets.value.isEmpty)
+        XCTAssertNil(viewModel.currentAsset.value)
+        XCTAssertNil(viewModel.currentWallet.value)
         XCTAssertEqual(viewModel.currentAmountInput, "0")
+        XCTAssertEqual(viewModel.amountInputObservable.value, "")
+        XCTAssertFalse(viewModel.isAmountInFiat.value)
+        XCTAssertEqual(viewModel.preQuoteValueObservable.value, "0.0")
+        XCTAssertEqual(viewModel.preQuoteBDValueObservable.value, "0")
+        XCTAssertFalse(viewModel.preQuoteValueHasErrorState.value)
         XCTAssertNil(viewModel.currentQuote.value)
         XCTAssertNil(viewModel.currentTransfer.value)
-        XCTAssertFalse(viewModel.isTransferInFiat.value)
-        XCTAssertEqual(viewModel.amountInputObservable.value, "")
-        XCTAssertEqual(viewModel.amountWithPriceObservable.value, "0.0")
-        XCTAssertFalse(viewModel.amountWithPriceErrorObservable.value)
-        XCTAssertNil(viewModel.pricesPolling)
         XCTAssertEqual(viewModel.uiState.value, .LOADING)
         XCTAssertEqual(viewModel.modalUiState.value, .LOADING)
     }
@@ -57,13 +58,23 @@ class CryptoTransferViewModelTest: CryptoTransferTest {
         // -- Given
         let viewModel = self.createViewModel()
 
-        // -- When
+        // -- Case: Accounts trading and fiat
         dataProvider.didFetchAccountsSuccessfully()
         viewModel.fetchAccounts()
         dataProvider.didFetchAccountsSuccessfully()
-
-        // -- Then
         XCTAssertFalse(viewModel.accounts.isEmpty)
+        XCTAssertEqual(viewModel.accounts.count, 1)
+        XCTAssertEqual(viewModel.accounts.first?.type, .trading)
+        XCTAssertEqual(viewModel.currentAccount.value, viewModel.accounts.first)
+
+        // -- Case: Accounts only fiat
+        viewModel.currentAccount.value = nil
+        let mockAccounts = AccountListBankModel(total: 1, page: 1, perPage: 1, objects: [AccountBankModel.fiat])
+        dataProvider.didFetchAccountsSuccessfully(mock: mockAccounts)
+        viewModel.fetchAccounts()
+        dataProvider.didFetchAccountsSuccessfully(mock: mockAccounts)
+        XCTAssertTrue(viewModel.accounts.isEmpty)
+        XCTAssertEqual(viewModel.currentAccount.value, nil)
     }
 
     func test_fetchExternalWallets() {
@@ -78,8 +89,8 @@ class CryptoTransferViewModelTest: CryptoTransferTest {
         dataProvider.didFetchListExternalWalletsSuccessfully(mock: mock)
 
         // -- Then
-        XCTAssertFalse(viewModel.externalWallets.isEmpty)
-        XCTAssertEqual(viewModel.externalWallets[0].state, .completed)
+        XCTAssertFalse(viewModel.wallets.isEmpty)
+        XCTAssertEqual(viewModel.wallets[0].state, .completed)
     }
 
     func test_fetchPrices() {
@@ -102,9 +113,10 @@ class CryptoTransferViewModelTest: CryptoTransferTest {
         let amount = "1"
         let viewModel = self.createViewModel()
         viewModel.currentAccount.value = nil
+        viewModel.currentAmountInput = amount
 
         // -- When
-        viewModel.createQuote(amount: amount)
+        viewModel.createQuote()
 
         // -- Then
         XCTAssertEqual(viewModel.modalUiState.value, .ERROR)
@@ -116,9 +128,10 @@ class CryptoTransferViewModelTest: CryptoTransferTest {
         let amount = "1"
         let viewModel = self.createViewModel()
         viewModel.currentAccount.value = AccountBankModel.mockWithNoAsset
+        viewModel.currentAmountInput = amount
 
         // -- When
-        viewModel.createQuote(amount: amount)
+        viewModel.createQuote()
 
         // -- Then
         XCTAssertEqual(viewModel.modalUiState.value, .ERROR)
@@ -130,11 +143,12 @@ class CryptoTransferViewModelTest: CryptoTransferTest {
         let amount = "1"
         let viewModel = self.createViewModel()
         viewModel.currentAccount.value = AccountBankModel.tradingETH
+        viewModel.currentAmountInput = amount
         let quoteBankModel = QuoteBankModel(guid: "1234")
 
         // -- When
         dataProvider.didCreateQuoteSuccessfully(quoteBankModel)
-        viewModel.createQuote(amount: amount)
+        viewModel.createQuote()
         dataProvider.didCreateQuoteSuccessfully(quoteBankModel)
 
         // -- Then

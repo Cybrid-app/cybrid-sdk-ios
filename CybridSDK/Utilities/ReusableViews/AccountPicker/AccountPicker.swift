@@ -18,10 +18,12 @@ public class AccountPicker: UIView {
     private var listItemsHeightConstraint: NSLayoutConstraint?
     private var isOpen = false
     private var accounts: [AccountBankModel] = []
-    public var accountSelected: AccountBankModel?
+    private var filterAccounts: [AccountBankModel] = []
+    internal var currentAccount: Observable<AccountBankModel?> = .init(nil)
     weak var delegate: AccountPickerDelegate?
 
     private var fieldContainer = UIView()
+    let listItems = UITableView()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -33,7 +35,7 @@ public class AccountPicker: UIView {
         return nil
     }
 
-    init(accounts: [AccountBankModel], delegate: AccountPickerDelegate? = nil) {
+    init(accounts: [AccountBankModel], currentAccount: Observable<AccountBankModel?>, delegate: AccountPickerDelegate? = nil) {
 
         super.init(frame: CGRect.zero)
         self.accounts = accounts
@@ -43,6 +45,7 @@ public class AccountPicker: UIView {
                 $0.asset! < $1.asset!
             })
         }
+        self.currentAccount = currentAccount
         self.delegate = delegate
         setupView()
     }
@@ -51,13 +54,13 @@ public class AccountPicker: UIView {
 
         self.heightConstraint = self.constraintHeight(52)
         self.createFieldContainer()
-
         if !self.accounts.isEmpty {
-
-            let account = self.accounts.first
-            self.createFieldContent(account: account!)
-            self.createListItems()
+            self.currentAccount.bind { account in
+                self.createFieldContent(account: account)
+                self.createListItems()
+            }
         }
+        self.close()
     }
 
     internal func createFieldContainer() {
@@ -78,60 +81,58 @@ public class AccountPicker: UIView {
         self.fieldContainer.addGestureRecognizer(tapGesture)
     }
 
-    internal func createFieldContent(account: AccountBankModel) {
-
-        // --
-        self.accountSelected = account
+    internal func createFieldContent(account: AccountBankModel?) {
 
         // -- Removing prev
         for view in self.fieldContainer.subviews {
             view.removeFromSuperview()
         }
 
-        // -- Add new
-        // -- Icon
-        let iconUrl = Cybrid.getAssetURL(with: account.asset!)
-        let icon = URLImageView(urlString: iconUrl)
-        fieldContainer.addSubview(icon!)
-        icon?.constraintLeft(fieldContainer, margin: 10)
-        icon?.centerVertical(parent: fieldContainer)
-        icon?.setConstraintsSize(size: CGSize(width: 28, height: 28))
+        if let account {
 
-        // -- Name
-        let asset = Cybrid.assets.first(where: { $0.code == account.asset! })
-        let nameString = asset?.name ?? ""
-        let paragraphStyle = getParagraphStyle(1.05)
-        paragraphStyle.alignment = .left
-        let name = UILabel()
-        name.font = UIFont.make(ofSize: 17)
-        name.textColor = UIColor.black
-        name.setParagraphText(nameString.capitalized, paragraphStyle)
-        fieldContainer.addSubview(name)
-        name.leftAside(icon!, margin: 15)
-        name.centerVertical(parent: fieldContainer)
+            // -- Icon
+            let iconUrl = Cybrid.getAssetURL(with: account.asset!)
+            let icon = URLImageView(urlString: iconUrl)
+            fieldContainer.addSubview(icon!)
+            icon?.constraintLeft(fieldContainer, margin: 10)
+            icon?.centerVertical(parent: fieldContainer)
+            icon?.setConstraintsSize(size: CGSize(width: 28, height: 28))
 
-        // -- Balance
-        let balanceValue = BigDecimal(account.platformBalance ?? "0", precision: asset?.decimals ?? 0) ?? BigDecimal(0)
-        let balanceValueFormatted = CybridCurrencyFormatter.formatInputNumber(balanceValue).removeTrailingZeros()
+            // -- Name
+            let asset = Cybrid.assets.first(where: { $0.code == account.asset! })
+            let nameString = asset?.name ?? ""
+            let paragraphStyle = getParagraphStyle(1.05)
+            paragraphStyle.alignment = .left
+            let name = UILabel()
+            name.font = UIFont.make(ofSize: 17)
+            name.textColor = UIColor.black
+            name.setParagraphText(nameString.capitalized, paragraphStyle)
+            fieldContainer.addSubview(name)
+            name.leftAside(icon!, margin: 15)
+            name.centerVertical(parent: fieldContainer)
 
-        // -- Code && Balance
-        let codeString = account.asset ?? ""
-        let codeAndBalanceString = "\(codeString.uppercased()) - \(balanceValueFormatted)"
-        let codeAndBalanceParagraphStyle = getParagraphStyle(1.05)
-        codeAndBalanceParagraphStyle.alignment = .left
-        let codeAndBalance = UILabel()
-        codeAndBalance.font = UIFont.make(ofSize: 16)
-        codeAndBalance.textColor = UIColor(hex: "#757575")
-        codeAndBalance.setParagraphText(codeAndBalanceString, codeAndBalanceParagraphStyle)
-        fieldContainer.addSubview(codeAndBalance)
-        codeAndBalance.leftAside(name, margin: 5)
-        codeAndBalance.centerVertical(parent: fieldContainer)
+            // -- Balance
+            let balanceValue = BigDecimal(account.platformBalance ?? "0", precision: asset?.decimals ?? 0) ?? BigDecimal(0)
+            let balanceValueFormatted = CybridCurrencyFormatter.formatInputNumber(balanceValue).removeTrailingZeros()
+
+            // -- Code && Balance
+            let codeString = account.asset ?? ""
+            let codeAndBalanceString = "\(codeString.uppercased()) - \(balanceValueFormatted)"
+            let codeAndBalanceParagraphStyle = getParagraphStyle(1.05)
+            codeAndBalanceParagraphStyle.alignment = .left
+            let codeAndBalance = UILabel()
+            codeAndBalance.font = UIFont.make(ofSize: 16)
+            codeAndBalance.textColor = UIColor(hex: "#757575")
+            codeAndBalance.setParagraphText(codeAndBalanceString, codeAndBalanceParagraphStyle)
+            fieldContainer.addSubview(codeAndBalance)
+            codeAndBalance.leftAside(name, margin: 5)
+            codeAndBalance.centerVertical(parent: fieldContainer)
+        }
     }
 
     internal func createListItems() {
 
         // -- Table
-        let listItems = UITableView()
         listItems.delegate = self
         listItems.dataSource = self
         listItems.alwaysBounceVertical = true
@@ -143,6 +144,13 @@ public class AccountPicker: UIView {
         listItems.constraintLeft(self, margin: 0)
         listItems.constraintRight(self, margin: 0)
         self.listItemsHeightConstraint = listItems.constraintHeight(0)
+
+        // -- Filter accounts without currentAccount
+        self.filterAccounts = []
+        self.filterAccounts = self.accounts.filter { account in
+            return account.guid != currentAccount.value?.guid
+        }
+        listItems.reloadData()
     }
 
     // MARK: View Click Actions
@@ -158,14 +166,14 @@ public class AccountPicker: UIView {
     // MARK: Close/Open
     internal func open() {
 
-        self.isOpen = !self.isOpen
+        self.isOpen = true
         self.heightConstraint?.constant = 210
         self.listItemsHeightConstraint?.constant = 150
     }
 
     internal func close() {
 
-        self.isOpen = !self.isOpen
+        self.isOpen = false
         self.heightConstraint?.constant = 52
         self.listItemsHeightConstraint?.constant = 0
     }
@@ -174,12 +182,12 @@ public class AccountPicker: UIView {
 extension AccountPicker: UITableViewDelegate, UITableViewDataSource {
 
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.accounts.count
+        return self.filterAccounts.count
     }
 
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-        let account = self.accounts[indexPath.row]
+        let account = self.filterAccounts[indexPath.row]
         guard
             let cell = tableView.dequeueReusableCell(
                 withIdentifier: AccountPickerCell.reuseIdentifier,
@@ -193,10 +201,9 @@ extension AccountPicker: UITableViewDelegate, UITableViewDataSource {
 
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
-        let account = self.accounts[indexPath.row]
-        self.createFieldContent(account: account)
-        self.close()
+        let account = self.filterAccounts[indexPath.row]
         self.delegate?.onAccountSelected(account: account)
+        self.close()
     }
 
     public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

@@ -97,10 +97,10 @@ final class ServiceProviderMock: AssetsRepoProvider,
         TradesAPIMock.didFetchTradesListWithError()
     }
 
-    func didFetchAccountsSuccessfully() {
+    func didFetchAccountsSuccessfully(mock: AccountListBankModel = AccountListBankModel.mock) {
 
         Cybrid.session.setupSession(authToken: "TEST-TOKEN")
-        AccountsAPIMock.didFetchAccountsSuccessfully()
+        AccountsAPIMock.didFetchAccountsSuccessfully(mock: mock)
     }
 
     func didFetchAccountsWithError() {

@@ -28,9 +28,9 @@ final class AccountsAPIMock: AccountsAPI {
     }
 
     @discardableResult
-    class func didFetchAccountsSuccessfully() -> AccountListBankModel {
+    class func didFetchAccountsSuccessfully(mock: AccountListBankModel) -> AccountListBankModel {
 
-        accountsCompletion?(.success(AccountListBankModel.mock))
+        accountsCompletion?(.success(mock))
         return AccountListBankModel.mock
     }
 

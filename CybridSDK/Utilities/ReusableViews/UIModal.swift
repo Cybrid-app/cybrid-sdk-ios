@@ -175,7 +175,7 @@ open class UIModal: UIViewController {
         closeButton.constraintHeight(50)
     }
 
-    internal func createDoneScreen(content: UIView, message: String) {
+    internal func createDoneScreen(content: UIView, message: String, action: (() -> Void)? = nil) {
 
         self.modifyHeight(height: 240)
 
@@ -211,7 +211,12 @@ open class UIModal: UIViewController {
             title: CybridLocalizer().localize(
                 with: "cybrid.modal.continue.button")
         ) {
-            self.cancel()
+            if action == nil {
+                self.cancel()
+            } else {
+                action!()
+            }
+            
         }
         container.addSubview(closeButton)
         closeButton.constraintLeft(container, margin: 0)

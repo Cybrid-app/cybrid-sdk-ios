@@ -58,7 +58,7 @@ extension CryptoTransferModal {
         fromValue.constraintRight(self.componentContent, margin: marginHorizontal)
 
         // -- To (Wallet)
-        let wallet = self.cryptoTransferViewModel.currentExternalWallet
+        let wallet = self.cryptoTransferViewModel.currentWallet.value
         let toTitle = self.label(
             font: UIFont.make(ofSize: 14),
             color: UIColor(hex: "#424242"),

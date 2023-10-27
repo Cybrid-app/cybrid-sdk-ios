@@ -84,9 +84,7 @@ extension CryptoTransferModal {
 
             case .DONE:
                 self.modifyHeight(height: UIValues.modalCofirmSize)
-                self.createDoneScreen(
-                    content: self.componentContent,
-                    message: "Transfer done")
+                self.cryptoTransferModal_Done()
 
             case .ERROR:
                 self.modifyHeight(height: UIValues.modalLoadingSize)
