@@ -35,7 +35,7 @@ class CryptoTransferViewModelErrorTest: CryptoTransferTest {
         dataProvider.didFetchListExternalWalletsFailed()
 
         // -- Then
-        XCTAssertTrue(viewModel.externalWallets.isEmpty)
+        XCTAssertTrue(viewModel.wallets.isEmpty)
     }
 
     func test_fetchPrices_Error() {
@@ -56,10 +56,11 @@ class CryptoTransferViewModelErrorTest: CryptoTransferTest {
         // -- Given
         let amount = "1"
         let viewModel = self.createViewModel()
+        viewModel.currentAmountInput = "1"
         viewModel.currentAccount.value = AccountBankModel.tradingETH
 
         // -- When
-        viewModel.createQuote(amount: amount)
+        viewModel.createQuote()
         dataProvider.didCreateQuoteFailed()
 
         // -- Then
@@ -70,15 +71,16 @@ class CryptoTransferViewModelErrorTest: CryptoTransferTest {
     func test_createTransfer_Error() {
 
         // -- Given
-        let quoteBankModel = QuoteBankModel(guid: "1234")
         let viewModel = self.createViewModel()
-        viewModel.currentQuote.value = quoteBankModel
+        viewModel.currentQuote.value = QuoteBankModel(guid: "1234")
+        viewModel.currentWallet.value = ExternalWalletBankModel.mock
 
         // -- When
         viewModel.createTransfer()
         dataProvider.didCreateTransferFailed()
 
         // -- Then
+        XCTAssertNil(viewModel.currentQuote.value)
         XCTAssertNil(viewModel.currentTransfer.value)
         XCTAssertEqual(viewModel.modalUiState.value, .ERROR)
     }

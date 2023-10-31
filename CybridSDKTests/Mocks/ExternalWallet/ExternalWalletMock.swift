@@ -23,6 +23,20 @@ extension ExternalWalletBankModel {
         failureCode: ""
     )
 
+    static let mockEth = ExternalWalletBankModel(
+        guid: "1234",
+        name: "ETH",
+        asset: "ETH",
+        environment: .sandbox,
+        bankGuid: "1234",
+        customerGuid: "1234",
+        address: "_1234x6",
+        tag: "",
+        createdAt: Date(),
+        state: .completed,
+        failureCode: ""
+    )
+
     static let mockDeleted = ExternalWalletBankModel(
         guid: "12342",
         name: "BTC",
@@ -69,6 +83,18 @@ extension ExternalWalletListBankModel {
         perPage: 1,
         objects: [
             ExternalWalletBankModel.mock,
+            ExternalWalletBankModel.mockDeleted,
+            ExternalWalletBankModel.mockDeleting
+        ]
+    )
+    
+    static let mockForCrpytoTransfer = ExternalWalletListBankModel(
+        total: 1,
+        page: 0,
+        perPage: 1,
+        objects: [
+            ExternalWalletBankModel.mock,
+            ExternalWalletBankModel.mockEth,
             ExternalWalletBankModel.mockDeleted,
             ExternalWalletBankModel.mockDeleting
         ]

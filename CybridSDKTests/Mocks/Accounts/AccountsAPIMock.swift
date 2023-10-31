@@ -137,6 +137,19 @@ extension AccountBankModel {
         state: .created
     )
 
+    static let mockMxn = AccountBankModel(
+        type: .fiat,
+        guid: "GUID",
+        createdAt: Date(),
+        asset: "MXN",
+        name: "MXN",
+        bankGuid: "BANK_GUID",
+        customerGuid: "CUSTOMER_GUID",
+        platformBalance: "2000",
+        platformAvailable: "2000",
+        state: .created
+    )
+
     static let fee = AccountBankModel(
         type: .fee,
         guid: "GUID",

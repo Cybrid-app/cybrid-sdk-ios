@@ -102,7 +102,7 @@ open class CryptoTransferViewModel: BaseViewModel {
                 self.wallets = allWallets.filter {
                     $0.state != .deleting && $0.state != .deleted
                 }
-                self.wallets = self.wallets.sorted(by: { $0.name! > $1.name! })
+                self.wallets = self.wallets.sorted(by: { $0.name! < $1.name! })
 
                 // -- Change current account
                 if self.currentAccount.value != nil { self.changeCurrentAccount(currentAccount.value!) }
@@ -190,7 +190,7 @@ open class CryptoTransferViewModel: BaseViewModel {
     internal func changeCurrentAccount(_ account: AccountBankModel) {
 
         self.currentAccount.value = account
-        let assetCode = self.currentAccount.value?.asset ?? ""
+        let assetCode = account.asset ?? ""
 
         // -- Changing current wallet
         self.currentWallets.value = self.wallets.filter { $0.asset == assetCode }
@@ -233,7 +233,7 @@ open class CryptoTransferViewModel: BaseViewModel {
     }
 
     // MARK: Quote Methods
-    internal func createPostQuoteBankModel(amount: String) -> PostQuoteBankModel? {
+    internal func  createPostQuoteBankModel(amount: String) -> PostQuoteBankModel? {
 
         guard let assetCode = self.currentAccount.value?.asset
         else {
