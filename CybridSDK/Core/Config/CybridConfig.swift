@@ -144,7 +144,7 @@ extension CybridConfig {
         return asset
     }
 
-    func canCreateDepositAddressFor(_ asset: String) -> Bool {
+    internal func canCreateDepositAddressFor(_ asset: String) -> Bool {
         return self.assetsForDepositAddress.contains(asset)
     }
 }
