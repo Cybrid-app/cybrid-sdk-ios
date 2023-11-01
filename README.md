@@ -240,10 +240,7 @@ To use this component, you simply need to create an instance of `AccountsViewCon
 
 #### Preview
 
-<p align="center">
-  <img src="https://github.com/Cybrid-app/cybrid-sdk-ios/assets/7268597/b91ee833-8d57-40f2-9de3-aff62fcd98d1">
-</p>
-
+https://github.com/Cybrid-app/cybrid-sdk-ios/assets/7268597/4b4765b0-7684-45eb-ab22-0b4bbd3bdad3
 
 ## Demo App
 
