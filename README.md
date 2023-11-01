@@ -199,6 +199,7 @@ func onSelected(asset: AssetBankModel, counterAsset: AssetBankModel)
 
 #### Preview
 
+![ListPricesView Preview](https://github.com/Cybrid-app/cybrid-sdk-ios/assets/7268597/72b2c251-317e-4901-93b2-fef7583092eb)
 
 ## Demo App
 
