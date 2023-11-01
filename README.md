@@ -240,13 +240,9 @@ To use this component, you simply need to create an instance of `AccountsViewCon
 
 #### Preview
 
-<p align="center">
-<video width="auto" height="auto" controls>
-  <source src="[movie.mp4](https://github.com/Cybrid-app/cybrid-sdk-ios/assets/7268597/4b4765b0-7684-45eb-ab22-0b4bbd3bdad3)" type="video/mp4">
-</video>
-</p>
-
-
+<div align="center">
+  <video src="https://github.com/Cybrid-app/cybrid-sdk-ios/assets/7268597/4b4765b0-7684-45eb-ab22-0b4bbd3bdad3" controls />
+</div>
 
 ## Demo App
 
