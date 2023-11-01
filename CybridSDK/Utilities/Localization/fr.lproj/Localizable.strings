@@ -229,7 +229,7 @@
 "cybird.crypto.transfer.modal.quote.title" = "Confirmer le retrait";
 "cybird.crypto.transfer.modal.quote.subTitle" = "Veuillez confirmer que les détails du retrait sont corrects.";
 "cybird.crypto.transfer.modal.quote.from" = "Depuis mon compte";
-"cybird.crypto.transfer.modal.quote.to" = "To my wallet";
+"cybird.crypto.transfer.modal.quote.to" = "À mon portefeuille";
 "cybird.crypto.transfer.modal.quote.amount" = "Montante";
 "cybird.crypto.transfer.modal.quote.transactionFee" = "Frais de transaction";
 "cybird.crypto.transfer.modal.quote.networkFee" = "Frais de réseau";
