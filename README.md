@@ -1,4 +1,4 @@
-# cybrid-sdk-ios
+# Cybrid iOS SDK
 
 [![Platforms](https://img.shields.io/badge/Platforms-iOS-yellowgreen?style=flat-square)](https://img.shields.io/badge/Platforms-iOS-Green?style=flat-square)
 [![CircleCI](https://dl.circleci.com/status-badge/img/gh/Cybrid-app/cybrid-sdk-ios/tree/main.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/Cybrid-app/cybrid-sdk-ios/tree/main)
@@ -10,7 +10,8 @@ Table of contents
 =================
 
 <!--ts-->
-   * [Features](#features)
+   * [Requirements](#requirements)
+   * [Installation](#installation)
    * [Releases](#releases)
    * [Requirements](#requirements)
    * [Getting started](#getting-started)
@@ -25,18 +26,35 @@ Table of contents
 
 <!--te-->
 
+## Requirements
+
+The Cybrid iOS SDK requires Xcode 14.1 or later and is compatible with apps targetting iOS 13 or above.
 
 ## Installation
 
-### CocoaPods
+To install our iOS SDK for now, you can only do so via Cocoapods. If you haven’t already, install the latest version of [CocoaPods](https://guides.cocoapods.org/using/getting-started.html).
 
-Add our podspec repo to your App's Podfile:
+If you don’t have an existing [Podfile](https://guides.cocoapods.org/syntax/podfile.html), run the following command to create one:
+
+`pod init`
+
+Add our podspec to your Podfile (second line)
 
 `source 'git@github.com:Cybrid-app/cybrid-podspecs.git'`
 
-And then install the dependencies
+Add the dependencie in the Podfile common_pods section)
 
-`pod install CybridSDK`
+`pod CybridSDK`
+
+Run the following command in terminal:
+
+`pod install`
+
+Don’t forget to use the `.xcworkspace` file to open your project in Xcode, instead of the `.xcodeproj` file, from here on out.
+
+In the future, to update to the latest version of the SDK, run in terminal:
+
+`pod update CybridSDK`
 
 ## Usage
 
