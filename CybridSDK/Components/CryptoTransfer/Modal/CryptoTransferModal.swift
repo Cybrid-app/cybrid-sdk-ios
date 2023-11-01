@@ -17,7 +17,7 @@ class CryptoTransferModal: UIModal {
     init(cryptoTransferViewModel: CryptoTransferViewModel) {
 
         self.cryptoTransferViewModel = cryptoTransferViewModel
-        super.init(height: UIValues.modalSize)
+        super.init(height: UIValues.modalLoadingSize)
         self.localizer = CybridLocalizer()
         self.setupViews()
     }
@@ -73,19 +73,21 @@ extension CryptoTransferModal {
             switch state {
 
             case .LOADING:
+                self.modifyHeight(height: UIValues.modalLoadingSize)
                 self.createLoadingScreen(
                     content: self.componentContent,
                     text: "Loading")
 
             case .QUOTE:
+                self.modifyHeight(height: UIValues.modalQuoteSize)
                 self.cryptoTransferModal_Quote()
 
             case .DONE:
-                self.createDoneScreen(
-                    content: self.componentContent,
-                    message: "Transfer done")
+                self.modifyHeight(height: UIValues.modalCofirmSize)
+                self.cryptoTransferModal_Done()
 
             case .ERROR:
+                self.modifyHeight(height: UIValues.modalLoadingSize)
                 self.createErrorScreen(
                     content: self.componentContent,
                     message: self.cryptoTransferViewModel.serverError)
@@ -106,7 +108,8 @@ extension CryptoTransferModal {
     enum UIValues {
 
         // -- Sizes
-        static let modalSize: CGFloat = 440
+        static let modalLoadingSize: CGFloat = 300
+        static let modalQuoteSize: CGFloat = 610
         static let modalCofirmSize: CGFloat = 300
     }
 
@@ -115,6 +118,7 @@ extension CryptoTransferModal {
         static let titleString = "cybird.crypto.transfer.modal.quote.title"
         static let subTitleString = "cybird.crypto.transfer.modal.quote.subTitle"
         static let from = "cybird.crypto.transfer.modal.quote.from"
+        static let toTitle = "cybird.crypto.transfer.modal.quote.to"
         static let amount = "cybird.crypto.transfer.modal.quote.amount"
         static let transactionFee = "cybird.crypto.transfer.modal.quote.transactionFee"
         static let networkFee = "cybird.crypto.transfer.modal.quote.networkFee"

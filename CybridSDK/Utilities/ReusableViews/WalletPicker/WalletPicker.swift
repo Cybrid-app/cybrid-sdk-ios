@@ -17,9 +17,9 @@ public class WalletPicker: UIView {
     private var heightConstraint: NSLayoutConstraint?
     private var listItemsHeightConstraint: NSLayoutConstraint?
     private var isOpen = false
-    private var originalWallets: [ExternalWalletBankModel] = []
-    private var wallets: [ExternalWalletBankModel] = []
-    public var walletSelected: ExternalWalletBankModel?
+    private var wallets: Observable<[ExternalWalletBankModel]> = .init([])
+    private var filterWallets: [ExternalWalletBankModel] = []
+    private var currentWallet: Observable<ExternalWalletBankModel?> = .init(nil)
     weak var delegate: WalletPickerDelegate?
 
     private var fieldContainer = UIView()
@@ -36,45 +36,29 @@ public class WalletPicker: UIView {
     }
 
     init(
-        wallets: [ExternalWalletBankModel],
-        asset: String,
-        delegate: WalletPickerDelegate? = nil) {
+        wallets: Observable<[ExternalWalletBankModel]>,
+        currentWallet: Observable<ExternalWalletBankModel?>,
+        delegate: WalletPickerDelegate? = nil
+    ) {
 
         super.init(frame: CGRect.zero)
-        self.originalWallets = wallets
-        self.getWalletsByAsset(asset: asset, change: false)
+        self.wallets = wallets
+        self.currentWallet = currentWallet
         self.delegate = delegate
         setupView()
-    }
-
-    func getWalletsByAsset(asset: String, change: Bool = true) {
-
-        if !self.originalWallets.isEmpty {
-            self.wallets = []
-            self.wallets = self.originalWallets.filter { $0.asset == asset }
-            self.wallets = self.wallets.sorted(by: {
-                $0.name! < $1.name!
-            })
-        }
-
-        if change {
-
-            self.listItems.reloadData()
-            self.createFieldContent(wallet: !self.wallets.isEmpty ? self.wallets.first : nil)
-        }
     }
 
     internal func setupView() {
 
         self.heightConstraint = self.constraintHeight(52)
         self.createFieldContainer()
-
-        if !self.wallets.isEmpty {
-
-            let wallet = self.wallets.first
-            self.createFieldContent(wallet: wallet!)
-            self.createListItems()
+        if !self.wallets.value.isEmpty {
+            self.currentWallet.bind { wallet in
+                self.createFieldContent(wallet: wallet)
+                self.createListItems()
+            }
         }
+        self.close()
     }
 
     internal func createFieldContainer() {
@@ -96,9 +80,6 @@ public class WalletPicker: UIView {
     }
 
     internal func createFieldContent(wallet: ExternalWalletBankModel?) {
-
-        // --
-        self.walletSelected = wallet
 
         // -- Removing prev
         for view in self.fieldContainer.subviews {
@@ -144,6 +125,13 @@ public class WalletPicker: UIView {
         listItems.constraintLeft(self, margin: 0)
         listItems.constraintRight(self, margin: 0)
         self.listItemsHeightConstraint = listItems.constraintHeight(0)
+
+        // -- Filter wallets without currentAccount
+        self.filterWallets = []
+        self.filterWallets = self.wallets.value.filter { wallet in
+            return wallet.guid != currentWallet.value?.guid
+        }
+        listItems.reloadData()
     }
 
     // MARK: View Click Actions
@@ -152,7 +140,7 @@ public class WalletPicker: UIView {
         if isOpen {
             self.close()
         } else {
-            if !self.wallets.isEmpty {
+            if !self.wallets.value.isEmpty && self.wallets.value.count > 1 {
                 self.open()
             }
         }
@@ -161,14 +149,14 @@ public class WalletPicker: UIView {
     // MARK: Close/Open
     internal func open() {
 
-        self.isOpen = !self.isOpen
+        self.isOpen = true
         self.heightConstraint?.constant = 210
         self.listItemsHeightConstraint?.constant = 150
     }
 
     internal func close() {
 
-        self.isOpen = !self.isOpen
+        self.isOpen = false
         self.heightConstraint?.constant = 52
         self.listItemsHeightConstraint?.constant = 0
     }
@@ -177,12 +165,12 @@ public class WalletPicker: UIView {
 extension WalletPicker: UITableViewDelegate, UITableViewDataSource {
 
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.wallets.count
+        return self.filterWallets.count
     }
 
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-        let wallet = self.wallets[indexPath.row]
+        let wallet = self.filterWallets[indexPath.row]
         guard
             let cell = tableView.dequeueReusableCell(
                 withIdentifier: WalletPickerCell.reuseIdentifier,
@@ -196,10 +184,9 @@ extension WalletPicker: UITableViewDelegate, UITableViewDataSource {
 
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
-        let wallet = self.wallets[indexPath.row]
-        self.createFieldContent(wallet: wallet)
-        self.close()
+        let wallet = self.filterWallets[indexPath.row]
         self.delegate?.onWalletSelected(wallet: wallet)
+        self.close()
     }
 
     public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

@@ -28,9 +28,9 @@ final class AccountsAPIMock: AccountsAPI {
     }
 
     @discardableResult
-    class func didFetchAccountsSuccessfully() -> AccountListBankModel {
+    class func didFetchAccountsSuccessfully(mock: AccountListBankModel) -> AccountListBankModel {
 
-        accountsCompletion?(.success(AccountListBankModel.mock))
+        accountsCompletion?(.success(mock))
         return AccountListBankModel.mock
     }
 
@@ -134,6 +134,19 @@ extension AccountBankModel {
         customerGuid: "CUSTOMER_GUID",
         platformBalance: "Hello",
         platformAvailable: "Hello",
+        state: .created
+    )
+
+    static let mockMxn = AccountBankModel(
+        type: .fiat,
+        guid: "GUID",
+        createdAt: Date(),
+        asset: "MXN",
+        name: "MXN",
+        bankGuid: "BANK_GUID",
+        customerGuid: "CUSTOMER_GUID",
+        platformBalance: "2000",
+        platformAvailable: "2000",
         state: .created
     )
 

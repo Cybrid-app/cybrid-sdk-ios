@@ -38,14 +38,14 @@ extension CryptoTransferView {
 
         // -- Account Picker
         let accountPicker = AccountPicker(
-            accounts: cryptoTransferViewModel?.accounts ?? [],
+            accounts: cryptoTransferViewModel!.accounts,
+            currentAccount: cryptoTransferViewModel!.currentAccount,
             delegate: self
         )
         self.addSubview(accountPicker)
         accountPicker.below(accountTitle, top: 10)
         accountPicker.constraintLeft(self, margin: 10)
         accountPicker.constraintRight(self, margin: 10)
-        self.cryptoTransferViewModel?.currentAccount.value = accountPicker.accountSelected
 
         // -- Wallet title
         let walletTitle = self.label(
@@ -61,15 +61,14 @@ extension CryptoTransferView {
 
         // -- Wallet Picker
         let walletPicker = WalletPicker(
-            wallets: cryptoTransferViewModel?.externalWallets ?? [],
-            asset: accountPicker.accountSelected?.asset ?? "",
+            wallets: cryptoTransferViewModel!.currentWallets,
+            currentWallet: cryptoTransferViewModel!.currentWallet,
             delegate: self
         )
         self.addSubview(walletPicker)
         walletPicker.below(walletTitle, top: 10)
         walletPicker.constraintLeft(self, margin: 10)
         walletPicker.constraintRight(self, margin: 10)
-        self.cryptoTransferViewModel?.currentExternalWallet = walletPicker.walletSelected
 
         // -- Amount title
         let amountTitle = self.label(
@@ -89,7 +88,7 @@ extension CryptoTransferView {
         let amountTextField = self.createAmountField(switchButton: switchButton)
         amountTextField.accessibilityIdentifier = "TradeComponent_AmountField"
         amountTextField.updateIcon(
-            .text(accountPicker.accountSelected?.asset ?? "")
+            .text(accountPicker.currentAccount.value?.asset ?? "")
         )
         self.addSubview(amountTextField)
         amountTextField.below(amountTitle, top: 10)
@@ -123,43 +122,37 @@ extension CryptoTransferView {
         errorLabel.below(flagIcon, top: 5)
         errorLabel.constraintLeft(self, margin: 10)
         errorLabel.constraintRight(self, margin: 10)
-        errorLabel.isHidden = !cryptoTransferViewModel!.amountWithPriceErrorObservable.value
+        errorLabel.isHidden = !cryptoTransferViewModel!.preQuoteValueHasErrorState.value
 
         // -- Continue button
         let continueButtonString = localizer.localize(with: Strings.contentButtonContinue)
         let continueButton = CYBButton(title: continueButtonString) { [self] in
-            let modal = CryptoTransferModal(
-                cryptoTransferViewModel: self.cryptoTransferViewModel!)
-            modal.present()
-            cryptoTransferViewModel?.createQuote(amount: amountTextField.text?.stringValue ?? "0")
+            if self.cryptoTransferViewModel!.canCreateQuote() {
+                let modal = CryptoTransferModal(
+                    cryptoTransferViewModel: self.cryptoTransferViewModel!)
+                modal.present()
+                cryptoTransferViewModel?.createQuote()
+            }
         }
-        continueButton.isEnabled = !cryptoTransferViewModel!.amountWithPriceErrorObservable.value
+        continueButton.isEnabled = !cryptoTransferViewModel!.preQuoteValueHasErrorState.value
         self.addSubview(continueButton)
         continueButton.constraintLeft(self, margin: 10)
         continueButton.constraintRight(self, margin: 10)
         continueButton.constraintBottom(self, margin: 5)
 
-        // -- Binds
-        self.cryptoTransferViewModel?.currentAccount.bind { account in
-            if let account {
-                walletPicker.getWalletsByAsset(asset: account.asset!)
-                self.cryptoTransferViewModel?.calculatePreQuote()
-            }
-        }
-
-        self.cryptoTransferViewModel?.isTransferInFiat.bind { [self] state in
+        self.cryptoTransferViewModel?.isAmountInFiat.bind { [self] state in
             if state {
                 amountTextField.updateIcon(
                     .text(self.cryptoTransferViewModel?.fiat.code ?? Cybrid.fiat.code)
                 )
                 self.setDataForRealTimeLabel(
                     icon: flagIcon,
-                    asset: accountPicker.accountSelected?.asset ?? ""
+                    asset: accountPicker.currentAccount.value?.asset ?? ""
                 )
                 maxButton.isHidden = true
             } else {
                 amountTextField.updateIcon(
-                    .text(accountPicker.accountSelected?.asset ?? "")
+                    .text(accountPicker.currentAccount.value?.asset ?? "")
                 )
                 self.setDataForRealTimeLabel(
                     icon: flagIcon,
@@ -177,20 +170,16 @@ extension CryptoTransferView {
             self.cryptoTransferViewModel?.calculatePreQuote()
         }
 
-        self.cryptoTransferViewModel?.amountWithPriceObservable.bind { amount in
-            realTimePriceLabel.text = amount
+        self.cryptoTransferViewModel?.preQuoteValueObservable.bind { preQuote in
+            realTimePriceLabel.text = preQuote
         }
 
-        self.cryptoTransferViewModel?.amountWithPriceErrorObservable.bind { state in
+        self.cryptoTransferViewModel?.preQuoteValueHasErrorState.bind { state in
             errorLabel.isHidden = !state
             continueButton.customState = !state ? .normal : .disabled
         }
-
-        self.cryptoTransferViewModel?.currentAccount.bind { [self] account in
-            self.cryptoTransferViewModel?.changeCurrentAccount(account)
-        }
     }
-    
+
     func createSwitchButton() -> UIButton {
 
         let image = UIImage(named: "switchIcon", in: Bundle(for: Self.self), with: nil)
@@ -260,14 +249,14 @@ extension CryptoTransferView {
 
 extension CryptoTransferView: AccountPickerDelegate {
     public func onAccountSelected(account: AccountBankModel) {
-        self.cryptoTransferViewModel?.currentAccount.value = account
-        self.cryptoTransferViewModel?.isTransferInFiat.value = false
+        self.cryptoTransferViewModel?.changeCurrentAccount(account)
+        self.cryptoTransferViewModel?.calculatePreQuote()
     }
 }
 
 extension CryptoTransferView: WalletPickerDelegate {
     public func onWalletSelected(wallet: ExternalWalletBankModel) {
-        self.cryptoTransferViewModel?.currentExternalWallet = wallet
+        self.cryptoTransferViewModel?.currentWallet.value = wallet
     }
 }
 

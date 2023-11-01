@@ -28,13 +28,18 @@ final class ExternalBankAccountAPIMock: ExternalBankAccountsAPI {
             return createExternalBankAccountWithRequestBuilder(postExternalBankAccountBankModel: postExternalBankAccountBankModel).requestTask
     }
 
+    // swiftlint:disable all
     override class func getExternalBankAccount(
         externalBankAccountGuid: String,
+        forceBalanceRefresh: Bool? = nil,
+        includeBalances: Bool? = nil,
+        includePii: Bool? = nil,
         apiResponseQueue: DispatchQueue = CybridApiBankSwiftAPI.apiResponseQueue,
         completion: @escaping ((Result<ExternalBankAccountBankModel, ErrorResponse>) -> Void)) -> RequestTask {
             fetchExternalBankAccountCompletion = completion
             return getExternalBankAccountWithRequestBuilder(externalBankAccountGuid: externalBankAccountGuid).requestTask
     }
+    // swiftlint:enable all
 
     override class func listExternalBankAccounts(
         page: Int? = nil,
