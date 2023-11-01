@@ -18,6 +18,10 @@ Table of contents
       * [CybridLogger](#CybridLogger)
       * [Setup](#setup)
       * [Cybrid](#cybrid)
+   * [Components](#components)
+      * [ListPrices](#list-prices)
+         * [ListPricesItemDelegate](#list-prices-item-delegate)
+         * [Preview](#preview)
 
 <!--te-->
 
@@ -155,39 +159,46 @@ let asset = try? findAsset(code: "exampleCode")
 
 Using `try` and `do-catch` allows you to handle any exceptions that may be thrown within `findAsset`, which is especially important when working with functions that can generate errors.
 
+## Components
 
+All components can be instantiated either with their `ViewController` or as independent `UIView` that can be placed anywhere, such as in `SwiftUI`, `CustomViewController`, or within a `UIView`.
 
+The only component that behaves strictly as a `UIView` is the ListPrices component.
 
+### ListPrices
 
-### 3. Use our Components:
+The ListPrices component allows you to view a list of available currencies for the logged-in customer and allows them to see the real-time price of the currency. It also includes a search feature.
 
-The SDK implements a set of `ViewController` components that you can integrate easily in your application.
+This method is tied to the TimeInterval (refreshRate) configured at the beginning in the SDK to update the list of prices respecting that time interval.
 
-- Price List View:
+To use this component, you should utilize the `ListPricesView` class, which provides the following methods:
 
-This component is an isolated view that displays the latest prices of the support assets on the platform.
+1. constructor (`ListPricesView()`)
 
+Constructor to initialize this component with no arguments.
+
+2. `setViewModel()`
+
+To make the component work and render the view, you should call this method, which only takes the `ListPricesViewModel` class as a parameter.
+
+3. `embed()`
+
+This method allows you to easily inject this view into a `UIView` or `UIViewController`
+
+And this memebers:
+
+1. itemDelegate: [ListPricesItemDelegate](#list-prices-item-delegate), can be nil
+
+#### ListPricesItemDelegate
+
+ListPricesItemDelegate is a protocol that implements the function:
+
+```swift
+func onSelected(asset: AssetBankModel, counterAsset: AssetBankModel)
 ```
-let tableView = CryptoPriceListView()
-```
 
-- Trade Component: 
+#### Preview
 
-This component display the latest prices of the supported assets and allow you to trade (i.e. buy or sell) the asset.
-
-```
-let tableView = CryptoPriceListView(navigationController: navigationController)
-```
-
-- Accounts Component:
-
-
-This component allows you to display the available accounts and get the details for each account.
-
-
-```
-let accounts = AccountsViewController()
-```
 
 ## Demo App
 
