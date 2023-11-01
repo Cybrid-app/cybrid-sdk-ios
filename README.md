@@ -23,7 +23,10 @@ Table of contents
          * [ListPricesItemDelegate](#list-prices-item-delegate)
          * [Preview](#preview)
       * [Trade](#trade)
-         * [Preview](#preview) 
+         * [Preview](#preview)
+      * [Accounts](#accounts)
+         * [Preview](#preview)
+    * [Demo App](#demo-app) 
 
 <!--te-->
 
@@ -216,6 +219,24 @@ To use this component, you can do so in the following ways:
 1. TradeVIewController
 
 To use this component, you simply need to create an instance of `TradeViewController` and display it.
+
+#### Preview
+
+<p align="center">
+  <img src="https://github.com/Cybrid-app/cybrid-sdk-ios/assets/7268597/b91ee833-8d57-40f2-9de3-aff62fcd98d1">
+</p>
+
+### Accounts
+
+The Accounts Component allows you to display the overall balance of all customer accounts and a list of customer accounts. It displays fiat accounts first and then accounts related to a cryptocurrency asset, all sorted alphabetically. Each account can provide a detailed view, showing the latest transfers or trades made.
+
+This component is related to the `TransfersComponent` and `DepositAddressComponent`.
+
+To use this component, you can do so in the following ways:
+
+1. AccountsVIewController
+
+To use this component, you simply need to create an instance of `AccountsViewController` and display it.
 
 #### Preview
 
