@@ -14,9 +14,10 @@ Table of contents
    * [Installation](#installation)
    * [Integration](#integration)
       * [SDKConfig](#sdkconfig)
-      * [CybridEnvironment](#cybridEnvironment)
-      * [CybridLogger](#cybridLogger)
+      * [CybridEnvironment](#CybridEnvironment)
+      * [CybridLogger](#CybridLogger)
       * [Setup](#setup)
+      * [Cybrid](#cybrid)
 
 <!--te-->
 
@@ -97,6 +98,62 @@ Cybrid.setup(sdkConfig: sdkConfig, logger: CustomLogger()) {}
 ```
 
 When this completion is called, it means that the SDK is ready to render any screen or component you need.
+
+### Cybrid
+
+The SDK provides a Singleton object or class called `Cybrid` that allows easy interaction with the general SDK configurations. It offers a list of available methods as follows:
+
+1. `Cybrid.setup()`
+
+Method to initialize the [SDK](#setup)
+
+Parameteres:
+
+| Argument      | Descrption          | Default    |
+| ------------- |:-------------------:|:----------:|
+| sdkConfig    | [SDKConfig](#sdkconfig) | |
+| locale        | [Locale](https://developer.apple.com/documentation/foundation/locale) | nil |
+| logger  | [CybridLogger](#CybridLogger) | nil |
+| refreshRate      | [TimeInterval](https://developer.apple.com/documentation/foundation/timeinterval) for components that support it  | 5 |
+| completion         | () -> Void | nil |
+
+2. `Cybrid.refreshBearer()`
+
+Method to refresh the Bearer
+
+Parameters:
+
+| Argument      | Descrption          | Default    |
+| ------------- |:-------------------:|:----------:|
+| bearer    | Bearer token should be retrieved from the backend (String) | |
+
+3. `Cybrid.findAsset() throws -> AssetBankModel`
+
+Method to find an asset, this method can throw an exception
+
+Parameters:
+
+| Argument      | Descrption          | Default    |
+| ------------- |:-------------------:|:----------:|
+| code    | AssetBankModel code | |
+
+You should call it with `try` and handle any exceptions with a `do-catch` block, similar to the example below:
+
+```swift
+do {
+    let asset = try findAsset(code: "exampleCode")
+} catch {
+    // Handle the error here
+}
+```
+
+or
+
+```swift
+let asset = try? findAsset(code: "exampleCode")
+```
+
+Using `try` and `do-catch` allows you to handle any exceptions that may be thrown within `findAsset`, which is especially important when working with functions that can generate errors.
 
 
 
