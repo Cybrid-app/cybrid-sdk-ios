@@ -104,6 +104,7 @@
 "cybrid.deposit.address.content.button" = "Générer le code de paiement";
 "cybrid.deposit.address.modal.title" = "Détails du dépôt pour";
 "cybrid.deposit.address.modal.amount.title" = "Quantité de";
+"cybrid.deposit.address.modal.gas.title" = "Frais de gaz";
 "cybrid.deposit.address.modal.message.title" = "Message pour la transaction";
 "cybrid.deposit.address.modal.message.placeholder" = "Message facultatif";
 "cybrid.deposit.address.modal.button" = "Générer";
