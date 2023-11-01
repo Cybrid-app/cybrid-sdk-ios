@@ -22,6 +22,8 @@ Table of contents
       * [ListPrices](#list-prices)
          * [ListPricesItemDelegate](#list-prices-item-delegate)
          * [Preview](#preview)
+      * [Trade](#trade)
+         * [Preview](#preview) 
 
 <!--te-->
 
@@ -199,7 +201,28 @@ func onSelected(asset: AssetBankModel, counterAsset: AssetBankModel)
 
 #### Preview
 
-![ListPricesView Preview](https://github.com/Cybrid-app/cybrid-sdk-ios/assets/7268597/72b2c251-317e-4901-93b2-fef7583092eb)
+<p align="center">
+  <img src="https://github.com/Cybrid-app/cybrid-sdk-ios/assets/7268597/72b2c251-317e-4901-93b2-fef7583092eb">
+</p>
+
+### Trade
+
+The Trade Component allows you to display a user interface for buying or selling a cryptocurrency asset from or to a fiat account (e.g., USD). This component relies entirely on the `ListPricesView` component to display the list of assets initially.
+
+This component is also affected by the general configuration of `TimeInterval` (refreshRate) for updating asset prices and refreshing the `QuoteBankModel`.
+
+To use this component, you can do so in the following ways:
+
+1. TradeVIewController
+
+To use this component, you simply need to create an instance of `TradeViewController` and display it.
+
+#### Preview
+
+<p align="center">
+  <img src="https://github.com/Cybrid-app/cybrid-sdk-ios/assets/7268597/72b2c251-317e-4901-93b2-fef7583092eb">
+</p>
+
 
 ## Demo App
 
