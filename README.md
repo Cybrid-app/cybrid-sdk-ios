@@ -220,7 +220,7 @@ To use this component, you simply need to create an instance of `TradeViewContro
 #### Preview
 
 <p align="center">
-  <img src="https://github.com/Cybrid-app/cybrid-sdk-ios/assets/7268597/72b2c251-317e-4901-93b2-fef7583092eb">
+  <img src="https://github.com/Cybrid-app/cybrid-sdk-ios/assets/7268597/b91ee833-8d57-40f2-9de3-aff62fcd98d1">
 </p>
 
 
