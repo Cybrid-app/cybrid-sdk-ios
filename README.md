@@ -25,6 +25,7 @@ Table of contents
       * [Trade](#trade)
          * [Preview](#preview)
       * [Accounts](#accounts)
+         * [Trades Sub Component](#trades-sub-component) 
          * [Preview](#preview)
     * [Demo App](#demo-app) 
 
@@ -237,6 +238,21 @@ To use this component, you can do so in the following ways:
 1. AccountsVIewController
 
 To use this component, you simply need to create an instance of `AccountsViewController` and display it.
+
+#### Trades Sub Component
+
+The Trades Component is a part of the Accounts Component package, allowing you to view the trades for a cryptocurrency asset account. You can use it without the need to use the Account Component.
+
+To use this component, you can do so in the following ways:
+
+1. AccountTradesViewCotroller
+
+To use this component, you simply need to create an instance of `AccountTradesViewController` and add this to the constructor:
+
+| Argument      | Descrption          | Default    |
+| ------------- |:-------------------:|:----------:|
+| balance    | BalaceUIModel | |
+| accountViewModel    | AccountsViewModel | |
 
 #### Preview
 
