@@ -1,10 +1,30 @@
 # cybrid-sdk-ios
 
-iOS SDK Library and Demo App for Cybrid API.
-
 [![Platforms](https://img.shields.io/badge/Platforms-iOS-yellowgreen?style=flat-square)](https://img.shields.io/badge/Platforms-iOS-Green?style=flat-square)
 [![CircleCI](https://dl.circleci.com/status-badge/img/gh/Cybrid-app/cybrid-sdk-ios/tree/main.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/Cybrid-app/cybrid-sdk-ios/tree/main)
 [![codecov](https://codecov.io/gh/Cybrid-app/cybrid-sdk-ios/branch/main/graph/badge.svg?token=LTJJFQJWEA)](https://codecov.io/gh/Cybrid-app/cybrid-sdk-ios)
+
+The Cybrid iOS SDK for cryptocurrency transactions and financial services offers a comprehensive solution for iOS applications. We provide customizable UI screens and elements to efficiently collect user data. Moreover, we expose low-level APIs to enable the creation of entirely customized user experiences. Whether it's for cryptocurrency transactions, identity verification (KYC), or managing bank accounts and wallets, our SDK simplifies integration into your iOS app, ensuring flexibility and quality.
+
+Table of contents
+=================
+
+<!--ts-->
+   * [Features](#features)
+   * [Releases](#releases)
+   * [Requirements](#requirements)
+   * [Getting started](#getting-started)
+      * [Integration](#integration)
+      * [Examples](#examples)
+      * [Building from source](#building-from-source)
+   * [Card scanning](#card-scanning)
+   * [Contributing](#contributing)
+   * [Migrating](#migrating-from-older-versions)
+   * [Code Stye](#code-style)
+   * [Licenses](#licenses)
+
+<!--te-->
+
 
 ## Installation
 
