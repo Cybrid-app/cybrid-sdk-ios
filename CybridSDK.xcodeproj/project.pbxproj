@@ -63,7 +63,6 @@
 		0B303CEC2862F898007BF7FF /* ColorThemeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B303CEB2862F898007BF7FF /* ColorThemeTests.swift */; };
 		0B303CF328636A0D007BF7FF /* CybridConfigTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B303CF228636A0D007BF7FF /* CybridConfigTests.swift */; };
 		0B50F35928A5885400DDB01E /* CybridEventTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B50F35828A5885400DDB01E /* CybridEventTests.swift */; };
-		0B50F35B28A5890C00DDB01E /* TradeViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B50F35A28A5890C00DDB01E /* TradeViewModelTests.swift */; };
 		0B557B982899F56900632A6D /* CYBButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B557B972899F56900632A6D /* CYBButton.swift */; };
 		0B6175D4288B7853004E4F5B /* TaskScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6175D3288B7853004E4F5B /* TaskScheduler.swift */; };
 		0B966004285A85C600584692 /* AsyncOperationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B966003285A85C600584692 /* AsyncOperationTests.swift */; };
@@ -428,7 +427,6 @@
 		0B303CEB2862F898007BF7FF /* ColorThemeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorThemeTests.swift; sourceTree = "<group>"; };
 		0B303CF228636A0D007BF7FF /* CybridConfigTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CybridConfigTests.swift; sourceTree = "<group>"; };
 		0B50F35828A5885400DDB01E /* CybridEventTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CybridEventTests.swift; sourceTree = "<group>"; };
-		0B50F35A28A5890C00DDB01E /* TradeViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeViewModelTests.swift; sourceTree = "<group>"; };
 		0B557B972899F56900632A6D /* CYBButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CYBButton.swift; sourceTree = "<group>"; };
 		0B6175D3288B7853004E4F5B /* TaskScheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskScheduler.swift; sourceTree = "<group>"; };
 		0B966003285A85C600584692 /* AsyncOperationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncOperationTests.swift; sourceTree = "<group>"; };
@@ -889,7 +887,6 @@
 				0B00E03A287F7B5D00707F26 /* Services Tests */,
 				0B303CEA2862F888007BF7FF /* Theme Tests */,
 				0B966005285A85FA00584692 /* Utilities Tests */,
-				0BD66120286C208600F4DA6B /* ViewModel Tests */,
 				9217353E28E41FF800DF58CA /* ModelTest */,
 			);
 			path = CybridSDKTests;
@@ -1376,15 +1373,6 @@
 			path = URLImageView;
 			sourceTree = "<group>";
 		};
-		0BD66120286C208600F4DA6B /* ViewModel Tests */ = {
-			isa = PBXGroup;
-			children = (
-				0BD66122286C20BC00F4DA6B /* CryptoPriceViewModelTests.swift */,
-				0B50F35A28A5890C00DDB01E /* TradeViewModelTests.swift */,
-			);
-			path = "ViewModel Tests";
-			sourceTree = "<group>";
-		};
 		0BD66126286D7CCB00F4DA6B /* Localization */ = {
 			isa = PBXGroup;
 			children = (
@@ -1839,6 +1827,7 @@
 		92F120582996B4B90086EE18 /* ListPrices */ = {
 			isa = PBXGroup;
 			children = (
+				A210D5792AF35F4400FBF4F4 /* View */,
 				92F120592996B4C10086EE18 /* Entity */,
 			);
 			path = ListPrices;
@@ -1955,6 +1944,14 @@
 				A20629272ABA11F600B71A5B /* WalletPickerCell.swift */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		A210D5792AF35F4400FBF4F4 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				0BD66122286C20BC00F4DA6B /* CryptoPriceViewModelTests.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		A23FC5E62A94093200129CE2 /* View */ = {
@@ -2886,7 +2883,6 @@
 				A2C2EACD2A7419CB0039C441 /* DepositAddressViewModelTest.swift in Sources */,
 				0B96600D285A9A3100584692 /* MockAsyncOperation.swift in Sources */,
 				0B00E048287FC4C800707F26 /* EnvironmentTests.swift in Sources */,
-				0B50F35B28A5890C00DDB01E /* TradeViewModelTests.swift in Sources */,
 				0B966019285AE8D300584692 /* MockURLSession.swift in Sources */,
 				92827DC62943E7A100231772 /* BankAPIMock.swift in Sources */,
 				0BD6611B286C197B00F4DA6B /* UIViewConstraintsTests.swift in Sources */,
