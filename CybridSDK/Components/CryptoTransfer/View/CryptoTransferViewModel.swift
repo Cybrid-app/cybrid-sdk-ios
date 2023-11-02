@@ -143,7 +143,7 @@ open class CryptoTransferViewModel: BaseViewModel {
         }
 
         // -- Create Quote
-        self.dataProvider.createQuote(params: postQuoteBankModel, with: nil) { [weak self] quoteResponse in
+        self.dataProvider.createQuote(postQuoteBankModel: postQuoteBankModel) { [weak self] quoteResponse in
             switch quoteResponse {
             case .success(let quote):
                 self?.logger?.log(.component(.accounts(.accountsDataFetching)))

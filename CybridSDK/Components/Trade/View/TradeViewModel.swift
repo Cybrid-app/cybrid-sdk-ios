@@ -318,7 +318,7 @@ open class TradeViewModel: NSObject, ListPricesItemDelegate {
         self.modalState.value = .LOADING
         self.quotePolling = Polling(interval: 8) {
             let postQuote = self.createPostQuote()
-            self.dataProvider.createQuote(params: postQuote, with: nil) { [weak self] quoteResult in
+            self.dataProvider.createQuote(postQuoteBankModel: postQuote) { [weak self] quoteResult in
                 switch quoteResult {
                 case .success(let quote):
                     self?.currentQuote.value = quote
