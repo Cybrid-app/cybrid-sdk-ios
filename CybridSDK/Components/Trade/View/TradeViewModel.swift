@@ -8,7 +8,7 @@
 import Foundation
 import CybridApiBankSwift
 
-class TradeViewModel: NSObject, ListPricesItemDelegate {
+open class TradeViewModel: NSObject, ListPricesItemDelegate {
 
     // MARK: Private properties
     private var dataProvider: TradesRepoProvider & AccountsRepoProvider & QuotesRepoProvider
@@ -27,8 +27,8 @@ class TradeViewModel: NSObject, ListPricesItemDelegate {
     internal var currentMaxButtonHide: Observable<Bool> = .init(true)
 
     // MARK: Public properties
-    var uiState: Observable<TradeViewController.ViewState> = .init(.PRICES)
-    var modalState: Observable<TradeViewController.ModalViewState> = .init(.LOADING)
+    var uiState: Observable<TradeView.State> = .init(.PRICES)
+    var modalState: Observable<TradeView.ModalState> = .init(.LOADING)
     var listPricesViewModel: ListPricesViewModel?
 
     var accountsOriginal: [AccountBankModel] = []
@@ -41,7 +41,7 @@ class TradeViewModel: NSObject, ListPricesItemDelegate {
     var currentTrade: Observable<TradeBankModel?> = .init(nil)
 
     // MARK: View Values
-    internal var segmentSelection: Observable<_TradeType> = Observable(.buy)
+    internal var segmentSelection: Observable<TradeType> = Observable(.buy)
 
     // MARK: Constructor
     init(dataProvider: TradesRepoProvider & AccountsRepoProvider & QuotesRepoProvider,
@@ -116,7 +116,7 @@ class TradeViewModel: NSObject, ListPricesItemDelegate {
     @objc
     func segmentedControlValueChanged(_ sender: UISegmentedControl) {
 
-        guard let selectedIndex = _TradeType(rawValue: sender.selectedSegmentIndex) else { return }
+        guard let selectedIndex = TradeType(rawValue: sender.selectedSegmentIndex) else { return }
         self.segmentSelection.value = selectedIndex
         self.maxButtonViewStateHandler()
         self.resetAmountInput()

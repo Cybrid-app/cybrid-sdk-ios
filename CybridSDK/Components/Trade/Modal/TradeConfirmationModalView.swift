@@ -176,7 +176,7 @@ extension TradeConfirmationModalView {
     let cryptoAmount: String
     let cryptoCode: String
     let transactionFee: String
-    let quoteType: _TradeType
+    let quoteType: TradeType
   }
 }
 

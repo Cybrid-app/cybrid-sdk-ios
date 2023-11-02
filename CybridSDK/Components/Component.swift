@@ -27,7 +27,7 @@ public class Component: UIView, ComponentProtocol {
     func setupView() {
         print("SDK Component - Setup View")
     }
-    
+
     // MARK: Embeddings Helpers
     func embed(in view: UIView, parent: UIViewController? = nil) {
 

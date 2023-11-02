@@ -64,7 +64,6 @@
 		0B303CF328636A0D007BF7FF /* CybridConfigTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B303CF228636A0D007BF7FF /* CybridConfigTests.swift */; };
 		0B50F35928A5885400DDB01E /* CybridEventTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B50F35828A5885400DDB01E /* CybridEventTests.swift */; };
 		0B50F35B28A5890C00DDB01E /* TradeViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B50F35A28A5890C00DDB01E /* TradeViewModelTests.swift */; };
-		0B557B962899F4DE00632A6D /* _TradeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B557B932899F4DE00632A6D /* _TradeViewController.swift */; };
 		0B557B982899F56900632A6D /* CYBButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B557B972899F56900632A6D /* CYBButton.swift */; };
 		0B6175D4288B7853004E4F5B /* TaskScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6175D3288B7853004E4F5B /* TaskScheduler.swift */; };
 		0B966004285A85C600584692 /* AsyncOperationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B966003285A85C600584692 /* AsyncOperationTests.swift */; };
@@ -85,7 +84,6 @@
 		0BBCF61F285C43E000D39C6D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0BBCF61E285C43E000D39C6D /* Assets.xcassets */; };
 		0BBCF640285C52D700D39C6D /* MockError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BBCF63F285C52D700D39C6D /* MockError.swift */; };
 		0BBD0CCA28AAC025001DBC5F /* BigDecimalValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BBD0CC928AAC025001DBC5F /* BigDecimalValidator.swift */; };
-		0BBD0CCE28AB71B7001DBC5F /* _TradeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BBD0CCD28AB71B7001DBC5F /* _TradeViewModel.swift */; };
 		0BBD0CD128ABF905001DBC5F /* TradeConfirmationModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BBD0CD028ABF905001DBC5F /* TradeConfirmationModalView.swift */; };
 		0BBD0CD428AC0B60001DBC5F /* CybridModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BBD0CD328AC0B60001DBC5F /* CybridModalViewController.swift */; };
 		0BBD0CD628AC1DDC001DBC5F /* LoadingModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BBD0CD528AC1DDC001DBC5F /* LoadingModalView.swift */; };
@@ -255,7 +253,6 @@
 		92F5EC7128E206CE009DC3F4 /* accountResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 92F5EC7028E206CE009DC3F4 /* accountResponse.json */; };
 		92F5EC7328E24150009DC3F4 /* listTradesResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 92F5EC7228E24150009DC3F4 /* listTradesResponse.json */; };
 		92F707C2298C204F005A93E5 /* TradeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F707C1298C204F005A93E5 /* TradeViewController.swift */; };
-		92F707C4298C235F005A93E5 /* TradeViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F707C3298C235F005A93E5 /* TradeViewController+Extensions.swift */; };
 		92F707C9298D7557005A93E5 /* ListPricesItemDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F707C8298D7557005A93E5 /* ListPricesItemDelegate.swift */; };
 		92F707CC298D806A005A93E5 /* TradeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F707CB298D806A005A93E5 /* TradeViewModel.swift */; };
 		9E3B30420CC77D425A7A1C28 /* Pods_Abstract_CybridSDKTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80DCD8FC666A9176CF28F146 /* Pods_Abstract_CybridSDKTests.framework */; };
@@ -302,6 +299,11 @@
 		A28964022A739D1C00151A36 /* createDepositAddressResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = A28964012A739D1C00151A36 /* createDepositAddressResponse.json */; };
 		A28964042A739E8200151A36 /* listDepositAddressResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = A28964032A739E8200151A36 /* listDepositAddressResponse.json */; };
 		A28964062A739F4E00151A36 /* listDepositAddressResponseIncomplete.json in Resources */ = {isa = PBXBuildFile; fileRef = A28964052A739F4E00151A36 /* listDepositAddressResponseIncomplete.json */; };
+		A2897C102AF2E89A00195031 /* TradeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2897C0F2AF2E89A00195031 /* TradeView.swift */; };
+		A2897C132AF2F26D00195031 /* TradeView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2897C122AF2F26D00195031 /* TradeView+Extensions.swift */; };
+		A2897C152AF2F41D00195031 /* TradeView_ListPrices.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2897C142AF2F41D00195031 /* TradeView_ListPrices.swift */; };
+		A2897C172AF2F5D200195031 /* TradeView_Content.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2897C162AF2F5D200195031 /* TradeView_Content.swift */; };
+		A2897C192AF3579700195031 /* TradeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2897C182AF3579700195031 /* TradeType.swift */; };
 		A298F6B72A990D3000D45954 /* CybridServerErrorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A298F6B62A990D3000D45954 /* CybridServerErrorTest.swift */; };
 		A29AA7C22A5DD85D00B6CC1A /* DepositAddressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29AA7C12A5DD85D00B6CC1A /* DepositAddressView.swift */; };
 		A29AA7C52A5DDBC700B6CC1A /* DepositAddresViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29AA7C42A5DDBC700B6CC1A /* DepositAddresViewController.swift */; };
@@ -427,7 +429,6 @@
 		0B303CF228636A0D007BF7FF /* CybridConfigTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CybridConfigTests.swift; sourceTree = "<group>"; };
 		0B50F35828A5885400DDB01E /* CybridEventTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CybridEventTests.swift; sourceTree = "<group>"; };
 		0B50F35A28A5890C00DDB01E /* TradeViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeViewModelTests.swift; sourceTree = "<group>"; };
-		0B557B932899F4DE00632A6D /* _TradeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = _TradeViewController.swift; sourceTree = "<group>"; };
 		0B557B972899F56900632A6D /* CYBButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CYBButton.swift; sourceTree = "<group>"; };
 		0B6175D3288B7853004E4F5B /* TaskScheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskScheduler.swift; sourceTree = "<group>"; };
 		0B966003285A85C600584692 /* AsyncOperationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncOperationTests.swift; sourceTree = "<group>"; };
@@ -450,7 +451,6 @@
 		0BBCF623285C43E000D39C6D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0BBCF63F285C52D700D39C6D /* MockError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockError.swift; sourceTree = "<group>"; };
 		0BBD0CC928AAC025001DBC5F /* BigDecimalValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigDecimalValidator.swift; sourceTree = "<group>"; };
-		0BBD0CCD28AB71B7001DBC5F /* _TradeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = _TradeViewModel.swift; sourceTree = "<group>"; };
 		0BBD0CD028ABF905001DBC5F /* TradeConfirmationModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeConfirmationModalView.swift; sourceTree = "<group>"; };
 		0BBD0CD328AC0B60001DBC5F /* CybridModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CybridModalViewController.swift; sourceTree = "<group>"; };
 		0BBD0CD528AC1DDC001DBC5F /* LoadingModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingModalView.swift; sourceTree = "<group>"; };
@@ -628,7 +628,6 @@
 		92F5EC7028E206CE009DC3F4 /* accountResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = accountResponse.json; sourceTree = "<group>"; };
 		92F5EC7228E24150009DC3F4 /* listTradesResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = listTradesResponse.json; sourceTree = "<group>"; };
 		92F707C1298C204F005A93E5 /* TradeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeViewController.swift; sourceTree = "<group>"; };
-		92F707C3298C235F005A93E5 /* TradeViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TradeViewController+Extensions.swift"; sourceTree = "<group>"; };
 		92F707C8298D7557005A93E5 /* ListPricesItemDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListPricesItemDelegate.swift; sourceTree = "<group>"; };
 		92F707CB298D806A005A93E5 /* TradeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeViewModel.swift; sourceTree = "<group>"; };
 		A206291E2ABA037200B71A5B /* AccountPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountPicker.swift; sourceTree = "<group>"; };
@@ -674,6 +673,11 @@
 		A28964012A739D1C00151A36 /* createDepositAddressResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = createDepositAddressResponse.json; sourceTree = "<group>"; };
 		A28964032A739E8200151A36 /* listDepositAddressResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = listDepositAddressResponse.json; sourceTree = "<group>"; };
 		A28964052A739F4E00151A36 /* listDepositAddressResponseIncomplete.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = listDepositAddressResponseIncomplete.json; sourceTree = "<group>"; };
+		A2897C0F2AF2E89A00195031 /* TradeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeView.swift; sourceTree = "<group>"; };
+		A2897C122AF2F26D00195031 /* TradeView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TradeView+Extensions.swift"; sourceTree = "<group>"; };
+		A2897C142AF2F41D00195031 /* TradeView_ListPrices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeView_ListPrices.swift; sourceTree = "<group>"; };
+		A2897C162AF2F5D200195031 /* TradeView_Content.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeView_Content.swift; sourceTree = "<group>"; };
+		A2897C182AF3579700195031 /* TradeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeType.swift; sourceTree = "<group>"; };
 		A298F6B62A990D3000D45954 /* CybridServerErrorTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CybridServerErrorTest.swift; sourceTree = "<group>"; };
 		A29AA7C12A5DD85D00B6CC1A /* DepositAddressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepositAddressView.swift; sourceTree = "<group>"; };
 		A29AA7C42A5DDBC700B6CC1A /* DepositAddresViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepositAddresViewController.swift; sourceTree = "<group>"; };
@@ -1072,13 +1076,12 @@
 		0B557B902899F4CB00632A6D /* Trade */ = {
 			isa = PBXGroup;
 			children = (
+				A2897C112AF2EABF00195031 /* ViewController */,
+				A2897C0E2AF2E82300195031 /* Extensions */,
 				92F1204F2994347A0086EE18 /* Entity */,
 				92F707CA298D8057005A93E5 /* View */,
 				0BBD0CCF28ABF8F8001DBC5F /* Modal */,
-				0B557B932899F4DE00632A6D /* _TradeViewController.swift */,
-				0BBD0CCD28AB71B7001DBC5F /* _TradeViewModel.swift */,
-				92F707C1298C204F005A93E5 /* TradeViewController.swift */,
-				92F707C3298C235F005A93E5 /* TradeViewController+Extensions.swift */,
+				A2897C0F2AF2E89A00195031 /* TradeView.swift */,
 			);
 			path = Trade;
 			sourceTree = "<group>";
@@ -1313,7 +1316,6 @@
 			isa = PBXGroup;
 			children = (
 				A29AA7C62A5E1BC000B6CC1A /* Component.swift */,
-				0BD66106286B768C00F4DA6B /* ListPricesView.swift */,
 				0BD66100286B766B00F4DA6B /* ListPrices */,
 				0B557B902899F4CB00632A6D /* Trade */,
 				92E08013295AD2F300372460 /* Transfer */,
@@ -1334,6 +1336,7 @@
 				92F707C7298D73CB005A93E5 /* Entity */,
 				92F707C6298D73B4005A93E5 /* View */,
 				92F707C5298D73AB005A93E5 /* Delegate */,
+				0BD66106286B768C00F4DA6B /* ListPricesView.swift */,
 			);
 			path = ListPrices;
 			sourceTree = "<group>";
@@ -1796,6 +1799,7 @@
 			isa = PBXGroup;
 			children = (
 				92F12050299435140086EE18 /* AccountAssetUIModel.swift */,
+				A2897C182AF3579700195031 /* TradeType.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -2071,6 +2075,24 @@
 				A28963FF2A73336900151A36 /* DepositAddressMock.swift */,
 			);
 			path = DepositAddress;
+			sourceTree = "<group>";
+		};
+		A2897C0E2AF2E82300195031 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				A2897C122AF2F26D00195031 /* TradeView+Extensions.swift */,
+				A2897C142AF2F41D00195031 /* TradeView_ListPrices.swift */,
+				A2897C162AF2F5D200195031 /* TradeView_Content.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		A2897C112AF2EABF00195031 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				92F707C1298C204F005A93E5 /* TradeViewController.swift */,
+			);
+			path = ViewController;
 			sourceTree = "<group>";
 		};
 		A298F6B52A990D1700D45954 /* Error Tests */ = {
@@ -2642,6 +2664,7 @@
 				A2EA1FA62AB8AB30008EF698 /* CryptoTransferView.swift in Sources */,
 				0BD6612A286DE86A00F4DA6B /* CybridLocalizationKey.swift in Sources */,
 				0B00E02E287F6AE500707F26 /* CybridError.swift in Sources */,
+				A2897C192AF3579700195031 /* TradeType.swift in Sources */,
 				92A90A8A2911939400CA0E08 /* IdentityVerificationViewController.swift in Sources */,
 				927233D628D243DC0080AAC4 /* AccountTradesViewController.swift in Sources */,
 				927233CD28D2419B0080AAC4 /* QuoteBankModel+Extensions.swift in Sources */,
@@ -2650,6 +2673,7 @@
 				92A2FD8429AE837200146D1E /* AccountsViewController+Extensions.swift in Sources */,
 				92635470294CEC0400660E0B /* BankAccountsViewController+Extensions.swift in Sources */,
 				92663D0F293FD60800842E30 /* WorkflowRepository.swift in Sources */,
+				A2897C172AF2F5D200195031 /* TradeView_Content.swift in Sources */,
 				A23FC5F82A95109D00129CE2 /* AssetPicker.swift in Sources */,
 				A24823D92AD998640064FA73 /* Quote.swift in Sources */,
 				9257E78D29B7B2E500846E12 /* AccountsFiatCell.swift in Sources */,
@@ -2675,7 +2699,6 @@
 				927233EC28D244DE0080AAC4 /* AccountTradesCell.swift in Sources */,
 				0B2B2A7128621DA7002F0EC1 /* FontTheme.swift in Sources */,
 				0BD6610B286B768C00F4DA6B /* CryptoPriceModel.swift in Sources */,
-				0B557B962899F4DE00632A6D /* _TradeViewController.swift in Sources */,
 				A27768142AC6B34000C5E81B /* _Content.swift in Sources */,
 				0B00E04E2885ADB300707F26 /* AssetsRepository.swift in Sources */,
 				0BBD0CD828AC21F1001DBC5F /* TradeSuccessModalView.swift in Sources */,
@@ -2719,9 +2742,11 @@
 				92827DAF294322AD00231772 /* BankBankModel+Extensions.swift in Sources */,
 				A24B35992A67099C00EF20C5 /* DepositAddressBankModel+Extensions.swift in Sources */,
 				92C92C8B2911FC6C00B81719 /* CustomerBankModel+Extensions.swift in Sources */,
+				A2897C102AF2E89A00195031 /* TradeView.swift in Sources */,
 				925FFDB829F832BD00F7D07A /* TradeModal.swift in Sources */,
 				927233EA28D244CC0080AAC4 /* AccountTradesHeaderCell.swift in Sources */,
 				0B303CE42862E5D9007BF7FF /* CybridConfig.swift in Sources */,
+				A2897C152AF2F41D00195031 /* TradeView_ListPrices.swift in Sources */,
 				0BD660FD286B763E00F4DA6B /* ConcurrencyInterfaces.swift in Sources */,
 				0BD66109286B768C00F4DA6B /* ListPricesView.swift in Sources */,
 				A2A29EF62A97DE050075C889 /* _Error.swift in Sources */,
@@ -2738,6 +2763,7 @@
 				0BD66125286D7C0400F4DA6B /* Localizer.swift in Sources */,
 				0BD66111286B76DC00F4DA6B /* URLImageView.swift in Sources */,
 				0B557B982899F56900632A6D /* CYBButton.swift in Sources */,
+				A2897C132AF2F26D00195031 /* TradeView+Extensions.swift in Sources */,
 				0B00E0042877DF7F00707F26 /* Bundle+Extensions.swift in Sources */,
 				92827DCF2947998C00231772 /* ExternalBankAccountBankModel+Extensions.swift in Sources */,
 				9224F76929DB9B6400712D3B /* AccountTransfersViewModel.swift in Sources */,
@@ -2774,7 +2800,6 @@
 				0B289A07289E29D4001B3360 /* AssetBankModel+Extensions.swift in Sources */,
 				927233E828D244BD0080AAC4 /* AccountsCell.swift in Sources */,
 				A23FC5EB2A94508C00129CE2 /* ExternalWalletsViewController.swift in Sources */,
-				0BBD0CCE28AB71B7001DBC5F /* _TradeViewModel.swift in Sources */,
 				A24CB4412A8BDDF3004FCC7A /* ExternalWalletsView.swift in Sources */,
 				9299104229D350DB007E9832 /* TransfersRepository.swift in Sources */,
 				0B289A0A289E333C001B3360 /* CYBTextField.swift in Sources */,
@@ -2783,7 +2808,6 @@
 				A27768122AC6B2CB00C5E81B /* _Loading.swift in Sources */,
 				A23FC5F32A94B17400129CE2 /* TextField.swift in Sources */,
 				0B2899F828942C54001B3360 /* CybridJSONDecoder.swift in Sources */,
-				92F707C4298C235F005A93E5 /* TradeViewController+Extensions.swift in Sources */,
 				0BD66105286B768300F4DA6B /* CryptoPriceTableViewCell.swift in Sources */,
 				0BBD0CD628AC1DDC001DBC5F /* LoadingModalView.swift in Sources */,
 				0BD660FE286B763E00F4DA6B /* AsyncOperation.swift in Sources */,
