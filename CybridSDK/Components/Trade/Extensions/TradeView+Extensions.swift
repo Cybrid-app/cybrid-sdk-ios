@@ -185,7 +185,7 @@ extension TradeView {
         }
 
         self.tradeViewModel.segmentSelection.bind { [self] segment in
-            
+
             self.tradeViewModel.calculatePreQuote()
             self.actionButton.setTitle(title: localizer.localize(with: segment == .buy ? Strings.contentBuyButton : Strings.contentSellButton))
         }

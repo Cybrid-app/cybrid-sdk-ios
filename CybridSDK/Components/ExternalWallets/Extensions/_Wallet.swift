@@ -55,7 +55,7 @@ extension ExternalWalletsView {
         let assetTitle = self.label(
             font: UIFont.make(ofSize: 14, weight: .light),
             color: UIColor(hex: "#818181"),
-            text: "Asset",
+            text: assetTitleString,
             lineHeight: 1.05,
             aligment: .left)
         self.addSubview(assetTitle)

@@ -158,7 +158,7 @@ extension TradeView: UITextFieldDelegate {
             if stringParts[0] == "." {
                 amountString = "\(leftSide)\(amountString)"
             }
-            
+
             if stringParts[stringParts.count - 1] == "." {
                 amountString = "\(amountString)\(rightSide)"
             }
@@ -166,6 +166,6 @@ extension TradeView: UITextFieldDelegate {
         self.tradeViewModel.currentAmountInput = amountString
         self.tradeViewModel.calculatePreQuote()
     }
-    
+
     public func textFieldForceUpdate(text: String) {}
 }

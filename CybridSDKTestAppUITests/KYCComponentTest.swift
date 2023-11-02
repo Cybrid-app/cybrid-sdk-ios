@@ -48,6 +48,7 @@ class KYCComponentTest: XCTestCase {
         demoMode.tap()
     }
 
+    // swiftlint:disable:next cyclomatic_complexity
     func test_flow() throws {
 
         app.launch()

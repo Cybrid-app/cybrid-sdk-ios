@@ -25,7 +25,7 @@ extension TransferBankModel {
 
         let sourceAccountJson = json[TransferBankModel.CodingKeys.sourceAccount.rawValue] as? [String: Any] ?? ["": ""]
         let sourceAccount = TransferBankModel.getSourceAccount(sourceAccountJson: sourceAccountJson)
-        
+
         let destinationAccountJson = json[TransferBankModel.CodingKeys.destinationAccount.rawValue] as? [String: Any] ?? ["": ""]
         let destinationAccount = TransferBankModel.getDestinationAccount(destinationAccountJson: destinationAccountJson)
 
