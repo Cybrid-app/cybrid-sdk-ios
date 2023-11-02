@@ -260,6 +260,8 @@
 		A20629252ABA108400B71A5B /* WalletPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20629242ABA108400B71A5B /* WalletPicker.swift */; };
 		A20629282ABA11F600B71A5B /* WalletPickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20629272ABA11F600B71A5B /* WalletPickerCell.swift */; };
 		A210D57B2AF3652200FBF4F4 /* TradeTypeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A210D57A2AF3652200FBF4F4 /* TradeTypeTests.swift */; };
+		A210D57D2AF372A200FBF4F4 /* TradeViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A210D57C2AF372A200FBF4F4 /* TradeViewModelTest.swift */; };
+		A210D57F2AF372DA00FBF4F4 /* TradeViewTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A210D57E2AF372DA00FBF4F4 /* TradeViewTest.swift */; };
 		A21E047C2A86BB4D0046CCBA /* ViewUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = A21E047B2A86BB4D0046CCBA /* ViewUtils.swift */; };
 		A23FC5E92A944F5900129CE2 /* ExternalWalletViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23FC5E82A944F5900129CE2 /* ExternalWalletViewModel.swift */; };
 		A23FC5EB2A94508C00129CE2 /* ExternalWalletsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23FC5EA2A94508C00129CE2 /* ExternalWalletsViewController.swift */; };
@@ -634,6 +636,8 @@
 		A20629242ABA108400B71A5B /* WalletPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletPicker.swift; sourceTree = "<group>"; };
 		A20629272ABA11F600B71A5B /* WalletPickerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletPickerCell.swift; sourceTree = "<group>"; };
 		A210D57A2AF3652200FBF4F4 /* TradeTypeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeTypeTests.swift; sourceTree = "<group>"; };
+		A210D57C2AF372A200FBF4F4 /* TradeViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TradeViewModelTest.swift; path = "CybridSDKTests/Components Tests/Trade/Entity/TradeViewModelTest.swift"; sourceTree = SOURCE_ROOT; };
+		A210D57E2AF372DA00FBF4F4 /* TradeViewTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TradeViewTest.swift; path = "CybridSDKTests/Components Tests/Trade/Entity/TradeViewTest.swift"; sourceTree = SOURCE_ROOT; };
 		A21E047B2A86BB4D0046CCBA /* ViewUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewUtils.swift; sourceTree = "<group>"; };
 		A23FC5E82A944F5900129CE2 /* ExternalWalletViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExternalWalletViewModel.swift; sourceTree = "<group>"; };
 		A23FC5EA2A94508C00129CE2 /* ExternalWalletsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExternalWalletsViewController.swift; sourceTree = "<group>"; };
@@ -1822,6 +1826,8 @@
 		92F120572996A8AB0086EE18 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				A210D57C2AF372A200FBF4F4 /* TradeViewModelTest.swift */,
+				A210D57E2AF372DA00FBF4F4 /* TradeViewTest.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2870,6 +2876,7 @@
 				0B00E03E287F803800707F26 /* MockAPIManager.swift in Sources */,
 				0B966025285C2CEF00584692 /* MockDispatchQueue.swift in Sources */,
 				92E0801B295B6AF800372460 /* TransferViewModelTest.swift in Sources */,
+				A210D57F2AF372DA00FBF4F4 /* TradeViewTest.swift in Sources */,
 				0B2899F2288F53FE001B3360 /* NotificationCenterMock.swift in Sources */,
 				0BBD0CE828B6C730001DBC5F /* TradeMock.swift in Sources */,
 				9299104A29D38F3C007E9832 /* CDecimalTest.swift in Sources */,
@@ -2885,6 +2892,7 @@
 				0BD6611F286C1EB800F4DA6B /* ObservableTests.swift in Sources */,
 				A2C2EACD2A7419CB0039C441 /* DepositAddressViewModelTest.swift in Sources */,
 				0B96600D285A9A3100584692 /* MockAsyncOperation.swift in Sources */,
+				A210D57D2AF372A200FBF4F4 /* TradeViewModelTest.swift in Sources */,
 				0B00E048287FC4C800707F26 /* EnvironmentTests.swift in Sources */,
 				0B966019285AE8D300584692 /* MockURLSession.swift in Sources */,
 				92827DC62943E7A100231772 /* BankAPIMock.swift in Sources */,

@@ -15,7 +15,7 @@ open class TradeViewModel: NSObject, ListPricesItemDelegate {
     private var logger: CybridLogger?
 
     // MARK: Internal properties
-    internal var customerGuig = Cybrid.customerGuid
+    internal var customerGuid = Cybrid.customerGuid
     internal var currentAsset: Observable<AssetBankModel?> = .init(nil)
     internal var currentCounterAsset: Observable<AssetBankModel?> = .init(nil)
     internal var currentAccountToTrade: Observable<AccountAssetUIModel?> = .init(nil)
@@ -273,7 +273,7 @@ open class TradeViewModel: NSObject, ListPricesItemDelegate {
                 let amountFormatted = AssetFormatter.forInput(currentAsset.value!, amount: amount)
                 postQuote = PostQuoteBankModel(
                     productType: .trading,
-                    customerGuid: self.customerGuig,
+                    customerGuid: self.customerGuid,
                     symbol: symbol,
                     side: .buy,
                     receiveAmount: amountFormatted
@@ -282,7 +282,7 @@ open class TradeViewModel: NSObject, ListPricesItemDelegate {
                 let amountFormatted = AssetFormatter.forInput(currentCounterAsset.value!, amount: amount)
                 postQuote = PostQuoteBankModel(
                     productType: .trading,
-                    customerGuid: self.customerGuig,
+                    customerGuid: self.customerGuid,
                     symbol: symbol,
                     side: .buy,
                     deliverAmount: amountFormatted
@@ -294,7 +294,7 @@ open class TradeViewModel: NSObject, ListPricesItemDelegate {
                 let amountFormatted = AssetFormatter.forInput(currentCounterAsset.value!, amount: amount)
                 postQuote = PostQuoteBankModel(
                     productType: .trading,
-                    customerGuid: self.customerGuig,
+                    customerGuid: self.customerGuid,
                     symbol: symbol,
                     side: .sell,
                     receiveAmount: amountFormatted
@@ -303,7 +303,7 @@ open class TradeViewModel: NSObject, ListPricesItemDelegate {
                 let amountFormatted = AssetFormatter.forInput(currentAsset.value!, amount: amount)
                 postQuote = PostQuoteBankModel(
                     productType: .trading,
-                    customerGuid: self.customerGuig,
+                    customerGuid: self.customerGuid,
                     symbol: symbol,
                     side: .sell,
                     deliverAmount: amountFormatted
