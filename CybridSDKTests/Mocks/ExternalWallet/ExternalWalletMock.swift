@@ -87,7 +87,7 @@ extension ExternalWalletListBankModel {
             ExternalWalletBankModel.mockDeleting
         ]
     )
-    
+
     static let mockForCrpytoTransfer = ExternalWalletListBankModel(
         total: 1,
         page: 0,

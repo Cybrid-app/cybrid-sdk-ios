@@ -8,14 +8,14 @@
 import Foundation
 import CybridApiBankSwift
 
-class TradeViewModel: NSObject, ListPricesItemDelegate {
+open class TradeViewModel: NSObject, ListPricesItemDelegate {
 
     // MARK: Private properties
     private var dataProvider: TradesRepoProvider & AccountsRepoProvider & QuotesRepoProvider
     private var logger: CybridLogger?
 
     // MARK: Internal properties
-    internal var customerGuig = Cybrid.customerGuid
+    internal var customerGuid = Cybrid.customerGuid
     internal var currentAsset: Observable<AssetBankModel?> = .init(nil)
     internal var currentCounterAsset: Observable<AssetBankModel?> = .init(nil)
     internal var currentAccountToTrade: Observable<AccountAssetUIModel?> = .init(nil)
@@ -27,8 +27,8 @@ class TradeViewModel: NSObject, ListPricesItemDelegate {
     internal var currentMaxButtonHide: Observable<Bool> = .init(true)
 
     // MARK: Public properties
-    var uiState: Observable<TradeViewController.ViewState> = .init(.PRICES)
-    var modalState: Observable<TradeViewController.ModalViewState> = .init(.LOADING)
+    var uiState: Observable<TradeView.State> = .init(.PRICES)
+    var modalState: Observable<TradeView.ModalState> = .init(.LOADING)
     var listPricesViewModel: ListPricesViewModel?
 
     var accountsOriginal: [AccountBankModel] = []
@@ -41,7 +41,7 @@ class TradeViewModel: NSObject, ListPricesItemDelegate {
     var currentTrade: Observable<TradeBankModel?> = .init(nil)
 
     // MARK: View Values
-    internal var segmentSelection: Observable<_TradeType> = Observable(.buy)
+    internal var segmentSelection: Observable<TradeType> = Observable(.buy)
 
     // MARK: Constructor
     init(dataProvider: TradesRepoProvider & AccountsRepoProvider & QuotesRepoProvider,
@@ -116,7 +116,7 @@ class TradeViewModel: NSObject, ListPricesItemDelegate {
     @objc
     func segmentedControlValueChanged(_ sender: UISegmentedControl) {
 
-        guard let selectedIndex = _TradeType(rawValue: sender.selectedSegmentIndex) else { return }
+        guard let selectedIndex = TradeType(rawValue: sender.selectedSegmentIndex) else { return }
         self.segmentSelection.value = selectedIndex
         self.maxButtonViewStateHandler()
         self.resetAmountInput()
@@ -273,7 +273,7 @@ class TradeViewModel: NSObject, ListPricesItemDelegate {
                 let amountFormatted = AssetFormatter.forInput(currentAsset.value!, amount: amount)
                 postQuote = PostQuoteBankModel(
                     productType: .trading,
-                    customerGuid: self.customerGuig,
+                    customerGuid: self.customerGuid,
                     symbol: symbol,
                     side: .buy,
                     receiveAmount: amountFormatted
@@ -282,7 +282,7 @@ class TradeViewModel: NSObject, ListPricesItemDelegate {
                 let amountFormatted = AssetFormatter.forInput(currentCounterAsset.value!, amount: amount)
                 postQuote = PostQuoteBankModel(
                     productType: .trading,
-                    customerGuid: self.customerGuig,
+                    customerGuid: self.customerGuid,
                     symbol: symbol,
                     side: .buy,
                     deliverAmount: amountFormatted
@@ -294,7 +294,7 @@ class TradeViewModel: NSObject, ListPricesItemDelegate {
                 let amountFormatted = AssetFormatter.forInput(currentCounterAsset.value!, amount: amount)
                 postQuote = PostQuoteBankModel(
                     productType: .trading,
-                    customerGuid: self.customerGuig,
+                    customerGuid: self.customerGuid,
                     symbol: symbol,
                     side: .sell,
                     receiveAmount: amountFormatted
@@ -303,7 +303,7 @@ class TradeViewModel: NSObject, ListPricesItemDelegate {
                 let amountFormatted = AssetFormatter.forInput(currentAsset.value!, amount: amount)
                 postQuote = PostQuoteBankModel(
                     productType: .trading,
-                    customerGuid: self.customerGuig,
+                    customerGuid: self.customerGuid,
                     symbol: symbol,
                     side: .sell,
                     deliverAmount: amountFormatted
@@ -318,7 +318,7 @@ class TradeViewModel: NSObject, ListPricesItemDelegate {
         self.modalState.value = .LOADING
         self.quotePolling = Polling(interval: 8) {
             let postQuote = self.createPostQuote()
-            self.dataProvider.createQuote(params: postQuote, with: nil) { [weak self] quoteResult in
+            self.dataProvider.createQuote(postQuoteBankModel: postQuote) { [weak self] quoteResult in
                 switch quoteResult {
                 case .success(let quote):
                     self?.currentQuote.value = quote

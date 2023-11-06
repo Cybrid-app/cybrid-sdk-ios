@@ -192,6 +192,7 @@ class TradeFlow: CybridUITest {
         self.returnTap()
     }
 
+    // swiftlint:disable:next cyclomatic_complexity
     func trade_buy(_ assetCode: String) {
 
         // --

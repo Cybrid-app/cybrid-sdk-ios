@@ -156,7 +156,7 @@ class TransferViewModel: NSObject {
             side: side,
             deliverAmount: AssetFormatter.forInput(Cybrid.fiat, amount: amountDecimal)
         )
-        self.dataProvider.createQuote(params: postQuoteBankModel, with: nil) { [weak self] quoteResponse in
+        self.dataProvider.createQuote(postQuoteBankModel: postQuoteBankModel) { [weak self] quoteResponse in
 
             switch quoteResponse {
 

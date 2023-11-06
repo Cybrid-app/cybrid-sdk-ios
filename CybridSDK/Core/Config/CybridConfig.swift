@@ -9,7 +9,7 @@ import CybridApiBankSwift
 import Foundation
 
 public final class CybridConfig {
-    
+
     // MARK: Statics assets for create deposit address
     private static let defaultAssets = ["BTC", "ETH", "BCH", "LTC", "USDC", "USDC_POL", "USDC_STE"]
 

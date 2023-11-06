@@ -8,45 +8,29 @@
 import BigInt
 import CybridApiBankSwift
 
-// MARK: - QuotesRepository
-
 typealias CreateQuoteCompletion = (Result<QuoteBankModel, ErrorResponse>) -> Void
 
 protocol QuotesRepository {
-  static func createQuote(_ params: PostQuoteBankModel,
-                          _ completion: @escaping CreateQuoteCompletion)
+    static func createQuote(postQuoteBankModel: PostQuoteBankModel, _ completion: @escaping CreateQuoteCompletion)
 }
 
 protocol QuotesRepoProvider: AuthenticatedServiceProvider {
-  var quotesRepository: QuotesRepository.Type { get set }
+
+    var quotesRepository: QuotesRepository.Type { get set }
 }
 
 extension QuotesRepoProvider {
-  func createQuote(params: PostQuoteBankModel,
-                   with scheduler: TaskScheduler?,
-                   _ completion: @escaping CreateQuoteCompletion) {
-    if let scheduler = scheduler {
-      scheduler.start { [weak self] in
-        guard let self = self else {
-          scheduler.cancel()
-          return
-        }
-        self.authenticatedRequest(self.quotesRepository.createQuote, parameters: params, completion: completion)
-      }
-    } else {
-      authenticatedRequest(quotesRepository.createQuote, parameters: params, completion: completion)
+
+    func createQuote(postQuoteBankModel: PostQuoteBankModel, _ completion: @escaping CreateQuoteCompletion) {
+        authenticatedRequest(quotesRepository.createQuote, parameters: postQuoteBankModel, completion: completion)
     }
-  }
 }
 
 extension CybridSession: QuotesRepoProvider {}
 
 extension QuotesAPI: QuotesRepository {
-  static func createQuote(_ params: PostQuoteBankModel,
-                          _ completion: @escaping CreateQuoteCompletion) {
-    createQuote(
-      postQuoteBankModel: params,
-      completion: completion
-    )
-  }
+
+    static func createQuote(postQuoteBankModel: PostQuoteBankModel, _ completion: @escaping CreateQuoteCompletion) {
+        createQuote(postQuoteBankModel: postQuoteBankModel, completion: completion)
+    }
 }

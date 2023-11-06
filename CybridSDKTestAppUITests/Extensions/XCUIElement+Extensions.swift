@@ -9,9 +9,9 @@ import Foundation
 import XCTest
 
 extension XCUIElement {
-    
+
     func setText(_ text: String, _ application: XCUIApplication) {
-        
+
         tap()
         UIPasteboard.general.string = text
         doubleTap()

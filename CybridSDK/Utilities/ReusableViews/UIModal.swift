@@ -216,7 +216,6 @@ open class UIModal: UIViewController {
             } else {
                 action!()
             }
-            
         }
         container.addSubview(closeButton)
         closeButton.constraintLeft(container, margin: 0)

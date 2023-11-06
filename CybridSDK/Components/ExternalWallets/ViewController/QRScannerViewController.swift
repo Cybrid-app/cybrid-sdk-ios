@@ -116,11 +116,11 @@ internal class QRScannerViewController: UIViewController, AVCaptureMetadataOutpu
     }
 
     func failed() {
-        
+
         let alertTitleString = localizer.localize(with: "cybrid.external.wallets.qr.scanner.controller.error.title")
         let alertMessageString = localizer.localize(with: "cybrid.external.wallets.qr.scanner.controller.error.message")
         let allertButtonString = localizer.localize(with: "cybrid.external.wallets.qr.scanner.controller.error.button")
-        
+
         let alert = UIAlertController(title: alertTitleString, message: alertMessageString, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: allertButtonString, style: .default))
         present(alert, animated: true)
