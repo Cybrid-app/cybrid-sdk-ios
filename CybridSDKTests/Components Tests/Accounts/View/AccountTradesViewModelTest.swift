@@ -127,7 +127,6 @@ class AccountTradesViewModelTests: XCTestCase {
             counterAsset: AssetBankModel.usd,
             price: SymbolPriceBankModel.btcUSD1)
         let accountsViewModel = AccountsViewModel(
-            cellProvider: AccountsMockViewProvider(),
             dataProvider: self.dataProvider,
             logger: nil)
         let controller = AccountTradesViewController(
@@ -158,7 +157,6 @@ class AccountTradesViewModelTests: XCTestCase {
             counterAsset: AssetBankModel.usd,
             price: SymbolPriceBankModel.btcUSD1)
         let accountsViewModel = AccountsViewModel(
-            cellProvider: AccountsMockViewProvider(),
             dataProvider: self.dataProvider,
             logger: nil)
         let controller = AccountTradesViewController(
@@ -191,7 +189,6 @@ class AccountTradesViewModelTests: XCTestCase {
             counterAsset: AssetBankModel.usd,
             price: SymbolPriceBankModel.btcUSD1)
         let accountsViewModel = AccountsViewModel(
-            cellProvider: AccountsMockViewProvider(),
             dataProvider: self.dataProvider,
             logger: nil)
         let controller = AccountTradesViewController(
@@ -224,7 +221,6 @@ class AccountTradesViewModelTests: XCTestCase {
             counterAsset: AssetBankModel.usd,
             price: SymbolPriceBankModel.btcUSD1)
         let accountsViewModel = AccountsViewModel(
-            cellProvider: AccountsMockViewProvider(),
             dataProvider: self.dataProvider,
             logger: nil)
         let controller = AccountTradesViewController(

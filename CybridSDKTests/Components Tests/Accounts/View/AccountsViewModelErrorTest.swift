@@ -16,7 +16,6 @@ class AccountsViewModelErrorTest: XCTestCase {
     func createViewModel() -> AccountsViewModel {
 
         return AccountsViewModel(
-            cellProvider: AccountsMockViewProvider(),
             dataProvider: self.dataProvider,
             logger: nil)
     }

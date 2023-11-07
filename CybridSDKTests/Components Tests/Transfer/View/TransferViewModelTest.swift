@@ -21,9 +21,9 @@ class TransferViewModelTest: XCTestCase {
     func test_init() {
 
         // -- Given
-        let uiState: Observable<TransferViewController.ViewState> = .init(.LOADING)
-        let modalUIState: Observable<TransferViewController.ModalViewState> = .init(.LOADING)
-        let balanceLoading: Observable<TransferViewController.BalanceViewState> = .init(.CONTENT)
+        let uiState: Observable<TransferView.State> = .init(.LOADING)
+        let modalUIState: Observable<TransferView.ModalState> = .init(.LOADING)
+        let balanceLoading: Observable<TransferView.BalanceViewState> = .init(.CONTENT)
         let viewModel = createViewModel()
 
         // -- Then
@@ -67,7 +67,7 @@ class TransferViewModelTest: XCTestCase {
         // -- Then
         XCTAssertNotNil(viewModel)
         XCTAssertFalse(viewModel.accounts.value.isEmpty)
-        XCTAssertEqual(viewModel.balanceLoading.value, TransferViewController.BalanceViewState.CONTENT)
+        XCTAssertEqual(viewModel.balanceLoading.value, TransferView.BalanceViewState.CONTENT)
     }
 
     func test_fetchExternalAccounts_Successfully() {
@@ -85,7 +85,7 @@ class TransferViewModelTest: XCTestCase {
         XCTAssertNotNil(viewModel)
         XCTAssertNotNil(viewModel.accountsPolling)
         XCTAssertFalse(viewModel.externalBankAccounts.value.isEmpty)
-        XCTAssertEqual(viewModel.uiState.value, .ACCOUNTS)
+        XCTAssertEqual(viewModel.uiState.value, .CONTENT)
         XCTAssertEqual(viewModel.modalUIState.value, .LOADING)
     }
 
@@ -117,7 +117,7 @@ class TransferViewModelTest: XCTestCase {
         viewModel.checkExternalBankAccounts(accounts: ExternalBankAccountBankModel.list)
 
         // -- Then
-        XCTAssertEqual(viewModel.uiState.value, .ACCOUNTS)
+        XCTAssertEqual(viewModel.uiState.value, .CONTENT)
         XCTAssertNotNil(viewModel.accountsPolling)
         XCTAssertEqual(viewModel.errorMessage.value, false)
     }
@@ -132,7 +132,7 @@ class TransferViewModelTest: XCTestCase {
         viewModel.checkExternalBankAccounts(accounts: ExternalBankAccountBankModel.listRefresh)
 
         // -- Then
-        XCTAssertEqual(viewModel.uiState.value, .ACCOUNTS)
+        XCTAssertEqual(viewModel.uiState.value, .CONTENT)
         XCTAssertNotNil(viewModel.accountsPolling)
         XCTAssertEqual(viewModel.errorMessage.value, true)
     }
@@ -151,7 +151,7 @@ class TransferViewModelTest: XCTestCase {
         XCTAssertNotNil(viewModel)
         XCTAssertNotNil(viewModel.uiState)
         XCTAssertNotNil(viewModel.currentQuote.value)
-        XCTAssertEqual(viewModel.modalUIState.value, TransferViewController.ModalViewState.CONFIRM)
+        XCTAssertEqual(viewModel.modalUIState.value, TransferView.ModalState.CONFIRM)
     }
 
     func test_createTransfer_Successfully() {
@@ -168,7 +168,7 @@ class TransferViewModelTest: XCTestCase {
         // -- Then
         XCTAssertNotNil(viewModel)
         XCTAssertNotNil(viewModel.uiState)
-        XCTAssertEqual(viewModel.modalUIState.value, TransferViewController.ModalViewState.DETAILS)
+        XCTAssertEqual(viewModel.modalUIState.value, TransferView.ModalState.DETAILS)
         XCTAssertNotNil(viewModel.currentTransfer.value)
     }
 
