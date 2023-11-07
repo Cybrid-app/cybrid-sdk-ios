@@ -8,10 +8,9 @@
 import LinkKit
 import CybridApiBankSwift
 
-class BankAccountsViewModel: NSObject {
+open class BankAccountsViewModel: NSObject {
 
     // MARK: Private properties
-    private unowned var cellProvider: BankAccountsViewProvider
     private var dataProvider: WorkflowProvider & ExternalBankAccountProvider & CustomersRepoProvider & BankProvider
     private var logger: CybridLogger?
 
@@ -27,17 +26,15 @@ class BankAccountsViewModel: NSObject {
     internal var accounts: [ExternalBankAccountBankModel] = []
 
     // MARK: Public properties
-    var uiState: Observable<BankAccountsViewController.BankAccountsViewState> = .init(.LOADING)
-    var modalState: Observable<BankAccountsViewController.BankAccountsModalViewState> = .init(.CONTENT)
+    var uiState: Observable<BankAccountsView.State> = .init(.LOADING)
+    var modalState: Observable<BankAccountsView.ModalState> = .init(.CONTENT)
     var latestWorkflow: WorkflowWithDetailsBankModel?
 
     // MARK: Constructor
     init(dataProvider: WorkflowProvider & ExternalBankAccountProvider & CustomersRepoProvider & BankProvider,
-         cellProvider: BankAccountsViewProvider,
          logger: CybridLogger?) {
 
         self.dataProvider = dataProvider
-        self.cellProvider = cellProvider
         self.logger = logger
     }
 
@@ -248,31 +245,5 @@ class BankAccountsViewModel: NSObject {
 
     func openBankAuthorization() {
         self.uiState.value = .AUTH
-    }
-}
-
-// MARK: - AccountsViewProvider
-
-protocol BankAccountsViewProvider: AnyObject {
-
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath, withAccount dataModel: ExternalBankAccountBankModel) -> UITableViewCell
-
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath, withAccount balance: ExternalBankAccountBankModel)
-}
-
-// MARK: - AccountsViewModel + UITableViewDelegate + UITableViewDataSource
-
-extension BankAccountsViewModel: UITableViewDelegate, UITableViewDataSource {
-
-    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        accounts.count
-    }
-
-    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        cellProvider.tableView(tableView, cellForRowAt: indexPath, withAccount: accounts[indexPath.row])
-    }
-
-    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        cellProvider.tableView(tableView, didSelectRowAt: indexPath, withAccount: accounts[indexPath.row])
     }
 }

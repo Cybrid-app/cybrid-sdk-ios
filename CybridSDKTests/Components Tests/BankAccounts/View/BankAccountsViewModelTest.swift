@@ -13,15 +13,14 @@ class BankAccountsViewModelTest: XCTestCase {
 
     lazy var dataProvider = ServiceProviderMock()
 
-    func createViewModel(cellProvider: BankAccountsViewProvider = BankAccountsMockViewProvider()) -> BankAccountsViewModel {
+    func createViewModel() -> BankAccountsViewModel {
         return BankAccountsViewModel(dataProvider: self.dataProvider,
-                                     cellProvider: cellProvider,
                                      logger: nil)
     }
 
     func test_init() {
 
-        let uiState: Observable<BankAccountsViewController.BankAccountsViewState> = .init(.LOADING)
+        let uiState: Observable<BankAccountsView.State> = .init(.LOADING)
         let viewModel = createViewModel()
 
         XCTAssertNotNil(viewModel)
@@ -275,76 +274,4 @@ class BankAccountsViewModelTest: XCTestCase {
         // -- Then
         XCTAssertEqual(viewModel.uiState.value, .AUTH)
     }
-
-    // MARK: TableView Delegation Test
-    func test_TableViewRows() {
-
-        // -- Given
-        let controller = BankAccountsViewController()
-        let tableView = controller.accountsTable
-        let viewModel = createViewModel(cellProvider: controller)
-
-        // -- When
-        dataProvider.fetchExternalBankAccountsSuccessfully()
-        viewModel.fetchExternalBankAccounts()
-        dataProvider.fetchExternalBankAccountsSuccessfully()
-        tableView.reloadData()
-
-        // Then
-        XCTAssertEqual(viewModel.tableView(tableView, numberOfRowsInSection: 0), 1)
-    }
-
-    func test_TableViewValidCell() {
-
-        // -- Given
-        let controller = BankAccountsViewController()
-        let tableView = controller.accountsTable
-        let viewModel = createViewModel(cellProvider: controller)
-        let indexPath = IndexPath(item: 0, section: 0)
-
-        // -- When
-        dataProvider.fetchExternalBankAccountsSuccessfully()
-        viewModel.fetchExternalBankAccounts()
-        dataProvider.fetchExternalBankAccountsSuccessfully()
-        tableView.reloadData()
-
-        // -- Then
-        XCTAssertTrue(viewModel.tableView(tableView, cellForRowAt: indexPath).isKind(of: BankAccountCell.self))
-    }
-
-    func test_TableView_didSelectRowAtIndex() throws {
-
-        // -- Given
-        let controller = BankAccountsViewController()
-        let tableView = controller.accountsTable
-        let viewModel = createViewModel(cellProvider: controller)
-        let indexPath = IndexPath(item: 0, section: 0)
-        let alertExpectation = XCTestExpectation(description: "testAlertShouldAppear")
-
-        // -- When
-        dataProvider.fetchExternalBankAccountsSuccessfully()
-        viewModel.fetchExternalBankAccounts()
-        dataProvider.fetchExternalBankAccountsSuccessfully()
-        tableView.reloadData()
-
-        viewModel.tableView(tableView, didSelectRowAt: indexPath)
-
-        // Then
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0, execute: {
-            XCTAssertNil(controller.presentingViewController)
-            XCTAssertNil(controller.presentedViewController)
-            XCTAssertNil(controller.navigationController)
-            alertExpectation.fulfill()
-        })
-        wait(for: [alertExpectation], timeout: 1.0)
-    }
-}
-
-class BankAccountsMockViewProvider: BankAccountsViewProvider {
-
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath, withAccount dataModel: ExternalBankAccountBankModel) -> UITableViewCell {
-        return UITableViewCell()
-    }
-
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath, withAccount balance: ExternalBankAccountBankModel) {}
 }

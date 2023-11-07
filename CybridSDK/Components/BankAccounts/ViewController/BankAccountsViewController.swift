@@ -1,16 +1,16 @@
 //
-//  IdentityVerificationViewController.swift
+//  BankAccountsViewController.swift
 //  CybridSDK
 //
-//  Created by Erick Sanchez Perez on 31/10/22.
+//  Created by Erick Sanchez Perez on 15/11/22.
 //
 
 import UIKit
 
-public final class IdentityVerificationViewController: UIViewController {
+public final class BankAccountsViewController: UIViewController {
 
     let componentContainer = UIView()
-    var identityView: IdentityView!
+    var bankAccountsView: BankAccountsView!
 
     public init() {
         super.init(nibName: nil, bundle: nil)
@@ -51,48 +51,15 @@ public final class IdentityVerificationViewController: UIViewController {
                                            attribute: .bottomMargin,
                                            constant: 5)
 
-        // -- AccountsViewModel
-        let identityVerificationViewModel = IdentityVerificationViewModel(
+        // -- BankAccountsViewModel
+        let bankAccountsViewModel = BankAccountsViewModel(
             dataProvider: CybridSession.current,
             logger: Cybrid.logger)
 
         // -- IdentityView
-        self.identityView = IdentityView()
-        self.identityView.embed(in: self.componentContainer)
-        self.identityView.parentController = self
-        self.identityView.initComponent(identityVerificationViewModel: identityVerificationViewModel)
-    }
-}
-
-extension IdentityVerificationViewController {
-
-    private func initComponentContent() {
-
-        let logo = UIImageView(image: UIImage(
-            named: "cybrid",
-            in: Bundle(for: Self.self),
-            with: nil
-        ))
-
-        self.view.addSubview(logo)
-        logo.constraint(attribute: .top,
-                        relatedBy: .equal,
-                        toItem: self.view,
-                        attribute: .topMargin,
-                        constant: 40)
-        logo.constraint(attribute: .centerX,
-                        relatedBy: .equal,
-                        toItem: self.view,
-                        attribute: .centerX)
-        logo.constraint(attribute: .height,
-                        relatedBy: .equal,
-                        toItem: nil,
-                        attribute: .notAnAttribute,
-                        constant: 30)
-        logo.constraint(attribute: .width,
-                        relatedBy: .equal,
-                        toItem: nil,
-                        attribute: .notAnAttribute,
-                        constant: 180)
+        self.bankAccountsView = BankAccountsView()
+        self.bankAccountsView.embed(in: self.componentContainer)
+        self.bankAccountsView.parentController = self
+        self.bankAccountsView.initComponent(bankAccountsViewModel: bankAccountsViewModel)
     }
 }
