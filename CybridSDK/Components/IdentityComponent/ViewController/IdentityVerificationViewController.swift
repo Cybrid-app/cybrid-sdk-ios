@@ -1,21 +1,21 @@
 //
-//  TransferViewController.swift
+//  IdentityVerificationViewController.swift
 //  CybridSDK
 //
-//  Created by Erick Sanchez Perez on 23/12/22.
+//  Created by Erick Sanchez Perez on 31/10/22.
 //
 
 import UIKit
 
-public final class TransferViewController: UIViewController {
+public final class IdentityVerificationViewController: UIViewController {
 
     let componentContainer = UIView()
-    var transferView: TransferView!
+    var identityView: IdentityView!
 
     public init() {
         super.init(nibName: nil, bundle: nil)
     }
-
+    
     @available(iOS, deprecated: 10, message: "You should never use this init method.")
     required init?(coder: NSCoder) {
         assertionFailure("init(coder:) should never be used")
@@ -51,15 +51,48 @@ public final class TransferViewController: UIViewController {
                                            attribute: .bottomMargin,
                                            constant: 5)
 
-        // -- TransferViewModel
-        let transferViewModel = TransferViewModel(
+        // -- AccountsViewModel
+        let identityVerificationViewModel = IdentityVerificationViewModel(
             dataProvider: CybridSession.current,
             logger: Cybrid.logger)
 
-        // -- TransferView
-        self.transferView = TransferView()
-        self.transferView.embed(in: self.componentContainer)
-        self.transferView.parentController = self
-        self.transferView.initComponent(transferViewModel: transferViewModel)
+        // -- IdentityView
+        self.identityView = IdentityView()
+        self.identityView.embed(in: self.componentContainer)
+        self.identityView.parentController = self
+        self.identityView.initComponent(identityVerificationViewModel: identityVerificationViewModel)
+    }
+}
+
+extension IdentityVerificationViewController {
+
+    private func initComponentContent() {
+
+        let logo = UIImageView(image: UIImage(
+            named: "cybrid",
+            in: Bundle(for: Self.self),
+            with: nil
+        ))
+
+        self.view.addSubview(logo)
+        logo.constraint(attribute: .top,
+                        relatedBy: .equal,
+                        toItem: self.view,
+                        attribute: .topMargin,
+                        constant: 40)
+        logo.constraint(attribute: .centerX,
+                        relatedBy: .equal,
+                        toItem: self.view,
+                        attribute: .centerX)
+        logo.constraint(attribute: .height,
+                        relatedBy: .equal,
+                        toItem: nil,
+                        attribute: .notAnAttribute,
+                        constant: 30)
+        logo.constraint(attribute: .width,
+                        relatedBy: .equal,
+                        toItem: nil,
+                        attribute: .notAnAttribute,
+                        constant: 180)
     }
 }

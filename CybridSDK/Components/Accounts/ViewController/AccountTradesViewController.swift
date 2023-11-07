@@ -30,12 +30,12 @@ public final class AccountTradesViewController: UIViewController {
         // -- Container
         self.view.backgroundColor = UIColor.white
 
-        // -- AccountsViewModel
+        // -- AccountTradesViewModel
         let accountTradesViewModel = AccountTradesViewModel(
             dataProvider: CybridSession.current,
             logger: Cybrid.logger)
 
-        // -- ExternalWallets View
+        // -- AccountTradesView
         self.accountTradesView = AccountTradesView()
         self.accountTradesView.embed(in: self.view)
         self.accountTradesView.parentController = self

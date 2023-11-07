@@ -59,7 +59,7 @@ public final class TradeViewController: UIViewController {
             logger: Cybrid.logger
         )
 
-        // -- ExternalWallets View
+        // -- TradeView
         self.tradeView = TradeView()
         self.tradeView.embed(in: self.componentContainer)
         self.tradeView.parentController = self

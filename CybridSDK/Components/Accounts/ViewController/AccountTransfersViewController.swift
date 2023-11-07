@@ -36,7 +36,7 @@ public final class AccountTransfersViewController: UIViewController {
             dataProvider: CybridSession.current,
             logger: Cybrid.logger)
 
-        // -- ExternalWallets View
+        // -- AccountTransfersView
         self.accountTransfersView = AccountTransfersView()
         self.accountTransfersView.embed(in: self.view)
         self.accountTransfersView.parentController = self

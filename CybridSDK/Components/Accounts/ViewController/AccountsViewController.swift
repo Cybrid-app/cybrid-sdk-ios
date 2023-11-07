@@ -51,15 +51,12 @@ public final class AccountsViewController: UIViewController {
                                            attribute: .bottomMargin,
                                            constant: 5)
 
-        // -- ExternalWallets View
-        self.accountsView = AccountsView()
-
         // -- AccountsViewModel
         let accountsViewModel = AccountsViewModel(
             dataProvider: CybridSession.current,
             logger: Cybrid.logger)
 
-        // -- ExternalWallets View
+        // -- AccountsView
         self.accountsView = AccountsView()
         self.accountsView.embed(in: self.componentContainer)
         self.accountsView.parentController = self
