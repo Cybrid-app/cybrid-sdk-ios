@@ -39,7 +39,7 @@ extension AccountsView: UITableViewDelegate, UITableViewDataSource {
         let balance = self.accountsViewModel.balances.value[indexPath.row]
         var controller = UIViewController()
         if balance.asset?.type == .crypto {
-            controller = AccountTradesViewController(balance: balance, accountsViewModel: accountsViewModel)
+            controller = AccountTradesViewController(balance: balance)
         } else {
             controller = AccountTransfersViewController(balance: balance)
         }

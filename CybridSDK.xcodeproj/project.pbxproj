@@ -270,6 +270,8 @@
 		A210D58E2AF9E9A500FBF4F4 /* AccountsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A210D58D2AF9E9A500FBF4F4 /* AccountsView.swift */; };
 		A210D5912AF9F54100FBF4F4 /* AccountsView_Loading.swift in Sources */ = {isa = PBXBuildFile; fileRef = A210D5902AF9F54100FBF4F4 /* AccountsView_Loading.swift */; };
 		A210D5932AF9F58B00FBF4F4 /* Accounts_Content.swift in Sources */ = {isa = PBXBuildFile; fileRef = A210D5922AF9F58B00FBF4F4 /* Accounts_Content.swift */; };
+		A210D5952AFA225E00FBF4F4 /* AccountTradesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A210D5942AFA225E00FBF4F4 /* AccountTradesView.swift */; };
+		A210D5972AFA243100FBF4F4 /* AccountTradesView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A210D5962AFA243100FBF4F4 /* AccountTradesView+Extensions.swift */; };
 		A21E047C2A86BB4D0046CCBA /* ViewUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = A21E047B2A86BB4D0046CCBA /* ViewUtils.swift */; };
 		A23FC5E92A944F5900129CE2 /* ExternalWalletViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23FC5E82A944F5900129CE2 /* ExternalWalletViewModel.swift */; };
 		A23FC5EB2A94508C00129CE2 /* ExternalWalletsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23FC5EA2A94508C00129CE2 /* ExternalWalletsViewController.swift */; };
@@ -654,6 +656,8 @@
 		A210D58D2AF9E9A500FBF4F4 /* AccountsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsView.swift; sourceTree = "<group>"; };
 		A210D5902AF9F54100FBF4F4 /* AccountsView_Loading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsView_Loading.swift; sourceTree = "<group>"; };
 		A210D5922AF9F58B00FBF4F4 /* Accounts_Content.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Accounts_Content.swift; sourceTree = "<group>"; };
+		A210D5942AFA225E00FBF4F4 /* AccountTradesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTradesView.swift; sourceTree = "<group>"; };
+		A210D5962AFA243100FBF4F4 /* AccountTradesView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AccountTradesView+Extensions.swift"; sourceTree = "<group>"; };
 		A21E047B2A86BB4D0046CCBA /* ViewUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewUtils.swift; sourceTree = "<group>"; };
 		A23FC5E82A944F5900129CE2 /* ExternalWalletViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExternalWalletViewModel.swift; sourceTree = "<group>"; };
 		A23FC5EA2A94508C00129CE2 /* ExternalWalletsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExternalWalletsViewController.swift; sourceTree = "<group>"; };
@@ -1547,9 +1551,9 @@
 				927233D728D243EC0080AAC4 /* Modal */,
 				927233DA28D2440C0080AAC4 /* Entity */,
 				927233DF28D2446E0080AAC4 /* View */,
-				927233D528D243DC0080AAC4 /* AccountTradesViewController.swift */,
 				9224F76A29DB9D6800712D3B /* AccountTransfersViewController.swift */,
 				A210D58D2AF9E9A500FBF4F4 /* AccountsView.swift */,
+				A210D5942AFA225E00FBF4F4 /* AccountTradesView.swift */,
 			);
 			path = Accounts;
 			sourceTree = "<group>";
@@ -2005,6 +2009,7 @@
 			isa = PBXGroup;
 			children = (
 				927233D328D243C60080AAC4 /* AccountsViewController.swift */,
+				927233D528D243DC0080AAC4 /* AccountTradesViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -2015,6 +2020,7 @@
 				92A2FD8329AE837200146D1E /* AccountsView+Extensions.swift */,
 				A210D5902AF9F54100FBF4F4 /* AccountsView_Loading.swift */,
 				A210D5922AF9F58B00FBF4F4 /* Accounts_Content.swift */,
+				A210D5962AFA243100FBF4F4 /* AccountTradesView+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -2721,6 +2727,7 @@
 				92F707C2298C204F005A93E5 /* TradeViewController.swift in Sources */,
 				9257E79929CA037E00846E12 /* TransferView+Extensions.swift in Sources */,
 				A2EA1FAC2AB98FFF008EF698 /* CryptoTransferViewController.swift in Sources */,
+				A210D5972AFA243100FBF4F4 /* AccountTradesView+Extensions.swift in Sources */,
 				A2A29F062A98697B0075C889 /* QRScannerViewController.swift in Sources */,
 				927233C228D1AAA20080AAC4 /* SymbolPriceBankModel+Extensions.swift in Sources */,
 				A210D5912AF9F54100FBF4F4 /* AccountsView_Loading.swift in Sources */,
@@ -2807,6 +2814,7 @@
 				A2A29F042A9865220075C889 /* ComponentEnum.swift in Sources */,
 				0BD66118286B79C500F4DA6B /* UIView+Constraints.swift in Sources */,
 				92827DAF294322AD00231772 /* BankBankModel+Extensions.swift in Sources */,
+				A210D5952AFA225E00FBF4F4 /* AccountTradesView.swift in Sources */,
 				A24B35992A67099C00EF20C5 /* DepositAddressBankModel+Extensions.swift in Sources */,
 				92C92C8B2911FC6C00B81719 /* CustomerBankModel+Extensions.swift in Sources */,
 				A2897C102AF2E89A00195031 /* TradeView.swift in Sources */,

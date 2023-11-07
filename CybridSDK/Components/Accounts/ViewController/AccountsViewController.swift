@@ -5,7 +5,6 @@
 //  Created by Erick Sanchez Perez on 19/08/22.
 //
 
-import Foundation
 import UIKit
 
 public final class AccountsViewController: UIViewController {

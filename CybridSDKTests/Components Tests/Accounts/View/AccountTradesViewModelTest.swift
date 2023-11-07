@@ -14,11 +14,10 @@ class AccountTradesViewModelTests: XCTestCase {
     lazy var dataProvider = ServiceProviderMock()
 
     func test_init() {
-
+        
+        Cybrid.assets = AssetListBankModel.mock.objects
         let viewModel = AccountTradesViewModel(
-            cellProvider: AccountTradesMockViewProvider(),
             dataProvider: self.dataProvider,
-            assets: AssetListBankModel.mock.objects,
             logger: nil)
 
         XCTAssertNotNil(viewModel)
@@ -28,10 +27,9 @@ class AccountTradesViewModelTests: XCTestCase {
     func test_getTrades_Successfully() {
 
         // -- Given
+        Cybrid.assets = AssetListBankModel.mock.objects
         let viewModel = AccountTradesViewModel(
-            cellProvider: AccountTradesMockViewProvider(),
             dataProvider: self.dataProvider,
-            assets: AssetListBankModel.mock.objects,
             logger: nil)
 
         // -- When
@@ -45,10 +43,9 @@ class AccountTradesViewModelTests: XCTestCase {
     func test_getTrades_Error() {
 
         // -- Given
+        Cybrid.assets = AssetListBankModel.mock.objects
         let viewModel = AccountTradesViewModel(
-            cellProvider: AccountTradesMockViewProvider(),
             dataProvider: self.dataProvider,
-            assets: AssetListBankModel.mock.objects,
             logger: nil)
 
         // -- When
@@ -62,10 +59,9 @@ class AccountTradesViewModelTests: XCTestCase {
     func test_buildModelList_Successfully() throws {
 
         // -- Given
+        Cybrid.assets = AssetListBankModel.mock.objects
         let viewModel = AccountTradesViewModel(
-            cellProvider: AccountTradesMockViewProvider(),
             dataProvider: self.dataProvider,
-            assets: AssetListBankModel.mock.objects,
             logger: nil)
 
         // -- When
@@ -79,10 +75,9 @@ class AccountTradesViewModelTests: XCTestCase {
     func test_buildModelList_Error() throws {
 
         // -- Given
+        Cybrid.assets = AssetListBankModel.mock.objects
         let viewModel = AccountTradesViewModel(
-            cellProvider: AccountTradesMockViewProvider(),
             dataProvider: self.dataProvider,
-            assets: AssetListBankModel.mock.objects,
             logger: nil)
 
         // -- When
@@ -96,10 +91,9 @@ class AccountTradesViewModelTests: XCTestCase {
     func test_createUIModelList_Nil() throws {
 
         // -- Given
+        Cybrid.assets = AssetListBankModel.mock.objects
         let viewModel = AccountTradesViewModel(
-            cellProvider: AccountTradesMockViewProvider(),
             dataProvider: self.dataProvider,
-            assets: AssetListBankModel.mock.objects,
             logger: nil)
 
         // -- When
@@ -115,138 +109,4 @@ class AccountTradesViewModelTests: XCTestCase {
         // -- Then
         XCTAssertEqual(list, [])
     }
-
-    // MARK: TableView Delegation Test
-
-    func test_TableViewRows() throws {
-
-        // -- Given
-        let balance = BalanceUIModel(
-            account: AccountListBankModel.mock.objects[0],
-            asset: AssetBankModel.bitcoin,
-            counterAsset: AssetBankModel.usd,
-            price: SymbolPriceBankModel.btcUSD1)
-        let accountsViewModel = AccountsViewModel(
-            dataProvider: self.dataProvider,
-            logger: nil)
-        let controller = AccountTradesViewController(
-            balance: balance,
-            accountsViewModel: accountsViewModel)
-        let tableView = controller.tradesTable
-        let viewModel = AccountTradesViewModel(
-            cellProvider: controller,
-            dataProvider: self.dataProvider,
-            assets: AssetListBankModel.mock.objects,
-            logger: nil)
-
-        // -- When
-        viewModel.getTrades(accountGuid: "")
-        dataProvider.didFetchTradesListSuccessfully()
-        tableView.reloadData()
-
-        // -- Then
-        XCTAssertEqual(viewModel.tableView(tableView, numberOfRowsInSection: 0), 1)
-    }
-
-    func test_TableViewHeader() throws {
-
-        // -- Given
-        let balance = BalanceUIModel(
-            account: AccountListBankModel.mock.objects[0],
-            asset: AssetBankModel.bitcoin,
-            counterAsset: AssetBankModel.usd,
-            price: SymbolPriceBankModel.btcUSD1)
-        let accountsViewModel = AccountsViewModel(
-            dataProvider: self.dataProvider,
-            logger: nil)
-        let controller = AccountTradesViewController(
-            balance: balance,
-            accountsViewModel: accountsViewModel)
-        let tableView = controller.tradesTable
-        let viewModel = AccountTradesViewModel(
-            cellProvider: controller,
-            dataProvider: self.dataProvider,
-            assets: AssetListBankModel.mock.objects,
-            logger: nil)
-
-        // -- When
-        viewModel.getTrades(accountGuid: "")
-        dataProvider.didFetchTradesListSuccessfully()
-        tableView.reloadData()
-        let headerView = viewModel.tableView(tableView, viewForHeaderInSection: 0)
-
-        // -- Then
-        XCTAssertNotNil(headerView)
-        XCTAssertTrue(headerView!.isKind(of: AccountTradesHeaderCell.self))
-    }
-
-    func test_TableViewValidCell() throws {
-
-        // -- Given
-        let balance = BalanceUIModel(
-            account: AccountListBankModel.mock.objects[0],
-            asset: AssetBankModel.bitcoin,
-            counterAsset: AssetBankModel.usd,
-            price: SymbolPriceBankModel.btcUSD1)
-        let accountsViewModel = AccountsViewModel(
-            dataProvider: self.dataProvider,
-            logger: nil)
-        let controller = AccountTradesViewController(
-            balance: balance,
-            accountsViewModel: accountsViewModel)
-        let tableView = controller.tradesTable
-        let viewModel = AccountTradesViewModel(
-            cellProvider: controller,
-            dataProvider: self.dataProvider,
-            assets: AssetListBankModel.mock.objects,
-            logger: nil)
-        let indexPath = IndexPath(item: 0, section: 0)
-
-        // -- When
-        viewModel.getTrades(accountGuid: "")
-        dataProvider.didFetchTradesListSuccessfully()
-        tableView.reloadData()
-
-        // -- Then
-        XCTAssertTrue(viewModel.tableView(tableView, cellForRowAt: indexPath).isKind(of: AccountTradesCell.self))
-
-    }
-
-    func test_TableView_didSelectRowAtIndex() throws {
-
-        // -- Given
-        let balance = BalanceUIModel(
-            account: AccountListBankModel.mock.objects[0],
-            asset: AssetBankModel.bitcoin,
-            counterAsset: AssetBankModel.usd,
-            price: SymbolPriceBankModel.btcUSD1)
-        let accountsViewModel = AccountsViewModel(
-            dataProvider: self.dataProvider,
-            logger: nil)
-        let controller = AccountTradesViewController(
-            balance: balance,
-            accountsViewModel: accountsViewModel)
-        let tableView = controller.tradesTable
-        let viewModel = AccountTradesViewModel(
-            cellProvider: controller,
-            dataProvider: self.dataProvider,
-            assets: AssetListBankModel.mock.objects,
-            logger: nil)
-        let indexPath = IndexPath(item: 0, section: 0)
-
-        // -- When
-        viewModel.getTrades(accountGuid: "")
-        dataProvider.didFetchTradesListSuccessfully()
-        tableView.reloadData()
-        viewModel.tableView(tableView, didSelectRowAt: indexPath)
-    }
-}
-
-class AccountTradesMockViewProvider: AccountTradesViewProvider {
-
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath, withData model: TradeUIModel) -> UITableViewCell {
-        return UITableViewCell()
-    }
-
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath, with trade: TradeUIModel) {}
 }

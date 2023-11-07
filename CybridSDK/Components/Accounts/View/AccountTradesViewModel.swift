@@ -8,28 +8,23 @@
 import Foundation
 import CybridApiBankSwift
 
-class AccountTradesViewModel: NSObject {
+open class AccountTradesViewModel: NSObject {
 
     // MARK: Observed properties
     internal var trades: Observable<[TradeUIModel]> = .init([])
 
     // MARK: Private properties
-    private unowned var cellProvider: AccountTradesViewProvider
     private var dataProvider: TradesRepoProvider
     private var logger: CybridLogger?
 
-    internal var assets: [AssetBankModel]
+    internal let assets = Cybrid.assets
     internal var tradesList: [TradeBankModel] = []
     internal var currentAccountGUID: String = ""
 
-    init(cellProvider: AccountTradesViewProvider,
-         dataProvider: TradesRepoProvider,
-         assets: [AssetBankModel],
+    init(dataProvider: TradesRepoProvider,
          logger: CybridLogger?) {
 
-        self.cellProvider = cellProvider
         self.dataProvider = dataProvider
-        self.assets = assets
         self.logger = logger
     }
 
@@ -81,35 +76,5 @@ class AccountTradesViewModel: NSObject {
                 counterAsset: counterAsset,
                 accountGuid: accountGuid)
         }
-    }
-}
-
-// MARK: - TradesViewProvider
-
-protocol AccountTradesViewProvider: AnyObject {
-
-  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath, withData model: TradeUIModel) -> UITableViewCell
-
-  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath, with trade: TradeUIModel)
-}
-
-// MARK: - TradesViewModel + UITableViewDelegate + UITableViewDataSource
-
-extension AccountTradesViewModel: UITableViewDelegate, UITableViewDataSource {
-
-    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        trades.value.count
-    }
-
-    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        cellProvider.tableView(tableView, cellForRowAt: indexPath, withData: trades.value[indexPath.row])
-    }
-
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        return AccountTradesHeaderCell()
-    }
-
-    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        cellProvider.tableView(tableView, didSelectRowAt: indexPath, with: trades.value[indexPath.row])
     }
 }
