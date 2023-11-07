@@ -8,24 +8,21 @@
 import Foundation
 import CybridApiBankSwift
 
-class AccountTransfersViewModel: NSObject {
+open class AccountTransfersViewModel: NSObject {
 
     // MARK: Observed properties
     internal var tranfers: Observable<[TransferBankModel]> = .init([])
 
     // MARK: Private properties
-    private unowned var cellProvider: AccountTransfersViewProvider
     private var dataProvider: TransfersRepoProvider
     private var logger: CybridLogger?
 
     internal var assets = Cybrid.assets
     internal var currentAccountGUID: String = ""
 
-    init(cellProvider: AccountTransfersViewProvider,
-         dataProvider: TransfersRepoProvider,
+    init(dataProvider: TransfersRepoProvider,
          logger: CybridLogger?) {
 
-        self.cellProvider = cellProvider
         self.dataProvider = dataProvider
         self.logger = logger
     }
@@ -69,35 +66,5 @@ class AccountTransfersViewModel: NSObject {
         // swiftlint:disable:next force_try
         let asset = try! Cybrid.findAsset(code: transfer.asset!)
         return AssetFormatter.format(asset, amount: amountFormatted)
-    }
-}
-
-// MARK: - AccountTransfersViewProvider
-
-protocol AccountTransfersViewProvider: AnyObject {
-
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath, withData model: TransferBankModel) -> UITableViewCell
-
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath, with transfer: TransferBankModel)
-}
-
-// MARK: - AccountTransfersViewModel + UITableViewDelegate + UITableViewDataSource
-
-extension AccountTransfersViewModel: UITableViewDelegate, UITableViewDataSource {
-
-    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        self.tranfers.value.count
-    }
-
-    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        cellProvider.tableView(tableView, cellForRowAt: indexPath, withData: self.tranfers.value[indexPath.row])
-    }
-
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        return AccountTransfersHeaderCell()
-    }
-
-    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        cellProvider.tableView(tableView, didSelectRowAt: indexPath, with: self.tranfers.value[indexPath.row])
     }
 }

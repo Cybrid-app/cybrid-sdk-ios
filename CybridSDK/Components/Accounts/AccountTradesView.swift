@@ -8,13 +8,13 @@
 import UIKit
 
 public final class AccountTradesView: Component {
-    
+
     internal var balance: BalanceUIModel!
     internal var accountTradesViewModel: AccountTradesViewModel!
-    
+
     internal var theme: Theme!
     internal var localizer: Localizer!
-    
+
     // -- Views
     var balanceAssetIcon: URLImageView!
     var balanceAssetName: UILabel!

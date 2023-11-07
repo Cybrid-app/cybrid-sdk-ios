@@ -28,7 +28,7 @@ open class AccountTradesViewModel: NSObject {
         self.logger = logger
     }
 
-    func getTrades(accountGuid: String) {
+    internal func getTrades(accountGuid: String) {
 
         self.currentAccountGUID = accountGuid
         dataProvider.fetchTrades(accountGuid: accountGuid) { [weak self] tradesResult in

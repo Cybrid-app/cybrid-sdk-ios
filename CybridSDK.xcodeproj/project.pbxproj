@@ -269,9 +269,11 @@
 		A210D58B2AF9D48600FBF4F4 /* TransferView_Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = A210D58A2AF9D48600FBF4F4 /* TransferView_Error.swift */; };
 		A210D58E2AF9E9A500FBF4F4 /* AccountsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A210D58D2AF9E9A500FBF4F4 /* AccountsView.swift */; };
 		A210D5912AF9F54100FBF4F4 /* AccountsView_Loading.swift in Sources */ = {isa = PBXBuildFile; fileRef = A210D5902AF9F54100FBF4F4 /* AccountsView_Loading.swift */; };
-		A210D5932AF9F58B00FBF4F4 /* Accounts_Content.swift in Sources */ = {isa = PBXBuildFile; fileRef = A210D5922AF9F58B00FBF4F4 /* Accounts_Content.swift */; };
+		A210D5932AF9F58B00FBF4F4 /* AccountsView_Content.swift in Sources */ = {isa = PBXBuildFile; fileRef = A210D5922AF9F58B00FBF4F4 /* AccountsView_Content.swift */; };
 		A210D5952AFA225E00FBF4F4 /* AccountTradesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A210D5942AFA225E00FBF4F4 /* AccountTradesView.swift */; };
 		A210D5972AFA243100FBF4F4 /* AccountTradesView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A210D5962AFA243100FBF4F4 /* AccountTradesView+Extensions.swift */; };
+		A210D5992AFA29DC00FBF4F4 /* AccountTransfersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A210D5982AFA29DC00FBF4F4 /* AccountTransfersView.swift */; };
+		A210D59B2AFA2AE000FBF4F4 /* AccountTransfersView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A210D59A2AFA2AE000FBF4F4 /* AccountTransfersView+Extensions.swift */; };
 		A21E047C2A86BB4D0046CCBA /* ViewUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = A21E047B2A86BB4D0046CCBA /* ViewUtils.swift */; };
 		A23FC5E92A944F5900129CE2 /* ExternalWalletViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23FC5E82A944F5900129CE2 /* ExternalWalletViewModel.swift */; };
 		A23FC5EB2A94508C00129CE2 /* ExternalWalletsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23FC5EA2A94508C00129CE2 /* ExternalWalletsViewController.swift */; };
@@ -655,9 +657,11 @@
 		A210D58A2AF9D48600FBF4F4 /* TransferView_Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferView_Error.swift; sourceTree = "<group>"; };
 		A210D58D2AF9E9A500FBF4F4 /* AccountsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsView.swift; sourceTree = "<group>"; };
 		A210D5902AF9F54100FBF4F4 /* AccountsView_Loading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsView_Loading.swift; sourceTree = "<group>"; };
-		A210D5922AF9F58B00FBF4F4 /* Accounts_Content.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Accounts_Content.swift; sourceTree = "<group>"; };
+		A210D5922AF9F58B00FBF4F4 /* AccountsView_Content.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsView_Content.swift; sourceTree = "<group>"; };
 		A210D5942AFA225E00FBF4F4 /* AccountTradesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTradesView.swift; sourceTree = "<group>"; };
 		A210D5962AFA243100FBF4F4 /* AccountTradesView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AccountTradesView+Extensions.swift"; sourceTree = "<group>"; };
+		A210D5982AFA29DC00FBF4F4 /* AccountTransfersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTransfersView.swift; sourceTree = "<group>"; };
+		A210D59A2AFA2AE000FBF4F4 /* AccountTransfersView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AccountTransfersView+Extensions.swift"; sourceTree = "<group>"; };
 		A21E047B2A86BB4D0046CCBA /* ViewUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewUtils.swift; sourceTree = "<group>"; };
 		A23FC5E82A944F5900129CE2 /* ExternalWalletViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExternalWalletViewModel.swift; sourceTree = "<group>"; };
 		A23FC5EA2A94508C00129CE2 /* ExternalWalletsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExternalWalletsViewController.swift; sourceTree = "<group>"; };
@@ -1551,9 +1555,9 @@
 				927233D728D243EC0080AAC4 /* Modal */,
 				927233DA28D2440C0080AAC4 /* Entity */,
 				927233DF28D2446E0080AAC4 /* View */,
-				9224F76A29DB9D6800712D3B /* AccountTransfersViewController.swift */,
 				A210D58D2AF9E9A500FBF4F4 /* AccountsView.swift */,
 				A210D5942AFA225E00FBF4F4 /* AccountTradesView.swift */,
+				A210D5982AFA29DC00FBF4F4 /* AccountTransfersView.swift */,
 			);
 			path = Accounts;
 			sourceTree = "<group>";
@@ -2010,6 +2014,7 @@
 			children = (
 				927233D328D243C60080AAC4 /* AccountsViewController.swift */,
 				927233D528D243DC0080AAC4 /* AccountTradesViewController.swift */,
+				9224F76A29DB9D6800712D3B /* AccountTransfersViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -2019,8 +2024,9 @@
 			children = (
 				92A2FD8329AE837200146D1E /* AccountsView+Extensions.swift */,
 				A210D5902AF9F54100FBF4F4 /* AccountsView_Loading.swift */,
-				A210D5922AF9F58B00FBF4F4 /* Accounts_Content.swift */,
+				A210D5922AF9F58B00FBF4F4 /* AccountsView_Content.swift */,
 				A210D5962AFA243100FBF4F4 /* AccountTradesView+Extensions.swift */,
+				A210D59A2AFA2AE000FBF4F4 /* AccountTransfersView+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -2723,6 +2729,7 @@
 				0B2899E0288E4860001B3360 /* AuthenticatedServiceProvider.swift in Sources */,
 				928A2CE62A16749F005D0E3A /* AccountTransferModal.swift in Sources */,
 				92827DAD294320EC00231772 /* BankRepository.swift in Sources */,
+				A210D59B2AFA2AE000FBF4F4 /* AccountTransfersView+Extensions.swift in Sources */,
 				927233E628D244AC0080AAC4 /* AccountsHeaderCell.swift in Sources */,
 				92F707C2298C204F005A93E5 /* TradeViewController.swift in Sources */,
 				9257E79929CA037E00846E12 /* TransferView+Extensions.swift in Sources */,
@@ -2741,7 +2748,7 @@
 				927233CD28D2419B0080AAC4 /* QuoteBankModel+Extensions.swift in Sources */,
 				A23FC5E92A944F5900129CE2 /* ExternalWalletViewModel.swift in Sources */,
 				A206291F2ABA037200B71A5B /* AccountPicker.swift in Sources */,
-				A210D5932AF9F58B00FBF4F4 /* Accounts_Content.swift in Sources */,
+				A210D5932AF9F58B00FBF4F4 /* AccountsView_Content.swift in Sources */,
 				92A2FD8429AE837200146D1E /* AccountsView+Extensions.swift in Sources */,
 				92635470294CEC0400660E0B /* BankAccountsViewController+Extensions.swift in Sources */,
 				92663D0F293FD60800842E30 /* WorkflowRepository.swift in Sources */,
@@ -2795,6 +2802,7 @@
 				0B2B2A8528629031002F0EC1 /* UIColor+Extensions.swift in Sources */,
 				A210D5872AF9D34500FBF4F4 /* TransferView_Content.swift in Sources */,
 				0B2B2A872862906E002F0EC1 /* UILabel+Extensions.swift in Sources */,
+				A210D5992AFA29DC00FBF4F4 /* AccountTransfersView.swift in Sources */,
 				9224F76529DB61E000712D3B /* AccountTransfersHeaderCell.swift in Sources */,
 				A23FC5ED2A94588600129CE2 /* ExternalWalletsView+Extensions.swift in Sources */,
 				0B2B2A6D28621D5C002F0EC1 /* ColorTheme.swift in Sources */,
