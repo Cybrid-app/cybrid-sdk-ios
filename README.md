@@ -23,10 +23,33 @@ Table of contents
          * [ListPricesItemDelegate](#list-prices-item-delegate)
          * [Preview](#preview)
       * [Trade](#trade)
+         * [TradeViewModel](#trade-view-model)
+         * [Preview](#preview)
+      * [Transfer](#transfer)
+         * [TransferViewModel](#transfer-view-model)
          * [Preview](#preview)
       * [Accounts](#accounts)
-         * [Trades Sub Component](#trades-sub-component) 
+         * [AccountsViewModel](#accounts-view-model)
          * [Preview](#preview)
+         * [AccountTrades](#account-trades)
+            * [AccountTradesViewModel](#account-trades-view-model) 
+            * [Permissions](#permissions) 
+      * [Identity](#identity)
+         * [IdentityVerificationViewModel](#identity-verification-view-model)
+         * [Permissions](#permissions)
+      * [BankAccounts](#bank-accounts)
+         * [BankAccountsViewModel](#bank-accounts-view-model)
+         * [Preview](#preview)
+       * [DepositAddress](#deposit-address)
+         * [DepositAddressViewModel](#deposit-address-view-model)
+         * [Preview](#preview)
+       * [ExternalWallets](#external-wallets)
+         * [ExternalWalletsViewModel](#external-wallets-view-model)
+         * [Permissions](#permissions)
+         * [Preview](#preview)
+       * [CryptoTransfer](#crypto-transfer)
+         * [CryptoTransferViewModel](#crypto-transfer-view-model)
+         * [Preview](#preview) 
     * [Demo App](#demo-app) 
 
 <!--te-->
@@ -219,7 +242,73 @@ To use this component, you can do so in the following ways:
 
 1. TradeVIewController
 
-To use this component, you simply need to create an instance of `TradeViewController` and display it.
+To use the component as UIVIewController, you simply need to create an instance of `TradeViewController` and display it.
+
+```swift
+let tradeViewController = TradeViewController()
+```
+
+2. TradeView
+
+To use the component as UIView, you simply need to create the view and pass the [TradeViewModel](#trade-view-model) instance.
+
+```swift
+let tradeView = TradeView()
+tradeView.parentController = self
+tradeView.initComponent(tradeViewModel: tradeViewModel)
+```
+
+#### TradeViewModel
+
+The TradeViewModel helps manage how the view interacts with Cybrid services and manipulates the view based on certain inputs. Creating it is as straightforward as this:
+
+```swift
+let tradeViewModel = TradeViewModel(
+    dataProvider: CybridSession.current,
+    logger: Cybrid.logger
+)
+```
+
+#### Preview
+
+<p align="center">
+  <img src="https://github.com/Cybrid-app/cybrid-sdk-ios/assets/7268597/b91ee833-8d57-40f2-9de3-aff62fcd98d1">
+</p>
+
+### Transfer
+
+The TransferComponent allows you to make a deposit from a connected bank account or make a withdrawal to a connected bank account, the component also shows the available balance in the configured fiat account.
+
+To use this component, you can do so in the following ways:
+
+1. TransferViewController
+
+To use this component, you simply need to create an instance of `AccountsViewController` and display it.
+
+```swift
+let transferViewController = TransferViewController()
+```
+
+2. TransferView
+
+To use the component as UIView, you simply need to create the view and pass the [TransferViewModel](#transfer-view-model) instance.
+
+```swift
+let transferView = TransferView()
+transferView.parentController = self
+transferView.initComponent(transferViewModel: transferViewModel)
+```
+
+#### TransferViewModel
+
+The TransferViewModel helps manage how the view interacts with Cybrid services and manipulates the view based on certain inputs. Creating it is as straightforward as this:
+
+```swift
+let transferViewModel = TransferViewModel(
+    dataProvider: CybridSession.current,
+    logger: Cybrid.logger
+)
+```
 
 #### Preview
 
@@ -239,20 +328,347 @@ To use this component, you can do so in the following ways:
 
 To use this component, you simply need to create an instance of `AccountsViewController` and display it.
 
-#### Trades Sub Component
+```swift
+let accountsViewController = AccountsViewController()
+```
 
-The Trades Component is a part of the Accounts Component package, allowing you to view the trades for a cryptocurrency asset account. You can use it without the need to use the Account Component.
+2. AccountsView
+
+To use the component as UIView, you simply need to create the view and pass the [AccountsViewModel](#accounts-view-model) instance.
+
+```swift
+let accountsView = AccountsView()
+accountsView.parentController = self
+accountsView.initComponent(accountsViewModel: accountsViewModel)
+```
+
+#### AccountsViewModel
+
+The AccountsVieWModel helps manage how the view interacts with Cybrid services and manipulates the view based on certain inputs. Creating it is as straightforward as this:
+
+```swift
+let accountsViewModel = AccountsViewModel(
+    dataProvider: CybridSession.current,
+    logger: Cybrid.logger
+)
+```
+
+#### Preview
+
+<div align="center">
+  <video src="https://github.com/Cybrid-app/cybrid-sdk-ios/assets/7268597/4b4765b0-7684-45eb-ab22-0b4bbd3bdad3" controls />
+</div>
+
+#### AccountTrades
+
+The AccountTrades component allows you to view a crypto account and its specific details, such as its balance in the account and its real-time balance in the configured fiat account, in addition to a list of recent trades, whether purchase or sale, each with detail and the possibility of clicking and being able to see even more detail.
 
 To use this component, you can do so in the following ways:
 
-1. AccountTradesViewCotroller
+1. AccountTradesViewController
 
 To use this component, you simply need to create an instance of `AccountTradesViewController` and add this to the constructor:
 
 | Argument      | Descrption          | Default    |
 | ------------- |:-------------------:|:----------:|
 | balance    | BalaceUIModel | |
-| accountViewModel    | AccountsViewModel | |
+
+```swift
+let accountTradesViewController = AccountTradesViewController(balance: BalaceUIModel)
+```
+
+2. AccountTradesView
+
+To use the component as UIView, you simply need to create the view and pass the [AccountTradesViewModel](#account-trades-view-model) instance.
+
+```swift
+let accountTradesView = AccountTradesView()
+accountTradesView.parentController = self
+accountTradesView.initComponent(balance: BalaceUIModel, accountsViewModel: accountsViewModel)
+```
+
+##### AccountTradesViewModel
+
+The AccountsVieWModel helps manage how the view interacts with Cybrid services and manipulates the view based on certain inputs. Creating it is as straightforward as this:
+
+```swift
+let accountTradesViewModel = AccountTradesViewModel(
+    dataProvider: CybridSession.current,
+    logger: Cybrid.logger
+)
+```
+
+##### Preview
+
+<div align="center">
+  <video src="https://github.com/Cybrid-app/cybrid-sdk-ios/assets/7268597/4b4765b0-7684-45eb-ab22-0b4bbd3bdad3" controls />
+</div>
+
+#### AccountTransfers
+
+The AccountTrades component allows you to view a fiat account and its specific details, such as its balance in the account and pending balance, in addition to a list of recent transfers, whether withdraw or deposit, each with detail and the possibility of clicking and being able to see even more detail.
+
+To use this component, you can do so in the following ways:
+
+1. AccountTransfersViewController
+
+To use this component, you simply need to create an instance of `AccountTransfersViewController` and add this to the constructor:
+
+| Argument      | Descrption          | Default    |
+| ------------- |:-------------------:|:----------:|
+| balance    | BalaceUIModel | |
+
+```swift
+let accountTransfersViewController = AccountTransfersViewController(balance: BalaceUIModel)
+```
+
+2. AccountTransfersView
+
+To use the component as UIView, you simply need to create the view and pass the [AccountTransfersViewModel](#account-transfers-view-model) instance.
+
+```swift
+let accountTransfersView = AccountTransfersView()
+accountTransfersView.parentController = self
+accountTransfersView.initComponent(balance: BalaceUIModel, accountTransfersViewModel: AccountTransfersViewModel)
+```
+
+##### AccountTransfersViewModel
+
+The AccountTransfersViewModel helps manage how the view interacts with Cybrid services and manipulates the view based on certain inputs. Creating it is as straightforward as this:
+
+```swift
+let accountTransfersViewModel = AccountTransfersViewModel(
+    dataProvider: CybridSession.current,
+    logger: Cybrid.logger
+)
+```
+
+##### Preview
+
+<div align="center">
+  <video src="https://github.com/Cybrid-app/cybrid-sdk-ios/assets/7268597/4b4765b0-7684-45eb-ab22-0b4bbd3bdad3" controls />
+</div>
+
+### Identity
+
+The Identity component allows you to carry out a KYC (Know Your Client) process through the [Persona](https://withpersona.com/) platform; The component checks if the customer already has the process completed and verified, otherwise it will show the status of the verification whether it is in process, an error, or the verification needs to be carried out for the first time.
+
+To use this component, you can do so in the following ways:
+
+1. IdentityVerificationViewController
+
+To use this component, you simply need to create an instance of `IdentityVerificationViewController` and display it.
+
+```swift
+let identityVerificationViewController = IdentityVerificationViewController()
+```
+
+2. IdentityView
+
+To use the component as UIView, you simply need to create the view and pass the [IdentityVerificationViewModel](#identity-verificacion-view-model) instance.
+
+```swift
+let identityView = IdentityView()
+identityView.parentController = self
+identityView.initComponent(identityVerificationViewModel: identityVerificationViewModel)
+```
+
+#### IdentityVerificationViewModel
+
+The IdentityVerificationViewModel helps manage how the view interacts with Cybrid services and manipulates the view based on certain inputs. Creating it is as straightforward as this:
+
+```swift
+let identityVerificationViewModel = IdentityVerificationViewModel(
+    dataProvider: CybridSession.current,
+    logger: Cybrid.logger
+)
+```
+
+#### Permissions
+
+This component requires two permissions to be configured in the project plist to be able to open the camera.
+
+| Key      | Type          | Value    |
+| ------------- |:-------------------:|:----------:|
+| Privacy - Camera Usage Description | String | In app permission request String |
+| Privacy - Photo Library Usage Description | String | In app permission request String |
+
+### BankAccounts
+
+This component currently only allows you to see the connected bank accounts and a bit of detail about them with the possibility of disconnecting (deleting) the customer
+
+To use this component, you can do so in the following ways:
+
+1. BankAccountsViewController
+
+To use this component, you simply need to create an instance of `BankAccountsViewController` and display it.
+
+```swift
+let bankAccountsViewController = BankAccountsViewController()
+```
+
+2. BankAccountsView
+
+To use the component as UIView, you simply need to create the view and pass the [BankAccountsViewModel](#bank-accounts-view-model) instance.
+
+```swift
+let bankAccountsView = BankAccountsView()
+bankAccountsView.parentController = self
+bankAccountsView.initComponent(bankAccountsViewModel: BankAccountsViewModel)
+```
+
+#### BankAccountsViewModel
+
+The BankAccountsViewModel helps manage how the view interacts with Cybrid services and manipulates the view based on certain inputs. Creating it is as straightforward as this:
+
+```swift
+let bankAccountsViewModel = BankAccountsViewModel(
+    dataProvider: CybridSession.current,
+    logger: Cybrid.logger
+)
+```
+
+#### Preview
+
+<div align="center">
+  <video src="https://github.com/Cybrid-app/cybrid-sdk-ios/assets/7268597/4b4765b0-7684-45eb-ab22-0b4bbd3bdad3" controls />
+</div>
+
+### DepositAddress
+
+This component allows you to create a deposit addres of a trading type account by showing you a QR code with the supported network, the address (with the option to copy with a button) and also create a payment code that will allow you to add a message and the amount payment.
+
+At the moment the only trading accounts accepted are:
+
+- BTC
+- ETH
+- BCH
+- LTC
+- USDC
+- USDC_POL
+- USDC_STE
+
+To use this component, you can do so in the following ways:
+
+1. DepositAddressViewController
+
+To use this component, you simply need to create an instance of `DepositAddressViewController` and display it.
+
+```swift
+let depositAddressViewController = DepositAddressViewController()
+```
+
+2. DepositAddressView
+
+To use the component as UIView, you simply need to create the view and pass the [DepositAddressViewModel](#deposit-address-view-model) instance.
+
+```swift
+let depositAddressView = DepositAddressView()
+depositAddressView.parentController = self
+depositAddressView.initComponent(depositAddressViewModel: DepositAddressViewModel)
+```
+
+#### DepositAddressViewModel
+
+The DepositAddressViewModel helps manage how the view interacts with Cybrid services and manipulates the view based on certain inputs. Creating it is as straightforward as this:
+
+```swift
+let depositAddressViewModel = DepositAddressViewModel(
+    dataProvider: CybridSession.current,
+    logger: Cybrid.logger
+)
+```
+
+#### Preview
+
+<div align="center">
+  <video src="https://github.com/Cybrid-app/cybrid-sdk-ios/assets/7268597/4b4765b0-7684-45eb-ab22-0b4bbd3bdad3" controls />
+</div>
+
+### ExternalWallets
+
+This component allows you to see the wallets that have been added to the account, be able to see the details of each one such as the custom name that has been given, the address, tag (if it has one) and the last transfers with a little of detail; It will also allow you to add a wallet only with the custom name, address (with a button to scan QR codes for addresses), tag (if it has one).
+
+To use this component, you can do so in the following ways:
+
+1. ExternalWalletsViewController
+
+To use this component, you simply need to create an instance of `ExternalWalletsViewController` and display it.
+
+```swift
+let externalWalletsViewController = ExternalWalletsViewController()
+```
+
+2. ExternalWalletsView
+
+To use the component as UIView, you simply need to create the view and pass the [ExternalWalletsViewModel](#external-wallets-view-model) instance.
+
+```swift
+let externalWalletsView = ExternalWalletsView()
+externalWalletsView.parentController = self
+externalWalletsView.initComponent(externalWalletsViewModel: ExternalWalletsViewModel)
+```
+
+#### ExternalWalletsViewModel
+
+The ExternalWalletsViewModel helps manage how the view interacts with Cybrid services and manipulates the view based on certain inputs. Creating it is as straightforward as this:
+
+```swift
+let externalWalletsViewModel = ExternalWalletsViewModel(
+    dataProvider: CybridSession.current,
+    logger: Cybrid.logger
+)
+```
+
+#### Permissions
+
+This component requires two permissions to be configured in the project plist to be able to open the camera.
+
+| Key      | Type          | Value    |
+| ------------- |:-------------------:|:----------:|
+| Privacy - Camera Usage Description | String | In app permission request String |
+| Privacy - Photo Library Usage Description | String | In app permission request String |
+
+#### Preview
+
+<div align="center">
+  <video src="https://github.com/Cybrid-app/cybrid-sdk-ios/assets/7268597/4b4765b0-7684-45eb-ab22-0b4bbd3bdad3" controls />
+</div>
+
+### CryptoTransfer
+
+This component allows you to make a withdrawal to one of your portfolios previously added to the customer's account, allowing you to choose the trading asset to make the withdrawal; It will always show the customer a notice to confirm the withdrawal with more information and the commissions that are generated when making the transfer.
+
+To use this component, you can do so in the following ways:
+
+1. CryptoTransferViewController
+
+To use this component, you simply need to create an instance of `CryptoTransferViewController` and display it.
+
+```swift
+let cryptoTransferViewController = CryptoTransferViewController()
+```
+
+2. CryptoTransferView
+
+To use the component as UIView, you simply need to create the view and pass the [CryptoTransferViewModel](#crypto-transfer-view-model) instance.
+
+```swift
+let cryptoTransferView = CryptoTransferView()
+cryptoTransferView.parentController = self
+cryptoTransferView.initComponent(cryptoTransferViewModel: CryptoTransferViewModel)
+```
+
+#### CryptoTransferViewModel
+
+The CryptoTransferViewModel helps manage how the view interacts with Cybrid services and manipulates the view based on certain inputs. Creating it is as straightforward as this:
+
+```swift
+let cryptoTransferViewModel = CryptoTransferViewModel(
+    dataProvider: CybridSession.current,
+    logger: Cybrid.logger
+)
+```
 
 #### Preview
 
