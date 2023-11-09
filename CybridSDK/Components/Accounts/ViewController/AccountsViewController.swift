@@ -1,17 +1,16 @@
 //
-//  TradeViewController.swift
+//  AccountsViewController.swift
 //  CybridSDK
 //
-//  Created by Erick Sanchez Perez on 30/01/23.
+//  Created by Erick Sanchez Perez on 19/08/22.
 //
 
-import Foundation
 import UIKit
 
-public final class TradeViewController: UIViewController {
+public final class AccountsViewController: UIViewController {
 
     let componentContainer = UIView()
-    var tradeView: TradeView!
+    var accountsView: AccountsView!
 
     public init() {
         super.init(nibName: nil, bundle: nil)
@@ -19,9 +18,8 @@ public final class TradeViewController: UIViewController {
 
     @available(iOS, deprecated: 10, message: "You should never use this init method.")
     required init?(coder: NSCoder) {
-
-      assertionFailure("init(coder:) should never be used")
-      return nil
+        assertionFailure("init(coder:) should never be used")
+        return nil
     }
 
     override public func viewDidLoad() {
@@ -53,16 +51,21 @@ public final class TradeViewController: UIViewController {
                                            attribute: .bottomMargin,
                                            constant: 5)
 
-        // -- TradeViewModel
-        let tradeViewModel = TradeViewModel(
+        // -- AccountsViewModel
+        let accountsViewModel = AccountsViewModel(
             dataProvider: CybridSession.current,
-            logger: Cybrid.logger
-        )
+            logger: Cybrid.logger)
 
-        // -- TradeView
-        self.tradeView = TradeView()
-        self.tradeView.embed(in: self.componentContainer)
-        self.tradeView.parentController = self
-        self.tradeView.initComponent(tradeViewModel: tradeViewModel)
+        // -- AccountsView
+        self.accountsView = AccountsView()
+        self.accountsView.embed(in: self.componentContainer)
+        self.accountsView.parentController = self
+        self.accountsView.initComponent(accountsViewModel: accountsViewModel)
+    }
+
+    override public func viewWillDisappear(_ animated: Bool) {
+
+        super.viewWillDisappear(animated)
+        self.accountsView.accountsViewModel.pricesPolling?.stop()
     }
 }

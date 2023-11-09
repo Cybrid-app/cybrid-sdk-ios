@@ -9,7 +9,7 @@ import Foundation
 import CybridApiBankSwift
 import Persona2
 
-class IdentityVerificationViewModel: NSObject {
+open class IdentityVerificationViewModel: NSObject {
 
     // MARK: Private properties
     private var dataProvider: CustomersRepoProvider & IdentityVerificationRepoProvider
@@ -21,16 +21,14 @@ class IdentityVerificationViewModel: NSObject {
     internal var customerGuid = Cybrid.customerGuid
 
     // MARK: Public properties
-    var uiState: Observable<IdentityVerificationViewController.KYCViewState> = .init(.LOADING)
+    var uiState: Observable<IdentityView.State> = .init(.LOADING)
     var latestIdentityVerification: IdentityVerificationWrapper?
 
     // MARK: Constructor
     init(dataProvider: CustomersRepoProvider & IdentityVerificationRepoProvider,
-         uiState: Observable<IdentityVerificationViewController.KYCViewState>,
          logger: CybridLogger?) {
 
         self.dataProvider = dataProvider
-        self.uiState = uiState
         self.logger = logger
     }
 

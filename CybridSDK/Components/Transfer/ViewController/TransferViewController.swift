@@ -1,17 +1,16 @@
 //
-//  TradeViewController.swift
+//  TransferViewController.swift
 //  CybridSDK
 //
-//  Created by Erick Sanchez Perez on 30/01/23.
+//  Created by Erick Sanchez Perez on 23/12/22.
 //
 
-import Foundation
 import UIKit
 
-public final class TradeViewController: UIViewController {
+public final class TransferViewController: UIViewController {
 
     let componentContainer = UIView()
-    var tradeView: TradeView!
+    var transferView: TransferView!
 
     public init() {
         super.init(nibName: nil, bundle: nil)
@@ -19,9 +18,8 @@ public final class TradeViewController: UIViewController {
 
     @available(iOS, deprecated: 10, message: "You should never use this init method.")
     required init?(coder: NSCoder) {
-
-      assertionFailure("init(coder:) should never be used")
-      return nil
+        assertionFailure("init(coder:) should never be used")
+        return nil
     }
 
     override public func viewDidLoad() {
@@ -53,16 +51,15 @@ public final class TradeViewController: UIViewController {
                                            attribute: .bottomMargin,
                                            constant: 5)
 
-        // -- TradeViewModel
-        let tradeViewModel = TradeViewModel(
+        // -- TransferViewModel
+        let transferViewModel = TransferViewModel(
             dataProvider: CybridSession.current,
-            logger: Cybrid.logger
-        )
+            logger: Cybrid.logger)
 
-        // -- TradeView
-        self.tradeView = TradeView()
-        self.tradeView.embed(in: self.componentContainer)
-        self.tradeView.parentController = self
-        self.tradeView.initComponent(tradeViewModel: tradeViewModel)
+        // -- TransferView
+        self.transferView = TransferView()
+        self.transferView.embed(in: self.componentContainer)
+        self.transferView.parentController = self
+        self.transferView.initComponent(transferViewModel: transferViewModel)
     }
 }

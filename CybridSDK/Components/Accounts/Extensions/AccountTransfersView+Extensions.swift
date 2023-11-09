@@ -1,68 +1,15 @@
 //
-//  AccountTransfersViewController.swift
+//  AccountTransfersView+Extensions.swift
 //  CybridSDK
 //
-//  Created by Erick Sanchez Perez on 03/04/23.
+//  Created by Erick Sanchez on 07/11/23.
 //
 
-import Foundation
 import UIKit
-import CybridApiBankSwift
 
-public final class AccountTransfersViewController: UIViewController {
+extension AccountTransfersView {
 
-    private var transfersViewModel: AccountTransfersViewModel!
-
-    private var theme: Theme!
-    private var localizer: Localizer!
-    private var balance: BalanceUIModel!
-
-    // -- Views
-    var balanceAssetIcon: URLImageView!
-    var balanceAssetName: UILabel!
-    var assetTitleContainer: UIStackView!
-    var balanceValueView: UILabel!
-    var subtitle: UILabel!
-    var pendingTitle: UILabel!
-    let transfersTable = UITableView()
-
-    internal init(balance: BalanceUIModel) {
-
-        super.init(nibName: nil, bundle: nil)
-        self.balance = balance
-
-        self.transfersViewModel = AccountTransfersViewModel(
-            cellProvider: self,
-            dataProvider: CybridSession.current,
-            logger: Cybrid.logger)
-
-        self.theme = Cybrid.theme
-        self.localizer = CybridLocalizer()
-
-        self.transfersViewModel.getTransfers(accountGuid: balance.account.guid!)
-        self.setupView()
-    }
-
-    @available(iOS, deprecated: 10, message: "You should never use this init method.")
-    required init?(coder: NSCoder) {
-
-        assertionFailure("init(coder:) should never be used")
-        return nil
-    }
-
-    func setupView() {
-
-        view.backgroundColor = .white
-        self.view.overrideUserInterfaceStyle = .light
-        self.createAssetTitle()
-        self.createBalanceTitles()
-        self.createTransfersTable()
-    }
-}
-
-extension AccountTransfersViewController {
-
-    private func createAssetTitle() {
+    internal func createAssetTitle() {
 
         // -- Icon
         balanceAssetIcon = URLImageView(urlString: balance.accountAssetURL)
@@ -81,11 +28,11 @@ extension AccountTransfersViewController {
         assetTitleContainer.alignment = .fill
         assetTitleContainer.spacing = UIValues.assetTitleStackSpacing
 
-        self.view.addSubview(assetTitleContainer)
+        self.addSubview(assetTitleContainer)
         self.centerHorizontalView(container: assetTitleContainer)
     }
 
-    private func createBalanceTitles() {
+    internal func createBalanceTitles() {
 
         // -- Balance Value
         balanceValueView = UILabel()
@@ -134,21 +81,21 @@ extension AccountTransfersViewController {
             margins: UIValues.balanceFiatPendingMargins)
     }
 
-    private func createTransfersTable() {
+    internal func createTransfersTable() {
 
-        self.transfersTable.delegate = self.transfersViewModel
-        self.transfersTable.dataSource = self.transfersViewModel
+        self.transfersTable.delegate = self
+        self.transfersTable.dataSource = self
         self.transfersTable.register(AccountTransfersCell.self, forCellReuseIdentifier: AccountTransfersCell.reuseIdentifier)
         self.transfersTable.rowHeight = UIValues.tradesTableCellHeight
         self.transfersTable.estimatedRowHeight = UIValues.tradesTableCellHeight
         self.transfersTable.translatesAutoresizingMaskIntoConstraints = false
         self.transfersTable.addBelowToBottom(
             topItem: self.pendingTitle,
-            bottomItem: self.view,
+            bottomItem: self,
             margins: UIValues.tradesTableMargins)
 
         // -- Live Data
-        transfersViewModel.tranfers.bind { _ in
+        self.accountTransfersViewModel.tranfers.bind { _ in
             self.transfersTable.reloadData()
         }
     }
@@ -158,12 +105,12 @@ extension AccountTransfersViewController {
         container.translatesAutoresizingMaskIntoConstraints = false
         container.constraint(attribute: .top,
                              relatedBy: .equal,
-                             toItem: self.view,
+                             toItem: self,
                              attribute: .topMargin,
                              constant: UIValues.assetTitleViewMargin.top)
         container.constraint(attribute: .centerX,
                              relatedBy: .equal,
-                             toItem: self.view,
+                             toItem: self,
                              attribute: .centerX)
         container.constraint(attribute: .height,
                              relatedBy: .equal,
@@ -173,10 +120,15 @@ extension AccountTransfersViewController {
     }
 }
 
-extension AccountTransfersViewController: AccountTransfersViewProvider {
+extension AccountTransfersView: UITableViewDelegate, UITableViewDataSource {
 
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath, withData model: TransferBankModel) -> UITableViewCell {
+    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        self.accountTransfersViewModel.tranfers.value.count
+    }
 
+    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+
+        let model = self.accountTransfersViewModel.tranfers.value[indexPath.row]
         guard let cell = tableView.dequeueReusableCell(withIdentifier: AccountTransfersCell.reuseIdentifier, for: indexPath) as? AccountTransfersCell else {
             return UITableViewCell()
         }
@@ -184,8 +136,13 @@ extension AccountTransfersViewController: AccountTransfersViewProvider {
         return cell
     }
 
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath, with transfer: TransferBankModel) {
+    public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        return AccountTransfersHeaderCell()
+    }
 
+    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+
+        let transfer = self.accountTransfersViewModel.tranfers.value[indexPath.row]
         let modal = AccountTransferModal(
             transfer: transfer,
             fiatAsset: Cybrid.fiat,
@@ -195,7 +152,7 @@ extension AccountTransfersViewController: AccountTransfersViewProvider {
     }
 }
 
-extension AccountTransfersViewController {
+extension AccountTransfersView {
 
     enum UIValues {
 

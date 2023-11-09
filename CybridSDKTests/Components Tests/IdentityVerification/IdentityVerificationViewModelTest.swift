@@ -13,15 +13,16 @@ class IdentityVerificationViewModelTest: XCTestCase {
 
     lazy var dataProvider = ServiceProviderMock()
 
-    func createViewModel(uiState: Observable<IdentityVerificationViewController.KYCViewState>) -> IdentityVerificationViewModel {
-        return IdentityVerificationViewModel(dataProvider: self.dataProvider,
-                                             uiState: uiState,
-                                             logger: nil)
+    func createViewModel(uiState: Observable<IdentityView.State>) -> IdentityVerificationViewModel {
+        let viewModel = IdentityVerificationViewModel(dataProvider: self.dataProvider,
+                                                      logger: nil)
+        viewModel.uiState.value = uiState.value
+        return viewModel
     }
 
     func test_init() {
 
-        let UIState: Observable<IdentityVerificationViewController.KYCViewState> = .init(.LOADING)
+        let UIState: Observable<IdentityView.State> = .init(.LOADING)
         let viewModel = createViewModel(uiState: UIState)
 
         XCTAssertNotNil(viewModel)
@@ -33,7 +34,7 @@ class IdentityVerificationViewModelTest: XCTestCase {
     func test_createCustomerTest_Successfully() {
 
         // -- Given
-        let UIState: Observable<IdentityVerificationViewController.KYCViewState> = .init(.LOADING)
+        let UIState: Observable<IdentityView.State> = .init(.LOADING)
         let viewModel = createViewModel(uiState: UIState)
         let expectedCustomerGuid = "cybrid_unit_testing_guid"
 
@@ -49,7 +50,7 @@ class IdentityVerificationViewModelTest: XCTestCase {
     func test_getCustomerStatus_Successfully() {
 
         // -- Given
-        let UIState: Observable<IdentityVerificationViewController.KYCViewState> = .init(.LOADING)
+        let UIState: Observable<IdentityView.State> = .init(.LOADING)
         let viewModel = createViewModel(uiState: UIState)
         let originalCustomerGUID = viewModel.customerGuid
 
@@ -65,7 +66,7 @@ class IdentityVerificationViewModelTest: XCTestCase {
     func test_getCustomerStatus_Successfully_Empty() {
 
         // -- Given
-        let UIState: Observable<IdentityVerificationViewController.KYCViewState> = .init(.LOADING)
+        let UIState: Observable<IdentityView.State> = .init(.LOADING)
         let viewModel = createViewModel(uiState: UIState)
         let originalCustomerGUID = viewModel.customerGuid
 
@@ -81,7 +82,7 @@ class IdentityVerificationViewModelTest: XCTestCase {
     func test_getIdentityVerificationStatus_State_Expired() {
 
         // -- Given
-        let UIState: Observable<IdentityVerificationViewController.KYCViewState> = .init(.LOADING)
+        let UIState: Observable<IdentityView.State> = .init(.LOADING)
         let viewModel = createViewModel(uiState: UIState)
         let wrapper = IdentityVerificationWrapper(identity: IdentityVerificationBankModel.getExpiredMock(), details: nil)
 
@@ -97,7 +98,7 @@ class IdentityVerificationViewModelTest: XCTestCase {
     func test_fetchIdentityVerificationStatus_Successfully() {
 
         // -- Given
-        let UIState: Observable<IdentityVerificationViewController.KYCViewState> = .init(.LOADING)
+        let UIState: Observable<IdentityView.State> = .init(.LOADING)
         let viewModel = createViewModel(uiState: UIState)
         let record = IdentityVerificationBankModel.getMock()
 
@@ -112,7 +113,7 @@ class IdentityVerificationViewModelTest: XCTestCase {
     func test_getIdentityVerificationStatusWithWrapperNil_lastVerification_Nil() {
 
         // -- Given
-        let UIState: Observable<IdentityVerificationViewController.KYCViewState> = .init(.LOADING)
+        let UIState: Observable<IdentityView.State> = .init(.LOADING)
         let viewModel = createViewModel(uiState: UIState)
 
         // -- When
@@ -131,7 +132,7 @@ class IdentityVerificationViewModelTest: XCTestCase {
     func test_getIdentityVerificationStatusWithWrapperNil_state_expired() {
 
         // -- Given
-        let UIState: Observable<IdentityVerificationViewController.KYCViewState> = .init(.LOADING)
+        let UIState: Observable<IdentityView.State> = .init(.LOADING)
         let viewModel = createViewModel(uiState: UIState)
 
         // -- When
@@ -150,7 +151,7 @@ class IdentityVerificationViewModelTest: XCTestCase {
     func test_getIdentityVerificationStatusWithWrapperNil() {
 
         // -- Given
-        let UIState: Observable<IdentityVerificationViewController.KYCViewState> = .init(.LOADING)
+        let UIState: Observable<IdentityView.State> = .init(.LOADING)
         let viewModel = createViewModel(uiState: UIState)
 
         // -- When
@@ -167,7 +168,7 @@ class IdentityVerificationViewModelTest: XCTestCase {
     func test_fetchLastIdentityVerification_Successfully() {
 
         // -- Given
-        let UIState: Observable<IdentityVerificationViewController.KYCViewState> = .init(.LOADING)
+        let UIState: Observable<IdentityView.State> = .init(.LOADING)
         let viewModel = createViewModel(uiState: UIState)
 
         // -- Then
@@ -182,7 +183,7 @@ class IdentityVerificationViewModelTest: XCTestCase {
     func test_createIdentityVerification_Successfully() {
 
         // -- Given
-        let UIState: Observable<IdentityVerificationViewController.KYCViewState> = .init(.LOADING)
+        let UIState: Observable<IdentityView.State> = .init(.LOADING)
         let viewModel = createViewModel(uiState: UIState)
 
         // -- Then
@@ -198,7 +199,7 @@ class IdentityVerificationViewModelTest: XCTestCase {
     func test_checkCustomerStatus() {
 
         // -- Given
-        let UIState: Observable<IdentityVerificationViewController.KYCViewState> = .init(.LOADING)
+        let UIState: Observable<IdentityView.State> = .init(.LOADING)
         let viewModel = createViewModel(uiState: UIState)
         var customer = CustomerBankModel()
 
@@ -213,33 +214,33 @@ class IdentityVerificationViewModelTest: XCTestCase {
         viewModel.customerJob = Polling {}
         viewModel.checkCustomerStatus(state: customer.state!)
         XCTAssertNil(viewModel.customerJob)
-        XCTAssertEqual(viewModel.uiState.value, IdentityVerificationViewController.KYCViewState.VERIFIED)
+        XCTAssertEqual(viewModel.uiState.value, IdentityView.State.VERIFIED)
 
         // -- state: unverified - UIState: LOADING
         customer.state = .unverified
         viewModel.customerJob = Polling {}
         viewModel.checkCustomerStatus(state: customer.state!)
         XCTAssertNil(viewModel.customerJob)
-        XCTAssertEqual(viewModel.uiState.value, IdentityVerificationViewController.KYCViewState.VERIFIED)
+        XCTAssertEqual(viewModel.uiState.value, IdentityView.State.VERIFIED)
 
         // -- state: rejected - UIState: LOADING
         customer.state = .rejected
         viewModel.customerJob = Polling {}
         viewModel.checkCustomerStatus(state: customer.state!)
         XCTAssertNil(viewModel.customerJob)
-        XCTAssertEqual(viewModel.uiState.value, IdentityVerificationViewController.KYCViewState.ERROR)
+        XCTAssertEqual(viewModel.uiState.value, IdentityView.State.ERROR)
 
         // -- state: unknownDefaultOpenApi - UIState: LOADING
         customer.state = .unknownDefaultOpenApi
         viewModel.uiState.value = .LOADING
         viewModel.checkCustomerStatus(state: customer.state!)
-        XCTAssertEqual(viewModel.uiState.value, IdentityVerificationViewController.KYCViewState.LOADING)
+        XCTAssertEqual(viewModel.uiState.value, IdentityView.State.LOADING)
     }
 
     func test_checkIdentityRecordStatus() {
 
         // -- Given
-        let uiState: Observable<IdentityVerificationViewController.KYCViewState> = .init(.LOADING)
+        let uiState: Observable<IdentityView.State> = .init(.LOADING)
         let viewModel = createViewModel(uiState: uiState)
         let wrapper = IdentityVerificationWrapper(identity: IdentityVerificationBankModel(state: .storing), details: IdentityVerificationWithDetailsBankModel(state: .storing))
 
@@ -247,7 +248,7 @@ class IdentityVerificationViewModelTest: XCTestCase {
         XCTAssertNil(viewModel.identityJob)
         viewModel.checkIdentityRecordStatus(wrapper: wrapper)
         XCTAssertNotNil(viewModel.identityJob)
-        XCTAssertEqual(viewModel.uiState.value, IdentityVerificationViewController.KYCViewState.LOADING)
+        XCTAssertEqual(viewModel.uiState.value, IdentityView.State.LOADING)
 
         // -- state: waiting - personaState: completed - UIState: LOADING
         wrapper.identityVerification?.state = .waiting
@@ -256,7 +257,7 @@ class IdentityVerificationViewModelTest: XCTestCase {
         viewModel.identityJob = nil
         viewModel.checkIdentityRecordStatus(wrapper: wrapper)
         XCTAssertNotNil(viewModel.identityJob)
-        XCTAssertEqual(viewModel.uiState.value, IdentityVerificationViewController.KYCViewState.LOADING)
+        XCTAssertEqual(viewModel.uiState.value, IdentityView.State.LOADING)
 
         // -- state: waiting - personaState: processing - UIState: LOADING
         wrapper.identityVerification?.state = .waiting
@@ -265,7 +266,7 @@ class IdentityVerificationViewModelTest: XCTestCase {
         viewModel.identityJob = nil
         viewModel.checkIdentityRecordStatus(wrapper: wrapper)
         XCTAssertNotNil(viewModel.identityJob)
-        XCTAssertEqual(viewModel.uiState.value, IdentityVerificationViewController.KYCViewState.LOADING)
+        XCTAssertEqual(viewModel.uiState.value, IdentityView.State.LOADING)
 
         // -- state: waiting - personaState: reviewing - UIState: LOADING
         wrapper.identityVerification?.state = .waiting
@@ -273,7 +274,7 @@ class IdentityVerificationViewModelTest: XCTestCase {
         wrapper.identityVerificationDetails?.personaState = .reviewing
         viewModel.checkIdentityRecordStatus(wrapper: wrapper)
         XCTAssertNil(viewModel.identityJob)
-        XCTAssertEqual(viewModel.uiState.value, IdentityVerificationViewController.KYCViewState.REVIEWING)
+        XCTAssertEqual(viewModel.uiState.value, IdentityView.State.REVIEWING)
 
         // -- state: expired - UIState: LOADING
         wrapper.identityVerification?.state = .expired
@@ -282,7 +283,7 @@ class IdentityVerificationViewModelTest: XCTestCase {
         viewModel.identityJob = Polling {}
         viewModel.checkIdentityRecordStatus(wrapper: wrapper)
         XCTAssertNil(viewModel.identityJob)
-        XCTAssertEqual(viewModel.uiState.value, IdentityVerificationViewController.KYCViewState.LOADING)
+        XCTAssertEqual(viewModel.uiState.value, IdentityView.State.LOADING)
 
         // -- state: completed - UIState: VERIFIED
         wrapper.identityVerification?.state = .completed
@@ -291,7 +292,7 @@ class IdentityVerificationViewModelTest: XCTestCase {
         viewModel.identityJob = Polling {}
         viewModel.checkIdentityRecordStatus(wrapper: wrapper)
         XCTAssertNil(viewModel.identityJob)
-        XCTAssertEqual(viewModel.uiState.value, IdentityVerificationViewController.KYCViewState.VERIFIED)
+        XCTAssertEqual(viewModel.uiState.value, IdentityView.State.VERIFIED)
 
         // -- state: unknownDefaultOpenApi - UIState: LOADING
         wrapper.identityVerification?.state = .unknownDefaultOpenApi
@@ -305,7 +306,7 @@ class IdentityVerificationViewModelTest: XCTestCase {
     func test_checkIdentityPersonaStatus() {
 
         // -- Given
-        let uiState: Observable<IdentityVerificationViewController.KYCViewState> = .init(.LOADING)
+        let uiState: Observable<IdentityView.State> = .init(.LOADING)
         let viewModel = createViewModel(uiState: uiState)
         let wrapper = IdentityVerificationWrapper(identity: IdentityVerificationBankModel(state: .waiting), details: IdentityVerificationWithDetailsBankModel(personaState: .waiting))
 
@@ -313,7 +314,7 @@ class IdentityVerificationViewModelTest: XCTestCase {
         viewModel.checkIdentityPersonaStatus(wrapper: wrapper)
         XCTAssertEqual(viewModel.latestIdentityVerification?.identityVerification, wrapper.identityVerification)
         XCTAssertEqual(viewModel.latestIdentityVerification?.identityVerificationDetails, wrapper.identityVerificationDetails)
-        XCTAssertEqual(viewModel.uiState.value, IdentityVerificationViewController.KYCViewState.REQUIRED)
+        XCTAssertEqual(viewModel.uiState.value, IdentityView.State.REQUIRED)
 
         // -- Persona: pending - UIState: REQUIRED
         wrapper.identityVerificationDetails?.personaState = .pending
@@ -321,7 +322,7 @@ class IdentityVerificationViewModelTest: XCTestCase {
         viewModel.checkIdentityPersonaStatus(wrapper: wrapper)
         XCTAssertEqual(viewModel.latestIdentityVerification?.identityVerification, wrapper.identityVerification)
         XCTAssertEqual(viewModel.latestIdentityVerification?.identityVerificationDetails, wrapper.identityVerificationDetails)
-        XCTAssertEqual(viewModel.uiState.value, IdentityVerificationViewController.KYCViewState.REQUIRED)
+        XCTAssertEqual(viewModel.uiState.value, IdentityView.State.REQUIRED)
 
         // -- Persona: reviewing - UIState: REVIEWING
         wrapper.identityVerificationDetails?.personaState = .reviewing
@@ -329,7 +330,7 @@ class IdentityVerificationViewModelTest: XCTestCase {
         viewModel.checkIdentityPersonaStatus(wrapper: wrapper)
         XCTAssertEqual(viewModel.latestIdentityVerification?.identityVerification, wrapper.identityVerification)
         XCTAssertEqual(viewModel.latestIdentityVerification?.identityVerificationDetails, wrapper.identityVerificationDetails)
-        XCTAssertEqual(viewModel.uiState.value, IdentityVerificationViewController.KYCViewState.REVIEWING)
+        XCTAssertEqual(viewModel.uiState.value, IdentityView.State.REVIEWING)
 
         // -- Persona: completed - UIState: ERROR
         wrapper.identityVerificationDetails?.personaState = .completed
@@ -337,7 +338,7 @@ class IdentityVerificationViewModelTest: XCTestCase {
         viewModel.checkIdentityPersonaStatus(wrapper: wrapper)
         XCTAssertEqual(viewModel.latestIdentityVerification?.identityVerification, wrapper.identityVerification)
         XCTAssertEqual(viewModel.latestIdentityVerification?.identityVerificationDetails, wrapper.identityVerificationDetails)
-        XCTAssertEqual(viewModel.uiState.value, IdentityVerificationViewController.KYCViewState.ERROR)
+        XCTAssertEqual(viewModel.uiState.value, IdentityView.State.ERROR)
 
         // -- Persona: expired - UIState: ERROR
         wrapper.identityVerificationDetails?.personaState = .expired
@@ -345,7 +346,7 @@ class IdentityVerificationViewModelTest: XCTestCase {
         viewModel.checkIdentityPersonaStatus(wrapper: wrapper)
         XCTAssertEqual(viewModel.latestIdentityVerification?.identityVerification, wrapper.identityVerification)
         XCTAssertEqual(viewModel.latestIdentityVerification?.identityVerificationDetails, wrapper.identityVerificationDetails)
-        XCTAssertEqual(viewModel.uiState.value, IdentityVerificationViewController.KYCViewState.LOADING)
+        XCTAssertEqual(viewModel.uiState.value, IdentityView.State.LOADING)
 
         // -- Persona: processing - UIState: ERROR
         wrapper.identityVerificationDetails?.personaState = .processing
@@ -353,7 +354,7 @@ class IdentityVerificationViewModelTest: XCTestCase {
         viewModel.checkIdentityPersonaStatus(wrapper: wrapper)
         XCTAssertEqual(viewModel.latestIdentityVerification?.identityVerification, wrapper.identityVerification)
         XCTAssertEqual(viewModel.latestIdentityVerification?.identityVerificationDetails, wrapper.identityVerificationDetails)
-        XCTAssertEqual(viewModel.uiState.value, IdentityVerificationViewController.KYCViewState.ERROR)
+        XCTAssertEqual(viewModel.uiState.value, IdentityView.State.ERROR)
 
         // -- Persona: unknown - UIState: ERROR
         wrapper.identityVerificationDetails?.personaState = .unknown
@@ -361,7 +362,7 @@ class IdentityVerificationViewModelTest: XCTestCase {
         viewModel.checkIdentityPersonaStatus(wrapper: wrapper)
         XCTAssertEqual(viewModel.latestIdentityVerification?.identityVerification, wrapper.identityVerification)
         XCTAssertEqual(viewModel.latestIdentityVerification?.identityVerificationDetails, wrapper.identityVerificationDetails)
-        XCTAssertEqual(viewModel.uiState.value, IdentityVerificationViewController.KYCViewState.ERROR)
+        XCTAssertEqual(viewModel.uiState.value, IdentityView.State.ERROR)
 
         // -- Persona: unknownDefaultOpenApi - UIState: ERROR
         wrapper.identityVerificationDetails?.personaState = .unknownDefaultOpenApi
@@ -369,6 +370,6 @@ class IdentityVerificationViewModelTest: XCTestCase {
         viewModel.checkIdentityPersonaStatus(wrapper: wrapper)
         XCTAssertEqual(viewModel.latestIdentityVerification?.identityVerification, wrapper.identityVerification)
         XCTAssertEqual(viewModel.latestIdentityVerification?.identityVerificationDetails, wrapper.identityVerificationDetails)
-        XCTAssertEqual(viewModel.uiState.value, IdentityVerificationViewController.KYCViewState.ERROR)
+        XCTAssertEqual(viewModel.uiState.value, IdentityView.State.ERROR)
     }
 }

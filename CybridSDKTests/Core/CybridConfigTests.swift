@@ -519,4 +519,27 @@ class CybridConfigTests: XCTestCase {
             XCTAssertTrue(error is AssetNotFoundError, "The error type should be AssetNotFoundError")
         }
     }
+
+    func test_canCreateDepositAddressFor() {
+
+        // -- Given
+        let bank = BankBankModel.mock()
+        let sdkConfig = SDKConfig(environment: .staging,
+                                  bearer: "TEST-BEARER",
+                                  customerGuid: "MOCK_GUID",
+                                  bank: bank)
+        let cybridConfig = CybridConfig()
+        cybridConfig.setup(sdkConfig: sdkConfig,
+                           dataProvider: dataProvider,
+                           completion: {})
+        cybridConfig.assets = AssetBankModel.mock
+
+        // -- Case: Try to create deposit address of SHIBA
+        let canCrateDogeAddres = cybridConfig.canCreateDepositAddressFor("DOGE")
+        XCTAssertFalse(canCrateDogeAddres)
+
+        // -- Case: Try to create deposit address of SHIBA
+        let canCrateBTCAddres = cybridConfig.canCreateDepositAddressFor("BTC")
+        XCTAssertTrue(canCrateBTCAddres)
+    }
 }

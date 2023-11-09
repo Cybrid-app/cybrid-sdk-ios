@@ -1,70 +1,15 @@
 //
-//  AccountTradesViewcontroller.swift
+//  AccountTradesView+Extensions.swift
 //  CybridSDK
 //
-//  Created by Erick Sanchez Perez on 25/08/22.
+//  Created by Erick Sanchez on 06/11/23.
 //
 
-import Foundation
 import UIKit
 
-public final class AccountTradesViewController: UIViewController {
+extension AccountTradesView {
 
-    private var balance: BalanceUIModel!
-    private var accountsViewModel: AccountsViewModel!
-    private var tradesViewModel: AccountTradesViewModel!
-
-    private var theme: Theme!
-    private var localizer: Localizer!
-
-    // -- Views
-    var balanceAssetIcon: URLImageView!
-    var balanceAssetName: UILabel!
-    var assetTitleContainer: UIStackView!
-    var balanceValueView: UILabel!
-    var balanceFiatValueView: UILabel!
-    let tradesTable = UITableView()
-    var depositAddressButton: CYBButton!
-
-    internal init(balance: BalanceUIModel, accountsViewModel: AccountsViewModel) {
-
-        super.init(nibName: nil, bundle: nil)
-        self.balance = balance
-        self.accountsViewModel = accountsViewModel
-
-        self.tradesViewModel = AccountTradesViewModel(
-            cellProvider: self,
-            dataProvider: CybridSession.current,
-            assets: accountsViewModel.assets,
-            logger: Cybrid.logger)
-
-        self.theme = Cybrid.theme
-        self.localizer = CybridLocalizer()
-
-        self.tradesViewModel.getTrades(accountGuid: balance.account.guid ?? "")
-        self.setupView()
-    }
-
-    @available(iOS, deprecated: 10, message: "You should never use this init method.")
-    required init?(coder: NSCoder) {
-      assertionFailure("init(coder:) should never be used")
-      return nil
-    }
-
-    func setupView() {
-
-        view.backgroundColor = .white
-        self.view.overrideUserInterfaceStyle = .light
-        self.createAssetTitle()
-        self.createBalanceTitles()
-        self.createDepositAddressButton()
-        self.createTradesTable()
-    }
-}
-
-extension AccountTradesViewController {
-
-    private func createAssetTitle() {
+    internal func createAssetTitle() {
 
         // -- Icon
         balanceAssetIcon = URLImageView(urlString: balance.accountAssetURL)
@@ -84,11 +29,11 @@ extension AccountTradesViewController {
         assetTitleContainer.spacing = UIValues.assetTitleStackSpacing
 
         // -- Adds
-        self.view.addSubview(assetTitleContainer)
+        self.addSubview(assetTitleContainer)
         self.centerHorizontalView(container: assetTitleContainer)
     }
 
-    private func createBalanceTitles() {
+    internal func createBalanceTitles() {
 
         // -- Balancr Value
         balanceValueView = UILabel()
@@ -130,30 +75,30 @@ extension AccountTradesViewController {
             margins: UIValues.balanceFiatValueViewMargins)
     }
 
-    private func createDepositAddressButton() {
+    internal func createDepositAddressButton() {
 
         let canCreate = Cybrid.canCreateDepositAddressFor(self.balance.account.asset ?? "")
         let buttonHeight: CGFloat = !canCreate ? 0 : 50
         self.depositAddressButton = CYBButton(title: localizer.localize(with: UIStrings.getDepositAddress)) {
 
             let depositAddressViewController = DepositAddresViewController(accountBalance: self.balance)
-            if self.navigationController != nil {
-                self.navigationController?.pushViewController(depositAddressViewController, animated: true)
+            if self.parentController?.navigationController != nil {
+                self.parentController?.navigationController?.pushViewController(depositAddressViewController, animated: true)
             } else {
-                self.present(depositAddressViewController, animated: true)
+                self.parentController?.present(depositAddressViewController, animated: true)
             }
         }
-        self.view.addSubview(self.depositAddressButton)
-        self.depositAddressButton.constraintLeft(self.view, margin: 20)
-        self.depositAddressButton.constraintRight(self.view, margin: 20)
-        self.depositAddressButton.constraintBottom(self.view, margin: 25)
+        self.addSubview(self.depositAddressButton)
+        self.depositAddressButton.constraintLeft(self, margin: 20)
+        self.depositAddressButton.constraintRight(self, margin: 20)
+        self.depositAddressButton.constraintBottom(self, margin: 25)
         self.depositAddressButton.constraintHeight(buttonHeight)
     }
 
-    private func createTradesTable() {
+    internal func createTradesTable() {
 
-        self.tradesTable.delegate = self.tradesViewModel
-        self.tradesTable.dataSource = self.tradesViewModel
+        self.tradesTable.delegate = self
+        self.tradesTable.dataSource = self
         self.tradesTable.register(AccountTradesCell.self, forCellReuseIdentifier: AccountTradesCell.reuseIdentifier)
         self.tradesTable.rowHeight = UIValues.tradesTableCellHeight
         self.tradesTable.estimatedRowHeight = UIValues.tradesTableCellHeight
@@ -165,7 +110,7 @@ extension AccountTradesViewController {
             margins: UIValues.tradesTableMargins)
 
         // -- Live Data
-        tradesViewModel.trades.bind { _ in
+        self.accountTradesViewModel.trades.bind { _ in
             self.tradesTable.reloadData()
         }
     }
@@ -175,12 +120,12 @@ extension AccountTradesViewController {
         container.translatesAutoresizingMaskIntoConstraints = false
         container.constraint(attribute: .top,
                              relatedBy: .equal,
-                             toItem: self.view,
+                             toItem: self,
                              attribute: .topMargin,
                              constant: UIValues.assetTitleViewMargin.top)
         container.constraint(attribute: .centerX,
                              relatedBy: .equal,
-                             toItem: self.view,
+                             toItem: self,
                              attribute: .centerX)
         container.constraint(attribute: .height,
                              relatedBy: .equal,
@@ -190,10 +135,15 @@ extension AccountTradesViewController {
     }
 }
 
-extension AccountTradesViewController: AccountTradesViewProvider {
+extension AccountTradesView: UITableViewDelegate, UITableViewDataSource {
 
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath, withData model: TradeUIModel) -> UITableViewCell {
+    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        self.accountTradesViewModel.trades.value.count
+    }
 
+    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let model = self.accountTradesViewModel.trades.value[indexPath.row]
         guard
             let cell = tableView.dequeueReusableCell(
                 withIdentifier: AccountTradesCell.reuseIdentifier,
@@ -205,19 +155,24 @@ extension AccountTradesViewController: AccountTradesViewProvider {
         return cell
     }
 
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath, with trade: TradeUIModel) {
+    public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        return AccountTradesHeaderCell()
+    }
 
+    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+
+        let trade = self.accountTradesViewModel.trades.value[indexPath.row]
         let modal = AccountTradeDetailModal(
-                trade: trade,
-                assetURL: balance.accountAssetURL,
-                theme: theme,
-                localizer: localizer,
-                onConfirm: nil)
+            trade: trade,
+            assetURL: balance.accountAssetURL,
+            theme: theme,
+            localizer: localizer,
+            onConfirm: nil)
         modal.present()
     }
 }
 
-extension AccountTradesViewController {
+extension AccountTradesView {
 
     enum UIValues {
 
@@ -248,7 +203,7 @@ extension AccountTradesViewController {
         static let balanceFiatValueColor = UIColor(hex: "#636366")
         static let balanceFiatValueCodeColor = UIColor(hex: "#757575")
     }
-
+    
     enum UIStrings {
 
         static let getDepositAddress = "cybrid.deposit.address.in.accounts.trades.create.button"

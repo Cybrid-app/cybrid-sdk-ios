@@ -8,7 +8,7 @@
 import Foundation
 import CybridApiBankSwift
 
-class TransferViewModel: NSObject {
+open class TransferViewModel: NSObject {
 
     // MARK: Private properties
     private var dataProvider: AccountsRepoProvider & ExternalBankAccountProvider & QuotesRepoProvider & TransfersRepoProvider
@@ -34,9 +34,9 @@ class TransferViewModel: NSObject {
     internal var accountsPolling: Polling?
 
     // MARK: Public properties
-    var uiState: Observable<TransferViewController.ViewState> = .init(.LOADING)
-    var modalUIState: Observable<TransferViewController.ModalViewState> = .init(.LOADING)
-    var balanceLoading: Observable<TransferViewController.BalanceViewState> = .init(.CONTENT)
+    var uiState: Observable<TransferView.State> = .init(.LOADING)
+    var modalUIState: Observable<TransferView.ModalState> = .init(.LOADING)
+    var balanceLoading: Observable<TransferView.BalanceViewState> = .init(.CONTENT)
 
     // MARK: Constructor
     init(dataProvider: AccountsRepoProvider & ExternalBankAccountProvider & QuotesRepoProvider & TransfersRepoProvider,
@@ -113,7 +113,7 @@ class TransferViewModel: NSObject {
 
             self.currentExternalBankAccount.value = accounts.first
             self.calculateFiatBalance()
-            self.uiState.value = .ACCOUNTS
+            self.uiState.value = .CONTENT
             self.createAccountsPolling()
             for account in accounts where account.state == .refreshRequired {
                 self.errorMessage.value = true

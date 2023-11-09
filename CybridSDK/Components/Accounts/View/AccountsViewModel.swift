@@ -8,7 +8,7 @@
 import CybridApiBankSwift
 import Foundation
 
-class AccountsViewModel: NSObject {
+open class AccountsViewModel: NSObject {
 
     // MARK: Observed properties
     internal var assets = Cybrid.assets
@@ -19,21 +19,18 @@ class AccountsViewModel: NSObject {
     internal var customerGuid = Cybrid.customerGuid
 
     // MARK: Private properties
-    private unowned var cellProvider: AccountsViewProvider
     private var dataProvider: PricesRepoProvider & AssetsRepoProvider & AccountsRepoProvider
     private var logger: CybridLogger?
 
     // -- MARK: Public properties
-    var uiState: Observable<AccountsViewController.ViewState> = .init(.LOADING)
+    var uiState: Observable<AccountsView.State> = .init(.LOADING)
 
     // -- MARK: Poll
     internal var pricesPolling: Polling?
 
-    init(cellProvider: AccountsViewProvider,
-         dataProvider: PricesRepoProvider & AssetsRepoProvider & AccountsRepoProvider,
+    init(dataProvider: PricesRepoProvider & AssetsRepoProvider & AccountsRepoProvider,
          logger: CybridLogger?) {
 
-        self.cellProvider = cellProvider
         self.dataProvider = dataProvider
         self.logger = logger
     }
@@ -145,34 +142,4 @@ class AccountsViewModel: NSObject {
             }
         }
     }
-}
-
-// MARK: - AccountsViewProvider
-
-protocol AccountsViewProvider: AnyObject {
-
-  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath, withData dataModel: BalanceUIModel) -> UITableViewCell
-
-  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath, withBalance balance: BalanceUIModel)
-}
-
-// MARK: - AccountsViewModel + UITableViewDelegate + UITableViewDataSource
-
-extension AccountsViewModel: UITableViewDelegate, UITableViewDataSource {
-
-  public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    balances.value.count
-  }
-
-  public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    cellProvider.tableView(tableView, cellForRowAt: indexPath, withData: balances.value[indexPath.row])
-  }
-
-  func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-      return AccountsHeaderCell(currency: Cybrid.fiat.code)
-  }
-
-  public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-      cellProvider.tableView(tableView, didSelectRowAt: indexPath, withBalance: balances.value[indexPath.row])
-  }
 }
