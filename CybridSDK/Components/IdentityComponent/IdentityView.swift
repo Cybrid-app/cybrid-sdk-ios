@@ -9,7 +9,7 @@ import UIKit
 
 public final class IdentityView: Component {
 
-    public enum State { case LOADING, REQUIRED, VERIFIED, ERROR, REVIEWING }
+    public enum State { case LOADING, REQUIRED, VERIFIED, ERROR, REVIEWING, FROZEN }
 
     internal var identityVerificationViewModel: IdentityVerificationViewModel!
     internal var theme: Theme!
@@ -52,6 +52,9 @@ public final class IdentityView: Component {
 
             case .REVIEWING:
                 self.KYCView_Reviewing()
+
+            case .FROZEN:
+                self.frozenCustomerUI()
             }
         }
     }

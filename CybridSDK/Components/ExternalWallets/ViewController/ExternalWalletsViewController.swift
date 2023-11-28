@@ -62,6 +62,7 @@ public final class ExternalWalletsViewController: UIViewController {
         // -- ExternalWallets View
         self.externalWalletsView = ExternalWalletsView()
         self.externalWalletsView.embed(in: self.componentContainer)
+        self.externalWalletsView.parentController = self
         self.externalWalletsView.initComponent(externalWalletsViewModel: externalWalletsViewModel)
     }
 }

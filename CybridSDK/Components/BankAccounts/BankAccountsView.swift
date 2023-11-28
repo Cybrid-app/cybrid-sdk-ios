@@ -36,15 +36,15 @@ public final class BankAccountsView: Component {
 
         self.backgroundColor = UIColor.white
         self.overrideUserInterfaceStyle = .light
-        self.manageCurrentStateUI()
+        if self.canRenderComponent() { self.manageCurrentStateUI() }
         self.accountsTable.register(BankAccountCell.self, forCellReuseIdentifier: BankAccountCell.reuseIdentifier)
     }
-    
+
     private func manageCurrentStateUI() {
 
         // -- Await for UI State changes
         self.bankAccountsViewModel.uiState.bind { state in
-            
+
             self.removeSubViewsFromContent()
             switch state {
             case .LOADING:
