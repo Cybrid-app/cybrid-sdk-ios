@@ -190,6 +190,11 @@ open class IdentityVerificationViewModel: NSObject {
             self.customerJob = nil
             self.uiState.value = .ERROR
 
+        case .frozen:
+            self.customerJob?.stop()
+            self.customerJob = nil
+            self.uiState.value = .FROZEN
+
         default:
             self.logger?.log(.component(.accounts(.pricesDataError)))
 

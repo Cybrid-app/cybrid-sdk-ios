@@ -6,6 +6,10 @@
 
 */
 
+// -- Generals
+"cybrid.customer.frozen" = "Your account has been frozen.";
+"cybrid.customer.frozen.details" = "Please contact customer support.";
+
 // UI -- Modal
 "cybrid.modal.continue.button" = "Continue";
 

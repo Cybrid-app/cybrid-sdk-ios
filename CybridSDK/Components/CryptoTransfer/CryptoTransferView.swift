@@ -27,7 +27,7 @@ public final class CryptoTransferView: Component {
 
         self.backgroundColor = UIColor.white
         self.overrideUserInterfaceStyle = .light
-        self.manageCurrentStateUI()
+        if self.canRenderComponent() { self.manageCurrentStateUI() }
     }
 
     private func manageCurrentStateUI() {

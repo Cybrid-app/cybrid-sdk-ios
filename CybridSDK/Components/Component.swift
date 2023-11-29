@@ -199,6 +199,62 @@ public class Component: UIView, ComponentProtocol {
         return errorContainer
     }
 
+    internal func frozenCustomerUI() {
+
+        let localizer = CybridLocalizer()
+
+        // -- Error container
+        let container = UIView()
+        self.addSubview(container)
+        container.constraintHeight(245)
+        container.centerVertical(parent: self)
+        container.constraintLeft(self, margin: 10)
+        container.constraintRight(self, margin: 10)
+
+        // -- Error Image
+        let errorImage = UIImageView(image: getImage("kyc_error", aClass: Self.self))
+        container.addSubview(errorImage)
+        errorImage.constraintTop(container, margin: 0)
+        errorImage.centerHorizontal(parent: container)
+        errorImage.setConstraintsSize(size: CGSize(width: 60, height: 60))
+
+        // -- Error message
+        let message = localizer.localize(with: "cybrid.customer.frozen")
+        let paragraphStyle = getParagraphStyle(1.20)
+        paragraphStyle.alignment = .center
+        let errorMessage = UILabel()
+        errorMessage.font = UIFont.make(ofSize: 22, weight: .bold)
+        errorMessage.textColor = UIColor.init(hex: "#3A3A3C")
+        errorMessage.setParagraphText(message, paragraphStyle)
+        container.addSubview(errorMessage)
+        errorMessage.below(errorImage, top: 20)
+        errorMessage.constraintLeft(container, margin: 0)
+        errorMessage.constraintRight(container, margin: 0)
+
+        // -- Sub-title
+        let subTitleString = localizer.localize(with: "cybrid.customer.frozen.details")
+        let subTitile = UILabel()
+        subTitile.font = UIFont.make(ofSize: 17.5)
+        subTitile.textColor = UIColor.black
+        subTitile.textAlignment = .center
+        subTitile.text = subTitleString
+        container.addSubview(subTitile)
+        subTitile.below(errorMessage, top: 12.5)
+        subTitile.constraintLeft(container, margin: 0)
+        subTitile.constraintRight(container, margin: 0)
+
+        // -- Add button
+        let returnButtonString = localizer.localize(with: "cybrid.modal.continue.button")
+        let returnButton = CYBButton(title: returnButtonString) {
+            self.back()
+        }
+        container.addSubview(returnButton)
+        returnButton.constraintLeft(self, margin: 10)
+        returnButton.constraintRight(self, margin: 10)
+        returnButton.below(subTitile, top: 50)
+        returnButton.constraintHeight(48)
+    }
+
     internal func label(font: UIFont,
                         color: UIColor,
                         text: String,
@@ -221,6 +277,14 @@ public class Component: UIView, ComponentProtocol {
         } else {
             self.parentController?.dismiss(animated: true)
         }
+    }
+
+    // MARK: Check customer
+    internal func canRenderComponent() -> Bool {
+        guard let customer = Cybrid.customer
+        else { return true }
+        self.frozenCustomerUI()
+        return customer.state != .frozen
     }
 }
 

@@ -27,7 +27,7 @@ public final class DepositAddresView: Component {
 
         self.backgroundColor = UIColor.clear
         self.overrideUserInterfaceStyle = .light
-        self.manageCurrentStateUI()
+        if self.canRenderComponent() { self.manageCurrentStateUI() }
     }
 
     private func manageCurrentStateUI() {

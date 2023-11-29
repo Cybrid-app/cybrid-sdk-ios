@@ -208,8 +208,9 @@ class IdentityVerificationViewModelTest: XCTestCase {
         XCTAssertNil(viewModel.customerJob)
         viewModel.checkCustomerStatus(state: customer.state!)
         XCTAssertNotNil(viewModel.customerJob)
+        XCTAssertEqual(viewModel.uiState.value, .LOADING)
 
-        // -- state: storing - UIState: VERIFIED
+        // -- state: verified - UIState: VERIFIED
         customer.state = .verified
         viewModel.customerJob = Polling {}
         viewModel.checkCustomerStatus(state: customer.state!)
@@ -223,12 +224,19 @@ class IdentityVerificationViewModelTest: XCTestCase {
         XCTAssertNil(viewModel.customerJob)
         XCTAssertEqual(viewModel.uiState.value, IdentityView.State.VERIFIED)
 
-        // -- state: rejected - UIState: LOADING
+        // -- state: rejected - UIState: ERROR
         customer.state = .rejected
         viewModel.customerJob = Polling {}
         viewModel.checkCustomerStatus(state: customer.state!)
         XCTAssertNil(viewModel.customerJob)
         XCTAssertEqual(viewModel.uiState.value, IdentityView.State.ERROR)
+
+        // -- state: frozen - UIState: FROZEN
+        customer.state = .frozen
+        viewModel.customerJob = Polling {}
+        viewModel.checkCustomerStatus(state: customer.state!)
+        XCTAssertNil(viewModel.customerJob)
+        XCTAssertEqual(viewModel.uiState.value, IdentityView.State.FROZEN)
 
         // -- state: unknownDefaultOpenApi - UIState: LOADING
         customer.state = .unknownDefaultOpenApi

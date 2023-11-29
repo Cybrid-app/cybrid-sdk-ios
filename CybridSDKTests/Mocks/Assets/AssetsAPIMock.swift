@@ -25,7 +25,7 @@ final class AssetsAPIMock: AssetsAPI {
   class func didFetchAssetsSuccessfully() -> AssetListBankModel {
     listAssetsCompletion?(.success(.mock))
     return .mock
-  }
+  } 
 
   class func didFetchAssetsWithError() {
     listAssetsCompletion?(.failure(.error(0, nil, nil, CybridError.serviceError)))

@@ -90,7 +90,7 @@ extension IdentityView {
     }
 
     @objc func dimissController() {
-        self.parentController?.navigationController?.popViewController(animated: true)
+        self.back()
     }
 }
 
@@ -101,9 +101,9 @@ extension IdentityView: InquiryDelegate {
         self.identityVerificationViewModel.uiState.value = .LOADING
         self.identityVerificationViewModel.getIdentityVerificationStatus(identityWrapper: self.identityVerificationViewModel.latestIdentityVerification)
     }
-    
+
     public func inquiryCanceled(inquiryId: String?, sessionToken: String?) {}
-    
+
     public func inquiryError(_ error: Error) {
         self.identityVerificationViewModel.uiState.value = .ERROR
     }
