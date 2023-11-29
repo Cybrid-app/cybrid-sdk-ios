@@ -165,8 +165,7 @@ open class IdentityVerificationViewModel: NSObject {
     // MARK: Checker Funtions
     internal func checkCustomerStatus(state: CustomerBankModel.StateBankModel) {
 
-        let newState: CustomerBankModel.StateBankModel = .frozen // DELETE : JUST DEMO
-        switch newState {
+        switch state {
 
         case .storing:
             if self.customerJob == nil {
