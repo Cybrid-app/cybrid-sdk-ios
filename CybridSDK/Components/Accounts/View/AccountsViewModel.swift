@@ -82,9 +82,9 @@ open class AccountsViewModel: NSObject {
             var tradingAccounts: [AccountBankModel] = []
             for account in self.accounts {
                 switch account.type {
-                case .fiat:
+                case "fiat":
                     fiatAccounts.append(account)
-                case .trading:
+                case "trading":
                     tradingAccounts.append(account)
                 default:
                     ()

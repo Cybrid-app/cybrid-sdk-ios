@@ -30,13 +30,13 @@ extension IdentityVerificationWithDetailsBankModel {
         self.init(
             guid: json[codingKeys.guid.rawValue] as? String ?? "",
             customerGuid: json[codingKeys.customerGuid.rawValue] as? String ?? "",
-            type: IdentityVerificationWithDetailsBankModel.TypeBankModel(rawValue: type) ?? .kyc,
-            method: IdentityVerificationWithDetailsBankModel.MethodBankModel(rawValue: method) ?? .idAndSelfie,
+            type: json[codingKeys.type.rawValue] as? String ?? "",
+            method: json[codingKeys.method.rawValue] as? String ?? "",
             createdAt: createdAtDate,
-            state: IdentityVerificationWithDetailsBankModel.StateBankModel(rawValue: state) ?? .storing,
-            outcome: IdentityVerificationWithDetailsBankModel.OutcomeBankModel(rawValue: outcome) ?? .passed,
+            state: json[codingKeys.state.rawValue] as? String ?? "",
+            outcome: json[codingKeys.outcome.rawValue] as? String ?? "",
             failureCodes: nil,
             personaInquiryId: json[codingKeys.personaInquiryId.rawValue] as? String ?? "",
-            personaState: IdentityVerificationWithDetailsBankModel.PersonaStateBankModel(rawValue: personaState) ?? .unknown)
+            personaState: json[codingKeys.personaState.rawValue] as? String ?? "")
     }
 }

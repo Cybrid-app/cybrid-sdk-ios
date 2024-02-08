@@ -48,7 +48,7 @@ class AccountTradeDetailModal: UIModal {
     private func setupViews() {
 
         // -- Title View
-        let titleType = trade.tradeBankModel.side == .sell ? UIString.sold : UIString.bought
+        let titleType = trade.tradeBankModel.side == "sell" ? UIString.sold : UIString.bought
         let localizedTitle = localizer.localize(with: titleType)
         let balanceAssetIcon = URLImageView(urlString: self.currentAssetURL) ?? UIImageView()
 
@@ -73,7 +73,7 @@ class AccountTradeDetailModal: UIModal {
 
         // -- Status
         let statusTitle = addItemTitle(belowOf: subTitleView, titleKey: UIString.status, firstElement: true)
-        let statusValue = addItemValue(belowOf: statusTitle, mainValue: trade.tradeBankModel.state?.rawValue ?? "")
+        let statusValue = addItemValue(belowOf: statusTitle, mainValue: trade.tradeBankModel.state ?? "")
 
         // -- Order Placed
         let orderPlaceTitle = addItemTitle(belowOf: statusValue, titleKey: UIString.orderPlaced)

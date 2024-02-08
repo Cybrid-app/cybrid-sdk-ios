@@ -14,7 +14,7 @@ extension ExternalWalletsView {
 
         // --
         let wallet = self.externalWalletViewModel?.currentWallet
-        let walletState = wallet?.state ?? .storing
+        let walletState = wallet?.state ?? "storing"
 
         let asset = try? Cybrid.findAsset(code: (self.externalWalletViewModel?.currentWallet?.asset)!)
         let assetName = asset?.name ?? ""
@@ -205,29 +205,29 @@ extension ExternalWalletsView {
         deleteButton.isHidden = true
 
         // -- Check status for show delete button
-        if walletState == .completed || walletState == .failed {
+        if walletState == "completed" || walletState == "failed" {
             deleteButton.isHidden = false
         }
     }
 
     internal func externalWalletsView_Wallet_statusChip(_ statusChip: UILabel, wallet: ExternalWalletBankModel?) {
 
-        switch wallet?.state ?? .storing {
-        case .storing, .pending:
+        switch wallet?.state ?? "storing" {
+        case "storing", "pending":
 
             statusChip.isHidden = false
             statusChip.textColor = UIColor.black
             statusChip.backgroundColor = UIColor(hex: "#FCDA66")
             statusChip.setLocalizedText(key: UIStrings.walletStatePending, localizer: localizer)
 
-        case .failed:
+        case "failed":
 
             statusChip.isHidden = false
             statusChip.textColor = UIColor.white
             statusChip.backgroundColor = UIColor(hex: "#D45736")
             statusChip.setLocalizedText(key: UIStrings.walletStateFailed, localizer: localizer)
 
-        case .completed:
+        case "completed":
             statusChip.isHidden = false
             statusChip.textColor = UIColor.white
             statusChip.backgroundColor = UIColor(hex: "#4dae51")

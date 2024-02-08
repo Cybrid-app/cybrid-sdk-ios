@@ -21,12 +21,12 @@ struct AccountAssetUIModel: Equatable {
         self.account = account
         self.asset = asset
 
-        let balanceToUse = account.type == .fiat ? account.platformAvailable : account.platformBalance
+        let balanceToUse = account.type == "fiat" ? account.platformAvailable : account.platformBalance
 
         let empty = BigDecimal(0)
         let balanceValue = BigDecimal(balanceToUse ?? "0", precision: asset.decimals)
         var balanceValueFormatted: String = ""
-        if account.type == .fiat {
+        if account.type == "fiat" {
             balanceValueFormatted = CybridCurrencyFormatter.formatPrice(balanceValue ?? empty, with: asset.symbol)
         } else {
             balanceValueFormatted = CybridCurrencyFormatter.formatInputNumber(balanceValue ?? empty).removeTrailingZeros()

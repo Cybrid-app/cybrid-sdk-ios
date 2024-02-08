@@ -19,9 +19,6 @@ extension TransferBankModel {
 
         let codingKeys = TransferBankModel.CodingKeys.self
         let createdAtDate = getDate(stringDate: createdAt)
-        let type = json[TransferBankModel.CodingKeys.transferType.rawValue] as? String ?? "funding"
-        let side = json[TransferBankModel.CodingKeys.side.rawValue] as? String ?? "deposit"
-        let state = json[TransferBankModel.CodingKeys.state.rawValue] as? String ?? "storing"
 
         let sourceAccountJson = json[TransferBankModel.CodingKeys.sourceAccount.rawValue] as? [String: Any] ?? ["": ""]
         let sourceAccount = TransferBankModel.getSourceAccount(sourceAccountJson: sourceAccountJson)
@@ -31,14 +28,14 @@ extension TransferBankModel {
 
         self.init(
             guid: json[codingKeys.guid.rawValue] as? String ?? "",
-            transferType: (TransferBankModel.TransferTypeBankModel(rawValue: type) ?? .funding) as TransferTypeBankModel,
+            transferType: json[codingKeys.transferType.rawValue] as? String ?? "",
             bankGuid: json[codingKeys.bankGuid.rawValue] as? String ?? "",
             customerGuid: json[codingKeys.customerGuid.rawValue] as? String ?? "",
             quoteGuid: json[codingKeys.quoteGuid.rawValue] as? String ?? "",
             externalBankAccountGuid: json[codingKeys.externalBankAccountGuid.rawValue] as? String ?? "",
             asset: json[codingKeys.asset.rawValue] as? String ?? "",
-            side: (TransferBankModel.SideBankModel(rawValue: side) ?? .deposit) as SideBankModel,
-            state: (TransferBankModel.StateBankModel(rawValue: state) ?? .storing) as StateBankModel,
+            side: json[codingKeys.side.rawValue] as? String ?? "",
+            state: json[codingKeys.state.rawValue] as? String ?? "",
             failureCode: json[codingKeys.failureCode.rawValue] as? String ?? "",
             amount: json[codingKeys.amount.rawValue] as? Int ?? 0,
             estimatedAmount: json[codingKeys.estimatedAmount.rawValue] as? Int ?? 0,
@@ -60,7 +57,7 @@ extension TransferBankModel {
         let sourceAccountGuid = sourceAccountJson[TransferSourceAccountBankModel.CodingKeys.guid.rawValue] as? String ?? ""
         return TransferSourceAccountBankModel(
             guid: sourceAccountGuid,
-            type: (TransferSourceAccountBankModel.TypeBankModel(rawValue: sourceAccountType) ?? .externalWallet) as TransferSourceAccountBankModel.TypeBankModel
+            type: sourceAccountType
         )
     }
 
@@ -70,7 +67,7 @@ extension TransferBankModel {
         let destinationAccountGuid = destinationAccountJson[TransferDestinationAccountBankModel.CodingKeys.guid.rawValue] as? String ?? ""
         return TransferDestinationAccountBankModel(
             guid: destinationAccountGuid,
-            type: (TransferDestinationAccountBankModel.TypeBankModel(rawValue: destinationAccountType) ?? .externalWallet) as TransferDestinationAccountBankModel.TypeBankModel
+            type: destinationAccountType
         )
     }
 

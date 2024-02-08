@@ -71,7 +71,7 @@ open class CryptoTransferViewModel: BaseViewModel {
 
                 // -- Set accounts (Only trading accounts)
                 self.accounts = accountList.objects
-                self.accounts = self.accounts.filter { $0.type == .trading }
+                self.accounts = self.accounts.filter { $0.type == "trading" }
                 self.accounts = self.accounts.sorted(by: { $0.asset! < $1.asset! })
 
                 // -- Choosing first account
@@ -100,7 +100,7 @@ open class CryptoTransferViewModel: BaseViewModel {
                 // -- Set wallets (Only active wallets)
                 let allWallets = list.objects
                 self.wallets = allWallets.filter {
-                    $0.state != .deleting && $0.state != .deleted
+                    $0.state != "deleting" && $0.state != "deleted"
                 }
                 self.wallets = self.wallets.sorted(by: { $0.name! < $1.name! })
 
@@ -253,7 +253,7 @@ open class CryptoTransferViewModel: BaseViewModel {
             productType: .cryptoTransfer,
             customerGuid: self.customerGuid,
             asset: asset.code,
-            side: PostQuoteBankModel.SideBankModel.withdrawal,
+            side: "withdrawal",
             deliverAmount: amountReady
         )
     }
@@ -290,7 +290,7 @@ open class CryptoTransferViewModel: BaseViewModel {
                 amount: amountFromInput,
                 cryptoAsset: self.currentAsset.value!,
                 price: sellPrice,
-                base: isAmountInFiat.value ? .fiat : .crypto
+                base: isAmountInFiat.value ? "fiat" : "crypto"
             )
             let tradeValueCDecimal = CDecimal(tradeValue)
             let platformBalance = CDecimal(self.currentAccount.value?.platformBalance ?? "0")

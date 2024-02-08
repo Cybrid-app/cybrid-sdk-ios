@@ -49,7 +49,7 @@ open class AccountTransfersViewModel: NSObject {
                 return CybridConstants.transferAssetError
             }
             let asset = try Cybrid.findAsset(code: transferAsset)
-            let amount = transfer.state == .completed ? transfer.amount ?? 0 : transfer.estimatedAmount ?? 0
+            let amount = transfer.state == "completed" ? transfer.amount ?? 0 : transfer.estimatedAmount ?? 0
             let amountValue = CDecimal(amount)
             let amountFormatted = AssetFormatter.forBase(asset, amount: amountValue)
             return amountFormatted

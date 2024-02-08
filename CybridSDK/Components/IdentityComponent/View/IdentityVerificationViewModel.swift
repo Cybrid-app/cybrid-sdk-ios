@@ -59,7 +59,7 @@ open class IdentityVerificationViewModel: NSObject {
 
             case .success(let customer):
                 self?.logger?.log(.component(.accounts(.pricesDataFetching)))
-                self?.checkCustomerStatus(state: customer.state ?? .storing)
+                self?.checkCustomerStatus(state: customer.state ?? "storing")
 
             case .failure:
                 self?.logger?.log(.component(.accounts(.pricesDataError)))
@@ -75,7 +75,7 @@ open class IdentityVerificationViewModel: NSObject {
             return
         }
 
-        if identityWrapper?.identityVerification?.state == .expired {
+        if identityWrapper?.identityVerification?.state == "expired" {
 
             self.createIdentityVerification { [self] recordIdentity in
                 self.fetchIdentityVerificationWithDetailsStatus(record: recordIdentity)
@@ -88,7 +88,7 @@ open class IdentityVerificationViewModel: NSObject {
     internal func getIdentityVerificationStatusWithWrapperNil() {
 
         self.fetchLastIdentityVerification { [self] lastVerification in
-            if lastVerification == nil || lastVerification?.state == .expired {
+            if lastVerification == nil || lastVerification?.state == "expired" {
                 self.createIdentityVerification { recordIdentity in
                     self.fetchIdentityVerificationWithDetailsStatus(record: recordIdentity)
                 }
@@ -163,34 +163,34 @@ open class IdentityVerificationViewModel: NSObject {
     }
 
     // MARK: Checker Funtions
-    internal func checkCustomerStatus(state: CustomerBankModel.StateBankModel) {
+    internal func checkCustomerStatus(state: String) {
 
         switch state {
 
-        case .storing:
+        case "storing":
             if self.customerJob == nil {
                 self.customerJob = Polling { self.getCustomerStatus() }
             }
 
-        case .verified:
+        case "verified":
 
             self.customerJob?.stop()
             self.customerJob = nil
             self.uiState.value = .VERIFIED
 
-        case .unverified:
+        case "unverified":
 
             self.customerJob?.stop()
             self.customerJob = nil
             self.getIdentityVerificationStatus()
 
-        case .rejected:
+        case "rejected":
 
             self.customerJob?.stop()
             self.customerJob = nil
             self.uiState.value = .ERROR
 
-        case .frozen:
+        case "frozen":
             self.customerJob?.stop()
             self.customerJob = nil
             self.uiState.value = .FROZEN
@@ -205,15 +205,15 @@ open class IdentityVerificationViewModel: NSObject {
 
         switch wrapper?.identityVerificationDetails?.state {
 
-        case .storing:
+        case "storing":
 
             if identityJob == nil {
                 identityJob = Polling { self.getIdentityVerificationStatus(identityWrapper: wrapper) }
             }
 
-        case .waiting:
+        case "waiting":
 
-            if wrapper?.identityVerificationDetails?.personaState == .completed || wrapper?.identityVerificationDetails?.personaState == .processing {
+            if wrapper?.identityVerificationDetails?.personaState == "completed" || wrapper?.identityVerificationDetails?.personaState == "processing" {
                 if identityJob == nil {
                     self.identityJob = Polling { self.getIdentityVerificationStatus(identityWrapper: wrapper) }
                 }
@@ -224,13 +224,13 @@ open class IdentityVerificationViewModel: NSObject {
                 self.checkIdentityPersonaStatus(wrapper: wrapper)
             }
 
-        case .expired:
+        case "expired":
 
             self.identityJob?.stop()
             self.identityJob = nil
             self.getIdentityVerificationStatus(identityWrapper: nil)
 
-        case .completed:
+        case "completed":
 
             self.identityJob?.stop()
             self.identityJob = nil
@@ -248,19 +248,19 @@ open class IdentityVerificationViewModel: NSObject {
         self.latestIdentityVerification = wrapper
         switch wrapper?.identityVerificationDetails?.personaState {
 
-        case .waiting:
+        case "waiting":
 
             uiState.value = .REQUIRED
 
-        case .pending:
+        case "pending":
 
             uiState.value = .REQUIRED
 
-        case .reviewing:
+        case "reviewing":
 
             uiState.value = .REVIEWING
 
-        case .expired:
+        case "expired":
 
             getIdentityVerificationStatus(identityWrapper: nil)
 

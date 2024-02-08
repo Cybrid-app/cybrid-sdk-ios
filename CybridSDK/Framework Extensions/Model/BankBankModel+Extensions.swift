@@ -17,8 +17,6 @@ extension BankBankModel {
             return nil
         }
 
-        let type = json[BankBankModel.CodingKeys.type.rawValue] as? String ?? ""
-
         let codingKeys = BankBankModel.CodingKeys.self
         let createdAtDate = getDate(stringDate: createdAt)
 
@@ -26,7 +24,7 @@ extension BankBankModel {
             guid: json[codingKeys.guid.rawValue] as? String ?? "",
             organizationGuid: json[codingKeys.organizationGuid.rawValue] as? String ?? "",
             name: json[codingKeys.name.rawValue] as? String ?? "",
-            type: BankBankModel.TypeBankModel(rawValue: type) ?? .sandbox,
+            type: json[codingKeys.type.rawValue] as? String ?? "",
             supportedTradingSymbols: json[codingKeys.supportedTradingSymbols.rawValue] as? [String] ?? [],
             supportedFiatAccountAssets: json[codingKeys.supportedFiatAccountAssets.rawValue] as? [String] ?? [],
             supportedCountryCodes: json[codingKeys.supportedCountryCodes.rawValue] as? [String] ?? [],

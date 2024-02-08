@@ -17,7 +17,7 @@ public enum FiatConfig {
         switch self {
         case .usd:
             return AssetBankModel(
-                type: .fiat,
+                type: "fiat",
                 code: "USD",
                 name: "United State Dollar",
                 symbol: "$",
@@ -25,7 +25,7 @@ public enum FiatConfig {
             )
         case .cad:
             return AssetBankModel(
-                type: .fiat,
+                type: "fiat",
                 code: "CAD",
                 name: "Canadian Dollar",
                 symbol: "$",

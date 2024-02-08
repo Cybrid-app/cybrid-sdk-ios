@@ -51,7 +51,7 @@ open class BankAccountsViewModel: NSObject {
                 let accountsPreFilter = accountsList.objects
                 var accountsFiltered: [ExternalBankAccountBankModel] = []
                 for account in accountsPreFilter {
-                    if account.state != .deleted && account.state != .deleting {
+                    if account.state != "deleted" && account.state != "deleting" {
                         accountsFiltered.append(account)
                     }
                 }
@@ -217,7 +217,7 @@ open class BankAccountsViewModel: NSObject {
 
     func checkExternalBankAccountState(externalBankAccount: ExternalBankAccountBankModel) {
 
-        if externalBankAccount.state == .completed {
+        if externalBankAccount.state == "completed" {
 
             self.externalBankAccountJob?.stop()
             self.externalBankAccountJob = nil

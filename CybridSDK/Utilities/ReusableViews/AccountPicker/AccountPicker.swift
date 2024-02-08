@@ -40,7 +40,7 @@ public class AccountPicker: UIView {
         super.init(frame: CGRect.zero)
         self.accounts = accounts
         if !self.accounts.isEmpty {
-            self.accounts = self.accounts.filter { $0.type == .trading }
+            self.accounts = self.accounts.filter { $0.type == "trading" }
             self.accounts = self.accounts.sorted(by: {
                 $0.asset! < $1.asset!
             })

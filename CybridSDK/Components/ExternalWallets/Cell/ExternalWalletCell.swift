@@ -86,7 +86,7 @@ class ExternalWalletCell: UITableViewCell {
         // -- Status chip
         // let localizer = CybridLocalizer()
         switch wallet.state {
-        case .storing, .pending:
+        case "storing", "pending":
 
             self.statusChip.isHidden = false
             self.statusChip.textColor = UIColor.black
@@ -94,7 +94,7 @@ class ExternalWalletCell: UITableViewCell {
             self.statusChip.text = "Pending"
             // self.statusChip.setLocalizedText(key: UIString.transferPending, localizer: localizer)
 
-        case .failed:
+        case "failed":
 
             self.statusChip.isHidden = false
             self.statusChip.textColor = UIColor.white
@@ -102,7 +102,7 @@ class ExternalWalletCell: UITableViewCell {
             self.statusChip.text = "Failed"
             // self.statusChip.setLocalizedText(key: UIString.transferFailed, localizer: localizer)
 
-        case .completed:
+        case "completed":
             self.statusChip.isHidden = false
             self.statusChip.textColor = UIColor.white
             self.statusChip.backgroundColor = UIColor(hex: "#4dae51")

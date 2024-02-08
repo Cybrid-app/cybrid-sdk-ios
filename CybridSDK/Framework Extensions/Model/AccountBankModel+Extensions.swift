@@ -12,25 +12,17 @@ extension AccountBankModel {
 
     init?(json: [String: Any]) {
 
-        guard
-            let platformAvailableValue = json[AccountBankModel.CodingKeys.platformAvailable.rawValue] as? String,
-            let platfomrBalanceValue = json[AccountBankModel.CodingKeys.platformBalance.rawValue] as? String,
-            let type = json[AccountBankModel.CodingKeys.type.rawValue] as? String,
-            let state = json[AccountBankModel.CodingKeys.state.rawValue] as? String
-        else {
-            return nil
-        }
         self.init(
-            type: (AccountBankModel.TypeBankModel(rawValue: type)!) as TypeBankModel,
+            type: json[AccountBankModel.CodingKeys.type.rawValue] as? String,
             guid: json[AccountBankModel.CodingKeys.guid.rawValue] as? String,
             createdAt: json[AccountBankModel.CodingKeys.createdAt.rawValue] as? Date,
             asset: json[AccountBankModel.CodingKeys.asset.rawValue] as? String,
             name: json[AccountBankModel.CodingKeys.name.rawValue] as? String,
             bankGuid: json[AccountBankModel.CodingKeys.bankGuid.rawValue] as? String,
             customerGuid: json[AccountBankModel.CodingKeys.customerGuid.rawValue] as? String,
-            platformBalance: platfomrBalanceValue,
-            platformAvailable: platformAvailableValue,
-            state: StateBankModel(rawValue: state))
+            platformBalance: json[AccountBankModel.CodingKeys.platformBalance.rawValue] as? String,
+            platformAvailable: json[AccountBankModel.CodingKeys.platformAvailable.rawValue] as? String,
+            state: json[AccountBankModel.CodingKeys.state.rawValue] as? String)
     }
 
     static func fromArray(objects: [[String: Any]]) -> [AccountBankModel] {

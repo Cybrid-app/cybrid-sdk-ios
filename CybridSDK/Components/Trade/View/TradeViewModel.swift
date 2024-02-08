@@ -74,8 +74,8 @@ open class TradeViewModel: NSObject, ListPricesItemDelegate {
 
                 let accountsFormatted = self?.buildUIModelList(accounts: accounts) ?? []
                 self?.accounts = accountsFormatted
-                self?.fiatAccounts = accountsFormatted.filter { $0.account.type == .fiat }
-                self?.tradingAccounts = accountsFormatted.filter { $0.account.type == .trading }
+                self?.fiatAccounts = accountsFormatted.filter { $0.account.type == "fiat" }
+                self?.tradingAccounts = accountsFormatted.filter { $0.account.type == "trading" }
                 self?.currentAccountToTrade.value = self?.tradingAccounts.first(where: {
                     $0.asset.code == self?.currentAsset.value?.code
                 })
@@ -129,7 +129,7 @@ open class TradeViewModel: NSObject, ListPricesItemDelegate {
 
     internal func switchActionHandler() {
 
-        if self.currentAccountToTrade.value?.account.type == .fiat {
+        if self.currentAccountToTrade.value?.account.type == "fiat" {
             self.currentAccountToTrade.value = self.tradingAccounts.first(where: {
                 $0.asset.code == self.currentAsset.value?.code
             })
@@ -152,13 +152,13 @@ open class TradeViewModel: NSObject, ListPricesItemDelegate {
     internal func maxButtonViewStateHandler() {
 
         if self.segmentSelection.value == .buy {
-            if self.currentAccountToTrade.value?.account.type == .fiat {
+            if self.currentAccountToTrade.value?.account.type == "fiat" {
                 self.currentMaxButtonHide.value = false
             } else {
                 self.currentMaxButtonHide.value = true
             }
         } else {
-            if self.currentAccountToTrade.value?.account.type == .fiat {
+            if self.currentAccountToTrade.value?.account.type == "fiat" {
                 self.currentMaxButtonHide.value = true
             } else {
                 self.currentMaxButtonHide.value = false
@@ -194,13 +194,13 @@ open class TradeViewModel: NSObject, ListPricesItemDelegate {
                 amount: amountFormatted,
                 cryptoAsset: self.currentAsset.value!,
                 price: buyPrice,
-                base: asset?.type ?? .crypto)
+                base: asset?.type ?? "crypto")
             let tradeValueCDecimal = CDecimal(tradeValue)
 
             // -- Founds validation
             if self.segmentSelection.value == .buy {
 
-                if asset?.type == .crypto {
+                if asset?.type == "crypto" {
                     let accountValue = self.currentAccountCounterToTrade.value?.account.platformAvailable
                     let accountValueCDecimal = CDecimal(accountValue ?? "0")
                     if tradeValueCDecimal.intValue > accountValueCDecimal.intValue {
@@ -216,7 +216,7 @@ open class TradeViewModel: NSObject, ListPricesItemDelegate {
                 }
             } else {
 
-                if asset?.type == .crypto {
+                if asset?.type == "crypto" {
                     let amountFormatted = AssetFormatter.forInput(asset!, amount: amount)
                     let amountFormattedCDecimal = CDecimal(amountFormatted)
                     let accountCryptoAssetValue = self.currentAccountToTrade.value?.account.platformBalance
@@ -253,7 +253,7 @@ open class TradeViewModel: NSObject, ListPricesItemDelegate {
 
         let asset = (self.currentAccountToTrade.value?.asset)!
         let account = self.currentAccountToTrade.value
-        let accountValue = asset.type == .crypto ? account?.account.platformBalance : account?.account.platformAvailable
+        let accountValue = asset.type == "crypto" ? account?.account.platformBalance : account?.account.platformAvailable
         let accountValueCDecimal = CDecimal(accountValue ?? "0")
         let valueFormatted = AssetFormatter.forBase(asset, amount: accountValueCDecimal)
         return valueFormatted
@@ -265,17 +265,17 @@ open class TradeViewModel: NSObject, ListPricesItemDelegate {
         let counterAssetCode = currentCounterAsset.value?.code ?? ""
         let symbol = "\(assetCode)-\(counterAssetCode)"
         let amount = CDecimal(self.currentAmountInput)
-        var postQuote = PostQuoteBankModel(side: .buy)
+        var postQuote = PostQuoteBankModel(side: "buy")
 
         switch segmentSelection.value {
         case .buy:
-            if currentAccountToTrade.value?.asset.type == .crypto {
+            if currentAccountToTrade.value?.asset.type == "crypto" {
                 let amountFormatted = AssetFormatter.forInput(currentAsset.value!, amount: amount)
                 postQuote = PostQuoteBankModel(
                     productType: .trading,
                     customerGuid: self.customerGuid,
                     symbol: symbol,
-                    side: .buy,
+                    side: "buy",
                     receiveAmount: amountFormatted
                 )
             } else {
@@ -284,19 +284,19 @@ open class TradeViewModel: NSObject, ListPricesItemDelegate {
                     productType: .trading,
                     customerGuid: self.customerGuid,
                     symbol: symbol,
-                    side: .buy,
+                    side: "buy",
                     deliverAmount: amountFormatted
                 )
             }
 
         case .sell:
-            if currentAccountToTrade.value?.asset.type == .fiat {
+            if currentAccountToTrade.value?.asset.type == "fiat" {
                 let amountFormatted = AssetFormatter.forInput(currentCounterAsset.value!, amount: amount)
                 postQuote = PostQuoteBankModel(
                     productType: .trading,
                     customerGuid: self.customerGuid,
                     symbol: symbol,
-                    side: .sell,
+                    side: "sell",
                     receiveAmount: amountFormatted
                 )
             } else {
@@ -305,7 +305,7 @@ open class TradeViewModel: NSObject, ListPricesItemDelegate {
                     productType: .trading,
                     customerGuid: self.customerGuid,
                     symbol: symbol,
-                    side: .sell,
+                    side: "sell",
                     deliverAmount: amountFormatted
                 )
             }

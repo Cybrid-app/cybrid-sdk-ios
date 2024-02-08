@@ -17,15 +17,13 @@ extension WorkflowBankModel {
             return nil
         }
 
-        let type = json[WorkflowBankModel.CodingKeys.type.rawValue] as? String ?? ""
-
         let codingKeys = WorkflowBankModel.CodingKeys.self
         let createdAtDate = getDate(stringDate: createdAt)
 
         self.init(
             guid: json[codingKeys.guid.rawValue] as? String ?? "",
             customerGuid: json[codingKeys.customerGuid.rawValue] as? String ?? "",
-            type: WorkflowBankModel.TypeBankModel(rawValue: type) ?? .plaid,
+            type: json[codingKeys.type.rawValue] as? String ?? "",
             createdAt: createdAtDate)
     }
 }

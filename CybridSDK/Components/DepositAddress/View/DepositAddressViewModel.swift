@@ -110,12 +110,12 @@ open class DepositAddressViewModel: BaseViewModel {
 
         switch depositAddress.state {
 
-        case .storing:
+        case "storing":
             self.depositAddressPolling = Polling {
                 self.fetchDepositAddress(depositAddress: depositAddress)
             }
 
-        case .created:
+        case "created":
             self.depositAddressPolling?.stop()
             self.depositAddressPolling = nil
             self.displayDepositAddress(depositAddress: depositAddress)
