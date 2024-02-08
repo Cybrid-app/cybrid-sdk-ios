@@ -11,11 +11,19 @@ import CybridApiBankSwift
 extension AccountBankModel {
 
     init?(json: [String: Any]) {
+        
+        guard
+            let createdAt = json[AccountBankModel.CodingKeys.createdAt.rawValue] as? String
+        else {
+            return nil
+        }
+        
+        let createdAtDate = getDate(stringDate: createdAt)
 
         self.init(
             type: json[AccountBankModel.CodingKeys.type.rawValue] as? String,
             guid: json[AccountBankModel.CodingKeys.guid.rawValue] as? String,
-            createdAt: json[AccountBankModel.CodingKeys.createdAt.rawValue] as? Date,
+            createdAt: createdAtDate,
             asset: json[AccountBankModel.CodingKeys.asset.rawValue] as? String,
             name: json[AccountBankModel.CodingKeys.name.rawValue] as? String,
             bankGuid: json[AccountBankModel.CodingKeys.bankGuid.rawValue] as? String,
