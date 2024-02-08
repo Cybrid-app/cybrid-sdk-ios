@@ -33,7 +33,12 @@ final class TransfersAPIMock: TransfersAPI {
         customerGuid: String? = nil,
         accountGuid: String? = nil,
         state: String? = nil,
+        side: String? = nil,
         label: String? = nil,
+        createdAtGte: String? = nil,
+        createdAtLt: String? = nil,
+        updatedAtGte: String? = nil,
+        updatedAtLt: String? = nil,
         apiResponseQueue: DispatchQueue = CybridApiBankSwiftAPI.apiResponseQueue,
         completion: @escaping ((Result<TransferListBankModel, ErrorResponse>) -> Void)) -> RequestTask {
         transfersListCompletition = completion
@@ -65,12 +70,12 @@ extension TransferBankModel {
     static func mock() -> TransferBankModel {
         return TransferBankModel(
             guid: "1234",
-            transferType: .funding,
+            transferType: "funding",
             customerGuid: "1234",
             quoteGuid: "1234",
             asset: "USD",
-            side: .deposit,
-            state: .storing,
+            side: "deposit",
+            state: "storing",
             amount: 1000,
             fee: 0,
             createdAt: Date()
@@ -80,17 +85,17 @@ extension TransferBankModel {
     static func mockWithWAlletGuid() -> Self {
         return TransferBankModel(
             guid: "1234",
-            transferType: .crypto,
+            transferType: "crypto",
             customerGuid: "12345",
             quoteGuid: "12345",
             asset: "BTC",
-            side: .withdrawal,
-            state: .completed,
+            side: "withdrawal",
+            state: "completed",
             amount: 200000,
             fee: 0,
             destinationAccount: TransferDestinationAccountBankModel(
                 guid: "wallet_guid",
-                type: .externalWallet
+                type: "externalWallet"
             ),
             createdAt: Date()
         )

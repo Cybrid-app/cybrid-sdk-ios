@@ -63,7 +63,7 @@ extension WorkflowBankModel {
         return WorkflowBankModel(
             guid: "1234",
             customerGuid: "1234",
-            type: .plaid,
+            type: "plaid",
             createdAt: Date()
         )
     }
@@ -75,7 +75,7 @@ extension WorkflowWithDetailsBankModel {
         return WorkflowWithDetailsBankModel(
             guid: "1234",
             customerGuid: "1234",
-            type: .plaid,
+            type: "plaid",
             createdAt: Date(),
             plaidLinkToken: "1234"
         )
@@ -85,7 +85,7 @@ extension WorkflowWithDetailsBankModel {
         return WorkflowWithDetailsBankModel(
             guid: "1234",
             customerGuid: "1234",
-            type: .plaid,
+            type: "plaid",
             createdAt: Date(),
             plaidLinkToken: ""
         )
@@ -95,7 +95,7 @@ extension WorkflowWithDetailsBankModel {
         return WorkflowWithDetailsBankModel(
             guid: "1234",
             customerGuid: "1234",
-            type: .plaid,
+            type: "plaid",
             createdAt: Date()
         )
     }

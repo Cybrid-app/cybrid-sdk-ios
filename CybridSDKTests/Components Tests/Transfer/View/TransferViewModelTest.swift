@@ -276,8 +276,8 @@ class TransferViewModelTest: XCTestCase {
         let sideDeposit = viewModel.getQuoteSide()
 
         // -- Then
-        XCTAssertEqual(sideWithdraw, .withdrawal)
-        XCTAssertEqual(sideDeposit, .deposit)
+        XCTAssertEqual(sideWithdraw, "withdrawal")
+        XCTAssertEqual(sideDeposit, "deposit")
     }
 
     func test_getAmountOfCurrentTransferFormatted_Asset_Nil() {

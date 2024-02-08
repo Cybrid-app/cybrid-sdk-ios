@@ -107,7 +107,7 @@ class CurrencyFormatterTests: XCTestCase {
 
   func testAmountFormatting_withoutFractions() {
     // Given
-    let jpy = AssetBankModel(type: .fiat, code: "JPY", name: "Japanes Yen", symbol: "¥", decimals: 0)
+    let jpy = AssetBankModel(type: "fiat", code: "JPY", name: "Japanes Yen", symbol: "¥", decimals: 0)
     let price = BigDecimal(BigInt(200_000), precision: jpy.decimals)
 
     // When
@@ -290,7 +290,7 @@ extension CurrencyFormatterTests {
 
   func testAmountFormatting_toGBP_withMultipleLocales() {
     // Given
-    let pounds = AssetBankModel(type: .fiat, code: "GBP", name: "Pounds", symbol: "£", decimals: 2)
+    let pounds = AssetBankModel(type: "fiat", code: "GBP", name: "Pounds", symbol: "£", decimals: 2)
     let price = BigDecimal(BigInt(200_032), precision: pounds.decimals)
 
     // When

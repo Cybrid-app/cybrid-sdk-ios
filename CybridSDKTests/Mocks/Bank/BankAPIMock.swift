@@ -58,7 +58,7 @@ extension BankBankModel {
             guid: "1234",
             organizationGuid: "1234",
             name: "1234",
-            type: .sandbox,
+            type: "sandbox",
             supportedFiatAccountAssets: ["USD"],
             features: [],
             createdAt: Date())
@@ -69,7 +69,7 @@ extension BankBankModel {
             guid: "1234",
             organizationGuid: "1234",
             name: "1234",
-            type: .sandbox,
+            type: "sandbox",
             supportedFiatAccountAssets: nil,
             features: [],
             createdAt: Date())
@@ -80,7 +80,7 @@ extension BankBankModel {
             guid: "1234",
             organizationGuid: "1234",
             name: "1234",
-            type: .sandbox,
+            type: "sandbox",
             supportedFiatAccountAssets: ["MXN"],
             features: [],
             createdAt: Date())
@@ -91,7 +91,7 @@ extension BankBankModel {
             guid: "1234",
             organizationGuid: "1234",
             name: "1234",
-            type: .sandbox,
+            type: "sandbox",
             features: [],
             createdAt: Date())
     }

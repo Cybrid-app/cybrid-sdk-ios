@@ -24,7 +24,22 @@ final class TradesAPIMock: TradesAPI {
         return createTradeWithRequestBuilder(postTradeBankModel: postTradeBankModel).requestTask
     }
 
-    override class func listTrades(page: Int? = nil, perPage: Int? = nil, guid: String? = nil, bankGuid: String? = nil, customerGuid: String? = nil, accountGuid: String? = nil, state: String? = nil, label: String? = nil, apiResponseQueue: DispatchQueue = CybridApiBankSwiftAPI.apiResponseQueue, completion: @escaping ((Result<TradeListBankModel, ErrorResponse>) -> Void)) -> RequestTask {
+    override class func listTrades(
+        page: Int? = nil,
+        perPage: Int? = nil,
+        guid: String? = nil,
+        bankGuid: String? = nil,
+        customerGuid: String? = nil,
+        accountGuid: String? = nil,
+        state: String? = nil,
+        side: String? = nil,
+        label: String? = nil,
+        createdAtGte: String? = nil,
+        createdAtLt: String? = nil,
+        updatedAtGte: String? = nil,
+        updatedAtLt: String? = nil,
+        apiResponseQueue: DispatchQueue = CybridApiBankSwiftAPI.apiResponseQueue,
+        completion: @escaping ((Result<TradeListBankModel, ErrorResponse>) -> Void)) -> RequestTask {
         tradesListCompletition = completion
         return listTradesWithRequestBuilder().requestTask
     }
@@ -59,8 +74,8 @@ extension TradesAPIMock {
                 customerGuid: "CUSTOMER_GUID",
                 quoteGuid: "QUOTE_GUID",
                 symbol: "ETH-USD",
-                side: .buy,
-                state: .completed,
+                side: "buy",
+                state: "completed",
                 receiveAmount: "100000000000000000",
                 deliverAmount: "13390",
                 fee: "0",

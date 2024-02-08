@@ -83,11 +83,11 @@ extension IdentityVerificationBankModel {
         return IdentityVerificationBankModel(
             guid: "12345",
             customerGuid: "12345",
-            type: .kyc,
-            method: .idAndSelfie,
+            type: "kyc",
+            method: "idAndSelfie",
             createdAt: Date(),
-            state: .storing,
-            outcome: .passed,
+            state: "storing",
+            outcome: "passed",
             failureCodes: [])
     }
 
@@ -95,11 +95,11 @@ extension IdentityVerificationBankModel {
         return IdentityVerificationBankModel(
             guid: "12345",
             customerGuid: "12345",
-            type: .kyc,
-            method: .idAndSelfie,
+            type: "kyc",
+            method: "idAndSelfie",
             createdAt: Date(),
-            state: .expired,
-            outcome: .passed,
+            state: "expired",
+            outcome: "passed",
             failureCodes: [])
     }
 
@@ -107,11 +107,11 @@ extension IdentityVerificationBankModel {
         return IdentityVerificationBankModel(
             guid: "12345",
             customerGuid: "12345",
-            type: .kyc,
-            method: .idAndSelfie,
+            type: "kyc",
+            method: "idAndSelfie",
             createdAt: Date(),
-            state: .storing,
-            outcome: .passed,
+            state: "storing",
+            outcome: "passed",
             failureCodes: [])
     }
 
@@ -150,41 +150,41 @@ extension IdentityVerificationWithDetailsBankModel {
         return IdentityVerificationWithDetailsBankModel(
             guid: "12345",
             customerGuid: "12345",
-            type: .kyc,
-            method: .idAndSelfie,
+            type: "kyc",
+            method: "idAndSelfie",
             createdAt: Date(),
-            state: .storing,
-            outcome: .passed,
+            state: "storing",
+            outcome: "passed",
             failureCodes: [],
             personaInquiryId: "12345",
-            personaState: .waiting)
+            personaState: "waiting")
     }
 
     static func getExpiredMock() -> IdentityVerificationWithDetailsBankModel {
         return IdentityVerificationWithDetailsBankModel(
             guid: "12345",
             customerGuid: "12345",
-            type: .kyc,
-            method: .idAndSelfie,
+            type: "kyc",
+            method: "idAndSelfie",
             createdAt: Date(),
-            state: .expired,
-            outcome: .passed,
+            state: "expired",
+            outcome: "passed",
             failureCodes: [],
             personaInquiryId: "12345",
-            personaState: .waiting)
+            personaState: "waiting")
     }
 
     static func getPersonaExpiredMock() -> IdentityVerificationWithDetailsBankModel {
         return IdentityVerificationWithDetailsBankModel(
             guid: "12345",
             customerGuid: "12345",
-            type: .kyc,
-            method: .idAndSelfie,
+            type: "kyc",
+            method: "idAndSelfie",
             createdAt: Date(),
-            state: .storing,
-            outcome: .passed,
+            state: "storing",
+            outcome: "passed",
             failureCodes: [],
             personaInquiryId: "12345",
-            personaState: .expired)
+            personaState: "expired")
     }
 }

@@ -164,7 +164,7 @@ class DepositAddressViewModelTest: XCTestCase {
             guid: "GUID",
             accountGuid: "GUID",
             asset: "BTC",
-            state: .storing
+            state: "storing"
         )
 
         // -- When
@@ -183,7 +183,7 @@ class DepositAddressViewModelTest: XCTestCase {
             guid: "GUID",
             accountGuid: "GUID",
             asset: "BTC",
-            state: .created
+            state: "created"
         )
         viewModel.depositAddressPolling = Polling {}
 
@@ -205,7 +205,7 @@ class DepositAddressViewModelTest: XCTestCase {
             guid: "GUID",
             accountGuid: "GUID",
             asset: "BTC",
-            state: .unknownDefaultOpenApi
+            state: "unknownDefaultOpenApi"
         )
         viewModel.depositAddressPolling = Polling {}
 

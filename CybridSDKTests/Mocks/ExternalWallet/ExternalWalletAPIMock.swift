@@ -21,7 +21,7 @@ final class ExternalWalletAPIMock: ExternalWalletsAPI {
     private static var createExternalWalletBankModelCompletion: CreateExternalWalletBankModelCompletion?
     private static var deleteExternalWalletBankModelCompletion: DeleteExternalWalletBankModelCompletion?
 
-    override class func listExternalWallets(page: Int? = nil, perPage: Int? = nil, owner: ListRequestOwnerBankModel? = nil, guid: String? = nil, bankGuid: String? = nil, customerGuid: String? = nil, state: String? = nil, apiResponseQueue: DispatchQueue = CybridApiBankSwiftAPI.apiResponseQueue, completion: @escaping ((Result<ExternalWalletListBankModel, ErrorResponse>) -> Void)) -> RequestTask {
+    override class func listExternalWallets(page: Int? = nil, perPage: Int? = nil, owner: String? = nil, guid: String? = nil, bankGuid: String? = nil, customerGuid: String? = nil, asset: String? = nil, state: String? = nil, apiResponseQueue: DispatchQueue = CybridApiBankSwiftAPI.apiResponseQueue, completion: @escaping ((Result<ExternalWalletListBankModel, ErrorResponse>) -> Void)) -> RequestTask {
         fetchExternalWalletListBankModelCompletion = completion
         return listExternalWalletsWithRequestBuilder().requestTask
     }

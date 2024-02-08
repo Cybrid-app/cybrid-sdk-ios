@@ -15,7 +15,7 @@ class BalanceUIModelTest: XCTestCase {
 
         // -- Given
         let account = AccountBankModel(
-            type: AccountBankModel.TypeBankModel.fiat,
+            type: "fiat",
             guid: "1234",
             createdAt: nil,
             asset: "USD-BTC",
@@ -24,7 +24,7 @@ class BalanceUIModelTest: XCTestCase {
             customerGuid: "1234",
             platformBalance: nil,
             platformAvailable: nil,
-            state: AccountBankModel.StateBankModel.storing
+            state: "storing"
         )
 
         let price = SymbolPriceBankModel(
@@ -52,7 +52,7 @@ class BalanceUIModelTest: XCTestCase {
 
         // -- Given
         let account = AccountBankModel(
-            type: AccountBankModel.TypeBankModel.fiat,
+            type: "fiat",
             guid: "1234",
             createdAt: nil,
             asset: nil,
@@ -61,7 +61,7 @@ class BalanceUIModelTest: XCTestCase {
             customerGuid: "1234",
             platformBalance: "cybrid",
             platformAvailable: "cybrid",
-            state: AccountBankModel.StateBankModel.storing
+            state: "storing"
         )
 
         let price = SymbolPriceBankModel(

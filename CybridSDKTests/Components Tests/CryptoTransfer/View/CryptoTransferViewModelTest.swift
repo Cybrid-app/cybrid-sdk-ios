@@ -65,9 +65,9 @@ class CryptoTransferViewModelTest: CryptoTransferTest {
         dataProvider.didFetchAccountsSuccessfully(mock: accountsFetched)
         XCTAssertFalse(viewModel.accounts.isEmpty)
         XCTAssertEqual(viewModel.accounts.count, 2)
-        XCTAssertEqual(viewModel.accounts.first?.type, .trading)
+        XCTAssertEqual(viewModel.accounts.first?.type, "trading")
         XCTAssertEqual(viewModel.accounts.first?.asset, "BTC")
-        XCTAssertEqual(viewModel.accounts.last?.type, .trading)
+        XCTAssertEqual(viewModel.accounts.last?.type, "trading")
         XCTAssertEqual(viewModel.accounts.last?.asset, "ETH")
         XCTAssertEqual(viewModel.currentAccount.value, viewModel.accounts.first)
 
@@ -94,9 +94,9 @@ class CryptoTransferViewModelTest: CryptoTransferTest {
         dataProvider.didFetchListExternalWalletsSuccessfully(mock: mock)
         XCTAssertFalse(viewModel.wallets.isEmpty)
         XCTAssertEqual(viewModel.wallets.count, 2)
-        XCTAssertEqual(viewModel.wallets.first?.state, .completed)
+        XCTAssertEqual(viewModel.wallets.first?.state, "completed")
         XCTAssertEqual(viewModel.wallets.first?.name, "BTC")
-        XCTAssertEqual(viewModel.wallets.last?.state, .completed)
+        XCTAssertEqual(viewModel.wallets.last?.state, "completed")
         XCTAssertEqual(viewModel.wallets.last?.name, "ETH")
 
         // -- Case: currentAccount nil
@@ -106,9 +106,9 @@ class CryptoTransferViewModelTest: CryptoTransferTest {
         dataProvider.didFetchListExternalWalletsSuccessfully(mock: mock)
         XCTAssertFalse(viewModel.wallets.isEmpty)
         XCTAssertEqual(viewModel.wallets.count, 2)
-        XCTAssertEqual(viewModel.wallets.first?.state, .completed)
+        XCTAssertEqual(viewModel.wallets.first?.state, "completed")
         XCTAssertEqual(viewModel.wallets.first?.name, "BTC")
-        XCTAssertEqual(viewModel.wallets.last?.state, .completed)
+        XCTAssertEqual(viewModel.wallets.last?.state, "completed")
         XCTAssertEqual(viewModel.wallets.last?.name, "ETH")
         XCTAssertEqual(viewModel.currentWallets.value.count, 1)
     }
@@ -321,7 +321,7 @@ class CryptoTransferViewModelTest: CryptoTransferTest {
         XCTAssertEqual(postQuoteBankModelFour?.productType, .cryptoTransfer)
         XCTAssertEqual(postQuoteBankModelFour?.customerGuid, customerGuid)
         XCTAssertEqual(postQuoteBankModelFour?.asset, "BTC")
-        XCTAssertEqual(postQuoteBankModelFour?.side, .withdrawal)
+        XCTAssertEqual(postQuoteBankModelFour?.side, "withdrawal")
         XCTAssertEqual(postQuoteBankModelFour?.deliverAmount, "100000000")
 
         // -- Case: amountInFiat as TRue
@@ -333,7 +333,7 @@ class CryptoTransferViewModelTest: CryptoTransferTest {
         XCTAssertEqual(postQuoteBankModelFour?.productType, .cryptoTransfer)
         XCTAssertEqual(postQuoteBankModelFour?.customerGuid, customerGuid)
         XCTAssertEqual(postQuoteBankModelFour?.asset, "BTC")
-        XCTAssertEqual(postQuoteBankModelFour?.side, .withdrawal)
+        XCTAssertEqual(postQuoteBankModelFour?.side, "withdrawal")
         XCTAssertEqual(postQuoteBankModelFour?.deliverAmount, "100000000")
     }
 

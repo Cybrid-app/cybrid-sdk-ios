@@ -61,7 +61,7 @@ class AccountTransfersViewModelTest: XCTestCase {
         Cybrid.assets = AssetBankModel.mock
         let transfer = TransferBankModel(guid: "1234",
                                          asset: "MXN",
-                                         state: .completed,
+                                         state: "completed",
                                          amount: nil,
                                          estimatedAmount: nil)
 
@@ -79,7 +79,7 @@ class AccountTransfersViewModelTest: XCTestCase {
         Cybrid.assets = AssetBankModel.mock
         let transfer = TransferBankModel(guid: "1234",
                                          asset: nil,
-                                         state: .completed,
+                                         state: "completed",
                                          amount: nil,
                                          estimatedAmount: nil)
 
@@ -99,25 +99,25 @@ class AccountTransfersViewModelTest: XCTestCase {
         let transferUSDCompleted = TransferBankModel(
             guid: "1234",
             asset: "USD",
-            state: .completed,
+            state: "completed",
             amount: 1000,
             estimatedAmount: nil)
         let transferUSDCompletedNoAmount = TransferBankModel(
             guid: "1234",
             asset: "USD",
-            state: .completed,
+            state: "completed",
             amount: nil,
             estimatedAmount: nil)
         let transferUSDStoring = TransferBankModel(
             guid: "1234",
             asset: "USD",
-            state: .storing,
+            state: "storing",
             amount: nil,
             estimatedAmount: 2000)
         let transferUSDStoringNoEstimatedAmount = TransferBankModel(
             guid: "1234",
             asset: "USD",
-            state: .storing,
+            state: "storing",
             amount: nil,
             estimatedAmount: nil)
 
@@ -141,7 +141,7 @@ class AccountTransfersViewModelTest: XCTestCase {
         Cybrid.assets = AssetBankModel.mock
         let transfer = TransferBankModel(guid: "1234",
                                          asset: "MXN",
-                                         state: .completed,
+                                         state: "completed",
                                          amount: 1000,
                                          estimatedAmount: nil)
 
@@ -160,7 +160,7 @@ class AccountTransfersViewModelTest: XCTestCase {
         Cybrid.assets = AssetBankModel.mock
         let transfer = TransferBankModel(guid: "1234",
                                          asset: "USD",
-                                         state: .completed,
+                                         state: "completed",
                                          amount: 1000,
                                          estimatedAmount: nil)
 

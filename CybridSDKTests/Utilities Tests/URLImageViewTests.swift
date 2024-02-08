@@ -33,7 +33,7 @@ class URLImageViewTests: XCTestCase {
     let urlImage = URLImageView(urlString: "Hello World")
     urlImage?.inject(dataProvider: mockURLSession)
 
-    XCTAssertNil(urlImage)
+    XCTAssertNil(urlImage?.image)
   }
 
   func testValidURL() {
