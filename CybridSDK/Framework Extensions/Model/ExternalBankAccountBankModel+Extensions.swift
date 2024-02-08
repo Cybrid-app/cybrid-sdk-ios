@@ -17,32 +17,22 @@ extension ExternalBankAccountBankModel {
             return nil
         }
 
-        let accountKind = json[ExternalBankAccountBankModel.CodingKeys.accountKind.rawValue] as? String ?? ""
-        let accountKindValue = ExternalBankAccountBankModel.AccountKindBankModel(rawValue: accountKind) ?? .plaid
-
-        let environment = json[ExternalBankAccountBankModel.CodingKeys.environment.rawValue] as? String ?? ""
-        let evnironmentValue = ExternalBankAccountBankModel.EnvironmentBankModel(rawValue: environment) ?? .sandbox
-
-        let state = json[ExternalBankAccountBankModel.CodingKeys.state.rawValue] as? String ?? ""
-        let stateValue = ExternalBankAccountBankModel.StateBankModel(rawValue: state) ?? .storing
-
         let createdAtDate = getDate(stringDate: createdAt)
-
         let codingKeys = ExternalBankAccountBankModel.CodingKeys.self
 
         self.init(
             guid: json[codingKeys.guid.rawValue] as? String ?? "",
             name: json[codingKeys.name.rawValue] as? String ?? "",
             asset: json[codingKeys.asset.rawValue] as? String ?? "",
-            accountKind: accountKindValue,
-            environment: evnironmentValue,
+            accountKind: json[codingKeys.accountKind.rawValue] as? String ?? "",
+            environment: json[codingKeys.environment.rawValue] as? String ?? "",
             bankGuid: json[codingKeys.bankGuid.rawValue] as? String ?? "",
             customerGuid: json[codingKeys.customerGuid.rawValue] as? String ?? "",
             createdAt: createdAtDate!,
             plaidInstitutionId: json[codingKeys.plaidInstitutionId.rawValue] as? String ?? "",
             plaidAccountMask: json[codingKeys.plaidAccountMask.rawValue] as? String ?? "",
             plaidAccountName: json[codingKeys.plaidAccountName.rawValue] as? String ?? "",
-            state: stateValue,
+            state: json[codingKeys.state.rawValue] as? String ?? "",
             failureCode: json[codingKeys.failureCode.rawValue] as? String ?? ""
         )
     }

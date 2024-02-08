@@ -91,7 +91,7 @@ class BankAccountCell: UITableViewCell {
 
     func setData(account: ExternalBankAccountBankModel) {
 
-        if account.state == .refreshRequired {
+        if account.state == "refreshRequired" {
             self.accountIcon.image = UIImage(named: "kyc_error", in: Bundle(for: Self.self), with: nil)!
         }
 

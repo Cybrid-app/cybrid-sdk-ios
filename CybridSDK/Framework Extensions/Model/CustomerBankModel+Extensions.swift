@@ -12,9 +12,7 @@ extension CustomerBankModel {
 
     init?(json: [String: Any]) {
         guard
-            let createdAt = json[CustomerBankModel.CodingKeys.createdAt.rawValue] as? String,
-            let state = json[CustomerBankModel.CodingKeys.state.rawValue] as? String,
-            let type = json[CustomerBankModel.CodingKeys.type.rawValue] as? String
+            let createdAt = json[CustomerBankModel.CodingKeys.createdAt.rawValue] as? String
         else {
             return nil
         }
@@ -25,9 +23,9 @@ extension CustomerBankModel {
         self.init(
             guid: json[codingKeys.guid.rawValue] as? String ?? "",
             bankGuid: json[codingKeys.bankGuid.rawValue] as? String ?? "",
-            type: (CustomerBankModel.TypeBankModel(rawValue: type) ?? .individual) as TypeBankModel,
+            type: json[codingKeys.type.rawValue] as? String ?? "",
             createdAt: createdAtDate,
-            state: (CustomerBankModel.StateBankModel(rawValue: state) ?? .storing) as StateBankModel)
+            state: json[codingKeys.state.rawValue] as? String ?? "")
     }
 
     static func fromArray(objects: [[String: Any]]) -> [CustomerBankModel] {

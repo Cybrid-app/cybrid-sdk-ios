@@ -47,7 +47,7 @@ public struct BalanceUIModel: Equatable {
         let buyPriceFormatted = CybridCurrencyFormatter.formatPrice(buyPrice, with: counterAsset?.symbol ?? "")
 
         var accountBalanceInFiat = BigDecimal(0)
-        if account.type == .fiat {
+        if account.type == "fiat" {
             accountBalanceInFiat = balanceAvailable
         } else {
             // swiftlint:disable:next force_try

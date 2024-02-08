@@ -98,7 +98,7 @@ struct AssetFormatter {
     static func format(_ asset: AssetBankModel, amount: String) -> String {
 
         var amountFormatted = amount.currencyFormat()
-        if asset.type == .fiat {
+        if asset.type == "fiat" {
             let code = " \(asset.code)"
             amountFormatted = "\(asset.symbol)\(amountFormatted)\(code)"
         } else {
@@ -123,7 +123,7 @@ struct AssetFormatter {
         amount: String,
         cryptoAsset: AssetBankModel,
         price: String,
-        base: AssetBankModel.TypeBankModel) -> String {
+        base: String) -> String {
 
         var result = BigInt(0)
         let unit = AssetFormatter.forInput(cryptoAsset, amount: CDecimal("1"))
@@ -131,7 +131,7 @@ struct AssetFormatter {
         let amountBigInt = BigInt(amount)!
         let priceBigInt = BigInt(price)!
 
-        if base == .crypto {
+        if base == "crypto" {
 
             let firstOperation = amountBigInt * priceBigInt
             let secondOperation = firstOperation / unitBigInt

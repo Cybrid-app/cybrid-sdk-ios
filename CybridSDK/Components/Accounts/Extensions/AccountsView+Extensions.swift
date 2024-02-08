@@ -15,7 +15,7 @@ extension AccountsView: UITableViewDelegate, UITableViewDataSource {
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
         let dataModel = self.accountsViewModel.balances.value[indexPath.row]
-        if dataModel.account.type == .trading {
+        if dataModel.account.type == "trading" {
             let cell = (tableView.dequeueReusableCell(
                 withIdentifier: AccountsCell.reuseIdentifier,
                 for: indexPath) as? AccountsCell)!
@@ -38,7 +38,7 @@ extension AccountsView: UITableViewDelegate, UITableViewDataSource {
 
         let balance = self.accountsViewModel.balances.value[indexPath.row]
         var controller = UIViewController()
-        if balance.asset?.type == .crypto {
+        if balance.asset?.type == "crypto" {
             controller = AccountTradesViewController(balance: balance)
         } else {
             controller = AccountTransfersViewController(balance: balance)

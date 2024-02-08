@@ -1,7 +1,7 @@
 version: 2.1
 
 orbs:
-  codecov: codecov/codecov@3.2.3
+  codecov: codecov/codecov@4.0.1
   swiftlint: ngs/swiftlint@0.0.1
 
 jobs:
@@ -20,7 +20,7 @@ jobs:
   pod-spec-lint:
     description: Runs podspec lint
     macos:
-      xcode: "14.0.1"
+      xcode: "15.2.0"
     steps:
       - checkout
       - run:
@@ -29,7 +29,7 @@ jobs:
 
   build-and-test:
     macos:
-      xcode: "14.0.1"
+      xcode: "15.2.0"
     environment:
       FASTLANE_OUTPUT_DIR: "./fastlane/output"
     steps:
@@ -46,7 +46,7 @@ jobs:
 
   publish:
     macos:
-      xcode: "14.0.1"
+      xcode: "15.2.0"
     steps:
       - checkout
       - run:

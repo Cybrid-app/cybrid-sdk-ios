@@ -34,7 +34,7 @@ struct TradeUIModel: Equatable {
     func getTradeAmount() -> String {
 
         var returnValue = ""
-        if self.tradeBankModel.side == .sell {
+        if self.tradeBankModel.side == "sell" {
             let deliverAmount = BigDecimal(self.tradeBankModel.deliverAmount ?? "0", precision: asset.decimals)
             returnValue = CybridCurrencyFormatter.formatInputNumber(deliverAmount ?? BigDecimal(0)).removeTrailingZeros()
         } else {
@@ -48,7 +48,7 @@ struct TradeUIModel: Equatable {
     func getTradeFiatAmount() -> String {
 
         var returnValue = ""
-        if self.tradeBankModel.side == .sell {
+        if self.tradeBankModel.side == "sell" {
             let receiveAmount = BigDecimal(self.tradeBankModel.receiveAmount ?? "0", precision: counterAsset.decimals) ?? BigDecimal(0)
             returnValue = CybridCurrencyFormatter.formatPrice(receiveAmount, with: self.counterAsset.symbol)
         } else {

@@ -12,15 +12,12 @@ extension QuoteBankModel {
 
     init(json: [String: Any]) {
 
-        let productTypeString = json[QuoteBankModel.CodingKeys.productType.rawValue] as? String ?? "trading"
-        let productType = (QuoteBankModel.ProductTypeBankModel(rawValue: productTypeString) ?? .trading) as ProductTypeBankModel
-
         self.init(guid: json[QuoteBankModel.CodingKeys.guid.rawValue] as? String,
-                  productType: productType,
+                  productType: json[QuoteBankModel.CodingKeys.productType.rawValue] as? String,
                   bankGuid: json[QuoteBankModel.CodingKeys.bankGuid.rawValue] as? String,
                   customerGuid: json[QuoteBankModel.CodingKeys.customerGuid.rawValue] as? String,
                   symbol: json[QuoteBankModel.CodingKeys.symbol.rawValue] as? String,
-                  side: json[QuoteBankModel.CodingKeys.side.rawValue] as? SideBankModel,
+                  side: json[QuoteBankModel.CodingKeys.side.rawValue] as? String,
                   receiveAmount: json[QuoteBankModel.CodingKeys.receiveAmount.rawValue] as? String,
                   deliverAmount: json[QuoteBankModel.CodingKeys.deliverAmount.rawValue] as? String,
                   fee: json[QuoteBankModel.CodingKeys.fee.rawValue] as? String,

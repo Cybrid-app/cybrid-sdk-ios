@@ -26,9 +26,9 @@ extension DepositAddressBankModel {
         accountGuid: "1234",
         createdAt: Date(),
         asset: "BTC",
-        state: .created,
+        state: "created",
         address: "qwerty123456789",
-        format: .legacy,
+        format: "legacy",
         tag: "123456"
     )
 }

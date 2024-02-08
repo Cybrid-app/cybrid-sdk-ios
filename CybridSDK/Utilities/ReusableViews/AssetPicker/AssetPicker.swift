@@ -34,7 +34,7 @@ public class AssetPicker: UIView {
         super.init(frame: CGRect.zero)
         self.assets = assets
         if !self.assets.isEmpty {
-            self.assets = self.assets.filter { $0.type == .crypto }
+            self.assets = self.assets.filter { $0.type == "crypto" }
             self.assets = self.assets.sorted(by: { $0.name < $1.name })
         }
         setupView()

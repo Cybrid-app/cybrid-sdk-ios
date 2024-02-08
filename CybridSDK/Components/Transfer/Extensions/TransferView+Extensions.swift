@@ -122,7 +122,7 @@ extension TransferView {
         self.transferViewModel.currentExternalBankAccount.value = account
         let name = self.transferViewModel.getAccountNameInFormat(account)
 
-        if account?.state == .refreshRequired {
+        if account?.state == "refreshRequired" {
             field.updateIcon(.image("kyc_error"))
         } else {
             field.updateIcon(.image("test_bank"))

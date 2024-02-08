@@ -116,7 +116,7 @@ extension BankAccountDetailModal {
         let accountStatusTitle = self.createAccountTitle(key: UIStrings.accountStatusString)
         accountStatusTitle.addBelow(toItem: accountNameValue, height: UIValues.accountTitleHeight, margins: UIValues.accountTitleMargin)
 
-        let accountStatusValue = self.createAccountValue(value: self.account.state?.rawValue ?? "")
+        let accountStatusValue = self.createAccountValue(value: self.account.state ?? "")
         accountStatusValue.addBelow(toItem: accountStatusTitle, height: UIValues.accountValueHeight, margins: UIValues.accountValueMargin)
 
         // -- Account Number

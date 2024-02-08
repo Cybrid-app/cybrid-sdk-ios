@@ -467,7 +467,7 @@ class AssetFormatterTest: XCTestCase {
             amount: amountFormatted,
             cryptoAsset: asset,
             price: price.buyPrice!,
-            base: .crypto)
+            base: "crypto")
         let tradeValueCDecimal = CDecimal(tradeValue)
         let tradeBase = AssetFormatter.forBase(AssetBankModel.usd, amount: tradeValueCDecimal)
         let tradeFormatted = AssetFormatter.format(AssetBankModel.usd, amount: tradeBase)
@@ -492,7 +492,7 @@ class AssetFormatterTest: XCTestCase {
             amount: amountFormatted,
             cryptoAsset: asset,
             price: price.buyPrice!,
-            base: .crypto)
+            base: "crypto")
         let tradeValueCDecimal = CDecimal(tradeValue)
         let tradeBase = AssetFormatter.forBase(AssetBankModel.usd, amount: tradeValueCDecimal)
         let tradeFormatted = AssetFormatter.format(AssetBankModel.usd, amount: tradeBase)
@@ -516,7 +516,7 @@ class AssetFormatterTest: XCTestCase {
             amount: amountFormatted,
             cryptoAsset: asset,
             price: price.buyPrice!,
-            base: .crypto)
+            base: "crypto")
         let tradeValueCDecimal = CDecimal(tradeValue)
         let tradeBase = AssetFormatter.forBase(AssetBankModel.usd, amount: tradeValueCDecimal)
         let tradeFormatted = AssetFormatter.format(AssetBankModel.usd, amount: tradeBase)
@@ -540,7 +540,7 @@ class AssetFormatterTest: XCTestCase {
             amount: amountFormatted,
             cryptoAsset: asset,
             price: price.buyPrice!,
-            base: .fiat)
+            base: "fiat")
         let tradeValueCDecimal = CDecimal(tradeValue)
         let tradeBase = AssetFormatter.forBase(AssetBankModel.bitcoin, amount: tradeValueCDecimal)
         let tradeFormatted = AssetFormatter.format(AssetBankModel.bitcoin, amount: tradeBase)

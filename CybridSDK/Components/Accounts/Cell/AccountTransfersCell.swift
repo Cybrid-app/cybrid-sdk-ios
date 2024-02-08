@@ -266,12 +266,12 @@ extension AccountTransfersCell {
 
         // -- Setup icon
         self.icon.image = UIImage(
-            named: transfer.side == .withdrawal ? "sellIcon" : "buyIcon",
+            named: transfer.side == "withdrawal" ? "sellIcon" : "buyIcon",
             in: Bundle(for: Self.self),
             with: nil)
 
         // -- Transfer Type
-        let transferTypeKey = (transfer.side == .withdrawal) ? UIString.transferWithdraw : UIString.transferDeposit
+        let transferTypeKey = (transfer.side == "withdrawal") ? UIString.transferWithdraw : UIString.transferDeposit
         self.transferType.setLocalizedText(key: transferTypeKey, localizer: CybridLocalizer())
 
         // -- Transfer Date
@@ -284,14 +284,14 @@ extension AccountTransfersCell {
         // -- Status chip
         let localizer = CybridLocalizer()
         switch transfer.state {
-        case .storing, .pending:
+        case "storing", "pending":
 
             self.statusChip.isHidden = false
             self.statusChip.textColor = UIColor.black
             self.statusChip.backgroundColor = UIValues.transferPending
             self.statusChip.setLocalizedText(key: UIString.transferPending, localizer: localizer)
 
-        case .failed:
+        case "failed":
 
             self.statusChip.isHidden = false
             self.statusChip.textColor = UIColor.white

@@ -18,8 +18,6 @@ extension DepositAddressBankModel {
 
         let codingKeys = DepositAddressBankModel.CodingKeys.self
         let createdAtDate = getDate(stringDate: createdAt)
-        let state = json[DepositAddressBankModel.CodingKeys.state.rawValue] as? String ?? "storing"
-        let format = json[DepositAddressBankModel.CodingKeys.format.rawValue] as? String ?? "standard"
 
         self.init(
             guid: json[codingKeys.guid.rawValue] as? String ?? "",
@@ -28,9 +26,9 @@ extension DepositAddressBankModel {
             accountGuid: json[codingKeys.accountGuid.rawValue] as? String ?? "",
             createdAt: createdAtDate!,
             asset: json[codingKeys.asset.rawValue] as? String ?? "",
-            state: (DepositAddressBankModel.StateBankModel(rawValue: state) ?? .storing) as StateBankModel,
+            state: json[codingKeys.state.rawValue] as? String ?? "",
             address: json[codingKeys.address.rawValue] as? String ?? "",
-            format: (DepositAddressBankModel.FormatBankModel(rawValue: format) ?? .standard) as FormatBankModel,
+            format: json[codingKeys.format.rawValue] as? String ?? "",
             tag: json[codingKeys.tag.rawValue] as? String ?? ""
         )
     }

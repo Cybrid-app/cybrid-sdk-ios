@@ -196,12 +196,12 @@ extension AccountTradesCell {
 
         // -- Setup icon
         icon.image = UIImage(
-            named: trade.tradeBankModel.side == .sell ? "sellIcon" : "buyIcon",
+            named: trade.tradeBankModel.side == "sell" ? "sellIcon" : "buyIcon",
             in: Bundle(for: Self.self),
             with: nil)
 
         // -- Trade Type
-        let tradeTypeKey = (trade.tradeBankModel.side == .sell) ? UIString.tradeTYpeSell : UIString.tradeTypeBuy
+        let tradeTypeKey = (trade.tradeBankModel.side == "sell") ? UIString.tradeTYpeSell : UIString.tradeTypeBuy
         tradeType.setLocalizedText(key: tradeTypeKey, localizer: CybridLocalizer())
 
         // -- Trade Amount

@@ -13,13 +13,13 @@ extension ExternalWalletBankModel {
         guid: "1234",
         name: "BTC",
         asset: "BTC",
-        environment: .sandbox,
+        environment: "sandbox",
         bankGuid: "1234",
         customerGuid: "1234",
         address: "_123456",
         tag: "",
         createdAt: Date(),
-        state: .completed,
+        state: "completed",
         failureCode: ""
     )
 
@@ -27,13 +27,13 @@ extension ExternalWalletBankModel {
         guid: "1234",
         name: "ETH",
         asset: "ETH",
-        environment: .sandbox,
+        environment: "sandbox",
         bankGuid: "1234",
         customerGuid: "1234",
         address: "_1234x6",
         tag: "",
         createdAt: Date(),
-        state: .completed,
+        state: "completed",
         failureCode: ""
     )
 
@@ -41,13 +41,13 @@ extension ExternalWalletBankModel {
         guid: "12342",
         name: "BTC",
         asset: "BTC",
-        environment: .sandbox,
+        environment: "sandbox",
         bankGuid: "1234",
         customerGuid: "1234",
         address: "_123456",
         tag: "",
         createdAt: Date(),
-        state: .deleted,
+        state: "deleted",
         failureCode: ""
     )
 
@@ -55,13 +55,13 @@ extension ExternalWalletBankModel {
         guid: "12342",
         name: "BTC",
         asset: "BTC",
-        environment: .sandbox,
+        environment: "sandbox",
         bankGuid: "1234",
         customerGuid: "1234",
         address: "_123456",
         tag: "",
         createdAt: Date(),
-        state: .deleting,
+        state: "deleting",
         failureCode: ""
     )
 }

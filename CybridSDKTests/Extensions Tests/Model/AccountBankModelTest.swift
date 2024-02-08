@@ -39,7 +39,6 @@ class AccountBankModelTest: XCTestCase {
         let json: [String: Any] = [
             "type": "trading",
             "guid": "5b13ffda9fc47c322af321434818709a",
-            "created_at": "2022-06-27T19:46:42.504Z",
             "asset": "ETH",
             "name": "BTC-USD",
             "customer_guid": "bf10305829337d106b82c521bb6c8fd2",

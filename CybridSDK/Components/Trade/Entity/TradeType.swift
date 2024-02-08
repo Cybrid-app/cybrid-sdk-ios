@@ -22,12 +22,12 @@ enum TradeType: Int {
         }
     }
 
-    var sideBankModel: PostQuoteBankModel.SideBankModel {
+    var sideBankModel: String {
         switch self {
         case .buy:
-            return .buy
+            return "buy"
         case .sell:
-            return.sell
+            return "sell"
         }
     }
 }

@@ -115,7 +115,7 @@ open class TransferViewModel: NSObject {
             self.calculateFiatBalance()
             self.uiState.value = .CONTENT
             self.createAccountsPolling()
-            for account in accounts where account.state == .refreshRequired {
+            for account in accounts where account.state == "refreshRequired" {
                 self.errorMessage.value = true
             }
         } else {
@@ -130,7 +130,7 @@ open class TransferViewModel: NSObject {
 
                 var total = BigDecimal(0).value
                 for account in self.accounts.value {
-                    if account.type == .fiat && account.state == .created {
+                    if account.type == "fiat" && account.state == "created" {
 
                         let accountBalance = BigDecimal(account.platformBalance ?? "0")
                         total += accountBalance!.value
@@ -213,9 +213,9 @@ open class TransferViewModel: NSObject {
         return name
     }
 
-    func getQuoteSide() -> PostQuoteBankModel.SideBankModel {
+    func getQuoteSide() -> String {
 
-        let side: PostQuoteBankModel.SideBankModel = self.isWithdraw.value ? .withdrawal : .deposit
+        let side: String = self.isWithdraw.value ? "withdrawal" : "deposit"
         return side
     }
 

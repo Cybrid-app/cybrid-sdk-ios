@@ -62,11 +62,11 @@ extension CustomerBankModel {
 
     static let mock = CustomerBankModel(guid: "cybrid_unit_testing_guid",
                                         bankGuid: "1234",
-                                        type: .individual,
+                                        type: "individual",
                                         createdAt: Date(),
-                                        state: .storing)
+                                        state: "storing")
 
     static let mockEmpty = CustomerBankModel(guid: "12345",
-                                             type: .individual,
+                                             type: "individual",
                                              createdAt: Date())
 }

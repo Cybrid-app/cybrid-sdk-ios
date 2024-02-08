@@ -47,6 +47,7 @@ final class ExternalBankAccountAPIMock: ExternalBankAccountsAPI {
         guid: String? = nil,
         bankGuid: String? = nil,
         customerGuid: String? = nil,
+        asset: String? = nil,
         state: String? = nil,
         apiResponseQueue: DispatchQueue = CybridApiBankSwiftAPI.apiResponseQueue,
         completion: @escaping ((Result<ExternalBankAccountListBankModel, ErrorResponse>) -> Void)) -> RequestTask {
@@ -125,15 +126,15 @@ extension ExternalBankAccountBankModel {
         guid: "1234",
         name: "test",
         asset: "test",
-        accountKind: .plaid,
-        environment: .sandbox,
+        accountKind: "plaid",
+        environment: "sandbox",
         bankGuid: "1234",
         customerGuid: "1234",
         createdAt: Date(),
         plaidInstitutionId: "1234",
         plaidAccountMask: "1234",
         plaidAccountName: "test",
-        state: .storing)
+        state: "storing")
     }
 
     static func mockCompleted() -> Self {
@@ -141,15 +142,15 @@ extension ExternalBankAccountBankModel {
         guid: "1234",
         name: "test",
         asset: "test",
-        accountKind: .plaid,
-        environment: .sandbox,
+        accountKind: "plaid",
+        environment: "sandbox",
         bankGuid: "1234",
         customerGuid: "1234",
         createdAt: Date(),
         plaidInstitutionId: "1234",
         plaidAccountMask: "1234",
         plaidAccountName: "test",
-        state: .completed)
+        state: "completed")
     }
 
     static func mockRefresh() -> Self {
@@ -157,15 +158,15 @@ extension ExternalBankAccountBankModel {
         guid: "1234",
         name: "test",
         asset: "test",
-        accountKind: .plaid,
-        environment: .sandbox,
+        accountKind: "plaid",
+        environment: "sandbox",
         bankGuid: "1234",
         customerGuid: "1234",
         createdAt: Date(),
         plaidInstitutionId: "1234",
         plaidAccountMask: "1234",
         plaidAccountName: "test",
-        state: .refreshRequired)
+        state: "refreshRequired")
     }
 
     static let list = [

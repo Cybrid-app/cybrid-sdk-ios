@@ -44,7 +44,7 @@ open class ExternalWalletViewModel: BaseViewModel {
             case.success(let list):
                 self.logger?.log(.component(.accounts(.accountsDataFetching)))
                 self.externalWallets = list.objects
-                self.externalWalletsActive = self.externalWallets.filter { $0.state != .deleting && $0.state != .deleted }
+                self.externalWalletsActive = self.externalWallets.filter { $0.state != "deleting" && $0.state != "deleted" }
                 self.uiState.value = .WALLETS
             case .failure:
                 self.logger?.log(.component(.accounts(.accountsDataError)))
@@ -118,9 +118,9 @@ open class ExternalWalletViewModel: BaseViewModel {
             return
         }
 
-        var filteredTransfers = transfers.filter { $0.transferType == .crypto }
+        var filteredTransfers = transfers.filter { $0.transferType == "crypto" }
         filteredTransfers = filteredTransfers.filter {
-            $0.destinationAccount?.type == .externalWallet &&
+            $0.destinationAccount?.type == "externalWallet" &&
             $0.destinationAccount?.guid == wallet.guid
         }
         self.transfers = filteredTransfers

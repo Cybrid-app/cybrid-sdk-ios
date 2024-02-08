@@ -18,22 +18,17 @@ extension IdentityVerificationBankModel {
             return nil
         }
 
-        let type = json[IdentityVerificationBankModel.CodingKeys.type.rawValue] as? String ?? ""
-        let method = json[IdentityVerificationBankModel.CodingKeys.method.rawValue] as? String ?? ""
-        let state = json[IdentityVerificationBankModel.CodingKeys.state.rawValue] as? String ?? ""
-        let outcome = json[IdentityVerificationBankModel.CodingKeys.outcome.rawValue] as? String ?? ""
-
         let codingKeys = IdentityVerificationBankModel.CodingKeys.self
         let createdAtDate = getDate(stringDate: createdAt)
 
         self.init(
             guid: json[codingKeys.guid.rawValue] as? String ?? "",
             customerGuid: json[codingKeys.customerGuid.rawValue] as? String ?? "",
-            type: IdentityVerificationBankModel.TypeBankModel(rawValue: type) ?? .kyc,
-            method: IdentityVerificationBankModel.MethodBankModel(rawValue: method) ?? .idAndSelfie,
+            type: json[codingKeys.type.rawValue] as? String ?? "",
+            method: json[codingKeys.method.rawValue] as? String ?? "",
             createdAt: createdAtDate,
-            state: IdentityVerificationBankModel.StateBankModel(rawValue: state) ?? .storing,
-            outcome: IdentityVerificationBankModel.OutcomeBankModel(rawValue: outcome) ?? .passed,
+            state: json[codingKeys.state.rawValue] as? String ?? "",
+            outcome: json[codingKeys.outcome.rawValue] as? String ?? "",
             failureCodes: nil)
     }
 

@@ -284,7 +284,7 @@ public class Component: UIView, ComponentProtocol {
         guard let customer = Cybrid.customer
         else { return true }
         self.frozenCustomerUI()
-        return customer.state != .frozen
+        return customer.state != "frozen"
     }
 }
 

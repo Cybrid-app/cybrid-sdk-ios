@@ -43,7 +43,7 @@ class AccountTransferModal: UIModal {
     private func setupViews() {
 
         // -- Title View
-        let titleType = transfer.side == .deposit ? UIString.deposit : UIString.withdraw
+        let titleType = transfer.side == "deposit" ? UIString.deposit : UIString.withdraw
         let localizedTitle = localizer.localize(with: titleType)
         let balanceAssetIcon = URLImageView(urlString: self.currentAssetURL) ?? UIImageView()
 
@@ -74,7 +74,7 @@ class AccountTransferModal: UIModal {
 
         // -- Status
         let statusTitle = addItemTitle(belowOf: subTitleView, titleKey: UIString.statusTitle, firstElement: true)
-        let statusValue = addItemValue(belowOf: statusTitle, mainValue: transfer.state?.rawValue.capitalized ?? "")
+        let statusValue = addItemValue(belowOf: statusTitle, mainValue: transfer.state?.capitalized ?? "")
 
         // -- Transfer Placed
         let transferTitle = addItemTitle(belowOf: statusValue, titleKey: UIString.transferTitle)

@@ -22,11 +22,11 @@ class TradeTypeTests: XCTestCase {
 
     func testSideBankModelForBuy() {
         let tradeType = TradeType.buy
-        XCTAssertEqual(tradeType.sideBankModel, .buy)
+        XCTAssertEqual(tradeType.sideBankModel, "buy")
     }
 
     func testSideBankModelForSell() {
         let tradeType = TradeType.sell
-        XCTAssertEqual(tradeType.sideBankModel, .sell)
+        XCTAssertEqual(tradeType.sideBankModel, "sell")
     }
 }
