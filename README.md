@@ -10,13 +10,18 @@ iOS SDK Library and Demo App for Cybrid API.
 
 ### CocoaPods
 
-Add our podspec repo to your App's Podfile:
+CybridSDK is published from Cybrid's own podspec repo, not the public CocoaPods trunk. Add it to your App's Podfile **before** the trunk CDN, so the pod always resolves from it:
 
-`source 'git@github.com:Cybrid-app/cybrid-podspecs.git'`
+```ruby
+source 'https://github.com/Cybrid-app/cybrid-podspecs.git'
+source 'https://cdn.cocoapods.org/'
 
-And then install the dependencies
+pod 'CybridSDK'
+```
 
-`pod install CybridSDK`
+And then install the dependencies:
+
+`pod install`
 
 ## Usage
 
