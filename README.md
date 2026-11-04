@@ -10,14 +10,20 @@ iOS SDK Library and Demo App for Cybrid API.
 
 ### CocoaPods
 
-CybridSDK is published from Cybrid's own podspec repo, not the public CocoaPods trunk. Add it to your App's Podfile **before** the trunk CDN, so the pod always resolves from it:
+CybridSDK and the Cybrid API clients are published from Cybrid's own podspec repo, not the public CocoaPods trunk. Add that repo to your App's Podfile **before** the trunk CDN, and pin every Cybrid pod to it with `:source`, so they never resolve from trunk:
 
 ```ruby
-source 'https://github.com/Cybrid-app/cybrid-podspecs.git'
+CYBRID_PODSPECS = 'https://github.com/Cybrid-app/cybrid-podspecs.git'
+
+source CYBRID_PODSPECS
 source 'https://cdn.cocoapods.org/'
 
-pod 'CybridSDK'
+pod 'CybridSDK', :source => CYBRID_PODSPECS
+pod 'CybridApiBankSwift', :source => CYBRID_PODSPECS
+pod 'CybridApiIdpSwift', :source => CYBRID_PODSPECS
 ```
+
+Do not install Cybrid pods from the public trunk: the Cybrid names there are not maintained releases.
 
 And then install the dependencies:
 
