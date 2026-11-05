@@ -40,7 +40,7 @@ func setupScrollView(_ scroll: UIScrollView, parent: UIView) -> UIView {
     return contentView
 }
 
-func getImage(_ named: String, aClass: AnyClass) -> UIImage {
+func getImage(_ named: String) -> UIImage {
 
-    return UIImage(named: named, in: Bundle(for: aClass), with: nil)!
+    return UIImage(named: named, in: Bundle.sdkBundle, with: nil)!
 }

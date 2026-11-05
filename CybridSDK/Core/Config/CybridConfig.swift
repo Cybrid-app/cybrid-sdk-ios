@@ -172,7 +172,7 @@ extension CybridConfig {
     func supportsLanguage(_ languageCode: String?) -> Bool {
 
         guard let languageCode = languageCode else { return false }
-        let sdkBundle = Bundle(for: CybridConfig.self)
+        let sdkBundle = Bundle.sdkBundle
         let localeBundlePath = sdkBundle.path(
             forResource: languageCode,
             ofType: "lproj"

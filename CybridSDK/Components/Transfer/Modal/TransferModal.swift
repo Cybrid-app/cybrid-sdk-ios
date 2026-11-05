@@ -228,7 +228,7 @@ extension TransferModal {
         self.modifyHeight(height: UIValues.modalSuccessHeightSize)
 
         // -- Icon
-        let image = UIImage(named: "kyc_verified", in: Bundle(for: Self.self), with: nil)
+        let image = UIImage(named: "kyc_verified", in: Bundle.sdkBundle, with: nil)
         let icon = UIImageView(image: image)
         icon.translatesAutoresizingMaskIntoConstraints = false
         icon.asFirstInCenter(self.componentContent, size: UIValues.successIconSize, margins: UIValues.successIconMargins)
@@ -272,7 +272,7 @@ extension TransferModal {
         self.modifyHeight(height: UIValues.modalErrorHeightSize)
 
         // -- Icon
-        let image = UIImage(named: "kyc_error", in: Bundle(for: Self.self), with: nil)!
+        let image = UIImage(named: "kyc_error", in: Bundle.sdkBundle, with: nil)!
         let icon = UIImageView(image: image)
         self.componentContent.addSubview(icon)
         icon.constraint(attribute: .top,

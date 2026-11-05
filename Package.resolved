@@ -1,0 +1,41 @@
+{
+  "pins" : [
+    {
+      "identity" : "bigint",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/attaswift/BigInt",
+      "state" : {
+        "revision" : "e1f28276687d7661cbb2754771bd9fc281784e32",
+        "version" : "5.2.0"
+      }
+    },
+    {
+      "identity" : "cybrid-api-bank-swift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Cybrid-app/cybrid-api-bank-swift",
+      "state" : {
+        "revision" : "ed6905d34376e22cfc4b5875f56523ed84e83fa8",
+        "version" : "0.113.6"
+      }
+    },
+    {
+      "identity" : "inquiry-ios-2",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/persona-id/inquiry-ios-2",
+      "state" : {
+        "revision" : "0b7fe454d02536096b8c638a6677661594d7259a",
+        "version" : "2.56.0"
+      }
+    },
+    {
+      "identity" : "plaid-link-ios-spm",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/plaid/plaid-link-ios-spm",
+      "state" : {
+        "revision" : "2e1897f728962d3ed177c217761d6a14baa3c733",
+        "version" : "5.6.1"
+      }
+    }
+  ],
+  "version" : 2
+}

@@ -220,7 +220,7 @@ final class CYBTextField: UITextField {
 
     private func setupImage(name: String) {
 
-        let image = UIImage(named: name, in: Bundle(for: Self.self), with: nil)!
+        let image = UIImage(named: name, in: Bundle.sdkBundle, with: nil)!
         let imageView = UIImageView(image: image)
         imageView.translatesAutoresizingMaskIntoConstraints = false
         iconContainer.addSubview(imageView)

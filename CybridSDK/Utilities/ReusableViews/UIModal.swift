@@ -144,7 +144,7 @@ open class UIModal: UIViewController {
         errorContainer.constraintHeight(190)
 
         // -- Error Image
-        let errorImage = UIImageView(image: getImage("kyc_error", aClass: Self.self))
+        let errorImage = UIImageView(image: getImage("kyc_error"))
         errorContainer.addSubview(errorImage)
         errorImage.constraintTop(errorContainer, margin: 0)
         errorImage.centerHorizontal(parent: errorContainer)
@@ -188,7 +188,7 @@ open class UIModal: UIViewController {
         container.constraintHeight(190)
 
         // -- Error Image
-        let errorImage = UIImageView(image: getImage("kyc_verified", aClass: Self.self))
+        let errorImage = UIImageView(image: getImage("kyc_verified"))
         container.addSubview(errorImage)
         errorImage.constraintTop(container, margin: 0)
         errorImage.centerHorizontal(parent: container)

@@ -8,26 +8,26 @@ iOS SDK Library and Demo App for Cybrid API.
 
 ## Installation
 
-### CocoaPods
+### Swift Package Manager
 
-CybridSDK and the Cybrid API clients are published from Cybrid's own podspec repo, not the public CocoaPods trunk. Add that repo to your App's Podfile **before** the trunk CDN, and pin every Cybrid pod to it with `:source`, so they never resolve from trunk:
+Add CybridSDK to your `Package.swift`, or in Xcode via File > Add Package Dependencies, using this exact URL. Do not install it from a fork or mirror.
 
-```ruby
-CYBRID_PODSPECS = 'https://github.com/Cybrid-app/cybrid-podspecs.git'
-
-source CYBRID_PODSPECS
-source 'https://cdn.cocoapods.org/'
-
-pod 'CybridSDK', :source => CYBRID_PODSPECS
-pod 'CybridApiBankSwift', :source => CYBRID_PODSPECS
-pod 'CybridApiIdpSwift', :source => CYBRID_PODSPECS
+```swift
+dependencies: [
+    .package(url: "https://github.com/Cybrid-app/cybrid-sdk-ios", exact: "<version>"),
+],
+targets: [
+    .target(name: "YourApp", dependencies: [
+        .product(name: "CybridSDK", package: "cybrid-sdk-ios"),
+    ]),
+]
 ```
 
-Do not install Cybrid pods from the public trunk: the Cybrid names there are not maintained releases.
+Pin an exact version and commit your `Package.resolved`. Release tags in this repository can't be moved or deleted, so a pinned version always resolves to the same code.
 
-And then install the dependencies:
+CybridSDK requires iOS 14 or later. It pins its own `CybridApiBankSwift` version, so don't add a different version of that package to your app.
 
-`pod install`
+CybridSDK is published only through Swift Package Manager. Version 0.0.3 in `cybrid-podspecs` was the last CocoaPods release and is no longer maintained.
 
 ## Usage
 

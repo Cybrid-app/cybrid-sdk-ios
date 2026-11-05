@@ -7,6 +7,7 @@
 
 import Foundation
 import CybridApiBankSwift
+import UIKit
 
 open class TransferViewModel: NSObject {
 

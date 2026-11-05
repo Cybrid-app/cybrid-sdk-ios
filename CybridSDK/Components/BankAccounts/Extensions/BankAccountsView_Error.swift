@@ -14,7 +14,7 @@ extension BankAccountsView {
         // -- Title
         self.createStateTitle(
             stringKey: UIStrings.errorText,
-            image: UIImage(named: "kyc_error", in: Bundle(for: Self.self), with: nil)!
+            image: UIImage(named: "kyc_error", in: Bundle.sdkBundle, with: nil)!
         )
 
         // -- Buttons

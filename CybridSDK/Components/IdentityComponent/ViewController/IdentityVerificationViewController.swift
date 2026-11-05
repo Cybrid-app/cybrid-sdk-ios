@@ -70,7 +70,7 @@ extension IdentityVerificationViewController {
 
         let logo = UIImageView(image: UIImage(
             named: "cybrid",
-            in: Bundle(for: Self.self),
+            in: Bundle.sdkBundle,
             with: nil
         ))
 

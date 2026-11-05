@@ -267,7 +267,7 @@ extension AccountTransfersCell {
         // -- Setup icon
         self.icon.image = UIImage(
             named: transfer.side == .withdrawal ? "sellIcon" : "buyIcon",
-            in: Bundle(for: Self.self),
+            in: Bundle.sdkBundle,
             with: nil)
 
         // -- Transfer Type

@@ -7,6 +7,7 @@
 
 import CybridApiBankSwift
 import Foundation
+import UIKit
 
 final class CybridSession: AuthenticatedServiceProvider {
 

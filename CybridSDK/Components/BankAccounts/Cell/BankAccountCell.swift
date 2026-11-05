@@ -37,7 +37,7 @@ class BankAccountCell: UITableViewCell {
 
         // -- Icon
         self.accountIcon.translatesAutoresizingMaskIntoConstraints = false
-        self.accountIcon.image = UIImage(named: "test_bank", in: Bundle(for: Self.self), with: nil)!
+        self.accountIcon.image = UIImage(named: "test_bank", in: Bundle.sdkBundle, with: nil)!
         self.addSubview(self.accountIcon)
         self.accountIcon.constraint(attribute: .leading,
                                     relatedBy: .equal,
@@ -92,7 +92,7 @@ class BankAccountCell: UITableViewCell {
     func setData(account: ExternalBankAccountBankModel) {
 
         if account.state == .refreshRequired {
-            self.accountIcon.image = UIImage(named: "kyc_error", in: Bundle(for: Self.self), with: nil)!
+            self.accountIcon.image = UIImage(named: "kyc_error", in: Bundle.sdkBundle, with: nil)!
         }
 
         let accountMask = account.plaidAccountMask ?? ""

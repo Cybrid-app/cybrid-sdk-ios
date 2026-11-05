@@ -6,6 +6,7 @@
 //
 
 import CybridApiBankSwift
+import UIKit
 
 open class DepositAddressViewModel: BaseViewModel {
 

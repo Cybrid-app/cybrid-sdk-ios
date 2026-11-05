@@ -9,7 +9,11 @@ import Foundation
 
 extension Bundle {
   static var sdkBundle: Bundle {
+    #if SWIFT_PACKAGE
+    Bundle.module
+    #else
     Bundle(for: CybridConfig.self)
+    #endif
   }
 
   static func localizationBundle(forLocale locale: Locale) -> Bundle {

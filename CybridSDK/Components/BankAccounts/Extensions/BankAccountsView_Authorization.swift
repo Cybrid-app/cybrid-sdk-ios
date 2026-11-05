@@ -17,7 +17,7 @@ extension BankAccountsView {
         let contentView = setupScrollView(scroll, parent: self)
 
         // -- IamgeTitle
-        let imageTitle = UIImageView(image: getImage("bankAuthorizationImage", aClass: Self.self))
+        let imageTitle = UIImageView(image: getImage("bankAuthorizationImage"))
         contentView.addSubview(imageTitle)
         imageTitle.constraintTop(contentView, margin: 0)
         imageTitle.centerHorizontal(parent: contentView)

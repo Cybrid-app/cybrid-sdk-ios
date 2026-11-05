@@ -14,7 +14,7 @@ extension TransferView {
         // -- Title
         self.createStateTitle(
             stringKey: UIStrings.warningText,
-            image: UIImage(named: "kyc_required", in: Bundle(for: Self.self), with: nil)!
+            image: UIImage(named: "kyc_required", in: Bundle.sdkBundle, with: nil)!
         )
 
         // -- Buttons

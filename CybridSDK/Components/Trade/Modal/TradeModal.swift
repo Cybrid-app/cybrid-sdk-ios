@@ -284,7 +284,7 @@ extension TradeModal {
         self.modifyHeight(height: UIValues.modalErrorSize)
 
         // -- Icon
-        let image = UIImage(named: "kyc_verified", in: Bundle(for: Self.self), with: nil)
+        let image = UIImage(named: "kyc_verified", in: Bundle.sdkBundle, with: nil)
         let icon = UIImageView(image: image)
         icon.translatesAutoresizingMaskIntoConstraints = false
         icon.asFirstInCenter(self.componentContent, size: UIValues.errorIconSize, margins: UIValues.errorIconMargins)
@@ -318,7 +318,7 @@ extension TradeModal {
         self.modifyHeight(height: UIValues.modalErrorSize)
 
         // -- Icon
-        let image = UIImage(named: "kyc_error", in: Bundle(for: Self.self), with: nil)
+        let image = UIImage(named: "kyc_error", in: Bundle.sdkBundle, with: nil)
         let icon = UIImageView(image: image)
         icon.translatesAutoresizingMaskIntoConstraints = false
         icon.asFirstInCenter(self.componentContent, size: UIValues.errorIconSize, margins: UIValues.errorIconMargins)

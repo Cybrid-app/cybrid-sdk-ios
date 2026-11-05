@@ -182,7 +182,7 @@ extension CryptoTransferView {
 
     func createSwitchButton() -> UIButton {
 
-        let image = UIImage(named: "switchIcon", in: Bundle(for: Self.self), with: nil)
+        let image = UIImage(named: "switchIcon", in: Bundle.sdkBundle, with: nil)
         let switchButton = UIButton(type: .custom)
         switchButton.setImage(image, for: .normal)
         switchButton.addTarget(cryptoTransferViewModel, action: #selector(cryptoTransferViewModel?.switchActionHandler), for: .touchUpInside)

@@ -1,0 +1,45 @@
+name: Swift Package
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: macos-15
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      # The repo root also holds the CocoaPods workspace, which xcodebuild would pick
+      # over the package, so build from a directory holding only the package.
+      - name: Stage the package
+        run: |
+          mkdir -p "$RUNNER_TEMP/package"
+          cp -R Package.swift Package.resolved CybridSDK Tests "$RUNNER_TEMP/package/"
+
+      - name: Build for iOS Simulator
+        working-directory: ${{ runner.temp }}/package
+        run: |
+          xcodebuild build \
+            -scheme CybridSDK \
+            -destination 'generic/platform=iOS Simulator' \
+            -onlyUsePackageVersionsFromResolvedFile \
+            -disableAutomaticPackageResolution
+
+      - name: Test on iOS Simulator
+        working-directory: ${{ runner.temp }}/package
+        run: |
+          device=$(xcrun simctl list devices available -j \
+            | jq -r '[.devices[][] | select(.name | startswith("iPhone"))][0].udid')
+          xcodebuild test \
+            -scheme CybridSDK \
+            -destination "id=$device" \
+            -onlyUsePackageVersionsFromResolvedFile \
+            -disableAutomaticPackageResolution

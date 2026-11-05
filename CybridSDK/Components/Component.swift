@@ -146,7 +146,7 @@ public class Component: UIView, ComponentProtocol {
         emptyContainer.constraintHeight(105)
 
         // -- Image
-        let imageEmpty = UIImageView(image: getImage("ic_empty", aClass: Self.self))
+        let imageEmpty = UIImageView(image: getImage("ic_empty"))
         emptyContainer.addSubview(imageEmpty)
         imageEmpty.constraintTop(emptyContainer, margin: 0)
         imageEmpty.centerHorizontal(parent: emptyContainer)
@@ -177,7 +177,7 @@ public class Component: UIView, ComponentProtocol {
         errorContainer.constraintHeight(105)
 
         // -- Error Image
-        let errorImage = UIImageView(image: getImage("kyc_error", aClass: Self.self))
+        let errorImage = UIImageView(image: getImage("kyc_error"))
         errorContainer.addSubview(errorImage)
         errorImage.constraintTop(errorContainer, margin: 0)
         errorImage.centerHorizontal(parent: errorContainer)
@@ -212,7 +212,7 @@ public class Component: UIView, ComponentProtocol {
         container.constraintRight(self, margin: 10)
 
         // -- Error Image
-        let errorImage = UIImageView(image: getImage("kyc_error", aClass: Self.self))
+        let errorImage = UIImageView(image: getImage("kyc_error"))
         container.addSubview(errorImage)
         errorImage.constraintTop(container, margin: 0)
         errorImage.centerHorizontal(parent: container)

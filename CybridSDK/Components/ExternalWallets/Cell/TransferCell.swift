@@ -33,7 +33,7 @@ class TransferCell: UITableViewCell {
     private func setupViews() {
 
         // -- Icon
-        self.icon = UIImageView(image: getImage("ic_crypto_transfer", aClass: Self.self))
+        self.icon = UIImageView(image: getImage("ic_crypto_transfer"))
         self.addSubview(icon)
         icon.constraintLeft(self, margin: 0)
         icon.centerVertical(parent: self)

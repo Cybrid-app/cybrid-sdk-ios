@@ -14,7 +14,7 @@ extension IdentityView {
         // -- Title
         self.createStateTitle(
             stringKey: UIStrings.reviewingText,
-            image: UIImage(named: "kyc_reviewing", in: Bundle(for: Self.self), with: nil)!
+            image: UIImage(named: "kyc_reviewing", in: Bundle.sdkBundle, with: nil)!
         )
 
         // -- Buttons

@@ -86,7 +86,7 @@ extension DepositAddresView {
 
         // -- Deposit Address - Copy Icon
         let depositAddressCopyIcon = UIImageView(image: UIImage(
-            named: "ic_copy", in: Bundle(for: Self.self), with: nil))
+            named: "ic_copy", in: Bundle.sdkBundle, with: nil))
         contentView.addSubview(depositAddressCopyIcon)
         depositAddressCopyIcon.constraintTop(networkValue, margin: 62)
         depositAddressCopyIcon.constraintRight(contentView, margin: 12)
@@ -242,7 +242,7 @@ extension DepositAddresView {
 
         // -- Warning Icon
         let warningIcon = UIImageView(image: UIImage(
-            named: "ic_warning", in: Bundle(for: Self.self), with: nil))
+            named: "ic_warning", in: Bundle.sdkBundle, with: nil))
         warningContainer.addSubview(warningIcon)
         warningIcon.constraintTop(warningContainer, margin: 10)
         warningIcon.constraintLeft(warningContainer, margin: 8)

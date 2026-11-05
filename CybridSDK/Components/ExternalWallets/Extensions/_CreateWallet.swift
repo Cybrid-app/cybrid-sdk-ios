@@ -91,7 +91,7 @@ extension ExternalWalletsView {
         addressIconContainer.addGestureRecognizer(addressIconGesture)
 
         // -- Addres icon
-        let addressIcon = UIImageView(image: getImage("ic_scan", aClass: Self.self))
+        let addressIcon = UIImageView(image: getImage("ic_scan"))
         addressIconContainer.addSubview(addressIcon)
         addressIcon.centerVertical(parent: addressIconContainer)
         addressIcon.centerHorizontal(parent: addressIconContainer)
@@ -154,7 +154,7 @@ extension ExternalWalletsView {
 
         // -- Warning Icon
         let warningIcon = UIImageView(image: UIImage(
-            named: "ic_warning", in: Bundle(for: Self.self), with: nil))
+            named: "ic_warning", in: Bundle.sdkBundle, with: nil))
         warningContainer.addSubview(warningIcon)
         warningIcon.constraintTop(warningContainer, margin: 10)
         warningIcon.constraintLeft(warningContainer, margin: 8)

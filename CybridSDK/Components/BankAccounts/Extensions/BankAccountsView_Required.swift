@@ -14,7 +14,7 @@ extension BankAccountsView {
         // -- Title
         self.createStateTitle(
             stringKey: UIStrings.requiredText,
-            image: UIImage(named: "kyc_required", in: Bundle(for: Self.self), with: nil)!
+            image: UIImage(named: "kyc_required", in: Bundle.sdkBundle, with: nil)!
         )
 
         // -- Buttons

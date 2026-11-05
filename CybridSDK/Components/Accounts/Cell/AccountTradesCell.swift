@@ -197,7 +197,7 @@ extension AccountTradesCell {
         // -- Setup icon
         icon.image = UIImage(
             named: trade.tradeBankModel.side == .sell ? "sellIcon" : "buyIcon",
-            in: Bundle(for: Self.self),
+            in: Bundle.sdkBundle,
             with: nil)
 
         // -- Trade Type
