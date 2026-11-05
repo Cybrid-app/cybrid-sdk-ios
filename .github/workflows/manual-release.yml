@@ -33,22 +33,32 @@ jobs:
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
-          ref: main
+          ref: ${{ github.sha }}
           persist-credentials: false
 
+      # A rerun after a failed release step finds its own tag already pushed and resumes;
+      # a tag on any other commit is refused.
       - name: Check the version
+        id: check
         run: |
           if ! printf '%s' "$VERSION" | grep -Eq '^[0-9]+\.[0-9]+\.[0-9]+$'; then
             echo "::error::Version must be X.Y.Z, got '$VERSION'"; exit 1
           fi
-          if git ls-remote --exit-code --tags origin "refs/tags/$VERSION" >/dev/null; then
-            echo "::error::Tag $VERSION already exists"; exit 1
+          tagged=$(git ls-remote origin "refs/tags/$VERSION" "refs/tags/$VERSION^{}" | tail -n 1 | cut -f1)
+          if [ -z "$tagged" ]; then
+            echo "tag_exists=false" >> "$GITHUB_OUTPUT"
+          elif [ "$tagged" = "$GITHUB_SHA" ]; then
+            echo "tag_exists=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "::error::Tag $VERSION already exists on $tagged, not $GITHUB_SHA"; exit 1
           fi
 
       - name: Pin GitHub's SSH host key
+        if: steps.check.outputs.tag_exists == 'false'
         run: printf '%s\n' "$GITHUB_HOST_KEY" > "$RUNNER_TEMP/known_hosts"
 
       - name: Tag the merged commit
+        if: steps.check.outputs.tag_exists == 'false'
         env:
           RELEASE_DEPLOY_KEY: ${{ secrets.RELEASE_DEPLOY_KEY }}
         run: |
@@ -65,5 +75,8 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
+          if gh release view "$VERSION" >/dev/null 2>&1; then
+            echo "Release $VERSION already exists"; exit 0
+          fi
           gh release create "$VERSION" --verify-tag --title "$VERSION" \
             --notes "CybridSDK $VERSION, built from commit $GITHUB_SHA."
