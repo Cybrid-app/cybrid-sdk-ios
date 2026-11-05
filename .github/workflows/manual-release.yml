@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
     inputs:
       version:
-        description: "Version to release (X.Y.Z). Must match CybridSDK.podspec on main."
+        description: "Version to release (X.Y.Z)"
         required: true
 
 permissions:
@@ -41,10 +41,6 @@ jobs:
           if ! printf '%s' "$VERSION" | grep -Eq '^[0-9]+\.[0-9]+\.[0-9]+$'; then
             echo "::error::Version must be X.Y.Z, got '$VERSION'"; exit 1
           fi
-          podspec_version=$(sed -nE 's/^ *spec\.version *= *"([^"]+)".*/\1/p' CybridSDK.podspec)
-          if [ "$podspec_version" != "$VERSION" ]; then
-            echo "::error::CybridSDK.podspec on main is $podspec_version. Merge a PR bumping it to $VERSION first."; exit 1
-          fi
           if git ls-remote --exit-code --tags origin "refs/tags/$VERSION" >/dev/null; then
             echo "::error::Tag $VERSION already exists"; exit 1
           fi
@@ -71,18 +67,3 @@ jobs:
         run: |
           gh release create "$VERSION" --verify-tag --title "$VERSION" \
             --notes "CybridSDK $VERSION, built from commit $GITHUB_SHA."
-
-      - name: Publish the podspec to cybrid-podspecs
-        env:
-          PODSPECS_DEPLOY_KEY: ${{ secrets.PODSPECS_DEPLOY_KEY }}
-        run: |
-          key="$RUNNER_TEMP/podspecs_key"
-          (umask 077 && printf '%s\n' "$PODSPECS_DEPLOY_KEY" > "$key")
-          export GIT_SSH_COMMAND="ssh -i $key -o IdentitiesOnly=yes -o StrictHostKeyChecking=yes -o UserKnownHostsFile=$RUNNER_TEMP/known_hosts"
-          pod repo add cybrid-podspecs git@github.com:Cybrid-app/cybrid-podspecs.git
-          git -C "$HOME/.cocoapods/repos/cybrid-podspecs" config user.name "github-actions[bot]"
-          git -C "$HOME/.cocoapods/repos/cybrid-podspecs" config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          pod repo push cybrid-podspecs CybridSDK.podspec \
-            --sources=https://github.com/Cybrid-app/cybrid-podspecs.git,https://cdn.cocoapods.org/ \
-            --allow-warnings --skip-tests
-          rm -f "$key"
