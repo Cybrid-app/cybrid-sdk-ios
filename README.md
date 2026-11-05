@@ -1,33 +1,19 @@
 # cybrid-sdk-ios
 
+> [!WARNING]
+> **CybridSDK is deprecated and no longer maintained.** It receives no fixes or security updates, and this repository is archived. It only builds against `CybridApiBankSwift` 0.113.6 (December 2023), and its last CocoaPods release (0.0.3) is from 2022.
+>
+> Integrate with the Cybrid APIs directly through the Swift API clients instead, installed with Swift Package Manager:
+>
+> - [cybrid-api-bank-swift](https://github.com/Cybrid-app/cybrid-api-bank-swift) (`CybridApiBankSwift`)
+> - [cybrid-api-id-swift](https://github.com/Cybrid-app/cybrid-api-id-swift) (`CybridApiIdpSwift`)
+> - [cybrid-api-organization-swift](https://github.com/Cybrid-app/cybrid-api-organization-swift) (`CybridApiOrganizationSwift`)
+
 iOS SDK Library and Demo App for Cybrid API.
 
 [![Platforms](https://img.shields.io/badge/Platforms-iOS-yellowgreen?style=flat-square)](https://img.shields.io/badge/Platforms-iOS-Green?style=flat-square)
 [![CircleCI](https://dl.circleci.com/status-badge/img/gh/Cybrid-app/cybrid-sdk-ios/tree/main.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/Cybrid-app/cybrid-sdk-ios/tree/main)
 [![codecov](https://codecov.io/gh/Cybrid-app/cybrid-sdk-ios/branch/main/graph/badge.svg?token=LTJJFQJWEA)](https://codecov.io/gh/Cybrid-app/cybrid-sdk-ios)
-
-## Installation
-
-### CocoaPods
-
-CybridSDK and the Cybrid API clients are published from Cybrid's own podspec repo, not the public CocoaPods trunk. Add that repo to your App's Podfile **before** the trunk CDN, and pin every Cybrid pod to it with `:source`, so they never resolve from trunk:
-
-```ruby
-CYBRID_PODSPECS = 'https://github.com/Cybrid-app/cybrid-podspecs.git'
-
-source CYBRID_PODSPECS
-source 'https://cdn.cocoapods.org/'
-
-pod 'CybridSDK', :source => CYBRID_PODSPECS
-pod 'CybridApiBankSwift', :source => CYBRID_PODSPECS
-pod 'CybridApiIdpSwift', :source => CYBRID_PODSPECS
-```
-
-Do not install Cybrid pods from the public trunk: the Cybrid names there are not maintained releases.
-
-And then install the dependencies:
-
-`pod install`
 
 ## Usage
 
